@@ -12,6 +12,7 @@ Nothing
 Now MultiBlock Heat Exchanger has 3 texture to build.
 TungstenSteel/Tungsten/Tantalum Hafnium Carbide.
 They can output HU:16384/32768/131072.
+[CHANGED]Engine recipe now use medium pipe.Iridium Engine now output 1024RU.Tungsten now output 512RU and its efficiency is a little more than tungstensteel Engine
 [ADDED]Thermomechanical block for Large Liquid Burn Box and Heat Exchanger
 [ADDED]Reactors can use Distilled Water as Coolant, but that uses a different System so beware.Connect from Original GT6 Version
 
