@@ -7,17 +7,18 @@ Nothing
 Nothing
 
 6.12.031: (Not released yet).
+[CHANGED]For MultyBlock Heat Exchanger now need Hot Block.
 [CHANGED]
-Now MultiBlock Heatexchanger has 3 testure to build.
+Now MultiBlock Heat Exchanger has 3 texture to build.
 TungstenSteel/Tungsten/Tantalum Hafnium Carbide.
 They can output HU:16384/32768/131072.
-[ADDED]
-Multiblock Large Liquid Burn Box.Need liquid fuels to output HU.
-There 3 texture for build like heat exchanger,you can build them by TungstenSteel/Tungsten/Tantalum Hafnium Carbide.
-16384/32768/131072 HU/t split evenly over the 8 Heat Transmitter Outputs.
+[ADDED]Thermomechanical block for Large Liquid Burn Box and Heat Exchanger
+[ADDED]Reactors can use Distilled Water as Coolant, but that uses a different System so beware.Connect from Original GT6 Version
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
+[CHANGED]Now Engine output be more.But they are no longer have 100%EFFICIENCY.
+[ADDED]Tungsten Engine
 [ADDED]
 Autoclave(LV-IV)That use energy to work. 
 
