@@ -7,13 +7,16 @@ Nothing
 Nothing
 
 6.12.031: (Not released yet).
-[CHANGED]For MultyBlock Heat Exchanger now need Hot Block.
+[CHANGED]For MultyBlock Heat Exchanger now need Thermomechanical Block.
+[CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.
+[CHANGED]Cryo Distillation Tower now use Frost Proof Machine Casing instead of Distillation Tower Part
+[CHANGED]Engine recipe now use medium pipe.Iridium Engine now output 1024RU.Tungsten now output 512RU and its efficiency is a little more than tungstensteel Engine
 [CHANGED]
 Now MultiBlock Heat Exchanger has 3 texture to build.
 TungstenSteel/Tungsten/Tantalum Hafnium Carbide.
 They can output HU:16384/32768/131072.
-[CHANGED]Engine recipe now use medium pipe.Iridium Engine now output 1024RU.Tungsten now output 512RU and its efficiency is a little more than tungstensteel Engine
-[ADDED]Thermomechanical block for Large Liquid Burn Box and Heat Exchanger
+[ADDED]Frost Proof Machine Casing for Cryo Distillation Tower build.
+[ADDED]Thermomechanical block for Heat Exchanger
 [ADDED]Reactors can use Distilled Water as Coolant, but that uses a different System so beware.Connect from Original GT6 Version
 
 6.12.021:
