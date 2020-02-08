@@ -29,6 +29,10 @@ Build like gas/steam turbine.It uses Engine fuels.Its a MultyBlock for Diesel En
 MultyBlock Plasma Turbine.
 Build like gas/steam turbine.Uses plasma fuel!Plasma fuel has a very high turbine value.
 And this is a new way that using fusion to make energy.
+[ADDED]
+MultyBlock Cracking Tower.
+A little different for building.It need 3x3x10 Cracking Tower Part.
+Cracking in Cracking Tower can get more products than single block cracking machine.
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
