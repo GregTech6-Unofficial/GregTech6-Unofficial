@@ -62,6 +62,7 @@ public class Loader_Worldgen implements Runnable {
 		boolean
 		tInfiniteOil = ConfigsGT.WORLDGEN.get(ConfigCategories.general, "GenerateInfiniteOilSources", T),
 		tInfiniteGas = ConfigsGT.WORLDGEN.get(ConfigCategories.general, "GenerateInfiniteGasSources", T);
+		tInfiniteOil = ConfigsGT.WORLDGEN.get(ConfigCategories.general, "GenerateInfiniteWaterSources", T);
 		
 		new WorldgenStoneLayers("stonelayers", T, GEN_GT, GEN_ENVM); // MUST BE FIRST
 		

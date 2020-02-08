@@ -49,7 +49,6 @@ public class Loader_Fluids implements Runnable {
 		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,    144, 4000).setLuminosity(15);
 		
 		//-----
-		
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000);
 		FL.create("Propylene"                , "Propylene"           , MT.Propylene          , 2);
@@ -78,6 +77,7 @@ public class Loader_Fluids implements Runnable {
 		FL.create("liquid_light_oil"         , "Light Oil"           , null                  , 1);
 		FL.create("soulsandoil"              , "Soulsand Oil"        , null                  , 1);
 		FL.create("gas_natural_gas"          , "Natural Gas"         , null                  , 2); // ~95% methane, ~5% ethane and trace amounts of propane and butane
+		
 		
 		FL.create("liquidoxygen"             , "Liquid Oxygen"       , MT.O                  , 1,   1000,    85);
 		
