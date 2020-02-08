@@ -26,11 +26,9 @@ import java.util.List;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
 import gregapi.tileentity.delegate.DelegatorTileEntity;
-import gregapi.tileentity.energy.ITileEntityEnergy;
 import gregapi.tileentity.multiblocks.ITileEntityMultiBlockController;
 import gregapi.tileentity.multiblocks.MultiTileEntityMultiBlockPart;
 import gregapi.tileentity.multiblocks.TileEntityBase10MultiBlockMachine;
-import gregapi.util.WD;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -193,7 +191,7 @@ public class MultiTileEntityFusionReactor extends TileEntityBase10MultiBlockMach
 		LH.add("gt.tooltip.multiblock.fusionreactor.2", "144 Iridium Coils, 576 Regular Tungstensteel Walls, 50 Ventilation Units.");
 		LH.add("gt.tooltip.multiblock.fusionreactor.3", "36 Regular Stainless Steel Walls, 53 Galvanized Steel Walls.");
 		LH.add("gt.tooltip.multiblock.fusionreactor.4", "3 Versatile, 12 Logic and 12 Control Quadcore Processing Units.");
-		LH.add("gt.tooltip.multiblock.fusionreactor.5", "Energy Output at the Electric Interfaces");
+		LH.add("gt.tooltip.multiblock.fusionreactor.5", "Input energy for start.Then for process");
 		LH.add("gt.tooltip.multiblock.fusionreactor.6", "Laser Input at the 'Glass' Ring");
 		LH.add("gt.tooltip.multiblock.fusionreactor.7", "Items and Fluids are handeled at the normal Walls");
 	}
@@ -225,12 +223,6 @@ public class MultiTileEntityFusionReactor extends TileEntityBase10MultiBlockMach
 	@Override
 	public DelegatorTileEntity<TileEntity> getItemOutputTarget(byte aSide) {
 		return null;
-	}
-	
-	@Override
-	public void doOutputEnergy() {
-		int tX = getOffsetXN(mFacing, 2), tY = yCoord, tZ = getOffsetZN(mFacing, 2);
-		for (byte tSide : ALL_SIDES_HORIZONTAL) if (ITileEntityEnergy.Util.insertEnergyInto(mEnergyTypeEmitted, mOutputEnergy, 1, this, WD.te(worldObj, tX+OFFSETS_X[tSide]*10, tY, tZ+OFFSETS_Z[tSide]*10, OPPOSITES[tSide], F)) > 0) return;
 	}
 	
 	@Override public DelegatorTileEntity<IInventory> getItemInputTarget(byte aSide) {return null;}
