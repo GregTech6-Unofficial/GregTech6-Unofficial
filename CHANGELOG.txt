@@ -7,8 +7,9 @@ Nothing
 Nothing
 
 6.12.031: (Not released yet).
+[CHANGED]Temperature of plasma set to 4000K
 [CHANGED]For MultyBlock Heat Exchanger now need Thermomechanical Block.
-[CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.
+[CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.Some of its recipes now output plasma.
 [CHANGED]Cryo Distillation Tower now use Frost Proof Machine Casing instead of Distillation Tower Part
 [CHANGED]Engine recipe now use medium pipe.Iridium Engine now output 1024RU.Tungsten now output 512RU and its efficiency is a little more than tungstensteel Engine
 [CHANGED]
@@ -18,6 +19,16 @@ They can output HU:16384/32768/131072.
 [ADDED]Frost Proof Machine Casing for Cryo Distillation Tower build.
 [ADDED]Thermomechanical block for Heat Exchanger
 [ADDED]Reactors can use Distilled Water as Coolant, but that uses a different System so beware.Connect from Original GT6 Version
+[ADDED]
+Titanium Niobium Carbide.You can use it for crucible(And Large crucible)Large Boiler, tools pipe and tank.
+Its pipe and tank can store plasma too.
+[ADDED]
+MultyBlock Engine Turbine.
+Build like gas/steam turbine.It uses Engine fuels.Its a MultyBlock for Diesel Engine
+[ADDED]
+MultyBlock Plasma Turbine.
+Build like gas/steam turbine.Uses plasma fuel!Plasma fuel has a very high turbine value.
+And this is a new way that using fusion to make energy.
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.

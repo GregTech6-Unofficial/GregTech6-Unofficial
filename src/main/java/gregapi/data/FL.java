@@ -72,7 +72,11 @@ public enum FL {
 	, Air_End                   ("enderair"                                                 , SIMPLE, GAS, AIR)
 	, Oxygen                    ("oxygen"                                                   , SIMPLE, GAS)
 	, Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID)
+
+	, HeliumP                   ("heliumplasma"                                             , PLASMA)
+	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
 	
+	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
 	, Deuterium                 ("deuterium"                                                , GAS)
 	, Tritium                   ("tritium"                                                  , GAS)

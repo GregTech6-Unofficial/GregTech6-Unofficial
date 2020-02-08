@@ -42,6 +42,9 @@ public class Loader_Fuels implements Runnable {
 		FM.FluidBed     .addRecipe1(T, -1, (tMat.mFurnaceBurnTime * 3 * EU_PER_FURNACE_TICK) / 72, OP.dustDiv72.mat(tMat, 1), FL.Calcite.make(  1), NF, OM.dust(tMat.mTargetBurning.mMaterial, UT.Code.units(tMat.mTargetBurning.mAmount, U*2, U72, F)));
 		}
 
+		FM.Plasma       .addRecipe0(T, -  8192,  1, FL.make("heliumplasma", 1)            , FL.make("helium",   1), ZL_IS);
+		FM.Plasma       .addRecipe0(T, - 16384,  1, FL.make("nitrogenplasma", 1)          , FL.make("nitrogen", 1), ZL_IS);
+		
 		FM.Burn         .addRecipe0(T, - 64,  1, FL.make("liquid_extra_heavy_oil", 1)        , FL.make("carbondioxide", 1), ZL_IS);
 		FM.Burn         .addRecipe0(T, - 48,  1, FL.make("liquid_heavy_oil", 1)              , FL.make("carbondioxide", 1), ZL_IS);
 		FM.Burn         .addRecipe0(T, - 32,  1, FL.make("liquid_medium_oil", 1)             , FL.make("carbondioxide", 1), ZL_IS);

@@ -44,9 +44,9 @@ import net.minecraftforge.fluids.FluidStack;
 public class Loader_Fluids implements Runnable {
 	@Override
 	public void run() {
-		FL.create("HeliumPlasma"             , "Helium Plasma"       , MT.He                 , 3,   1000, 10000).setLuminosity(15);
-		FL.create("NitrogenPlasma"           , "Nitrogen Plasma"     , MT.N                  , 3,   1000, 10000).setLuminosity(15);
-		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,   1000, 10000).setLuminosity(15);
+		FL.create("HeliumPlasma"             , "Helium Plasma"       , MT.He                 , 3,   1000, 4000).setLuminosity(15);
+		FL.create("NitrogenPlasma"           , "Nitrogen Plasma"     , MT.N                  , 3,   1000, 4000).setLuminosity(15);
+		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,    144, 4000).setLuminosity(15);
 		
 		//-----
 		
