@@ -385,6 +385,7 @@ public enum FL {
 	, Butane                    ("butane"                                                   , SIMPLE, GAS)
 	, Ethylene                  ("ethylene"                 , "ethene"                      , GAS)
 	, Propylene                 ("propylene"                , "propene"                     , GAS)
+	, Ethane                    ("ethane"                                                   , GAS)  
 	
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)

@@ -29,6 +29,7 @@ import gregapi.data.IL;
 import gregapi.data.LH;
 import gregapi.data.MD;
 import gregapi.data.MT;
+import gregapi.data.MS;
 import gregapi.data.TD;
 import gregapi.item.multiitem.food.FoodStatDrink;
 import gregapi.old.Textures;
@@ -51,6 +52,7 @@ public class Loader_Fluids implements Runnable {
 		//-----
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000);
+		FL.create("Ethane"                   , "Ethane"              , MS.Ethane             , 2).setDensity(-1000);
 		FL.create("Propylene"                , "Propylene"           , MT.Propylene          , 2);
 		FL.create("polyvinylchloride"        , "polyvinylchloride"   , null                  , 1);
 		FL.create("polytetrafluoroethylene"  , "polytetrafluoroethylene" , null              , 1);
