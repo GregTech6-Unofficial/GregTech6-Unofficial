@@ -1,4 +1,4 @@
-This is the Git Repository for GregTech-6
+This is the Git Repository for GregTech-6 Unofficial.
 
 # License
 
@@ -12,7 +12,3 @@ derivative of it are licensed under the
 # Support
 
 You can use the Issue Tracker, or you can just use the Forums. Since you should need a Forum Account to log into this anyways, I would recommend you to go for the Forums if you have an Issue.
-
-# Dev Environment Setup
-
-TODO: OvermindDL1 should replace this with proper instructions. ;)
