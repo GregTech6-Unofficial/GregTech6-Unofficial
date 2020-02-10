@@ -97,8 +97,8 @@ public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingD
 	}
 	
 	static {
-		LH.add("gt.tooltip.reactorcore.1", "Primary Facing Emits Hot Coolant.");
-		LH.add("gt.tooltip.reactorcore.2", "Secondary Facing Emits Cold Coolant when over half full.");
+		LH.add("gt.tooltip.reactorcore.1", "Primary Facing Emits Hot Liquid.");
+		LH.add("gt.tooltip.reactorcore.2", "Secondary Facing Emits Liquid when over half full.");
 	}
 	
 	@Override
