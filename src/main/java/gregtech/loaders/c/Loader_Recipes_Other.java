@@ -740,6 +740,31 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.CokeOven     .addRecipe1(T,  0,  3600, dust                      .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(  U40, F), dustTiny .mat(MT.Asphalt, 1));
 		RM.CokeOven     .addRecipe1(T,  0, 32400, blockDust                 .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(9*U40, F), dust     .mat(MT.Asphalt, 1));
 		
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), nugget                    .mat(MT.Coal    , 9), NF, MT.Creosote   .liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), chunkGt                   .mat(MT.Coal    , 4), NF, MT.Creosote   .liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), ingot                     .mat(MT.Coal    , 1), NF, MT.Creosote   .liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), gem                       .mat(MT.Coal    , 1), NF, MT.Creosote   .liquid(   U2, F), gem       .mat(MT.CoalCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedPurified           .mat(MT.Coal    , 1), NF, MT.Creosote   .liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 5));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedPurifiedTiny       .mat(MT.Coal    , 9), NF, MT.Creosote   .liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 5));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedCentrifuged        .mat(MT.Coal    , 1), NF, MT.Creosote   .liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 6));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedCentrifugedTiny    .mat(MT.Coal    , 9), NF, MT.Creosote   .liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 6));
+		RM.PyrolyseOven .addRecipe2(T, 16,   900, ST.tag( 0), blockGem                  .mat(MT.Coal    , 1), NF, MT.Creosote   .liquid( 9*U2, F), blockGem  .mat(MT.CoalCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   900, ST.tag( 0), blockIngot                .mat(MT.Coal    , 1), NF, MT.Creosote   .liquid( 9*U2, F), blockIngot.mat(MT.CoalCoke, 1));
+		
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), nugget                    .mat(MT.Lignite , 9), NF, MT.Creosote   .liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), chunkGt                   .mat(MT.Lignite , 4), NF, MT.Creosote   .liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), ingot                     .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), gem                       .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid( 3*U4, F), gem       .mat(MT.LigniteCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedPurified           .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 5));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedPurifiedTiny       .mat(MT.Lignite , 9), NF, MT.Creosote   .liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 5));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedCentrifuged        .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 6));
+		RM.PyrolyseOven .addRecipe2(T, 16,   300, ST.tag( 0), crushedCentrifugedTiny    .mat(MT.Lignite , 9), NF, MT.Creosote   .liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 6));
+		RM.PyrolyseOven .addRecipe2(T, 16,  1800, ST.tag( 0), blockGem                  .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid(27*U4, F), blockGem  .mat(MT.LigniteCoke, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,  1800, ST.tag( 0), blockIngot                .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid(27*U4, F), blockIngot.mat(MT.LigniteCoke, 1));
+		
+		RM.PyrolyseOven .addRecipe2(T, 16,  1800, ST.tag( 0), dust                      .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(  U40, F), dustTiny .mat(MT.Asphalt, 1));
+		RM.PyrolyseOven .addRecipe2(T, 16,  1800, ST.tag( 0), blockDust                 .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(9*U40, F), dust     .mat(MT.Asphalt, 1));
+
 		
 		RM.Nanofab.addRecipe2(T, 16,  64, ST.tag( 0), dustDiv72.mat(MT.C,18), foil.mat(MT.Graphene, 1));
 		RM.Nanofab.addRecipe2(T, 16, 256, ST.tag( 0), dustTiny .mat(MT.C, 9), foil.mat(MT.Graphene, 4));

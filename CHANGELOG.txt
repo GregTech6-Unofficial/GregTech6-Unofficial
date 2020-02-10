@@ -46,6 +46,9 @@ Now Molecular Scanner only has MultyBlock Version.It can overcheap clocking and 
 [ADDED]
 MultyBlock Large Matter Replicator.
 MultyBlock version for Matter Replicator.It has 64 Parallel. 
+[ADDED]
+MultyBlock Pyrolyse Oven.
+Do recipes like Coke Oven.Use energy to over clocking!And it has own RecipeMap because it will do more process in the future.
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
