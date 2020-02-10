@@ -65,7 +65,7 @@ public class MultiTileEntityLargeTurbinePlasma extends MultiTileEntityLargeTurbi
 		LH.add("gt.tooltip.multiblock.plasmaturbine.1", "3x3x4 of the Block you crafted this one with");
 		LH.add("gt.tooltip.multiblock.plasmaturbine.2", "Main centered on the 3x3 facing outwards");
 		LH.add("gt.tooltip.multiblock.plasmaturbine.3", "Input only possible at frontal 3x3");
-		LH.add("gt.tooltip.multiblock.plasmaturbine.4", "Matter has to be removed!");
+		LH.add("gt.tooltip.multiblock.plasmaturbine.4", "Exhaust Gas has to be removed!");
 	}
 	
 	@Override

@@ -385,7 +385,8 @@ public enum FL {
 	, Butane                    ("butane"                                                   , SIMPLE, GAS)
 	, Ethylene                  ("ethylene"                 , "ethene"                      , GAS)
 	, Propylene                 ("propylene"                , "propene"                     , GAS)
-	, Ethane                    ("ethane"                                                   , GAS)  
+	, Ethene                    ("ethene"                                                   , SIMPLE, LIQUID)  
+	, Naphtha                   ("naphtha"                                                  , SIMPLE, LIQUID)
 	
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)
@@ -404,6 +405,12 @@ public enum FL {
 	, BioFuel                   ("biofuel"                                                  , SIMPLE, LIQUID)
 	, BioDiesel                 ("biodiesel"                                                , SIMPLE, LIQUID)
 	, BioEthanol                ("bioethanol"                                               , SIMPLE, LIQUID)
+	, SFuel                     ("sfuel"                                                    , SIMPLE, LIQUID)
+	, SDiesel                   ("sdiesel"                                                  , SIMPLE, LIQUID)
+	, SKerosine                 ("skerosine"                                                , SIMPLE, LIQUID)
+	, SPetrol                   ("spetrol"                                                  , SIMPLE, LIQUID)
+	, SNaphtha                  ("snaphtha"                                                 , SIMPLE, LIQUID)
+
 	
 	, Glue                      ("glue"                                                     , SIMPLE, LIQUID)
 	, Latex                     ("latex"                    , "molten.latex"                , SIMPLE, LIQUID)

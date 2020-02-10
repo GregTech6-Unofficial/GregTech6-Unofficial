@@ -29,7 +29,6 @@ import gregapi.data.IL;
 import gregapi.data.LH;
 import gregapi.data.MD;
 import gregapi.data.MT;
-import gregapi.data.MS;
 import gregapi.data.TD;
 import gregapi.item.multiitem.food.FoodStatDrink;
 import gregapi.old.Textures;
@@ -52,7 +51,6 @@ public class Loader_Fluids implements Runnable {
 		//-----
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000);
-		FL.create("Ethane"                   , "Ethane"              , MS.Ethane             , 2).setDensity(-1000);
 		FL.create("Propylene"                , "Propylene"           , MT.Propylene          , 2);
 		FL.create("polyvinylchloride"        , "polyvinylchloride"   , null                  , 1);
 		FL.create("polytetrafluoroethylene"  , "polytetrafluoroethylene" , null              , 1);
@@ -104,7 +102,12 @@ public class Loader_Fluids implements Runnable {
 		FL.create("bioethanol"               , "Bio Ethanol"         , MT.Ethanol            , 1);
 		FL.create("mcguffium"                , "Mc Guffium 239"      , MT.Mcg                , 1,      L,   300);
 		FL.create("hotfryingoil"             , "Hot Frying Oil"      , MT.FryingOilHot       , 1,   1000,   400);
-		
+		FL.create("sfuel"                    , "Fuel Oil"            , null                  , 1);
+		FL.create("sdiesel"                  , "Diesel"              , null                  , 1);
+		FL.create("spetrol"                  , "Petrol"              , null                  , 1);
+		FL.create("skerosine"                , "Kerosine"            , null                  , 1);
+		FL.create("snaphtha"                 , "Naphtha"             , null                  , 1);
+
 		FL.create("fieryblood"               , "Fiery Blood"         , null                  , 1,      L,  1500).setLuminosity(10);
 		FL.create("fierytears"               , "Fiery Tears"         , null                  , 1,      L,  1500).setLuminosity(10);
 		
