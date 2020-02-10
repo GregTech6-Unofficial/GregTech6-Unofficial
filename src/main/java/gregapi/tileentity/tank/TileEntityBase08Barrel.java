@@ -69,12 +69,13 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 	public boolean hasHeat = F;
 
 	public boolean canDrain(){
-		return FL.temperature(mTank.getFluid()) >= DEF_ENV_TEMP;
+		if (isClientSide())return false;
+		return FL.temperature(mTank.get()) <= DEF_ENV_TEMP + 10;
 	}
 
 	@Override public boolean isEnergyType(TagData aEnergyType, byte aSide, boolean aEmitting) {return !aEmitting && aEnergyType.equals(TD.Energy.HU);}
 	@Override public long doInject(TagData aEnergyType, byte aSide, long aSize, long aAmount, boolean aDoInject) {
-		long temp = (FL.temperature(mTank.getFluid()) - DEF_ENV_TEMP)/16;
+		long temp = (FL.temperature(mTank.get()) - DEF_ENV_TEMP - 10)/16;
 		if (aDoInject) {
 			if (aAmount > temp)
 				hasHeat = T;
@@ -315,6 +316,9 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 
 	@Override
 	public int addFluidToConnectedTank(byte aSide, FluidStack aFluid, boolean aOnlyAddIfItAlreadyHasFluidsOfThatTypeOrIsDedicated) {
+		if (!canDrain()&&!hasHeat){
+			return 0;
+		}
 		if (aFluid == NF || (mTank.isEmpty() && aOnlyAddIfItAlreadyHasFluidsOfThatTypeOrIsDedicated)) return 0;
 		return mTank.fill(aFluid, T);
 	}
@@ -327,6 +331,9 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 
 	@Override
 	public long getAmountOfFluidInConnectedTank(byte aSide, FluidStack aFluid) {
+		if (!canDrain()&&!hasHeat){
+			return 0;
+		}
 		return mTank.contains(aFluid) ? mTank.amount() : 0;
 	}
 }
