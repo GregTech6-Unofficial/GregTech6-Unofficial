@@ -32,6 +32,11 @@ MultyBlock Plasma Turbine.
 Build like gas/steam turbine.Uses plasma fuel!Plasma fuel has a very high turbine value.
 And this is a new way that using fusion to make energy.
 [ADDED]
+MultyBlock Oil Cleaner.
+3x3x3 Hallow with Clean StainlessSteel Machine Casing.
+For processing in MultyBlock can get all Products than mixer.
+And now DistillationTower will output dirty oil(Oil with S)So you need put in machine to get clean oil.
+[ADDED]
 MultyBlock Cracking Tower.
 A little different for building.It need 3x3x10 Cracking Tower Part.
 Cracking in Cracking Tower can get more products than single block cracking machine.
