@@ -838,9 +838,11 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Fusion.addRecipe1(T, 2048,  576, ST.tag(2), FL.array(MT.He    .gas   (U  , T), MT.Be_8.liquid(U  , T)), FL.array(MT.C     .liquid(  U , F)                                                                                 ), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
 		RM.Fusion.addRecipe1(T, 2048,  576, ST.tag(2), FL.array(MT.He    .gas   (U  , T), MT.C   .liquid(U  , T)), FL.array(MT.O     .gas   (  U , F)                                                                                 ), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
 		RM.Fusion.addRecipe1(T,16384, 1024, ST.tag(2), FL.array(MT.Ad    .liquid(U  , T), MT.Be_7.liquid(U  , T)), FL.array(MT.W     .liquid(  U , F), MT.He    .gas   (16*U, F), MT.He_3  .gas   (24*U, F), MT.T     .gas   (24*U, F)), OP.dust.mat(MT.Vb, 1)).setSpecialNumber(60000L*20000L*12L);
-		
-		
-		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
+
+        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(MT.D     .gas   (U*2, T)                        ), FL.array(MT.He_3  .gas   (  U2, F), MT.T     .gas   (  U2, F)                                                      ), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
+
+
+        for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
 			ItemStack
 			tInput = OP.dust.mat(tMaterial, 1);          if (tInput != null)       RM.Massfab.addRecipe1(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tInput, NF, tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
 			tInput = OP.ingot.mat(tMaterial, 1);         if (tInput != null)       RM.Massfab.addRecipe1(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tInput, NF, tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
