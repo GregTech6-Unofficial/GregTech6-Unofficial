@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b53e04aa-3cf5-4882-83d9-4d3feafb1123" name="Default" comment="Merge branch 'master' of https://github.com/GregTech6-Unofficial/-GregTech6-Unofficial-&#10;&#10;# Conflicts:&#10;#&#9;src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gregtech/tileentity/multiblocks/MultiTileEntityPyrolyseOven.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gregtech/loaders/b/Loader_MultiTileEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gregtech/loaders/b/Loader_MultiTileEntities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/gregtech/textures/gui/machines/CokeOven.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/gregtech/textures/gui/machines/CokeOven.png" afterDir="false" />
-    </list>
-    <list id="057efea1-cba2-46f6-8f10-02b755abb3fe" name="Added Subatomic Particle Plasmas" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/gregapi/data/MT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gregapi/data/MT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,11 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Loader_Recipes_Other.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Loader_Recipes_Other.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="854" column="111" lean-forward="true" selection-start-line="854" selection-start-column="111" selection-end-line="854" selection-end-column="111" />
+            <state relative-caret-position="348">
+              <caret line="842" column="193" selection-start-line="842" selection-start-column="193" selection-end-line="842" selection-end-column="193" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -56,29 +48,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MT.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/MT.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3735">
-              <caret line="282" column="62" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FL.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/FL.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="79" column="109" selection-start-line="79" selection-start-column="109" selection-end-line="79" selection-end-column="109" />
+            <state relative-caret-position="-1977">
+              <caret line="89" column="98" lean-forward="true" selection-start-line="89" selection-start-column="98" selection-end-line="89" selection-end-column="98" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Loader_Fluids.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Loader_Fluids.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/loaders/a/Loader_Fluids.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="59" column="116" lean-forward="true" selection-start-line="59" selection-start-column="116" selection-end-line="59" selection-end-column="116" />
+            <state relative-caret-position="436">
+              <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -785,10 +768,18 @@
       </map>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="58" />
     <option name="y" value="23" />
-    <option name="width" value="1134" />
-    <option name="height" value="986" />
+    <option name="width" value="1440" />
+    <option name="height" value="836" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -796,6 +787,135 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name=".defaultconfigs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gregtech" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gregtech" type="462c0819:PsiDirectoryNode" />
+              <item name="loaders" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gregtech" type="462c0819:PsiDirectoryNode" />
+              <item name="loaders" type="462c0819:PsiDirectoryNode" />
+              <item name="a" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gregtech" type="462c0819:PsiDirectoryNode" />
+              <item name="loaders" type="462c0819:PsiDirectoryNode" />
+              <item name="b" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="gregtech" type="462c0819:PsiDirectoryNode" />
+              <item name="loaders" type="462c0819:PsiDirectoryNode" />
+              <item name="c" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="textures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="textures" type="462c0819:PsiDirectoryNode" />
+              <item name="blocks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="gt6u" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gt6u" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="textures" type="462c0819:PsiDirectoryNode" />
+              <item name="blocks" type="462c0819:PsiDirectoryNode" />
+              <item name="fluids" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
@@ -907,6 +1027,21 @@
       <option name="presentableId" value="Default" />
       <updated>1581338089173</updated>
     </task>
+    <task id="LOCAL-00001" summary="Strange Files">
+      <created>1581411653896</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1581411653896</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Fixed wrong codes in the class.">
+      <created>1581412163595</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581412163595</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -919,21 +1054,21 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="58" y="23" width="1440" height="836" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="986" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32882273" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.4062947" side_tool="true" visible="true" weight="0.26792964" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5071531" side_tool="true" weight="0.24492557" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.5937053" visible="true" weight="0.26792964" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.5937053" visible="true" weight="0.26771653" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.42219216" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49356222" weight="0.24492557" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49284694" weight="0.20359956" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3090129" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30891332" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.3968254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -999,6 +1134,12 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="Strange Files" />
+    <MESSAGE value="Fixed wrong codes in the class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed wrong codes in the class." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/BuildInfo.java" />
@@ -1184,13 +1325,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/gregapi/textures/blocks/overlays/characters/neutron.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/MT.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3735">
-          <caret line="282" column="62" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/gregtech/textures/blocks/fluids/nitrogenplasma.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -1212,23 +1346,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/assets/gregtech/textures/blocks/fluids/positronplasma.png.mcmeta">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/FL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="79" column="109" selection-start-line="79" selection-start-column="109" selection-end-line="79" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="854" column="111" lean-forward="true" selection-start-line="854" selection-start-column="111" selection-end-line="854" selection-end-column="111" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/BuildInfo.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/GT6_Main.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1247,6 +1364,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/MT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1372">
+          <caret line="282" column="62" selection-start-line="282" selection-start-column="62" selection-end-line="282" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/FL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1977">
+          <caret line="89" column="98" lean-forward="true" selection-start-line="89" selection-start-column="98" selection-end-line="89" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/loaders/a/Loader_Fluids.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gregapi/data/AM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1254,10 +1395,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/loaders/a/Loader_Fluids.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gregtech/loaders/c/Loader_Recipes_Other.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="59" column="116" lean-forward="true" selection-start-line="59" selection-start-column="116" selection-end-line="59" selection-end-column="116" />
+        <state relative-caret-position="348">
+          <caret line="842" column="193" selection-start-line="842" selection-start-column="193" selection-end-line="842" selection-end-column="193" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
