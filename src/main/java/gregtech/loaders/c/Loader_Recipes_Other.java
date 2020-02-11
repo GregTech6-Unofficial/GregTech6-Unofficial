@@ -839,11 +839,9 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Fusion.addRecipe1(T, 2048,  576, ST.tag(2), FL.array(MT.He    .gas   (U  , T), MT.C   .liquid(U  , T)), FL.array(MT.O     .gas   (  U , F)                                                                                 ), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
 		RM.Fusion.addRecipe1(T,16384, 1024, ST.tag(2), FL.array(MT.Ad    .liquid(U  , T), MT.Be_7.liquid(U  , T)), FL.array(MT.W     .liquid(  U , F), MT.He    .gas   (16*U, F), MT.He_3  .gas   (24*U, F), MT.T     .gas   (24*U, F)), OP.dust.mat(MT.Vb, 1)).setSpecialNumber(60000L*20000L*12L);
 
-<<<<<<< HEAD
         RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.protonP.make(100)), FL.array(FL.positronP.make(1), FL.electronP.make(1) ), ZL_IS ).setSpecialNumber( 200L*2000L*1L);
-=======
         RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(MT.D     .gas   (U*2, T)                        ), FL.array(MT.He_3  .gas   (  U2, F), MT.T     .gas   (  U2, F)                                                      ), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
->>>>>>> ab9f55838d97d8969e44bdae2883cb8b9423c437
+
 
 
         for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
