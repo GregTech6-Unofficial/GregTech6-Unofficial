@@ -30,6 +30,7 @@ import gregapi.data.LH;
 import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.TD;
+import gregapi.data.AM;
 import gregapi.item.multiitem.food.FoodStatDrink;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictMaterial;
@@ -47,7 +48,14 @@ public class Loader_Fluids implements Runnable {
 		FL.create("HeliumPlasma"             , "Helium Plasma"       , MT.He                 , 3,   1000, 4000).setLuminosity(15);
 		FL.create("NitrogenPlasma"           , "Nitrogen Plasma"     , MT.N                  , 3,   1000, 4000).setLuminosity(15);
 		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,    144, 4000).setLuminosity(15);
-		
+
+		// Subatomic particle plasmas
+        FL.create("NeutronPlasma", "Neutron Plasma", MT.n, 3, 1000, 4000).setLuminosity(15);
+        FL.create("ProtonPlasma", "Proton Plasma", MT.p, 3, 1000, 4000).setLuminosity(15);
+        FL.create("ElectronPlasma", "Electron Plasma", MT.e, 3, 1000, 4000).setLuminosity(15);
+        FL.create("PositronPlasma", "Positron Plasma", AM.e, 3, 1000, 4000).setLuminosity(15);
+
+
 		//-----
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000);

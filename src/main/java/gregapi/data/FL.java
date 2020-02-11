@@ -75,7 +75,12 @@ public enum FL {
 
 	, HeliumP                   ("heliumplasma"                                             , PLASMA)
 	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
-	
+    , neutronP                         ("neutronplasma"                                           , PLASMA)
+    , protonP                         ("protonplasma"                                           , PLASMA)
+    , electronP                         ("electronplasma"                                           , PLASMA)
+    , positronP                         ("positronplasma"                                           , PLASMA)
+
+
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
 	, Deuterium                 ("deuterium"                                                , GAS)
@@ -84,7 +89,7 @@ public enum FL {
 	, Helium_3                  ("helium-3"                                                 , GAS)
 	, Neon                      ("neon"                                                     , GAS)
 	, Argon                     ("argon"                                                    , GAS)
-	
+
 	, Steam                     ("steam"                                                    , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2                 ("ic2steam"                                                 , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2_Superheated     ("ic2superheatedsteam"                                      , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
