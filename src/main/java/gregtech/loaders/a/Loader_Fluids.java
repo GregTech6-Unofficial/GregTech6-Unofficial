@@ -54,7 +54,18 @@ public class Loader_Fluids implements Runnable {
         FL.create("ProtonPlasma", "Proton Plasma", MT.p, 3, 1000, 4000).setLuminosity(15);
         FL.create("ElectronPlasma", "Electron Plasma", MT.e, 3, 1000, 4000).setLuminosity(15);
         FL.create("PositronPlasma", "Positron Plasma", AM.e, 3, 1000, 4000).setLuminosity(15);
+        FL.create("Anti-ProtonPlasma", "Anti-Proton Plasma", AM.p, 3, 1000, 4000).setLuminosity(15);
+        FL.create("NeutrinoPlasma", "Neutrino Plasma", MT.v, 3, 1000, 4000).setLuminosity(15);
+        FL.create("Anti-NeutrinoPlasma", "Anti-Neutrino PLasma", AM.v, 3, 1000, 4000).setLuminosity(15);
 
+        // Anti Elements
+        FL.create("Anti-Nitrogen", "Anti-Nitrogen", AM.N, 2, 1000, 273);
+        FL.create("Anti-Hydrogen", "Anti-Hydrogen", AM.H, 2, 1000, 273);
+        FL.create("Anti-Deuterium", "Anti-Deuterium", AM.D, 2, 1000, 273);
+        FL.create("Anti-Tritium", "Anti-Tritium", AM.T, 2, 1000, 273);
+        FL.create("Anti-Helium", "Anti-Helium", AM.He, 2, 1000, 273);
+        FL.create("Anti-Helium_3", "Anti-Helium_3", AM.He_3, 2, 1000, 273);
+        FL.create("Anti-Carbon_13", "Anti-Carbon_13", AM.C_13, 2, 1000, 2000);
 
 		//-----
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);

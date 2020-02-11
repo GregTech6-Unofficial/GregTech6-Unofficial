@@ -75,11 +75,13 @@ public enum FL {
 
 	, HeliumP                   ("heliumplasma"                                             , PLASMA)
 	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
-    , neutronP                         ("neutronplasma"                                           , PLASMA)
-    , protonP                         ("protonplasma"                                           , PLASMA)
-    , electronP                         ("electronplasma"                                           , PLASMA)
-    , positronP                         ("positronplasma"                                           , PLASMA)
-
+    , neutronP                  ("neutronplasma"                                            , PLASMA)
+    , protonP                   ("protonplasma"                                             , PLASMA)
+    , antiprotonP               ("antiprotonplasma"                                         , PLASMA)
+    , electronP                 ("electronplasma"                                           , PLASMA)
+    , positronP                 ("positronplasma"                                           , PLASMA)
+    , neutrinoP                 ("neutrinoplasma"                                           , PLASMA)
+    , antineutrinoP             ("antineutrinoplasma"                                       , PLASMA)
 
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
@@ -89,6 +91,15 @@ public enum FL {
 	, Helium_3                  ("helium-3"                                                 , GAS)
 	, Neon                      ("neon"                                                     , GAS)
 	, Argon                     ("argon"                                                    , GAS)
+
+    // Anti Elements
+    , AntiNitrogen                  ("antinitrogen"                                                 , GAS)
+    , AntiHydrogen                  ("antihydrogen"                                                 , GAS)
+    , AntiDeuterium                 ("antideuterium"                                                , GAS)
+    , AntiTritium                   ("antitritium"                                                  , GAS)
+    , AntiHelium                    ("antihelium"                                                   , GAS)
+    , AntiHelium_3                  ("antihelium-3"                                                 , GAS)
+    , AntiCarbon_13                 ("anticarbon-13"                                                , LIQUID)
 
 	, Steam                     ("steam"                                                    , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2                 ("ic2steam"                                                 , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
@@ -382,7 +393,8 @@ public enum FL {
 	, Oil_Light2                ("lightoil"                                                 , SIMPLE, LIQUID)
 	, Oil_Heavy2                ("heavyoil"                                                 , SIMPLE, LIQUID)
 	, Oil_HotCrude              ("hotcrude"                                                 , SIMPLE, LIQUID)
-	
+
+    // Petrol Final Products
 	, Gas_Natural               ("gas_natural_gas"          , "naturalgas", "gas.natural"   , SIMPLE, GAS)
 	, Methane                   ("methane"                                                  , SIMPLE, GAS)
 	, Liquid_Methane            ("liquidmethane"                                            , SIMPLE, LIQUID, THERMOS)
@@ -392,31 +404,37 @@ public enum FL {
 	, Propylene                 ("propylene"                , "propene"                     , GAS)
 	, Ethene                    ("ethene"                                                   , SIMPLE, LIQUID)  
 	, Naphtha                   ("naphtha"                                                  , SIMPLE, LIQUID)
-	
+    , benzene                   ("benzene"                                                  , SIMPLE, LIQUID)
+    , lpg                       ("lpg"                                                      , SIMPLE, LIQUID)
+    , phenol                    ("phenol"                                                   , SIMPLE, LIQUID)
+    , acetone                   ("acetone"                                                  , SIMPLE, LIQUID)
+    , bisphenol                 ("bisphenol"                                                , SIMPLE, LIQUID)
+    , epichlorohydrin           ("epichlorohydrin"                                          , SIMPLE, LIQUID)
+    , Petrol                    ("petrol"                   , "gasoline"                    , SIMPLE, LIQUID)
+    , Fuel                      ("fuel"                                                     , SIMPLE, LIQUID)
+    , Diesel                    ("diesel"                                                   , SIMPLE, LIQUID)
+    , Kerosine                  ("kerosine"                 , "kerosene"                    , SIMPLE, LIQUID)
+
+    // Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)
 	, polyvinylchloride         ("polyvinylchloride"                                        , SIMPLE, LIQUID)
 	, epoxid                    ("epoxid"                                                   , SIMPLE, LIQUID)
-	, benzene                   ("benzene"                                                  , SIMPLE, LIQUID)                  
-	, lpg                       ("lpg"                                                      , SIMPLE, LIQUID)
-	, phenol                    ("phenol"                                                   , SIMPLE, LIQUID)
-	, acetone                   ("acetone"                                                  , SIMPLE, LIQUID)  
-	, bisphenol                 ("bisphenol"                                                , SIMPLE, LIQUID)  	
-	, epichlorohydrin           ("epichlorohydrin"                                          , SIMPLE, LIQUID) 
-	, Petrol                    ("petrol"                   , "gasoline"                    , SIMPLE, LIQUID)
-	, Fuel                      ("fuel"                                                     , SIMPLE, LIQUID)
-	, Diesel                    ("diesel"                                                   , SIMPLE, LIQUID)
-	, Kerosine                  ("kerosine"                 , "kerosene"                    , SIMPLE, LIQUID)
+
+    // Petrol Processing
+    , SFuel                     ("sfuel"                                                    , SIMPLE, LIQUID)
+    , SDiesel                   ("sdiesel"                                                  , SIMPLE, LIQUID)
+    , SKerosine                 ("skerosine"                                                , SIMPLE, LIQUID)
+    , SPetrol                   ("spetrol"                                                  , SIMPLE, LIQUID)
+    , SNaphtha                  ("snaphtha"                                                 , SIMPLE, LIQUID)
+
+    // Biomass Processing
+
 	, BioFuel                   ("biofuel"                                                  , SIMPLE, LIQUID)
 	, BioDiesel                 ("biodiesel"                                                , SIMPLE, LIQUID)
 	, BioEthanol                ("bioethanol"                                               , SIMPLE, LIQUID)
-	, SFuel                     ("sfuel"                                                    , SIMPLE, LIQUID)
-	, SDiesel                   ("sdiesel"                                                  , SIMPLE, LIQUID)
-	, SKerosine                 ("skerosine"                                                , SIMPLE, LIQUID)
-	, SPetrol                   ("spetrol"                                                  , SIMPLE, LIQUID)
-	, SNaphtha                  ("snaphtha"                                                 , SIMPLE, LIQUID)
 
-	
+
 	, Glue                      ("glue"                                                     , SIMPLE, LIQUID)
 	, Latex                     ("latex"                    , "molten.latex"                , SIMPLE, LIQUID)
 	, Concrete                  ("concrete"                 , "molten.concrete"             , SIMPLE, LIQUID)
