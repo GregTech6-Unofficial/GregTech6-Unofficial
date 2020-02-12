@@ -1,6 +1,0 @@
-The CompileOptions.bootClasspath property has been deprecated and is scheduled to be removed in Gradle 5.0. Please use the CompileOptions.bootstrapClasspath property instead.
-	at build_achue85qxomcnkne2fyfcw4k4.run(/Users/wyc/Desktop/gt6u/build.gradle:158)
-	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
-Gradle now uses separate output directories for each JVM language, but this build assumes a single directory for all classes from a source set. This behaviour has been deprecated and is scheduled to be removed in Gradle 5.0
-	at build_achue85qxomcnkne2fyfcw4k4$_run_closure17.doCall(/Users/wyc/Desktop/gt6u/build.gradle:388)
-	(Run with --stacktrace to get the full stack trace of this deprecation warning.)
