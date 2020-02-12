@@ -30,6 +30,7 @@ import gregapi.data.LH;
 import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.TD;
+import gregapi.data.AM;
 import gregapi.item.multiitem.food.FoodStatDrink;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictMaterial;
@@ -47,7 +48,25 @@ public class Loader_Fluids implements Runnable {
 		FL.create("HeliumPlasma"             , "Helium Plasma"       , MT.He                 , 3,   1000, 4000).setLuminosity(15);
 		FL.create("NitrogenPlasma"           , "Nitrogen Plasma"     , MT.N                  , 3,   1000, 4000).setLuminosity(15);
 		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,    144, 4000).setLuminosity(15);
-		
+
+		// Subatomic particle plasmas
+        FL.create("NeutronPlasma", "Neutron Plasma", MT.n, 3, 1000, 4000).setLuminosity(15);
+        FL.create("ProtonPlasma", "Proton Plasma", MT.p, 3, 1000, 4000).setLuminosity(15);
+        FL.create("ElectronPlasma", "Electron Plasma", MT.e, 3, 1000, 4000).setLuminosity(15);
+        FL.create("PositronPlasma", "Positron Plasma", AM.e, 3, 1000, 4000).setLuminosity(15);
+        FL.create("Anti-ProtonPlasma", "Anti-Proton Plasma", AM.p, 3, 1000, 4000).setLuminosity(15);
+        FL.create("NeutrinoPlasma", "Neutrino Plasma", MT.v, 3, 1000, 4000).setLuminosity(15);
+        FL.create("Anti-NeutrinoPlasma", "Anti-Neutrino PLasma", AM.v, 3, 1000, 4000).setLuminosity(15);
+
+        // Anti Elements
+        FL.create("Anti-Nitrogen", "Anti-Nitrogen", AM.N, 2, 1000, 273);
+        FL.create("Anti-Hydrogen", "Anti-Hydrogen", AM.H, 2, 1000, 273);
+        FL.create("Anti-Deuterium", "Anti-Deuterium", AM.D, 2, 1000, 273);
+        FL.create("Anti-Tritium", "Anti-Tritium", AM.T, 2, 1000, 273);
+        FL.create("Anti-Helium", "Anti-Helium", AM.He, 2, 1000, 273);
+        FL.create("Anti-Helium_3", "Anti-Helium_3", AM.He_3, 2, 1000, 273);
+        FL.create("Anti-Carbon_13", "Anti-Carbon_13", AM.C_13, 2, 1000, 2000);
+
 		//-----
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000);
@@ -102,11 +121,11 @@ public class Loader_Fluids implements Runnable {
 		FL.create("bioethanol"               , "Bio Ethanol"         , MT.Ethanol            , 1);
 		FL.create("mcguffium"                , "Mc Guffium 239"      , MT.Mcg                , 1,      L,   300);
 		FL.create("hotfryingoil"             , "Hot Frying Oil"      , MT.FryingOilHot       , 1,   1000,   400);
-		FL.create("sfuel"                    , "Fuel Oil"            , null                  , 1);
-		FL.create("sdiesel"                  , "Diesel"              , null                  , 1);
-		FL.create("spetrol"                  , "Petrol"              , null                  , 1);
-		FL.create("skerosine"                , "Kerosine"            , null                  , 1);
-		FL.create("snaphtha"                 , "Naphtha"             , null                  , 1);
+		FL.create("sfuel"                    , "Fuel Oil With Sulfur", null                  , 1);
+		FL.create("sdiesel"                  , "Diesel With Sulfur"  , null                  , 1);
+		FL.create("spetrol"                  , "Petrol With Sulfur"  , null                  , 1);
+		FL.create("skerosine"                , "Kerosine With Sulfur", null                  , 1);
+		FL.create("snaphtha"                 , "Naphtha With Sulfur" , null                  , 1);
 
 		FL.create("fieryblood"               , "Fiery Blood"         , null                  , 1,      L,  1500).setLuminosity(10);
 		FL.create("fierytears"               , "Fiery Tears"         , null                  , 1,      L,  1500).setLuminosity(10);

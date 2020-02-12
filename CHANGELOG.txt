@@ -1,14 +1,16 @@
 This is the Changelogs for gregtech6-modify
 
-6.12.051: (Not released yet).
+6.13.02: (Not released yet).
 Nothing
 
-6.12.041: (Not released yet).
+6.13.01: (Not released yet).
 Nothing
 
-6.12.031: (Not released yet).
+6.13.00: (Not released yet).
 [CHANGED]Temperature of plasma set to 4000K
 [CHANGED]Implosion Compressor now accept EU to do process.
+[CHANGED]The Matter Replicators are working 2 times than before.
+[CHANGED]Now you put molten metal to the tank the temperature will drop,if temperature below melting point you need to heat 
 [CHANGED]For MultyBlock Heat Exchanger now need Thermomechanical Block.
 [CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.Some of its recipes now output plasma.
 [CHANGED]Cryo Distillation Tower now use Frost Proof Machine Casing instead of Distillation Tower Part
@@ -21,6 +23,8 @@ They can output HU:16384/32768/131072.
 [ADDED]Frost Proof Machine Casing for Cryo Distillation Tower build.
 [ADDED]Thermomechanical block for Heat Exchanger
 [ADDED]Reactors can use Distilled Water as Coolant, but that uses a different System so beware.From Original GT6 Version
+[ADDED]
+Assembler for Circult processing!And it has some other assembly recipes by Greg.
 [ADDED]
 Titanium Niobium Carbide.You can use it for crucible(And Large crucible)Large Boiler, tools pipe and tank.
 Its pipe and tank can store plasma too.
@@ -47,8 +51,11 @@ Now Molecular Scanner only has MultyBlock Version.It can overcheap clocking and 
 MultyBlock Large Matter Replicator.
 MultyBlock version for Matter Replicator.It has 64 Parallel. 
 [ADDED]
-MultyBlock Pyrolyse Oven.
+MultyBlock Industry Coke Oven.
 Do recipes as Coke Oven.Use energy to over clocking!
+[WIP]
+MultyBlock Particle Collider.Build like fusion reactor.
+Now you can build it but its purpose will be added in the future.
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
