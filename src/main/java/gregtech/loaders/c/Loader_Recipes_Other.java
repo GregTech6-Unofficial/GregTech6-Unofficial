@@ -839,17 +839,18 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Fusion.addRecipe1(T, 2048,  576, ST.tag(2), FL.array(MT.He    .gas   (U  , T), MT.C   .liquid(U  , T)), FL.array(MT.O     .gas   (  U , F)                                                                                                 ), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
 		RM.Fusion.addRecipe1(T,16384, 1024, ST.tag(2), FL.array(MT.Ad    .liquid(U  , T), MT.Be_7.liquid(U  , T)), FL.array(MT.W     .liquid(  U , F), MT.He    .gas   (16*U, F), MT.He_3  .gas   (24*U, F), MT.T     .gas   (24*U, F)), OP.dust.mat(MT.Vb, 1)).setSpecialNumber(60000L*20000L*12L);
 		// Anti Fusion
+        /*
 		RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.antiprotonP.make(10), FL.positronP.make(10)), FL.array(FL.AntiHydrogen.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.antiprotonP.make(10), FL.neutronP.make(10), FL.positronP.make(10)), FL.array(FL.AntiDeuterium.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.antiprotonP.make(10), FL.neutronP.make(20), FL.positronP.make(10)), FL.array(FL.AntiTritium.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.antiprotonP.make(20), FL.neutronP.make(20), FL.positronP.make(20)), FL.array(FL.AntiHelium.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.antiprotonP.make(20), FL.neutronP.make(10), FL.positronP.make(20)), FL.array(FL.AntiHelium_3.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
+
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.AntiHelium.make(20), FL.AntiHelium_3.make(10)), FL.array(FL.AntiCarbon_13.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.AntiCarbon_13.make(10), FL.AntiHydrogen.make(10)), FL.array(FL.AntiNitrogen.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
-
-        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.protonP.make(200)),                                    FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1), FL.antineutrinoP.make(1) ), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
-        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.electronP.make(100), FL.positronP.make(100)), FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1), FL.antineutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
-
+        */
+        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.protonP.make(200)),                                    FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
+        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.electronP.make(100), FL.positronP.make(100)), FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
 
 
         for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {

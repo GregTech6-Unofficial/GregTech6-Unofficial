@@ -489,8 +489,11 @@ public class TD {
 		public static final TagData FUSION                                  = TagData.createTagData("PROCESSING.FUSION_SYNTHESISABLE", "Fusion Synthesisable");
 		/** If this Material can be ground by a Mortar. */
 		public static final TagData MORTAR                                  = TagData.createTagData("PROCESSING.MORTAR_GRINDABLE", "Mortar Grindable");
-		
-		public static final TagData SMITHABLE                               = TagData.createTagData("PROCESSING.SMITHABLE", "Smithable");
+        /** If this Material can be created using Particle Collider.  */
+        public static final TagData PARTICLECOLLIDER                        = TagData.createTagData("PROCESSING.PARTICLECOLLIDER_SYNTHESISABLE", "Particle Collider Synthesisable");
+
+
+        public static final TagData SMITHABLE                               = TagData.createTagData("PROCESSING.SMITHABLE", "Smithable");
 		/** If this Material can be directly cooked in a regular Furnace */
 		public static final TagData FURNACE                                 = TagData.createTagData("PROCESSING.FURNACE", "Furnace Smeltable");
 		/** If this Material can be molten in a Crucible (every Material can, this is just for NEI Stuff) */
@@ -510,7 +513,7 @@ public class TD {
 		public static final TagData WASHING_MERCURY                         = TagData.createTagData("PROCESSING.WASHING_MERCURY", "Mercury Washable");
 		public static final TagData PULVERIZING_CINNABAR                    = TagData.createTagData("PROCESSING.PULVERIZING_CINNABAR", "Cinnabar Pulverisation Byproduct");
 		
-		public static final List<TagData> ALL_MACHINES                      = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, FURNACE, SMITHABLE, MELTING, MORTAR, FUSION, UUM, ELECTROLYSER, CENTRIFUGE, UNRECYCLABLE, SOLDERING_MATERIAL));
+		public static final List<TagData> ALL_MACHINES                      = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, FURNACE, SMITHABLE, MELTING, MORTAR, PARTICLECOLLIDER, UUM, ELECTROLYSER, CENTRIFUGE, UNRECYCLABLE, SOLDERING_MATERIAL));
 		public static final List<TagData> ALL_ORES                          = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, WASHING_PERSULFATE, WASHING_MERCURY, PULVERIZING_CINNABAR));
 	}
 	
