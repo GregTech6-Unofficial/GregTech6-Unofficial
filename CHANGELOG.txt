@@ -10,7 +10,9 @@ Nothing
 [CHANGED]Temperature of plasma set to 4000K
 [CHANGED]Implosion Compressor now accept EU to do process.
 [CHANGED]The Matter Replicators are working 2 times than before.
-[CHANGED]Now you put molten metal to the tank the temperature will drop,if temperature below melting point you need to heat 
+[CHANGED]
+Now when you put molten metal to the tank the temperature will drop and you can no longer output it.
+If the temperature drops below melting point you need to heat the tank in order to melt the metal.
 [CHANGED]For MultyBlock Heat Exchanger now need Thermomechanical Block.
 [CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.Some of its recipes now output plasma.
 [CHANGED]Cryo Distillation Tower now use Frost Proof Machine Casing instead of Distillation Tower Part
@@ -39,7 +41,7 @@ And this is a new way that using fusion to make energy.
 MultyBlock Oil Cleaner.
 3x3x3 Hallow with Clean StainlessSteel Machine Casing.
 For processing in MultyBlock can get all Products than mixer.
-And now DistillationTower will output dirty oil(Oil with S)So you need put in machine to get clean oil.
+And now DistillationTower will output dirty oil (Oil with Sulfer) So you need put in machine to get clean oil.
 [ADDED]
 MultyBlock Cracking Tower.
 A little different for building.It need 3x3x10 Cracking Tower Part.
@@ -56,12 +58,13 @@ Do recipes as Coke Oven.Use energy to over clocking!
 [WIP]
 MultyBlock Particle Collider.Build like fusion reactor.
 Now you can build it but its purpose will be added in the future.
+[WIP]
+Subatomic particles and antimatter.
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
-[CHANGED]Now Engine output be more.But they are no longer have 100%EFFICIENCY.
+[CHANGED]Now Engines output more, but they no longer have 100% Efficiency.
 [ADDED]Tungsten Engine
-[ADDED]
-Autoclave(LV-IV)That use energy to work. 
+[ADDED]Autoclaves (LV-IV) That use energy to work.
 
 *NOTE:For Original GT6 Version changelogs.You can see in this https://gregtech.overminddl1.com/changelog 
