@@ -73,7 +73,7 @@ public class MultiTileEntityCrackingTower extends TileEntityBase10MultiBlockMach
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ+1, 18113, getMultiTileEntityRegistryID(),  mFacing == SIDE_Z_NEG ? 1 : 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY  , tZ+1, 18113, getMultiTileEntityRegistryID(),                              0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
 			
-			for (int i = 1; i < 10; i++) {
+			for (int i = 1; i < 8; i++) {
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX-1, tY+i, tZ-1, 18113, getMultiTileEntityRegistryID(),                              0, MultiTileEntityMultiBlockPart.ONLY_FLUID_OUT)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY+i, tZ-1, 18113, getMultiTileEntityRegistryID(),  mFacing == SIDE_Z_POS ? 1 : 0, MultiTileEntityMultiBlockPart.ONLY_FLUID_OUT)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY+i, tZ-1, 18113, getMultiTileEntityRegistryID(),                              0, MultiTileEntityMultiBlockPart.ONLY_FLUID_OUT)) tSuccess = F;
@@ -92,7 +92,7 @@ public class MultiTileEntityCrackingTower extends TileEntityBase10MultiBlockMach
 	
 	static {
 		LH.add("gt.tooltip.multiblock.crackingtower.1", "3x3 Base of Heat Transmitters");
-		LH.add("gt.tooltip.multiblock.crackingtower.2", "3x3x10 of Cracking Tower Parts");
+		LH.add("gt.tooltip.multiblock.crackingtower.2", "3x3x8 of Cracking Tower Parts");
 		LH.add("gt.tooltip.multiblock.crackingtower.3", "Main centered on Side-Bottom of Tower facing outwards");
 		LH.add("gt.tooltip.multiblock.crackingtower.4", "Outputs automatically to the Holes on the Backside");
 		LH.add("gt.tooltip.multiblock.crackingtower.5", "Bottom Hole is for outputting all Items");

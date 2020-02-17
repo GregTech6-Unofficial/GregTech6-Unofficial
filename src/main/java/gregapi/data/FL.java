@@ -393,6 +393,7 @@ public enum FL {
 	, Oil_Light2                ("lightoil"                                                 , SIMPLE, LIQUID)
 	, Oil_Heavy2                ("heavyoil"                                                 , SIMPLE, LIQUID)
 	, Oil_HotCrude              ("hotcrude"                                                 , SIMPLE, LIQUID)
+	, Gasoil                    ("gasoil"                                                   , SIMPLE, LIQUID)
 
     // Petrol Final Products
 	, Gas_Natural               ("gas_natural_gas"          , "naturalgas", "gas.natural"   , SIMPLE, GAS)
@@ -402,7 +403,7 @@ public enum FL {
 	, Butane                    ("butane"                                                   , SIMPLE, GAS)
 	, Ethylene                  ("ethylene"                 , "ethene"                      , GAS)
 	, Propylene                 ("propylene"                , "propene"                     , GAS)
-	, Ethene                    ("ethene"                                                   , SIMPLE, LIQUID)  
+	, FEthene                   ("ethene"                                                   , SIMPLE, LIQUID)  
 	, Naphtha                   ("naphtha"                                                  , SIMPLE, LIQUID)
     , benzene                   ("benzene"                                                  , SIMPLE, LIQUID)
     , lpg                       ("lpg"                                                      , SIMPLE, LIQUID)
@@ -427,7 +428,8 @@ public enum FL {
     , SKerosine                 ("skerosine"                                                , SIMPLE, LIQUID)
     , SPetrol                   ("spetrol"                                                  , SIMPLE, LIQUID)
     , SNaphtha                  ("snaphtha"                                                 , SIMPLE, LIQUID)
-
+    , SGasoil                   ("sgasoil"                                                  , SIMPLE, LIQUID)
+    
     // Biomass Processing
 
 	, BioFuel                   ("biofuel"                                                  , SIMPLE, LIQUID)
