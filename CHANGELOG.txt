@@ -6,7 +6,7 @@ Nothing
 6.13.01: (Not released yet).
 Nothing
 
-6.13.00: (Not released yet).
+6.13.00:
 [FIXED]Gearboxes sometimes breaking/overloading on World Load.
 [FIXED]A Rare NEI Recipe List Crash. (Concurrent Modification Exception when clicking Progress Bar)
 [FIXED]Bedrock Ores did not generate Indicator Flowers and Indicator Rocks in Twilight Forest due to its Terrains normal Height of Y31 instead of Y63.
@@ -26,7 +26,7 @@ They can output HU:16384/32768/131072.
 [CHANGED]
 Now when you put molten metal to the tank the temperature will drop and you can no longer output it.
 If the temperature drops below melting point you need to heat the tank in order to melt the metal.
-[ADDED]Naphtha Ethene and gas oil for cracking product.
+[ADDED]Naphtha and gas oil for cracking product.
 [ADDED]Frost Proof Machine Casing for Cryo Distillation Tower build.
 [ADDED]Thermomechanical block for Heat Exchanger
 [ADDED]Reactors can use Distilled Water as Coolant, but that uses a different System so beware.From Original GT6 Version
