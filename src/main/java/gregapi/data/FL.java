@@ -403,7 +403,6 @@ public enum FL {
 	, Butane                    ("butane"                                                   , SIMPLE, GAS)
 	, Ethylene                  ("ethylene"                 , "ethene"                      , GAS)
 	, Propylene                 ("propylene"                , "propene"                     , GAS)
-	, FEthene                   ("ethene"                                                   , SIMPLE, LIQUID)  
 	, Naphtha                   ("naphtha"                                                  , SIMPLE, LIQUID)
     , benzene                   ("benzene"                                                  , SIMPLE, LIQUID)
     , lpg                       ("lpg"                                                      , SIMPLE, LIQUID)

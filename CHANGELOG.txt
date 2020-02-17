@@ -7,6 +7,10 @@ Nothing
 Nothing
 
 6.13.00: (Not released yet).
+[FIXED]Gearboxes sometimes breaking/overloading on World Load.
+[FIXED]A Rare NEI Recipe List Crash. (Concurrent Modification Exception when clicking Progress Bar)
+[FIXED]Bedrock Ores did not generate Indicator Flowers and Indicator Rocks in Twilight Forest due to its Terrains normal Height of Y31 instead of Y63.
+[FIXED]The Code that made Plates, Ingots and Rocks placeable did not check if the Stack was already a Block, meaning it just replaced things like Greatwood Planks or Silverwood Planks with the Stack-of-Plates Block.
 [CHANGED]Temperature of plasma set to 4000K
 [CHANGED]Implosion Compressor now accept EU to do process.
 [CHANGED]The Matter Replicators are working 2 times than before.

@@ -81,7 +81,6 @@ public class Loader_Fluids implements Runnable {
 		FL.create("Bisphenol"                , "Bisphenol"           , null                  , 1);
 		FL.create("Epichlorohydrin"          , "Epichlorohydrin"     , null                  , 1);
 		FL.create("Ethylene"                 , "Ethylene"            , MT.Ethylene           , 2);
-		FL.create("fethene"                  , "Ethene"              , null                  , 2);
 		FL.create("dragonbreath"             , "Dragon's Breath"     , null                  , 2,   1000,   300, IL.EtFu_Dragon_Breath.get(1), IL.Bottle_Empty.get(1), 250).setDensity(100).setLuminosity(5);
 		FL.create("netherair"                , "Nether Air"          , null                  , 2,   1000,   370).setDensity(0);
 		FL.create("enderair"                 , "Ender Air"           , null                  , 2,   1000,   280).setDensity(0);
