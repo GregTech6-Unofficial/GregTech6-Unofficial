@@ -1,10 +1,18 @@
 This is the Changelogs for GregTech6-Unofficial
+6.13.05: (Not released yet).
+Nothing
+
+6.13.04: (Not released yet).
+Nothing
+
+6.13.03: (Not released yet).
+Nothing
 
 6.13.02: (Not released yet).
 Nothing
 
-6.13.01: (Not released yet).
-Nothing
+6.13.01:
+[ADDED]General version for Autoclaves.
 
 6.13.00:
 [FIXED]Gearboxes sometimes breaking/overloading on World Load.
