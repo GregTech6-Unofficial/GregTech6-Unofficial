@@ -9,10 +9,14 @@ Nothing
 Nothing
 
 6.13.02: (Not released yet).
-Nothing
+[WIP]
+MultyBlock Particle Collider.Build like fusion reactor.
+Now you can build it but its purpose will be added in the future.
+[WIP]
+Subatomic particles and antimatter.
 
 6.13.01:
-[ADDED]General version for Autoclaves.
+[ADDED]General version for Autoclave.
 
 6.13.00:
 [FIXED]Gearboxes sometimes breaking/overloading on World Load.
@@ -21,7 +25,7 @@ Nothing
 [FIXED]The Code that made Plates, Ingots and Rocks placeable did not check if the Stack was already a Block, meaning it just replaced things like Greatwood Planks or Silverwood Planks with the Stack-of-Plates Block.
 [CHANGED]Temperature of plasma set to 4000K
 [CHANGED]Implosion Compressor now accept EU to do process.
-[CHANGED]The Matter Replicators are working 2 times than before.
+[CHANGED]The Matter Replicators are working 4 times than before.
 [CHANGED]For MultyBlock Heat Exchanger now need Thermomechanical Block.
 [CHANGED]Now Distillation Tower need 3x3x12 Distillation Tower Parts to build.
 [CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.Some of its recipes now output plasma.
@@ -67,11 +71,6 @@ MultyBlock version for Matter Replicator.It has 64 Parallel.
 [ADDED]
 MultyBlock Industry Coke Oven.
 Do recipes as Coke Oven.Use energy to over clocking!
-[WIP]
-MultyBlock Particle Collider.Build like fusion reactor.
-Now you can build it but its purpose will be added in the future.
-[WIP]
-Subatomic particles and antimatter.
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
