@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 Gregtech6-Unofficial Team
  *
  * This file is part of GregTech.
  *
@@ -40,7 +40,7 @@ import net.minecraftforge.fluids.IFluidHandler;
  */
 public class MultiTileEntityDryer extends TileEntityBase10MultiBlockMachine {
 	
-	public short mDryerWalls = 18002;
+	public short mDryerWalls = 18023;
 	
 	@Override
 	public boolean checkStructure2() {
