@@ -9,6 +9,7 @@ Nothing
 Nothing
 
 6.13.02: (Not released yet).
+[FIXED]Titanium Niobium Carbide Gas and Engine Turbine Main Housing recipes use Dense Titanium Niobium Carbide Wall 
 [WIP]
 MultyBlock Particle Collider.Build like fusion reactor.
 Now you can build it but its purpose will be added in the future.
