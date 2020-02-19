@@ -9,6 +9,7 @@ Nothing
 Nothing
 
 6.13.02: (Not released yet).
+[FIXED]Titanium Niobium Carbide can not made in crucible.
 [FIXED]Tooltips of large heat exchanger still like before.
 [FIXED]Distillation Tower now output fluid in the correct order
 [FIXED]Titanium Niobium Carbide Gas and Engine Turbine Main Housing recipes use Dense Titanium Niobium Carbide Wall 
