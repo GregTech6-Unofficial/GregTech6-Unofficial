@@ -10,6 +10,7 @@ Nothing
 
 6.13.02: (Not released yet).
 [FIXED]Tooltips of large heat exchanger still like before.
+[FIXED]Distillation Tower now output fluid in the correct order
 [FIXED]Titanium Niobium Carbide Gas and Engine Turbine Main Housing recipes use Dense Titanium Niobium Carbide Wall 
 [ADDED]Gas Oil now can be Burned or put in Engine
 [ADDED]
