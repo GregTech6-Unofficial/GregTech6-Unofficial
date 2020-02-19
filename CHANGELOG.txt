@@ -12,6 +12,7 @@ Nothing
 [FIXED]Tooltips of large heat exchanger still like before.
 [FIXED]Distillation Tower now output fluid in the correct order
 [FIXED]Titanium Niobium Carbide Gas and Engine Turbine Main Housing recipes use Dense Titanium Niobium Carbide Wall 
+[ADDED]Snow Golems can have their poop picked up by GT6 Hoppers automatically, without constantly breaking the Block.
 [ADDED]Gas Oil now can be Burned or put in Engine
 [ADDED]
 MultyBlock Large Dryer.
