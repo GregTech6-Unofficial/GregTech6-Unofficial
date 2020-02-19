@@ -52,7 +52,7 @@ import net.minecraftforge.fluids.IFluidTank;
 /**
  * @author Gregorius Techneticies
  */
-public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlockBase implements IFluidHandler, ITileEntityRunningActively, ITileEntityEnergy, IMultiBlockFluidHandler, IMultiBlockEnergy {
+public class MultiTileEntityLargeHeatExchanger extends TileEntityBase10MultiBlockBase implements IFluidHandler, ITileEntityRunningActively, ITileEntityEnergy, IMultiBlockFluidHandler, IMultiBlockEnergy {
 	public short mEfficiency = 10000;
 	public long mEnergy = 0, mRate = 8;
 	public TagData mEnergyTypeEmitted = TD.Energy.HU;
@@ -60,6 +60,7 @@ public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlo
 	public Recipe mLastRecipe = null;
 	public FluidTankGT[] mTanks = {new FluidTankGT(10000), new FluidTankGT(Long.MAX_VALUE)};
 	public TE_Behavior_Active_Trinary mActivity = null;
+	public short mHeatWalls = 18109;
 	
 	@Override
 	public void readFromNBT2(NBTTagCompound aNBT) {
@@ -67,6 +68,7 @@ public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlo
 		mEnergy = aNBT.getLong(NBT_ENERGY);
 		mActivity = new TE_Behavior_Active_Trinary(this, aNBT);
 		if (aNBT.hasKey(NBT_OUTPUT)) mRate = aNBT.getLong(NBT_OUTPUT);
+		if (aNBT.hasKey(NBT_DESIGN)) mHeatWalls = aNBT.getShort(NBT_DESIGN);
 		if (aNBT.hasKey(NBT_FUELMAP)) mRecipes = RecipeMap.RECIPE_MAPS.get(aNBT.getString(NBT_FUELMAP));
 		if (aNBT.hasKey(NBT_EFFICIENCY)) mEfficiency = (short)UT.Code.bind_(0, 10000, aNBT.getShort(NBT_EFFICIENCY));
 		if (aNBT.hasKey(NBT_ENERGY_EMITTED)) mEnergyTypeEmitted = TagData.createTagData(aNBT.getString(NBT_ENERGY_EMITTED));
@@ -90,21 +92,21 @@ public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlo
 		if (worldObj.blockExists(tX-1, tY, tZ-1) && worldObj.blockExists(tX+1, tY, tZ-1) && worldObj.blockExists(tX-1, tY, tZ+1) && worldObj.blockExists(tX+1, tY, tZ+1)) {
 			boolean tSuccess = T;
 			
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ  , 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY  , tZ  , 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY  , tZ  , 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ+1, 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY  , tZ+1, 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ+2, 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY  , tZ+2, 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY  , tZ+2, 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ  , mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY  , tZ  , mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY  , tZ  , mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ+1, mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+	
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY  , tZ+1, mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY  , tZ+2, mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY  , tZ+2, mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY  , tZ+2, mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY_IN)) tSuccess = F;
 			
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY+1, tZ  , 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY+1, tZ  , 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY+1, tZ  , 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY+1, tZ+1, 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
-			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY+1, tZ+1, 18110, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY+1, tZ+1, mHeatWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+2, tY+1, tZ+1, 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY+1, tZ+2, 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 			if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+1, tY+1, tZ+2, 18101, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -122,19 +124,19 @@ public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlo
 	}
 	
 	static {
-		LH.add("gt.tooltip.multiblock.heatexchangerw.1", "3x3 Ring of 8 Heat Transmitters with Dense Tungsten Wall inside");
-		LH.add("gt.tooltip.multiblock.heatexchangerw.2", "3x3 Ring of 8 Dense Tungsten Walls with Main inside");
-		LH.add("gt.tooltip.multiblock.heatexchangerw.3", "Energy Output split over the 8 Heat Transmitters (Top)");
-		LH.add("gt.tooltip.multiblock.heatexchangerw.4", "Input at Bottom Layer, Fluid Output at Main Block");
+		LH.add("gt.tooltip.multiblock.heatexchanger.1", "3x3 Ring of 8 Heat Transmitters with Tantalum Hafnium Carbide Thermomechanical block inside");
+		LH.add("gt.tooltip.multiblock.heatexchanger.2", "3x3 Ring of 8 Tantalum Hafnium Carbide Thermomechanical block with Main inside");
+		LH.add("gt.tooltip.multiblock.heatexchanger.3", "Energy Output split over the 8 Heat Transmitters (Top)");
+		LH.add("gt.tooltip.multiblock.heatexchanger.4", "Input at Bottom Layer, Fluid Output at Main Block");
 	}
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		aList.add(Chat.CYAN     + LH.get(LH.STRUCTURE) + ":");
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangerw.1"));
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangerw.2"));
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangerw.3"));
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangerw.4"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.1"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.2"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.3"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.4"));
 		aList.add(Chat.CYAN     + LH.get(LH.RECIPES) + ": " + Chat.WHITE + LH.get(mRecipes.mNameInternal));
 		aList.add(LH.getToolTipEfficiency(mEfficiency));
 		LH.addEnergyToolTips(this, aList, null, mEnergyTypeEmitted, null, LH.get(LH.FACE_TOP));
@@ -263,5 +265,5 @@ public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlo
 	
 	@Override public boolean canDrop(int aInventorySlot) {return F;}
 	
-	@Override public String getTileEntityName() {return "gt.multitileentity.multiblock.heatexchangerw";}
+	@Override public String getTileEntityName() {return "gt.multitileentity.multiblock.heatexchanger";}
 }

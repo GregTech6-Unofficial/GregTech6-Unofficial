@@ -148,17 +148,23 @@ public class MultiTileEntityDistillationTower extends TileEntityBase10MultiBlock
 			FluidStack tFluid = tTank.getFluid();
 			if (tFluid != null && tFluid.amount > 0) {
 				DelegatorTileEntity<TileEntity> tDelegator = null;
-				if (FL.is(tFluid, "propane", "methane")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+7, getOffsetZN(mFacing, 3), mFacing, F);
+				if (FL.is(tFluid, "methane")) {
+					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+10, getOffsetZN(mFacing, 3), mFacing, F);
+				} else if (FL.is(tFluid, "propane")) {
+					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+9, getOffsetZN(mFacing, 3), mFacing, F);
 				} else if (FL.is(tFluid, "butane")) {
+					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+8, getOffsetZN(mFacing, 3), mFacing, F);
+				} else if (FL.is(tFluid, "sgasoli", "bioethanol")) {
+					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+7, getOffsetZN(mFacing, 3), mFacing, F);
+				} else if (FL.is(tFluid, "spetrol", "bioethanol")) {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+6, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "spetrol", "sgasoline", "bioethanol")) {
+				} else if (FL.is(tFluid, "skerosene", "glycerol")) {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+5, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "skerosene", "kerosine", "glycerol")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+4, getOffsetZN(mFacing, 3), mFacing, F);
 				} else if (FL.is(tFluid, "sdiesel", "biodiesel")) {
+					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+4, getOffsetZN(mFacing, 3), mFacing, F);
+				} else if (FL.is(tFluid, "snaphtha", "biodiesel")) {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+3, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "sfuel", "fueloil", "biofuel")) {
+				} else if (FL.is(tFluid, "sfuel", "biofuel")) {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+2, getOffsetZN(mFacing, 3), mFacing, F);
 				} else {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+1, getOffsetZN(mFacing, 3), mFacing, F);
