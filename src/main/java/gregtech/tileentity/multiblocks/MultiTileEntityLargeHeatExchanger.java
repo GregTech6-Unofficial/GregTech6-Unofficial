@@ -124,19 +124,19 @@ public class MultiTileEntityLargeHeatExchanger extends TileEntityBase10MultiBloc
 	}
 	
 	static {
-		LH.add("gt.tooltip.multiblock.heatexchangert.1", "3x3 Ring of 8 Heat Transmitters with Tantalum Hafnium Carbide Thermomechanical block inside");
-		LH.add("gt.tooltip.multiblock.heatexchangert.2", "3x3 Ring of 8 Tantalum Hafnium Carbide Thermomechanical block with Main inside");
-		LH.add("gt.tooltip.multiblock.heatexchangert.3", "Energy Output split over the 8 Heat Transmitters (Top)");
-		LH.add("gt.tooltip.multiblock.heatexchangert.4", "Input at Bottom Layer, Fluid Output at Main Block");
+		LH.add("gt.tooltip.multiblock.heatexchanger.1", "3x3 Ring of 8 Heat Transmitters with Tantalum Hafnium Carbide Thermomechanical block inside");
+		LH.add("gt.tooltip.multiblock.heatexchanger.2", "3x3 Ring of 8 Tantalum Hafnium Carbide Thermomechanical block with Main inside");
+		LH.add("gt.tooltip.multiblock.heatexchanger.3", "Energy Output split over the 8 Heat Transmitters (Top)");
+		LH.add("gt.tooltip.multiblock.heatexchanger.4", "Input at Bottom Layer, Fluid Output at Main Block");
 	}
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		aList.add(Chat.CYAN     + LH.get(LH.STRUCTURE) + ":");
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangert.1"));
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangert.2"));
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangert.3"));
-		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchangert.4"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.1"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.2"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.3"));
+		aList.add(Chat.WHITE    + LH.get("gt.tooltip.multiblock.heatexchanger.4"));
 		aList.add(Chat.CYAN     + LH.get(LH.RECIPES) + ": " + Chat.WHITE + LH.get(mRecipes.mNameInternal));
 		aList.add(LH.getToolTipEfficiency(mEfficiency));
 		LH.addEnergyToolTips(this, aList, null, mEnergyTypeEmitted, null, LH.get(LH.FACE_TOP));
@@ -265,5 +265,5 @@ public class MultiTileEntityLargeHeatExchanger extends TileEntityBase10MultiBloc
 	
 	@Override public boolean canDrop(int aInventorySlot) {return F;}
 	
-	@Override public String getTileEntityName() {return "gt.multitileentity.multiblock.heatexchangert";}
+	@Override public String getTileEntityName() {return "gt.multitileentity.multiblock.heatexchanger";}
 }
