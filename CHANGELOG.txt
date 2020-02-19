@@ -12,6 +12,9 @@ Nothing
 [FIXED]Tooltips of large heat exchanger still like before.
 [FIXED]Titanium Niobium Carbide Gas and Engine Turbine Main Housing recipes use Dense Titanium Niobium Carbide Wall 
 [ADDED]Gas Oil now can be Burned or put in Engine
+[ADDED]
+MultyBlock Large Dryer.
+Need Dense Wall to build because it has up to 256 Parallel.
 [WIP]
 MultyBlock Particle Collider.Build like fusion reactor.
 Now you can build it but its purpose will be added in the future.

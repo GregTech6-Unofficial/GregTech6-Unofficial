@@ -31,6 +31,7 @@ import gregapi.tileentity.multiblocks.MultiTileEntityMultiBlockPart;
 import gregapi.tileentity.multiblocks.TileEntityBase10MultiBlockMachine;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -39,8 +40,13 @@ import net.minecraftforge.fluids.IFluidHandler;
  * @author Gregorius Techneticies
  */
 public class MultiTileEntityDryer extends TileEntityBase10MultiBlockMachine {
+	public short mDryerWalls = 18002;
 	
-	public short mDryerWalls = 18023;
+	@Override
+	public void readFromNBT2(NBTTagCompound aNBT) {
+		super.readFromNBT2(aNBT);
+		if (aNBT.hasKey(NBT_DESIGN)) mDryerWalls = aNBT.getShort(NBT_DESIGN);
+	}
 	
 	@Override
 	public boolean checkStructure2() {
