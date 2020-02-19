@@ -122,8 +122,8 @@ public class MultiTileEntityLargeHeatExchangerW extends TileEntityBase10MultiBlo
 	}
 	
 	static {
-		LH.add("gt.tooltip.multiblock.heatexchangerw.1", "3x3 Ring of 8 Heat Transmitters with Dense Tungsten Wall inside");
-		LH.add("gt.tooltip.multiblock.heatexchangerw.2", "3x3 Ring of 8 Dense Tungsten Walls with Main inside");
+		LH.add("gt.tooltip.multiblock.heatexchangerw.1", "3x3 Ring of 8 Heat Transmitters with Tungsten Thermomechanical Block inside");
+		LH.add("gt.tooltip.multiblock.heatexchangerw.2", "3x3 Ring of 8 Tungsten Thermomechanical Block with Main inside");
 		LH.add("gt.tooltip.multiblock.heatexchangerw.3", "Energy Output split over the 8 Heat Transmitters (Top)");
 		LH.add("gt.tooltip.multiblock.heatexchangerw.4", "Input at Bottom Layer, Fluid Output at Main Block");
 	}
