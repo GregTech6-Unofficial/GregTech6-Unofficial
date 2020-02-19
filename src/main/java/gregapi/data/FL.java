@@ -73,6 +73,7 @@ public enum FL {
 	, Oxygen                    ("oxygen"                                                   , SIMPLE, GAS)
 	, Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID)
 
+    // plasmas
 	, HeliumP                   ("heliumplasma"                                             , PLASMA)
 	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
     , neutronP                  ("neutronplasma"                                            , PLASMA)
@@ -82,6 +83,10 @@ public enum FL {
     , positronP                 ("positronplasma"                                           , PLASMA)
     , neutrinoP                 ("neutrinoplasma"                                           , PLASMA)
     , antineutrinoP             ("antineutrinoplasma"                                       , PLASMA)
+
+    // ionized plasmas
+    , HydrogenI("ionizedhydrogen", PLASMA)
+    , HeliumI("ionizedhelium", PLASMA)
 
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Hydrogen                  ("hydrogen"                                                 , GAS)

@@ -490,7 +490,7 @@ public class TD {
 		/** If this Material can be ground by a Mortar. */
 		public static final TagData MORTAR                                  = TagData.createTagData("PROCESSING.MORTAR_GRINDABLE", "Mortar Grindable");
         /** If this Material can be created using Particle Collider.  */
-        public static final TagData PARTICLECOLLIDER                        = TagData.createTagData("PROCESSING.PARTICLECOLLIDER_SYNTHESISABLE", "Particle Collider Synthesisable");
+        //public static final TagData PARTICLECOLLIDER                        = TagData.createTagData("PROCESSING.PARTICLECOLLIDER_SYNTHESISABLE", "Particle Collider Synthesisable");
 
 
         public static final TagData SMITHABLE                               = TagData.createTagData("PROCESSING.SMITHABLE", "Smithable");
@@ -513,7 +513,7 @@ public class TD {
 		public static final TagData WASHING_MERCURY                         = TagData.createTagData("PROCESSING.WASHING_MERCURY", "Mercury Washable");
 		public static final TagData PULVERIZING_CINNABAR                    = TagData.createTagData("PROCESSING.PULVERIZING_CINNABAR", "Cinnabar Pulverisation Byproduct");
 		
-		public static final List<TagData> ALL_MACHINES                      = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, FURNACE, SMITHABLE, MELTING, MORTAR, PARTICLECOLLIDER, UUM, ELECTROLYSER, CENTRIFUGE, UNRECYCLABLE, SOLDERING_MATERIAL));
+		public static final List<TagData> ALL_MACHINES                      = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, FURNACE, SMITHABLE, MELTING, MORTAR, UUM, ELECTROLYSER, CENTRIFUGE, UNRECYCLABLE, SOLDERING_MATERIAL));
 		public static final List<TagData> ALL_ORES                          = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, WASHING_PERSULFATE, WASHING_MERCURY, PULVERIZING_CINNABAR));
 	}
 	

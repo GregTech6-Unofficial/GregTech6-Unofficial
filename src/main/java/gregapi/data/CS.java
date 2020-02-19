@@ -1428,8 +1428,8 @@ public class CS {
 	/** Contains GT Items and Item related References. */
 	public static class ItemsGT {
 		/** The MultiItems */
-		public static MultiItemRandom TECH, TOOLS, CANS, FOOD, BOTTLES, BOOKS, BUMBLEBEES;
-		public static MultiItemRandom[] ALL_MULTI_ITEMS = new MultiItemRandom[] {TECH, TOOLS, CANS, FOOD, BOTTLES, BOOKS, BUMBLEBEES};
+		public static MultiItemRandom TECH, TOOLS, CANS, FOOD, BOTTLES, BOOKS, BUMBLEBEES, PHYS;
+		public static MultiItemRandom[] ALL_MULTI_ITEMS = new MultiItemRandom[] {TECH, TOOLS, CANS, FOOD, BOTTLES, BOOKS, BUMBLEBEES, PHYS};
 		public static final ItemStackSet<ItemStackContainer> ILLEGAL_DROPS = new ItemStackSet<>();
 		public static final ItemStackSet<ItemStackContainer> DEBUG_ITEMS = new ItemStackSet<>();
 		public static final ItemStackSet<ItemStackContainer> AMMO_ITEMS = new ItemStackSet<>();

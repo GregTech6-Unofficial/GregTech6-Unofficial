@@ -411,6 +411,10 @@ public enum IL implements IItemContainer {
 	Spray_Foam_Used_00, Spray_Foam_Used_01, Spray_Foam_Used_02, Spray_Foam_Used_03, Spray_Foam_Used_04, Spray_Foam_Used_05, Spray_Foam_Used_06, Spray_Foam_Used_07, Spray_Foam_Used_08, Spray_Foam_Used_09, Spray_Foam_Used_10, Spray_Foam_Used_11, Spray_Foam_Used_12, Spray_Foam_Used_13, Spray_Foam_Used_14, Spray_Foam_Used_15,
 	Spray_Foam_Owned_00, Spray_Foam_Owned_01, Spray_Foam_Owned_02, Spray_Foam_Owned_03, Spray_Foam_Owned_04, Spray_Foam_Owned_05, Spray_Foam_Owned_06, Spray_Foam_Owned_07, Spray_Foam_Owned_08, Spray_Foam_Owned_09, Spray_Foam_Owned_10, Spray_Foam_Owned_11, Spray_Foam_Owned_12, Spray_Foam_Owned_13, Spray_Foam_Owned_14, Spray_Foam_Owned_15,
 	Spray_Foam_Owned_Used_00, Spray_Foam_Owned_Used_01, Spray_Foam_Owned_Used_02, Spray_Foam_Owned_Used_03, Spray_Foam_Owned_Used_04, Spray_Foam_Owned_Used_05, Spray_Foam_Owned_Used_06, Spray_Foam_Owned_Used_07, Spray_Foam_Owned_Used_08, Spray_Foam_Owned_Used_09, Spray_Foam_Owned_Used_10, Spray_Foam_Owned_Used_11, Spray_Foam_Owned_Used_12, Spray_Foam_Owned_Used_13, Spray_Foam_Owned_Used_14, Spray_Foam_Owned_Used_15,
+
+    // Physics
+    Proton, Anti_Proton, Electron, Positron, Neutron, Alpha_Particle, Neutrino, Anti_Neutrino, Higgs_Boson,
+    Kerr_Blackhole,
 	
 	// Deprecated
 	Battery_Hull_LV, Battery_SU_LV_SulfuricAcid, Battery_SU_LV_Mercury, Battery_RE_LV_Sodium, Battery_RE_LV_Cadmium, Battery_RE_LV_Lithium, Battery_RE_LV_Redstone, Battery_RE_LV_Nikolite, Battery_RE_LV_Teslatite, Battery_RE_LV_Electrotine,

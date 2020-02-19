@@ -269,10 +269,12 @@ public class MT {
 	y       , Photon                    =   y       = create(   1, "Photon"     ).setStatsElement(0,0,0,0,0).heat(0,0,0).setRGBa(255, 255, 255, 255).setTextures(SET_NONE).put(PARTICLE).setTooltip("y").hide(),
 	v       , Neutrino                  =   v       = create(   2, "Neutrino"   ).setStatsElement(0,0,0,0,0).heat(0,0,0).setRGBa(180, 180, 180,   0).setTextures(SET_NONE).put(PARTICLE).setTooltip("v").hide(),
 	n       , Neutron                   =   n       = create(   3, "Neutron"    ).setStatsElement(0,0,1,0,0).heat(0,0,0).setRGBa(128, 128, 128,   0).setTextures(SET_NONE).put(PARTICLE).setTooltip("n").hide(),
-	p       , Proton                    =   p       = create(   4, "Proton"     ).setStatsElement(1,0,0,0,0).heat(0,0,0).setRGBa(255,   0,   0,   0).setTextures(SET_NONE).put(PARTICLE).setTooltip("p").hide(),
-	e       , Electron                  =   e       = create(   5, "Electron"   ).setStatsElement(0,1,0,0,0).heat(0,0,0).setRGBa(  0,   0, 255,   0).setTextures(SET_NONE).put(PARTICLE).setTooltip("e").hide();
-	
-	/** Yes, I consider Magic as some kind of Element. I placed it at the Spot of "Anti-Empty", since Slot 0 is for the "Empty" Material, and "Anti-Empty" = "Magically-Full", or some crazy shit like that. Also Magic has negative Mass. */
+	p       , Proton                    =   p       = create(   4, "Proton"     ).setStatsElement(1,0,0,0,0).heat(0,0,0).setRGBa(255,   0,   0,   0).setTextures(SET_NONE).put(PARTICLE, FUSION).setTooltip("p").hide(),
+	e       , Electron                  =   e       = create(   5, "Electron"   ).setStatsElement(0,1,0,0,0).heat(0,0,0).setRGBa(  0,   0, 255,   0).setTextures(SET_NONE).put(PARTICLE).setTooltip("e").hide(),
+    HB      , HiggsBoson                =   HB      = create(   6, "Higgs-Boson").setStatsElement(0,0,0,0,0).heat(0,0,0).setRGBa(255, 255, 255, 255).setTextures(SET_NONE).put(PARTICLE).setTooltip("HB").hide();
+
+
+    /** Yes, I consider Magic as some kind of Element. I placed it at the Spot of "Anti-Empty", since Slot 0 is for the "Empty" Material, and "Anti-Empty" = "Magically-Full", or some crazy shit like that. Also Magic has negative Mass. */
 	public static final OreDictMaterial
 	Ma      , Magic                     =   Ma      = create( 4000, "Magic"     ).setStatsElement(0,0,0,-1,0).heat(0,0,0).setTextures(SET_SHINY).put(ELEMENT, MAGICAL, UNBURNABLE).setTooltip("Ma").hide().qual(3, 10.0, 5120, 5);
 	
@@ -1254,10 +1256,12 @@ public class MT {
 	//27000-28000 For GregTech6-Unofficial//
 	Nb2Ti3C4                = alloymachine  (27000, "Titanium Niobium Carbide"                      , 153, 153, 204, 255).put(MOLTEN).qual(3, 16.0, 7680, 4)                                                                                                            .uumMcfg( 0, Nb             , 3*U, Ti               , 3*U, C                , 4*U)                                                                          .aspects(TC.METALLUM, 2, TC.GELUM, 2).heat(4196).alloyCentrifuge(),
 	H3PO4                   = lqudaciddcmp  (27001, "Phosphoric Acid"       , SET_FLUID             , 255, 255,  61, 255).put(LIQUID)                                                                                                                                   .uumMcfg( 0, H              , 3*U, P                , 1*U, O                , 4*U)                                                                          .heat( 200,  400), PhosphoricAcid = H3PO4,
-	Naphtha                 = create        (27003, "Naphtha"               , SET_FLUID             , 255, 255, 102, 255).put(LIQUID, EXPLOSIVE, FLAMMABLE)                                                                                                                                                                                                                                                                         .heat( 100,  400).aspects(TC.MORTUUS, 1, TC.POTENTIA, 1);
+	Naphtha                 = create        (27003, "Naphtha"               , SET_FLUID             , 255, 255, 102, 255).put(LIQUID, EXPLOSIVE, FLAMMABLE)                                                                                                                                                                                                                                                                         .heat( 100,  400).aspects(TC.MORTUUS, 1, TC.POTENTIA, 1),
+    H_Ion                   = create   (27004, "Ionized Hydrogen", SET_FLUID, 255, 255, 102, 255).put(PLASMA).heat(1, 12),
+    He_Ion                   = create   (27005, "Ionized Helium", SET_FLUID, 255, 255, 102, 255).put(PLASMA).heat(2, 8);
 
-	
-	static {
+
+    static {
 		H2O.setSolidifying(Ice, U);
 		Lava.setSolidifying(Obsidian, U).setDensity(Obsidian.mGramPerCubicCentimeter);
 		Clay.setSmelting(Ceramic, U);

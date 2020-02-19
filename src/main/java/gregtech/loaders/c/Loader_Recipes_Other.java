@@ -849,9 +849,11 @@ public class Loader_Recipes_Other implements Runnable {
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.AntiHelium.make(20), FL.AntiHelium_3.make(10)), FL.array(FL.AntiCarbon_13.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         RM.Fusion.addRecipe1(T, 2048, 384, ST.tag(1), FL.array(FL.AntiCarbon_13.make(10), FL.AntiHydrogen.make(10)), FL.array(FL.AntiNitrogen.make(10)), ZL_IS                ).setSpecialNumber( 2000L*20000L*1L);
         */
-        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.protonP.make(200)),                                    FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
-        RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.electronP.make(100), FL.positronP.make(100)), FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
 
+        RM.ParticleCollider.addRecipe1(T, 8192,  20, new long[] {100, 100, 10, 200, 200, 50}, ST.tag(1), FL.HydrogenI.make(10), FL.Hydrogen.make(5), IL.Proton.get(1), IL.Anti_Proton.get(1), IL.Neutron.get(1), IL.Electron.get(1), IL.Positron.get(1), IL.Neutrino.get(1)).setSpecialNumber(10000000);
+        RM.ParticleCollider.addRecipe1(T, 8192,  40, new long[] {80, 80, 8, 160, 160, 30},    ST.tag(1), FL.HeliumI.make(10), FL.Helium.make(6), IL.Proton.get(1), IL.Anti_Proton.get(1), IL.Neutron.get(1), IL.Electron.get(1), IL.Positron.get(1), IL.Neutrino.get(1)).setSpecialNumber(10000000);
+        RM.ParticleCollider.addRecipeX(T, 32768,  2, new long[] {200, 200, 20, 5, 100, 1},       ST.array(IL.Electron.get(1),IL.Positron.get(1)),  FL.array(MT.Xe.gas(U, T)), FL.array(MT.Xe.gas(U, T)), IL.Proton.get(1), IL.Anti_Proton.get(1), IL.Neutron.get(1), IL.Higgs_Boson.get(1), IL.Neutrino.get(1), IL.Kerr_Blackhole.get(1)).setSpecialNumber(10000000);
+        RM.ParticleCollider.addRecipeX(T, 32768,  4, new long[] {300, 300, 15, 5, 75, 1},        ST.array(ST.tag(1), IL.Proton.get(2)), FL.array(MT.Xe.gas(U, T)), FL.array(MT.Xe.gas(U, T)), IL.Electron.get(1), IL.Positron.get(1), IL.Neutron.get(1), IL.Higgs_Boson.get(1), IL.Neutrino.get(1), IL.Kerr_Blackhole.get(1)).setSpecialNumber(10000000);
 
         for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
 			ItemStack
