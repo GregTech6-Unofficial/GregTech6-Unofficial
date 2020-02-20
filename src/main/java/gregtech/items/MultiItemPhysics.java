@@ -45,7 +45,7 @@ public class MultiItemPhysics extends MultiItemRandom{
 
     public MultiItemPhysics() {
         super(MD.GT.mID, "gt.multiitem.physics");
-        setCreativeTab(new CreativeTab(getUnlocalizedName(), "GregTech: Physics", this, (short)9000));
+        setCreativeTab(new CreativeTab(getUnlocalizedName(), "GregTech: Physics", this, (short)1008));
     }
 
     @Override
