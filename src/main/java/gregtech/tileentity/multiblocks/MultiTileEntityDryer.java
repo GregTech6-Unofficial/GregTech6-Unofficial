@@ -97,7 +97,7 @@ public class MultiTileEntityDryer extends TileEntityBase10MultiBlockMachine {
 	static {
 		LH.add("gt.tooltip.multiblock.largedryer.1", "3x3 Base of Heat Transmitters");
 		LH.add("gt.tooltip.multiblock.largedryer.2", "3x3x3 Hollow of the Block you crafted this one with");
-		LH.add("gt.tooltip.multiblock.largedryer.3", "Main centered on Side-Bottom of Boiler facing outwards");
+		LH.add("gt.tooltip.multiblock.largedryer.3", "Main centered on Side-Bottom of Dryer facing outwards");
 		LH.add("gt.tooltip.multiblock.largedryer.4", "Input only possible at Bottom Layer of Dryer");
 	}
 	

@@ -9,7 +9,15 @@ Nothing
 Nothing
 
 6.13.04: (Not released yet).
-Nothing
+[CHANGED]Particle Collider now needs minimum 20 particle in the input slot to operate.
+[CHANGED]Some recipes of the Particle Collider to adjust the previous change.
+[ADDED]
+Multiblock Ionizer.
+3x3x3 Hollow of Electrical Proof Machine Casing, with the Main at the center of any bottom side.
+[ADDED]
+Electrical Proof Machine Casing
+[ADDED]
+Recipes of ionized gas now are added.
 
 6.13.03: 
 [FIXED]molten metal in tank system are forbidden now.
@@ -84,13 +92,13 @@ MultyBlock Industry Coke Oven.
 Do recipes as Coke Oven.Use energy to over clocking!
 
 6.13.02: 
-[BROKEN]Not To Used!
+[BROKEN]Not To Use!
 
 6.13.01:
-[BROKEN]Not To Used!
+[BROKEN]Not To Use!
 
 6.13.00:
-[BROKEN]Not To Used!
+[BROKEN]Not To Use!
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
