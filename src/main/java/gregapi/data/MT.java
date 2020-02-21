@@ -1257,9 +1257,9 @@ public class MT {
 	Nb2Ti3C4                = alloymachine  (27000, "Titanium Niobium Carbide"                      , 153, 153, 204, 255).put(MOLTEN).qual(3, 16.0, 7680, 4)                                                                                                            .uumMcfg( 0, NiobiumTitanium               , 6*U, C                , 4*U)                                                                          .aspects(TC.METALLUM, 2, TC.GELUM, 2).heat(4196).alloyCentrifuge(),
 	H3PO4                   = lqudaciddcmp  (27001, "Phosphoric Acid"       , SET_FLUID             , 255, 255,  61, 255).put(LIQUID)                                                                                                                                   .uumMcfg( 0, H              , 3*U, P                , 1*U, O                , 4*U)                                                                          .heat( 200,  400), PhosphoricAcid = H3PO4,
 	Naphtha                 = create        (27003, "Naphtha"               , SET_FLUID             , 255, 255, 102, 255).put(LIQUID, EXPLOSIVE, FLAMMABLE)                                                                                                                                                                                                                                                                         .heat( 100,  400).aspects(TC.MORTUUS, 1, TC.POTENTIA, 1),
-    H_Ion                   = create   (27004, "Ionized Hydrogen", SET_FLUID, 255, 255, 102, 255).put(PLASMA).heat(1, 12),
-    He_Ion                   = create   (27005, "Ionized Helium", SET_FLUID, 255, 255, 102, 255).put(PLASMA).heat(2, 8);
-
+    H_Ion                   = create        (27004, "Ionized Hydrogen", SET_FLUID, 255, 255, 102, 255).put(PLASMA).heat(1, 12),
+    He_Ion                  = create        (27005, "Ionized Helium", SET_FLUID, 255, 255, 102, 255).put(PLASMA).heat(2, 8),
+	NqO2U238Am              = oredustdcmp   (27006, "Naquadah Mixture"       , SET_METALLIC          , 55,  60, 50, 255).put(MELTING, MOLTEN, INGOTS)                                                                                                                   .uumMcfg( 1, Nq             , 1*U, Nq_528, 1*U, O                , 2*U, U_238          ,2*U, Am, 1*U)                                                                                                  .qual(0, 1.0, 16, 2);
 
     static {
 		H2O.setSolidifying(Ice, U);
