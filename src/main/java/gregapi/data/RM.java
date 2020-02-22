@@ -145,6 +145,7 @@ public class RM {
 	, CNC                       = new RecipeMap                     (null, "gt.recipe.cncmachine"                   , "CNC Machine"                     , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 2, 1, 2,/*IN-OUT-MIN-FLUID=*/ 1, 0, 1,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, F/*T*/, F/*T*/, T)
 	, ParticleCollider          = new RecipeMap                     (null, "gt.recipe.particlecollider"             , "Particle Collider"               , null, 0, 1, RES_PATH_GUI+"machines/ParticleCollider"                    ,/*IN-OUT-MIN-ITEM=*/ 2, 6, 1,/*IN-OUT-MIN-FLUID=*/ 2, 6, 0,/*MIN*/ 2,/*AMP=*/ 1, "Start: "             ,    1, " EU"   , T, T, T, T)
     , Ionizer                   = new RecipeMap                     (null, "gt.recipe.ionizer"                       , "Ionizer"                        , null, 0, 1, RES_PATH_GUI+"machines/Ionizer"                     ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 0,/*IN-OUT-MIN-FLUID=*/ 1, 1, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T)
+    , RPP                       = new RecipeMap                     (null, "gt.recipe.radiationprocessing"          , "radiationprocessing"             , null, 0, 1, RES_PATH_GUI+"machines/Lightning"                 ,/*IN-OUT-MIN-ITEM=*/ 6, 6, 0,/*IN-OUT-MIN-FLUID=*/ 6, 6, 0,/*MIN*/ 2,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T)
 
             ;
 	
