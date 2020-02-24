@@ -12,13 +12,12 @@ Nothing
 [CHANGED]Naquadah worldgen now just worldgen exist in Naquadah Mixture Ore.
 [CHANGED]Particle Collider now needs minimum 20 particle in the input slot to operate.
 [CHANGED]Some recipes of the Particle Collider to adjust the previous change.
+[ADDED]IV Battery(8192EU/t)
+[ADDED]Electrical Proof Machine Casing.
+[ADDED]Recipes of ionized gas now are added.
 [ADDED]
 Multiblock Ionizer.
 3x3x3 Hollow of Electrical Proof Machine Casing, with the Main at the center of any bottom side.
-[ADDED]
-Electrical Proof Machine Casing
-[ADDED]
-Recipes of ionized gas now are added.
 
 6.13.03: 
 [FIXED]molten metal in tank system are forbidden now.
