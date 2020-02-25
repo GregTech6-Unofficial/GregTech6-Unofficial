@@ -9,6 +9,7 @@ Nothing
 Nothing
 
 6.13.04: (Not released yet).
+[FIXED]DistillationTower recipe has not have recipe output Gasoil With Sulfur
 [CHANGED]Copper and Cassiterite now can Worldgen in Stone Layer.
 [CHANGED]Naquadah worldgen now just worldgen exist in Naquadah Mixture Ore.
 [CHANGED]Particle Collider now needs minimum 20 particle in the input slot to operate.
