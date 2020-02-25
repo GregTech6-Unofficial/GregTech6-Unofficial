@@ -102,6 +102,7 @@ public class Loader_Worldgen implements Runnable {
 		, new StoneLayerOres(MT.TigerEyeBlue            , U64, 32, 64, BIOMES_RIVER_LAKE)
 		, new StoneLayerOres(MT.TigerEyeBlack           , U64, 32, 64, BIOMES_MESA)
 		, new StoneLayerOres(MT.TigerIron               , U64, 32, 64, BIOMES_SHROOM)
+		, new StoneLayerOres(MT.Cu                      , U12, 32, 80)
 		));
 		
 		
