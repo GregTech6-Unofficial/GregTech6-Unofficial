@@ -461,9 +461,7 @@ public enum FL {
 	, Redstone                  ("molten.redstone"                                          , LIQUID) // 144 per Unit
 	, Redstone_TE               ("redstone"                                                 , LIQUID) // 100 per Unit
 	, Glowstone_TE              ("glowstone"                                                , GAS) // 250 per Unit
-	
 	, Calcite                   ("molten.calcite"                                           , LIQUID) // 144 per Unit
-	
 	, Med_Heal                  ("medicine.heal"                                            , SIMPLE, LIQUID, BATH)
 	, Med_Laxative              ("medicine.laxative"                                        , SIMPLE, LIQUID, BATH)
 	

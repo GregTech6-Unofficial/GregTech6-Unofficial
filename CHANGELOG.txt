@@ -9,14 +9,15 @@ Nothing
 Nothing
 
 6.13.04: (Not released yet).
-[FIXED]DistillationTower recipe has not have recipe output Gasoil With Sulfur
+[FIXED]DistillationTower does not output lubricant.
+[FIXED]DistillationTower recipe does not have recipe output Gasoil With Sulfur
 [CHANGED]Copper and Cassiterite now can Worldgen in Stone Layer.
-[CHANGED]Naquadah worldgen now just worldgen exist in Naquadah Mixture Ore.
 [CHANGED]Particle Collider now needs minimum 20 particle in the input slot to operate.
 [CHANGED]Some recipes of the Particle Collider to adjust the previous change.
 [ADDED]IV Battery(8192EU/t)
 [ADDED]Electrical Proof Machine Casing.
 [ADDED]Recipes of ionized gas now are added.
+[ADDED]Multiblock Large Roasting Oven.
 [ADDED]
 Multiblock Ionizer.
 3x3x3 Hollow of Electrical Proof Machine Casing, with the Main at the center of any bottom side.

@@ -300,7 +300,7 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.CatalyticCracking.addRecipe1(F, 16, 384, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Petrol.make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20)), ZL_IS);
 		RM.CatalyticCracking.addRecipe1(F, 16, 384, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Fuel  .make(100)), FL.array(FL.Ethylene.make(40), FL.Propylene.make(10)), ZL_IS);
 		
-		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Butane  .make(1000)), FL.array(FL.Methane.make(500),  FL.Ethylene.make(1000), FL.Propylene.make(1000)), dustTiny.mat(MT.C, 1));
+		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Butane  .make(1000)), FL.array(FL.Methane.make(550),  FL.Ethylene.make(1000), FL.Propylene.make(1000)), dustTiny.mat(MT.C, 1));
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Butane  .make(1000)), FL.array(FL.Methane.make(2000), FL.Propane.make(1000)), ZL_IS);
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Propane .make(1000)), FL.array(FL.Methane.make(1000),  FL.Propylene.make(500)), dustTiny.mat(MT.C, 1));
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Propane .make(1000)), FL.array(FL.Methane.make(1500)), ZL_IS);
@@ -308,13 +308,13 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Petrol  .make(1000)), FL.array(FL.Methane.make(500),  FL.Butane.make(400),  FL.Naphtha.make(800), FL.Propane.make(400)), ZL_IS);
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Naphtha .make(1000)), FL.array(FL.Fuel.make(100),     FL.Petrol.make(100),  FL.benzene.make(400), FL.Methane.make(600), FL.Ethylene.make(600), FL.Propylene.make(600)), dustTiny.mat(MT.C, 1));
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Naphtha .make(1000)), FL.array(FL.Methane.make(200),  FL.Butane.make(400),  FL.Naphtha.make(800), FL.Propane.make(400)), ZL_IS);
-		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Fuel    .make(1000)), FL.array(FL.Petrol.make(100),   FL.benzene.make(200), FL.Methane.make(500), FL.Ethylene.make(300), FL.Propylene.make(300)), dustTiny.mat(MT.C, 1));
+		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Fuel    .make(1000)), FL.array(FL.Petrol.make(100),   FL.benzene.make(200), FL.Methane.make(500), FL.Ethylene.make(300), FL.Propylene.make(400)), dustTiny.mat(MT.C, 1));
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Fuel    .make(1000)), FL.array(FL.Petrol.make(800),   FL.Butane.make(100),  FL.Naphtha.make(400), FL.Propane.make(100), FL.Methane.make(150)), ZL_IS);
-		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Gasoil  .make(1000)), FL.array(FL.Methane.make(750), FL.Ethylene.make(100), FL.Propylene.make(70)), dustTiny.mat(MT.C, 1));
-		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Gasoil  .make(1000)), FL.array(FL.Methane.make(1500)), ZL_IS);
+		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Gasoil  .make(1000)), FL.array(FL.Methane.make(800), FL.Ethylene.make(200), FL.Propylene.make(150)), dustTiny.mat(MT.C, 1));
+		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Gasoil  .make(1000)), FL.array(FL.Methane.make(2000)), ZL_IS);
 		
-		RM.RPP.addRecipe1(F,2048,1024, OP.crushedPurified.mat(MT.NqU238Am, 1), FL.array(MT.AquaRegia.liquid(U * 4, T)), FL.array(MT.UCl4.liquid(U * 2, T), MT.NqAm.liquid(U * 4, T)), ZL_IS);
-		
+		RM.Centrifuge       .addRecipe0(F, 64,  48, FL.array(FL.Gas_Natural.make(320)), FL.array(FL.lpg  .make(290)), ZL_IS);
+
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Ethylene .make(100)), ZL_FS, OP.dust.mat(MT.Plastic, 1)); // TODO Fluidized Bed Reactor
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Propylene.make(100)), ZL_FS, OP.dust.mat(MT.Plastic, 1)); // TODO Fluidized Bed Reactor
 		

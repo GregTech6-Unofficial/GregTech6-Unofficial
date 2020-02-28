@@ -148,7 +148,9 @@ public class MultiTileEntityDistillationTower extends TileEntityBase10MultiBlock
 			FluidStack tFluid = tTank.getFluid();
 			if (tFluid != null && tFluid.amount > 0) {
 				DelegatorTileEntity<TileEntity> tDelegator = null;
-				if (FL.is(tFluid, "methane")) {
+				if (FL.is(tFluid, "lubricant")) {
+					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+11, getOffsetZN(mFacing, 3), mFacing, F);
+				} else if (FL.is(tFluid, "methane")) {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+10, getOffsetZN(mFacing, 3), mFacing, F);
 				} else if (FL.is(tFluid, "propane")) {
 					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+9, getOffsetZN(mFacing, 3), mFacing, F);
