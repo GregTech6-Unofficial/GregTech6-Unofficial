@@ -64,7 +64,7 @@ public class MultiTileEntityGasMotor extends TileEntityBase09FacingSingle implem
 	public short mEfficiency = 10000;
 	public long mEnergy = 0, mRate = 32;
 	public TagData mEnergyTypeEmitted = TD.Energy.RU;
-	public RecipeMap mRecipes = FM.Engine;
+	public RecipeMap mRecipes = FM.Gas;
 	public Recipe mLastRecipe = null;
 	public FluidTankGT[] mTanks = {new FluidTankGT(1000), new FluidTankGT(1000)};
 	public TE_Behavior_Active_Trinary mActivity = null;
