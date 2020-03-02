@@ -741,8 +741,8 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.CokeOven     .addRecipe1(T,  0, 32400, blockGem                  .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid(27*U4, F), blockGem  .mat(MT.LigniteCoke, 1));
 		RM.CokeOven     .addRecipe1(T,  0, 32400, blockIngot                .mat(MT.Lignite , 1), NF, MT.Creosote   .liquid(27*U4, F), blockIngot.mat(MT.LigniteCoke, 1));
 		
-		RM.CokeOven     .addRecipe1(T,  0,  4000, dust                      .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(  U80, F), dustTiny .mat(MT.Asphalt, 1));
-		RM.CokeOven     .addRecipe1(T,  0, 36000, blockDust                 .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(9*U80, F), dust     .mat(MT.Asphalt, 1));
+		RM.CokeOven     .addRecipe1(T,  0,  4000, dust                      .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(  U10, F), dustTiny .mat(MT.Asphalt, 1));
+		RM.CokeOven     .addRecipe1(T,  0, 36000, blockDust                 .mat(MT.Oilshale, 1), NF, MT.Oil        .liquid(9*U10, F), dust     .mat(MT.Asphalt, 1));
 		
 		RM.Nanofab.addRecipe2(T, 16,  64, ST.tag( 0), dustDiv72.mat(MT.C,18), foil.mat(MT.Graphene, 1));
 		RM.Nanofab.addRecipe2(T, 16, 256, ST.tag( 0), dustTiny .mat(MT.C, 9), foil.mat(MT.Graphene, 4));

@@ -27,6 +27,7 @@ import java.util.List;
 
 import gregapi.GT_API;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_BreakBlock;
+import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnBlockAdded;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnWalkOver;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
 import gregapi.code.TagData;
@@ -43,6 +44,7 @@ import gregapi.tileentity.data.ITileEntityGibbl;
 import gregapi.tileentity.data.ITileEntityProgress;
 import gregapi.tileentity.data.ITileEntityTemperature;
 import gregapi.tileentity.data.ITileEntityWeight;
+import gregapi.tileentity.delegate.DelegatorTileEntity;
 import gregapi.tileentity.energy.ITileEntityEnergy;
 import gregapi.tileentity.energy.ITileEntityEnergyDataCapacitor;
 import gregapi.tileentity.logistics.ITileEntityLogistics;
@@ -75,7 +77,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 /**
  * @author Gregorius Techneticies
  */
-public class MultiTileEntityMultiBlockPart extends TileEntityBase05Paintable implements ITileEntityEnergy, ITileEntityCrucible, ITileEntityLogistics, IMTE_OnWalkOver, ITileEntityTemperature, ITileEntityGibbl, ITileEntityProgress, ITileEntityWeight, ITileEntityTapAccessible, ITileEntityFunnelAccessible, ITileEntityEnergyDataCapacitor, ITileEntityAdjacentInventoryUpdatable, IFluidHandler, IMTE_BreakBlock, ITileEntityRunningSuccessfully, ITileEntitySwitchableMode, ITileEntitySwitchableOnOff {
+public class MultiTileEntityMultiBlockPart extends TileEntityBase05Paintable implements ITileEntityEnergy, ITileEntityCrucible, ITileEntityLogistics, IMTE_OnWalkOver, ITileEntityTemperature, ITileEntityGibbl, ITileEntityProgress, ITileEntityWeight, ITileEntityTapAccessible, ITileEntityFunnelAccessible, ITileEntityEnergyDataCapacitor, ITileEntityAdjacentInventoryUpdatable, IFluidHandler, IMTE_OnBlockAdded, IMTE_BreakBlock, ITileEntityRunningSuccessfully, ITileEntitySwitchableMode, ITileEntitySwitchableOnOff {
 	public ChunkCoordinates mTargetPos = null;
 	
 	public ITileEntityMultiBlockController mTarget = null;
@@ -174,6 +176,19 @@ public class MultiTileEntityMultiBlockPart extends TileEntityBase05Paintable imp
 		ITileEntityMultiBlockController tTarget = getTarget(F);
 		if (tTarget != null) tTarget.onStructureChange();
 		return F;
+	}
+	
+	@Override
+	public void onBlockAdded() {
+		for (byte tSide : ALL_SIDES_VALID) {
+			DelegatorTileEntity<TileEntity> tDelegator = getAdjacentTileEntity(tSide);
+			if (tDelegator.mTileEntity instanceof MultiTileEntityMultiBlockPart) {
+				ITileEntityMultiBlockController tController = ((MultiTileEntityMultiBlockPart)tDelegator.mTileEntity).getTarget(F);
+				if (tController != null) tController.onStructureChange();;
+			} else if (tDelegator.mTileEntity instanceof ITileEntityMultiBlockController) {
+				((ITileEntityMultiBlockController)tDelegator.mTileEntity).onStructureChange();
+			}
+		}
 	}
 	
 	public ITileEntityMultiBlockController getTarget(boolean aCheckValidity) {
