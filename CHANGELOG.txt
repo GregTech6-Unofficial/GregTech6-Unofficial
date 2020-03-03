@@ -18,6 +18,7 @@ Nothing
 [ADDED]Electrical Proof Machine Casing.
 [ADDED]Recipes of ionized gas now are added.
 [ADDED]Multiblock Large Roasting Oven.
+[ADDED]Single block gas turbines.
 [ADDED]
 Multiblock Ionizer.
 3x3x3 Hollow of Electrical Proof Machine Casing, with the Main at the center of any bottom side.
