@@ -133,7 +133,8 @@ public class Loader_Fluids implements Runnable {
 		FL.create("gasoil"                   , "Gas Oil"             , null                  , 1);
 		FL.create("sgasoil"                  , "Gas Oil With Sulfur" , null                  , 1);
 
-		
+		FL.create("isoprene"                 , "Isoprene"           , null                  , 1);
+
 		FL.create("fieryblood"               , "Fiery Blood"         , null                  , 1,      L,  1500).setLuminosity(10);
 		FL.create("fierytears"               , "Fiery Tears"         , null                  , 1,      L,  1500).setLuminosity(10);
 		

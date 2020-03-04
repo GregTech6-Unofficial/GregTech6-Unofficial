@@ -419,7 +419,7 @@ public enum FL {
     , Fuel                      ("fuel"                                                     , SIMPLE, LIQUID)
     , Diesel                    ("diesel"                                                   , SIMPLE, LIQUID)
     , Kerosine                  ("kerosine"                 , "kerosene"                    , SIMPLE, LIQUID)
-
+    , Isoprene                  ("isoprene"                                                 , SIMPLE, LIQUID)
     // Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)
