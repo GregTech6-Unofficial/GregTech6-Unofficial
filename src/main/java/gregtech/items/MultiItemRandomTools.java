@@ -196,10 +196,10 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		IL.Tool_Matches.set(                    addItem(tLastID =  5000, "Match"                            , ""                                            , new Behavior_Lighter(9000), TC.stack(TC.IGNIS, 1), TC.stack(TC.VACUOS, 1), OD.craftingFirestarter));
-		RM.Assembler.addRecipe2(T, 16, 16, OP.bolt.mat(MT.Wood, 1), OP.dustSmall.mat(MT.P           , 1), IL.Tool_Matches.get(1));
-		RM.Assembler.addRecipe2(T, 16, 16, OP.bolt.mat(MT.Wood, 1), OP.dustSmall.mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(1));
-		RM.Assembler.addRecipe2(T, 16, 64, OP.bolt.mat(MT.Wood, 4), OP.dust     .mat(MT.P           , 1), IL.Tool_Matches.get(4));
-		RM.Assembler.addRecipe2(T, 16, 64, OP.bolt.mat(MT.Wood, 4), OP.dust     .mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(4));
+		RM.Welder.addRecipe2(T, 16, 16, OP.bolt.mat(MT.Wood, 1), OP.dustSmall.mat(MT.P           , 1), IL.Tool_Matches.get(1));
+		RM.Welder.addRecipe2(T, 16, 16, OP.bolt.mat(MT.Wood, 1), OP.dustSmall.mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(1));
+		RM.Welder.addRecipe2(T, 16, 64, OP.bolt.mat(MT.Wood, 4), OP.dust     .mat(MT.P           , 1), IL.Tool_Matches.get(4));
+		RM.Welder.addRecipe2(T, 16, 64, OP.bolt.mat(MT.Wood, 4), OP.dust     .mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(4));
 		CR.shaped(IL.Tool_Matches.get(1), CR.DEF, "P", "S", 'P', OP.dustSmall.dat(MT.P                  ), 'S', OP.bolt.dat(ANY.Wood));
 		CR.shaped(IL.Tool_Matches.get(1), CR.DEF, "P", "S", 'P', OP.dustSmall.dat(MT.Phosphorus         ), 'S', OP.bolt.dat(ANY.Wood));
 		CR.shaped(IL.Tool_Matches.get(4), CR.DEF, " S ", "SPS", " S ", 'P', OP.dust.dat(MT.P            ), 'S', OP.bolt.dat(ANY.Wood));

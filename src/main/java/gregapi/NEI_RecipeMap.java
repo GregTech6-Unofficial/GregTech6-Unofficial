@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2020 Gregorius Techneticies
  *
- * This file is part of GregTech.
+ * This file is part of gregtech6.
  *
  * GregTech is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,7 +14,7 @@
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with GregTech. If not, see <http://www.gnu.org/licenses/>.
+ * along with gregtech6. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package gregapi;
@@ -107,7 +107,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 		@Override
 		public void generatePermutations() {
 			if (permutated) return;
-			
+
 			ArrayList<ItemStack> tDisplayStacks = new ArrayListNoNulls<>();
 			for (ItemStack tStack : items) if (ST.valid(tStack)) {
 				if (ST.meta_(tStack) == W) {
@@ -123,7 +123,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 					tDisplayStacks.add(ST.copy(tStack));
 				}
 			}
-			
+
 			items = tDisplayStacks.toArray(ZL_IS);
 			if (items.length == 0) items = ST.array(ST.make(Blocks.fire, 1, 0));
 			permutated = T;
@@ -460,7 +460,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 			//
 		}
 	}
-	
+
 	/** Thanks to codewarrior for doing most of this, because Greg was way too lazy to do it, but not lazy enough to not fix it. XD */
 	public void sortRecipes() {
 		if (arecipes.size() > 1000) return;
@@ -481,16 +481,14 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 				ItemStack tInput1 = tRecipe1.mInputs[0], tInput2 = tRecipe2.mInputs[0];
 				if (ST.valid(tInput1)) {
 					if (ST.invalid(tInput2)) return -1;
-					
 					OreDictItemData tData1 = OM.anydata_(tInput1), tData2 = OM.anydata_(tInput2);
-					if (tData1 != null && tData1.hasValidMaterialData()) {
-						if (tData2 == null || !tData2.hasValidMaterialData()) return -1;
+					if (tData1 != null && !tData1.mBlackListed) {
+						if (tData2 == null || tData2.mBlackListed) return -1;
 						tCompare = tData1.mMaterial.mMaterial.mNameInternal.compareTo(tData2.mMaterial.mMaterial.mNameInternal);
 						if (tCompare != 0) return tCompare;
 						tCompare = Long.compare(tData1.mMaterial.mAmount, tData2.mMaterial.mAmount);
 						if (tCompare != 0) return tCompare;
-					} else if (tData2 != null && tData2.hasValidMaterialData()) return 1;
-					
+					} else if (tData2 != null && !tData2.mBlackListed) return 1;
 					tCompare = Long.compare(tRecipe1.mDuration, tRecipe2.mDuration);
 					if (tCompare != 0) return tCompare;
 					tCompare = ST.regName(tInput1).compareTo(ST.regName(tInput2));
@@ -502,7 +500,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 			return 0;
 		}});
 	}
-	
+
 	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals(getOverlayIdentifier())) {
@@ -665,7 +663,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 				drawText    (10, 73, "Costs: "  + (tDuration*tGUt) + " GU"        , 0xFF000000);
 				if (mRecipeMap.mShowVoltageAmperageInNEI) {
 					drawText(10, 83, "Usage: "  + tGUt + " GU/t"                  , 0xFF000000);
-					drawText(10, 93, "Tier: "   + tGUt / mRecipeMap.mPower + " GU", 0xFF000000);
+					drawText(10, 93, "Tier: "   + tGUt / mRecipeMap.mPower + " GU (" + voltageTier(tGUt / mRecipeMap.mPower) + ")", 0xFF000000);
 					drawText(10,103, "Power: "  + mRecipeMap.mPower               , 0xFF000000);
 				} else {
 					if (tGUt != 1)
@@ -676,7 +674,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 				drawText    (10, 73, "Gain: "   + (tDuration*tGUt) + " GU"        , 0xFF000000);
 				if (mRecipeMap.mShowVoltageAmperageInNEI) {
 					drawText(10, 83, "Output: " + tGUt + " GU/t"                  , 0xFF000000);
-					drawText(10, 93, "Tier: "   + tGUt / mRecipeMap.mPower + " GU", 0xFF000000);
+					drawText(10, 93, "Tier: "   + tGUt / mRecipeMap.mPower + " GU (" + voltageTier(tGUt / mRecipeMap.mPower) + ")", 0xFF000000);
 					drawText(10,103, "Power: "  + mRecipeMap.mPower               , 0xFF000000);
 				} else {
 					if (tGUt != 1)
@@ -688,5 +686,14 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 		drawText(10,113, "Time: " + (tDuration < 1200 ? tDuration + " ticks" : tDuration < 36000 ? (tDuration/20) + " secs" : (tDuration/1200) + " mins"), 0xFF000000);
 		if (UT.Code.stringValid(mRecipeMap.mNEISpecialValuePre) || UT.Code.stringValid(mRecipeMap.mNEISpecialValuePost))
 		drawText(10,123, mRecipeMap.mNEISpecialValuePre + (((CachedDefaultRecipe)arecipes.get(aRecipeIndex)).mRecipe.mSpecialValue * mRecipeMap.mNEISpecialValueMultiplier) + mRecipeMap.mNEISpecialValuePost, 0xFF000000);
+	}
+
+	public String voltageTier(long cost) {
+		for(int i=0;i<V.length;i++) {
+			if(V[i] >= cost) {
+				return VN[i];
+			}
+		}
+		return VN[V.length];
 	}
 }
