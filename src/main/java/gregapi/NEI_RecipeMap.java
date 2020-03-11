@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2020 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech6-Unofficial-Team
  *
- * This file is part of gregtech6.
+ * This file is part of GregTech6-Unofficial
  *
  * GregTech is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,7 +14,7 @@
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with gregtech6. If not, see <http://www.gnu.org/licenses/>.
+ * along with Gregtech. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package gregapi;
@@ -123,7 +123,7 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 					tDisplayStacks.add(ST.copy(tStack));
 				}
 			}
-
+            
 			items = tDisplayStacks.toArray(ZL_IS);
 			if (items.length == 0) items = ST.array(ST.make(Blocks.fire, 1, 0));
 			permutated = T;
@@ -449,18 +449,18 @@ public class NEI_RecipeMap extends TemplateRecipeHandler {
 		public boolean mouseScrolled(GuiContainer gui, int mousex, int mousey, int scrolled) {
 			return F;
 		}
-
+        
 		@Override
 		public void onMouseScrolled(GuiContainer gui, int mousex, int mousey, int scrolled) {
 			//
 		}
-
+        
 		@Override
 		public void onMouseDragged(GuiContainer gui, int mousex, int mousey, int button, long heldTime) {
 			//
 		}
 	}
-
+    
 	/** Thanks to codewarrior for doing most of this, because Greg was way too lazy to do it, but not lazy enough to not fix it. XD */
 	public void sortRecipes() {
 		if (arecipes.size() > 1000) return;

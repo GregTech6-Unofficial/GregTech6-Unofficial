@@ -3,12 +3,14 @@ This is the Changelogs for GregTech6-Unofficial
 Nothing
 
 6.13.06: (Not released yet).
-Nothing
+[CHANGED]You can no longer Put dust into Extruder
+[CHANGED]Assembler-Circuit Assembler.It should be different from Welder
 
-6.13.05: (Not released yet).
-Nothing
+6.13.05:
+[FIXED]Some Recipe conflict
+[ADDED]Isoprene Process.And Rubber can use it to produce
 
-6.13.04: (Not released yet).
+6.13.04: 
 [FIXED]DistillationTower does not output lubricant.
 [FIXED]DistillationTower recipe does not have recipe output Gasoil With Sulfur
 [CHANGED]Copper and Cassiterite now can Worldgen in Stone Layer.
