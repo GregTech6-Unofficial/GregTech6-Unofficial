@@ -5,10 +5,14 @@ Nothing
 6.13.06: (Not released yet).
 [CHANGED]You can no longer Put dust into Extruder
 [CHANGED]Assembler-Circuit Assembler.It should be different from Welder
+[ADDED]
+Mask Aligner. A more powerful and precise machine to align nano-scale patterns on wafers.
+Built from Stainless Steel Walls and Aligner Units, its purpose will be added in the future.
+[ADDED]Aligner Units used to build Mask Aligner
 
 6.13.05:
 [FIXED]Some Recipe conflict
-[ADDED]Isoprene Process.And Rubber can use it to produce
+[ADDED]Process of Isoprene, which produces Rubber chemically.
 
 6.13.04: 
 [FIXED]DistillationTower does not output lubricant.
