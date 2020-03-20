@@ -37,7 +37,7 @@ import static gregapi.data.CS.*;
 
 /**
  * @author Gregorius Techneticies
- * @author yuesha
+ * @author YueSha
  */
 public class MultiTileEntityParticleCollider extends TileEntityBase10MultiBlockMachine {
 	@Override
@@ -111,11 +111,11 @@ public class MultiTileEntityParticleCollider extends TileEntityBase10MultiBlockM
 				if (OCTAGONS[2][i][j]) {
 					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-2, tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
 					
-					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-1, tZ+j, 18044, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-1, tZ+j, 18046, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 					
 					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY  , tZ+j, 18002, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 					
-					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+1, tZ+j, 18044, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+1, tZ+j, 18046, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 					
 					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2, tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
 				}
@@ -189,7 +189,7 @@ public class MultiTileEntityParticleCollider extends TileEntityBase10MultiBlockM
 	
 	static {
 		LH.add("gt.tooltip.multiblock.particlecollider.1", "For Construction Instructions read the Manual or the GUI.");
-		LH.add("gt.tooltip.multiblock.particlecollider.2", "144 Osmium Coils, 576 Regular Osmiridium Walls, 50 Ventilation Units.");
+		LH.add("gt.tooltip.multiblock.particlecollider.2", "144 Superconducting Coils, 576 Regular Osmiridium Walls, 50 Ventilation Units.");
 		LH.add("gt.tooltip.multiblock.particlecollider.3", "36 Regular Stainless Steel Walls, 53 Galvanized Steel Walls.");
 		LH.add("gt.tooltip.multiblock.particlecollider.4", "3 Versatile, 12 Logic and 12 Control Quadcore Processing Units.");
 		LH.add("gt.tooltip.multiblock.particlecollider.5", "Input energy for start.Then for process");

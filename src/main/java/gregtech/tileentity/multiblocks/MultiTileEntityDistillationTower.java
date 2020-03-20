@@ -144,25 +144,12 @@ public class MultiTileEntityDistillationTower extends TileEntityBase10MultiBlock
 	
 	@Override
 	public void doOutputFluids() {
-		for (IFluidTank tTank : mTanksOutput) {
+		for (int i=0;i<mTanksOutput.length;i++) {
+			IFluidTank tTank = mTanksOutput[i];
 			FluidStack tFluid = tTank.getFluid();
 			if (tFluid != null && tFluid.amount > 0) {
-				DelegatorTileEntity<TileEntity> tDelegator = null;
-				if (FL.is(tFluid, "propane", "methane")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+7, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "butane")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+6, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "spetrol", "sgasoline", "bioethanol")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+5, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "skerosene", "kerosine", "glycerol")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+4, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "sdiesel", "biodiesel")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+3, getOffsetZN(mFacing, 3), mFacing, F);
-				} else if (FL.is(tFluid, "sfuel", "fueloil", "biofuel")) {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+2, getOffsetZN(mFacing, 3), mFacing, F);
-				} else {
-					tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+1, getOffsetZN(mFacing, 3), mFacing, F);
-				}
+				DelegatorTileEntity<TileEntity> tDelegator = null;				
+				tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+i+1, getOffsetZN(mFacing, 3), mFacing, F);
 				
 				if (FL.move(tTank, tDelegator) > 0) updateInventory();
 			}

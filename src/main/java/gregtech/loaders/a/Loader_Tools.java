@@ -380,6 +380,14 @@ public class Loader_Tools implements Runnable {
 		
 		toolHeadDrill               .addListener(new OreProcessing_Tool(JACKHAMMER_HV_Normal    , tCategory + "JackhammerHV"            ,F,T, -1,V[3], MT.DATA.Electric_T[3]    , new String[][] {{"SVS", "XWX", "YSY"}}                                                    , null                                                          , plateCurved.dat(MT.DATA.Electric_T[3]), spring.dat(MT.DATA.Electric_T[3]), null, tBattery, IL.PISTONS[3], new And(ANTIMATTER.NOT, WOOD.NOT, BOUNCY.NOT, STRETCHY.NOT, typemin(3), qualmin(1))));
 		}
+		for (ItemStack tBattery : OreDictManager.getOres("gt:re-battery3", F)) {
+		toolHeadWrench              .addListener(new OreProcessing_Tool(WRENCH_EV               , tCategory + "WrenchEV"                ,F,T, -1,V[4], MT.DATA.Electric_T[4]    , new String[][] {{"dAT", "XWX", "XVX"}}                                                    , null                                                          , plateCurved.dat(MT.DATA.Electric_T[4]), null, null, tBattery, IL.MOTORS[4], new And(ANTIMATTER.NOT, WOOD.NOT, BOUNCY.NOT, STRETCHY.NOT, typemin(3), qualmin(1))));
+		toolHeadDrill               .addListener(new OreProcessing_Tool(MININGDRILL_EV          , tCategory + "MiningDrillEV"           ,F,T, -1,V[4], MT.DATA.Electric_T[4]    , new String[][] {{"dAT", "XWX", "XVX"}}                                                    , null                                                          , plateCurved.dat(MT.DATA.Electric_T[4]), null, null, tBattery, IL.MOTORS[4], new And(ANTIMATTER.NOT, WOOD.NOT, BOUNCY.NOT, STRETCHY.NOT, typemin(3), qualmin(1))));
+		toolHeadChainsaw            .addListener(new OreProcessing_Tool(CHAINSAW_EV             , tCategory + "ChainsawEV"              ,F,T, -1,V[4], MT.DATA.Electric_T[4]    , new String[][] {{"dAT", "XWX", "XVX"}}                                                    , null                                                          , plateCurved.dat(MT.DATA.Electric_T[4]), null, null, tBattery, IL.MOTORS[4], new And(ANTIMATTER.NOT, WOOD.NOT, BOUNCY.NOT, STRETCHY.NOT, typemin(3), qualmin(1))));
+		
+		toolHeadDrill               .addListener(new OreProcessing_Tool(JACKHAMMER_EV_Normal    , tCategory + "JackhammerEV"            ,F,T, -1,V[4], MT.DATA.Electric_T[4]    , new String[][] {{"SVS", "XWX", "YSY"}}                                                    , null                                                          , plateCurved.dat(MT.DATA.Electric_T[4]), spring.dat(MT.DATA.Electric_T[4]), null, tBattery, IL.PISTONS[4], new And(ANTIMATTER.NOT, WOOD.NOT, BOUNCY.NOT, STRETCHY.NOT, typemin(3), qualmin(1))));
+		}
+
 		}});
 	}
 	

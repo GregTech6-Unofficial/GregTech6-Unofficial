@@ -73,6 +73,7 @@ public enum FL {
 	, Oxygen                    ("oxygen"                                                   , SIMPLE, GAS)
 	, Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID)
 
+    // plasmas
 	, HeliumP                   ("heliumplasma"                                             , PLASMA)
 	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
     , neutronP                  ("neutronplasma"                                            , PLASMA)
@@ -82,6 +83,10 @@ public enum FL {
     , positronP                 ("positronplasma"                                           , PLASMA)
     , neutrinoP                 ("neutrinoplasma"                                           , PLASMA)
     , antineutrinoP             ("antineutrinoplasma"                                       , PLASMA)
+
+    // ionized plasmas
+    , HydrogenI("ionizedhydrogen", PLASMA)
+    , HeliumI("ionizedhelium", PLASMA)
 
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
@@ -414,7 +419,7 @@ public enum FL {
     , Fuel                      ("fuel"                                                     , SIMPLE, LIQUID)
     , Diesel                    ("diesel"                                                   , SIMPLE, LIQUID)
     , Kerosine                  ("kerosine"                 , "kerosene"                    , SIMPLE, LIQUID)
-
+    , Isoprene                  ("isoprene"                                                 , SIMPLE, LIQUID)
     // Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)
@@ -456,9 +461,7 @@ public enum FL {
 	, Redstone                  ("molten.redstone"                                          , LIQUID) // 144 per Unit
 	, Redstone_TE               ("redstone"                                                 , LIQUID) // 100 per Unit
 	, Glowstone_TE              ("glowstone"                                                , GAS) // 250 per Unit
-	
 	, Calcite                   ("molten.calcite"                                           , LIQUID) // 144 per Unit
-	
 	, Med_Heal                  ("medicine.heal"                                            , SIMPLE, LIQUID, BATH)
 	, Med_Laxative              ("medicine.laxative"                                        , SIMPLE, LIQUID, BATH)
 	

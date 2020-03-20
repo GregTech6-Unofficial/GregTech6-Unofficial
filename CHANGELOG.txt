@@ -1,19 +1,43 @@
 This is the Changelogs for GregTech6-Unofficial
-
-6.13.02: (Not released yet).
+6.13.07: (Not released yet).
 Nothing
 
-6.13.01: (Not released yet).
-Nothing
+6.13.06: (Not released yet).
+[CHANGED]You can no longer Put dust into Extruder
+[CHANGED]Assembler-Circuit Assembler.It should be different from Welder
 
-6.13.00:
+6.13.05:
+[FIXED]Some Recipe conflict
+[ADDED]Isoprene Process.And Rubber can use it to produce
+
+6.13.04: 
+[FIXED]DistillationTower does not output lubricant.
+[FIXED]DistillationTower recipe does not have recipe output Gasoil With Sulfur
+[CHANGED]Copper and Cassiterite now can Worldgen in Stone Layer.
+[CHANGED]Particle Collider now needs minimum 20 particle in the input slot to operate.
+[CHANGED]Some recipes of the Particle Collider to adjust the previous change.
+[ADDED]IV Battery(8192EU/t)
+[ADDED]Electrical Proof Machine Casing.
+[ADDED]Recipes of ionized gas now are added.
+[ADDED]Multiblock Large Roasting Oven.
+[ADDED]Single block gas turbines.
+[ADDED]
+Multiblock Ionizer.
+3x3x3 Hollow of Electrical Proof Machine Casing, with the Main at the center of any bottom side.
+
+6.13.03: 
+[FIXED]molten metal in tank system are forbidden now.
+[FIXED]Titanium Niobium Carbide can not made in crucible.
+[FIXED]Tooltips of large heat exchanger still like before.
+[FIXED]Distillation Tower now output fluid in the correct order
 [FIXED]Gearboxes sometimes breaking/overloading on World Load.
 [FIXED]A Rare NEI Recipe List Crash. (Concurrent Modification Exception when clicking Progress Bar)
 [FIXED]Bedrock Ores did not generate Indicator Flowers and Indicator Rocks in Twilight Forest due to its Terrains normal Height of Y31 instead of Y63.
 [FIXED]The Code that made Plates, Ingots and Rocks placeable did not check if the Stack was already a Block, meaning it just replaced things like Greatwood Planks or Silverwood Planks with the Stack-of-Plates Block.
+[FIXED]Titanium Niobium Carbide Gas and Engine Turbine Main Housing recipes use Dense Titanium Niobium Carbide Wall 
 [CHANGED]Temperature of plasma set to 4000K
 [CHANGED]Implosion Compressor now accept EU to do process.
-[CHANGED]The Matter Replicators are working 2 times than before.
+[CHANGED]The Matter Replicators are working 4 times than before.
 [CHANGED]For MultyBlock Heat Exchanger now need Thermomechanical Block.
 [CHANGED]Now Distillation Tower need 3x3x12 Distillation Tower Parts to build.
 [CHANGED]Fusion now accept energy LU to do process.And it dont output energy now.Some of its recipes now output plasma.
@@ -26,6 +50,19 @@ They can output HU:16384/32768/131072.
 [CHANGED]
 Now when you put molten metal to the tank the temperature will drop and you can no longer output it.
 If the temperature drops below melting point you need to heat the tank in order to melt the metal.
+[ADDED]General version for Autoclave.
+[ADDED]Snow Golems can have their poop picked up by GT6 Hoppers automatically, without constantly breaking the Block.
+[ADDED]Gas Oil now can be Burned or put in Engine
+[ADDED]
+MultyBlock Large Dryer.
+Need Dense Wall to build because it has up to 256 Parallel.
+[ADDED]
+MultyBlock Particle Collider. Build like fusion reactor.
+It can produce several subatmoic particles, but their usage will be added in the future. 
+[ADDED]
+Proton, Neutron, Electron, Positron, Anti-Proton, Neutrino, Anti-Neutrino, Alpha Particle, Higgs-Boson, and Kerr Blackhole.
+[Added]
+Ionized Hydrogen and Helium. 
 [ADDED]Naphtha and gas oil for cracking product.
 [ADDED]Frost Proof Machine Casing for Cryo Distillation Tower build.
 [ADDED]Thermomechanical block for Heat Exchanger
@@ -59,11 +96,15 @@ MultyBlock version for Matter Replicator.It has 64 Parallel.
 [ADDED]
 MultyBlock Industry Coke Oven.
 Do recipes as Coke Oven.Use energy to over clocking!
-[WIP]
-MultyBlock Particle Collider.Build like fusion reactor.
-Now you can build it but its purpose will be added in the future.
-[WIP]
-Subatomic particles and antimatter.
+
+6.13.02: 
+[BROKEN]Not To Use!
+
+6.13.01:
+[BROKEN]Not To Use!
+
+6.13.00:
+[BROKEN]Not To Use!
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.

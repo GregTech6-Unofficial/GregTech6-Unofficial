@@ -357,11 +357,11 @@ public enum IL implements IItemContainer {
 	Robot_Tip_Wrench, Robot_Tip_Screwdriver, Robot_Tip_Saw, Robot_Tip_Hammer, Robot_Tip_Cutter, Robot_Tip_Chisel, Robot_Tip_Rubber, Robot_Tip_Blade, Robot_Tip_Drill, Robot_Tip_File,
 	Battery_RE_ULV_Tantalum, ZPM,
 	Comp_Laser_Gas_Empty, Comp_Laser_Gas_He, Comp_Laser_Gas_Ne, Comp_Laser_Gas_Ar, Comp_Laser_Gas_Kr, Comp_Laser_Gas_Xe, Comp_Laser_Gas_HeNe, Comp_Laser_Gas_CO, Comp_Laser_Gas_CO2,
-	Battery_Lead_Acid_Cell_Empty, Battery_Lead_Acid_Cell_Filled, Battery_Lead_Acid_ULV, Battery_Lead_Acid_LV, Battery_Lead_Acid_MV, Battery_Lead_Acid_HV, Battery_Lead_Acid_EV,
-	Battery_Alkaline_Cell_Empty, Battery_Alkaline_Cell_Filled, Battery_Alkaline_ULV, Battery_Alkaline_LV, Battery_Alkaline_MV, Battery_Alkaline_HV, Battery_Alkaline_EV,
-	Battery_NiCd_Cell_Empty, Battery_NiCd_Cell_Filled, Battery_NiCd_ULV, Battery_NiCd_LV, Battery_NiCd_MV, Battery_NiCd_HV, Battery_NiCd_EV,
-	Battery_LiCoO2_Cell_Empty, Battery_LiCoO2_Cell_Filled, Battery_LiCoO2_ULV, Battery_LiCoO2_LV, Battery_LiCoO2_MV, Battery_LiCoO2_HV, Battery_LiCoO2_EV,
-	Battery_LiMn_Cell_Empty, Battery_LiMn_Cell_Filled, Battery_LiMn_ULV, Battery_LiMn_LV, Battery_LiMn_MV, Battery_LiMn_HV, Battery_LiMn_EV,
+	Battery_Lead_Acid_Cell_Empty, Battery_Lead_Acid_Cell_Filled, Battery_Lead_Acid_ULV, Battery_Lead_Acid_LV, Battery_Lead_Acid_MV, Battery_Lead_Acid_HV, Battery_Lead_Acid_EV, Battery_Lead_Acid_IV, Battery_Lead_Acid_LuV,
+	Battery_Alkaline_Cell_Empty, Battery_Alkaline_Cell_Filled, Battery_Alkaline_ULV, Battery_Alkaline_LV, Battery_Alkaline_MV, Battery_Alkaline_HV, Battery_Alkaline_EV, Battery_Alkaline_IV, Battery_Alkaline_LuV,
+	Battery_NiCd_Cell_Empty, Battery_NiCd_Cell_Filled, Battery_NiCd_ULV, Battery_NiCd_LV, Battery_NiCd_MV, Battery_NiCd_HV, Battery_NiCd_EV, Battery_NiCd_IV, Battery_NiCd_LuV,
+	Battery_LiCoO2_Cell_Empty, Battery_LiCoO2_Cell_Filled, Battery_LiCoO2_ULV, Battery_LiCoO2_LV, Battery_LiCoO2_MV, Battery_LiCoO2_HV, Battery_LiCoO2_EV, Battery_LiCoO2_IV,  Battery_LiCoO2_LuV,
+	Battery_LiMn_Cell_Empty, Battery_LiMn_Cell_Filled, Battery_LiMn_ULV, Battery_LiMn_LV, Battery_LiMn_MV, Battery_LiMn_HV, Battery_LiMn_EV, Battery_LiMn_IV, Battery_LiMn_LuV,
 	Crystal_Energium_Red_ULV, Crystal_Energium_Red_LV, Crystal_Energium_Red_MV, Crystal_Energium_Red_HV, Crystal_Energium_Red_EV, Crystal_Energium_Red_IV,
 	Crystal_Energium_Cyan_ULV, Crystal_Energium_Cyan_LV, Crystal_Energium_Cyan_MV, Crystal_Energium_Cyan_HV, Crystal_Energium_Cyan_EV, Crystal_Energium_Cyan_IV,
 	Fuel_Can_Plastic_Empty, Fuel_Can_Plastic_Filled,
@@ -411,6 +411,10 @@ public enum IL implements IItemContainer {
 	Spray_Foam_Used_00, Spray_Foam_Used_01, Spray_Foam_Used_02, Spray_Foam_Used_03, Spray_Foam_Used_04, Spray_Foam_Used_05, Spray_Foam_Used_06, Spray_Foam_Used_07, Spray_Foam_Used_08, Spray_Foam_Used_09, Spray_Foam_Used_10, Spray_Foam_Used_11, Spray_Foam_Used_12, Spray_Foam_Used_13, Spray_Foam_Used_14, Spray_Foam_Used_15,
 	Spray_Foam_Owned_00, Spray_Foam_Owned_01, Spray_Foam_Owned_02, Spray_Foam_Owned_03, Spray_Foam_Owned_04, Spray_Foam_Owned_05, Spray_Foam_Owned_06, Spray_Foam_Owned_07, Spray_Foam_Owned_08, Spray_Foam_Owned_09, Spray_Foam_Owned_10, Spray_Foam_Owned_11, Spray_Foam_Owned_12, Spray_Foam_Owned_13, Spray_Foam_Owned_14, Spray_Foam_Owned_15,
 	Spray_Foam_Owned_Used_00, Spray_Foam_Owned_Used_01, Spray_Foam_Owned_Used_02, Spray_Foam_Owned_Used_03, Spray_Foam_Owned_Used_04, Spray_Foam_Owned_Used_05, Spray_Foam_Owned_Used_06, Spray_Foam_Owned_Used_07, Spray_Foam_Owned_Used_08, Spray_Foam_Owned_Used_09, Spray_Foam_Owned_Used_10, Spray_Foam_Owned_Used_11, Spray_Foam_Owned_Used_12, Spray_Foam_Owned_Used_13, Spray_Foam_Owned_Used_14, Spray_Foam_Owned_Used_15,
+
+    // Physics
+    Proton, Anti_Proton, Electron, Positron, Neutron, Alpha_Particle, Neutrino, Anti_Neutrino, Higgs_Boson,
+    Kerr_Blackhole,
 	
 	// Deprecated
 	Battery_Hull_LV, Battery_SU_LV_SulfuricAcid, Battery_SU_LV_Mercury, Battery_RE_LV_Sodium, Battery_RE_LV_Cadmium, Battery_RE_LV_Lithium, Battery_RE_LV_Redstone, Battery_RE_LV_Nikolite, Battery_RE_LV_Teslatite, Battery_RE_LV_Electrotine,
