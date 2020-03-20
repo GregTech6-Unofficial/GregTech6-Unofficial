@@ -852,11 +852,11 @@ public class Loader_Recipes_Other implements Runnable {
         RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.protonP.make(200)),                                    FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
         RM.ParticleCollider.addRecipe1(T, 2048,  384, ST.tag(1), FL.array(FL.electronP.make(100), FL.positronP.make(100)), FL.array(FL.neutronP.make(5), FL.protonP.make(5), FL.antiprotonP.make(4), FL.positronP.make(8), FL.electronP.make(10), FL.neutrinoP.make(1)), ZL_IS ).setSpecialNumber( 2000L*20000L*1L);
 
-
 		//RM.MaskAligner.addRecipe2(T, 16,   6400, foil.mat(MT.Au                 , 4), foil.mat(MT.Cu                 , 4), IL.Circuit_Wire_Gold.get(1));
 
 
 		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
+
 			ItemStack
 			tInput = OP.dust.mat(tMaterial, 1);          if (tInput != null)       RM.Massfab.addRecipe1(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tInput, NF, tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
 			tInput = OP.ingot.mat(tMaterial, 1);         if (tInput != null)       RM.Massfab.addRecipe1(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tInput, NF, tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));

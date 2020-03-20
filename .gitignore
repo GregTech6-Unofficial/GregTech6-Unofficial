@@ -1,0 +1,56 @@
+# Blacklist everything by default
+*
+
+# Whitelist directories (directories with no tracked files don't get committed regardless)
+!**/
+
+!/.gitignore
+!/.gitattributes
+
+# License files
+!/LICENSE*
+!/COPYING*
+!/MinecraftForge-Credits.txt
+!/MinecraftForge-License.txt
+!/CREDITS-fml.txt
+
+# Documentation files
+!/README.md
+!/old_todo_list.txt
+
+# Build files
+!/build.gradle
+!/settings.gradle
+!/gradlew
+!/gradlew.bat
+!/gradle/wrapper/gradle-wrapper.jar
+!/gradle/wrapper/gradle-wrapper.properties
+
+# Meta Project Files
+!/.meta/**/*
+
+# Default Config Pack
+!/.defaultconfigs/**/*
+/.defaultconfigs/**/.directory
+
+# Source
+!/src/main/java/**/*.java
+!/src/template/java/**/*.java
+
+# License Files inside the Mod
+!/src/main/resources/**/LICENSE*
+!/src/main/resources/**/COPYING*
+# Assets
+!/src/main/resources/**/*.txt
+!/src/main/resources/**/*.cfg
+!/src/main/resources/**/*.ogg
+!/src/main/resources/**/*.png
+!/src/main/resources/**/*.json
+!/src/main/resources/**/*.lang
+!/src/main/resources/**/*.info
+!/src/main/resources/**/*.mcmeta
+# Some old scripts in resources...
+!/src/main/resources/**/*.bat
+/bin/
+/build/
+/.gradle/
