@@ -71,60 +71,15 @@ public class Loader_Fluids implements Runnable {
         FL.create("Anti-Helium_3", "Anti-Helium_3", AM.He_3, 2, 1000, 273);
         FL.create("Anti-Carbon_13", "Anti-Carbon_13", AM.C_13, 2, 1000, 2000);
 
-		//-----
-		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000);
-		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000);
-		FL.create("Propylene"                , "Propylene"           , MT.Propylene          , 2);
-		FL.create("polyvinylchloride"        , "polyvinylchloride"   , null                  , 1);
-		FL.create("polytetrafluoroethylene"  , "polytetrafluoroethylene" , null              , 1);
-		FL.create("epoxid"                   , "epoxid"              , null                  , 1);
-		FL.create("benzene"                  , "benzene"             , null                  , 1);
-		FL.create("lpg"                      , "lpg"                 , null                  , 1);
-		FL.create("phenol"                   , "phenol"              , null                  , 1);
-		FL.create("acetone"                  , "acetone"             , null                  , 1);
-		FL.create("Bisphenol"                , "Bisphenol"           , null                  , 1);
-		FL.create("Epichlorohydrin"          , "Epichlorohydrin"     , null                  , 1);
-		FL.create("Ethylene"                 , "Ethylene"            , MT.Ethylene           , 2);
-		FL.create("dragonbreath"             , "Dragon's Breath"     , null                  , 2,   1000,   300, IL.EtFu_Dragon_Breath.get(1), IL.Bottle_Empty.get(1), 250).setDensity(100).setLuminosity(5);
-		FL.create("netherair"                , "Nether Air"          , null                  , 2,   1000,   370).setDensity(0);
-		FL.create("enderair"                 , "Ender Air"           , null                  , 2,   1000,   280).setDensity(0);
-		FL.create("Steam"                    , "Steam"               , MT.H2O                , 2, 160000, C+100).setDensity(-1000);
-		MT.Ice.mGas = MT.H2O.mGas;
-		MT.H2O.mGas.getFluid().setTemperature((int)(C+100)).setGaseous(T);
-		
-		//-----
-		
+        // Natural Carbohydrates
 		FL.create("liquid_extra_heavy_oil"   , "Very Heavy Oil"      , null                  , 1);
 		FL.create("liquid_heavy_oil"         , "Heavy Oil"           , null                  , 1);
 		FL.create("liquid_medium_oil"        , "Raw Oil"             , null                  , 1);
 		FL.create("liquid_light_oil"         , "Light Oil"           , null                  , 1);
 		FL.create("soulsandoil"              , "Soulsand Oil"        , null                  , 1);
 		FL.create("gas_natural_gas"          , "Natural Gas"         , null                  , 2); // ~95% methane, ~5% ethane and trace amounts of propane and butane
-		
-		
-		FL.create("liquidoxygen"             , "Liquid Oxygen"       , MT.O                  , 1,   1000,    85);
-		
-		FL.create("chargedmatter"            , "Charged Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);
-		FL.create("neutralmatter"            , "Neutral Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);
-		FL.create("UUAmplifier"              , "UU-Amplifier"        , MT.UUAmplifier        , 1,      1,   100);
-		FL.create("ic2uumatter"              , "UU-Matter"           , MT.UUMatter           , 1,      1,   100);
-		FL.create("ic2constructionfoam"      , "Construction Foam"   , MT.ConstructionFoam   , 1,    100,   300);
-		FL.create("ic2distilledwater"        , "Distilled Water"     , MT.DistWater          , 1);
-		FL.create("NitroFuel"                , "Nitro Fuel"          , MT.NitroFuel          , 1);
-		FL.create("lubricant"                , "Lubricant"           , MT.Lubricant          , 1);
-		FL.create("oil"                      , "Oil"                 , MT.Oil                , 1);
-		FL.create("fuel"                     , "Fuel Oil"            , MT.Fuel               , 1);
-		FL.create("kerosine"                 , "Kerosine"            , MT.Kerosine           , 1);
-		FL.create("diesel"                   , "Diesel"              , MT.Diesel             , 1);
-		FL.create("petrol"                   , "Petrol"              , MT.Petrol             , 1);
-		FL.create("ic2biomass"               , "Biomass"             , MT.Biomass            , 1);
-		FL.create("biomass"                  , "Biomass"             , MT.Biomass            , 1);
-		FL.create("ic2coolant"               , "Coolant"             , null                  , 1);
-		FL.create("ic2hotcoolant"            , "Heatant"             , null                  , 1,   1000,  1200);
-		FL.create("ic2pahoehoelava"          , "Pahoehoe Lava"       , null                  , 1,   1000,  1200).setLuminosity(10).setDensity(50000).setViscosity(250000);
-		FL.create("bioethanol"               , "Bio Ethanol"         , MT.Ethanol            , 1);
-		FL.create("mcguffium"                , "Mc Guffium 239"      , MT.Mcg                , 1,      L,   300);
-		FL.create("hotfryingoil"             , "Hot Frying Oil"      , MT.FryingOilHot       , 1,   1000,   400);
+
+		// Petrol processing
 		FL.create("sfuel"                    , "Fuel Oil With Sulfur", null                  , 1);
 		FL.create("sdiesel"                  , "Diesel With Sulfur"  , null                  , 1);
 		FL.create("spetrol"                  , "Petrol With Sulfur"  , null                  , 1);
@@ -133,7 +88,67 @@ public class Loader_Fluids implements Runnable {
 		FL.create("gasoil"                   , "Gas Oil"             , null                  , 1);
 		FL.create("sgasoil"                  , "Gas Oil With Sulfur" , null                  , 1);
 
-		FL.create("isoprene"                 , "Isoprene"           , null                  , 1);
+		// Petrol final products (organic chemistry)
+		FL.create("lubricant"                , "Lubricant"           , MT.Lubricant          , 1);
+		FL.create("oil"                      , "Oil"                 , MT.Oil                , 1);
+		FL.create("fuel"                     , "Fuel Oil"            , MT.Fuel               , 1);
+		FL.create("kerosine"                 , "Kerosine"            , MT.Kerosine           , 1);
+		FL.create("diesel"                   , "Diesel"              , MT.Diesel             , 1);
+		FL.create("petrol"                   , "Petrol"              , MT.Petrol             , 1);
+
+		FL.create("NitroFuel"                , "Nitro Fuel"          , MT.NitroFuel          , 1);          //硝基柴油
+		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000); //丙烷
+		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000); //丁烷
+		FL.create("Ethylene"                 , "Ethylene"            , MT.Ethylene           , 2);          //乙烯
+		FL.create("Propylene"                , "Propylene"           , MT.Propylene          , 2);          //丙烯
+		FL.create("benzene"                  , "benzene"             , null                  , 1); //苯
+		FL.create("lpg"                      , "lpg"                 , null                  , 1); //液化石油气
+		FL.create("phenol"                   , "phenol"              , null                  , 1); //苯酚
+		FL.create("acetone"                  , "acetone"             , null                  , 1); //丙酮
+		FL.create("Bisphenol"                , "Bisphenol"           , null                  , 1); //双酚A
+		FL.create("Epichlorohydrin"          , "Epichlorohydrin"     , null                  , 1); //环氧氯丙烷
+		FL.create("isoprene"                 , "Isoprene"            , null                  , 1); //异戊二烯
+		FL.create("dichloroisopropanol"      , "Dichloroisopropanol" , null                  , 1); //二氯异丙醇
+		FL.create("cumene"                   , "Cumene"              , null                  , 1); //异丙苯
+		FL.create("silane"                   , "Silane"              , null                  , 1); //硅烷
+		FL.create("allylchloride"            , "Allyl Chloride"      , null                  , 1); //氯丙烯
+		FL.create("acrylicacid"              , "Acrylic Acid"        , null                  , 1); //丙烯酸
+		FL.create("ethylacrylate"            , "Ethyl Acrylate"      , null                  , 1); //丙烯酸乙酯
+		FL.create("styrene"                  , "Styrene"             , null                  , 1); //苯乙烯
+		FL.create("vinylchloride"            , "Vinyl Chloride"      , null                  , 1); //氯乙烯
+		FL.create("ethyne"                   , "Ethyne"              , null                  , 1); //乙炔
+		FL.create("photoresist"              , "Photoresist"         , null                  , 1); //光刻胶
+
+		// Polymers
+		FL.create("polyvinylchloride"        , "polyvinylchloride"   , null                  , 1); //聚氯乙烯
+		FL.create("polytetrafluoroethylene"  , "polytetrafluoroethylene" , null              , 1); //聚四氟乙烯
+		FL.create("epoxid"                   , "epoxid"              , null                  , 1); //环氧树脂
+
+		// GT6U - others
+		FL.create("liquidoxygen"             , "Liquid Oxygen"       , MT.O                  , 1,   1000,    85);
+		FL.create("liquidhydrogen"             , "Liquid Hydrogen"       , MT.H                  , 1,   1000,    20);
+
+		// -------------------
+		FL.create("chargedmatter"            , "Charged Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);
+		FL.create("neutralmatter"            , "Neutral Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);
+		FL.create("UUAmplifier"              , "UU-Amplifier"        , MT.UUAmplifier        , 1,      1,   100);
+		FL.create("ic2uumatter"              , "UU-Matter"           , MT.UUMatter           , 1,      1,   100);
+		FL.create("ic2constructionfoam"      , "Construction Foam"   , MT.ConstructionFoam   , 1,    100,   300);
+		FL.create("ic2distilledwater"        , "Distilled Water"     , MT.DistWater          , 1);
+		FL.create("ic2biomass"               , "Biomass"             , MT.Biomass            , 1);
+		FL.create("biomass"                  , "Biomass"             , MT.Biomass            , 1);
+		FL.create("ic2coolant"               , "Coolant"             , null                  , 1);
+		FL.create("ic2hotcoolant"            , "Heatant"             , null                  , 1,   1000,  1200);
+		FL.create("ic2pahoehoelava"          , "Pahoehoe Lava"       , null                  , 1,   1000,  1200).setLuminosity(10).setDensity(50000).setViscosity(250000);
+		FL.create("bioethanol"               , "Bio Ethanol"         , MT.Ethanol            , 1);
+		FL.create("mcguffium"                , "Mc Guffium 239"      , MT.Mcg                , 1,      L,   300);
+		FL.create("hotfryingoil"             , "Hot Frying Oil"      , MT.FryingOilHot       , 1,   1000,   400);
+		FL.create("dragonbreath"             , "Dragon's Breath"     , null                  , 2,   1000,   300, IL.EtFu_Dragon_Breath.get(1), IL.Bottle_Empty.get(1), 250).setDensity(100).setLuminosity(5);
+		FL.create("netherair"                , "Nether Air"          , null                  , 2,   1000,   370).setDensity(0);
+		FL.create("enderair"                 , "Ender Air"           , null                  , 2,   1000,   280).setDensity(0);
+		FL.create("Steam"                    , "Steam"               , MT.H2O                , 2, 160000, C+100).setDensity(-1000);
+		MT.Ice.mGas = MT.H2O.mGas;
+		MT.H2O.mGas.getFluid().setTemperature((int)(C+100)).setGaseous(T);
 
 		FL.create("fieryblood"               , "Fiery Blood"         , null                  , 1,      L,  1500).setLuminosity(10);
 		FL.create("fierytears"               , "Fiery Tears"         , null                  , 1,      L,  1500).setLuminosity(10);

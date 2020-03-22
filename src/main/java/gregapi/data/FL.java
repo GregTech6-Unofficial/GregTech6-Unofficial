@@ -106,6 +106,7 @@ public enum FL {
     , AntiHelium_3                  ("antihelium-3"                                                 , GAS)
     , AntiCarbon_13                 ("anticarbon-13"                                                , LIQUID)
 
+	// ----
 	, Steam                     ("steam"                                                    , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2                 ("ic2steam"                                                 , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2_Superheated     ("ic2superheatedsteam"                                      , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
@@ -420,7 +421,18 @@ public enum FL {
     , Diesel                    ("diesel"                                                   , SIMPLE, LIQUID)
     , Kerosine                  ("kerosine"                 , "kerosene"                    , SIMPLE, LIQUID)
     , Isoprene                  ("isoprene"                                                 , SIMPLE, LIQUID)
-    // Polymers
+	, Dichloroisopropanol       ("dichloroisopropanol"                                      , SIMPLE, LIQUID)
+	, Cumene                    ("cumene"                                                   , SIMPLE, LIQUID)
+	, Silane                    ("silane"                                                   , SIMPLE, LIQUID)
+	, Allyl_Chloride            ("allylchloride"                                            , SIMPLE, LIQUID)
+	, Acrylic_Acid              ("acrylicacid"                                              , SIMPLE, LIQUID)
+	, Ethyl_Acrylate            ("ethylacrylate"                                            , SIMPLE, LIQUID)
+	, Styrene                   ("styrene"                                                  , SIMPLE, LIQUID)
+	, Vinyl_Chloride            ("vinylchloride"                                            , SIMPLE, LIQUID)
+	, Ethyne                    ("ethyne"                                                   , SIMPLE, LIQUID)
+	, Photoresist               ("photoresist"                                              , SIMPLE, LIQUID)
+
+	// Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)
 	, polyvinylchloride         ("polyvinylchloride"                                        , SIMPLE, LIQUID)
@@ -435,7 +447,6 @@ public enum FL {
     , SGasoil                   ("sgasoil"                                                  , SIMPLE, LIQUID)
     
     // Biomass Processing
-
 	, BioFuel                   ("biofuel"                                                  , SIMPLE, LIQUID)
 	, BioDiesel                 ("biodiesel"                                                , SIMPLE, LIQUID)
 	, BioEthanol                ("bioethanol"                                               , SIMPLE, LIQUID)
