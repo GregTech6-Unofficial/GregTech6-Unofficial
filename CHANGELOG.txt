@@ -5,6 +5,17 @@ Nothing
 6.13.06: (Not released yet).
 [CHANGED]You can no longer Put dust into Extruder
 [CHANGED]Assembler-Circuit Assembler.It should be different from Welder
+[ADDED]More organic fluids
+Dichloroisopropanol
+Cumene
+Silane
+Allyl Chloride
+Acrylic Acid
+Ethyl Acrylate
+Styrene
+Vinyl Chloride
+Ethyne
+Photoresist
 [ADDED]
 Mask Aligner. A more powerful and precise machine to align nano-scale patterns on wafers.
 Built from Stainless Steel Walls and Aligner Units, its purpose will be added in the future.
