@@ -1,4 +1,6 @@
 This is the Git Repository for GregTech-6 Unofficial.
+This mod is an UNOFFICIAL Derivative of GregTech-6, which is created by GregoriousT
+(Link: https://github.com/GregTech6/gregtech6).
 
 # License
 
@@ -11,4 +13,5 @@ derivative of it are licensed under the
 
 # Support
 
-You can use the Issue Tracker, or you can just use the Forums. Since you should need a Forum Account to log into this anyways, I would recommend you to go for the Forums if you have an Issue.
+You can use the Issue Tracker or join the QQ group of GT6U development: 675321303
+You can visit GT6 Forums at https://forum.mechaenetia.com/
