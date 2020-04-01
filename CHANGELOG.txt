@@ -1,8 +1,27 @@
-This is the Changelogs for GregTech6-Unofficial
-6.13.07: (Not released yet).
+This is the Changelog for GregTech6-Unofficial
+6.13.11: (Not released yet).
 Nothing
 
-6.13.06: (Not released yet).
+6.13.10: (Not released yet).
+Nothing
+
+6.13.09: (Not released yet).
+Nothing
+
+6.13.08 (Not released yet).
+Nothing
+
+6.13.07: (Not released yet).
+[FIXED]Now Titanium Niobium Carbide Steam Turbine Main Housing has the correct crafting recipe.
+[FIXED]The tooltip of the Mask Aligner has been fixed. The input should be from bottom layer and the output otherwise.
+[CHANGED]Aligner Units and Mask Aligner crafting recipes.
+[CHANGED]Now Circuit Wiring (Platinum) are made in Mask Aligner.
+[CHANGED]Now Fluid Solidifiers accept CU instead of EU.
+[CHANGED]Some recipes are now processed in heat mixers instead of mixers.
+[ADDED]Heat Mixers (T1-T5)
+[WIP]Polytetrafluoroethylene drums and pipes.
+
+6.13.06:
 [CHANGED]You can no longer Put dust into Extruder
 [CHANGED]Assembler-Circuit Assembler.It should be different from Welder
 [ADDED]More organic fluids

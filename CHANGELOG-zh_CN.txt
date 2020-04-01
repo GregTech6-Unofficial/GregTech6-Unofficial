@@ -1,5 +1,27 @@
 GT6U Changelog中文翻译
 原作：GT6U-Team 翻译：Evan 校对：YueSha
+6.13.11: (Not released yet).
+Nothing
+
+6.13.10: (Not released yet).
+Nothing
+
+6.13.09: (Not released yet).
+Nothing
+
+6.13.08 (Not released yet).
+Nothing
+
+6.13.07: (Not released yet).
+[FIXED]修复碳化铌钛蒸汽涡轮机核心合成冲突
+[FIXED]修复了光刻机的介绍。应从底部输入，顶部输出。
+[CHANGED]更改了光刻机和光刻单元的配方。
+[CHANGED]蚀刻电路（铂）现在需要光刻机加工。
+[CHANGED]流体固化器现在接受CU。
+[CHANGED]一些原先在搅拌机合成的配方现在为高温搅拌机配方。
+[ADDED]高温搅拌机 (T1-T5)
+[WIP]聚四氟乙烯储罐和管道。
+
 6.13.06 更新
 [修改] 现在开始将无法把粉放入挤压机中。
 [修改] 电路组装机与焊接机进行了区分。

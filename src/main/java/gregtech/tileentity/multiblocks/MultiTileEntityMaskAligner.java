@@ -65,7 +65,7 @@ public class MultiTileEntityMaskAligner extends TileEntityBase10MultiBlockMachin
         LH.add("gt.tooltip.multiblock.maskaligner.1", "Bottom and Top layer: 3x3 of stainless steel walls");
         LH.add("gt.tooltip.multiblock.maskaligner.2", "Middle Layer: 3x3 ring of aligner units surrounding a stainless steel wall");
         LH.add("gt.tooltip.multiblock.maskaligner.3", "Main Block centered on Side-Bottom and facing outwards");
-        LH.add("gt.tooltip.multiblock.maskaligner.4", "Top layer accepts Input items and fluids, Bottom layer and Main Block emit Output");
+        LH.add("gt.tooltip.multiblock.maskaligner.4", "Bottom layer accepts Input items and fluids, Top layer and Main Block emit Output");
         LH.add("gt.tooltip.multiblock.maskaligner.5", "Energy only accepted at Aligner Units");
     }
 

@@ -133,7 +133,7 @@ public class Loader_Recipes_Other implements Runnable {
 				for (OreDictMaterial tMat : ANY.Cu.mToThis)
 					RM.LaserEngraver    .addRecipe2(T, 16,   64, foil.mat(tMat                  , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Copper.get(1));
 				RM.LaserEngraver    .addRecipe2(T, 16,   64, foil.mat(MT.Au                 , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Gold.get(1));
-				RM.LaserEngraver    .addRecipe2(T, 16,   64, foil.mat(MT.Pt                 , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Platinum.get(1));
+				RM.MaskAligner    .addRecipe2(T, 16,   64, foil.mat(MT.Pt                 , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Platinum.get(1));
 				RM.LaserEngraver    .addRecipe2(T, 16,   64, foil.mat(MT.Thaumium           , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Magic.get(1));
 				RM.LaserEngraver    .addRecipe2(T, 16,   64, foil.mat(MT.Manasteel          , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Magic.get(1));
 				RM.LaserEngraver    .addRecipe2(T, 16,   64, foil.mat(MT.Mithril            , 4), ST.amount(0, aEvent.mStack), IL.Circuit_Wire_Magic.get(1));
