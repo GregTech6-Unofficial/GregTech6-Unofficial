@@ -439,6 +439,7 @@ jar {
 			exclude 'META-INF', 'META-INF/**'
 		}
 	}
+	zip64=true
 }
 
 task sourceJar(type: Jar) {
