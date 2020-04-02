@@ -18,6 +18,7 @@ Nothing
 [CHANGED]Now Circuit Wiring (Platinum) are made in Mask Aligner.
 [CHANGED]Now Fluid Solidifiers accept CU instead of EU.
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
+[CHANGED]Partcile Collider now has completely different structure.
 [ADDED]Heat Mixers (T1-T5)
 [WIP]Polytetrafluoroethylene drums and pipes.
 
