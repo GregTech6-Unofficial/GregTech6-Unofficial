@@ -57,7 +57,7 @@ public class MultiTileEntityMolecularScanner extends TileEntityBase10MultiBlockM
 	@Override public void onProcessStarted() {UT.Sounds.send(SFX.MC_EXPLODE, this); super.onProcessStarted();}
 	
 	static {
-		LH.add("gt.tooltip.multiblock.molecularscanner.1", "3x3x3 26 Osmiridium Wall Walls filled with Air");
+		LH.add("gt.tooltip.multiblock.molecularscanner.1", "3x3x3 26 Osmiridium Wall Walls");
 		LH.add("gt.tooltip.multiblock.molecularscanner.2", "Main Block centered on Side-Bottom and facing outwards");
 	}
 	

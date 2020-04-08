@@ -14,6 +14,7 @@ Nothing
 6.13.07: (Not released yet).
 [FIXED]Now Titanium Niobium Carbide Steam Turbine Main Housing has the correct crafting recipe.
 [FIXED]The tooltip of the Mask Aligner has been fixed. The input should be from bottom layer and the output otherwise.
+[FIXED]The tooltip of the Large Molecular Scanner has been fixed. The structure should not be filled with air.
 [CHANGED]Aligner Units and Mask Aligner crafting recipes.
 [CHANGED]Now Circuit Wiring (Platinum) are made in Mask Aligner.
 [CHANGED]Now Fluid Solidifiers accept CU instead of EU.
