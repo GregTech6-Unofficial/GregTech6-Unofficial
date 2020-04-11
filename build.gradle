@@ -460,6 +460,7 @@ task devJar(type: Jar) {
 	}
 	classifier = 'dev'
 	from sourceSets.main.output
+	zip64=true
 }
 
 //task coreJar(type: Jar) {
