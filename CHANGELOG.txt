@@ -24,6 +24,7 @@ Nothing
 [CHANGED]Now Fluid Solidifiers accept CU instead of EU.
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
 [ADDED]Heat Mixers (T1-T5)
+[ADDED]Laser Cutters (T1-T5)
 [WIP]Polytetrafluoroethylene drums and pipes.
 
 6.13.06:

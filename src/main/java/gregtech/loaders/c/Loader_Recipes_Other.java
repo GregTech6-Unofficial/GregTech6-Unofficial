@@ -21,6 +21,7 @@ package gregtech.loaders.c;
 
 import static gregapi.data.CS.*;
 import static gregapi.data.MT.DATA.WIRES_01;
+import static gregapi.data.MT.SiliconDioxide;
 import static gregapi.data.MT.Superconductor;
 import static gregapi.data.MT.TungstenSteel;
 import static gregapi.data.OP.*;
@@ -859,12 +860,12 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.ParticleCollider.addRecipeX(T, 32768,  20, new long[] {200, 200, 20, 5, 100, 1},       ST.array(IL.Electron.get(10),IL.Positron.get(10)),  FL.array(MT.Xe.gas(U, T)), FL.array(MT.Xe.gas(U, T)), IL.Proton.get(10), IL.Anti_Proton.get(10), IL.Neutron.get(10), IL.Higgs_Boson.get(10), IL.Neutrino.get(10), IL.Kerr_Blackhole.get(10)).setSpecialNumber(10000000);
 		RM.ParticleCollider.addRecipeX(T, 32768,  40, new long[] {300, 300, 15, 5, 75, 1},        ST.array(ST.tag(1), IL.Proton.get(20)), FL.array(MT.Xe.gas(U, T)), FL.array(MT.Xe.gas(U, T)), IL.Electron.get(10), IL.Positron.get(10), IL.Neutron.get(10), IL.Higgs_Boson.get(10), IL.Neutrino.get(10), IL.Kerr_Blackhole.get(10)).setSpecialNumber(10000000);
 
-		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.Nq, 1), IL.Electric_Pump_LV.get(2)), FL.array(FL.Nitrogen.make(1000)), ZL_FS, wireGt01.mat(Superconductor, 1));
-		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.Nq, 1), IL.Electric_Pump_LV.get(2)), FL.array(FL.Helium.make(1000)), ZL_FS, wireGt01.mat(Superconductor, 1));
-		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.Nq, 1), IL.Electric_Pump_LV.get(2)), FL.array(FL.Hydrogen.make(1000)), ZL_FS, wireGt01.mat(Superconductor, 1));
-		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.YttriumBariumCuprate, 1), IL.Electric_Pump_LV.get(2)), FL.array(FL.Helium.make(1000)), ZL_FS, wireGt01.mat(Superconductor, 1));
-		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.YttriumBariumCuprate, 1), IL.Electric_Pump_LV.get(2)), FL.array(FL.Hydrogen.make(1000)), ZL_FS, wireGt01.mat(Superconductor, 1));
-		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.VanadiumGallium, 1), IL.Electric_Pump_LV.get(2)), FL.array(FL.Helium.make(1000)), ZL_FS, wireGt01.mat(Superconductor, 1));
+		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.Nq, 3), IL.Electric_Pump_LV.get(2)), FL.array(FL.Nitrogen.make(2000)), ZL_FS, wireGt01.mat(Superconductor, 3));
+		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.Nq, 3), IL.Electric_Pump_LV.get(2)), FL.array(FL.Helium.make(2000)), ZL_FS, wireGt01.mat(Superconductor, 3));
+		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.Nq, 3), IL.Electric_Pump_LV.get(2)), FL.array(FL.Hydrogen.make(2000)), ZL_FS, wireGt01.mat(Superconductor, 3));
+		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.YttriumBariumCuprate, 3), IL.Electric_Pump_LV.get(2)), FL.array(FL.Helium.make(2000)), ZL_FS, wireGt01.mat(Superconductor, 3));
+		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.YttriumBariumCuprate, 3), IL.Electric_Pump_LV.get(2)), FL.array(FL.Hydrogen.make(2000)), ZL_FS, wireGt01.mat(Superconductor, 3));
+		RM.Welder.addRecipeX(T, 64, 40, ST.array(pipeTiny.mat(MT.TungstenSteel, 1), wireGt01.mat(MT.NiobiumTitanium, 3), IL.Electric_Pump_LV.get(2)), FL.array(FL.Helium.make(2000)), ZL_FS, wireGt01.mat(Superconductor, 3));
 
 		RM.Ionizer.addRecipe0(T, 64,   2000, FL.Hydrogen.make(50), FL.HydrogenI.make(50), ZL_IS);
 		RM.Ionizer.addRecipe0(T, 64,   2000, FL.Helium.make(50), FL.HeliumI.make(50), ZL_IS);
