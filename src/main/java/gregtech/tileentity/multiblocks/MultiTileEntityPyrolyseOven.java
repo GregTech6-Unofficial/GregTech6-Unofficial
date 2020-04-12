@@ -131,7 +131,7 @@ public class MultiTileEntityPyrolyseOven extends TileEntityBase10MultiBlockMachi
 		LH.add("gt.tooltip.multiblock.pyrolyseoven.1", "5x5x3 'Basin' of 72 Stainless Steel Walls");
 		LH.add("gt.tooltip.multiblock.pyrolyseoven.2", "3x3x2 with 27 Nichrome Coils inside the 5x5x4");
 		LH.add("gt.tooltip.multiblock.pyrolyseoven.3", "Main Block centered on Side-Bottom and facing outwards");
-		LH.add("gt.tooltip.multiblock.pyrolyseoven.4", "Stuff can go in and out on any of the Stainless Steel Walls");
+		LH.add("gt.tooltip.multiblock.pyrolyseoven.4", "Stuff can go in and out on any of the Stainless Steel Walls, Energy input at bottom layer");
 	}
 	
 	@Override

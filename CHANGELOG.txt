@@ -15,11 +15,14 @@ Nothing
 [FIXED]Now Titanium Niobium Carbide Steam Turbine Main Housing has the correct crafting recipe.
 [FIXED]The tooltip of the Mask Aligner has been fixed. The input should be from bottom layer and the output otherwise.
 [FIXED]The tooltip of the Large Molecular Scanner has been fixed. The structure should not be filled with air.
+[FIXED]The tooltip of the Industrial Coke Oven.
+[FIXED]Same crafting recipes for Industrial Coke Oven and Large Roasting Oven main blocks.
+[FIXED]Partcile Collider construction now is possible.
+[CHANGED]Now Industrial Coke Oven, Large Roasting Oven, and Large Dyers can input and output fluids or items at any walls.
 [CHANGED]Aligner Units and Mask Aligner crafting recipes.
 [CHANGED]Now Circuit Wiring (Platinum) are made in Mask Aligner.
 [CHANGED]Now Fluid Solidifiers accept CU instead of EU.
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
-[CHANGED]Partcile Collider now has completely different structure.
 [ADDED]Heat Mixers (T1-T5)
 [WIP]Polytetrafluoroethylene drums and pipes.
 
