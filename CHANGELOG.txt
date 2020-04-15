@@ -17,7 +17,7 @@ Nothing
 [FIXED]The tooltip of the Large Molecular Scanner has been fixed. The structure should not be filled with air.
 [FIXED]The tooltip of the Industrial Coke Oven.
 [FIXED]Same crafting recipes for Industrial Coke Oven and Large Roasting Oven main blocks.
-[FIXED]Partcile Collider construction now is possible.
+[FIXED]Partcile Collider construction is now possible.
 [CHANGED]Now Industrial Coke Oven, Large Roasting Oven, and Large Dyers can input and output fluids or items at any walls.
 [CHANGED]Aligner Units and Mask Aligner crafting recipes.
 [CHANGED]Now Circuit Wiring (Platinum) are made in Mask Aligner.
@@ -25,7 +25,8 @@ Nothing
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
 [ADDED]Heat Mixers (T1-T5)
 [ADDED]Laser Cutters (T1-T5)
-[WIP]Polytetrafluoroethylene drums and pipes.
+[ADDED]Polytetrafluoroethylene drum and pipes.
+[ADDED]Polyvinylchloride drum and pipes.
 
 6.13.06:
 [CHANGED]You can no longer Put dust into Extruder

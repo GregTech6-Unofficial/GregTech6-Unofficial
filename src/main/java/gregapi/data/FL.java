@@ -431,6 +431,9 @@ public enum FL {
 	, Vinyl_Chloride            ("vinylchloride"                                            , SIMPLE, LIQUID)
 	, Ethyne                    ("ethyne"                                                   , SIMPLE, LIQUID)
 	, Photoresist               ("photoresist"                                              , SIMPLE, LIQUID)
+    , Monochlorodifluoromethane ("monochlorodifluoromethane", SIMPLE, GAS)
+    , Trichloromethane ("trichloromethane", SIMPLE, GAS)
+    , Tetrafluoroethylene ("tetrafluoroethylene", SIMPLE, GAS)
 
 	// Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)

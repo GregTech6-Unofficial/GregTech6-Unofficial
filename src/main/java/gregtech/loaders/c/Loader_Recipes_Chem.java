@@ -315,6 +315,7 @@ public class Loader_Recipes_Chem implements Runnable {
 		
 		RM.Centrifuge       .addRecipe0(F, 64,  48, FL.array(FL.Gas_Natural.make(320)), FL.array(FL.lpg  .make(290)), ZL_IS);
 
+		//Polymer production
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Ethylene .make(144)), ZL_FS, OP.dust.mat(MT.Plastic, 1)); // TODO Fluidized Bed Reactor
 		RM.Mixer            .addRecipe1(T, 16,  16, OP.dust.mat(MT.MgCl2, 0), FL.array(MT.TiCl4.liquid(U1000, T), FL.Propylene.make(144)), ZL_FS, OP.dust.mat(MT.Plastic, 1)); // TODO Fluidized Bed Reactor
 
@@ -323,7 +324,15 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.Mixer            .addRecipe1(T, 16, 144, ST.tag(2), FL.array(FL.Propylene.make(1000), FL.Ethylene .make(1000)), FL.array(FL.Isoprene.make(1000), MT.H      .gas   (2*U , F)), ZL_IS);
 		RM.Mixer            .addRecipe1(T, 16, 108, ST.tag(2), FL.array(FL.Isoprene.make(288),   MT.O .gas (2*U, F)), ZL_FS, OP.dust.mat(MT.Rubber, 3));
 
-		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.Pyrite                  ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Fe,   U3 ));
+        RM.HeatMixer            .addRecipe1(T, 64, 144, ST.tag(0), FL.array(FL.Ethylene.make(1000), MT.Cl.gas(1000, F)), FL.array(FL.Vinyl_Chloride.make(1000), MT.HCl.liquid(1000, F)), ZL_IS);
+        RM.HeatMixer            .addRecipe1(T, 64, 144, OP.dust.mat(MT.MgCl2, 0), FL.array(FL.Vinyl_Chloride.make(144), MT.TiCl4.gas(10, F)), ZL_FS, OP.dust.mat(MT.PVC, 1));
+
+        RM.HeatMixer            .addRecipe1(T, 256, 144, ST.tag(0), FL.array(FL.Methane.make(1000), MT.Cl.gas(3000, F)), FL.array(FL.Trichloromethane.make(1000), MT.HCl.liquid(3000, F)), ZL_IS);
+        RM.HeatMixer            .addRecipe1(T, 256, 144, ST.tag(0), FL.array(FL.Trichloromethane.make(1000), MT.HF.gas(2000, F)), FL.array(FL.Monochlorodifluoromethane.make(1000), MT.HCl.liquid(2000, F)), ZL_IS);
+        RM.HeatMixer            .addRecipe1(T, 256, 288, OP.dust.mat(MT.Pt, 0), FL.array(FL.Monochlorodifluoromethane.make(2000)), FL.array(FL.Tetrafluoroethylene.make(1000), MT.HCl.liquid(2000, F)), ZL_IS);
+        RM.HeatMixer            .addRecipe1(T, 256, 288, OP.dust.mat(MT.K2S2O7, 0), FL.array(FL.Tetrafluoroethylene.make(144), FL.DistW.make(144)), ZL_FS, OP.dust.mat(MT.PTFE, 1)); //  TODO Fluidbed
+
+        RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.Pyrite                  ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Fe,   U3 ));
 		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.OREMATS.Sphalerite      ), MT. O .gas( 2*U2 , T), MT.SO2.gas( 3*U2 , F), OM.dust(MT.Zn,   U2 ));
 		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.OREMATS.Molybdenite     ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Mo,   U3 ));
 		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.OREMATS.Stibnite        ), MT. O .gas( 6*U5 , T), MT.SO2.gas( 9*U5 , F), OM.dust(MT.Sb, 2*U5 ));

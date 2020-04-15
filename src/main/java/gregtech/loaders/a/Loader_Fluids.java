@@ -118,11 +118,14 @@ public class Loader_Fluids implements Runnable {
 		FL.create("vinylchloride"            , "Vinyl Chloride"      , null                  , 1); //氯乙烯
 		FL.create("ethyne"                   , "Ethyne"              , null                  , 1); //乙炔
 		FL.create("photoresist"              , "Photoresist"         , null                  , 1); //光刻胶
+        FL.create("monochlorodifluoromethane", "Monochlorodifluoromethane", null, 2); //二氟一氯甲烷
+        FL.create("trichloromethane", "Trichloromethane", null, 2); //氯仿
+        FL.create("tetrafluoroethylene", "Tetrafluoroethylene", null, 2); //四氟乙烯
 
 		// Polymers
-		FL.create("polyvinylchloride"        , "polyvinylchloride"   , null                  , 1); //聚氯乙烯
-		FL.create("polytetrafluoroethylene"  , "polytetrafluoroethylene" , null              , 1); //聚四氟乙烯
-		FL.create("epoxid"                   , "epoxid"              , null                  , 1); //环氧树脂
+		FL.create("polyvinylchloride"        , "Polyvinylchloride"   , MT.PVC                  , 1,1000,273); //聚氯乙烯
+		FL.create("polytetrafluoroethylene"  , "Polytetrafluoroethylene" , MT.PTFE             , 1,1000,273); //聚四氟乙烯
+		FL.create("epoxid"                   , "Epoxid"              , MT.Epoxid               , 1,1000,273); //环氧树脂
 
 		// GT6U - others
 		FL.create("liquidoxygen"             , "Liquid Oxygen"       , MT.O                  , 1,   1000,    85);
