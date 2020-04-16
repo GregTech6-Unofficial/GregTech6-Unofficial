@@ -21,12 +21,15 @@ Nothing
 [CHANGED]Now Industrial Coke Oven, Large Roasting Oven, and Large Dyers can input and output fluids or items at any walls.
 [CHANGED]Aligner Units and Mask Aligner crafting recipes.
 [CHANGED]Now Circuit Wiring (Platinum) are made in Mask Aligner.
-[CHANGED]Now Fluid Solidifiers accept CU instead of EU.
+[CHANGED]Now Fluid Solidifiers accept CU instead of EU. (And its appearance changed!)
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
+[CHANGED]Chromium can no longer be obtained by melting or electrolysing chromite.
+A whole new processing method of Chromium production is implemented.
+To compensate the early-game loss of Chromium, small amount of Chromium can now be obtained from sluicing Chromite.
 [ADDED]Heat Mixers (T1-T5)
 [ADDED]Laser Cutters (T1-T5)
-[ADDED]Polytetrafluoroethylene drum and pipes.
-[ADDED]Polyvinylchloride drum and pipes.
+[ADDED]Polytetrafluoroethylene drum and pipes and its production.
+[ADDED]Polyvinylchloride drum and pipes and its production.
 
 6.13.06:
 [CHANGED]You can no longer Put dust into Extruder
