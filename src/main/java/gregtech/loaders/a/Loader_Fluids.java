@@ -50,13 +50,13 @@ public class Loader_Fluids implements Runnable {
 		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,    144, 4000).setLuminosity(15);
 
 		// Subatomic particle plasmas
-        FL.create("NeutronPlasma", "Neutron Plasma", MT.n, 3, 1000, 4000).setLuminosity(15);
+        //FL.create("NeutronPlasma", "Neutron Plasma", MT.n, 3, 1000, 4000).setLuminosity(15);
         FL.create("ProtonPlasma", "Proton Plasma", MT.p, 3, 1000, 4000).setLuminosity(15);
         FL.create("ElectronPlasma", "Electron Plasma", MT.e, 3, 1000, 4000).setLuminosity(15);
         FL.create("PositronPlasma", "Positron Plasma", AM.e, 3, 1000, 4000).setLuminosity(15);
         FL.create("AntiProtonPlasma", "Anti Proton Plasma", AM.p, 3, 1000, 4000).setLuminosity(15);
-        FL.create("NeutrinoPlasma", "Neutrino Plasma", MT.v, 3, 1000, 4000).setLuminosity(15);
-        FL.create("AntiNeutrinoPlasma", "Anti Neutrino Plasma", AM.v, 3, 1000, 4000).setLuminosity(15);
+        //FL.create("NeutrinoPlasma", "Neutrino Plasma", MT.v, 3, 1000, 4000).setLuminosity(15);
+        //FL.create("AntiNeutrinoPlasma", "Anti Neutrino Plasma", AM.v, 3, 1000, 4000).setLuminosity(15);
 
         // Ionized Plasmas
         FL.create("IonizedHydrogen", "Ionized Hydrogen", MT.H_Ion, 3, 1000, 4000).setLuminosity(15);
