@@ -24,6 +24,7 @@ Nothing
 [CHANGED]Now Fluid Solidifiers accept CU instead of EU. (And its appearance changed!)
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
 [CHANGED]Chromium can no longer be obtained by melting or electrolysing chromite.
+[CHANGED]Alumina now has white texture.
 A whole new processing method of Chromium production is implemented.
 To compensate the early-game loss of Chromium, small amount of Chromium can now be obtained from sluicing Chromite.
 [ADDED]Heat Mixers (T1-T5)
