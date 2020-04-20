@@ -101,10 +101,10 @@ public class Loader_Fluids implements Runnable {
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000); //丁烷
 		FL.create("Ethylene"                 , "Ethylene"            , MT.Ethylene           , 2);          //乙烯
 		FL.create("Propylene"                , "Propylene"           , MT.Propylene          , 2);          //丙烯
-		FL.create("benzene"                  , "benzene"             , null                  , 1); //苯
-		FL.create("lpg"                      , "lpg"                 , null                  , 1); //液化石油气
-		FL.create("phenol"                   , "phenol"              , null                  , 1); //苯酚
-		FL.create("acetone"                  , "acetone"             , null                  , 1); //丙酮
+		FL.create("benzene"                  , "Benzene"             , null                  , 1); //苯
+		FL.create("lpg"                      , "Liquefied Petroleum Gas" , null                  , 1); //液化石油气
+		FL.create("phenol"                   , "Phenol"              , null                  , 1); //苯酚
+		FL.create("acetone"                  , "Acetone"             , null                  , 1); //丙酮
 		FL.create("Bisphenol"                , "Bisphenol"           , null                  , 1); //双酚A
 		FL.create("Epichlorohydrin"          , "Epichlorohydrin"     , null                  , 1); //环氧氯丙烷
 		FL.create("isoprene"                 , "Isoprene"            , null                  , 1); //异戊二烯
