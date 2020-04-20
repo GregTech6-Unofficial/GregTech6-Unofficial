@@ -129,7 +129,7 @@ public class Loader_Fluids implements Runnable {
 
 		// GT6U - others
 		FL.create("liquidoxygen"             , "Liquid Oxygen"       , MT.O                  , 1,   1000,    85);
-		FL.create("liquidhydrogen"             , "Liquid Hydrogen"       , MT.H                  , 1,   1000,    20);
+		FL.create("liquidhydrogen"           , "Liquid Hydrogen"     , MT.H                  , 1,   1000,    20);
 
 		// -------------------
 		FL.create("chargedmatter"            , "Charged Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);
