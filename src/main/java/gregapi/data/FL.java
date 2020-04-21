@@ -76,6 +76,7 @@ public enum FL {
     // plasmas
 	, HeliumP                   ("heliumplasma"                                             , PLASMA)
 	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
+    , OxygenP                   ("oxygenplasma"                                             , PLASMA)
     , IronP                     ("ironplasma"                                               , PLASMA)
     //, neutronP                  ("neutronplasma"                                            , PLASMA)
     , protonP                   ("protonplasma"                                             , PLASMA)
@@ -86,8 +87,8 @@ public enum FL {
     //, antineutrinoP             ("antineutrinoplasma"                                       , PLASMA)
 
     // ionized plasmas
-    , HydrogenI("ionizedhydrogen", PLASMA)
-    , HeliumI("ionizedhelium", PLASMA)
+    , HydrogenI("ionizedhydrogen", GAS)
+    , HeliumI("ionizedhelium", GAS)
 
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
@@ -97,6 +98,7 @@ public enum FL {
 	, Helium_3                  ("helium-3"                                                 , GAS)
 	, Neon                      ("neon"                                                     , GAS)
 	, Argon                     ("argon"                                                    , GAS)
+    , Iron                      ("iron"                                                  , LIQUID)
 
     // Anti Elements
     , AntiNitrogen                  ("antinitrogen"                                                 , GAS)

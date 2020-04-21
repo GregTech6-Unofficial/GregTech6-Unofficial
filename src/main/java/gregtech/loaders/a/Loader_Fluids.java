@@ -47,7 +47,8 @@ public class Loader_Fluids implements Runnable {
 	public void run() {
 		FL.create("HeliumPlasma"             , "Helium Plasma"       , MT.He                 , 3,   1000, 4000).setLuminosity(15);
 		FL.create("NitrogenPlasma"           , "Nitrogen Plasma"     , MT.N                  , 3,   1000, 4000).setLuminosity(15);
-		FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,    144, 4000).setLuminosity(15);
+        FL.create("OxygenPlasma"             , "Oxygen Plasma"       , MT.O                  , 3,   1000, 4000).setLuminosity(15);
+        FL.create("IronPlasma"               , "Iron Plasma"         , MT.Fe                 , 3,   1000, 4000).setLuminosity(15);
 
 		// Subatomic particle plasmas
         //FL.create("NeutronPlasma", "Neutron Plasma", MT.n, 3, 1000, 4000).setLuminosity(15);
@@ -59,8 +60,8 @@ public class Loader_Fluids implements Runnable {
         //FL.create("AntiNeutrinoPlasma", "Anti Neutrino Plasma", AM.v, 3, 1000, 4000).setLuminosity(15);
 
         // Ionized Plasmas
-        FL.create("IonizedHydrogen", "Ionized Hydrogen", MT.H_Ion, 3, 1000, 4000).setLuminosity(15);
-        FL.create("IonizedHelium", "Ionized Helium", MT.He_Ion, 3, 1000, 4000).setLuminosity(15);
+        FL.create("IonizedHydrogen", "Ionized Hydrogen", MT.H_Ion, 3, 1000, 273).setLuminosity(15);
+        FL.create("IonizedHelium", "Ionized Helium", MT.He_Ion, 3, 1000, 273).setLuminosity(15);
 
         // Anti Elements
         FL.create("Anti-Nitrogen", "Anti-Nitrogen", AM.N, 2, 1000, 273);

@@ -44,8 +44,10 @@ public class Loader_Fuels implements Runnable {
 
 		FM.Plasma       .addRecipe0(T, - 4096,  2, FL.make("heliumplasma", 1)            , FL.make("helium",   1), ZL_IS);
 		FM.Plasma       .addRecipe0(T, - 4096,  4, FL.make("nitrogenplasma", 1)          , FL.make("nitrogen", 1), ZL_IS);
-		
-		FM.Engine       .addRecipe0(T, - 64,  7, FL.make("lpg", 1)                       , FL.make("carbondioxide", 1), ZL_IS);
+        FM.Plasma       .addRecipe0(T, - 8192,  2, FL.make("oxygenplasma", 1)            , FL.make("oxygen",   1), ZL_IS);
+        FM.Plasma       .addRecipe0(T, - 8192,  4, FL.make("ironplasma", 1)              , MT.Fe.fluid(U1000*1,     F), ZL_IS);
+
+        FM.Engine       .addRecipe0(T, - 64,  7, FL.make("lpg", 1)                       , FL.make("carbondioxide", 1), ZL_IS);
 
 		FM.Burn         .addRecipe0(T, - 64,  4, FL.make("gasoil", 1)                         , FL.make("carbondioxide", 1), ZL_IS);
 		FM.Engine       .addRecipe0(T, - 64,  6, FL.make("gasoil", 1)                         , FL.make("carbondioxide", 1), ZL_IS);
