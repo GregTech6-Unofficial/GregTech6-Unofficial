@@ -11,7 +11,7 @@ Nothing
 6.13.08 (Not released yet).
 Nothing
 
-6.13.07: (Not released yet).
+6.13.07:
 [FIXED]Now Titanium Niobium Carbide Steam Turbine Main Housing has the correct crafting recipe.
 [FIXED]The tooltip of the Mask Aligner has been fixed. The input should be from bottom layer and the output otherwise.
 [FIXED]The tooltip of the Large Molecular Scanner has been fixed. The structure should not be filled with air.
@@ -25,6 +25,7 @@ Nothing
 [CHANGED]Some recipes are now processed in heat mixers instead of mixers.
 [CHANGED]Chromium can no longer be obtained by melting or electrolysing chromite.
 [CHANGED]Alumina now has white texture.
+[CHANGED]Redone GUI Textures of Circuit Assembler and Mask Aligner
 A whole new processing method of Chromium production is implemented.
 To compensate the early-game loss of Chromium, small amount of Chromium can now be obtained from sluicing Chromite.
 [ADDED]Heat Mixers (T1-T5)
