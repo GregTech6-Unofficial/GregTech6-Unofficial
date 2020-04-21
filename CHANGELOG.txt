@@ -36,6 +36,7 @@ To compensate the early-game loss of Chromium, small amount of Chromium can now 
 [ADDED]Polyvinylchloride drum and pipes and its production.
 [ADDED]Large Heat Mixer. A multiblock version of heat mixer working at 256x parallel recipes.
 [ADDED]Incubator
+[ADDED]Neutronium, Americium, and lots of molten metal now is available.
 
 6.13.06:
 [CHANGED]You can no longer Put dust into Extruder
