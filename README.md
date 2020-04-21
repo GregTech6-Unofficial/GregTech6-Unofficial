@@ -15,3 +15,7 @@ derivative of it are licensed under the
 
 You can use the Issue Tracker or join the QQ group of GT6U development: 675321303
 You can visit GT6 Forums at https://forum.mechaenetia.com/
+
+# Acknowledgement
+
+Texture Support: @MCTian-mi @Orientsky @duckegg128
