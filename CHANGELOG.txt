@@ -28,7 +28,7 @@ Nothing
 [CHANGED]Redone GUI Textures of Circuit Assembler and Mask Aligner
 [CHANGED]Changed some old recipes and added 50 new Fusion recipes.
 [CHANGED]Increased the energy acceptance limit of Fusion Reactor and Mask Aligner
-A whole new processing method of Chromium production is implemented.
+[ADDED]A whole new processing method of Chromium production is implemented.
 To compensate the early-game loss of Chromium, small amount of Chromium can now be obtained from sluicing Chromite.
 [ADDED]Heat Mixers (T1-T5)
 [ADDED]Laser Cutters (T1-T5)
