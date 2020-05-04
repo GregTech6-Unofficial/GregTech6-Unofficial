@@ -487,9 +487,9 @@ public class Loader_Recipes_Handlers implements Runnable {
 		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemChipped         , 1, NF,  16,tMultiplier[i]     * 32,     0, NF, plateGemTiny , 2, NI, NI, F, F, F, ANTIMATTER.NOT));
 		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemFlawed          , 1, NF,  16,tMultiplier[i] * 2 * 32,     0, NF, plateGemTiny , 4, NI, NI, F, F, F, ANTIMATTER.NOT));
 		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gem                , 1, NF,  48,tMultiplier[i]     * 32,     0, NF, plateGem     , 1, NI, NI, F, F, F, ANTIMATTER.NOT));
-		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemFlawless        , 1, NF,  48,tMultiplier[i]     * 32,     0, NF, plateGem     , 3, NI, NI, F, F, F, ANTIMATTER.NOT));
-		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemExquisite       , 1, NF,  48,tMultiplier[i] * 3 * 32,     0, NF, plateGem     , 5, NI, NI, F, F, F, ANTIMATTER.NOT));
-		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemLegendary       , 1, NF,  48,tMultiplier[i] * 7 * 32,     0, NF, plateGem     , 9, NI, NI, F, F, F, ANTIMATTER.NOT));
+		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemFlawless        , 1, NF,  48,tMultiplier[i]     * 32,     0, NF, plateGem     , 2, NI, NI, F, F, F, ANTIMATTER.NOT));
+		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemExquisite       , 1, NF,  48,tMultiplier[i] * 3 * 32,     0, NF, plateGem     , 4, NI, NI, F, F, F, ANTIMATTER.NOT));
+		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(gemLegendary       , 1, NF,  48,tMultiplier[i] * 7 * 32,     0, NF, plateGem     , 8, NI, NI, F, F, F, ANTIMATTER.NOT));
 		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(bouleGt            , 1, NF,  16,tMultiplier[i] * 3 * 32,     0, NF, plateGem     , 6, NI, NI, F, F, F, ANTIMATTER.NOT));
 		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(ingotDouble        , 1, NF,  16,tMultiplier[i]     * 32,     0, NF, ingot        , 2, NI, NI, F, F, F, ANTIMATTER.NOT));
 		RM.LaserCutter  .add(new RecipeMapHandlerPrefix(ingotTriple        , 1, NF,  16,tMultiplier[i] * 2 * 32,     0, NF, ingot        , 3, NI, NI, F, F, F, ANTIMATTER.NOT));

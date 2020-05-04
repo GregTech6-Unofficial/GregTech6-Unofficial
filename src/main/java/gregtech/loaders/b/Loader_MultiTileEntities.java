@@ -1844,7 +1844,7 @@ public class Loader_MultiTileEntities implements Runnable {
 		MultiTileEntityPipeFluid.addFluidPipes(26020, 26142,         75, F, F, F, T, T, F, T, aRegistry, aWooden      , aClass, 340, MT.WoodSealed);
 		MultiTileEntityPipeFluid.addFluidPipes(26080, 26142,        200, T, F, F, F, F, T, T, aRegistry, aWooden      , aClass, MT.IronWood);
 		MultiTileEntityPipeFluid.addFluidPipes(26060, 26142,        100, T, F, F, T, F, F, T, aRegistry, aWooden      , aClass, 370, MT.Plastic);
-        MultiTileEntityPipeFluid.addFluidPipes(26070, 26142,       1200, T, F, F, T, F, F, T, aRegistry, aMachine      , aClass, 600, MT.PTFE);
+        MultiTileEntityPipeFluid.addFluidPipes(26070, 26142,       1200, T, T, F, T, F, T, T, aRegistry, aMachine     , aClass, 600, MT.PTFE);
         MultiTileEntityPipeFluid.addFluidPipes(26520, 26142,        100, T, F, F, T, F, F, F, aRegistry, aUtilWool    , aClass, 350, MT.Rubber);
 		MultiTileEntityPipeFluid.addFluidPipes(26100, 26142,        100, T, F, F, T, F, T, T, aRegistry, aMachine     , aClass, MT.Cu);
 		MultiTileEntityPipeFluid.addFluidPipes(26340, 26142,        100, T, F, F, F, F, T, T, aRegistry, aMachine     , aClass, MT.Al);
