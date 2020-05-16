@@ -2012,6 +2012,7 @@ public class Loader_MultiTileEntities implements Runnable {
 		aRegistry.add("Plates"                                              , "Untyped"                             , 32085, 32764, MultiTileEntityPlate.class                              ,                 0, 64, aUtilMetal     , null);
 		aRegistry.add("Gem Plates"                                          , "Untyped"                             , 32086, 32764, MultiTileEntityPlateGem.class                           ,                 0, 64, aUtilStone     , null);
 		aRegistry.add("Bumble Hive"                                         , "Untyped"                             , 32755, 32764, MultiTileEntityBumbleHive.class                         ,                 0, 64, aHive          , null);
+		aRegistry.add("Fluid Well"                                          , "Untyped"                             , 32699, 32764, MultiTileEntityFluidWell.class                        ,                 0, 64, aStone         , null);
 
 		for (int i = 0; i < 16; i++) {
 			ItemStack

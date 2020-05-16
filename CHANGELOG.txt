@@ -12,6 +12,8 @@ Nothing
 [FIXED]Producing too many gem plates from gems in laser cutter.
 [FIXED]Chromium production now is balanced correctly in GT manner.
 [FIXED]Polytetrafluoroethylene Pipes not able to handle acids.
+[ADDED]Sea Water Spring. Same generation stats as Water Spring.
+[ADDED]Water Well. Same generation stats as Water Spring.
 
 6.13.07:
 [FIXED]Now Titanium Niobium Carbide Steam Turbine Main Housing has the correct crafting recipe.
