@@ -892,6 +892,8 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Ionizer.addRecipe0(T, 64,   2000, FL.Hydrogen.make(50), FL.HydrogenI.make(50), ZL_IS);
 		RM.Ionizer.addRecipe0(T, 64,   2000, FL.Helium.make(50), FL.HeliumI.make(50), ZL_IS);
 
+		RM.Well.addRecipe1(T, 16,   1800, ST.tag(1), ZL_FS, MT.H2O.liquid(U*2, F), ZL_IS);
+
 		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
 			ItemStack
 					tInput = OP.dust.mat(tMaterial, 1);          if (tInput != null)       RM.Massfab.addRecipe1(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tInput, NF, tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
