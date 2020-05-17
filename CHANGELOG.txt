@@ -8,7 +8,7 @@ Nothing
 6.13.09: (Not released yet).
 Nothing
 
-6.13.08 (Not released yet).
+6.13.08:
 [FIXED]Producing too many gem plates from gems in laser cutter.
 [FIXED]Chromium production now is balanced correctly in GT manner.
 [FIXED]Polytetrafluoroethylene Pipes not able to handle acids.
