@@ -438,6 +438,20 @@ public enum FL {
     , Trichloromethane          ("trichloromethane"                                         , SIMPLE, GAS)
     , Tetrafluoroethylene       ("tetrafluoroethylene"                                      , SIMPLE, GAS)
 
+	//铂族矿物处理相关流体
+	, SolutionRichPtPa		    ("solutionrichptpa"                                         , SIMPLE, LIQUID)
+	, SolutionRichPa            ("solutionrichpa"                                           , SIMPLE, LIQUID)
+	, MoltenSodiumBisulfate     ("moltensodiumbisulfate"                                    , SIMPLE, LIQUID)
+	, RhodiumSulfideSolution    ("rhodiumsulfidesolution"                                   , SIMPLE, LIQUID)
+	, PregnantSolutionOsRu		("pregnantsolutionosru"                                     , SIMPLE, LIQUID)
+	, AbsorptionLiquidOsRu      ("absorptionliquidosru"                                     , SIMPLE, LIQUID)
+	, AbsorptionLiquidRu        ("absorptionliquidru"                                       , SIMPLE, LIQUID)
+	, RutheniumTetroxide        ("rutheniumtetroxide"                                       , SIMPLE, GAS)
+	, OsmiumTetroxide           ("osmiumtetroxide"                                          , SIMPLE, GAS)
+	, ChloroRhodiumAcid         ("chlororhodiumacid"                                        , SIMPLE, LIQUID)
+	, EvaporatedliquidOs        ("evaporatedliquidos"                                       , SIMPLE, LIQUID)
+	, SodiumOsmiumHexachloride  ("exachloride"                                              , SIMPLE, LIQUID)
+
 	// Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)

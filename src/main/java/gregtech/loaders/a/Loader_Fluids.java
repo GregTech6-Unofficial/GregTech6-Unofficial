@@ -117,11 +117,26 @@ public class Loader_Fluids implements Runnable {
 		FL.create("ethylacrylate"            , "Ethyl Acrylate"      , null                  , 1); //丙烯酸乙酯
 		FL.create("styrene"                  , "Styrene"             , null                  , 1); //苯乙烯
 		FL.create("vinylchloride"            , "Vinyl Chloride"      , null                  , 1); //氯乙烯
-		FL.create("ethyne"                   , "Ethyne"              , null                  , 1); //乙炔
+		FL.create("ethyne"                   , "Ethyne"              , null                  , 2); //乙炔
 		FL.create("photoresist"              , "Photoresist"         , null                  , 1); //光刻胶
         FL.create("monochlorodifluoromethane", "Monochlorodifluoromethane", null, 2); //二氟一氯甲烷
         FL.create("trichloromethane", "Trichloromethane", null, 2); //氯仿
         FL.create("tetrafluoroethylene", "Tetrafluoroethylene", null, 2); //四氟乙烯
+
+		//铂族矿物处理相关流体
+		FL.create("solutionrichptpa" , "Rich Platinum Palladium Solution" , null , 1);
+		FL.create("solutionrichpa" , "Rich Palladium Solution" , null , 1);
+		FL.create("moltensodiumbisulfate" , "Molten Sodium Bisulfate" , null , 1);
+		FL.create("rhodiumsulfidesolution" , "Rhodium Sulfide Solution" , null , 1);
+		FL.create("pregnantsolutionosru" , "Rich Osmium Ruthenium Pregnant Solution" , null , 1);
+		FL.create("absorptionliquidosru" , "Rich Osmium Ruthenium Absorption Liquid" , null , 1);
+		FL.create("absorptionliquidru" , "Rich Ruthenium Absorption Liquid" , null , 1);
+		FL.create("rutheniumtetroxide" , "Ruthenium Tetroxide" , null , 1);
+		FL.create("osmiumtetroxide" , "Osmium Tetroxide" , null , 1);
+		FL.create("chlororhodiumacid" , "Chlororhodium Acid" , null , 1);
+		FL.create("evaporatedliquidos" , "Rich Osmium Evaporated Liquid" , null , 1);
+		FL.create("exachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);//机翻世界第一
+
 
 		// Polymers
 		FL.create("polyvinylchloride"        , "Polyvinylchloride"   , MT.PVC                  , 1,1000,273); //聚氯乙烯
