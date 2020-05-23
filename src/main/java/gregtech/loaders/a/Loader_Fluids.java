@@ -131,8 +131,8 @@ public class Loader_Fluids implements Runnable {
 		FL.create("pregnantsolutionosru" , "Rich Osmium Ruthenium Pregnant Solution" , null , 1);
 		FL.create("absorptionliquidosru" , "Rich Osmium Ruthenium Absorption Liquid" , null , 1);
 		FL.create("absorptionliquidru" , "Rich Ruthenium Absorption Liquid" , null , 1);
-		FL.create("rutheniumtetroxide" , "Ruthenium Tetroxide" , null , 1);
-		FL.create("osmiumtetroxide" , "Osmium Tetroxide" , null , 1);
+		FL.create("rutheniumtetroxide" , "Ruthenium Tetroxide" , null , 2);
+		FL.create("osmiumtetroxide" , "Osmium Tetroxide" , null , 2);
 		FL.create("chlororhodiumacid" , "Chlororhodium Acid" , null , 1);
 		FL.create("evaporatedliquidos" , "Rich Osmium Evaporated Liquid" , null , 1);
 		FL.create("exachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);//机翻世界第一
