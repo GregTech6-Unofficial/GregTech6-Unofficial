@@ -450,7 +450,7 @@ public enum FL {
 	, OsmiumTetroxide           ("osmiumtetroxide"                                          , SIMPLE, GAS)
 	, ChloroRhodiumAcid         ("chlororhodiumacid"                                        , SIMPLE, LIQUID)
 	, EvaporatedliquidOs        ("evaporatedliquidos"                                       , SIMPLE, LIQUID)
-	, SodiumOsmiumHexachloride  ("exachloride"                                              , SIMPLE, LIQUID)
+	, SodiumOsmiumHexachloride  ("sodiumosmiumhexachloride"                                 , SIMPLE, LIQUID)
 
 	// Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)

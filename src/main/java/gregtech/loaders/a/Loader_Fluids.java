@@ -135,7 +135,7 @@ public class Loader_Fluids implements Runnable {
 		FL.create("osmiumtetroxide" , "Osmium Tetroxide" , null , 2);
 		FL.create("chlororhodiumacid" , "Chlororhodium Acid" , null , 1);
 		FL.create("evaporatedliquidos" , "Rich Osmium Evaporated Liquid" , null , 1);
-		FL.create("exachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);//机翻世界第一
+		FL.create("sodiumosmiumhexachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);//机翻世界第一
 
 
 		// Polymers
