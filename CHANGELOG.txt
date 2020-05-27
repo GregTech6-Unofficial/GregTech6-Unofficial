@@ -1,12 +1,58 @@
 This is the Changelog for GregTech6-Unofficial
-6.13.11: (Not released yet).
+6.14.05: (Not released yet).
 Nothing
 
-6.13.10: (Not released yet).
+6.14.04: (Not released yet).
 Nothing
 
-6.13.09: (Not released yet).
-[ADDED]Draining Well. A Multiblock that drains liquid from underground.
+6.14.03: (Not released yet).
+Nothing
+
+6.14.02: (Not released yet).
+Nothing
+
+6.14.01: (Not released yet).
+[WIP]Draining Well. A Multiblock that drains liquid from underground.
+
+6.14.00: (Not released yet).
+[MERGED]Merged official GT 6.13.00
+| [NOTE] Sorry for letting this one take so long.
+| [NOTE] I got a report that Riverwater, Swampwater and Oceanwater cannot be scanned with the Thaumometer, I can not replicate that Issue though, so I guess it is either fixed or something is wrong with their Modpack.
+| [COMPAT] Netherite Plus got Compatibility now. It backports Netherite to 1.7.10. Soulfire Torch Placement by Tools, Record Shelving, Blackstone, Biomass, and the two Wood Types should all work in GregTech Stuff, also Netherite Ingots are made the Crucible way now instead of Crafting Debris with Gold Ingots. https://www.curseforge.com/minecraft/mc-mods/netheriteplus
+| [FIXED] Seems like QwertTech might have messed up the Recipes for putting Planks in a Bathing Pot to get Treated Wood. This Issue might be fixed now for Vanilla Planks.
+| [FIXED] The GT6 Axe was still slowed down on my end, when TreeCapitator was actually installed, resulting in a Double Slowdown.
+| [FIXED] Heat Exchangers and Diesel Motors were wasting Fuel in certain Situations. Typically when they were operated while constantly out of Fuel.
+| [FIXED] Failing to Load Save Files in Singleplayer when you already loaded another World before.
+| [FIXED] Pam's Harvestcraft Fishtrap Bait Recipe for Mixing Bowl had a lower amount of Output than intended.
+| [FIXED] Thaumcraft Golems were not chopping GT6 Logs, because it checks for the wrong OreDict String, and because it checks for Block IDs using Block Objects which is kinda screwed up, so I had to fix that too.
+| [FIXED] 7 Bits are definitely not enough to store Numbers that can go up to 12 Billion. Fusion Reactor Start Energy is now properly saved when unloaded.
+| [FIXED] Terrafirmacraft Plus not being detected as Terrafirmacraft.
+| [FIXED] Clay Ore that comes from Hematite Bedrock Drilling is now processable.
+| [FIXED] Some Ars Magica Unification things.
+| [FIXED] The way I overrode the Railcraft Plate Names was kinda jank so I made it use the GregTech Language File now.
+| [FIXED] JABBA Dollys can no longer pick up GT6 Shelves. Somehow they were still able to be picked up even though I prevented them from working on GT Blocks as a whole, ages ago.
+| [FIXED] Infinite Items Glitch caused by InvTweaks making 111 Stacks and NEI keeping those at an Infinite Level, causing Infinite Item Duplication, if a Stack with higher than its custom Maximum Size enters a GT6 GUI Slot, while the GUI is being kept open. Now if that happens I will just cap the Stacksize at 64, potentially deleting Items, but that is what you get for InvTweaks being screwed up.
+| [CHANGED] When Machines can process multiple Items in a row in one go, they wont process more than a Minutes worth of Stuff at a time, assuming maximum Power Input. This applies to things like the Crusher, Sifter, Compressor, Squeezer, Electrolyzer and Centrifuge for example.
+| [CHANGED] Bath Recipes that have an Output Stacksize of more than 1 now have their Outputs spread over the 6 Output Slots. This should make it easier to parallel process Ores in a Multiblock Bath. (I may or may not have slightly buffed the Outputs of some Ore Recipes too)
+| [CHANGED] Blastproofness Tooltip now also mentions Strong Dynamite Proofness and doesn't stop at TNT-Proof anymore.
+| [CHANGED] NEI Fuel Lists are now no longer listing the confusing and irrelevant EU/t Value.
+| [CHANGED] More Reactor Test Stuffs from Erik3003.
+| [CHANGED] Crucibles now glow when they are within 100 Kelvin of melting down.
+| [ADDED] Netherite things, such as Crucibles, Burning Boxes and all the Shelf Stuff. The Crucible Tier is same as Meteoric Steel. The good Netherite Tools are made by bathing Diamond in molten Netherite. The bad Netherite Tools are, well, not that good. Ancient Debris does generate in the Nether now as rare small Ore.
+| [ADDED] Infinite Bedrock Veins for Ancient Debris in the Nether. Relatively high Probability compared to all other Bedrock Veins. Will also exist without Netherrite Plus.
+| [ADDED] Ancient Debris aka "Netherite Scraps" can now be used in the Massfabricator to make liquid Enderpearl. Which then can be used in a Replicator to make it into an actual Enderpearl. Dont ask me what sense it makes, the Massfabricator does it, not me.
+| [ADDED] The HV Lightning Processor can be used to turn Blocks of Solid Netherite combined with a few other Ingredients into Netherstars.
+| [ADDED] Uranium Hexaflouride Processing Chain by Erik3003. And fixed by Greg, because the Maths of the Recipes were "Perfectly Balanced without Exploits", except for the obvious dupes of every single Recipe added.
+| [ADDED] Ownership Reset Config for people who locked themselves out of Stuff like Mechanical Safes in SinglePlayer.
+| [ADDED] Small Cinnabar Ore to the Nether.
+| [ADDED] Ars Magica Chimerite Ore when it is installed.
+| [ADDED] Steam can now be put in Chem Tubes.
+| [ADDED]
+| Erik3003s Nuclear Reactor changes made it into this Version.
+| He wrote a PDF as a Guide too, which I linked on the Downloads Page, and also here: https://gregtech.mechaenetia.com/1.7.10/gt6fission.pdf
+
+
+
 
 6.13.08:
 [FIXED]Producing too many gem plates from gems in the laser cutter.
