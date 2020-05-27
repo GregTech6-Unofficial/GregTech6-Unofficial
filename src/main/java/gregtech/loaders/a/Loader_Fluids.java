@@ -123,7 +123,7 @@ public class Loader_Fluids implements Runnable {
         FL.create("trichloromethane", "Trichloromethane", null, 2); //氯仿
         FL.create("tetrafluoroethylene", "Tetrafluoroethylene", null, 2); //四氟乙烯
 
-		//铂族矿物处理相关流体
+		// Platinum Family Metal processing related fluids
 		FL.create("solutionrichptpa" , "Rich Platinum Palladium Solution" , null , 1);
 		FL.create("solutionrichpa" , "Rich Palladium Solution" , null , 1);
 		FL.create("moltensodiumbisulfate" , "Molten Sodium Bisulfate" , null , 1);
@@ -135,7 +135,7 @@ public class Loader_Fluids implements Runnable {
 		FL.create("osmiumtetroxide" , "Osmium Tetroxide" , null , 2);
 		FL.create("chlororhodiumacid" , "Chlororhodium Acid" , null , 1);
 		FL.create("evaporatedliquidos" , "Rich Osmium Evaporated Liquid" , null , 1);
-		FL.create("sodiumosmiumhexachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);//机翻世界第一
+		FL.create("sodiumosmiumhexachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);
 
 
 		// Polymers

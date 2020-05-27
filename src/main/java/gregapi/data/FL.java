@@ -450,7 +450,7 @@ public enum FL {
     , Trichloromethane          ("trichloromethane"                                         , SIMPLE, GAS)
     , Tetrafluoroethylene       ("tetrafluoroethylene"                                      , SIMPLE, GAS)
 
-	//铂族矿物处理相关流体
+	// Platinum Family Metal processing related fluids
 	, SolutionRichPtPa		    ("solutionrichptpa"                                         , SIMPLE, LIQUID)
 	, SolutionRichPa            ("solutionrichpa"                                           , SIMPLE, LIQUID)
 	, MoltenSodiumBisulfate     ("moltensodiumbisulfate"                                    , SIMPLE, LIQUID)
