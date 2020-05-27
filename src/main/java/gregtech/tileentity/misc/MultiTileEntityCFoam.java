@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -30,6 +30,7 @@ import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnPlaced;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnRegistration;
 import gregapi.block.multitileentity.MultiTileEntityContainer;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
+import gregapi.data.CS.BlocksGT;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
 import gregapi.old.Textures;
@@ -56,7 +57,7 @@ public class MultiTileEntityCFoam extends TileEntityBase07Paintable implements I
 		super.readFromNBT2(aNBT);
 		if (aNBT.hasKey(NBT_FOAMDRIED)) mFoamDried = aNBT.getBoolean(NBT_FOAMDRIED);
 		if (aNBT.hasKey(NBT_OWNABLE)) mOwnable = aNBT.getBoolean(NBT_OWNABLE);
-		if (aNBT.hasKey(NBT_OWNER)) mOwner = UUID.fromString(aNBT.getString(NBT_OWNER));
+		if (aNBT.hasKey(NBT_OWNER) && !OWNERSHIP_RESET) mOwner = UUID.fromString(aNBT.getString(NBT_OWNER));
 	}
 	
 	@Override
@@ -105,7 +106,7 @@ public class MultiTileEntityCFoam extends TileEntityBase07Paintable implements I
 	
 	@Override
 	public boolean onPlaced(ItemStack aStack, EntityPlayer aPlayer, MultiTileEntityContainer aMTEContainer, World aWorld, int aX, int aY, int aZ, byte aSide, float aHitX, float aHitY, float aHitZ) {
-		if (mOwnable && aPlayer != null) mOwner = aPlayer.getUniqueID();
+		if (mOwnable && aPlayer != null && !OWNERSHIP_RESET) mOwner = aPlayer.getUniqueID();
 		return T;
 	}
 	
@@ -133,7 +134,8 @@ public class MultiTileEntityCFoam extends TileEntityBase07Paintable implements I
 	
 	@Override public int getLightOpacity() {return mFoamDried ? LIGHT_OPACITY_MAX : LIGHT_OPACITY_WATER;}
 	
-	@Override public float getExplosionResistance2() {return mFoamDried ? 24 : 6;}
+	@Override public float getBlockHardness()        {return (mFoamDried?BlocksGT.CFoam:BlocksGT.CFoamFresh).getBlockHardness(worldObj, xCoord, yCoord, zCoord);}
+	@Override public float getExplosionResistance2() {return (mFoamDried?BlocksGT.CFoam:BlocksGT.CFoamFresh).getExplosionResistance(null);}
 	
 	@Override public byte getVisualData() {return (byte)((mFoamDried ? 1 : 0)|(mOwnable ? 2 : 0));}
 	@Override public void setVisualData(byte aData) {mFoamDried = ((aData & 1) != 0); mOwnable = ((aData & 2) != 0);}

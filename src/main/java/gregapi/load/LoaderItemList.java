@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -364,6 +364,7 @@ public class LoaderItemList implements Runnable {
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.ReC, "reactorcraft_block_fluoriteore"  , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.ReC, "reactorcraft_block_ore"          , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.ElC, "electricraft_block_ore"          , null));
+		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.AA, "blockMisc"                        , null));
 		
 		
 		IL.Bottle_Empty                         .set(ST.make(Items.glass_bottle, 1, 0));
@@ -710,6 +711,17 @@ public class LoaderItemList implements Runnable {
 		IL.ENVM_Bottle_Water_Cold               .set(ST.make(MD.ENVM, "coldWaterBottle"                     , 1, 0));
 		IL.ENVM_Bottle_Water_Dirty              .set(ST.make(MD.ENVM, "badWaterBottle"                      , 1, 0));
 		IL.ENVM_Bottle_Water_Salty              .set(ST.make(MD.ENVM, "saltWaterBottle"                     , 1, 0));
+		
+		
+		IL.NePl_Torch                           .set(ST.make(MD.NePl, "SoulTorch"                           , 1, 0));
+		IL.NePl_Blackstone                      .set(ST.make(MD.NePl, "Blackstone"                          , 1, 0), OP.stone.dat(MT.Blackstone));
+		IL.NePl_Blackstone_Bricks               .set(ST.make(MD.NePl, "PolishedBlackstoneBricks"            , 1, 0), OP.stone.dat(MT.Blackstone));
+		IL.NePl_Blackstone_Polished             .set(ST.make(MD.NePl, "PolishedBlackstone"                  , 1, 0), OP.stone.dat(MT.Blackstone));
+		IL.NePl_Basalt                          .set(ST.make(MD.NePl, "Basalt"                              , 1, 0), OP.stone.dat(MT.Basalt));
+		IL.NePl_Basalt_Polished                 .set(ST.make(MD.NePl, "PolishedBasalt"                      , 1, 0), OP.stone.dat(MT.Basalt));
+		IL.NePl_SoulSoil                        .set(ST.make(MD.NePl, "SoulSoil"                            , 1, 0), null, OD.soulsand);
+		IL.NePl_Quartz_Bricks                   .set(ST.make(MD.NePl, "QuartzBricks"                        , 1, 0), new OreDictItemData(MT.NetherQuartz, U*4));
+		
 		
 		IL.EtFu_Chorus_Fruit                    .set(ST.make(MD.EtFu, "chorus_fruit"                        , 1, 0));
 		IL.EtFu_Chorus_Popped                   .set(ST.make(MD.EtFu, "chorus_fruit_popped"                 , 1, 0));

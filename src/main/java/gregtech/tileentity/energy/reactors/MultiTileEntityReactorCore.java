@@ -30,6 +30,7 @@ import gregapi.data.CS.SFX;
 import gregapi.data.FL;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
+import gregapi.data.MT;
 import gregapi.fluid.FluidTankGT;
 import gregapi.item.IItemReactorRod;
 import gregapi.tileentity.ITileEntityFunnelAccessible;
@@ -54,7 +55,8 @@ import net.minecraftforge.fluids.IFluidTank;
  * @author Gregorius Techneticies
  */
 public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingDouble implements ITileEntityServerTickPost, IFluidHandler, ITileEntityTapAccessible, ITileEntityFunnelAccessible, ITileEntityRunningActively, ITileEntitySwitchableOnOff, IMTE_GetCollisionBoundingBoxFromPool, IMTE_OnEntityCollidedWithBlock {
-	public int mNeutronCounts[] = new int[] {0,0,0,0}, oNeutronCounts[] = new int[] {0,0,0,0};
+	public int[] mNeutronCounts = new int[]{0, 0, 0, 0};
+	public int[] oNeutronCounts = new int[]{0, 0, 0, 0};
 	public long mEnergy = 0, oEnergy = 0;
 	public byte mMode = 0;
 	public boolean mRunning = F, mStopped = F;
@@ -97,14 +99,20 @@ public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingD
 	}
 	
 	static {
-		LH.add("gt.tooltip.reactorcore.1", "Primary Facing Emits Hot Liquid.");
-		LH.add("gt.tooltip.reactorcore.2", "Secondary Facing Emits Liquid when over half full.");
+		LH.add("gt.tooltip.reactorcore.1", "Reactor Slots can be accessed from the Top and Bottom Side.");
+		LH.add("gt.tooltip.reactorcore.2", "Accessing a reactor slot is only possible when the slot or the reactor is off.");
+		LH.add("gt.tooltip.reactorcore.3", "Primary Facing Emits Hot Coolant.");
+		LH.add("gt.tooltip.reactorcore.4", "Secondary Facing Emits Cold Coolant when over half full.");
+		LH.add("gt.tooltip.reactorcore.5", "Choice of Coolant can have special Effects.");
 	}
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		aList.add(Chat.CYAN     + LH.get("gt.tooltip.reactorcore.1"));
 		aList.add(Chat.CYAN     + LH.get("gt.tooltip.reactorcore.2"));
+		aList.add(Chat.CYAN     + LH.get("gt.tooltip.reactorcore.3"));
+		aList.add(Chat.CYAN     + LH.get("gt.tooltip.reactorcore.4"));
+		aList.add(Chat.GREEN    + LH.get("gt.tooltip.reactorcore.5"));
 		aList.add(Chat.ORANGE   + LH.get(LH.NO_GUI_FUNNEL_TAP_TO_TANK));
 		aList.add(Chat.DRED     + LH.get(LH.HAZARD_CONTACT));
 		aList.add(Chat.DGRAY    + LH.get(LH.TOOL_TO_TAKE_PINCERS));
@@ -149,7 +157,11 @@ public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingD
 	// 1 and 3 are at SIDE_Z_POS  2|0 2|0   |0 2
 	// 0 and 1 are at SIDE_X_NEG  3|1 3|1   v1 3
 	// 2 and 3 are at SIDE_X_POS    0 2     Z+
-	
+
+	public boolean isReactorRodModerated(int aSlot) {
+		return false;
+	}
+
 	public int getReactorRodNeutronEmission(int aSlot) {
 		return 0;
 	}
@@ -158,7 +170,7 @@ public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingD
 		return F;
 	}
 	
-	public int getReactorRodNeutronReflection(int aSlot, int aNeutrons) {
+	public int getReactorRodNeutronReflection(int aSlot, int aNeutrons, boolean aModerated) {
 		return 0;
 	}
 	
@@ -232,11 +244,22 @@ public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingD
 	
 	@Override public byte getVisualData() {return (byte)(mStopped?mRunning?mMode|48:mMode|32:mRunning?mMode|16:mMode);}
 	@Override public byte getDefaultSide() {return SIDE_BOTTOM;}
+	@Override public byte getDefaultSecondSide() {return SIDE_BOTTOM;}
 	@Override public boolean[] getValidSides() {return SIDES_VALID;}
 	
 	@Override
 	protected IFluidTank getFluidTankFillable2(byte aSide, FluidStack aFluidToFill) {
-		return FL.Coolant_IC2.is(aFluidToFill) || FL.DistW.is(aFluidToFill) ? mTanks[0] : null; // TODO MULTIPLE COOLANT TYPES
+		return FL.Coolant_IC2.is(aFluidToFill) ||
+				FL.distw(aFluidToFill) ||
+				FL.Thorium_Salt.is(aFluidToFill) ||
+				MT.Sn.mLiquid.isFluidEqual(aFluidToFill) ||
+				MT.Na.mLiquid.isFluidEqual(aFluidToFill) ||
+				MT.HDO.mLiquid.isFluidEqual(aFluidToFill) ||
+				MT.D2O.mLiquid.isFluidEqual(aFluidToFill) ||
+				MT.T2O.mLiquid.isFluidEqual(aFluidToFill) ||
+				MT.LiCl.mLiquid.isFluidEqual(aFluidToFill) ||
+				MT.He.mGas.isFluidEqual(aFluidToFill) ||
+				MT.CO2.mGas.isFluidEqual(aFluidToFill) ? mTanks[0] : null;
 	}
 	
 	@Override
@@ -248,14 +271,25 @@ public abstract class MultiTileEntityReactorCore extends TileEntityBase10FacingD
 	protected IFluidTank[] getFluidTanks2(byte aSide) {
 		return mTanks;
 	}
-	
+
+
 	@Override
 	public int funnelFill(byte aSide, FluidStack aFluid, boolean aDoFill) {
-		if (!(FL.Coolant_IC2.is(aFluid) || !FL.DistW.is(aFluid))) return 0; // TODO MULTIPLE COOLANT TYPES
+		if (!(FL.Coolant_IC2.is(aFluid) ||
+				FL.distw(aFluid) ||
+				FL.Thorium_Salt.is(aFluid) ||
+				MT.Sn.mLiquid.isFluidEqual(aFluid) ||
+				MT.Na.mLiquid.isFluidEqual(aFluid) ||
+				MT.HDO.mLiquid.isFluidEqual(aFluid) ||
+				MT.D2O.mLiquid.isFluidEqual(aFluid) ||
+				MT.T2O.mLiquid.isFluidEqual(aFluid) ||
+				MT.LiCl.mLiquid.isFluidEqual(aFluid) ||
+				MT.He.mGas.isFluidEqual(aFluid) ||
+				MT.CO2.mGas.isFluidEqual(aFluid))) return 0;
 		updateInventory();
 		return mTanks[0].fill(aFluid, aDoFill);
 	}
-	
+
 	@Override
 	public FluidStack tapDrain(byte aSide, int aMaxDrain, boolean aDoDrain) {
 		updateInventory();

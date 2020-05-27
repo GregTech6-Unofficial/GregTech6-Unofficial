@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -50,7 +50,6 @@ import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -182,26 +181,26 @@ public class MultiItemTool extends MultiItem implements IItemGTHandTool, IItemGT
 	/**
 	 * Called by the Block Harvesting Event within the GT_Proxy
 	 */
-	public void onHarvestBlockEvent(ArrayList<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY, int aZ, byte aMetaData, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent) {
-		if (aBlock instanceof BlockTorch || IL.GC_Torch_Glowstone.equal(aBlock) || IL.AETHER_Torch_Ambrosium.equal(aBlock) || (aMetaData == 1 && IL.TC_Block_Air.equal(aBlock))) return;
+	public void onHarvestBlockEvent(ArrayList<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY, int aZ, byte aMeta, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent) {
+		if (ST.torch(aBlock, aMeta)) return;
 		IToolStats tStats = getToolStats(aStack);
-		if (isItemStackUsable(aStack) && getDigSpeed(aStack, aBlock, aMetaData) > 0) {
-			int tDamage = tStats.convertBlockDrops(aDrops, aStack, aPlayer, aBlock, (getToolMaxDamage(aStack) - getToolDamage(aStack)) / tStats.getToolDamagePerDropConversion(), aX, aY, aZ, aMetaData, aFortune, aSilkTouch, aEvent);
+		if (isItemStackUsable(aStack) && getDigSpeed(aStack, aBlock, aMeta) > 0) {
+			int tDamage = tStats.convertBlockDrops(aDrops, aStack, aPlayer, aBlock, (getToolMaxDamage(aStack) - getToolDamage(aStack)) / tStats.getToolDamagePerDropConversion(), aX, aY, aZ, aMeta, aFortune, aSilkTouch, aEvent);
 			if (WD.dimBTL(aPlayer.worldObj) && !getPrimaryMaterial(aStack).contains(TD.Properties.BETWEENLANDS)) tDamage *= 4;
 			if (!UT.Entities.hasInfiniteItems(aPlayer)) doDamage(aStack, tDamage * tStats.getToolDamagePerDropConversion(), aPlayer);
 		}
 	}
 	
-	public boolean canCollectDropsDirectly(ItemStack aStack, Block aBlock, byte aMetaData) {
-		if (aBlock instanceof BlockTorch || IL.GC_Torch_Glowstone.equal(aBlock) || IL.AETHER_Torch_Ambrosium.equal(aBlock) || (aMetaData == 1 && IL.TC_Block_Air.equal(aBlock))) return T;
+	public boolean canCollectDropsDirectly(ItemStack aStack, Block aBlock, byte aMeta) {
+		if (ST.torch(aBlock, aMeta)) return T;
 		IToolStats tStats = getToolStats(aStack);
-		return (tStats.canCollect() || getPrimaryMaterial(aStack).contains(TD.Properties.MAGNETIC_ACTIVE)) && isItemStackUsable(aStack) && getDigSpeed(aStack, aBlock, aMetaData) > 0;
+		return (tStats.canCollect() || getPrimaryMaterial(aStack).contains(TD.Properties.MAGNETIC_ACTIVE)) && isItemStackUsable(aStack) && getDigSpeed(aStack, aBlock, aMeta) > 0;
 	}
 	
-	public float onBlockBreakSpeedEvent(float aDefault, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY, int aZ, byte aMetaData, PlayerEvent.BreakSpeed aEvent) {
-		if (aBlock instanceof BlockTorch || IL.GC_Torch_Glowstone.equal(aBlock) || IL.AETHER_Torch_Ambrosium.equal(aBlock) || (aMetaData == 1 && IL.TC_Block_Air.equal(aBlock))) return Float.MAX_VALUE;
+	public float onBlockBreakSpeedEvent(float aDefault, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY, int aZ, byte aMeta, PlayerEvent.BreakSpeed aEvent) {
+		if (ST.torch(aBlock, aMeta)) return Float.MAX_VALUE;
 		IToolStats tStats = getToolStats(aStack);
-		return tStats == null ? aDefault : tStats.getMiningSpeed(aBlock, aMetaData, aDefault, aPlayer, aPlayer.worldObj, aX, aY, aZ);
+		return tStats == null ? aDefault : tStats.getMiningSpeed(aBlock, aMeta, aDefault, aPlayer, aPlayer.worldObj, aX, aY, aZ);
 	}
 	
 	@Override
@@ -221,7 +220,7 @@ public class MultiItemTool extends MultiItem implements IItemGTHandTool, IItemGT
 				if (tDamage + tMagicDamage > 0) {
 					boolean tCriticalHit = aPlayer.fallDistance > 0 && !aPlayer.onGround && !aPlayer.isOnLadder() && !aPlayer.isInWater() && !aPlayer.isPotionActive(Potion.blindness) && aPlayer.ridingEntity == null && aEntity instanceof EntityLivingBase;
 					if (tCriticalHit && tDamage > 0) tDamage *= 1.5;
-					float tFullDamage = (MD.TFC.mLoaded ? (tDamage+tMagicDamage) * 10 : (tDamage+tMagicDamage));
+					float tFullDamage = (MD.TFC.mLoaded || MD.TFCP.mLoaded ? (tDamage+tMagicDamage) * 80 : (tDamage+tMagicDamage));
 					// Avoiding the Betweenlands Damage Cap in a fair way. Only Betweenlands Materials will avoid it. And maybe some super Lategame Items.
 					if (MD.BTL.mLoaded && aEntity.getClass().getName().startsWith("thebetweenlands") && getPrimaryMaterial(aStack).contains(TD.Properties.BETWEENLANDS)) {
 						float tDamageToDeal = tFullDamage;
@@ -287,7 +286,7 @@ public class MultiItemTool extends MultiItem implements IItemGTHandTool, IItemGT
 			aList.add(LH.Chat.WHITE + "Durability: " + LH.Chat.GREEN + (tMaxDamage - tDamage) + " / " + tMaxDamage + LH.Chat.GRAY);
 			aList.add(LH.Chat.WHITE + tMaterial.getLocal() + LH.Chat.YELLOW + " lvl " + getHarvestLevel(aStack, "") + LH.Chat.GRAY);
 			float tCombat = getToolCombatDamage(aStack);
-			aList.add(LH.Chat.WHITE + "Attack Damage: " + LH.Chat.BLUE + "+" + tCombat + LH.Chat.RED + " (= " + ((tCombat+1)/2) + " Hearts)" + LH.Chat.GRAY);
+			aList.add(LH.Chat.WHITE + "Attack Damage: " + LH.Chat.BLUE + "+" + (((MD.TFC.mLoaded || MD.TFCP.mLoaded) ? tCombat * 80 : tCombat) + LH.Chat.RED + " (= " + ((MD.TFC.mLoaded || MD.TFCP.mLoaded) ? ((tCombat+1)*40) + ")" : ((tCombat+1)/2) + " Hearts)"))  + LH.Chat.GRAY);
 			aList.add(LH.Chat.WHITE + "Mining Speed: " + LH.Chat.PINK + Math.max(Float.MIN_NORMAL, tStats.getSpeedMultiplier() * getPrimaryMaterial(aStack, MT.NULL).mToolSpeed) + LH.Chat.GRAY);
 			aList.add(LH.Chat.WHITE + "Crafting Uses: " + LH.Chat.GREEN + UT.Code.divup(getEnergyStats(aStack) == null ? tMaxDamage - tDamage : getEnergyStored(TD.Energy.EU, aStack), tStats.getToolDamagePerContainerCraft()) + LH.Chat.GRAY);
 			if (MD.BTL.mLoaded && tMaterial.contains(TD.Properties.BETWEENLANDS)) aList.add(LH.Chat.GREEN + LH.get(LH.TOOLTIP_BETWEENLANDS_RESISTANCE));
@@ -423,13 +422,13 @@ public class MultiItemTool extends MultiItem implements IItemGTHandTool, IItemGT
 	}
 	
 	@Override
-	public float getDigSpeed(ItemStack aStack, Block aBlock, int aMetaData) {
+	public float getDigSpeed(ItemStack aStack, Block aBlock, int aMeta) {
 		if (aBlock == NB || aBlock == Blocks.bedrock) return 0;
-		if (aBlock instanceof BlockTorch || IL.GC_Torch_Glowstone.equal(aBlock) || IL.AETHER_Torch_Ambrosium.equal(aBlock) || (aMetaData == 1 && IL.TC_Block_Air.equal(aBlock))) return 10;
+		if (ST.torch(aBlock, aMeta)) return 10;
 		if (!isItemStackUsable(aStack)) return 0;
 		IToolStats tStats = getToolStats(aStack);
-		if (tStats == null || Math.max(0, getHarvestLevel(aStack, "")) < aBlock.getHarvestLevel(aMetaData)) return 0;
-		return tStats.getMiningSpeed(aBlock, (byte)aMetaData) * Math.max(Float.MIN_NORMAL, tStats.getSpeedMultiplier() * getPrimaryMaterial(aStack, MT.Steel).mToolSpeed);
+		if (tStats == null || Math.max(0, getHarvestLevel(aStack, "")) < aBlock.getHarvestLevel(aMeta)) return 0;
+		return tStats.getMiningSpeed(aBlock, (byte)aMeta) * Math.max(Float.MIN_NORMAL, tStats.getSpeedMultiplier() * getPrimaryMaterial(aStack, MT.Steel).mToolSpeed);
 	}
 	
 	@Override
@@ -445,7 +444,7 @@ public class MultiItemTool extends MultiItem implements IItemGTHandTool, IItemGT
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack aStack, World aWorld, Block aBlock, int aX, int aY, int aZ, EntityLivingBase aPlayer) {
-		if (aBlock instanceof BlockTorch || IL.GC_Torch_Glowstone.equal(aBlock) || IL.AETHER_Torch_Ambrosium.equal(aBlock) || IL.TC_Block_Air.equal(aBlock)) return T;
+		if (ST.torch(aBlock)) return T;
 		if (!isItemStackUsable(aStack)) return F;
 		IToolStats tStats = getToolStats(aStack);
 		if (tStats == null) return F;

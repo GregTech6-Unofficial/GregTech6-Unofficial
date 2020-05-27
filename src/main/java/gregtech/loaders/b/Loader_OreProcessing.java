@@ -384,12 +384,39 @@ public class Loader_OreProcessing implements Runnable {
 		@Override
 		public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			if (mCondition.isTrue(aEvent.mMaterial) && aEvent.mMaterial != MT.Empty) {
-				FluidStack tFluid = aEvent.mMaterial.fluid(DEF_ENV_TEMP, mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, F);
-				ItemStack  tStack = OM.dust(aEvent.mMaterial, mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount);
-				if (tFluid == null || tFluid.amount <= 0 || FL.Error.is(tFluid)) tFluid = null;
-				if (tStack != null || tFluid != null) {
-					RM.Canner.addRecipe1(T, 16, 16, aEvent.mStack, NF, tStack==null?tFluid:NF, aEvent.mPrefix.mat(MT.Empty, 1), tStack);
-					RM.Canner.addRecipe2(T, 16, 16, tStack, aEvent.mPrefix.mat(MT.Empty, 1), tStack==null?tFluid:NF, NF, aEvent.mStack);
+				ItemStack tStack = OM.dust(aEvent.mMaterial, mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount);
+				FluidStack tFluid1 = aEvent.mMaterial.fluid(DEF_ENV_TEMP, mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, F);
+				FluidStack tFluid2 = aEvent.mMaterial.fluid(DEF_ENV_TEMP, mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, T);
+				
+				if (tFluid1 == null || tFluid1.amount <= 0 || FL.Error.is(tFluid1)) {
+					tFluid1 = aEvent.mMaterial.liquid(mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, F);
+					tFluid2 = aEvent.mMaterial.liquid(mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, T);
+				}
+				if (tFluid1 == null || tFluid1.amount <= 0 || FL.Error.is(tFluid1)) {
+					tFluid1 = aEvent.mMaterial.gas   (mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, F);
+					tFluid2 = aEvent.mMaterial.gas   (mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, T);
+				}
+				if (tFluid1 == null || tFluid1.amount <= 0 || FL.Error.is(tFluid1)) {
+					tFluid1 = aEvent.mMaterial.plasma(mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, F);
+					tFluid2 = aEvent.mMaterial.plasma(mMaterialAmount<0?aEvent.mPrefix.mAmount:mMaterialAmount, T);
+				}
+				if (tFluid1 == null || tFluid1.amount <= 0 || FL.Error.is(tFluid1)) {
+					tFluid1 = null;
+					tFluid2 = null;
+				}
+				
+				if (tStack != null) {
+					RM.Canner.addRecipe2(T, 16, 16, tStack, aEvent.mPrefix.mat(MT.Empty, 1), aEvent.mStack);
+					if (tFluid1 == null || tFluid2 == null || aEvent.mMaterial.mMeltingPoint > DEF_ENV_TEMP) {
+					RM.Canner.addRecipe1(T, 16, 16, aEvent.mStack, aEvent.mPrefix.mat(MT.Empty, 1), tStack);
+					}
+				}
+				
+				if (tFluid1 != null && tFluid2 != null) {
+					RM.Canner.addRecipe1(T, 16, 16, aEvent.mPrefix.mat(MT.Empty, 1), tFluid2, NF, aEvent.mStack);
+					if (tStack == null || aEvent.mMaterial.mMeltingPoint <= DEF_ENV_TEMP) {
+					RM.Canner.addRecipe1(T, 16, 16, aEvent.mStack, NF, tFluid1, aEvent.mPrefix.mat(MT.Empty, 1));
+					}
 				}
 			}
 		}

@@ -224,7 +224,7 @@ public class MultiTileEntityFusionReactor extends TileEntityBase10MultiBlockMach
 	public DelegatorTileEntity<TileEntity> getItemOutputTarget(byte aSide) {
 		return null;
 	}
-	
+
 	@Override public DelegatorTileEntity<IInventory> getItemInputTarget(byte aSide) {return null;}
 	@Override public DelegatorTileEntity<IFluidHandler> getFluidInputTarget(byte aSide) {return null;}
 	

@@ -35,7 +35,6 @@ import gregapi.oredict.OreDictMaterial;
 import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
-import gregtech.blocks.tool.BlockBarsTungstenSteel;
 import gregtech.items.behaviors.Behavior_DataStorage;
 import gregtech.items.behaviors.Behavior_DataStorage16;
 import net.minecraft.init.Blocks;
@@ -936,6 +935,5 @@ public class MultiItemTechnological extends MultiItemRandom {
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_2.get(1)), (byte)54);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_3.get(1)), (byte)54);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_4.get(1)), (byte)54);
-
-    }
+	}
 }

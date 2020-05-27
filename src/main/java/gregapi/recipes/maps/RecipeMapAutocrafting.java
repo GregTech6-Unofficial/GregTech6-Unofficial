@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -27,7 +27,7 @@ import java.util.List;
 import gregapi.code.ArrayListNoNulls;
 import gregapi.data.IL;
 import gregapi.data.LH;
-import gregapi.gui.Slot_Normal;
+import gregapi.gui.Slot_Base;
 import gregapi.gui.Slot_Whitelist;
 import gregapi.item.IItemGTHandTool;
 import gregapi.oredict.OreDictManager;
@@ -55,8 +55,8 @@ import net.minecraftforge.fluids.FluidStack;
  * @author Gregorius Techneticies
  */
 public class RecipeMapAutocrafting extends RecipeMap {
-	public RecipeMapAutocrafting(Collection<Recipe> aRecipeList, String aUnlocalizedName, String aNameLocal, String aNameNEI, long aProgressBarDirection, long aProgressBarAmount, String aNEIGUIPath, long aInputItemsCount, long aOutputItemsCount, long aMinimalInputItems, long aInputFluidCount, long aOutputFluidCount, long aMinimalInputFluids, long aMinimalInputs, long aPower, String aNEISpecialValuePre, long aNEISpecialValueMultiplier, String aNEISpecialValuePost, boolean aShowVoltageAmperageInNEI, boolean aNEIAllowed, boolean aConfigAllowed, boolean aNeedsOutputs) {
-		super(aRecipeList, aUnlocalizedName, aNameLocal, aNameNEI, aProgressBarDirection, aProgressBarAmount, aNEIGUIPath, aInputItemsCount, aOutputItemsCount, aMinimalInputItems, aInputFluidCount, aOutputFluidCount, aMinimalInputFluids, aMinimalInputs, aPower, aNEISpecialValuePre, aNEISpecialValueMultiplier, aNEISpecialValuePost, aShowVoltageAmperageInNEI, aNEIAllowed, aConfigAllowed, aNeedsOutputs);
+	public RecipeMapAutocrafting(Collection<Recipe> aRecipeList, String aUnlocalizedName, String aNameLocal, String aNameNEI, long aProgressBarDirection, long aProgressBarAmount, String aNEIGUIPath, long aInputItemsCount, long aOutputItemsCount, long aMinimalInputItems, long aInputFluidCount, long aOutputFluidCount, long aMinimalInputFluids, long aMinimalInputs, long aPower, String aNEISpecialValuePre, long aNEISpecialValueMultiplier, String aNEISpecialValuePost, boolean aShowVoltageAmperageInNEI, boolean aNEIAllowed, boolean aConfigAllowed, boolean aNeedsOutputs, boolean aCombinePower) {
+		super(aRecipeList, aUnlocalizedName, aNameLocal, aNameNEI, aProgressBarDirection, aProgressBarAmount, aNEIGUIPath, aInputItemsCount, aOutputItemsCount, aMinimalInputItems, aInputFluidCount, aOutputFluidCount, aMinimalInputFluids, aMinimalInputs, aPower, aNEISpecialValuePre, aNEISpecialValueMultiplier, aNEISpecialValuePost, aShowVoltageAmperageInNEI, aNEIAllowed, aConfigAllowed, aNeedsOutputs, aCombinePower);
 	}
 	
 	public static final List<IRecipe> ALLOWED_RECIPES = new ArrayListNoNulls<>();
@@ -163,7 +163,7 @@ public class RecipeMapAutocrafting extends RecipeMap {
 	}
 	
 	@Override
-	public Slot_Normal getSpecialSlot(ITileEntityInventoryGUI aInventory, int aIndex, int aX, int aY) {
+	public Slot_Base getSpecialSlot(ITileEntityInventoryGUI aInventory, int aIndex, int aX, int aY) {
 		return new Slot_Whitelist(aInventory, aIndex, aX, aY, OreDictManager.getOres("gt:autocrafterblueprintitem", F).toArray(ZL_IS)).setTooltip(LH.AUTOCRAFTING_INSERT_BLUEPRINT, LH.Chat.WHITE);
 	}
 }

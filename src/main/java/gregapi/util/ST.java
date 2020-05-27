@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -94,16 +94,27 @@ public class ST {
 	public static boolean equal (ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {return aStack1 != null && aStack2 != null && equal_(aStack1, aStack2, aIgnoreNBT);}
 	public static boolean equal_(ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {return item_(aStack1) == item_(aStack2) && equal(meta_(aStack1), meta_(aStack2)) && (aIgnoreNBT || (((nbt_(aStack1) == null) == (nbt_(aStack2) == null)) && (nbt_(aStack1) == null || nbt_(aStack1).equals(nbt_(aStack2)))));}
 	
-	public static boolean equal (ItemStack aStack, Item  aItem ) {return aStack != null && aItem  != null && equal_(aStack, aItem );}
-	public static boolean equal (ItemStack aStack, Block aBlock) {return aStack != null && aBlock != null && equal_(aStack, aBlock);}
-	public static boolean equal_(ItemStack aStack, Item  aItem ) {return item_ (aStack) == aItem ;}
-	public static boolean equal_(ItemStack aStack, Block aBlock) {return block_(aStack) == aBlock;}
-	public static boolean equal (ItemStack aStack, Item  aItem , long aMeta) {return aStack != null && aItem  != null && equal_(aStack, aItem , aMeta);}
-	public static boolean equal (ItemStack aStack, Block aBlock, long aMeta) {return aStack != null && aBlock != null && equal_(aStack, aBlock, aMeta);}
-	public static boolean equal_(ItemStack aStack, Item  aItem , long aMeta) {return equal(meta_(aStack), aMeta) && item_ (aStack) == aItem ;}
-	public static boolean equal_(ItemStack aStack, Block aBlock, long aMeta) {return equal(meta_(aStack), aMeta) && block_(aStack) == aBlock;}
+	public static boolean equal (ItemStack aStack, Item  aItem                             ) {return aStack != null && aItem  != null && equal_(aStack, aItem );}
+	public static boolean equal (ItemStack aStack, Block aBlock                            ) {return aStack != null && aBlock != null && equal_(aStack, aBlock);}
+	public static boolean equal_(ItemStack aStack, Item  aItem                             ) {return item_ (aStack) == aItem ;}
+	public static boolean equal_(ItemStack aStack, Block aBlock                            ) {return block_(aStack) == aBlock;}
+	public static boolean equal (ItemStack aStack, Item  aItem                 , long aMeta) {return aStack != null && aItem  != null && equal_(aStack, aItem , aMeta);}
+	public static boolean equal (ItemStack aStack, Block aBlock                , long aMeta) {return aStack != null && aBlock != null && equal_(aStack, aBlock, aMeta);}
+	public static boolean equal_(ItemStack aStack, Item  aItem                 , long aMeta) {return equal(meta_(aStack), aMeta) && item_ (aStack) == aItem ;}
+	public static boolean equal_(ItemStack aStack, Block aBlock                , long aMeta) {return equal(meta_(aStack), aMeta) && block_(aStack) == aBlock;}
 	public static boolean equal (ItemStack aStack, ModData aModID, String aItem            ) {return equal(aStack, GameRegistry.findItem(aModID.mID, aItem));}
 	public static boolean equal (ItemStack aStack, ModData aModID, String aItem, long aMeta) {return equal(aStack, GameRegistry.findItem(aModID.mID, aItem), aMeta);}
+	
+	public static boolean equal (ItemStack aStack, Item  aItem                             , boolean aAllowNBT) {return aStack != null && aItem  != null && equal_(aStack, aItem , aAllowNBT);}
+	public static boolean equal (ItemStack aStack, Block aBlock                            , boolean aAllowNBT) {return aStack != null && aBlock != null && equal_(aStack, aBlock, aAllowNBT);}
+	public static boolean equal_(ItemStack aStack, Item  aItem                             , boolean aAllowNBT) {return item_ (aStack) == aItem  && aAllowNBT == aStack.hasTagCompound();}
+	public static boolean equal_(ItemStack aStack, Block aBlock                            , boolean aAllowNBT) {return block_(aStack) == aBlock && aAllowNBT == aStack.hasTagCompound();}
+	public static boolean equal (ItemStack aStack, Item  aItem                 , long aMeta, boolean aAllowNBT) {return aStack != null && aItem  != null && equal_(aStack, aItem , aMeta, aAllowNBT);}
+	public static boolean equal (ItemStack aStack, Block aBlock                , long aMeta, boolean aAllowNBT) {return aStack != null && aBlock != null && equal_(aStack, aBlock, aMeta, aAllowNBT);}
+	public static boolean equal_(ItemStack aStack, Item  aItem                 , long aMeta, boolean aAllowNBT) {return equal(meta_(aStack), aMeta) && item_ (aStack) == aItem  && aAllowNBT == aStack.hasTagCompound();}
+	public static boolean equal_(ItemStack aStack, Block aBlock                , long aMeta, boolean aAllowNBT) {return equal(meta_(aStack), aMeta) && block_(aStack) == aBlock && aAllowNBT == aStack.hasTagCompound();}
+	public static boolean equal (ItemStack aStack, ModData aModID, String aItem            , boolean aAllowNBT) {return equal(aStack, GameRegistry.findItem(aModID.mID, aItem), aAllowNBT);}
+	public static boolean equal (ItemStack aStack, ModData aModID, String aItem, long aMeta, boolean aAllowNBT) {return equal(aStack, GameRegistry.findItem(aModID.mID, aItem), aMeta, aAllowNBT);}
 	
 	public static boolean equal (long aMeta1, long aMeta2) {return aMeta1 == aMeta2 || aMeta1 == W || aMeta2 == W;}
 	
@@ -689,10 +700,15 @@ public class ST {
 		return ItemsGT.DEBUG_ITEMS.contains(aStack, T);
 	}
 	
+	public static boolean torch(Block aBlock) {
+		return torch(aBlock, 1); // that 1 is totally not hacky at all. XD
+	}
+	public static boolean torch(Block aBlock, long aMeta) {
+		if (IL.NePl_Torch.equal(aBlock) || IL.GC_Torch_Glowstone.equal(aBlock) || IL.AETHER_Torch_Ambrosium.equal(aBlock) || (aMeta == 1 && IL.TC_Block_Air.equal(aBlock))) return T;
+		return aBlock instanceof BlockTorch && !(aBlock instanceof BlockRedstoneTorch);
+	}
 	public static boolean torch(ItemStack aStack) {
-		if (IL.GC_Torch_Glowstone.equal(aStack, T, T) || IL.AETHER_Torch_Ambrosium.equal(aStack, T, T) || IL.TC_Nitor.equal(aStack, F, T)) return T;
-		Block tBlock = block(aStack);
-		return tBlock instanceof BlockTorch && !(tBlock instanceof BlockRedstoneTorch);
+		return IL.TC_Nitor.equal(aStack, F, T) || torch(block(aStack), meta(aStack));
 	}
 	
 	public static boolean ammo(ItemStack aStack) {

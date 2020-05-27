@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -414,7 +414,7 @@ public class LoaderItemData implements Runnable {
 		OM.reg("dirt"                               , ST.make(Blocks.dirt, 1, W));
 		OM.reg("sand"                               , ST.make(Blocks.sand, 1, W));
 		OM.reg("gravel"                             , ST.make(Blocks.gravel, 1, W));
-		OM.reg("soulsand"                           , ST.make(Blocks.soul_sand, 1, W));
+		OM.reg(OD.soulsand                          , ST.make(Blocks.soul_sand, 1, W));
 		OM.reg(OD.itemGrassTall                     , ST.make(Blocks.tallgrass, 1, 1));
 		OM.reg(OD.itemGrassTall                     , ST.make(Blocks.tallgrass, 1, 2));
 		OM.reg(OD.itemGhastTear                     , ST.make(Items.ghast_tear, 1, W));
@@ -613,6 +613,7 @@ public class LoaderItemData implements Runnable {
 		OM.reg(OP.dustSmall.dat(MT.Cyanite)         , ST.make(MD.BINNIE_BEE, "misc", 1,29));
 		
 		
+		OM.reg(OD.record                            , ST.make(MD.NePl, "PigStep", 1, 0));
 		OM.reg(OD.record                            , ST.make(MD.MFR, "record.blank", 1, 0));
 		OM.reg(OD.record                            , ST.make(MD.RoC, "rotarycraft_item_disk", 1, 0));
 		OM.reg(OD.record                            , ST.make(MD.BoP, "record_corruption", 1, 0));
@@ -1174,7 +1175,7 @@ public class LoaderItemData implements Runnable {
 		
 		OM.data(MD.EIO, "blockTank"                         , 1,   0, ANY.Fe                , 11* U2, MT.Glass              ,  U * 1);
 		OM.data(MD.EIO, "blockTank"                         , 1,   1, MT.ObsidianSteel          , 44* U3);
-		OM.data(MD.EIO, "blockDarkIronBars"                 , 1,   W, MT.ObsidianSteel          ,  8* U3);
+		OM.data(MD.EIO, "blockDarkIronBars"                 , 1,   W, MT.ObsidianSteel          ,  3* U8);
 		
 		
 		OM.data(MD.FR, "gearTin"                            , 1,   0, MT.Sn                 ,  U * 4);
@@ -1368,7 +1369,6 @@ public class LoaderItemData implements Runnable {
 		
 		OM.data(MD.BB, "boneShard"                          , 1,   W, MT.Bone               ,  U * 2);
 		
-		
 		OM.data(MD.EtFu, "red_sandstone_slab"               , 1,   0, MT.Sand               ,  U2);
 		OM.data(MD.EtFu, "red_sandstone"                    , 1,   W, MT.Sand               ,  U * 1);
 		OM.data(MD.EtFu, "crying_obsidian"                  , 1,   W, MT.Obsidian           ,  U * 9, MT.Lapis, U * 1);
@@ -1379,6 +1379,17 @@ public class LoaderItemData implements Runnable {
 		
 		OM.data(MD.GaSu, "mutton_raw"                       , 1,   W, MT.MeatRaw            ,  U * 2, MT.Bone, U4);
 		OM.data(MD.GaSu, "mutton_cooked"                    , 1,   W, MT.MeatCooked         ,  U * 2, MT.Bone, U4);
+		
+		
+		OM.dat2(MD.NePl, "ItemNetheriteSword"               , 1,   W, MT.NetherizedDiamond  ,  U * 2, ANY.Wood, U2);
+		OM.dat2(MD.NePl, "NetheritePickaxe"                 , 1,   W, MT.NetherizedDiamond  ,  U * 3, ANY.Wood, U );
+		OM.dat2(MD.NePl, "ItemNetheriteShovel"              , 1,   W, MT.NetherizedDiamond  ,  U * 1, ANY.Wood, U );
+		OM.dat2(MD.NePl, "ItemNetheriteAxe"                 , 1,   W, MT.NetherizedDiamond  ,  U * 3, ANY.Wood, U );
+		OM.dat2(MD.NePl, "ItemNetheriteHoe"                 , 1,   W, MT.NetherizedDiamond  ,  U * 2, ANY.Wood, U );
+		OM.dat2(MD.NePl, "NetheriteHelm"                    , 1,   W, MT.NetherizedDiamond  ,  U * 5);
+		OM.dat2(MD.NePl, "NetheriteChest"                   , 1,   W, MT.NetherizedDiamond  ,  U * 8);
+		OM.dat2(MD.NePl, "NetheriteLegg"                    , 1,   W, MT.NetherizedDiamond  ,  U * 7);
+		OM.dat2(MD.NePl, "NetheriteBoots"                   , 1,   W, MT.NetherizedDiamond  ,  U * 4);
 		
 		
 		OM.dat2(MD.TF, "item.giantPick"                     , 1,   0, ANY.Stone             ,  U*192, ANY.Wood, U*128);
@@ -1859,12 +1870,17 @@ public class LoaderItemData implements Runnable {
 		OM.data(ST.make(Blocks.mossy_cobblestone, 1, W)             , ANY.Stone             ,  U * 1);
 		OM.data(ST.make(Blocks.stone_button, 1, W)                  , ANY.Stone             ,  U * 1);
 		OM.data(ST.make(Blocks.stone_pressure_plate, 1, W)          , ANY.Stone             ,  U * 2);
-		OM.data(ST.make(Blocks.ladder, 1, W)                        , ANY.Wood              ,  U * 1);
+		OM.data(ST.make(Blocks.ladder, 1, W)                        , ANY.Wood              ,  3 *U7);
 		OM.data(ST.make(Blocks.wooden_button, 1, W)                 , ANY.Wood              ,  U * 1);
 		OM.data(ST.make(Blocks.wooden_pressure_plate, 1, W)         , ANY.Wood              ,  U * 2);
-		OM.data(ST.make(Blocks.fence, 1, W)                         , ANY.Wood              ,  3* U2);
+		OM.data(ST.make(Blocks.fence, 1, W)                         , ANY.Wood              ,  3 *U2);
+		OM.data(ST.make(Blocks.fence_gate, 1, W)                    , ANY.Wood              ,  U * 4);
+		OM.data(ST.make(Blocks.trapdoor, 1, W)                      , ANY.Wood              ,  U * 3);
 		OM.data(ST.make(Items.bowl, 1, W)                           , ANY.Wood              ,  U * 1);
 		OM.data(ST.make(Items.sign, 1, W)                           , ANY.Wood              ,  U * 2);
+		OM.data(ST.make(Items.painting, 1, W)                       , ANY.Wood              ,  U * 4);
+		OM.data(ST.make(Items.item_frame, 1, W)                     , ANY.Wood              ,  U * 4);
+		OM.data(ST.make(Items.boat, 1, W)                           , ANY.Wood              ,  U * 5);
 		OM.data(ST.make(Items.wooden_door, 1, W)                    , ANY.Wood              ,  U * 2);
 		OM.data(ST.make(Blocks.chest, 1, W)                         , ANY.Wood              ,  U * 8);                              OM.reg(OD.craftingChest, ST.make(Blocks.chest, 1, W));
 		OM.data(ST.make(Blocks.trapped_chest, 1, W)                 , ANY.Wood              ,  U * 9, ANY.Fe, OP.ring.mAmount * 2); OM.reg(OD.craftingChest, ST.make(Blocks.trapped_chest, 1, W));

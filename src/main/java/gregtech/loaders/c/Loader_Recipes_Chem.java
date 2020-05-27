@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -147,6 +147,16 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.Mixer        .addRecipe1(T, 16,   80, tIron                              , MT.HCl            .fluid(U * 4, T)                                                            , MT.H              .gas  (U * 2, F), OM.dust(MT.FeCl2, U*3));
 		}
 		
+		RM.HeatMixer    .addRecipe1(T,  16, 186, OM.dust(MT.OREMATS.Uraninite, U*1), MT.HF.gas(U*8, T), MT.H2O.liquid(U*6, F), OM.dust(MT.UF4, U*5));
+		RM.Mixer        .addRecipe1(T,  16, 112, OM.dust(MT.UF4, U*5), MT.F.gas(U*2, T), NF, MT.UF6.gas(U*7, T));
+		RM.Mixer        .addRecipe0(T,  16, 144, FL.array(MT.H .gas   (U*2, T), MT.UF6   .gas   (U*7, T)), MT.HF  .gas   (U*4, T), OM.dust(MT.UF4   , U*5));
+		RM.Mixer        .addRecipe0(T,  16, 144, FL.array(MT.H .gas   (U*2, T), MT.U238F6.gas   (U*7, T)), MT.HF  .gas   (U*4, T), OM.dust(MT.U238F4, U*5));
+		RM.Mixer        .addRecipe0(T,  16, 144, FL.array(MT.H .gas   (U*2, T), MT.U235F6.gas   (U*7, T)), MT.HF  .gas   (U*4, T), OM.dust(MT.U235F4, U*5));
+		RM.Mixer        .addRecipe0(T,  16, 112, FL.array(MT.Ca.liquid(U*2, T), MT.UF4   .liquid(U*5, T)), MT.CaF2.liquid(U*6, T), MT.U_238.liquid(U*1, T));
+		RM.Mixer        .addRecipe0(T,  16, 112, FL.array(MT.Ca.liquid(U*2, T), MT.U238F4.liquid(U*5, T)), MT.CaF2.liquid(U*6, T), MT.U_238.liquid(U*1, T));
+		RM.Mixer        .addRecipe0(T,  16, 112, FL.array(MT.Ca.liquid(U*2, T), MT.U235F4.liquid(U*5, T)), MT.CaF2.liquid(U*6, T), MT.U_235.liquid(U*1, T));
+		RM.Centrifuge   .addRecipe0(T, 512, 120, MT.UF6.gas(U*7, T), MT.U238F6.gas(U*5, T), MT.U235F6.gas(U*2, T));
+
 		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.NaCl                ,U * 4), MT.CaCO3       .liquid(U* 5, T)                                                            , NF                                , OM.dust(MT.CaCl2, U*3), OM.dust(MT.Na2CO3, U*6));
 		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.NaCl                ,U * 4), MT.MgCO3       .liquid(U* 5, T)                                                            , NF                                , OM.dust(MT.MgCl2, U*3), OM.dust(MT.Na2CO3, U*6));
 		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.OREMATS.Scheelite   ,U * 6), MT.HCl         .fluid(U * 4, T)                                                            , NF                                , OM.dust(MT.CaCl2, U*3), OM.dust(MT.H2WO4, U*7));
@@ -194,8 +204,8 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.BurnMixer    .addRecipe2(T, 16,  256, OM.dust(MT.OREMATS.Ilmenite, U* 5), OM.dust(MT.PetCoke , 3*U2), FL.array(MT.Cl.gas(U* 7, T), MT.CaCO3.liquid(U  , T)), FL.array(MT.TiCl4.liquid(U* 5, F), MT.CO .gas(U* 6, F)), OM.dust(MT.FeCl3, U*4));
 		RM.BurnMixer    .addRecipe2(T, 16,  256, OM.dust(MT.OREMATS.Ilmenite, U*10), OM.dust(MT.PetCoke , 3*U ), FL.array(MT.Cl.gas(U*14, T), MT.CaCO3.liquid(U*2, T)), FL.array(MT.TiCl4.liquid(U*10, F), MT.CO .gas(U*12, F)), OM.dust(MT.FeCl3, U*8));
 		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.OREMATS.Ilmenite, U*5), FL.array(MT.H2SO4.liquid(7*U, T)), FL.array(MT.GreenVitriol.liquid(6*U, T), FL.Water.make(3000)), OM.dust(MT.TiO2));
-		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.Na, U*4), MT.TiCl4.liquid(5*U, T), NF, OM.dust(MT.Ti), OM.dust(MT.NaCl , U*8));
-		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.Mg, U*2), MT.TiCl4.liquid(5*U, T), NF, OM.dust(MT.Ti), OM.dust(MT.MgCl2, U*6));
+		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.Na, U*4), MT.TiCl4.liquid(5*U, T), NF, OM.dust(MT.Ti), OM.dust(MT.NaCl , U*2), OM.dust(MT.NaCl , U*2), OM.dust(MT.NaCl , U*2), OM.dust(MT.NaCl , U*2));
+		RM.Bath         .addRecipe1(T, 0,   512, OM.dust(MT.Mg, U*2), MT.TiCl4.liquid(5*U, T), NF, OM.dust(MT.Ti), OM.dust(MT.MgCl2, U*2), OM.dust(MT.MgCl2, U*2), OM.dust(MT.MgCl2, U*2));
 		
 		
 		RM.Mixer        .addRecipe0(T, 16,   16, FL.array(MT.Fuel.liquid(2*U5, T), MT.Glyceryl.fluid(U10, T))                                                              , MT.NitroFuel      .liquid(U2, F), ZL_IS);
@@ -272,20 +282,20 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.DistillationTower.addRecipe0(F, 64, 128, new long[] {3000, 3000}, FL.array(FL.Oil_Light     .make( 50)), FL.array(FL.SFuel.make(25), FL.SDiesel.make(15), FL.SKerosine.make(15), FL.SPetrol.make(15), FL.SNaphtha.make(20),FL.SGasoil.make(30),FL.Propane.make(50), FL.Butane.make(50), FL.lube( 25)), dustTiny.mat(MT.WaxParaffin, 1), dustTiny.mat(MT.Asphalt, 1)); if (FL.Oil_Light2.exists())
 		RM.DistillationTower.addRecipe0(F, 64, 128, new long[] {3000, 3000}, FL.array(FL.Oil_Light2    .make( 50)), FL.array(FL.SFuel.make(25), FL.SDiesel.make(15), FL.SKerosine.make(15), FL.SPetrol.make(15), FL.SNaphtha.make(20),FL.SGasoil.make(30),FL.Propane.make(50), FL.Butane.make(50), FL.lube( 25)), dustTiny.mat(MT.WaxParaffin, 1), dustTiny.mat(MT.Asphalt, 1));
 		RM.DistillationTower.addRecipe0(F, 64, 128, new long[] {2000, 2000}, FL.array(FL.Oil_Soulsand  .make( 50)), FL.array(FL.SFuel.make(20), FL.SDiesel.make(10), FL.SKerosine.make(10), FL.SPetrol.make(10), FL.SNaphtha.make(10),FL.SGasoil.make(25),FL.Propane.make(10), FL.Butane.make(10), FL.lube( 80)), dustTiny.mat(MT.WaxParaffin, 1), dustTiny.mat(MT.Asphalt, 1));
-		
-		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SFuel.make(16000),     FL.Hydrogen.make(1000)), FL.array(FL.Fuel.make(15000),       MT.H2S.gas(U, T)), ZL_IS); 
-		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SDiesel.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Diesel.make(15000),     MT.H2S.gas(U, T)), ZL_IS); 
-		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SPetrol.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Petrol.make(15000),     MT.H2S.gas(U, T)), ZL_IS); 
-		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SKerosine.make(16000), FL.Hydrogen.make(1000)), FL.array(FL.Kerosine.make(15000),   MT.H2S.gas(U, T)), ZL_IS); 
-		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SNaphtha.make(16000),  FL.Hydrogen.make(1000)), FL.array(FL.Naphtha.make(15000),    MT.H2S.gas(U, T)), ZL_IS); 
-		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SGasoil.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Gasoil.make(15000),    MT.H2S.gas(U, T)), ZL_IS); 
 
-		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SFuel.make(16000),     FL.Hydrogen.make(1000)), FL.array(FL.Fuel.make(16000),        MT.H2S.gas(U, T)), ZL_IS); 
-		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SDiesel.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Diesel.make(16000),      MT.H2S.gas(U, T)), ZL_IS); 
-		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SPetrol.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Petrol.make(16000),      MT.H2S.gas(U, T)), ZL_IS); 
-		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SKerosine.make(16000), FL.Hydrogen.make(1000)), FL.array(FL.Kerosine.make(16000),    MT.H2S.gas(U, T)), ZL_IS); 
-		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SNaphtha.make(16000),  FL.Hydrogen.make(1000)), FL.array(FL.Naphtha.make(16000),     MT.H2S.gas(U, T)), ZL_IS); 
-		RM.OilCleaner       .addRecipe0(F, 64, 150, FL.array(FL.SGasoil.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Gasoil.make(16000),     MT.H2S.gas(U, T)), ZL_IS); 
+		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SFuel.make(16000),     FL.Hydrogen.make(1000)), FL.array(FL.Fuel.make(15000),       MT.H2S.gas(U, T)), ZL_IS);
+		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SDiesel.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Diesel.make(15000),     MT.H2S.gas(U, T)), ZL_IS);
+		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SPetrol.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Petrol.make(15000),     MT.H2S.gas(U, T)), ZL_IS);
+		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SKerosine.make(16000), FL.Hydrogen.make(1000)), FL.array(FL.Kerosine.make(15000),   MT.H2S.gas(U, T)), ZL_IS);
+		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SNaphtha.make(16000),  FL.Hydrogen.make(1000)), FL.array(FL.Naphtha.make(15000),    MT.H2S.gas(U, T)), ZL_IS);
+		RM.Mixer            .addRecipe0(F, 64, 300, FL.array(FL.SGasoil.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Gasoil.make(15000),    MT.H2S.gas(U, T)), ZL_IS);
+
+		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SFuel.make(16000),     FL.Hydrogen.make(1000)), FL.array(FL.Fuel.make(16000),        MT.H2S.gas(U, T)), ZL_IS);
+		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SDiesel.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Diesel.make(16000),      MT.H2S.gas(U, T)), ZL_IS);
+		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SPetrol.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Petrol.make(16000),      MT.H2S.gas(U, T)), ZL_IS);
+		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SKerosine.make(16000), FL.Hydrogen.make(1000)), FL.array(FL.Kerosine.make(16000),    MT.H2S.gas(U, T)), ZL_IS);
+		RM.OilCleaner       .addRecipe0(F, 64, 260, FL.array(FL.SNaphtha.make(16000),  FL.Hydrogen.make(1000)), FL.array(FL.Naphtha.make(16000),     MT.H2S.gas(U, T)), ZL_IS);
+		RM.OilCleaner       .addRecipe0(F, 64, 150, FL.array(FL.SGasoil.make(16000),   FL.Hydrogen.make(1000)), FL.array(FL.Gasoil.make(16000),     MT.H2S.gas(U, T)), ZL_IS);
 
 		
 		RM.CryoDistillationTower.addRecipe0(T, 64,  64, new long[] {9000}, FL.array(FL.Air       .make(200)), FL.array(MT.N.gas(U7, T), MT.O.gas(U20, T), MT.CO2.gas(U100, T), MT.He.gas(U1000, T), MT.Ne.gas(U1000, T), MT.Ar.gas(U1000, T)), OP.dustTiny.mat(MT.Ice, 1));
@@ -295,11 +305,11 @@ public class Loader_Recipes_Chem implements Runnable {
 		
 		RM.SteamCracking    .addRecipe0(F, 16, 384, FL.array(FL.Steam.make(1000), FL.Propane.make(100)), FL.array(FL.Hydrogen.make( 2), FL.Methane.make(27), FL.Ethylene.make(42), FL.Propylene.make(19)), ZL_IS);
 		RM.SteamCracking    .addRecipe0(F, 16, 384, FL.array(FL.Steam.make(1000), FL.Butane .make(100)), FL.array(FL.Hydrogen.make( 5), FL.Methane.make( 9), FL.Ethylene.make(78), FL.Propylene.make( 3)), ZL_IS);
-		
-		
+
+
 		RM.CatalyticCracking.addRecipe1(F, 16, 384, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Petrol.make(100)), FL.array(FL.Ethylene.make(30), FL.Propylene.make(20)), ZL_IS);
 		RM.CatalyticCracking.addRecipe1(F, 16, 384, OP.dust.mat(MT.Pt, 0), FL.array(FL.Hydrogen.make(100), FL.Fuel  .make(100)), FL.array(FL.Ethylene.make(40), FL.Propylene.make(10)), ZL_IS);
-		
+
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Butane  .make(1000)), FL.array(FL.Methane.make(550),  FL.Ethylene.make(1000), FL.Propylene.make(1000)), dustTiny.mat(MT.C, 1));
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Butane  .make(1000)), FL.array(FL.Methane.make(2000), FL.Propane.make(1000)), ZL_IS);
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Propane .make(1000)), FL.array(FL.Methane.make(1000),  FL.Propylene.make(500)), dustTiny.mat(MT.C, 1));
@@ -312,7 +322,7 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Fuel    .make(1000)), FL.array(FL.Petrol.make(800),   FL.Butane.make(100),  FL.Naphtha.make(400), FL.Propane.make(100), FL.Methane.make(150)), ZL_IS);
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Steam.make(1000),    FL.Gasoil  .make(1000)), FL.array(FL.Methane.make(800), FL.Ethylene.make(200), FL.Propylene.make(150)), dustTiny.mat(MT.C, 1));
 		RM.CrackingTower    .addRecipe0(F,128, 108, FL.array(FL.Hydrogen.make(1000), FL.Gasoil  .make(1000)), FL.array(FL.Methane.make(2000)), ZL_IS);
-		
+
 		RM.Centrifuge       .addRecipe0(F, 64,  48, FL.array(FL.Gas_Natural.make(320)), FL.array(FL.lpg  .make(290)), ZL_IS);
 
 		//Polymer production

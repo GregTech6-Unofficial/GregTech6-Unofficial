@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -249,14 +249,24 @@ public class LoaderUnificationTargets implements Runnable {
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.WaxMagic               , ST.make(MD.FRMB, "wax", 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.WaxSoulful             , ST.make(MD.FRMB, "wax", 1, 1));
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.WaxAmnesic             , ST.make(MD.FRMB, "wax", 1, 2));
+		OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Vinteum                , ST.make(MD.ARS, "vinteumOre", 1, 0));
+		OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Chimerite              , ST.make(MD.ARS, "vinteumOre", 1, 1));
+		OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.BlueTopaz              , ST.make(MD.ARS, "vinteumOre", 1, 2));
+		OreDictManager.INSTANCE.setTarget(OP.ore            , MT.Sunstone               , ST.make(MD.ARS, "vinteumOre", 1, 3));
+		OreDictManager.INSTANCE.setTarget(OP.oreMoon        , MT.Moonstone              , ST.make(MD.ARS, "vinteumOre", 1, 4));
+		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.Moonstone              , ST.make(MD.ARS, "vinteumOre", 1, 5));
+		OreDictManager.INSTANCE.setTarget(OP.blockDust      , MT.Vinteum                , ST.make(MD.ARS, "vinteumOre", 1, 6));
+		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.BlueTopaz              , ST.make(MD.ARS, "vinteumOre", 1, 7));
+		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.Sunstone               , ST.make(MD.ARS, "vinteumOre", 1, 8));
+		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.Chimerite              , ST.make(MD.ARS, "vinteumOre", 1, 9));
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.Vinteum                , ST.make(MD.ARS, "itemOre", 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.ArcaneCompound         , ST.make(MD.ARS, "itemOre", 1, 1));
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.ArcaneAsh              , ST.make(MD.ARS, "itemOre", 1, 2));
 		OreDictManager.INSTANCE.setTarget(OP.dust           , MT.VinteumPurified        , ST.make(MD.ARS, "itemOre", 1, 3));
-		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.UNUSED.Chimerite       , ST.make(MD.ARS, "itemOre", 1, 4));
+		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.Chimerite              , ST.make(MD.ARS, "itemOre", 1, 4));
 		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.BlueTopaz              , ST.make(MD.ARS, "itemOre", 1, 5));
-		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.UNUSED.Sunstone        , ST.make(MD.ARS, "itemOre", 1, 6));
-		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.UNUSED.Moonstone       , ST.make(MD.ARS, "itemOre", 1, 7));
+		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.Sunstone               , ST.make(MD.ARS, "itemOre", 1, 6));
+		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.Moonstone              , ST.make(MD.ARS, "itemOre", 1, 7));
 		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.SmokeyQuartz           , ST.make(MD.BOTA, "quartz", 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.ManaQuartz             , ST.make(MD.BOTA, "quartz", 1, 1));
 		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.BlazeQuartz            , ST.make(MD.BOTA, "quartz", 1, 2));
@@ -315,6 +325,7 @@ public class LoaderUnificationTargets implements Runnable {
 		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.VoidCrystal            , ST.make(MD.AA, "blockCrystal", 1, 3));
 		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.Emeradic               , ST.make(MD.AA, "blockCrystal", 1, 4));
 		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.Enori                  , ST.make(MD.AA, "blockCrystal", 1, 5));
+		OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.BlackQuartz            , ST.make(MD.AA, "blockMisc", 1, 3));
 		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.Charcoal               , ST.make(MD.AA, "blockMisc", 1, 5));
 		OreDictManager.INSTANCE.setTarget(OP.blockGem       , MT.CoalCoke               , ST.make(MD.RC, "cube", 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.CoalCoke               , ST.make(MD.RC, "fuel.coke", 1, 0));
@@ -639,6 +650,12 @@ public class LoaderUnificationTargets implements Runnable {
 		OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.Rubber                 , ST.make(MD.ELN, "Eln.sharedItem", 1, 4097));
 		OreDictManager.INSTANCE.setTarget(OP.gem            , MT.DiamondIndustrial      , ST.make(MD.ELN, "Eln.sharedItem", 1, 4420));
 		OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.Si                     , ST.make(MD.ELN, "Eln.sharedItem", 1, 7697));
+		OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.Netherite              , ST.make(MD.NePl, "NetheriteIngot", 1, 0));
+		OreDictManager.INSTANCE.setTarget(OP.blockIngot     , MT.Netherite              , ST.make(MD.NePl, "NetheriteBlock", 1, 0));
+		OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.AncientDebris          , ST.make(MD.NePl, "NetheriteScrap", 1, 0));
+		OreDictManager.INSTANCE.setTarget(OP.oreNetherrack  , MT.AncientDebris          , ST.make(MD.NePl, "AncientDebris", 1, 0));
+		OreDictManager.INSTANCE.setTarget(OP.oreNetherrack  , MT.Au                     , ST.make(MD.NePl, "GoldOre", 1, 0));
+		OreDictManager.INSTANCE.setTarget(OP.oreBlackstone  , MT.Au                     , ST.make(MD.NePl, "GildedBlackstone", 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.bottle         , MT.Empty                  , ST.make(Items.glass_bottle, 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.bottle         , MT.H2O                    , ST.make(Items.potionitem, 1, 0));
 		OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Coal                   , ST.make(Blocks.coal_ore, 1, 0));

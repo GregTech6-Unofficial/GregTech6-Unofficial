@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -74,8 +74,9 @@ public class LoaderOreDictReRegistrations implements Runnable {
 		OreDictManager.INSTANCE.addAutoBlackListing("IngotEnrichedUranium");
 		
 		OreDictManager.INSTANCE.addAutoBlackListingForMod(MD.TFC.mID);
+		OreDictManager.INSTANCE.addAutoBlackListingForMod(MD.TFCP.mID);
 		
-
+		
 		OreDictManager.INSTANCE.addReRegistrationWithReversal(OD.itemTar                , "tar");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal(OD.craftingChest          , "chest");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal(OD.craftingWorkBench      , "craftingTable");
@@ -95,6 +96,7 @@ public class LoaderOreDictReRegistrations implements Runnable {
 		OreDictManager.INSTANCE.addReRegistrationWithReversal(OD.itemGlue               , "glue");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal(OP.stone                  , "stoneSmooth");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal(OP.cobblestone            , "stoneCobble");
+		OreDictManager.INSTANCE.addReRegistrationWithReversal("ingotNetherite"          , "NetheriteIngot");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("itemAnthracite"          , "gemAnthracite");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("obsidianRod"             , "stickObsidian");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("obsidian"                , "blockSolidObsidian");
@@ -218,6 +220,7 @@ public class LoaderOreDictReRegistrations implements Runnable {
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockSunstone"           , "blockGemSunstone");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockMoonstone"          , "blockGemMoonstone");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockRedMeteorGem"       , "blockGemRedMeteor");
+		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockNetherite"          , "blockIngotNetherite");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockIron"               , "blockIngotIron");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockSteel"              , "blockIngotSteel");
 		OreDictManager.INSTANCE.addReRegistrationWithReversal("blockBronze"             , "blockIngotBronze");
@@ -559,6 +562,7 @@ public class LoaderOreDictReRegistrations implements Runnable {
 		OreDictManager.INSTANCE.addReRegistration("ingotDuranium"                   , OD.craftingPistonIngot);
 		OreDictManager.INSTANCE.addReRegistration("ingotTritanium"                  , OD.craftingPistonIngot);
 		OreDictManager.INSTANCE.addReRegistration("ingotSyrmorite"                  , OD.craftingPistonIngot);
+		OreDictManager.INSTANCE.addReRegistration("dustSoulSand"                    , OD.soulsand);
 		OreDictManager.INSTANCE.addReRegistration("ingotTarPitch"                   , OD.itemTar);
 		OreDictManager.INSTANCE.addReRegistration("nuggetTarPitch"                  , OD.itemTar);
 		OreDictManager.INSTANCE.addReRegistration("stoneBowl"                       , "bowlStone");
@@ -1247,7 +1251,7 @@ public class LoaderOreDictReRegistrations implements Runnable {
 		OreDictManager.INSTANCE.setAutomaticItemData("livingRoot", new OreDictItemData(MT.LiveRoot, U));
 		OreDictManager.INSTANCE.setAutomaticItemData("silicon", new OreDictItemData(MT.Si, U));
 		OreDictManager.INSTANCE.setAutomaticItemData("glowstone", new OreDictItemData(MT.Glowstone, 4*U));
-		OreDictManager.INSTANCE.setAutomaticItemData("soulsand", new OreDictItemData(MT.SoulSand, U));
+		OreDictManager.INSTANCE.setAutomaticItemData(OD.soulsand, new OreDictItemData(MT.SoulSand, U));
 		OreDictManager.INSTANCE.setAutomaticItemData("seedWheat", new OreDictItemData(MT.Wheat, U9));
 		OreDictManager.INSTANCE.setAutomaticItemData("seedRye", new OreDictItemData(MT.Rye, U9));
 		OreDictManager.INSTANCE.setAutomaticItemData("seedOats", new OreDictItemData(MT.Oat, U9));
