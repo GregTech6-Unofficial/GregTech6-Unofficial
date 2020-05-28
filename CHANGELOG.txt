@@ -79,13 +79,15 @@ Nothing
 | [FIXED] Crucible Crossings were rather directional when chained together.
 | [CHANGED] Purified and Refined Coal Ore in the Coke Oven will give 5 Chunks of Coke instead of 1 Gem.
 
-[FIXED Localized name for Circuit Assembler should not be "Circult Assembler"
-[CHANGED] Radiation Protection Processing Machine is removed
+[FIXED] Localized name for Circuit Assembler should not be "Circult Assembler".
+[FIXED] Chromium production chain is not balanced correctly on GT manner, again. Not it is fixed.
+[CHANGED] Radiation Protection Processing Machine is removed, and nuclear reactor rod recipes on same as before.
 [CHANGED] Large Molecular Scanner now requires a Mass Spectrometer Module at the center of the 3x3x3 hollow, also its tooltip is fixed.
 [CHANGED] Energy required to assemble circuit parts changed.
+[CHANGED] Butane steam cracking tower recipe changed to be more realistic.
+[CHANGED] Cumene now requires aluminium chloride as the catalyst but not alumina.
+[ADDED] Aluminium chloride.
 [ADDED] Bunch of fluids that are related to Platinum family metal production
-
-
 
 6.13.08:
 [FIXED]Producing too many gem plates from gems in the laser cutter.
