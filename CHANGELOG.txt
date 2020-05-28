@@ -15,7 +15,8 @@ Nothing
 [WIP]Draining Well. A Multiblock that drains liquid from underground.
 
 6.14.00: (Not released yet).
-[MERGED]Merged official GT 6.13.00
+[MERGED]Merged official branch 6.12.01 - 6.13.00
+| 6.13.00
 | [NOTE] Sorry for letting this one take so long.
 | [NOTE] I got a report that Riverwater, Swampwater and Oceanwater cannot be scanned with the Thaumometer, I can not replicate that Issue though, so I guess it is either fixed or something is wrong with their Modpack.
 | [COMPAT] Netherite Plus got Compatibility now. It backports Netherite to 1.7.10. Soulfire Torch Placement by Tools, Record Shelving, Blackstone, Biomass, and the two Wood Types should all work in GregTech Stuff, also Netherite Ingots are made the Crucible way now instead of Crafting Debris with Gold Ingots. https://www.curseforge.com/minecraft/mc-mods/netheriteplus
@@ -50,6 +51,38 @@ Nothing
 | [ADDED]
 | Erik3003s Nuclear Reactor changes made it into this Version.
 | He wrote a PDF as a Guide too, which I linked on the Downloads Page, and also here: https://gregtech.mechaenetia.com/1.7.10/gt6fission.pdf
+| 6.12.02:
+| [NOTE] This one automatically triggers the outdated Major Version Notification to nonupdated Users (once it is released), because ofcourse the first one or two of a Major Version tend to be buggy.
+| [FIXED] TerraFirmaCraft Attack Damage Multiplier for GT6 Tools to be 80 instead of 10 and actually showing in the Tooltip.
+| [FIXED] Thaumcraft Aspects for Nuggets and Ingots now check if they are supposed to be Metallum, and if not, then they will replace it with Ordo.
+| [FIXED] Reactors blew up when no Coolant was in them while a minimal amount of Power was left over and they did not have any Rods.
+| [FIXED] IC2-Classic Watermills should now accept Ocean and River Water. This requires a pending update on the IC2-Classic Side aswell.
+| [FIXED] GT6 Tools should now work with Treecapitator installed as long as Treecapitator detects them as valid Tools.
+| [FIXED] A Rare NEI Recipe List Crash. (Concurrent Modification Exception when clicking Progress Bar)
+| [FIXED] Bedrock Ores did not generate Indicator Flowers and Indicator Rocks in Twilight Forest due to its Terrains normal Height of Y31 instead of Y63.
+| [FIXED] The Code that made Plates, Ingots and Rocks placeable did not check if the Stack was already a Block, meaning it just replaced things like Greatwood Planks or Silverwood Planks with the Stack-of-Plates Block.
+| [FIXED] Gearboxes sometimes breaking/overloading on World Load.
+| [FIXED] Some Issue with Coke Ovens and other Ignition based Basic Machines, hopefully.
+| [FIXED] Bumbliaries were lacking Tooltips.
+| [FIXED] Reactor Rods in general were not ON/OFF sensitive.
+| [FIXED] The Running-Possible Sensors now also return Redstone when the Output happens to be blocked at that moment.
+| [FIXED] Made Tooltips for Power Input/Output of Machines now have a special verbiage for a Minimum of "1 Unit per Tick" or less, by saying "up to MAX per Tick" instead.
+| [CHANGED] Coke Ovens now have 9 Output Slots due to the Recipe that outputs 5/6 Chunks of Coal Coke, so that each Coke Chunk gets 1 Slot.
+| [ADDED] Chili Crop which was missing.
+| [ADDED] Snow Golems can have their poop picked up by GT6 Hoppers automatically without constantly breaking a Snow Layer Block. Also works with Et Futurums silent replacement for Snow Golems, yes I luckily noticed that...
+| [ADDED] Reactors can use Distilled Water as Coolant, but that uses a different System so beware. Also it is not tested or finished yet! Also Reactor Explosions are disabled yet again until.
+| [ADDED] Geiger Counter Sensor courtesy of Erik3003.
+| 6.12.01:
+| [FIXED] A doubled up Magnifying Glass Tooltip on the Large Heat Exchanger.
+| [FIXED] Large Heat Exchanger did not let Pipes connect to its Output.
+| [FIXED] The ON/OFF State of a Reactor while setting it up is more consistent now. Also Soft Hammers can turn it ON/OFF too now.
+| [FIXED] Crucible Crossings were rather directional when chained together.
+| [CHANGED] Purified and Refined Coal Ore in the Coke Oven will give 5 Chunks of Coke instead of 1 Gem.
+
+[FIXED Localized name for Circuit Assembler should not be "Circult Assembler"
+[CHANGED] Radiation Protection Processing Machine is removed
+[CHANGED] Large Molecular Scanner now requires a Mass Spectrometer Module at the center of the 3x3x3 hollow, also its tooltip is fixed.
+[CHANGED] Energy required to assemble circuit parts changed.
 [ADDED] Bunch of fluids that are related to Platinum family metal production
 
 
