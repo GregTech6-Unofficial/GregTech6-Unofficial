@@ -14,8 +14,11 @@ Nothing
 6.14.01: (Not released yet).
 [WIP]Draining Well. A Multiblock that drains liquid from underground.
 
-6.14.00: (Not released yet).
-[MERGED]Merged official branch 6.12.01 - 6.13.00
+6.14.00:
+[MERGED]Merged official branch 6.13.01
+| 6.13.01:
+| [FIXED] a Bug that crashes every single Crafting Recipe, sorry about that lol.
+| [FIXED] Some Localisation Issues with Reika's Fluids, it should be fine now. It will work with all other Unlocalized Fluids too, so GT6 will display the most proper Fluid Name that it can display now.
 | 6.13.00
 | [NOTE] Sorry for letting this one take so long.
 | [NOTE] I got a report that Riverwater, Swampwater and Oceanwater cannot be scanned with the Thaumometer, I can not replicate that Issue though, so I guess it is either fixed or something is wrong with their Modpack.
@@ -78,7 +81,6 @@ Nothing
 | [FIXED] The ON/OFF State of a Reactor while setting it up is more consistent now. Also Soft Hammers can turn it ON/OFF too now.
 | [FIXED] Crucible Crossings were rather directional when chained together.
 | [CHANGED] Purified and Refined Coal Ore in the Coke Oven will give 5 Chunks of Coke instead of 1 Gem.
-
 [FIXED] Localized name for Circuit Assembler should not be "Circult Assembler".
 [FIXED] Chromium production chain is not balanced correctly on GT manner, again. Not it is fixed.
 [CHANGED] Radiation Protection Processing Machine is removed, and nuclear reactor rod recipes on same as before.
