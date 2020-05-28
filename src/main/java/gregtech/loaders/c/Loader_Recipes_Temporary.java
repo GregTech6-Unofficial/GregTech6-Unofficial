@@ -81,6 +81,8 @@ public class Loader_Recipes_Temporary implements Runnable {
 			RM.biomass(ST.make(MD.NePl, "CrimsonRoots" , 8, 0));
 			RM.biomass(ST.make(MD.NePl, "WarpedRoots"  , 8, 0));
 			RM.biomass(ST.make(MD.NePl, "TwistingVines", 8, 0));
+			
+			RM.Boxinator.addRecipe2(T, 16, 16, ST.make(Items.netherbrick, 2, 0), ST.make(Items.nether_wart, 2, 0), ST.make(MD.NePl, "RedBricks", 1, 0));
 		}
 
 		// Too lazy to make another Compat Handler Class for this Mod ID too.
@@ -108,6 +110,13 @@ public class Loader_Recipes_Temporary implements Runnable {
 		RM.generify(FL.Redstone                      .make(36),FL.Redstone_TE.make(25));
 		RM.generify(FL.Lubricant                     .make(1), FL.LubRoCant.make(1));
 		RM.generify(FL.LubRoCant                     .make(1), FL.Lubricant.make(1));
+		RM.generify(FL.make("ethanol"                    , 1), FL.Reikanol.make(1));
+		RM.generify(FL.BioEthanol                    .make(1), FL.Reikanol.make(1));
+		RM.generify(FL.Reikanol                      .make(1), FL.BioEthanol.make(1));
+		RM.generify(FL.Oxygen                        .make(1), FL.Reikygen.make(1));
+		RM.generify(FL.Reikygen                      .make(1), FL.Oxygen.make(1));
+		RM.generify(FL.Liquid_Oxygen                 .make(1), FL.Liquid_Reikygen.make(1));
+		RM.generify(FL.Liquid_Reikygen               .make(1), FL.Liquid_Oxygen.make(1));
 		RM.generify(FL.Oil_Canola                    .make(2), FL.lube(1));
 		RM.generify(FL.make("molten.latex"               , 1), FL.Latex.make(1));
 		RM.generify(FL.Latex                         .make(1), FL.make("molten.latex", 1));

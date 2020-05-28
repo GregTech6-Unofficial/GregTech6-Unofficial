@@ -1489,10 +1489,10 @@ public class UT {
 			long tR = 0, tG = 0, tB = 0, tPixels = 0;
 			for (int tWidth = 0; tWidth < icon.getWidth(); tWidth++) for (int tHeight = 0; tHeight < icon.getHeight(); tHeight++) {
 				int tPixel = icon.getRGB(tWidth, tHeight);
-				if (((tPixel >>> 24) & 255) > 128) {
+				if ((     (tPixel >>> 24) & 255) > 128) {
 					tR += (tPixel >>> 16) & 255;
-					tG += (tPixel >>> 8) & 255;
-					tB += tPixel & 255;
+					tG += (tPixel >>>  8) & 255;
+					tB +=  tPixel         & 255;
 					tPixels++;
 				}
 			}
@@ -1501,8 +1501,14 @@ public class UT {
 		
 		/** toUpperCases the first Character of the String and returns it */
 		public static String capitalise(String aString) {
-			if (aString != null && !aString.isEmpty()) return aString.substring(0, 1).toUpperCase() + aString.substring(1);
-			return "";
+			return aString == null ? "" : aString.length() <= 1 ? aString.toUpperCase() : aString.substring(0, 1).toUpperCase() + aString.substring(1);
+		}
+		
+		/** toUpperCases the first Character of each Word in the String and returns it */
+		public static String capitaliseWords(String aString) {
+			StringBuilder rString = new StringBuilder();
+			for (String tString : aString.split(" ")) if (!tString.isEmpty()) rString.append(capitalise(tString)).append(" ");
+			return rString.toString().trim();
 		}
 		
 		/** @return the opposite facing of this Side of a Block, with a boundary check. */

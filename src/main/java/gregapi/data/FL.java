@@ -68,10 +68,13 @@ public enum FL {
 	, XP                        ("xpjuice"                                                  , SIMPLE, LIQUID)
 
 	, Air                       ("air"                                                      , SIMPLE, GAS, AIR)
-	, Air_Nether                ("netherair"                                                , SIMPLE, GAS, AIR)
 	, Air_End                   ("enderair"                                                 , SIMPLE, GAS, AIR)
-	, Oxygen                    ("oxygen"                                                   , SIMPLE, GAS)
-	, Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID)
+    , Air_Nether                ("netherair"                                                , SIMPLE, GAS, AIR)
+
+    , Oxygen                    ("oxygen"                                                   , SIMPLE, GAS, OXYGEN)
+    , Reikygen                  ("rc oxygen"                                                , SIMPLE, GAS, OXYGEN)
+    , Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID, LIQUID_OXYGEN)
+    , Liquid_Reikygen           ("rc liquid oxygen"                                         , SIMPLE, LIQUID, LIQUID_OXYGEN)
 
     // plasmas
 	, HeliumP                   ("heliumplasma"                                             , PLASMA)
@@ -91,6 +94,8 @@ public enum FL {
     , HeliumI("ionizedhelium", GAS)
 
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
+
+
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
 	, Deuterium                 ("deuterium"                                                , GAS)
 	, Tritium                   ("tritium"                                                  , GAS)
@@ -137,6 +142,7 @@ public enum FL {
 	, River_Water               ("riverwater"                                               , SIMPLE, LIQUID, FOOD, WATER)
 	, Water_Hot                 ("ic2hotwater"                                              , SIMPLE, LIQUID, FOOD, WATER)
 	, Ice                       ("ice"                                                      , SIMPLE, LIQUID, FOOD, WATER, THERMOS)
+	, Heavy_Reiker              ("rc heavy water"                                           , SIMPLE, LIQUID)
 	, Mineralwater              ("potion.mineralwater"                                      , SIMPLE, LIQUID, FOOD)
 	, Mineralsoda               ("mineralsoda"                                              , SIMPLE, LIQUID, FOOD)
 	, Soda                      ("soda"                                                     , SIMPLE, LIQUID, FOOD)
@@ -481,8 +487,8 @@ public enum FL {
     // Biomass Processing
 	, BioFuel                   ("biofuel"                                                  , SIMPLE, LIQUID)
 	, BioDiesel                 ("biodiesel"                                                , SIMPLE, LIQUID)
-	, BioEthanol                ("bioethanol"                                               , SIMPLE, LIQUID)
-
+	, BioEthanol                ("bioethanol"               , "ethanol"                     , SIMPLE, LIQUID)
+	, Reikanol                  ("rc ethanol"                                               , SIMPLE, LIQUID)
 
 	, Glue                      ("glue"                                                     , SIMPLE, LIQUID)
 	, Latex                     ("latex"                    , "molten.latex"                , SIMPLE, LIQUID)
@@ -672,7 +678,7 @@ public enum FL {
 	public static String regName (FluidStack aFluid) {return aFluid == null ? null : regName_(aFluid);}
 	public static String regName_(FluidStack aFluid) {return regName(aFluid.getFluid());}
 	public static String regName (Fluid aFluid) {return aFluid == null ? null : regName_(aFluid);}
-	public static String regName_(Fluid aFluid) {return FluidRegistry.getFluidName(aFluid);}
+	public static String regName_(Fluid aFluid) {return aFluid.getName();}
 
 	public static short id (IFluidTank aTank) {return aTank == null ? -1 : id_(aTank);}
 	public static short id_(IFluidTank aTank) {return id(aTank.getFluid());}
@@ -880,7 +886,9 @@ public enum FL {
 		if (!aLocalized) return aFluid.getUnlocalizedName();
 		if (aFluid instanceof FluidGT) return LH.get(aFluid.getUnlocalizedName());
 		String rName = aFluid.getLocalizedName(make(aFluid, 0));
-		if (rName.contains("fluid.") || rName.contains("tile.")) return Code.capitalise(rName.replaceAll("fluid.", "").replaceAll("tile.", ""));
+		if (rName.startsWith("fluid.") || rName.startsWith("tile.") || rName.startsWith("rc ")) {
+			return Code.capitaliseWords(rName.replaceFirst("fluid.", "").replaceFirst("tile.", "").replaceFirst("rc ", ""));
+		}
 		return rName;
 	}
 
@@ -1045,7 +1053,7 @@ public enum FL {
 		String tName = FluidsGT.FLUID_RENAMINGS.get(aName);
 		if (Code.stringValid(tName)) aName = tName;
 		Fluid aFluid = FluidRegistry.getFluid(aName);
-		if (aFluid == null) return FL.LubRoCant.is(aName) ? FL.Lubricant.make(aNBT.getInteger("Amount")) : null;
+		if (aFluid == null) return FL.LubRoCant.is(aName) ? FL.Lubricant.make(aNBT.getInteger("Amount")) : FL.Reikanol.is(aName) ? FL.BioEthanol.make(aNBT.getInteger("Amount")) : null;
 		FluidStack rFluid = new FluidStack(aFluid, aNBT.getInteger("Amount"));
 		if (aNBT.hasKey("Tag")) rFluid.tag = aNBT.getCompoundTag("Tag");
 		return rFluid;
@@ -1063,8 +1071,8 @@ public enum FL {
 	/** Saves a FluidStack properly. */
 	public static NBTTagCompound save_(FluidStack aFluid) {return aFluid.writeToNBT(NBT.make());}
 
-	
-	
+
+
 	@SafeVarargs public static Fluid createLiquid(OreDictMaterial aMaterial, Set<String>... aFluidList) {return createLiquid(aMaterial, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_MOLTEN), aFluidList);}
 	@SafeVarargs public static Fluid createLiquid(OreDictMaterial aMaterial, IIconContainer aTexture, Set<String>... aFluidList) {return create(aMaterial.mNameInternal.toLowerCase(), aTexture, aMaterial.mNameLocal, aMaterial, aMaterial.mRGBaLiquid, STATE_LIQUID, 1000, aMaterial.mMeltingPoint <= 0 ? 1000 : aMaterial.mMeltingPoint < 300 ? Math.min(300, aMaterial.mBoilingPoint - 1) : aMaterial.mMeltingPoint, null, null, 0, aFluidList);}
 

@@ -165,19 +165,20 @@ public class Loader_Fluids implements Runnable {
 		FL.create("biomass"                  , "Biomass"             , MT.Biomass            , 1);
 		FL.create("ic2coolant"               , "Industrial Coolant"  , null                  , 1);
 		FL.create("ic2hotcoolant"            , "Industrial Heatant"  , null                  , 1,   1000,  1200);
-		FL.create("hotmoltensodium"          , "Hot Molten Sodium"  , null      , 1, 1000, 1100);
-		FL.create("hotmoltentin"             , "Hot Molten Tin"     , null      , 1, 1000, 2800);
-		FL.create("hotmoltenlicl"            , "Hot Molten Lithium Chloride",    null       , 1, 1000, 1600);
+		FL.create("hotmoltensodium"          , "Hot Molten Sodium"   , null                  , 1,   1000,  1100);
+		FL.create("hotmoltentin"             , "Hot Molten Tin"      , null                  , 1,   1000,  2800);
+		FL.create("hotmoltenlicl"            , "Hot Molten Lithium Chloride", null           , 1,   1000,  1600);
 
-		FL.create("hotheavywater"            , "Hot Heavy Water"        , null      , 1, 1000, 600);
-		FL.create("hotsemiheavywater"        , "Hot Semiheavy Water"    , null      , 1, 1000, 550);
-		FL.create("hottritiatedwater"        , "Hot Tritiated Water"    , null      , 1, 1000, 650);
+		FL.create("hotheavywater"            , "Hot Heavy Water"     , null                  , 1,   1000,   600);
+		FL.create("hotsemiheavywater"        , "Hot Semiheavy Water" , null                  , 1,   1000,   550);
+		FL.create("hottritiatedwater"        , "Hot Tritiated Water" , null                  , 1,   1000,   650);
 
-		FL.create("hotcarbondioxide"         , "Hot Carbon Dioxide" , null      , 1, 1000, 950);
-		FL.create("hothelium"                , "Hot Helium"         , null      , 1, 1000, 1150);
-		FL.create("thoriumsalt"              , "Molten Thorium Salt"    , null                  , 1,   1000,  600);
+		FL.create("hotcarbondioxide"         , "Hot Carbon Dioxide"  , null                  , 1,   1000,   950);
+		FL.create("hothelium"                , "Hot Helium"          , null                  , 1,   1000,  1150);
+		FL.create("thoriumsalt"              , "Molten Thorium Salt" , null                  , 1,   1000,   600);
 
 		FL.create("ic2pahoehoelava"          , "Pahoehoe Lava"       , null                  , 1,   1000,  1200).setLuminosity(10).setDensity(50000).setViscosity(250000);
+		FL.create("ethanol"                  , "Ethanol"             , MT.Ethanol            , 1);
 		FL.create("bioethanol"               , "Bio Ethanol"         , MT.Ethanol            , 1);
 		FL.create("mcguffium"                , "Mc Guffium 239"      , MT.Mcg                , 1,      L,   300);
 		FL.create("hotfryingoil"             , "Hot Frying Oil"      , MT.FryingOilHot       , 1,   1000,   400);
@@ -645,7 +646,7 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink(FL.create("rottendrink"                                , "Rotten Drink"                            , null                  , 1, 1000, 275)                                                                                         , "Smells rotten"                                                   ,  0, 0.0F  ,   0, C+37,  0.75F,  0,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.hunger                   .id, 100, 1, 100);
 		new FoodStatDrink(FL.create("mushroomsoup"                               , "Mushroom Stew"                           , null                  , 1, 1000, 300, ST.make(Items.mushroom_stew,1,0), ST.make(Items.bowl,1,0), 1000)                        , ""                                                                ,  2, 0.6F  ,   5, C+37,  0.15F,  0,  0, 10, 10,  0, EnumAction.eat  , T, F, F);
 
-		
+
 		new FoodStatDrink("pinkslime"                                                                                                                                                                                                                               , "Meaty Slime Juice"                                               ,  4, 0.5F  ,  20, C+37,  0.50F,  0,  0,  0, 20,  0, EnumAction.drink, F, F, F, Potion.jump                     .id,1200, 1,  75);
 		new FoodStatDrink(FL.create("slime"                                      , "Slime"                                   , null                  , 1, 1000, 300)                                                                                         , "Green Slime Juice"                                               ,  2, 0.5F  ,  20, C+37,  0.50F,  0,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.jump                     .id, 600, 0,  50);
 		new FoodStatDrink(FL.create("bawls"                                      , "BAWLS"                                   , null                  , 1, 1000, 275)                                                                                         , "Here, take a cold and refreshing sip of my BAWLS"                ,  2, 0.5F  ,  20, C+35,  0.50F,  0,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.jump                     .id,1200, 1,  90);
@@ -662,7 +663,7 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink(FL.create("sweettea"                                   , "Sweet Tea"                               , null                  , 1, 1000, 300)                                                                                         , "How about a Tea Party? In Boston?"                               ,  2, 0.2F  ,  20, C+39,  0.50F,  0, 30,  0, 30,  0, EnumAction.drink, F, F, F);
 		new FoodStatDrink(FL.create("icetea"                                     , "Ice Tea"                                 , null                  , 1, 1000, 255)                                                                                         , "Ice 'T'"                                                         ,  6, 0.4F  ,  30, C+35,  0.50F,  0, 10,  0, 30,  0, EnumAction.drink, F, F, F);
 
-		
+
 		new FoodStatDrink(FL.create("medicine.heal"                              , "Medicine"                                , null                  , 1, 1000, 300)                                                                                         , "Heals up to 20 Hearts"                                           ,  0, 0.0F  ,   0, C+37,  0.00F,  0,  0,  0,  0,  0, EnumAction.drink, T, F, F, Potion.regeneration             .id, 120, 4, 100);
 		new FoodStatDrink(FL.create("medicine.laxative"                          , "Laxative"                                , null                  , 1, 1000, 300)                                                                                         , "Removes 10 Hunger/Saturation"                                    ,  0, 0.0F  ,   0, C+37,  0.00F,  0,  0,  0,  0,  0, EnumAction.drink, T, F, F, Potion.hunger                   .id, 300,10, 100);
 

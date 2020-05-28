@@ -541,7 +541,7 @@ public class Loader_Recipes_Handlers implements Runnable {
 		RM.Bath         .add(new RecipeMapHandlerMaterial(tMat                      , FL.FieryTears     .make(   L)     ,   0, 144, NF, MT.FierySteel           , NI, T, tConditionP));
 		}
 		for (OreDictMaterial tMat : ANY.Diamond.mToThis) {
-		RM.Bath         .add(new RecipeMapHandlerMaterial(tMat                      , MT.Netherite      .liquid(U4, T)  ,   0, 144, NF, MT.NetherizedDiamond     , NI, T, tConditionP));
+		RM.Bath         .add(new RecipeMapHandlerMaterial(tMat                      , MT.Netherite      .liquid(U4, T)  ,   0, 144, NF, MT.NetherizedDiamond    , NI, T, tConditionP));
 		}
 		
 		tConditionP = new And(SIMPLIFIABLE, ingotHot.NOT);
@@ -560,6 +560,7 @@ public class Loader_Recipes_Handlers implements Runnable {
 		RM.Generifier   .add(new RecipeMapHandlerMaterial(MT.Mithril                , NF                                ,   0,   1, NF, MT.Pt                   , NI, T, tConditionP));
 		RM.Generifier   .add(new RecipeMapHandlerMaterial(MT.TungstenSintered       , NF                                ,   0,   1, NF, MT.W                    , NI, T, tConditionP));
 		RM.Generifier   .add(new RecipeMapHandlerMaterial(MT.Os                     , NF                                ,   0,   1, NF, MT.FakeOsmium           , NI, T, tConditionP));
+		RM.Generifier   .add(new RecipeMapHandlerMaterial(MT.Chimerite              , NF                                ,   0,   1, NF, MT.Vinteum              , NI, T, tConditionP));
 		
 		for (OreDictMaterial tMaterial : new OreDictMaterial[] {MT.WroughtIron, MT.MeteoricIron, MT.IronMagnetic, MT.Meteorite, MT.PigIron, MT.IronCompressed, MT.Thaumium, MT.Enori})
 		RM.Generifier   .add(new RecipeMapHandlerMaterial(tMaterial                 , NF                                ,   0,   1, NF, MT.Fe                   , NI, T, tConditionP));

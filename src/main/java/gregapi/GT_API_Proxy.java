@@ -912,9 +912,12 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 	
 	@SubscribeEvent
 	public void onBlockHarvestingEvent(BlockEvent.HarvestDropsEvent aEvent) {
-		
 		Iterator<ItemStack> aDrops = aEvent.drops.iterator();
-		while (aDrops.hasNext()) if (ItemsGT.ILLEGAL_DROPS.contains(aDrops.next(), T)) aDrops.remove();
+		while (aDrops.hasNext()) {
+			ItemStack tDrop = aDrops.next();
+			if (ST.invalid(tDrop) || ItemsGT.ILLEGAL_DROPS.contains(tDrop, T)) {aDrops.remove(); continue;}
+			if (ST.item_(tDrop) == Items.gold_nugget) ST.meta_(tDrop, 0);
+		}
 		
 		if (aEvent.block == Blocks.dirt && aEvent.blockMetadata == 1) for (int i = 0, j = aEvent.drops.size(); i < j; i++) if (ST.block(aEvent.drops.get(0)) == Blocks.dirt) {
 			aEvent.drops.set(i, ST.make(Blocks.dirt, aEvent.drops.get(i).stackSize, 1));
@@ -1059,9 +1062,9 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		if (aEvent.entity instanceof EntityItem && !aEvent.entity.worldObj.isRemote) {
 			ItemStack aStack = ST.update(OM.get(((EntityItem)aEvent.entity).getEntityItem()), aEvent.entity.worldObj, UT.Code.roundDown(aEvent.entity.posX), UT.Code.roundDown(aEvent.entity.posY), UT.Code.roundDown(aEvent.entity.posZ));
 			if (ST.valid(aStack) && aStack.stackSize > 0) {
-				if (ST.meta(aStack) == W) ST.meta(aStack, 0);
+				if (ST.meta_(aStack) == W || ST.item_(aStack) == Items.gold_nugget) ST.meta(aStack, 0);
 				if (((EntityItem)aEvent.entity).lifespan > 1200) {
-					if (aStack.getItem() == Items.egg || aStack.getItem() == Items.feather || aStack.getItem() == Items.apple) {
+					if (ST.item_(aStack) == Items.egg || ST.item_(aStack) == Items.feather || ST.item_(aStack) == Items.apple) {
 						((EntityItem)aEvent.entity).lifespan = 1200;
 					} else {
 						if (((EntityItem)aEvent.entity).lifespan == 6000) {
