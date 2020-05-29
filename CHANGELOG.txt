@@ -9,12 +9,10 @@ Nothing
 Nothing
 
 6.14.02: (Not released yet).
-Nothing
-
-6.14.01: (Not released yet).
 [WIP]Draining Well. A Multiblock that drains liquid from underground.
 
-6.14.00:
+6.14.01:
+[NOTE] Do not use 6.14.00, it will crash the game.
 [MERGED]Merged official branch 6.13.01
 | 6.13.01:
 | [FIXED] a Bug that crashes every single Crafting Recipe, sorry about that lol.
@@ -90,6 +88,8 @@ Nothing
 [CHANGED] Cumene now requires aluminium chloride as the catalyst but not alumina.
 [ADDED] Aluminium chloride.
 [ADDED] Bunch of fluids that are related to Platinum family metal production
+
+6.14.00: (Broken, Do not use!)
 
 6.13.08:
 [FIXED]Producing too many gem plates from gems in the laser cutter.

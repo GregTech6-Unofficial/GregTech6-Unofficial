@@ -90,6 +90,7 @@ public class Loader_Fluids implements Runnable {
 		FL.create("sgasoil"                  , "Gas Oil With Sulfur" , null                  , 1);
 
 		// Petrol final products (organic chemistry)
+		FL.create("NitroFuel"                , "Nitro Fuel"          , MT.NitroFuel          , 1);          //硝基柴油
 		FL.create("lubricant"                , "Lubricant"           , MT.Lubricant          , 1);
 		FL.create("oil"                      , "Oil"                 , MT.Oil                , 1);
 		FL.create("fuel"                     , "Fuel Oil"            , MT.Fuel               , 1);
@@ -97,7 +98,6 @@ public class Loader_Fluids implements Runnable {
 		FL.create("diesel"                   , "Diesel"              , MT.Diesel             , 1);
 		FL.create("petrol"                   , "Petrol"              , MT.Petrol             , 1);
 
-		FL.create("NitroFuel"                , "Nitro Fuel"          , MT.NitroFuel          , 1);          //硝基柴油
 		FL.create("Propane"                  , "Propane"             , MT.Propane            , 2).setDensity(-1000); //丙烷
 		FL.create("Butane"                   , "Butane"              , MT.Butane             , 2).setDensity(-1000); //丁烷
 		FL.create("Ethylene"                 , "Ethylene"            , MT.Ethylene           , 2);          //乙烯
@@ -154,13 +154,6 @@ public class Loader_Fluids implements Runnable {
 		FL.create("ic2uumatter"              , "UU-Matter"           , MT.UUMatter           , 1,      1,   100);
 		FL.create("ic2constructionfoam"      , "Construction Foam"   , MT.ConstructionFoam   , 1,    100,   300);
 		FL.create("ic2distilledwater"        , "Distilled Water"     , MT.DistWater          , 1);
-		FL.create("NitroFuel"                , "Nitro Fuel"          , MT.NitroFuel          , 1);
-		FL.create("lubricant"                , "Lubricant"           , MT.Lubricant          , 1);
-		FL.create("oil"                      , "Oil"                 , MT.Oil                , 1);
-		FL.create("fuel"                     , "Fuel Oil"            , MT.Fuel               , 1);
-		FL.create("kerosine"                 , "Kerosine"            , MT.Kerosine           , 1);
-		FL.create("diesel"                   , "Diesel"              , MT.Diesel             , 1);
-		FL.create("petrol"                   , "Petrol"              , MT.Petrol             , 1);
 		FL.create("ic2biomass"               , "Biomass"             , MT.Biomass            , 1);
 		FL.create("biomass"                  , "Biomass"             , MT.Biomass            , 1);
 		FL.create("ic2coolant"               , "Industrial Coolant"  , null                  , 1);
