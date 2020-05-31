@@ -119,23 +119,47 @@ public class Loader_Fluids implements Runnable {
 		FL.create("vinylchloride"            , "Vinyl Chloride"      , null                  , 1); //氯乙烯
 		FL.create("ethyne"                   , "Ethyne"              , null                  , 2); //乙炔
 		FL.create("photoresist"              , "Photoresist"         , null                  , 1); //光刻胶
-        FL.create("monochlorodifluoromethane", "Monochlorodifluoromethane", null, 2); //二氟一氯甲烷
-        FL.create("trichloromethane", "Trichloromethane", null, 2); //氯仿
-        FL.create("tetrafluoroethylene", "Tetrafluoroethylene", null, 2); //四氟乙烯
+        FL.create("monochlorodifluoromethane", "Monochlorodifluoromethane",null              , 2); //二氟一氯甲烷
+        FL.create("trichloromethane"         , "Trichloromethane"    , null                  , 2); //氯仿
+        FL.create("tetrafluoroethylene"      , "Tetrafluoroethylene" , null                  , 2); //四氟乙烯
 
 		// Platinum Family Metal processing related fluids
-		FL.create("solutionrichptpa" , "Rich Platinum Palladium Solution" , null , 1);
-		FL.create("solutionrichpa" , "Rich Palladium Solution" , null , 1);
-		FL.create("moltensodiumbisulfate" , "Molten Sodium Bisulfate" , null , 1);
-		FL.create("rhodiumsulfidesolution" , "Rhodium Sulfide Solution" , null , 1);
-		FL.create("pregnantsolutionosru" , "Rich Osmium Ruthenium Pregnant Solution" , null , 1);
-		FL.create("absorptionliquidosru" , "Rich Osmium Ruthenium Absorption Liquid" , null , 1);
-		FL.create("absorptionliquidru" , "Rich Ruthenium Absorption Liquid" , null , 1);
-		FL.create("rutheniumtetroxide" , "Ruthenium Tetroxide" , null , 2);
-		FL.create("osmiumtetroxide" , "Osmium Tetroxide" , null , 2);
-		FL.create("chlororhodiumacid" , "Chlororhodium Acid" , null , 1);
-		FL.create("evaporatedliquidos" , "Rich Osmium Evaporated Liquid" , null , 1);
-		FL.create("sodiumosmiumhexachloride" , "Ammonium Hexachloroosmium Solution" , null , 1);
+		FL.create("solutionrichptpa"         , "Rich Platinum Palladium Solution" , null     , 1);
+		FL.create("solutionrichpa"           , "Rich Palladium Solution" , null              , 1);
+		FL.create("moltensodiumbisulfate"    , "Molten Sodium Bisulfate" , null              , 1);
+		FL.create("rhodiumsulfidesolution"   , "Rhodium Sulfide Solution" , null             , 1);
+		FL.create("pregnantsolutionosru"     , "Rich Osmium Ruthenium Pregnant Solution" , null , 1);
+		FL.create("absorptionliquidosru"     , "Rich Osmium Ruthenium Absorption Liquid" , null , 1);
+		FL.create("absorptionliquidru"       , "Rich Ruthenium Absorption Liquid" , null     , 1);
+		FL.create("rutheniumtetroxide"       , "Ruthenium Tetroxide" , null                  , 2);
+		FL.create("osmiumtetroxide"          , "Osmium Tetroxide"    , null                  , 2);
+		FL.create("chlororhodiumacid"        , "Chlororhodium Acid"  , null                  , 1);
+		FL.create("evaporatedliquidos"       , "Rich Osmium Evaporated Liquid" , null        , 1);
+		FL.create("sodiumosmiumhexachloride" , "Ammonium Hexachloroosmium Solution" , null   , 1);
+
+		//fluids about bio circuit
+		FL.create("mscbasalmedium"           , "MSC Basal Medium"    , null                  , 1);
+		FL.create("mscsupplement"            , "MSC Supplement"      , null                  , 1);
+		FL.create("msc"                      , "MSC(Mesenchymal Stem Cell)" , null           , 1);
+		FL.create("bonemarrow"               , "Bone Marrow"         , null                  , 1);
+		FL.create("spss"                     , "Stroke-physiological saline solution" , null , 1);
+		FL.create("amylumsolution"           , "Amylum Solution"     , null                  , 1);
+		FL.create("vitaminsolution"          , "Vitamin Solution"    , null                  , 1);
+		FL.create("hormonesolution"          , "Hormone Solution"    , null                  , 1);
+		FL.create("differentiationpromotingproteinneuron" , "Differentiation Promoting Protein Neuron" , null , 1);
+		FL.create("methanol"                 , "Methanol"            , null                  , 1);
+		FL.create("coconutoil"               , "Coconut Oil"         , null                  , 1);
+		FL.create("methyllaurate"            , "Methyl Laurate"      , null                  , 1);
+		FL.create("methylhydrolaurate"       , "Methyl Hydrolaurate" , null                  , 1);
+		FL.create("tris_hcl"                 , "Tris-HCl Buffer"     , null                  , 1);
+		FL.create("aceticacid"               , "Acetic Acid"         , null                  , 1);
+		FL.create("edta"                     , "Ethylenediaminetetraacetic acid" , null      , 1);
+		FL.create("animaltissuehomogenate"   , "Animal Tissue Homogenate" , null             , 1);
+		FL.create("dnaextract"               , "DNA Extract"         , null                  , 1);
+		FL.create("dnasolution"              , "DNA Solution"        , null                  , 1);
+		FL.create("bacteria_differentiationpromotingproteinneuron" , "Bacteria(Differentiation Promoting Protein Neuron)" , null , 1);
+
+		FL.create("ethanol"                  ,"Ethanol"              ,null                   ,1);
 
 
 		// Polymers

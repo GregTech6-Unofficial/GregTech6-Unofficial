@@ -470,6 +470,31 @@ public enum FL {
 	, EvaporatedliquidOs        ("evaporatedliquidos"                                       , SIMPLE, LIQUID)
 	, SodiumOsmiumHexachloride  ("sodiumosmiumhexachloride"                                 , SIMPLE, LIQUID)
 
+	//fluids about bio circuit
+	, MSCBasalMedium            ("mscbasalmedium"                                           , SIMPLE, LIQUID)
+	, MSCSupplement             ("mscsupplement"                                            , SIMPLE, LIQUID)
+	, MSC                       ("msc"                                                      , SIMPLE, LIQUID)
+	, BoneMarrow                ("bonemarrow"                                               , SIMPLE, LIQUID)
+	, SPSS                      ("spss"                                                     , SIMPLE, LIQUID)
+	, AmylumSolution            ("amylumsolution"                                           , SIMPLE, LIQUID)
+	, VitaminSolution           ("vitaminsolution"                                          , SIMPLE, LIQUID)
+	, HormoneSolution           ("hormonesolution"                                          , SIMPLE, LIQUID)
+	, DifferentiationPromotingProteinNeuron("differentiationpromotingproteinneuron"         , SIMPLE, LIQUID)
+	, Methanol                  ("methanol"                                                 , SIMPLE, LIQUID)
+	, CoconutOil                ("coconutoil"                                               , SIMPLE, LIQUID)
+	, MethylLaurate             ("methyllaurate"                                            , SIMPLE, LIQUID)
+	, MethylHydrolaurate        ("methylhydrolaurate"                                       , SIMPLE, LIQUID)
+	, Tris_HCl                  ("tris_hcl"                                                 , SIMPLE, LIQUID)
+	, AceticAcid                ("aceticacid"                                               , SIMPLE, LIQUID)
+	, EDTA                      ("edta"                                                     , SIMPLE, LIQUID)
+	, AnimalTissueHomogenate    ("animaltissuehomogenate"                                   , SIMPLE, LIQUID)
+	, DNAExtract                ("dnaextract"                                               , SIMPLE, LIQUID)
+	, DNASolution               ("dnasolution"                                              , SIMPLE, LIQUID)
+	, Bacteria_DifferentiationPromotingProteinNeuron("bacteria_differentiationpromotingproteinneuron", SIMPLE, LIQUID)
+
+	//I don't know the reason why it only has a texture ,so I added it here.
+	,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)
+
 	// Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)
 	, polytetrafluoroethylene   ("polytetrafluoroethylene"                                  , SIMPLE, LIQUID)
