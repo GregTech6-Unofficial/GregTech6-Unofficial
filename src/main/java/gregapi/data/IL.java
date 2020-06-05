@@ -416,6 +416,9 @@ public enum IL implements IItemContainer {
     // Physics
     Proton, Anti_Proton, Electron, Positron, Neutron, Alpha_Particle, Neutrino, Anti_Neutrino, Higgs_Boson,
     Kerr_Blackhole,
+
+	// Biology
+	Culture_Dish_Empty,
 	
 	// Deprecated
 	Battery_Hull_LV, Battery_SU_LV_SulfuricAcid, Battery_SU_LV_Mercury, Battery_RE_LV_Sodium, Battery_RE_LV_Cadmium, Battery_RE_LV_Lithium, Battery_RE_LV_Redstone, Battery_RE_LV_Nikolite, Battery_RE_LV_Teslatite, Battery_RE_LV_Electrotine,

@@ -32,6 +32,7 @@ import gregapi.item.prefixitem.PrefixItemRing;
 import gregapi.util.ST;
 import gregtech.entities.projectiles.EntityArrow_Material;
 import gregtech.items.*;
+import gregtech.items.MultiItemBiology;
 
 public class Loader_Items implements Runnable {
 	@Override
@@ -46,6 +47,7 @@ public class Loader_Items implements Runnable {
 		ItemsGT.BOOKS = new MultiItemBooks();
 		ItemsGT.BUMBLEBEES = new MultiItemBumbles();
 		ItemsGT.PHYS = new MultiItemPhysics();
+		ItemsGT.BIO = new MultiItemBiology();
 		
 		ItemsGT.ALL_MULTI_ITEMS[0] = ItemsGT.TECH;
 		ItemsGT.ALL_MULTI_ITEMS[1] = ItemsGT.TOOLS;
@@ -55,6 +57,7 @@ public class Loader_Items implements Runnable {
 		ItemsGT.ALL_MULTI_ITEMS[5] = ItemsGT.BOOKS;
 		ItemsGT.ALL_MULTI_ITEMS[6] = ItemsGT.BUMBLEBEES;
 		ItemsGT.ALL_MULTI_ITEMS[7] = ItemsGT.PHYS;
+		ItemsGT.ALL_MULTI_ITEMS[8] = ItemsGT.BIO;
 		
 		new PrefixItem(MD.GT, "gt.meta.dust"                        , OP.dust                           );
 		new PrefixItem(MD.GT, "gt.meta.dustSmall"                   , OP.dustSmall                      );
