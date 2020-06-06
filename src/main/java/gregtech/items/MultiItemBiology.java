@@ -35,6 +35,18 @@ public class MultiItemBiology extends MultiItemRandom{
     @Override
     public void addItems() {
         IL.Culture_Dish_Empty.set(addItem(1000, "Culture Dish (Empty)", "A fundamental tool of laboratory biology"));
+        IL.Culture_Dish_MSC.set(addItem(1001,"Culture Dish (MSC)","Stem cell culture medium inside"));
+        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in biology laboratory"));
+        IL.Culture_Dish_Stem_Cell_Somatic.set(addItem(1003,"Culture Dish (stem cells)","Stem cells inside"));
+        IL.dust_Inorganic_Salt_Mixture.set(addItem(1004,"Inorganic Salt Mixture Dust","Inorganic salts for cell culture"));
+        IL.dust_Tiny_Inorganic_Salt_Mixture.set(addItem(1005,"Tiny InorganicSalt Mixture Dust","Inorganic salts for cell culture"));
+        IL.dust_Glucose.set(addItem(1006,"Glucose Dust","Can't be eaten now"));
+        IL.Stem_Cell.set(addItem(1007,"Stem Cell","It can differentiate into various cells(But now there are only neuron cells)"));
+        IL.Neuron_Cell.set(addItem(1008,"Culture Dish (Neuron Cell)","It's clever"));
+        IL.Unformed_Embryo.set(addItem(1009,"Unformed Embryo","It's alive,and it will die for science."));
+        IL.Precision_Manipulator.set(addItem(1010,"Percision Manipulator","Very accurate"));
+        IL.Lauryl_Sulfate.set(addItem(1011,"Lauryl Sulfate",""));
+        IL.SDS.set(addItem(1012,"SDS",""));
 
         RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
 
