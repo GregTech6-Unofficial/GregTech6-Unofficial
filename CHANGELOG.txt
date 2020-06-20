@@ -9,10 +9,13 @@ Nothing
 Nothing
 
 6.14.02: (Not released yet).
-[WIP]Draining Well. A Multiblock that drains liquid from underground.
-[FIXED] Recipe for Titanium Niobium Carbide Dynamo Mainblock
-[CHANGED] Thanks for Greg to notify me that dust not able to put into Extruders will cause plastic and similar materials cannot be processed into capsules, etc. I reverted the change so Extruders can process them now again.
-[ADDED] Biology Item Group
+[FIXED] Recipe for Titanium Niobium Carbide Dynamo Mainblock.
+[CHANGED] The Mod name is now 'GregTech 6 Unofficial' to avoid ambiguity.
+[CHANGED] Thanks to Greg notifying me that dust not being able to put into Extruders will cause plastic and similar materials cannot be processed into capsules, etc. I reverted the change so Extruders can process them now again.
+[CHANGED] Fusion Reactor Mk1 now requires LU for start energy and EU for the maintaining energy. Since a Tokamak design is used here, electricity should be used to maintain the current in the coils.
+[ADDED] Biology Item Group.
+[ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
+[WIP] Biochemical Research Laboratory.
 
 6.14.01:
 [NOTE] Do not use 6.14.00, it will crash the game.

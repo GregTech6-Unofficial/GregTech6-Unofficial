@@ -213,6 +213,7 @@ public class MultiTileEntityFusionReactor extends TileEntityBase10MultiBlockMach
 	public boolean isInsideStructure(int aX, int aY, int aZ) {
 		int tX = getOffsetXN(mFacing, 2), tY = yCoord-2, tZ = getOffsetZN(mFacing, 2);
 		return aX >= tX - 9 && aY >= tY && aZ >= tZ - 9 && aX <= tX + 9 && aY <= tY + 5 && aZ <= tZ + 9;
+		// aY <= tY + 5 originally is written by Greg, but tY + 4 works here too.
 	}
 	
 	@Override
