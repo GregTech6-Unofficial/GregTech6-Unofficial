@@ -2,9 +2,9 @@
 
 ## Introduction
 
-This mod is an [unofficial but approved](https://www.curseforge.com/linkout?remoteUrl=https%253a%252f%252fforum.mechaenetia.com%252ftag%252fapproved) continuation of [GregTech-6](https://github.com/GregTech6/gregtech6). 
+This mod is an [unofficial but approved](https://forum.mechaenetia.com/tag/approved) continuation of [GregTech-6](https://github.com/GregTech6/gregtech6). 
 
-Note: GT6 official branch is still being developed, though it will be mostly bugfixes, but also PRs. (Gregorious is going to make his own Game Mechaenetia ^^) And I will be merging official branch commits into GT6U. For details, visit this [post](https://www.curseforge.com/linkout?remoteUrl=https%253a%252f%252fforum.mechaenetia.com%252ft%252fgregtech-6-main-thread%252f34%252f168). 
+Note: GT6 official branch is still being developed, though it will be mostly bugfixes, but also PRs. (Gregorious is going to make his own Game Mechaenetia ^^) And I will be merging official branch commits into GT6U. For details, visit this [post](https://forum.mechaenetia.com/t/gregtech-6-main-thread/34/168). 
 
 The development work of GT6U is undertaken by development team GT6U-Team, and its development direction is to continue to improve the technology line of GT6 and add more practical equipment.
 
@@ -22,6 +22,18 @@ The development work of GT6U is undertaken by development team GT6U-Team, and it
 
 * Diversified gameplay, such as nuclear power reactors that can be cooled with distilled water.
 
+## Upgrading from GT6 to GT6U
+
+You can easily update your GT6 official world to GT6U by replacing the original GT6 jar file, but do NOTE that:
+
+* Distillation Tower and Cryo Distillation Tower won't work with original design in GT6 official branch, but you can easily fix it by looking at the tooltips of the mainblocks.
+
+* Fusion reactor now accepts LU as start energy while requires EU as maintain energy.
+
+* Some recipes are changed so check NEI if you find out some of your machines not working.
+
+If other bugs emerge when updating the world, submit a GitHub issue. (Just click the Issues button above)
+
 ## License
 
 This Mod is licensed under the [GNU Lesser General Public License](LICENSE).
@@ -31,10 +43,29 @@ Any assets containing the [GregTech logo](src/main/resources/logos) or any
 derivative of it are licensed under the
 [Creative Commons Attribution-NonCommercial 4.0 International Public License](src/main/resources/LICENSE.logos).
 
+## Acknowledgement
+
+Lead Developers: YueSha, Fanshu
+
+Contributers: jihuayu, duck_egg
+
+Special thanks to:
+
+Texture Support：@MCTian-mi @Orientsky @duckegg128
+
+Localization Support：@qwerty9462 @Orientsky @Evan323
+
+Test & Debug Support：@Contrl
+
+Also thanks to GregoriousT!
+
 ## Support
 
-You can use the Issue Tracker or join the QQ group of GT6U development: 675321303
-You can visit GT6 Forums at https://forum.mechaenetia.com/
+You can use the Issue Tracker or join Discord or QQ group. 
+
+## Contribution
+
+Please do ^^ But if you make major changes please make sure you understand their consequences that might bring up because I don't guarantee that I can discover them. 
 
 ## Related Projects
 
@@ -42,15 +73,29 @@ You can visit GT6 Forums at https://forum.mechaenetia.com/
 
 OmniOcular Mod is an addon of Waila that provides more info about the things in game. [GitHub](https://github.com/GregTech6-Unofficial/OmniOcularGT6U)
 
-#### Chinese Localization
+#### Chinese Localization for GT6U
 
 Originally maintained by MoHaDouBi Team and now maintained by GT6U supporters and ourselves. [GitHub](https://github.com/yuesha-yc/GregTech6U-Chinese-Localization)
+
+## Addons and Modpacks
+
+#### Addons:
+
+Nothing here now :p
+
+#### Modpacks:
+
+[Terra Firma Rescue](https://www.curseforge.com/minecraft/modpacks/terrafirma-rescue) A combination of GT6U and TFC. 
+
+## Videos and Streams
+
+[Bear's Den](https://www.youtube.com/playlist?list=PLt-FxKYxk8Lj30lntAvgCfZcde142pste)
 
 ## Downloads
 
 [Curseforge](https://www.curseforge.com/minecraft/mc-mods/gregtech6-unofficial)
 
-## Release Links
+## Other Links
 
 [MCBBS](https://www.mcbbs.net/thread-1038500-1-1.html)
 
