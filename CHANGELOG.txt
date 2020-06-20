@@ -10,7 +10,9 @@ Nothing
 
 6.14.02: (Not released yet).
 [WIP]Draining Well. A Multiblock that drains liquid from underground.
-[ADDDED] Biology Item Group
+[FIXED] Recipe for Titanium Niobium Carbide Dynamo Mainblock
+[CHANGED] Thanks for Greg to notify me that dust not able to put into Extruders will cause plastic and similar materials cannot be processed into capsules, etc. I reverted the change so Extruders can process them now again.
+[ADDED] Biology Item Group
 
 6.14.01:
 [NOTE] Do not use 6.14.00, it will crash the game.
