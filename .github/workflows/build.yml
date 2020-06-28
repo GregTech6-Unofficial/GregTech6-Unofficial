@@ -16,8 +16,6 @@ jobs:
           **/.gradle
           !**/.gradle/libs
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
     - name: set up JDK 1.8
       uses: actions/setup-java@v1
       with:
