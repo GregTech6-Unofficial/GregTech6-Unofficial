@@ -15,6 +15,7 @@ Nothing
 [CHANGED] Fusion Reactor Mk1 now requires LU for start energy and EU for the maintaining energy. Since a Tokamak design is used here, electricity should be used to maintain the current in the coils.
 [ADDED] Biology Item Group.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
+[ADDED] Achievement Page and GT6U Achievements. This is heavily in progress so don't be surprise if you find out there is only few achievements.
 [WIP] Biochemical Research Laboratory.
 
 6.14.01:
