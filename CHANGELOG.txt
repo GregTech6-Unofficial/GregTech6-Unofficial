@@ -10,6 +10,9 @@ Nothing
 
 6.14.02: (Not released yet).
 [FIXED] Recipe for Titanium Niobium Carbide Dynamo Mainblock.
+[FIXED] Recipe for Titanium Niobium Carbide Turbine Mainblock.
+[FIXED] Recipes for Large Mass Fab and Mass Replicator Mainblocks are the same.
+[FIXED] When centrifuging energy crystal dust you can get more sapphire dust.
 [CHANGED] The Mod name is now 'GregTech 6 Unofficial' to avoid ambiguity.
 [CHANGED] Thanks to Greg notifying me that dust not being able to put into Extruders will cause plastic and similar materials cannot be processed into capsules, etc. I reverted the change so Extruders can process them now again.
 [CHANGED] Fusion Reactor Mk1 now requires LU for start energy and EU for the maintaining energy. Since a Tokamak design is used here, electricity should be used to maintain the current in the coils.
