@@ -157,7 +157,8 @@ public class Loader_Fluids implements Runnable {
 		FL.create("animaltissuehomogenate"   , "Animal Tissue Homogenate" , null             , 1);
 		FL.create("dnaextract"               , "DNA Extract"         , null                  , 1);
 		FL.create("dnasolution"              , "DNA Solution"        , null                  , 1);
-		FL.create("bacteria_differentiationpromotingproteinneuron" , "Bacteria(Differentiation Promoting Protein Neuron)" , null , 1);
+		FL.create("bacteria_differentiationpromotingproteinneuron"               , "Bacteria(Differentiation Promoting Protein Neuron)" , null , 1);
+		FL.create("protein"                  , "Protein"             , null                  , 1);
 
 //		FL.create("ethanol"                  ,"Ethanol"              ,null                   ,1);
 
