@@ -145,7 +145,7 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		
 		CR.shaped(ST.make(Blocks.gravel                     , 1, 0), DEF, "h", "X", 'X', ST.make(Blocks.cobblestone, 1, 0));
 		CR.shaped(ST.make(Blocks.cobblestone                , 1, 0), DEF, "h", "X", 'X', ST.make(Blocks.stone, 1, 0));
-		shaped(ST.make(Blocks.stonebrick, 1, 2), DEF, "h", "X", 'X', ST.make(Blocks.stonebrick, 1, 0))
+		CR.shaped(ST.make(Blocks.stonebrick, 1, 2), DEF, "h", "X", 'X', ST.make(Blocks.stonebrick, 1, 0));
 		CR.shaped(ST.make(Blocks.stonebrick                 , 1, 3), DEF, "f", "X", 'X', ST.make(Blocks.double_stone_slab, 1, 8));
 		CR.shapeless(ST.make(Blocks.double_stone_slab       , 1, 8), DEF, new Object[] {ST.make(Blocks.double_stone_slab    , 1, 0)});
 		CR.shapeless(ST.make(Blocks.double_stone_slab       , 1, 0), DEF, new Object[] {ST.make(Blocks.double_stone_slab    , 1, 8)});
