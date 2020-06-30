@@ -19,12 +19,14 @@
 
 package gregtech.tileentity.multiblocks;
 
+import gregapi.block.multitileentity.MultiTileEntityRegistry;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
 import gregapi.tileentity.delegate.DelegatorTileEntity;
 import gregapi.tileentity.multiblocks.ITileEntityMultiBlockController;
 import gregapi.tileentity.multiblocks.MultiTileEntityMultiBlockPart;
 import gregapi.tileentity.multiblocks.TileEntityBase10MultiBlockMachine;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -41,6 +43,8 @@ import static gregapi.data.CS.*;
  */
 
 public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
+    MultiTileEntityRegistry tRegistry = MultiTileEntityRegistry.getRegistry("gt.multitileentity");
+
     @Override
     public boolean checkStructure2() {
         int tX = getOffsetXN(mFacing, 2), tY = yCoord, tZ = getOffsetZN(mFacing, 2);
@@ -63,10 +67,23 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     } else {
                         tSuccess = F;
                     }
+
+                    //tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+j, tZ+k, SIDE_UNKNOWN, (short)18200 , null, F, T);
+                    //tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+j, tZ+k, SIDE_UNKNOWN, (short)18201 , null, F, T);
+                    //tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+j, tZ+k, SIDE_UNKNOWN, (short)18202 , null, F, T);
+
                 } else if (i*i + j*j + k*k > 6 || (j == 0 && (((i == -2 || i == 2) && k == 0) || (((k == -2 || k == 2) && i == 0))))) {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+j, tZ+k, 18014, getMultiTileEntityRegistryID(), mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+
+                    //tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+j, tZ+k, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
+
                 } else {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+j, tZ+k, 18299, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+
+                    //tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+j, tZ+k, SIDE_UNKNOWN, (short)18299 , null, F, T);
+
+
                 }
             }
 
@@ -85,6 +102,18 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX-10, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX-11, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX-12, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+//                tRegistry.mBlock.placeBlock(worldObj, tX-3, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-4, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-5, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-6, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-7, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-8, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-9, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-10, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-11, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX-12, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
+
             }
             if (mFacing != SIDE_X_POS) {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+3, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -97,6 +126,16 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+10, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+11, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+12, tY, tZ  , 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+//                tRegistry.mBlock.placeBlock(worldObj, tX+3, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+4, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+5, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+6, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+7, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+8, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+9, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+10, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+11, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX+12, tY, tZ, SIDE_UNKNOWN, (short)18014 , null, F, T);
             }
             if (mFacing != SIDE_Z_NEG) {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ-3, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -109,6 +148,16 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ-10, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ-11, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ-12, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-3,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-4,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-5,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-6,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-7,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-8,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-9,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-10, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-11, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ-12, SIDE_UNKNOWN, (short)18014 , null, F, T);
             }
             if (mFacing != SIDE_Z_POS) {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ+3, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -121,6 +170,16 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ+10, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ+11, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX  , tY, tZ+12, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+3,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+4,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+5,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+6,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+7,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+8,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+9,  SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+10, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+11, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                tRegistry.mBlock.placeBlock(worldObj, tX, tY, tZ+12, SIDE_UNKNOWN, (short)18014 , null, F, T);
             }
 
 
@@ -137,6 +196,12 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                         if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY  , tZ+j, 18014, getMultiTileEntityRegistryID(), mActive ? 6 : 5, MultiTileEntityMultiBlockPart.ONLY_ENERGY_IN)) tSuccess = F;
                     }
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+1, tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
+
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
+
                 }
                 if (OCTAGONS[1][i][j]) { //second and fourth row layer
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-2, tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
@@ -148,6 +213,14 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+1, tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2, tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
+
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18046 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
+
                 }
                 if (OCTAGONS[2][i][j]) { //central row layer
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-2, tZ+j, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
@@ -159,7 +232,13 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+1, tZ+j, 18046, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2, tZ+j, 18014, getMultiTileEntityRegistryID(),  mActive ? 6 : 5, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
-                }
+
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18046 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18002 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18046 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+              }
 
                 if (OCTAGONS[3][i][j]) {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-2  , tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -171,6 +250,13 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+1  , tZ+j, 18299, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2  , tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18299 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18299 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
                 }
                 if (OCTAGONS[4][i][j]) {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-3  , tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -186,8 +272,17 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2  , tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+3  , tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-3, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18204 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18204 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+3, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
                 }
-                if (OCTAGONS[5][i][j]) {
+                if (OCTAGONS[5][i][j]) { // This part has problem
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-3  , tZ+j, 18299, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-3  , tZ+j, 18202, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -201,6 +296,15 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2  , tZ+j, 18202, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+3  , tZ+j, 18299, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-3, tZ+j, SIDE_UNKNOWN, (short)18299 , null, F, T);
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-2, tZ+j, SIDE_UNKNOWN, (short)18202 , null, F, T);
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18046 , null, F, T);
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+2, tZ+j, SIDE_UNKNOWN, (short)18202 , null, F, T);
+                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+3, tZ+j, SIDE_UNKNOWN, (short)18299 , null, F, T);
+
                 }
                 if (OCTAGONS[6][i][j]) {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY-3  , tZ+j, 18014, getMultiTileEntityRegistryID(), mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
@@ -216,6 +320,15 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+2  , tZ+j, 18014, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
 
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX+i, tY+3  , tZ+j, 18014, getMultiTileEntityRegistryID(), mActive ? 6 : 5, MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-3, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY-1, tZ+j, SIDE_UNKNOWN, (short)18046 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY, tZ+j, SIDE_UNKNOWN, (short)18002 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+1, tZ+j, SIDE_UNKNOWN, (short)18046 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+2, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+//                    tRegistry.mBlock.placeBlock(worldObj, tX+i, tY+3, tZ+j, SIDE_UNKNOWN, (short)18014 , null, F, T);
+
                 }
             }
 
@@ -225,47 +338,47 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
     }
 
     public static boolean[][][] OCTAGONS = {
-            { //RING THIRD LAYER
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,T,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,T,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F},
-                    {F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F},
-                    {F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F},
-                    {F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F},
-                    {F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F},
-                    {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
-                    {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
-                    {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
-                    {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
-                    {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
-                    {F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F},
-                    {F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F},
-                    {F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F},
-                    {F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F},
-                    {F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,T,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,T,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F},
-                    {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
-            }, { //RING SECOND LAYER
+    { //RING THIRD LAYER
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,T,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,T,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F},
+            {F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F},
+            {F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F},
+            {F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F},
+            {F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F},
+            {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
+            {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
+            {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
+            {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
+            {F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F},
+            {F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F},
+            {F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F},
+            {F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F},
+            {F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F},
+            {F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,T,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,T,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,T,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F},
+            {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
+    }, { //RING SECOND LAYER
             {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
             {F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F,F},
             {F,F,F,F,F,F,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F},
@@ -534,6 +647,7 @@ public class MultiTileEntityCEPC extends TileEntityBase10MultiBlockMachine {
     public boolean isInsideStructure(int aX, int aY, int aZ) {
         int tX = getOffsetXN(mFacing, 2), tY = yCoord-3, tZ = getOffsetZN(mFacing, 2);
         return aX >= tX - 19 && aY >= tY && aZ >= tZ - 19 && aX <= tX + 19 && aY <= tY + 7 && aZ <= tZ + 19;
+
     }
 
     @Override public DelegatorTileEntity<IFluidHandler> getFluidOutputTarget(byte aSide, Fluid aOutput) { return null; }

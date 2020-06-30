@@ -1,4 +1,4 @@
-# GregTech-6 Unofficial [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/gzwsGuR) [![Join our QQ Group!](https://img.shields.io/badge/QQ-Join%20US-brightgreen)](https://jq.qq.com/?_wv=1027&k=uhBLbHnI)
+# GregTech-6 Unofficial [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/gzwsGuR) [![Join our QQ Group!](https://img.shields.io/badge/QQ-Join%20US-brightgreen)](https://jq.qq.com/?_wv=1027&k=uhBLbHnI) ![Build](https://github.com/GregTech6-Unofficial/GregTech6-Unofficial/workflows/Build/badge.svg) 
 
 ## Introduction
 
