@@ -491,6 +491,7 @@ public enum FL {
 	, DNAExtract                ("dnaextract"                                               , SIMPLE, LIQUID)
 	, DNASolution               ("dnasolution"                                              , SIMPLE, LIQUID)
 	, Bacteria_DifferentiationPromotingProteinNeuron("bacteria_differentiationpromotingproteinneuron", SIMPLE, LIQUID)
+	, Protein                   ("protein"                                                  , SIMPLE, LIQUID)
 
 	//I don't know the reason why it only has a texture ,so I added it here.
 	,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)

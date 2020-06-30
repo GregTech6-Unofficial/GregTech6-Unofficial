@@ -22,8 +22,36 @@ package gregtech.items;
 import gregapi.data.*;
 import gregapi.item.CreativeTab;
 import gregapi.item.multiitem.MultiItemRandom;
+import gregapi.util.CR;
+import gregapi.util.ST;
+import net.minecraft.init.Items;
+
 
 import static gregapi.data.CS.*;
+
+import static gregapi.data.OP.*;
+import static gregapi.util.CR.*;
+import gregapi.config.ConfigCategories;
+import gregapi.data.ANY;
+import gregapi.data.CS.BlocksGT;
+import gregapi.data.CS.ConfigsGT;
+import gregapi.data.CS.FluidsGT;
+import gregapi.data.CS.OreDictToolNames;
+import gregapi.data.FL;
+import gregapi.data.IL;
+import gregapi.data.MT;
+import gregapi.data.OD;
+import gregapi.data.OP;
+import gregapi.data.RM;
+import gregapi.oredict.OreDictMaterial;
+import gregapi.util.CR;
+import gregapi.util.OM;
+import gregapi.util.ST;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+//不管有没有用，先import再说
 
 public class MultiItemBiology extends MultiItemRandom{
 
@@ -49,7 +77,44 @@ public class MultiItemBiology extends MultiItemRandom{
         IL.SDS.set(addItem(1012,"SDS",""));
 
         RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
+        //空培养皿的合成
 
+        RM.Centrifuge.addRecipe1(T,1024,200, ST.make(Items.bone,1,0), ZL_FS, FL.FieryBlood.make(1),OP.dust.mat(MT.Bone,4));
+        //骨髓血
+
+        RM.Mixer.addRecipe1(T,16,64,OP.dustDiv72.mat(MT.NaCl,81), MT.DistWater.liquid(U*125,T), FL.SPSS.make(125000),ZL_IS);
+        RM.Mixer.addRecipe1(T,64,128,OP.dust.mat(MT.NaCl,9),MT.DistWater.liquid(U*1000,T), FL.SPSS.make(1000000),ZL_IS);
+        RM.Mixer.addRecipe1(T,256,256,OP.dustSmall.mat(MT.NaCl, 9),MT.DistWater.liquid(U*250,T), FL.SPSS.make(250000),ZL_IS);
+        //生理盐水
+
+        RM.Welder.addRecipeX(T,256,256, ST.array(OP.plateTiny.mat(MT.Ti,4),OP.gearGtSmall.mat(MT.Ti,1),OP.stick.mat(MT.Ti, 2) , OP.stick.mat(MT.NeodymiumMagnetic,1), OP.stickLong.mat(MT.Rh,1),IL.Processor_Crystal_Emerald.get(1)) ,ZL_FS,ZL_FS,IL.Precision_Manipulator.get(1));
+        //精密机械臂，晶体处理器要在MT中换成MF8
+
+        RM.Mixer.addRecipeX(T, 64, 64, ST.array(OP.dustSmall.mat(MT.PO4 , 1) , OP.dustSmall.mat(MT.KNO3 , 1) , OP.dustSmall.mat(MT.CaSO4, 1), OP.dustSmall.mat(MT.MgCl2,1)),ZL_FS,ZL_FS, IL.dust_Inorganic_Salt_Mixture.get(1));
+        //无机盐混合物粉
+
+        CR.shaped(IL.dust_Tiny_Inorganic_Salt_Mixture.get(9),DEF , "X  ", 'X',IL.dust_Inorganic_Salt_Mixture);
+        CR.shaped(IL.dust_Inorganic_Salt_Mixture.get(1),DEF_NCC, "XXX", "XXX" ,"XXX" , 'X', IL.dust_Tiny_Inorganic_Salt_Mixture.get(9));
+        //无机盐混合物粉与其小撮粉的相互转化
+
+        RM.Juicer.addRecipe1(T, 16, 114, ST.make(Items.ghast_tear, 1, 0), ZL_FS, FL.HormoneSolution.make(1), ZL_IS);
+        RM.HeatMixer.addRecipe1(T, 256, 810, ST.make(Items.golden_apple, 8, 0), FL.HormoneSolution.make(8), FL.HormoneSolution.make(9), ZL_IS);
+        //激素溶液
+
+        RM.Bath.addRecipe1(T, 16, 64, OP.dust.mat(ANY.Flour, 2), FL.Water.make(1000), FL.AmylumSolution.make(1000), IL.Food_Dough.get(1));
+        //淀粉溶液
+
+        RM.HeatMixer.addRecipeX(T, 16, 500, ZL_IS, FL.array(FL.AmylumSolution.make(2000), MT.SulfuricAcid.fluid(U10, T)), FL.Holywater.make(1000), IL.dust_Glucose.get(1));
+        //葡萄糖
+
+        RM.Mixer.addRecipeX(T, 16, 512, ZL_IS, FL.array(FL.Juice_Tomato.make(1000), FL.Ethanol.make(1000)), FL.VitaminSolution.make(1), ZL_IS);
+        //维生素溶液
+
+        RM.CryoMixer.addRecipeX(T, 256, 514, ST.array(IL.dust_Glucose.get(1), IL.dust_Tiny_Inorganic_Salt_Mixture.get(1)) , FL.array(FL.SPSS.make(1000), FL.Protein.make(10), FL.VitaminSolution.make(1), FL.HormoneSolution.make(1)), FL.MSCBasalMedium.make(1000), ZL_IS);
+        //干细胞无血清营养添加物
+
+        RM.CryoMixer.addRecipeX(T, 64, 1919, ST.array(IL.dust_Glucose.get(4), IL.dust_Inorganic_Salt_Mixture.get(1)), FL.array(FL.SPSS.make(1000), FL.Protein.make(1000)), FL.MSCSupplement.make(1000), ZL_IS);
+        //干细胞无血清基础培养基
         //给鸭蛋的加配方介绍：
 
         //初级

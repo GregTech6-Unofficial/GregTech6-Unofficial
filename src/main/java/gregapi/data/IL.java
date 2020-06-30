@@ -420,21 +420,7 @@ public enum IL implements IItemContainer {
 	// Biology
 	Culture_Dish_Empty,Culture_Dish_MSC,Culture_Dish_Stem_Cell_Embryonic,Culture_Dish_Stem_Cell_Somatic,dust_Inorganic_Salt_Mixture,dust_Tiny_Inorganic_Salt_Mixture,
 	dust_Glucose,Stem_Cell,Neuron_Cell,Unformed_Embryo,Precision_Manipulator,Lauryl_Sulfate,SDS,
-	/*
-	    public static ItemBase CultureDishStemCellSomatic = new ItemBase("CultureDishStemCellSomatic");
 
-    public static ItemBase dustInorganicSaltMixture = new ItemBase("dustInorganicSaltMixture");               //无机盐混合物粉
-    public static ItemBase dustTinyInorganicSaltMixture = new ItemBase("dustTinyInorganicSaltMixture");       //小撮无机盐混合物粉
-    public static ItemBase dustGlucose = new ItemBase("dustGlucose");                                         //葡萄糖粉
-    public static ItemBase StemCell = new ItemBase("StemCell");                                               //干细胞
-    public static ItemBase NeuronCell = new ItemBase("NeuronCell");                                           //神经细胞
-    public static ItemBase UnformedEmbryo = new ItemBase("UnformedEmbryo");                                   //未成形胚胎
-    public static ItemBase Microchip = new ItemBase("Microchip");                                             //微型芯片
-    public static ItemBase BioCircuit = new ItemBase("BioCircuit");                                           //生物电路板
-    public static ItemBase PrecisionManipulator = new ItemBase("PrecisionManipulator");                       //精密机械臂
-    public static ItemBase LaurylSulfate = new ItemBase("LaurylSulfate") ;                                    //硫酸化月桂醇
-    public static ItemBase SDS = new ItemBase("SDS");
-	 */
 	
 	// Deprecated
 	Battery_Hull_LV, Battery_SU_LV_SulfuricAcid, Battery_SU_LV_Mercury, Battery_RE_LV_Sodium, Battery_RE_LV_Cadmium, Battery_RE_LV_Lithium, Battery_RE_LV_Redstone, Battery_RE_LV_Nikolite, Battery_RE_LV_Teslatite, Battery_RE_LV_Electrotine,
