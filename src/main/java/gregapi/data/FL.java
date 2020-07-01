@@ -494,7 +494,7 @@ public enum FL {
 	, Protein                   ("protein"                                                  , SIMPLE, LIQUID)
 
 	//I don't know the reason why it only has a texture ,so I added it here.
-	,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)
+	//,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)
 
 	// Polymers
 	, Polyethylene              ("polyethylene"                                             , SIMPLE, LIQUID)

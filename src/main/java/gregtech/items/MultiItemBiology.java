@@ -22,6 +22,7 @@ package gregtech.items;
 import gregapi.data.*;
 import gregapi.item.CreativeTab;
 import gregapi.item.multiitem.MultiItemRandom;
+import gregapi.recipes.Recipe;
 import gregapi.util.CR;
 import gregapi.util.ST;
 import net.minecraft.init.Items;
@@ -115,6 +116,17 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.CryoMixer.addRecipeX(T, 64, 1919, ST.array(IL.dust_Glucose.get(4), IL.dust_Inorganic_Salt_Mixture.get(1)), FL.array(FL.SPSS.make(1000), FL.Protein.make(1000)), FL.MSCSupplement.make(1000), ZL_IS);
         //干细胞无血清基础培养基
+
+        RM.Assembler.addRecipe1(T, 64, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.MSCBasalMedium.make(1000), FL.BoneMarrow.make(1)), ZL_FS,IL.Culture_Dish_Stem_Cell_Embryonic.get(1));
+        //接种干细胞
+        //坐等生物实验室，先用组装机垫着
+
+        RM.CryoMixer.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, ZL_IS);
+
+        //培养干细胞
+        //坐等生物实验室，先用组装机垫着
+
+
         //给鸭蛋的加配方介绍：
 
         //初级
