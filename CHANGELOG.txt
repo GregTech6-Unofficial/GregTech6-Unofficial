@@ -16,9 +16,10 @@ Nothing
 [CHANGED] The Mod name is now 'GregTech 6 Unofficial' to avoid ambiguity.
 [CHANGED] Thanks to Greg notifying me that dust not being able to put into Extruders will cause plastic and similar materials cannot be processed into capsules, etc. I reverted the change so Extruders can process them now again.
 [CHANGED] Fusion Reactor Mk1 now requires LU for start energy and EU for the maintaining energy. Since a Tokamak design is used here, electricity should be used to maintain the current in the coils.
+[CHANGED] PVC production yield now decrease.
 [ADDED] Biology Item Group.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
-[ADDED] Achievement Page and GT6U Achievements. This is heavily in progress so don't be surprise if you find out there is only few achievements.
+[ADDED] Main tech tree Achievement Page and some Achievements.
 [WIP] Biochemical Research Laboratory.
 
 6.14.01:

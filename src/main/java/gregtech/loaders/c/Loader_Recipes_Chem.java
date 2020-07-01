@@ -347,7 +347,7 @@ public class Loader_Recipes_Chem implements Runnable {
 
 		//PVC and PAC
         RM.HeatMixer        .addRecipe1(T, 64, 144, ST.tag(0), FL.array(FL.Ethylene.make(1000), MT.Cl.gas(U*1, T)), FL.array(FL.Vinyl_Chloride.make(1000), MT.HCl.liquid(U*1, F)), ZL_IS);
-        RM.HeatMixer        .addRecipe1(T, 64, 144, OP.dust.mat(MT.MgCl2, 0), FL.array(FL.Vinyl_Chloride.make(144), MT.TiCl4.liquid(U1000, T)), ZL_FS, OP.dust.mat(MT.PVC, 1));
+        RM.HeatMixer        .addRecipe1(T, 64, 144, OP.dust.mat(MT.MgCl2, 0), FL.array(FL.Vinyl_Chloride.make(500), MT.TiCl4.liquid(U1000*5, T)), ZL_FS, OP.dust.mat(MT.PVC, 1));
 
         //PTFE
         RM.Roasting         .addRecipe1(T, 256, 288, OP.dust.mat(MT.K2SO4, 1), FL.array(MT.SO3.gas(U*1, T)), ZL_FS, OP.dust.mat(MT.K2S2O7, 1));
