@@ -26,6 +26,7 @@ import gregapi.item.multiitem.MultiItemTool;
 import gregapi.item.multiitem.behaviors.Behavior_Tool;
 import gregapi.old.Textures;
 import gregapi.render.IIconContainer;
+import gregtech.GT6_Main;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
@@ -87,5 +88,6 @@ public class GT_Tool_Knife extends GT_Tool_Sword {
 	public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
 		super.onToolCrafted(aStack, aPlayer);
 		aPlayer.triggerAchievement(AchievementList.buildSword);
+		try { GT6_Main.achievements.issueAchievement(aPlayer, "knife"); } catch (Exception e) { }
 	}
 }

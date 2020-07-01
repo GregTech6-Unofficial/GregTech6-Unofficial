@@ -17,6 +17,7 @@
 # Documentation files
 !/README.md
 !/old_todo_list.txt
+!/GT6U_TodoList.txt
 
 # Build files
 !/build.gradle

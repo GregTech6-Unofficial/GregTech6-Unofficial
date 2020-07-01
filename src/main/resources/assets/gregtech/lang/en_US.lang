@@ -1,0 +1,74 @@
+# This language file is solely for achievements. Do not put other localization here, but put them in gregtech.lang in your game instance directory.
+
+achievement.flint=Ouch, it's Sharp
+achievement.pickaxe=Mining Helper
+achievement.knife=Single Trouble
+achievement.drygrass=You need fire?
+achievement.furnace=Pretty Hot
+achievement.stone_anvil=Blacksmith Setup
+achievement.file=The Beginning of your Journey
+achievement.chisel=Sculptor
+achievement.wrench=Handy Tool
+achievement.burningbox=Burning Sunrise
+achievement.ceramic_crucible=Melting Topic
+achievement.bronze=Bronze
+achievement.iron=Iron, Wrought Iron, Pig Iron?
+achievement.stainlesssteel=Stainless Alloy
+achievement.bath=Bath in Melted Metal
+achievement.distillationtower=Giant Companion
+achievement.bronzeturbine_steam=Your First Steam Turbine
+achievement.bronzeengine_steam=Your First Steam Engine
+achievement.steel=Iron, but Really Strong
+achievement.steelturbine_steam=Better Steam Turbine
+achievement.steelengine_steam=Better Steam Engine
+achievement.galvanizedsteel=Galvanized
+achievement.dynamo_lv=The Second Industrial Revolution
+achievement.electrolyzer=Molecule Breaker
+achievement.heatmixer=Heat is Essential
+achievement.titanium=Titanium
+achievement.aluminium=Aluminium-num
+achievement.tungsten=Tungsten
+achievement.tungstensteel=Tungsten Steel
+achievement.cryodistill=Separating the Air
+achievement.circuit_t6=Master of Circuitry
+achievement.crystalprocessor=A Piece of Computer Board
+achievement.bedrockdrill=Ultimate Miner
+achievement.fusionmk1=A Star on the Ground
+
+achievement.flint.desc=Grab a flint
+achievement.pickaxe.desc=Craft a pickaxe
+achievement.knife.desc=Craft a knife
+achievement.drygrass.desc=Place the grass bale and wait to get dry grass bale
+achievement.furnace.desc=Craft a furnace
+achievement.stone_anvil.desc=Craft any stone anvil
+achievement.file.desc=Craft a file
+achievement.chisel.desc=Craft a chisel
+achievement.wrench.desc=Craft a wrench
+achievement.burningbox.desc=Craft a lead, bismuth, or bronze burning box
+achievement.ceramic_crucible.desc=Craft a ceramic crucible
+achievement.bronze.desc=Make a bronze ingot
+achievement.iron.desc=Make any iron ingot
+achievement.stainlesssteel.desc=Make a stainless steel ingot
+achievement.bath.desc=Craft a stainless steel bathing pot
+achievement.distillationtower.desc=Craft a distillation tower
+achievement.bronzeturbine_steam.desc=Craft a steam turbine (bronze)
+achievement.bronzeengine_steam.desc= Craft a steam engine (bronze)
+achievement.steel.desc=Make a steel ingot
+achievement.steelturbine_steam.desc=Craft a steam turbine (steel)
+achievement.steelengine_steam.desc=Craft a steam engine (steel)
+achievement.galvanizedsteel.desc=Make a double galvanized steel machine casing
+achievement.dynamo_lv.desc=Craft a dynamo
+achievement.electrolyzer.desc=Craft an electrolyzer (LV)
+achievement.heatmixer.desc=Craft a heat mixer (LV)
+achievement.titanium.desc=Make a titanium dust
+achievement.aluminium.desc=Make a aluminium dust
+achievement.tungsten.desc=Make a tungsten dust
+achievement.tungstensteel.desc=Make a tungstensteel ingot
+achievement.cryodistill.desc=Craft a cryo distillation tower
+achievement.circuit_t6.desc=Make a Circuit T6
+achievement.crystalprocessor.desc=Craft an empty crystal processor
+achievement.bedrockdrill.desc=Craft a bedrock drill controller
+achievement.fusionmk1.desc=Craft a fusion reactor Mk1 controller
+
+
+  

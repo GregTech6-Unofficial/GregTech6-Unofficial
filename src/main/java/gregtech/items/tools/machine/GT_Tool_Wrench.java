@@ -31,6 +31,7 @@ import gregapi.item.multiitem.behaviors.Behavior_Tool;
 import gregapi.item.multiitem.tools.ToolStats;
 import gregapi.old.Textures;
 import gregapi.render.IIconContainer;
+import gregtech.GT6_Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -81,6 +82,12 @@ public class GT_Tool_Wrench extends ToolStats {
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
 		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_wrench, SFX.GT_WRENCH, 100, !canBlock()));
+	}
+
+	@Override
+	public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
+		super.onToolCrafted(aStack, aPlayer);
+		try { GT6_Main.achievements.issueAchievement(aPlayer, "wrench"); } catch (Exception e) { }
 	}
 	
 	@Override

@@ -28,6 +28,7 @@ import gregapi.item.multiitem.MultiItemTool;
 import gregapi.item.multiitem.tools.ToolStats;
 import gregapi.old.Textures;
 import gregapi.render.IIconContainer;
+import gregtech.GT6_Main;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -101,6 +102,12 @@ public class GT_Tool_File extends ToolStats {
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
 		//
+	}
+
+	@Override
+	public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
+		super.onToolCrafted(aStack, aPlayer);
+		try { GT6_Main.achievements.issueAchievement(aPlayer, "file"); } catch (Exception e) { }
 	}
 	
 	@Override
