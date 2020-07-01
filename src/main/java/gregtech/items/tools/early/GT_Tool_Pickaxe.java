@@ -28,7 +28,6 @@ import gregapi.item.multiitem.behaviors.Behavior_Place_Torch;
 import gregapi.item.multiitem.tools.ToolStats;
 import gregapi.render.IIconContainer;
 import gregtech.GT6_Main;
-import gregtech.loaders.c.Loader_Achievements;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

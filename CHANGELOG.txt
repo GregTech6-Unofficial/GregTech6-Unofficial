@@ -13,10 +13,12 @@ Nothing
 [FIXED] Recipe for Titanium Niobium Carbide Turbine Mainblock.
 [FIXED] Recipes for Large Mass Fab and Mass Replicator Mainblocks are the same.
 [FIXED] When centrifuging energy crystal dust you can get more sapphire dust.
+[FIXED[ TerraFirmaCraft and TerraFirmaCraft Plus rocks and ores cannot be harvested by GT pickaxes and drills.
 [CHANGED] The Mod name is now 'GregTech 6 Unofficial' to avoid ambiguity.
 [CHANGED] Thanks to Greg notifying me that dust not being able to put into Extruders will cause plastic and similar materials cannot be processed into capsules, etc. I reverted the change so Extruders can process them now again.
 [CHANGED] Fusion Reactor Mk1 now requires LU for start energy and EU for the maintaining energy. Since a Tokamak design is used here, electricity should be used to maintain the current in the coils.
 [CHANGED] PVC production yield now decrease.
+[CHANGED] There is now a config option to choose whether Long distance pipes can be crafted with less material.
 [ADDED] Biology Item Group.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
 [ADDED] Main tech tree Achievement Page and some Achievements.
