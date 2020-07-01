@@ -1,0 +1,59 @@
+This is an unofficial to do list of gregtech
+
+Chromium processing
+Platinum processing
+
+The two main products of chromium ore refining are ferrochromium and metallic chromium. For those products the ore smelter process differs considerably. For the production of ferrochromium, the chromite ore (FeCr2O4) is reduced in large scale in electric arc furnace or in smaller smelters with either aluminium or silicon in an aluminothermic reaction.[56]
+
+
+Chromium ore output in 2002[57]
+For the production of pure chromium, the iron must be separated from the chromium in a two step roasting and leaching process. The chromite ore is heated with a mixture of calcium carbonate and sodium carbonate in the presence of air. The chromium is oxidized to the hexavalent form, while the iron forms the stable Fe2O3. The subsequent leaching at higher elevated temperatures dissolves the chromates and leaves the insoluble iron oxide. The chromate is converted by sulfuric acid into the dichromate.[56]
+
+
+4 FeCr2O4 + 8 Na2CO3 + 7 O2 → 8 Na2CrO4 + 2 Fe2O3 + 8 CO2
+2 Na2CrO4 + H2SO4 → Na2Cr2O7 + Na2SO4 + H2O
+
+Na2Cr2O7 + 2 C → Cr2O3 + Na2CO3 + CO
+Cr2O3 + 2 Al → Al2O3 + 2 Cr
+
+宝石无中生有
+聚四氟乙烯管道不耐腐蚀
+铬线配平GT化
+
+聚变mk2 mk3
+mk2:
+输入液氦 MK2聚变机械外壳 UV超导线圈
+mk3:
+输入液氦 MK3聚变机械外壳 PUV1超导线
+
+粒子对撞机
+电离粒子对撞机：
+铱锇合金壁板 UV超导线圈
+正负电子对撞机：
+粒子对撞机械外壳 PUV1超导线
+大型强子对撞机：
+粒子对撞机械外壳 PUV2超导线
+
+反物质发LU
+
+水井
+3x3x4，主方块在底面中心，顶面中心自动输出水，顶面其他方块可以被抽取水。
+本质上是一个机器
+1个输入物品槽，1个输出流体槽
+
+铂线流体
+
+Engine and turbine:
+
+火花塞内燃机20%-30%，压燃内燃机30%-40%，燃气内燃机50%-60%
+
+Fusion:
+
+Energy capture
+Multiple approaches have been proposed for energy capture. The simplest is to heat a fluid. Most designs concentrate on the D-T reaction, which releases much of its energy in a neutron. Electrically neutral, the neutron escapes the confinement. In most such designs, it is ultimately captured in a thick "blanket" of lithium surrounding the reactor core. When struck by a high-energy neutron, the lithium can produce tritium, which is then fed back into the reactor. The energy of this reaction also heats the blanket, which is then actively cooled with a working fluid and then that fluid is used to drive conventional turbomachinery.
+
+It has also been proposed to use the neutrons to breed additional fission fuel in a blanket of nuclear waste, a concept known as a fission-fusion hybrid. In these systems, the power output is enhanced by the fission events, and power is extracted using systems like those in conventional fission reactors.[7]
+
+Designs that use other fuels, notably the p-B reaction, release much more of their energy in the form of charged particles. In these cases, alternate power extraction systems based on the movement of these charges are possible. Direct energy conversion was developed at LLNL in the 1980s as a method to maintain a voltage using the fusion reaction products. This has demonstrated energy capture efficiency of 48 percent.[8]
+
+When Greg replaced GT5 fusion mechanic with GT6, it was arguably more realistic because you could pretend that the GT6 fusion reactor was doing some kind of direct energy conversion. I think that replacing it with a turbine that outputs RU is moving things back to being unrealistic. My suggestion is that either you rename the "plasma turbine" to "plasma MHD generator" and have it directly output EU instead of RU, or implement a lithium (or lithium+U238) blanket system that would be used with the heat exchanger.
