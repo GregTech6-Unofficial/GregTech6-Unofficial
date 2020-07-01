@@ -33,6 +33,7 @@ import gregapi.item.multiitem.tools.ToolStats;
 import gregapi.old.Textures;
 import gregapi.render.IIconContainer;
 import gregapi.util.ST;
+import gregtech.GT6_Main;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -95,6 +96,12 @@ public class GT_Tool_Chisel extends ToolStats {
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
 		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_chisel, SFX.MC_DIG_ROCK, 100, !canBlock()));
+	}
+
+	@Override
+	public void onToolCrafted(ItemStack aStack, EntityPlayer aPlayer) {
+		super.onToolCrafted(aStack, aPlayer);
+		try { GT6_Main.achievements.issueAchievement(aPlayer, "chisel"); } catch (Exception e) { }
 	}
 	
 	@Override
