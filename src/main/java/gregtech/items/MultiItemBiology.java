@@ -102,7 +102,7 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.HeatMixer.addRecipe1(T, 256, 810, ST.make(Items.golden_apple, 8, 0), FL.HormoneSolution.make(8), FL.HormoneSolution.make(9), ZL_IS);
         //激素溶液
 
-        RM.Bath.addRecipe1(T, 16, 64, OP.dust.mat(ANY.Flour, 2), FL.Water.make(1000), FL.AmylumSolution.make(1000), IL.Food_Dough.get(1));
+        RM.Mixer.addRecipe1(T, 16, 64, OP.dust.mat(ANY.Flour, 2), FL.Water.make(1000), FL.AmylumSolution.make(1000), IL.Food_Dough.get(1));
         //淀粉溶液
 
         RM.HeatMixer.addRecipeX(T, 16, 500, ZL_IS, FL.array(FL.AmylumSolution.make(2000), MT.SulfuricAcid.fluid(U10, T)), FL.Holywater.make(1000), IL.dust_Glucose.get(1));
@@ -117,9 +117,9 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.CryoMixer.addRecipeX(T, 64, 1919, ST.array(IL.dust_Glucose.get(4), IL.dust_Inorganic_Salt_Mixture.get(1)), FL.array(FL.SPSS.make(1000), FL.Protein.make(1000)), FL.MSCSupplement.make(1000), ZL_IS);
         //干细胞无血清基础培养基
 
-        RM.Assembler.addRecipe1(T, 64, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.MSCBasalMedium.make(1000), FL.BoneMarrow.make(1)), ZL_FS,IL.Culture_Dish_Stem_Cell_Embryonic.get(1));
+        RM.BioLab.addRecipe1(T, 64, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.MSCBasalMedium.make(1000), FL.BoneMarrow.make(1)), ZL_FS,IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(200000);;
         //接种干细胞
-        //坐等生物实验室，先用组装机垫着
+        //坐等生物实验室，先用组装机垫着//垫完了
 
         RM.CryoMixer.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, ZL_IS);
 
