@@ -108,7 +108,7 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.HeatMixer.addRecipeX(T, 16, 500, ZL_IS, FL.array(FL.AmylumSolution.make(2000), MT.SulfuricAcid.fluid(U10, T)), FL.Holywater.make(1000), IL.dust_Glucose.get(1));
         //葡萄糖
 
-        RM.Mixer.addRecipeX(T, 16, 512, ZL_IS, FL.array(FL.Juice_Tomato.make(1000), FL.Ethanol.make(1000)), FL.VitaminSolution.make(1), ZL_IS);
+        RM.Mixer.addRecipeX(T, 16, 512, ZL_IS, FL.array(FL.Juice_Tomato.make(1000), MT.Ethanol.liquid(U, T)), FL.VitaminSolution.make(1), ZL_IS);
         //维生素溶液
 
         RM.CryoMixer.addRecipeX(T, 256, 514, ST.array(IL.dust_Glucose.get(1), IL.dust_Tiny_Inorganic_Salt_Mixture.get(1)) , FL.array(FL.SPSS.make(1000), FL.Protein.make(10), FL.VitaminSolution.make(1), FL.HormoneSolution.make(1)), FL.MSCBasalMedium.make(1000), ZL_IS);

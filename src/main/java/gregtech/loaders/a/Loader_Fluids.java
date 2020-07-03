@@ -160,7 +160,7 @@ public class Loader_Fluids implements Runnable {
 		FL.create("bacteria_differentiationpromotingproteinneuron"               , "Bacteria(Differentiation Promoting Protein Neuron)" , null , 1);
 		FL.create("protein"                  , "Protein"             , null                  , 1);
 
-//		FL.create("ethanol"                  ,"Ethanol"              ,null                   ,1);
+		//FL.create("ethanol"                  ,"Ethanol"              ,null                   ,1);
 
 
 		// Polymers
