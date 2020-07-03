@@ -48,6 +48,9 @@ public class PlayerModelRenderer extends RenderPlayer {
 		aPlayer = aPlayer.toLowerCase();
 		if (aPlayer.equalsIgnoreCase("GregoriusT"))     return mResources[3];
 		if (aPlayer.equalsIgnoreCase("OvermindDL1"))    return mResources[3];
+		if (aPlayer.equalsIgnoreCase("jihuayu123"))    	return mResources[3];
+		if (aPlayer.equalsIgnoreCase("Yuesha_Kev14"))   return mResources[3];
+		if (aPlayer.equalsIgnoreCase("Evanvenir"))   	return mResources[3];
 		if (aPlayer.equalsIgnoreCase("Mine_Sasha"))     return mResources[4];
 		if (aPlayer.equalsIgnoreCase("Mr_Brain"))       return mResources[2];
 		if (aPlayer.equalsIgnoreCase("Friedi4321"))     return mResources[0];
