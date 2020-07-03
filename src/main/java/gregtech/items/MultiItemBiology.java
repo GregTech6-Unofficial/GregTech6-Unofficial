@@ -161,24 +161,25 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.CryoMixer.addRecipe0(T, 64, 200, FL.array(FL.DNAExtract.make(1000), MT.Ethanol.fluid(U, T)), FL.array(FL.DNASolution.make(1000)), ZL_IS);
 
-        //给鸭蛋的加配方介绍：
-
-        //初级
-        //RM.Sharpening 相当于mtu keys
-        //addRecipe1 输入一种物品的配方 addRecipe2 输入两种物品的配方，addRecipeX 输入大于2种物品的配方
-        //ST.tag(1) 是集成电路 数字代表集成电路编号
-        //aEUt 表示能量需求
-        //aDuration 表示时长
-        //这里之后可以选用加一个 new long[] {10000, 2000} 之类的，代表输出物品的几率。同mtu
-        //然后参数就是MTU里一样的顺序的：输入物品（或物品数组）输入流体（或流体数组）输出流体（或流体数组）输出物品（或物品数组）
-
-        //中级：
-        //无论是物品还是流体，输入还是输出，如果大于一种：物品必须要用ST.array(物品1，物品2)，流体要用FL.array(流体1，流体2)
-        //若输入/输出为空：物品用ZL_IS代替，流体用ZL_FS代替
-        //物品表示方法：IL.物品名.get(数量) 或者 OP.<板/锭/粉/小粉/等等的标志，可以打完OP.自己翻，多试试就懂>.mat(MT.材料名, 数量)
-        //流体表示方法：FL.流体名.make(一个整数，升为单位) 或者 MT.材料名.liquid/gas/fluid(U*份数，T或者F) U一般对于流体代表1000L，U10代表U/10，U100代表U/100，以此类推。 T代表这个流体是输入，F代表这个流体是输出，非常重要！！
-
 
     }
 
 }
+
+
+//给鸭蛋的加配方介绍：
+
+//初级
+//RM.Sharpening 相当于mtu keys
+//addRecipe1 输入一种物品的配方 addRecipe2 输入两种物品的配方，addRecipeX 输入大于2种物品的配方
+//ST.tag(1) 是集成电路 数字代表集成电路编号
+//aEUt 表示能量需求
+//aDuration 表示时长
+//这里之后可以选用加一个 new long[] {10000, 2000} 之类的，代表输出物品的几率。同mtu
+//然后参数就是MTU里一样的顺序的：输入物品（或物品数组）输入流体（或流体数组）输出流体（或流体数组）输出物品（或物品数组）
+
+//中级：
+//无论是物品还是流体，输入还是输出，如果大于一种：物品必须要用ST.array(物品1，物品2)，流体要用FL.array(流体1，流体2)
+//若输入/输出为空：物品用ZL_IS代替，流体用ZL_FS代替
+//物品表示方法：IL.物品名.get(数量) 或者 OP.<板/锭/粉/小粉/等等的标志，可以打完OP.自己翻，多试试就懂>.mat(MT.材料名, 数量)
+//流体表示方法：FL.流体名.make(一个整数，升为单位) 或者 MT.材料名.liquid/gas/fluid(U*份数，T或者F) U一般对于流体代表1000L，U10代表U/10，U100代表U/100，以此类推。 T代表这个流体是输入，F代表这个流体是输出，非常重要！！
