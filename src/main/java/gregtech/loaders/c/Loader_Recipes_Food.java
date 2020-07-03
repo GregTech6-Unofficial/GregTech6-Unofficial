@@ -439,7 +439,7 @@ public class Loader_Recipes_Food implements Runnable {
 		RM.Distillery   .addRecipe1(T, 16,   16, OM.dust(MT.Coffee, U3), FL.mul(tWater, 1, 4, T), FL.make("potion.darkcoffee", 250), ZL_IS);
 		
 		for (OreDictMaterial tMat : ANY.Flour.mToThis)
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(tMat), FL.mul(tWater, 1, 4, T), NF, IL.Food_Dough.get(2));
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(tMat), FL.mul(tWater, 1, 4, T), FL.AmylumSolution.make(1000), IL.Food_Dough.get(2));
 		
 		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Milk        ), FL.mul(tWater, 1, 2, T), FL.Milk.make(1000), ZL_IS);
 		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Honey       ), FL.mul(tWater, 1, 2, T), FL.Honey.make(1000), ZL_IS);

@@ -23,8 +23,7 @@ import gregapi.data.*;
 import gregapi.item.CreativeTab;
 import gregapi.item.multiitem.MultiItemRandom;
 import gregapi.recipes.Recipe;
-import gregapi.util.CR;
-import gregapi.util.ST;
+import gregapi.util.*;
 import net.minecraft.init.Items;
 
 
@@ -46,11 +45,11 @@ import gregapi.data.OP;
 import gregapi.data.RM;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.util.CR;
-import gregapi.util.OM;
 import gregapi.util.ST;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 //不管有没有用，先import再说
 
@@ -102,9 +101,6 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.HeatMixer.addRecipe1(T, 256, 810, ST.make(Items.golden_apple, 8, 0), FL.HormoneSolution.make(8), FL.HormoneSolution.make(9), ZL_IS);
         //激素溶液
 
-        RM.Mixer.addRecipe1(T, 16, 64, OP.dust.mat(ANY.Flour, 2), FL.Water.make(1000), FL.AmylumSolution.make(1000), IL.Food_Dough.get(1));
-        //淀粉溶液
-
         RM.HeatMixer.addRecipeX(T, 16, 500, ZL_IS, FL.array(FL.AmylumSolution.make(2000), MT.SulfuricAcid.fluid(U10, T)), FL.Holywater.make(1000), IL.dust_Glucose.get(1));
         //葡萄糖
 
@@ -122,9 +118,9 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(200000);
         //还是接种干细胞
 
-        for(int duck_egg = 1; duck_egg <=16; duck_egg = duck_egg*2){
+        for(long duck_egg = 1; duck_egg <=16; duck_egg = duck_egg*2){
             RM.Incubator.addRecipe2(T, 16, 20000 + 4096*duck_egg, IL.Culture_Dish_Stem_Cell_Embryonic.get(duck_egg), ST.tag(duck_egg), FL.MSCSupplement.make(1000*duck_egg), NF, IL.Culture_Dish_Stem_Cell_Somatic.get(duck_egg));
-            //培养干细胞，可以一次培养多个
+            //培养干细胞，可以一次培养多个 //TODO 修复
         }
 
         RM.BioLab.addRecipe1(T, 16, 64, IL.Culture_Dish_Stem_Cell_Somatic.get(1), ZL_FS, ZL_FS, OP.scrapGt.mat(MT.PTFE, 8));
@@ -133,9 +129,37 @@ public class MultiItemBiology extends MultiItemRandom{
 
         //RM.DistillationTower.addRecipe0(16, 64, ZL_IS, MT.Petrol.liquid(U, T), );
 
+        //RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithName(1, "Gene Data"));
+        //RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Stem Cell")));
 
+        /** DNA 提取 */
+        RM.HeatMixer.addRecipeX(T, 512, 200, ZL_IS, FL.array(MT.CO.fluid(U, T), MT.H.fluid(U, T)), FL.array(FL.Methanol.make(1000)), ZL_IS);
 
+        RM.Centrifuge.addRecipe1(T, 512, 200, IL.Remains_Nut.get(1), NF, FL.CoconutOil.make(1000), NI); //TODO 椰子
 
+        RM.HeatMixer.addRecipeX(T, 512, 200, ZL_IS, FL.array(FL.CoconutOil.make(1000), MT.H2SO4.fluid(U, T), FL.Methanol.make(3000)), FL.array(FL.MethylLaurate.make(3000), MT.Glycerol.fluid(U, T), MT.H2SO4.fluid(U10*9, T)), ZL_IS);
+
+        RM.HeatMixer.addRecipe1(T, 512, 200, OP.dust.mat(MT.Pt, 0), FL.array(FL.MethylLaurate.make(1000), MT.H.fluid(U*2, T)), FL.array(FL.MethylHydrolaurate.make(1000)), ZL_IS);
+
+        RM.Distillery.addRecipe1(T, 256, 2000, ST.tag(0), FL.array(FL.MethylHydrolaurate.make(1000)), FL.array(FL.Dodecane.make(1000)), ZL_IS);
+
+        RM.HeatMixer.addRecipe0(T, 512, 200, FL.array(FL.Dodecane.make(1000), MT.N.fluid(U, T), MT.SO3.fluid(U, T)), ZL_FS, IL.Lauryl_Sulfate.get(1));
+
+        RM.HeatMixer.addRecipeX(T, 512, 200, ST.array(IL.Lauryl_Sulfate.get(1), OP.dust.mat(MT.NaOH, 2)), ZL_FS, ZL_FS, ST.array(IL.SDS.get(1), OP.dust.mat(MT.NaSO4, 1)));
+
+        RM.HeatMixer.addRecipe1(T, 512, 200, ST.tag(0), FL.array(MT.Butane.fluid(U, T), MT.DistWater.fluid(U*3, T), MT.HNO3.fluid(U, T), MT.HCl.fluid(U, T)), FL.Tris_HCl.make(1000), ZL_IS);
+
+        RM.HeatMixer.addRecipe0(T, 128, 200, FL.array(MT.Ethylene.fluid(U, T), MT.Water.fluid(U, T)), FL.array(MT.Ethanol.fluid(U, T)), ZL_IS);
+
+        RM.HeatMixer.addRecipe1(T, 512, 200, OP.spring.mat(MT.Silver, 0), FL.array(MT.Ethanol.fluid(U, T)), FL.array(FL.AceticAcid.make(1000)), ZL_IS);
+
+        RM.HeatMixer.addRecipe0(T, 512, 200, FL.array(MT.Ethylene.fluid(U, T), MT.Br.fluid(U, T), MT.NH3.fluid(U*2, T), FL.AceticAcid.make(4000)), FL.array(FL.EDTA.make(1000)), ZL_IS);
+
+        RM.CryoMixer.addRecipe1(T, 16, 200, IL.Unformed_Embryo.get(1), FL.array(MT.Ethanol.fluid(U, T)), FL.array(FL.AnimalTissueHomogenate.make(1000)), ZL_IS);
+
+        RM.Mixer.addRecipe1(T, 64, 200, IL.SDS.get(1), FL.array(FL.AnimalTissueHomogenate.make(1000), FL.EDTA.make(1000), FL.Tris_HCl.make(1000)), FL.array(FL.DNAExtract.make(1000)), ZL_IS);
+
+        RM.CryoMixer.addRecipe0(T, 64, 200, FL.array(FL.DNAExtract.make(1000), MT.Ethanol.fluid(U, T)), FL.array(FL.DNASolution.make(1000)), ZL_IS);
 
         //给鸭蛋的加配方介绍：
 
