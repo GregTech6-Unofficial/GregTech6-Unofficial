@@ -65,7 +65,7 @@ public class MultiItemBiology extends MultiItemRandom{
     public void addItems() {
         IL.Culture_Dish_Empty.set(addItem(1000, "Culture Dish (Empty)", "A fundamental tool of laboratory biology"));
         IL.Culture_Dish_MSC.set(addItem(1001,"Culture Dish (MSC)","Stem cell culture medium inside"));
-        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in biology laboratory"));
+        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in Incubator"));
         IL.Culture_Dish_Stem_Cell_Somatic.set(addItem(1003,"Culture Dish (stem cells)","Stem cells inside"));
         IL.dust_Inorganic_Salt_Mixture.set(addItem(1004,"Inorganic Salt Mixture Dust","Inorganic salts for cell culture"));
         IL.dust_Tiny_Inorganic_Salt_Mixture.set(addItem(1005,"Tiny InorganicSalt Mixture Dust","Inorganic salts for cell culture"));
@@ -117,14 +117,24 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.CryoMixer.addRecipeX(T, 64, 1919, ST.array(IL.dust_Glucose.get(4), IL.dust_Inorganic_Salt_Mixture.get(1)), FL.array(FL.SPSS.make(1000), FL.Protein.make(1000)), FL.MSCSupplement.make(1000), ZL_IS);
         //干细胞无血清基础培养基
 
-        RM.BioLab.addRecipe1(T, 64, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.MSCBasalMedium.make(1000), FL.BoneMarrow.make(1)), ZL_FS,IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(200000);;
+        RM.BioLab.addRecipe1(T, 64, 512, new long[] {1000}, IL.Culture_Dish_Empty.get(1), FL.array(FL.MSCBasalMedium.make(1000), FL.BoneMarrow.make(1)), ZL_FS,IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(200000);
         //接种干细胞
-        //坐等生物实验室，先用组装机垫着//垫完了
+        RM.BioLab.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(200000);
+        //还是接种干细胞
 
-        RM.CryoMixer.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, ZL_IS);
+        for(int duck_egg = 1; duck_egg <=16; duck_egg = duck_egg*2){
+            RM.Incubator.addRecipe2(T, 16, 20000 + 4096*duck_egg, IL.Culture_Dish_Stem_Cell_Embryonic.get(duck_egg), ST.tag(duck_egg), FL.MSCSupplement.make(1000*duck_egg), NF, IL.Culture_Dish_Stem_Cell_Somatic.get(duck_egg));
+            //培养干细胞，可以一次培养多个
+        }
 
-        //培养干细胞
-        //坐等生物实验室，先用组装机垫着
+        RM.BioLab.addRecipe1(T, 16, 64, IL.Culture_Dish_Stem_Cell_Somatic.get(1), ZL_FS, ZL_FS, OP.scrapGt.mat(MT.PTFE, 8));
+        //把干细胞从培养皿里拿出来
+        //生物垃圾不可回收（确信）
+
+        //RM.DistillationTower.addRecipe0(16, 64, ZL_IS, MT.Petrol.liquid(U, T), );
+
+
+
 
 
         //给鸭蛋的加配方介绍：
