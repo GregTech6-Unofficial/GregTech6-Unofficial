@@ -50,7 +50,7 @@ public class BlockTreeLeaves extends BlockBaseLeaves {
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Leaves");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Leaves");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Leaves");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Leaves");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Leaves");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbow Leaves");
 		LH.add(getUnlocalizedName()+ ".8.name", "Rubber Leaves");
 		LH.add(getUnlocalizedName()+ ".9.name", "Maple Leaves");
@@ -58,7 +58,7 @@ public class BlockTreeLeaves extends BlockBaseLeaves {
 		LH.add(getUnlocalizedName()+".11.name", "Blue Mahoe Leaves");
 		LH.add(getUnlocalizedName()+".12.name", "Hazel Leaves");
 		LH.add(getUnlocalizedName()+".13.name", "Cinnamon Leaves");
-		LH.add(getUnlocalizedName()+".14.name", "Palm Leaves");
+		LH.add(getUnlocalizedName()+".14.name", "Coconut Leaves");
 		LH.add(getUnlocalizedName()+".15.name", "Rainbow Leaves");
 		
 		for (int i = 0; i < 16; i++) OM.reg(ST.make(this, 1, i), OP.treeLeaves);
@@ -112,6 +112,8 @@ public class BlockTreeLeaves extends BlockBaseLeaves {
 			switch(aMeta & 7) {case 2: case 3: case 4: if (RNGSUS.nextInt(tChance) < 2) rDrops.add(OP.stick.mat(MT.Wood, 1));}
 		}
 		if ((aMeta & 7) == 4 && RNGSUS.nextInt(tChance) < 2) rDrops.add(IL.Food_Hazelnut.get(1));
+		if ((aMeta & 7) == 6 && RNGSUS.nextInt(tChance) < 2) rDrops.add(IL.Food_Coconut.get(1));
+
 		return rDrops;
 	}
 	

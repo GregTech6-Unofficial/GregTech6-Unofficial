@@ -27,6 +27,7 @@ Nothing
 [ADDED] Biology Item Group.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
 [ADDED] Biochemical Research Laboratory. Multiblock machine.
+[ADDED] Coconut Tree and its derivatives. Also its compat for Binnie's Mods. They are likely to grow along beach and swamp area.
 
 6.14.01:
 [NOTE] Do not use 6.14.00, it will crash the game.

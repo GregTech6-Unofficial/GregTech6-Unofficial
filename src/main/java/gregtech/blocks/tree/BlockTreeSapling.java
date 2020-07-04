@@ -44,7 +44,7 @@ public class BlockTreeSapling extends BlockBaseSapling {
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Sapling");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Sapling");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Sapling");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Sapling (coming soon)");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Sapling");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbowood Sapling");
 		LH.add(getUnlocalizedName()+ ".8.name", "Rubber Sapling");
 		LH.add(getUnlocalizedName()+ ".9.name", "Maple Sapling");
@@ -52,7 +52,7 @@ public class BlockTreeSapling extends BlockBaseSapling {
 		LH.add(getUnlocalizedName()+".11.name", "Blue Mahoe Sapling");
 		LH.add(getUnlocalizedName()+".12.name", "Hazel Sapling");
 		LH.add(getUnlocalizedName()+".13.name", "Cinnamon Sapling");
-		LH.add(getUnlocalizedName()+".14.name", "Palm Sapling (coming soon)");
+		LH.add(getUnlocalizedName()+".14.name", "Coconut Sapling");
 		LH.add(getUnlocalizedName()+".15.name", "Rainbowood Sapling");
 		
 		for (int i = 0; i < 16; i++) OM.reg(ST.make(this, 1, i), OP.treeSapling);
@@ -226,7 +226,35 @@ public class BlockTreeSapling extends BlockBaseSapling {
 			}
 			return T;
 		case 6:
-			return F;
+			if (getMaxHeight(aWorld, aX, aY, aZ, 14) < 14) return F;
+			for (int i = -2; i <= 2; i++) for (int j = -2; j <= 2; j++) if (i != 0 || j != 0) if (!canPlaceTree(aWorld, aX+i, aY+2, aZ+j)) return F;
+
+			placeTree(aWorld, aX, aY  , aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+1, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+2, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+3, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+4, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+5, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+6, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+7, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+8, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+9, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+10, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+11, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+12, aZ, BlocksGT.LogB, 2);
+			placeTree(aWorld, aX, aY+13, aZ, BlocksGT.LogB, 2);
+
+			for (int i = -1; i <= 1; i++) for (int j = -1; j <= 1; j++) {
+				placeTree(aWorld, aX+i, aY+14, aZ+j, BlocksGT.Leaves, 14);
+			}
+			for (int i = -2; i <= 2; i++) for (int j = -2; j <= 2; j++) {
+				if (i != 0 || j != 0) placeTree(aWorld, aX+i, aY+12, aZ+j, BlocksGT.Leaves, 14);
+				if (Math.abs(i*j) < 4) placeTree(aWorld, aX+i, aY+13, aZ+j, BlocksGT.Leaves, 14);
+			}
+			for (int i = -3; i <= 3; i++) for (int j = -3; j <= 3; j++) {
+				if (Math.abs(i*j) < 9 && (i != 0 || j != 0)) placeTree(aWorld, aX+i, aY+11, aZ+j, BlocksGT.Leaves, 14);
+			}
+			return T;
 		case 7:
 			tMaxHeight = getMaxHeight(aWorld, aX, aY, aZ, 9);
 			if (tMaxHeight < 7) return F;

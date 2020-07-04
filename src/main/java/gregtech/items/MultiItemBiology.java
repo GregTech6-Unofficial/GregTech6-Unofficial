@@ -137,8 +137,6 @@ public class MultiItemBiology extends MultiItemRandom{
         /** DNA 提取 */
         RM.HeatMixer.addRecipeX(T, 512, 200, ZL_IS, FL.array(MT.CO.fluid(U, T), MT.H.fluid(U, T)), FL.array(FL.Methanol.make(1000)), ZL_IS);
 
-        RM.Centrifuge.addRecipe1(T, 512, 200, IL.Remains_Nut.get(1), NF, FL.CoconutOil.make(1000), NI); //TODO 椰子
-
         RM.HeatMixer.addRecipeX(T, 512, 200, ZL_IS, FL.array(FL.CoconutOil.make(1000), MT.H2SO4.fluid(U, T), FL.Methanol.make(3000)), FL.array(FL.MethylLaurate.make(3000), MT.Glycerol.fluid(U, T), MT.H2SO4.fluid(U10*9, T)), ZL_IS);
 
         RM.HeatMixer.addRecipe1(T, 512, 200, OP.dust.mat(MT.Pt, 0), FL.array(FL.MethylLaurate.make(1000), MT.H.fluid(U*2, T)), FL.array(FL.MethylHydrolaurate.make(1000)), ZL_IS);
