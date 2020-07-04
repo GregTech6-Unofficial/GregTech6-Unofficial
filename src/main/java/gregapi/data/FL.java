@@ -470,7 +470,7 @@ public enum FL {
 	, EvaporatedliquidOs        ("evaporatedliquidos"                                       , SIMPLE, LIQUID)
 	, SodiumOsmiumHexachloride  ("sodiumosmiumhexachloride"                                 , SIMPLE, LIQUID)
 
-	//fluids about bio circuit
+	//fluids about bio tech
 	, MSCBasalMedium            ("mscbasalmedium"                                           , SIMPLE, LIQUID)
 	, MSCSupplement             ("mscsupplement"                                            , SIMPLE, LIQUID)
 	, MSC                       ("msc"                                                      , SIMPLE, LIQUID)
@@ -495,6 +495,12 @@ public enum FL {
 	, Dodecane                  ("dodecane"                                                 , SIMPLE, LIQUID)
 	, Dodecane_Chloride         ("dodecanechloride"                                         , SIMPLE, LIQUID)
 	, Monochlorodecane          ("monochlorodecane"                                         , SIMPLE, LIQUID)
+	, Deoxyribonucleotide       ("deoxyribonucleotide"                                      , SIMPLE, LIQUID)
+	, Primer                    ("primer"                                                   , SIMPLE, LIQUID)
+	, taqDNAPolymerase          ("taqdnapolymerase"                                         , SIMPLE, LIQUID)
+    , EscherichiaColi           ("escherichiacoli"                                          , SIMPLE, LIQUID)
+	, RestrictionEndonuclease   ("restrictionendonuclease"                                  , SIMPLE, LIQUID)
+	, DifferentiationPromotingProtein_NerveCell_Gene("differentiationpromotingprotein_nerve cell_gene", SIMPLE, LIQUID)
 
 	//I don't know the reason why it only has a texture ,so I added it here.
 	//,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)

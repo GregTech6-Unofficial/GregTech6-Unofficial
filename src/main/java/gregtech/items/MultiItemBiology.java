@@ -161,10 +161,8 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.CryoMixer.addRecipe0(T, 64, 200, FL.array(FL.DNAExtract.make(1000), MT.Ethanol.fluid(U, T)), FL.array(FL.DNASolution.make(1000)), ZL_IS);
 
-        int egg_duck = 100;
-                if (egg_duck == 1000){
-            RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Stem Cell")));
-        }
+        /**DNA提取部分结束*/
+
 
     }
 

@@ -162,6 +162,12 @@ public class Loader_Fluids implements Runnable {
 		FL.create("dodecane"                 , "Dodecane"            , null                  , 1);
 		FL.create("dodecanechloride"         , "Dodecane Chloride"   , null                  , 1);
 		FL.create("monochlorodecane"         , "Monochlorodecane"    , null                  , 1);
+		FL.create("deoxyribonucleotide"      , "Deoxyribonucleotide" , null                  , 1);
+		FL.create("primer"                   , "Primer"              , null                  , 1);
+		FL.create("taqdnapolymerase"         , "taq DNA polymerase"  , null                  , 1);
+		FL.create("escherichiacoli"          , "Escherichia coli"    , null                  , 1);
+		FL.create("restrictionendonuclease"  , "Restriction endonuclease", null              , 1);
+		FL.create("differentiationpromotingprotein_nerve cell_gene", "Differentiation promoting protein (nerve cell) gene", null, 1);
 
 		//FL.create("ethanol"                  ,"Ethanol"              ,null                   ,1);
 
