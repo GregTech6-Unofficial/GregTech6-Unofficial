@@ -22,8 +22,6 @@ package gregtech.loaders.c;
 import static gregapi.data.CS.*;
 import static gregapi.data.OP.*;
 
-import binnie.extratrees.block.FruitPod;
-import binnie.extratrees.item.Food;
 import gregapi.data.ANY;
 import gregapi.data.CS.FluidsGT;
 import gregapi.data.CS.FoodsGT;
@@ -586,10 +584,6 @@ public class Loader_Recipes_Food implements Runnable {
 		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream                               .make(250), FL.Nutbutter_Peanut                     .make(250), ZL_IS);
 		}
 		RM.Centrifuge.addRecipe1(T, 16, 64, IL.Food_Coconut.get(1), ZL_FS, FL.CoconutOil.make(100), ZL_IS);
-
-		if(MD.BINNIE.mLoaded) {
-			RM.Centrifuge.addRecipe1(T, 16, 64, Food.Coconut.get(1), ZL_FS, FL.CoconutOil.make(100), ZL_IS);
-		}
 
 		//RM.Juicer.addRecipe1(T, 16, 16, IL.Food_Coconut.get(1), NF, FL.Juice_Coconut.make(150), NI);
 
