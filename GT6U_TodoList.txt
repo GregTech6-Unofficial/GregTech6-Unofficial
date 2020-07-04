@@ -11,7 +11,12 @@ For the production of pure chromium, the iron must be separated from the chromiu
 
 
 4 FeCr2O4 + 8 Na2CO3 + 7 O2 → 8 Na2CrO4 + 2 Fe2O3 + 8 CO2
+
+28 + 48 + 14 - 56 + 10 + 24
+
 2 Na2CrO4 + H2SO4 → Na2Cr2O7 + Na2SO4 + H2O
+
+14 + 7 - 11 + 7 + 3
 
 Na2Cr2O7 + 2 C → Cr2O3 + Na2CO3 + CO
 Cr2O3 + 2 Al → Al2O3 + 2 Cr

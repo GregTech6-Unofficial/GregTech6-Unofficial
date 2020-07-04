@@ -376,9 +376,9 @@ public class Loader_Recipes_Chem implements Runnable {
         RM.HeatMixer        .addRecipe1(T, 128, 400, OP.dust.mat(MT.V2O5, 0), FL.array(FL.Ethyl_Acrylate.make(1000), FL.Styrene.make(1000), MT.TiCl4.liquid(U100, T)), FL.array(FL.Photoresist.make(1000)), ZL_IS);
 
         //Chromium production
-        RM.HeatMixer        .addRecipe2(T, 16, 288, OM.dust(MT.OREMATS.Chromite, U*28), OP.dust.mat(MT.Na2CO3, 24), FL.array(MT.O.gas(U*14, T)), FL.array(MT.CO2.gas(U*4, F)), OP.dust.mat(MT.Na2CrO4, 40), OM.dust(MT.OREMATS.Hematite, U*10));
-        RM.HeatMixer        .addRecipe1(T, 16, 288, OP.dust.mat(MT.Na2CrO4, 7), FL.array(MT.H2SO4.liquid(U*7, T)), FL.array(MT.H2O.liquid(U*3, F)), OP.dust.mat(MT.Na2Cr2O7, 11), OP.dust.mat(MT.Na2SO4, 7));
-        RM.HeatMixer        .addRecipe2(T, 16, 288, OP.dust.mat(MT.Na2Cr2O7, 11), OP.dust.mat(MT.C, 2), ZL_FS, FL.array(MT.CO.gas(U*4, F)), OP.dust.mat(MT.Cr2O3, 5), OP.dust.mat(MT.Na2CO3, 3));
+        RM.HeatMixer        .addRecipe2(T, 16, 288, OM.dust(MT.OREMATS.Chromite, U*28), OP.dust.mat(MT.Na2CO3, 48), FL.array(MT.O.gas(U*14, T)), FL.array(MT.CO2.gas(U*24, F)), OP.dust.mat(MT.Na2CrO4, 56), OM.dust(MT.OREMATS.Hematite, U*10));
+        RM.HeatMixer        .addRecipe1(T, 16, 288, OP.dust.mat(MT.Na2CrO4, 14), FL.array(MT.H2SO4.liquid(U*7, T)), FL.array(MT.H2O.liquid(U*3, F)), OP.dust.mat(MT.Na2Cr2O7, 11), OP.dust.mat(MT.Na2SO4, 7));
+        RM.HeatMixer        .addRecipe2(T, 16, 288, OP.dust.mat(MT.Na2Cr2O7, 11), OP.dust.mat(MT.C, 2), ZL_FS, FL.array(MT.CO.gas(U*2, F)), OP.dust.mat(MT.Cr2O3, 5), OP.dust.mat(MT.Na2CO3, 6));
         RM.BurnMixer        .addRecipe2(T, 16, 144, OP.dust.mat(MT.Cr2O3, 5), OP.dust.mat(MT.Al, 2), ZL_FS, FL.array(MT.Cr.liquid(U*2, F)), OP.dust.mat(MT.Al2O3, 5));
 
         RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.Pyrite                  ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Fe,   U3 ));
