@@ -137,6 +137,17 @@ public class Loader_Fluids implements Runnable {
 		FL.create("evaporatedliquidos"       , "Rich Osmium Evaporated Liquid" , null        , 1);
 		FL.create("sodiumosmiumhexachloride" , "Ammonium Hexachloroosmium Solution" , null   , 1);
 
+		//fluids about bacteria
+		FL.create("biowaste"            , "Bio Waste"      , null                  , 1);
+		FL.create("agar"            , "Agar"      , null                  , 1);
+		FL.create("biomass_flora"            , "Biomass Flora"      , null                  , 1);
+		FL.create("biomass_diluted"            , "Diluted Biomass"      , null                  , 1);
+		FL.create("bacteria_medium"            , "Bacteria Culture Medium"      , null                  , 1);
+		FL.create("yeast"            , "Yeast"      , null                  , 1);
+		FL.create("methanogens"            , "Methanogens"      , null                  , 1);
+		FL.create("bacillus"            , "Bacillus"      , null                  , 1);
+		FL.create("clostridia"            , "Clostridia"      , null                  , 1);
+
 		//fluids about bio circuit
 		FL.create("mscbasalmedium"           , "MSC Basal Medium"    , null                  , 1);
 		FL.create("mscsupplement"            , "MSC Supplement"      , null                  , 1);

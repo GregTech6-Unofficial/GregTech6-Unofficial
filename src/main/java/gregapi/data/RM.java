@@ -105,7 +105,7 @@ public class RM {
 	, Calciner                  = new RecipeMap                     (null, "gt.recipe.calciner"                     , "Calciner"                        , null, 0, 1, RES_PATH_GUI+"machines/Calciner"                  ,/*IN-OUT-MIN-ITEM=*/ 3, 3, 0,/*IN-OUT-MIN-FLUID=*/ 3, 3, 0,/*MIN*/ 2,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
 	, Roasting                  = new RecipeMap                     (null, "gt.recipe.roaster"                      , "Roaster"                         , null, 0, 1, RES_PATH_GUI+"machines/Roaster"                   ,/*IN-OUT-MIN-ITEM=*/ 1, 3, 1,/*IN-OUT-MIN-FLUID=*/ 1, 1, 1,/*MIN*/ 2,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
 	, Drying                    = new RecipeMap                     (null, "gt.recipe.drying"                       , "Dryer"                           , null, 0, 1, RES_PATH_GUI+"machines/Dryer"                     ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 0,/*IN-OUT-MIN-FLUID=*/ 1, 1, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
-	, Fermenter                 = new RecipeMap                     (null, "gt.recipe.fermenter"                    , "Fermenter"                       , null, 0, 1, RES_PATH_GUI+"machines/Fermenter"                 ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 1, 1, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
+	, Fermenter                 = new RecipeMap                     (null, "gt.recipe.fermenter"                    , "Fermenter"                       , null, 0, 1, RES_PATH_GUI+"machines/Fermenter"                 ,/*IN-OUT-MIN-ITEM=*/ 2, 1, 1,/*IN-OUT-MIN-FLUID=*/ 2, 1, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
 	, Distillery                = new RecipeMap                     (null, "gt.recipe.distillery"                   , "Distillery"                      , null, 0, 1, RES_PATH_GUI+"machines/Distillery"                ,/*IN-OUT-MIN-ITEM=*/ 1, 2, 1,/*IN-OUT-MIN-FLUID=*/ 1, 2, 1,/*MIN*/ 2,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
 	, Extruder                  = new RecipeMap                     (null, "gt.recipe.extruder"                     , "Extruder"                        , null, 0, 1, RES_PATH_GUI+"machines/Extruder"                  ,/*IN-OUT-MIN-ITEM=*/ 2, 1, 2,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
 	, Polarizer                 = new RecipeMap                     (null, "gt.recipe.polarizer"                    , "Polarizer"                       , null, 0, 1, RES_PATH_GUI+"machines/Polarizer"                 ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F)
@@ -218,21 +218,48 @@ public class RM {
 	public static boolean biomass(ItemStack aBiomass, long aSpeed) {
 		if (ST.invalid(aBiomass)) return F;
 		int tSize = aBiomass.stackSize;
+		long tBiomassFloraAcc = 10;
+
 		if (tSize <= 0) return F;
 		aBiomass = ST.amount(1, aBiomass);
-		for (String tFluid : FluidsGT.WATER) if (FL.exists(tFluid) && !"riverwater".equals(tFluid))
-		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 4) / tSize, aBiomass, FL.make(tFluid                   , 1080 / tSize), FL.BiomassIC2.make(1080    / tSize), ZL_IS);
-		for (String tFluid : FluidsGT.MILK ) if (FL.exists(tFluid))
-		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 3) / tSize, aBiomass, FL.make(tFluid                   , 1080 / tSize), FL.BiomassIC2.make(2160    / tSize), ZL_IS);
-		for (String tFluid : FluidsGT.JUICE) if (FL.exists(tFluid) && !"potion.idunsapplejuice".equals(tFluid) && !"potion.goldenapplejuice".equals(tFluid) && !"goldencarrotjuice".equals(tFluid))
-		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 3) / tSize, aBiomass, FL.make(tFluid                   , 1080 / tSize), FL.BiomassIC2.make(3240    / tSize), ZL_IS);
-		RM.Fermenter.addRecipe1(F, 16,  aSpeed      / tSize, aBiomass, FL.make("potion.idunsapplejuice" , 1080 / tSize), FL.BiomassIC2.make(2099520 / tSize), ZL_IS);
-		RM.Fermenter.addRecipe1(F, 16,  aSpeed      / tSize, aBiomass, FL.make("potion.goldenapplejuice", 1080 / tSize), FL.BiomassIC2.make(233280  / tSize), ZL_IS);
-		RM.Fermenter.addRecipe1(F, 16,  aSpeed      / tSize, aBiomass, FL.make("goldencarrotjuice"      , 1080 / tSize), FL.BiomassIC2.make(25920   / tSize), ZL_IS);
-		for (String tFluid : FluidsGT.HONEY) if (FL.exists(tFluid))
-		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 3) / tSize, aBiomass, FL.make(tFluid                   , 1080 / tSize), FL.BiomassIC2.make(3240    / tSize), ZL_IS);
-		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 2) / tSize, aBiomass, FL.Honeydew.make(                  1080 / tSize), FL.BiomassIC2.make(3240    / tSize), ZL_IS);
-		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 2) / tSize, aBiomass, FL.RoyalJelly.make(                1080 / tSize), FL.BiomassIC2.make(32400   / tSize), ZL_IS);
+		for (String tFluid : FluidsGT.WATER) if (FL.exists(tFluid) && !"riverwater".equals(tFluid)) {
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 4) / tSize, ST.tag(0), aBiomass, FL.make(tFluid, 1080 / tSize), FL.BiomassIC2.make(1080 / tSize), ZL_IS);
+
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 4 / tBiomassFloraAcc) / tSize, ST.tag(1), aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(1080 * 2 / tSize), ZL_IS);
+		}
+		for (String tFluid : FluidsGT.MILK ) if (FL.exists(tFluid)) {
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 3) / tSize, ST.tag(0), aBiomass, FL.make(tFluid, 1080 / tSize), FL.BiomassIC2.make(2160 / tSize), ZL_IS);
+
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 3 / tBiomassFloraAcc) / tSize, ST.tag(1), aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(2160 * 2   / tSize), ZL_IS);
+		}
+		for (String tFluid : FluidsGT.JUICE) if (FL.exists(tFluid) && !"potion.idunsapplejuice".equals(tFluid) && !"potion.goldenapplejuice".equals(tFluid) && !"goldencarrotjuice".equals(tFluid)) {
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 3) / tSize, ST.tag(0), aBiomass, FL.make(tFluid, 1080 / tSize), FL.BiomassIC2.make(3240 / tSize), ZL_IS);
+			RM.Fermenter.addRecipe2(F, 16, aSpeed / tSize, ST.tag(0), aBiomass, FL.make("potion.idunsapplejuice", 209952 / tSize), FL.BiomassIC2.make(2099520 / tSize), ZL_IS);
+			RM.Fermenter.addRecipe2(F, 16, aSpeed / tSize, ST.tag(0), aBiomass, FL.make("potion.goldenapplejuice", 23328 / tSize), FL.BiomassIC2.make(233280 / tSize), ZL_IS);
+			RM.Fermenter.addRecipe2(F, 16, aSpeed / tSize, ST.tag(0), aBiomass, FL.make("goldencarrotjuice", 2592 / tSize), FL.BiomassIC2.make(25920 / tSize), ZL_IS);
+
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 3 / tBiomassFloraAcc) / tSize, ST.tag(1), aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(3240 * 2  / tSize), ZL_IS);
+
+		}
+		for (String tFluid : FluidsGT.HONEY) if (FL.exists(tFluid)) {
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 3) / tSize, ST.tag(0), aBiomass, FL.make(tFluid, 1080 / tSize), FL.BiomassIC2.make(3240 / tSize), ZL_IS);
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 2) / tSize, ST.tag(0), aBiomass, FL.Honeydew.make(1080 / tSize), FL.BiomassIC2.make(3240 / tSize), ZL_IS);
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 2) / tSize, ST.tag(0), aBiomass, FL.RoyalJelly.make(1080 / tSize), FL.BiomassIC2.make(32400 / tSize), ZL_IS);
+
+			RM.Fermenter.addRecipe2(F, 16, (aSpeed * 3 / tBiomassFloraAcc) / tSize, ST.tag(1), aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(3240 * 2   / tSize), ZL_IS);
+
+		}
+//		// Bacteria Accerleration
+//		for (String tFluid : FluidsGT.WATER) if (FL.exists(tFluid) && !"riverwater".equals(tFluid))
+//		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 4 / tBiomassFloraAcc) / tSize, aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(1080 * 2    / tSize), ZL_IS);
+//		for (String tFluid : FluidsGT.MILK ) if (FL.exists(tFluid))
+//		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 3 / tBiomassFloraAcc) / tSize, aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(2160 * 2   / tSize), ZL_IS);
+//		for (String tFluid : FluidsGT.JUICE) if (FL.exists(tFluid) && !"potion.idunsapplejuice".equals(tFluid) && !"potion.goldenapplejuice".equals(tFluid) && !"goldencarrotjuice".equals(tFluid))
+//		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 3 * tBiomassFloraAcc) / tSize, aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(3240 * 2  / tSize), ZL_IS);
+//		for (String tFluid : FluidsGT.HONEY) if (FL.exists(tFluid))
+//		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 3 / tBiomassFloraAcc) / tSize, aBiomass, FL.array(FL.make(tFluid, 1080 / tSize), FL.BiomassFlora.make(1080 / tSize / 2)), FL.BiomassIC2.make(3240 * 2   / tSize), ZL_IS);
+//		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 2 / tBiomassFloraAcc) / tSize, aBiomass, FL.Honeydew.make(                  1080 / tSize), FL.BiomassIC2.make(3240    / tSize), ZL_IS);
+//		RM.Fermenter.addRecipe1(F, 16, (aSpeed * 2 / tBiomassFloraAcc) / tSize, aBiomass, FL.RoyalJelly.make(                10800 / tSize), FL.BiomassIC2.make(32400   / tSize), ZL_IS);
 		return T;
 	}
 	
