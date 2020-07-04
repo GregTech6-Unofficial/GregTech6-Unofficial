@@ -75,6 +75,8 @@ public class MultiItemBiology extends MultiItemRandom{
         IL.Precision_Manipulator.set(addItem(1010,"Percision Manipulator","Very accurate"));
         IL.Lauryl_Sulfate.set(addItem(1011,"Lauryl Sulfate",""));
         IL.SDS.set(addItem(1012,"SDS",""));
+        IL.Gene_Samples.set(addItem(1013, "Gene Samples", ""));
+        IL.Protein_Sample.set(addItem(1014, "Protein Sample", ""));
 
         RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
         //空培养皿的合成
@@ -161,6 +163,10 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.CryoMixer.addRecipe0(T, 64, 200, FL.array(FL.DNAExtract.make(1000), MT.Ethanol.fluid(U, T)), FL.array(FL.DNASolution.make(1000)), ZL_IS);
 
+        int egg_duck = 100;
+                if (egg_duck == 1000){
+            RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Stem Cell")));
+        }
 
     }
 
@@ -183,3 +189,5 @@ public class MultiItemBiology extends MultiItemRandom{
 //若输入/输出为空：物品用ZL_IS代替，流体用ZL_FS代替
 //物品表示方法：IL.物品名.get(数量) 或者 OP.<板/锭/粉/小粉/等等的标志，可以打完OP.自己翻，多试试就懂>.mat(MT.材料名, 数量)
 //流体表示方法：FL.流体名.make(一个整数，升为单位) 或者 MT.材料名.liquid/gas/fluid(U*份数，T或者F) U一般对于流体代表1000L，U10代表U/10，U100代表U/100，以此类推。 T代表这个流体是输入，F代表这个流体是输出，非常重要！！
+//RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Stem Cell")));
+//上为NBT添加方法
