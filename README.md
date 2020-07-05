@@ -22,6 +22,10 @@ The development work of GT6U is undertaken by development team GT6U-Team, and it
 
 * Diversified gameplay, such as nuclear power reactors that can be cooled with distilled water.
 
+## Changelogs
+
+[See here](https://github.com/GregTech6-Unofficial/GregTech6-Unofficial/blob/master/CHANGELOG.txt)
+
 ## Upgrading from GT6 to GT6U
 
 You can easily update your GT6 official world to GT6U by replacing the original GT6 jar file, but do NOTE that:

@@ -419,7 +419,9 @@ public enum IL implements IItemContainer {
 
 	// Biology
 	Culture_Dish_Empty,Culture_Dish_MSC,Culture_Dish_Stem_Cell_Embryonic,Culture_Dish_Stem_Cell_Somatic,dust_Inorganic_Salt_Mixture,dust_Tiny_Inorganic_Salt_Mixture,
-	dust_Glucose,Stem_Cell,Neuron_Cell,Unformed_Embryo,Precision_Manipulator,Lauryl_Sulfate,SDS, Protein_Sample, Gene_Samples,
+	dust_Glucose,Stem_Cell,Neuron_Cell,Unformed_Embryo,Precision_Manipulator,Lauryl_Sulfate,SDS,Culture_Dish_Biomass_Flora,Mixing_Rod,
+	Culture_Dish_Yeast,Culture_Dish_Methanogens,Culture_Dish_Bacillus,Culture_Dish_Clostridia,Protein_Sample, Gene_Samples,
+
 
 	
 	// Deprecated

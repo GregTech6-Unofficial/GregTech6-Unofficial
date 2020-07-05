@@ -502,6 +502,19 @@ public enum FL {
 	, RestrictionEndonuclease   ("restrictionendonuclease"                                  , SIMPLE, LIQUID)
 	, DifferentiationPromotingProtein_NerveCell_Gene("differentiationpromotingprotein_nerve cell_gene", SIMPLE, LIQUID)
 
+	//fluids about bacteria
+	, Biowaste                  ("biowaste"                                                 , SIMPLE, LIQUID) //琼脂 - Canddleberry 提取
+
+	, Agar                      ("agar"                                                     , SIMPLE, LIQUID) //琼脂 - Canddleberry 提取
+	, BiomassFlora              ("biomass_flora"                                            , SIMPLE, LIQUID) //生物质菌群
+	, DilutedBiomass            ("biomass_diluted"                                          , SIMPLE, LIQUID) //稀释生物质
+	, BacteriaMedium            ("bacteria_medium"                                          , SIMPLE, LIQUID) //琼脂 + SPSS + 葡萄糖
+
+	, Yeast                     ("yeast"                                                    , SIMPLE, LIQUID) //酵母菌
+    , Methanogens               ("methanogens"                                              , SIMPLE, LIQUID) //产甲烷菌
+	, Bacillus                  ("bacillus"                                                 , SIMPLE, LIQUID) //芽孢杆菌（Bacillus）吸氧 产氢气 + 氧气
+	, Clostridia                ("clostridia"                                               , SIMPLE, LIQUID) //产氢梭菌Clostridia 厌氧 + 氦气
+
 	//I don't know the reason why it only has a texture ,so I added it here.
 	//,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)
 

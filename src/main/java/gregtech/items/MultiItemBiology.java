@@ -75,8 +75,58 @@ public class MultiItemBiology extends MultiItemRandom{
         IL.Precision_Manipulator.set(addItem(1010,"Percision Manipulator","Very accurate"));
         IL.Lauryl_Sulfate.set(addItem(1011,"Lauryl Sulfate",""));
         IL.SDS.set(addItem(1012,"SDS",""));
-        IL.Gene_Samples.set(addItem(1013, "Gene Samples", ""));
-        IL.Protein_Sample.set(addItem(1014, "Protein Sample", ""));
+        IL.Culture_Dish_Biomass_Flora.set(addItem(1013,"Culture Dish (Biomass Flora)",""));
+        IL.Mixing_Rod.set(addItem(1014,"Mixing Rod","Used to differentiate bacteria"));
+        IL.Culture_Dish_Yeast.set(addItem(1015,"Culture Dish (Yeast)",""));
+        IL.Culture_Dish_Methanogens.set(addItem(1016,"Culture Dish (Methanogens)",""));
+        IL.Culture_Dish_Bacillus.set(addItem(1017,"Culture Dish (Bacillus)",""));
+        IL.Culture_Dish_Clostridia.set(addItem(1018,"Culture Dish (Clostridia)",""));
+        IL.Gene_Samples.set(addItem(1019, "Gene Samples", ""));
+        IL.Protein_Sample.set(addItem(1020, "Protein Sample", ""));
+
+
+        // Bacteria
+        RM.Sharpening.addRecipe1(T, 16, 128, OP.stick.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Mixing_Rod.get(1));
+
+        RM.Mixer.addRecipe1(T, 16, 128, NI, FL.array(FL.BiomassIC2.make(100), MT.DistWater.fluid(U, T)), FL.array(FL.DilutedBiomass.make(1100)), ZL_IS);
+
+        RM.Centrifuge.addRecipe1(T, 16, 128, IL.Food_Candleberry.get(1), FL.array(FL.BioEthanol.make(500)), FL.array(FL.Agar.make(100)), ZL_IS);
+
+        RM.Mixer.addRecipe1(T, 16, 128, IL.dust_Glucose.get(4), FL.array(FL.Agar.make(600), FL.SPSS.make(400)), FL.array(FL.BacteriaMedium.make(1000)), ZL_IS);
+
+        RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.DilutedBiomass.make(1000)), ZL_FS, IL.Culture_Dish_Biomass_Flora.get(1));
+
+        RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.BiomassFlora.make(10)), ZL_FS, IL.Culture_Dish_Biomass_Flora.get(1));
+
+        RM.Incubator.addRecipe1(T, 16, 24000, IL.Culture_Dish_Biomass_Flora.get(1), NF, FL.BiomassFlora.make(1000), IL.Culture_Dish_Empty.get(1));
+
+        RM.BioLab.addRecipeX(T, 128, 2000, ST.array(IL.Mixing_Rod.get(0), ST.tag(1)), FL.array(FL.BiomassFlora.make(1000)), FL.array(FL.Biowaste.make(900), FL.Yeast.make(1)), ZL_IS).setSpecialNumber(200000);
+
+        RM.BioLab.addRecipeX(T, 128, 3000, ST.array(IL.Mixing_Rod.get(0), ST.tag(2)), FL.array(FL.BiomassFlora.make(1000), FL.Yeast.make(100), FL.Methane.make(1000)), FL.array(FL.Biowaste.make(900), FL.Methanogens.make(1)), ZL_IS).setSpecialNumber(200000);
+
+        RM.BioLab.addRecipeX(T, 512, 4000, ST.array(IL.Mixing_Rod.get(0), ST.tag(3)), FL.array(FL.BiomassFlora.make(1000), FL.Methanogens.make(100), FL.Oxygen.make(1000)), FL.array(FL.Biowaste.make(900), FL.Bacillus.make(1)), ZL_IS).setSpecialNumber(200000);
+
+        RM.BioLab.addRecipeX(T, 512, 4000, ST.array(IL.Mixing_Rod.get(0), ST.tag(4)), FL.array(FL.BiomassFlora.make(1000), FL.Bacillus.make(100), FL.Nitrogen.make(1000)), FL.array(FL.Biowaste.make(900), FL.Clostridia.make(1)), ZL_IS).setSpecialNumber(200000);
+
+        RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.Yeast.make(10)), ZL_FS, IL.Culture_Dish_Yeast.get(1));
+
+        RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.Methanogens.make(10)), ZL_FS, IL.Culture_Dish_Methanogens.get(1));
+
+        RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.Bacillus.make(10)), ZL_FS, IL.Culture_Dish_Bacillus.get(1));
+
+        RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.Clostridia.make(10)), ZL_FS, IL.Culture_Dish_Clostridia.get(1));
+
+        RM.Incubator.addRecipe1(T, 16, 24000, IL.Culture_Dish_Yeast.get(1), NF, FL.Yeast.make(1000), IL.Culture_Dish_Empty.get(1));
+
+        RM.Incubator.addRecipe1(T, 16, 36000, IL.Culture_Dish_Methanogens.get(1), NF, FL.Methanogens.make(1000), IL.Culture_Dish_Empty.get(1));
+
+        RM.Incubator.addRecipe1(T, 16, 48000, IL.Culture_Dish_Bacillus.get(1), NF, FL.Bacillus.make(1000), IL.Culture_Dish_Empty.get(1));
+
+        RM.Incubator.addRecipe1(T, 16, 48000, IL.Culture_Dish_Clostridia.get(1), NF, FL.Clostridia.make(1000), IL.Culture_Dish_Empty.get(1));
+
+        //TODO 其余细菌的功能
+
+        // Bacteria ends
 
         RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
         //空培养皿的合成

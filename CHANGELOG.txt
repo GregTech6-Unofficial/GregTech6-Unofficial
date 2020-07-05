@@ -23,11 +23,15 @@ Nothing
 [CHANGED] Renamed Oil Cleaner into Fuel Cleaner.
 [CHANGED] Lowered the cost of Fuel Cleaner and Clean stainless steel machine casing.
 [CHANGED] Altered the time cost for fuel cleaning in mixer and fuel cleaner so that it is more balanced.
+[CHANGED] Fermenting recipes now needs a Selector Tag.
+[CHANGED] When fermenting Biomass from bio resources, you can choose to boost its efficiency by 20 times by providing Biomass Flora.
+[CHANGED] Now you need more Idun Golden Apple Juice, Idun Apple Juice, and Golden Carrot Juice to ferment biomass.
 [ADDED] GT6U Achievement Page and some Achievements.
 [ADDED] Biology Item Group.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
 [ADDED] Biochemical Research Laboratory. Multiblock machine.
 [ADDED] Coconut Tree and its derivatives. Also its compat for Binnie's Mods. They are likely to grow along beach and swamp area.
+[ADDED] 4 Kinds of Bacterias and Biomass Flora Bacteria cluster. These bacterias are helpful to increase efficiency in fermenting and producing organic gases.
 
 6.14.01:
 [NOTE] Do not use 6.14.00, it will crash the game.
