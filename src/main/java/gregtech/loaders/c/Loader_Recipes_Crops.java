@@ -96,7 +96,7 @@ public class Loader_Recipes_Crops implements Runnable {
 			RM.biomass(ST.amount(1, aEvent.mStack));
 		}});
 		addListener("itemGrassMoldy", "itemGrassRotten", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.biomass(ST.amount(9, aEvent.mStack), 16);
+			RM.biomass(ST.amount(9, aEvent.mStack), 160);
 		}});
 		addListener("itemGrass", "itemGrassDry", "cropStraw", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			RM.biomass(ST.amount(9, aEvent.mStack));
