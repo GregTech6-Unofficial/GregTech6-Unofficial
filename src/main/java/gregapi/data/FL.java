@@ -500,7 +500,8 @@ public enum FL {
 	, taqDNAPolymerase          ("taqdnapolymerase"                                         , SIMPLE, LIQUID)
     , EscherichiaColi           ("escherichiacoli"                                          , SIMPLE, LIQUID)
 	, RestrictionEndonuclease   ("restrictionendonuclease"                                  , SIMPLE, LIQUID)
-	, DifferentiationPromotingProtein_NerveCell_Gene("differentiationpromotingprotein_nerve cell_gene", SIMPLE, LIQUID)
+	, DifferentiationPromotingProtein_NerveCell_Gene("differentiationpromotingprotein_nervecell_gene", SIMPLE, LIQUID)
+	, LaurylAlcohol             ("laurylalcohol"                                            , SIMPLE, LIQUID)
 
 	//fluids about bacteria
 	, Biowaste                  ("biowaste"                                                 , SIMPLE, LIQUID) //琼脂 - Canddleberry 提取

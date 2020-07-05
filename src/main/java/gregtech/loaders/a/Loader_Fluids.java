@@ -178,7 +178,8 @@ public class Loader_Fluids implements Runnable {
 		FL.create("taqdnapolymerase"         , "taq DNA polymerase"  , null                  , 1);
 		FL.create("escherichiacoli"          , "Escherichia coli"    , null                  , 1);
 		FL.create("restrictionendonuclease"  , "Restriction endonuclease", null              , 1);
-		FL.create("differentiationpromotingprotein_nerve cell_gene", "Differentiation promoting protein (nerve cell) gene", null, 1);
+		FL.create("differentiationpromotingprotein_nervecell_gene", "Differentiation promoting protein (nerve cell) gene", null, 1);
+		FL.create("laurylalcohol"            , "Lauryl alcohol"      , null                  , 1);
 
 		//FL.create("ethanol"                  ,"Ethanol"              ,null                   ,1);
 

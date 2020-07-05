@@ -22,36 +22,19 @@ package gregtech.items;
 import gregapi.data.*;
 import gregapi.item.CreativeTab;
 import gregapi.item.multiitem.MultiItemRandom;
-import gregapi.recipes.Recipe;
 import gregapi.util.*;
 import net.minecraft.init.Items;
-
-
 import static gregapi.data.CS.*;
-
 import static gregapi.data.OP.*;
 import static gregapi.util.CR.*;
-import gregapi.config.ConfigCategories;
-import gregapi.data.ANY;
-import gregapi.data.CS.BlocksGT;
-import gregapi.data.CS.ConfigsGT;
-import gregapi.data.CS.FluidsGT;
-import gregapi.data.CS.OreDictToolNames;
 import gregapi.data.FL;
 import gregapi.data.IL;
 import gregapi.data.MT;
-import gregapi.data.OD;
 import gregapi.data.OP;
 import gregapi.data.RM;
-import gregapi.oredict.OreDictMaterial;
 import gregapi.util.CR;
 import gregapi.util.ST;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidStack;
-//不管有没有用，先import再说
 
 public class MultiItemBiology extends MultiItemRandom{
 
@@ -179,7 +162,19 @@ public class MultiItemBiology extends MultiItemRandom{
         //把干细胞从培养皿里拿出来
         //生物垃圾不可回收（确信）
 
-        //RM.DistillationTower.addRecipe0(16, 64, ZL_IS, MT.Petrol.liquid(U, T), );
+        RM.Distillery.addRecipe1(T, 512, 128,ST.tag(0), MT.Petrol.liquid(U, T), FL.Dodecane.make(150), ZL_IS);
+        RM.Distillery.addRecipe1(T, 512, 192,ST.tag(0), MT.Diesel.liquid(U, T), FL.Dodecane.make(200), ZL_IS);
+        //十二烷
+
+        RM.Mixer.addRecipe0(T, 16, 256, FL.array(FL.Dodecane.make(10000), MT.Cl.gas(U, T)), FL.array(FL.Dodecane_Chloride.make(1000), FL.Dodecane.make(9000)), ZL_IS);
+        RM.HeatMixer.addRecipe0(T, 256, 24, FL.array(FL.Dodecane.make(10000), MT.Cl.gas(U, T)), FL.array(FL.Dodecane_Chloride.make(1000),FL.Dodecane.make(9000)), ZL_IS);
+        //氯化十二烷
+
+        RM.Distillery.addRecipe1(T, 256, 256, ST.tag(0), FL.Dodecane_Chloride.make(1000), FL.Monochlorodecane.make(50), ZL_IS);
+        //一氯十二烷。因为不再加入一氯十二烷提纯为1,一氯十二烷的操作，遂在此再次减小概率
+
+        RM.HeatMixer.addRecipe1(T, 64, 256, OP.dust.mat(MT.NaOH, 1), FL.array(FL.Monochlorodecane.make(1000), MT.Water.liquid(U*2, T)), FL.LaurylAlcohol.make(1000), OP.dust.mat(MT.NaCl, 1));
+        //月桂醇
 
         //RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithName(1, "Gene Data"));
         //RM.BioLab.addRecipe1(T, 16, 64, IL.USB_Stick_4.get(1), ZL_FS, ZL_FS, IL.USB_Stick_4.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Stem Cell")));
@@ -191,9 +186,9 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.HeatMixer.addRecipe1(T, 512, 200, OP.dust.mat(MT.Pt, 0), FL.array(FL.MethylLaurate.make(1000), MT.H.fluid(U*2, T)), FL.array(FL.MethylHydrolaurate.make(1000)), ZL_IS);
 
-        RM.Distillery.addRecipe1(T, 256, 2000, ST.tag(0), FL.array(FL.MethylHydrolaurate.make(1000)), FL.array(FL.Dodecane.make(1000)), ZL_IS);
+        RM.Distillery.addRecipe1(T, 256, 2000, ST.tag(0), FL.array(FL.MethylHydrolaurate.make(1000)), FL.array(FL.LaurylAlcohol.make(1000)), ZL_IS);
 
-        RM.HeatMixer.addRecipe0(T, 512, 200, FL.array(FL.Dodecane.make(1000), MT.N.fluid(U, T), MT.SO3.fluid(U, T)), ZL_FS, IL.Lauryl_Sulfate.get(1));
+        RM.HeatMixer.addRecipe0(T, 512, 200, FL.array(FL.LaurylAlcohol.make(1000), MT.N.fluid(U, T), MT.SO3.fluid(U, T)), ZL_FS, IL.Lauryl_Sulfate.get(1));
 
         RM.HeatMixer.addRecipeX(T, 512, 200, ST.array(IL.Lauryl_Sulfate.get(1), OP.dust.mat(MT.NaOH, 2)), ZL_FS, ZL_FS, ST.array(IL.SDS.get(1), OP.dust.mat(MT.NaSO4, 1)));
 
@@ -213,6 +208,44 @@ public class MultiItemBiology extends MultiItemRandom{
 
         /**DNA提取部分结束*/
 
+        RM.HeatMixer.addRecipe1(T, 64, 2048, OP.dust.mat(MT.NaOH, 0), FL.DNASolution.make(1000), FL.Deoxyribonucleotide.make(1000), ZL_IS);
+        //脱氧核糖核苷酸
+
+        RM.HeatMixer.addRecipe1(T, 64, 512, dustTiny.mat(MT.NaOH, 0), FL.DNASolution.make(1000), FL.Primer.make(100), ZL_IS);
+        //引物
+
+        RM.BioLab.addRecipe0(T, 16, 4096, MT.Lava.liquid(U*16, T), FL.taqDNAPolymerase.make(1), ZL_IS);
+        //taqDNA聚合酶
+
+        RM.BioLab.addRecipeX(T, 16, 4096, ST.array(IL.Culture_Dish_Empty.get(1), OP.ingot.mat(MT.MeatCooked, 1), ST.make(Blocks.dirt, 1, 0)), MT.Water.liquid(U, T), FL.EscherichiaColi.make(1) , ZL_IS);
+        //大肠杆菌
+
+        RM.Incubator.addRecipe1(T, 16, 4096, OP.ingot.mat(MT.MeatCooked, 4), FL.EscherichiaColi.make(1), FL.EscherichiaColi.make(1000), ZL_IS);
+        //培养大肠杆菌
+
+        RM.BioLab.addRecipe0(T, 256, 2048, FL.EscherichiaColi.make(1000), FL.RestrictionEndonuclease.make(1), ZL_IS);
+        //提取限制性核酸内切酶
+
+        RM.BioLab.addRecipe1(T, 16, 1024, new long[]{100}, OP.tube.mat(MT.Glass, 1), FL.array(FL.DNASolution.make(1), FL.RestrictionEndonuclease.make(1)), ZL_FS, IL.Gene_Samples.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Differentiation promoting protein (nerve cell)")));
+        //基因样本
+
+        RM.BioLab.addRecipe1(T, 64, 1024, IL.Gene_Samples.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Differentiation promoting protein (nerve cell)")), FL.array(FL.Primer.make(100), FL.Deoxyribonucleotide.make(1000)), FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), ZL_IS);
+        //扩增基因样本
+
+        RM.BioLab.addRecipe1(T, 16, 256, OP.dust.mat(MT.CaCl2, 1), FL.array(FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), FL.EscherichiaColi.make(10)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1), ZL_IS);
+        //导入基因。本来要用林业那个附属的基因的，但是这里没有，但是正好加了大肠杆菌，就用了，也挺好
+
+        RM.Incubator.addRecipe1(T, 16, 4096, ST.tag(0),  FL.array(FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1),FL.MSCSupplement.make(1000)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(100), ZL_IS);
+        //培养导入基因后的细菌
+
+        RM.Centrifuge.addRecipe0(T, 256, 512, FL.Bacteria_DifferentiationPromotingProteinNeuron.make(100), FL.DifferentiationPromotingProteinNeuron.make(10), ZL_IS);
+        //提取促分化蛋白
+
+        RM.BioLab.addRecipe1(T, 16, 256, new long[]{1000}, ST.make(Items.egg, 1, 0), ZL_FS, ZL_FS, IL.Unformed_Embryo.get(1));
+        //从鸡蛋里拿出未成形胚胎
+
+        RM.BioLab.addRecipe1(T, 16, 514, IL.Culture_Dish_Stem_Cell_Somatic.get(1), FL.DifferentiationPromotingProteinNeuron.make(10), NF, IL.Neuron_Cell.get(1));
+        //神经细胞培养皿
 
     }
 
