@@ -649,12 +649,12 @@ public class MultiItemTechnological extends MultiItemRandom {
 
 
 		IL.Circuit_Plate_Empty.set(             addItem(tLastID = 30000, "Plastic Circuit Plate"                    , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U100*25, MT.Plastic, U), TC.stack(TC.FABRICO, 1)));
-		IL.Circuit_Plate_Empty_Phenolic.set(    addItem(tLastID = 30017, "Phenolic Circuit Plate"    , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U100*25, MT.Wood, U*4), TC.stack(TC.FABRICO, 1)));
-		IL.Circuit_Plate_Empty_Epoxid.set(      addItem(tLastID = 30018, "Epoxid Circuit Plate"               , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
-		IL.Circuit_Plate_Empty_Multilayer.set(  addItem(tLastID = 30019, "Multilayer Epoxid Circuit Plate"               , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
-		IL.Circuit_plate_Empty_Crystal.set(     addItem(tLastID = 30020, "Aluminium Printed Circuit Plate"               , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U*2), TC.stack(TC.FABRICO, 1)));
-		IL.Perforated_Bushing.set(              addItem(tLastID = 30021, "Perforated Bushing"                    , "Used to manufacture glass fiber"                            , new OreDictItemData(ANY.Steel, U10*35), TC.stack(TC.FABRICO, 1)));
-		IL.Glass_Fiber.set(                     addItem(tLastID = 30022, "Fibreglass"                    , "Excellent material to strengthen circuit plates"                   , new OreDictItemData(MT.Glass, U100), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty_Phenolic.set(    addItem(tLastID = 30017, "Phenolic Circuit Plate"                   , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U100*25, MT.Wood, U*4), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty_Epoxid.set(      addItem(tLastID = 30018, "Epoxid Circuit Plate"                     , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty_Multilayer.set(  addItem(tLastID = 30019, "Multilayer Epoxid Circuit Plate"          , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_plate_Empty_Crystal.set(     addItem(tLastID = 30020, "Aluminium Printed Circuit Plate"          , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U*2), TC.stack(TC.FABRICO, 1)));
+		IL.Perforated_Bushing.set(              addItem(tLastID = 30021, "Perforated Bushing"                       , "Used to manufacture glass fiber"                 , new OreDictItemData(ANY.Steel, U10*35), TC.stack(TC.FABRICO, 1)));
+		IL.Glass_Fiber.set(                     addItem(tLastID = 30022, "Fibreglass"                               , "About 1/20 of your hair's diameter"              , new OreDictItemData(MT.Glass, U100), TC.stack(TC.FABRICO, 1)));
 
 
 		CR.shaped(IL.Perforated_Bushing.get(1), CR.DEF_NAC   , "ShS", "PPP", "SfS", 'P', OP.plateDouble.dat(ANY.Steel), 'S', OP.bolt.dat(ANY.Steel));
