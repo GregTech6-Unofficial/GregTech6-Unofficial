@@ -13,7 +13,7 @@ Nothing
 [FIXED] Recipe for Titanium Niobium Carbide Turbine Mainblock.
 [FIXED] Recipes for Large Mass Fab and Mass Replicator Mainblocks are the same.
 [FIXED] When centrifuging energy crystal dust you can get more sapphire dust.
-[FIXED[ TerraFirmaCraft and TerraFirmaCraft Plus rocks and ores cannot be harvested by GT pickaxes and drills.
+[FIXED] TerraFirmaCraft and TerraFirmaCraft Plus rocks and ores cannot be harvested by GT pickaxes and drills.
 [FIXED] A log error of NetheritePlus recipe when NePl is not loaded.
 [CHANGED] The Mod name is now 'GregTech 6 Unofficial' to avoid ambiguity.
 [CHANGED] Thanks to Greg notifying me that dust not being able to put into Extruders will cause plastic and similar materials unable to be processed into capsules, etc. I reverted the change so Extruders can process them now again.
@@ -27,6 +27,9 @@ Nothing
 [CHANGED] When fermenting Biomass from bio resources, you can choose to boost its efficiency by 20 times by providing Biomass Flora.
 [CHANGED] Now you need more Idun Golden Apple Juice, Idun Apple Juice, and Golden Carrot Juice to ferment biomass.
 [CHANGED] IV batteries are now made in Welder with high cost.
+[CHANGED] Circuit Plate is now named as Plastic Circuit Plate.
+[CHANGED] The Circuit production is majorly changed. Different Circuits now need different Circuit Plate to craft.
+[CHANGED] Press now have fluid input and output.
 [ADDED] GT6U Achievement Page and some Achievements.
 [ADDED] Biology Item Group.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
@@ -34,6 +37,7 @@ Nothing
 [ADDED] Coconut Tree and its derivatives. Also its compat for Binnie's Mods. They are likely to grow along beach and swamp area.
 [ADDED] 4 Kinds of Bacterias and Biomass Flora Bacteria cluster. These bacterias are helpful to increase efficiency in fermenting and producing organic gases.
 [ADDED] Ethanol, Methane, and Hydrogen can now be produced by different bacteris with biomass and required nutrition or environment fluids in the Incubator.
+[ADDED] Phenolic Circuit Plate, Epoxid Circuit Plate, Multilayer Epoxid Circuit Plate, Aluminium Printed Circuit Plate, Perforated Bushing, and Fibreglass.
 
 6.14.01:
 [NOTE] Do not use 6.14.00, it will crash the game.

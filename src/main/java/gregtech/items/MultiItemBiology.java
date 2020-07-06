@@ -22,6 +22,7 @@ package gregtech.items;
 import gregapi.data.*;
 import gregapi.item.CreativeTab;
 import gregapi.item.multiitem.MultiItemRandom;
+import gregapi.oredict.OreDictItemData;
 import gregapi.util.*;
 import net.minecraft.init.Items;
 import static gregapi.data.CS.*;
@@ -45,10 +46,10 @@ public class MultiItemBiology extends MultiItemRandom{
 
     @Override
     public void addItems() {
-        IL.Culture_Dish_Empty.set(addItem(1000, "Culture Dish (Empty)", "A fundamental tool of laboratory biology"));
-        IL.Culture_Dish_MSC.set(addItem(1001,"Culture Dish (MSC)","Stem cell culture medium inside"));
-        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in Incubator"));
-        IL.Culture_Dish_Stem_Cell_Somatic.set(addItem(1003,"Culture Dish (stem cells)","Stem cells inside"));
+        IL.Culture_Dish_Empty.set(addItem(1000, "Culture Dish (Empty)", "A fundamental tool of laboratory biology"), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_MSC.set(addItem(1001,"Culture Dish (MSC)","Stem cell culture medium inside"), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in Incubator"), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Stem_Cell_Somatic.set(addItem(1003,"Culture Dish (stem cells)","Stem cells inside"), new OreDictItemData(MT.PTFE, U));
         IL.dust_Inorganic_Salt_Mixture.set(addItem(1004,"Inorganic Salt Mixture Dust","Inorganic salts for cell culture"));
         IL.dust_Tiny_Inorganic_Salt_Mixture.set(addItem(1005,"Tiny InorganicSalt Mixture Dust","Inorganic salts for cell culture"));
         IL.dust_Glucose.set(addItem(1006,"Glucose Dust","Can't be eaten now"));
@@ -58,12 +59,12 @@ public class MultiItemBiology extends MultiItemRandom{
         IL.Precision_Manipulator.set(addItem(1010,"Percision Manipulator","Very accurate"));
         IL.Lauryl_Sulfate.set(addItem(1011,"Lauryl Sulfate",""));
         IL.SDS.set(addItem(1012,"SDS",""));
-        IL.Culture_Dish_Biomass_Flora.set(addItem(1013,"Culture Dish (Biomass Flora)",""));
-        IL.Mixing_Rod.set(addItem(1014,"Mixing Rod","Used to differentiate bacteria"));
-        IL.Culture_Dish_Yeast.set(addItem(1015,"Culture Dish (Yeast)",""));
-        IL.Culture_Dish_Methanogens.set(addItem(1016,"Culture Dish (Methanogens)",""));
-        IL.Culture_Dish_Bacillus.set(addItem(1017,"Culture Dish (Bacillus)",""));
-        IL.Culture_Dish_Clostridia.set(addItem(1018,"Culture Dish (Clostridia)",""));
+        IL.Culture_Dish_Biomass_Flora.set(addItem(1013,"Culture Dish (Biomass Flora)",""), new OreDictItemData(MT.PTFE, U));
+        IL.Mixing_Rod.set(addItem(1014,"Mixing Rod","Used to differentiate bacteria"), new OreDictItemData(MT.PTFE, U10*5));
+        IL.Culture_Dish_Yeast.set(addItem(1015,"Culture Dish (Yeast)",""), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Methanogens.set(addItem(1016,"Culture Dish (Methanogens)",""), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Bacillus.set(addItem(1017,"Culture Dish (Bacillus)",""), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Clostridia.set(addItem(1018,"Culture Dish (Clostridia)",""), new OreDictItemData(MT.PTFE, U));
         IL.Gene_Samples.set(addItem(1019, "Gene Samples", ""));
         IL.Protein_Sample.set(addItem(1020, "Protein Sample", ""));
 
@@ -245,7 +246,7 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe1(T, 64, 1024, IL.Gene_Samples.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Differentiation promoting protein (nerve cell)")), FL.array(FL.Primer.make(100), FL.Deoxyribonucleotide.make(1000)), FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), ZL_IS);
         //扩增基因样本
 
-        RM.BioLab.addRecipe1(T, 16, 256, OP.dust.mat(MT.CaCl2, 1), FL.array(FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), FL.EscherichiaColi.make(10)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1), ZL_IS);
+        RM.BioLab.addRecipe1(T, 16, 256, OM.dust(MT.CaCl2, U), FL.array(FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), FL.EscherichiaColi.make(10)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1), ZL_IS);
         //导入基因。本来要用林业那个附属的基因的，但是这里没有，但是正好加了大肠杆菌，就用了，也挺好
 
         RM.Incubator.addRecipe1(T, 16, 4096, ST.tag(0),  FL.array(FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1),FL.MSCSupplement.make(1000)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(100), ZL_IS);

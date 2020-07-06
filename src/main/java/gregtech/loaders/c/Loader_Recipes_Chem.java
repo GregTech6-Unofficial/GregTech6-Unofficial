@@ -268,9 +268,9 @@ public class Loader_Recipes_Chem implements Runnable {
 		RM.Electrolyzer .addRecipe1(T, 16,20480, ST.tag(0), FL.array(FL.OceanGrC.make(16000)     ), FL.array(MT.Cl.gas(U4, F), MT.H.gas(83*U8, F), MT.O.gas(41*U8, F)), OM.dust(MT.NaOH, 3*U8));
 		RM.Electrolyzer .addRecipe1(T, 16,20480, ST.tag(0), FL.array(FL.Ocean.make(16000)        ), FL.array(MT.Cl.gas(U4, F), MT.H.gas(83*U8, F), MT.O.gas(41*U8, F)), OM.dust(MT.NaOH, 3*U8));
 		RM.Electrolyzer .addRecipe1(T, 16, 1280, ST.tag(0), FL.array(MT.SaltWater.liquid(U, T)   ), FL.array(MT.Cl.gas(U8, F), MT.H.gas( 3*U8, F), MT.O.gas(   U8, F)), OM.dust(MT.NaOH, 3*U8));
-		
-		
-		
+		RM.Electrolyzer .addRecipe1(T, 16,  800, ST.tag(0), FL.array(MT.H2SO4.fluid(U*14, T)), FL.array(MT.H.fluid(U*2, F), MT.H2S2O8.fluid( U*12, F)), NI);
+		RM.Mixer        .addRecipe1(T, 16,  256, ST.tag(0), FL.array(MT.H2S2O8.fluid(U*12, T), MT.H2O.fluid(U*6, T)), FL.array(MT.H2SO4.fluid(U*14, F), MT.H2O2.fluid( U*4, F)), NI);
+
 		RM.Fermenter        .addRecipe1(T, 16,  24, ST.tag(0), FL.Biomass   .make(40), FL.Methane.make(8), ZL_IS);
 		RM.Fermenter        .addRecipe1(T, 16,  24, ST.tag(0), FL.BiomassIC2.make(40), FL.Methane.make(8), ZL_IS);
 		

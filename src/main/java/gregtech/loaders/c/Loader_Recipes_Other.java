@@ -160,6 +160,13 @@ public class Loader_Recipes_Other implements Runnable {
 				RM.Mixer            .addRecipe1(T, 16,   16, aEvent.mStack, FL.Water.make(250), FL.Glue.make(250), ZL_IS);
 				RM.Mixer            .addRecipe1(T, 16,   16, aEvent.mStack, FL.DistW.make(200), FL.Glue.make(250), ZL_IS);
 				RM.Laminator        .addRecipe2(T, 16,   16, aEvent.mStack, ST.make(Blocks.piston, 1, W), ST.make(Blocks.sticky_piston, 1, 0));
+
+				for (OreDictMaterial tMat : ANY.Wood.mToThis) {
+					ItemStack tDust = OP.dust.mat(tMat, 4);
+
+					if (ST.valid(tDust)) RM.Press.addRecipeX(T, F, F, F, T, 16, 64, ST.array(aEvent.mStack, tDust, OP.foil.mat(MT.Cu, 1)), IL.Circuit_Plate_Empty_Phenolic.get(1));
+				}
+
 			}});
 			addListener(OD.itemClay, new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 				RM.Mixer            .addRecipeX(T, 16,   16, ST.array(aEvent.mStack, OM.dust(MT.Redstone), OM.dust(MT.Basalz), OM.dust(MT.Obsidian)), OM.dust(MT.Petrotheum, 2*U));

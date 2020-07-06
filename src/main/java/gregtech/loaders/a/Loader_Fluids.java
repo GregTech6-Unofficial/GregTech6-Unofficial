@@ -185,13 +185,15 @@ public class Loader_Fluids implements Runnable {
 
 
 		// Polymers
-		FL.create("polyvinylchloride"        , "Polyvinylchloride"   , MT.PVC                  , 1,1000,273); //聚氯乙烯
-		FL.create("polytetrafluoroethylene"  , "Polytetrafluoroethylene" , MT.PTFE             , 1,1000,273); //聚四氟乙烯
-		FL.create("epoxid"                   , "Epoxid"              , MT.Epoxid               , 1,1000,273); //环氧树脂
+		FL.create("polyvinylchloride"        , "Molten Polyvinylchloride"   , MT.PVC                  , 1,1000,423); //聚氯乙烯
+		FL.create("polytetrafluoroethylene"  , "Molten Polytetrafluoroethylene" , MT.PTFE             , 1,1000,423); //聚四氟乙烯
+		FL.create("epoxid"                   , "Molten Epoxid"              , MT.Epoxid               , 1,1000,423); //环氧树脂
 
 		// GT6U - others
 		FL.create("liquidoxygen"             , "Liquid Oxygen"       , MT.O                  , 1,   1000,    85);
 		FL.create("liquidhydrogen"           , "Liquid Hydrogen"     , MT.H                  , 1,   1000,    20);
+		FL.create("electro_etching_solution" , "Electro-Etching Solution", MT.ElectroEtchingSolution , 1,   1000,    273);
+		FL.create("peroxydisulfuricacid"     , "Peroxydisulfuric Acid", MT.H2S2O8            , 1,   1000,    273);
 
 		// -------------------
 		FL.create("chargedmatter"            , "Charged Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);

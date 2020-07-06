@@ -20,7 +20,6 @@
 package gregtech.items;
 
 import static gregapi.data.CS.*;
-import static gregapi.data.MT.TungstenSteel;
 
 import gregapi.code.ItemStackContainer;
 import gregapi.cover.covers.*;
@@ -649,12 +648,32 @@ public class MultiItemTechnological extends MultiItemRandom {
 		RM.Press.addRecipeX(T, 16, 64, ST.array(ST.make(Blocks.end_stone, 5, W)                              , OP.gem      .mat(MT.EnderEye, 2)), IL.Electrode_FR_Ender       .get(4));
 
 
-		IL.Circuit_Plate_Empty.set(             addItem(tLastID = 30000, "Circuit Plate"                    , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.SiO2, U, MT.Plastic, U), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty.set(             addItem(tLastID = 30000, "Plastic Circuit Plate"                    , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U100*25, MT.Plastic, U), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty_Phenolic.set(    addItem(tLastID = 30017, "Phenolic Circuit Plate"    , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U100*25, MT.Wood, U*4), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty_Epoxid.set(      addItem(tLastID = 30018, "Epoxid Circuit Plate"               , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_Plate_Empty_Multilayer.set(  addItem(tLastID = 30019, "Multilayer Epoxid Circuit Plate"               , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
+		IL.Circuit_plate_Empty_Crystal.set(     addItem(tLastID = 30020, "Aluminium Printed Circuit Plate"               , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U*2), TC.stack(TC.FABRICO, 1)));
+		IL.Perforated_Bushing.set(              addItem(tLastID = 30021, "Perforated Bushing"                    , "Used to manufacture glass fiber"                            , new OreDictItemData(ANY.Steel, U10*35), TC.stack(TC.FABRICO, 1)));
+		IL.Glass_Fiber.set(                     addItem(tLastID = 30022, "Fibreglass"                    , "Excellent material to strengthen circuit plates"                   , new OreDictItemData(MT.Glass, U100), TC.stack(TC.FABRICO, 1)));
+
+
+		CR.shaped(IL.Perforated_Bushing.get(1), CR.DEF_NAC   , "ShS", "PPP", "SfS", 'P', OP.plateDouble.dat(ANY.Steel), 'S', OP.bolt.dat(ANY.Steel));
+		RM.Bath.addRecipe1(T, 0, 200, IL.Perforated_Bushing.get(0), MT.Glass.liquid(U10, T), NF, IL.Glass_Fiber.get(10));
+		RM.Mixer.addRecipe1(T, 16, 300, ST.tag(0), FL.array(MT.HCl.fluid(U, T), MT.H2O2.fluid(U*2, T), MT.H2O.fluid(U*3, T)), MT.ElectroEtchingSolution.fluid(U*6, T), NI);
 
 		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
 			ItemStack tDust = OP.dust.mat(tMat, 1);
-			if (ST.valid(tDust)) RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.Plastic, 1), tDust, IL.Circuit_Plate_Empty.get(1));
+			if (ST.valid(tDust)) RM.Press.addRecipeX(T, F, F, F, T, 16, 64, ST.array(OP.plate.mat(MT.Plastic, 1), tDust, OP.foil.mat(MT.Cu, 1)), IL.Circuit_Plate_Empty.get(1));
 		}
+
+		RM.Press.addRecipeX(T, F, F, F, T, 16, 100, ST.array(OP.plate.mat(MT.Epoxid, 1), IL.Glass_Fiber.get(4), OP.foil.mat(MT.Cu, 4)), IL.Circuit_Plate_Empty_Epoxid.get(1));
+		RM.Press.addRecipeX(T, F, F, F, T, 16, 100, ST.array(OP.plate.mat(MT.Epoxid, 1), OP.wireFine.mat(MT.Graphene, 4), OP.foil.mat(MT.Cu, 4)), IL.Circuit_Plate_Empty_Epoxid.get(1));
+
+		RM.Press.addRecipeX(T, F, F, F, T, 16, 160, ST.array(OP.foil.mat(MT.Epoxid, 4), IL.Glass_Fiber.get(8), OP.foil.mat(MT.Cu, 8)), IL.Circuit_Plate_Empty_Multilayer.get(1));
+		RM.Press.addRecipeX(T, F, F, F, T, 16, 160, ST.array(OP.foil.mat(MT.Epoxid, 4), OP.wireFine.mat(MT.Graphene, 8), OP.foil.mat(MT.Cu, 8)), IL.Circuit_Plate_Empty_Multilayer.get(1));
+
+		RM.Press.addRecipeX(T, F, F, F, T, 64, 256, ST.array(OP.foil.mat(MT.Epoxid, 8), OP.foil.mat(MT.Al, 4), IL.Glass_Fiber.get(16)), IL.Circuit_plate_Empty_Crystal.get(1));
+		RM.Press.addRecipeX(T, F, F, F, T, 64, 256, ST.array(OP.foil.mat(MT.Epoxid, 8), OP.foil.mat(MT.Al, 4), OP.wireFine.mat(MT.Graphene, 16)), IL.Circuit_plate_Empty_Crystal.get(1));
 
 		IL.Circuit_Wire_Copper.set(             addItem(tLastID = 30001, "Circuit Wiring (Copper)"          , "Needs to be placed on an empty Circuit Plate"    , new OreDictItemData(MT.Cu, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Circuit_Plate_Copper.set(            addItem(tLastID = 30002, "Circuit Plate (Copper)"           , "Needs Circuit Parts"                             , new OreDictItemData(MT.Cu, U, ANY.SiO2, U, MT.Plastic, U), TC.stack(TC.FABRICO, 1), TC.stack(TC.PERMUTATIO, 1)));
@@ -674,13 +693,15 @@ public class MultiItemTechnological extends MultiItemRandom {
 
 		CR.shaped(IL.Circuit_Wire_Copper        .get(1), CR.DEF, "WWW", "WxW", "WWW", 'W', OP.wireFine.dat(ANY.Cu));
 
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Copper    .get(1), IL.Circuit_Plate_Copper    .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Gold      .get(1), IL.Circuit_Plate_Gold      .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Platinum  .get(1), IL.Circuit_Plate_Platinum  .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty_Phenolic.get(1), IL.Circuit_Wire_Copper    .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF, IL.Circuit_Plate_Copper    .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Copper    .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF, IL.Circuit_Plate_Copper    .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty_Epoxid.get(1), IL.Circuit_Wire_Gold      .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF,  IL.Circuit_Plate_Gold      .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty_Multilayer.get(1), IL.Circuit_Wire_Platinum  .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF,  IL.Circuit_Plate_Platinum  .get(1));
 
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Magic     .get(1), IL.Circuit_Plate_Magic     .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Enderium  .get(1), IL.Circuit_Plate_Enderium  .get(1));
-		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Signalum  .get(1), IL.Circuit_Plate_Signalum  .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty_Phenolic.get(1), IL.Circuit_Wire_Magic     .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF, IL.Circuit_Plate_Magic     .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Magic     .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF, IL.Circuit_Plate_Magic     .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Enderium  .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF, IL.Circuit_Plate_Enderium  .get(1));
+		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Empty.get(1), IL.Circuit_Wire_Signalum  .get(1), MT.ElectroEtchingSolution.fluid(U10, T), NF, IL.Circuit_Plate_Signalum  .get(1));
 
 		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, OP.plate.mat(MT.HSLA, 1), IL.Circuit_Wire_Gold.get(1), IL.Circuit_Plate_HSLA.get(1));
 
@@ -710,24 +731,24 @@ public class MultiItemTechnological extends MultiItemRandom {
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.dustTiny.mat(MT.Redstone, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Basic        .get(1));
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.dustTiny.mat(MT.Redstone, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Basic        .get(1));
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.dustTiny.mat(MT.Redstone, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Basic        .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  20, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  70, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Advanced     .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  70, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Advanced     .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T, 260, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Elite        .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,1030, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Master       .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,1030, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Master       .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,4100, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Ultimate     .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  128, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Advanced     .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  128, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Advanced     .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T, 512, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Elite        .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,2048, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Master       .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,2048, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Master       .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,4096, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Ultimate     .get(1));
 
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.Thaumium      , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Magic        .get(1));
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.Thaumium      , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Magic        .get(1));
@@ -783,23 +804,23 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Circuit_Board_Power_Module.set(      addItem(tLastID = 30299, "Circuit Board (Power Module)"     , "Needs to be soldered properly"                   , TC.stack(TC.FABRICO, 1), MD.RoC.mLoaded ? null : TD.Creative.HIDDEN));
 
 		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Basic      .get(4), IL.Circuit_Board_Basic         .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Good       .get(4), IL.Circuit_Board_Good          .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Advanced   .get(4), IL.Circuit_Board_Good          .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Elite      .get(4), IL.Circuit_Board_Good          .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Master     .get(4), IL.Circuit_Board_Good          .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Ultimate   .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Good       .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Advanced   .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Elite      .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Master     .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Copper      .get(1), IL.Circuit_Part_Ultimate   .get(4), IL.Circuit_Board_Good          .get(1));
 		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Basic      .get(4), IL.Circuit_Board_Basic         .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Good       .get(4), IL.Circuit_Board_Good          .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,120, 64, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Advanced   .get(4), IL.Circuit_Board_Advanced      .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,360, 64, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Elite      .get(4), IL.Circuit_Board_Elite         .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,360, 64, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Master     .get(4), IL.Circuit_Board_Elite         .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,360, 64, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Ultimate   .get(4), IL.Circuit_Board_Elite         .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Good       .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,32, 512, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Advanced   .get(4), IL.Circuit_Board_Advanced      .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,128, 256, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Elite      .get(4), IL.Circuit_Board_Elite         .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,128, 256, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Master     .get(4), IL.Circuit_Board_Elite         .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,128, 256, IL.Circuit_Plate_Gold        .get(1), IL.Circuit_Part_Ultimate   .get(4), IL.Circuit_Board_Elite         .get(1));
 		RM.Press.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Basic      .get(4), IL.Circuit_Board_Basic         .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T, 30, 64, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Good       .get(4), IL.Circuit_Board_Good          .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,120, 64, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Advanced   .get(4), IL.Circuit_Board_Advanced      .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,360, 64, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Elite      .get(4), IL.Circuit_Board_Elite         .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,480, 64, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Master     .get(4), IL.Circuit_Board_Master        .get(1));
-		RM.Assembler.addRecipe2(T, F, F, F, T,720, 64, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Ultimate   .get(4), IL.Circuit_Board_Ultimate      .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T, 32, 128, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Good       .get(4), IL.Circuit_Board_Good          .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,32, 512, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Advanced   .get(4), IL.Circuit_Board_Advanced      .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,128, 256, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Elite      .get(4), IL.Circuit_Board_Elite         .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,128, 512, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Master     .get(4), IL.Circuit_Board_Master        .get(1));
+		RM.Assembler.addRecipe2(T, F, F, F, T,128, 1024, IL.Circuit_Plate_Platinum    .get(1), IL.Circuit_Part_Ultimate   .get(4), IL.Circuit_Board_Ultimate      .get(1));
 
 		RM.Assembler.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Magic       .get(1), IL.Circuit_Part_Magic      .get(4), IL.Circuit_Board_Magic         .get(1));
 		RM.Assembler.addRecipe2(T, F, F, F, T, 16, 64, IL.Circuit_Plate_Enderium    .get(1), IL.Circuit_Part_Enderium   .get(4), IL.Circuit_Board_Enderium      .get(1));
@@ -832,20 +853,20 @@ public class MultiItemTechnological extends MultiItemRandom {
 		RM.Bath.addRecipe1(T, F, F, F, T, 0, 64, IL.Circuit_Board_Basic         .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Basic         .get(1));
 		RM.Bath.addRecipe1(T, F, F, F, T, 0, 64, IL.Circuit_Board_Basic         .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Basic         .get(1));
 		RM.Bath.addRecipe1(T, F, F, F, T, 0, 64, IL.Circuit_Board_Good          .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Basic         .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T, 30, 120, IL.Circuit_Board_Good          .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Good          .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T, 30, 120, IL.Circuit_Board_Good          .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Good          .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Good          .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Good          .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Good          .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Good          .get(1));
 		RM.Bath.addRecipe1(T, F, F, F, T, 0, 64, IL.Circuit_Board_Advanced      .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Basic         .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T, 30, 120, IL.Circuit_Board_Advanced      .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Good          .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,120, 120, IL.Circuit_Board_Advanced      .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Advanced      .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T, 30, 120, IL.Circuit_Board_Elite         .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Good          .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,120, 120, IL.Circuit_Board_Elite         .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Advanced      .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,360, 120, IL.Circuit_Board_Elite         .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Elite         .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,120, 120, IL.Circuit_Board_Master        .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Advanced      .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,360, 120, IL.Circuit_Board_Master        .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Elite         .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,480, 120, IL.Circuit_Board_Master        .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Master        .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,360, 120, IL.Circuit_Board_Ultimate      .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Elite         .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,480, 120, IL.Circuit_Board_Ultimate      .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Master        .get(1));
-		RM.Assembler.addRecipe1(T, F, F, F, T,720, 120, IL.Circuit_Board_Ultimate      .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Ultimate      .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Advanced      .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Good          .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Advanced      .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Advanced      .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Elite         .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Good          .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Elite         .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Advanced      .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Elite         .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Elite         .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Master        .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Advanced      .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Master        .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Elite         .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Master        .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Master        .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Ultimate      .get(1), MT.Pb              .liquid(U, T), NF, IL.Circuit_Elite         .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Ultimate      .get(1), MT.Sn              .liquid(U, T), NF, IL.Circuit_Master        .get(1));
+		RM.Bath.addRecipe1(T, F, F, F, T, 0, 120, IL.Circuit_Board_Ultimate      .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Ultimate      .get(1));
 
 		RM.Assembler.addRecipe1(T, F, F, F, T,32, 64, IL.Circuit_Board_Magic         .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Magic         .get(1));
 		RM.Assembler.addRecipe1(T, F, F, F, T,32, 64, IL.Circuit_Board_Enderium      .get(1), MT.SolderingAlloy  .liquid(U, T), NF, IL.Circuit_Enderium      .get(1));
@@ -873,7 +894,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Processor_Crystal_Emerald       .set(addItem(tLastID = 30503, "Crystal Processor (Emerald)"      , "Storage Processor Circuit"                       , TC.stack(TC.COGNITO, 5), TC.stack(TC.LUCRUM, 2), TC.stack(TC.VITREUS, 2), new OreDictItemData(MT.Pt, U, ANY.Emerald, U)));
 		IL.Processor_Crystal_Sapphire      .set(addItem(tLastID = 30504, "Crystal Processor (Sapphire)"     , "Conversion Processor Circuit"                    , TC.stack(TC.COGNITO, 5), TC.stack(TC.LUCRUM, 2), TC.stack(TC.VITREUS, 2), new OreDictItemData(MT.Pt, U, ANY.Sapphire, U)));
 
-		CR.shaped(IL.Processor_Crystal_Empty.get(1), CR.DEF_REV, "CLC", "LBL", "CLC", 'C', OD_CIRCUITS[6], 'B', IL.Circuit_Plate_Platinum, 'L', IL.Comp_Laser_Gas_HeNe);
+		CR.shaped(IL.Processor_Crystal_Empty.get(1), CR.DEF_REV, "CLC", "LBL", "CLC", 'C', OD_CIRCUITS[6], 'B', IL.Circuit_plate_Empty_Crystal, 'L', IL.Comp_Laser_Gas_HeNe);
 
 		RM.Assembler.addRecipe2(T, F, F, F, T, 480, 144, IL.Processor_Crystal_Empty.get(1), IL.Circuit_Crystal_Diamond .get(1), IL.Processor_Crystal_Diamond .get(1));
 		RM.Assembler.addRecipe2(T, F, F, F, T, 480, 144, IL.Processor_Crystal_Empty.get(1), IL.Circuit_Crystal_Ruby    .get(1), IL.Processor_Crystal_Ruby    .get(1));
