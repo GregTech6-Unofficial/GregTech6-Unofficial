@@ -1,8 +1,6 @@
 package gregtech;
 
 public final class BuildInfo {
-   public final static String version = "${version}";
-   public final static String mcversion = "${mcversion}";
-   public final static String builddate = "${builddate}";
+   public static String version = "6.14.02";
 }
 
