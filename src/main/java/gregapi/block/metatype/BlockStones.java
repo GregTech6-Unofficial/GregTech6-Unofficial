@@ -58,6 +58,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockStones extends BlockMetaType implements IOreDictListenerEvent, IBlockToolable, Runnable {
@@ -65,6 +67,7 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 	  MOSSY = {F,F,T,F,F,T,F,F,F,F,F,F,F,F,F,F}
 	, SEALABLE = {F,F,F,T,F,T,T,T,T,T,T,T,T,T,T,T}
 	, SPAWNABLE = {T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F}
+	, PLANTABLE = {T,T,T,F,T,T,F,F,F,F,F,F,F,F,F,F}
 	;
 	
 	public static final byte
@@ -410,14 +413,14 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 	@Override
 	public int getItemStackLimit(ItemStack aStack) {
 		switch (ST.meta_(aStack)) {
-		case  0: return UT.Code.bindStack(OP.stone              .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		case  1: return UT.Code.bindStack(OP.stoneCobble        .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		case  2: return UT.Code.bindStack(OP.stoneMossy         .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		case  4: return UT.Code.bindStack(OP.stoneCracked       .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		case  5: return UT.Code.bindStack(OP.stoneMossyBricks   .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		case  6: return UT.Code.bindStack(OP.stoneChiseled      .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		case  7: return UT.Code.bindStack(OP.stonePolished      .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
-		default: return UT.Code.bindStack(OP.stoneBricks        .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  0: return UT.Code.bindStack(OP.stone           .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  1: return UT.Code.bindStack(OP.stoneCobble     .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  2: return UT.Code.bindStack(OP.stoneMossy      .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  4: return UT.Code.bindStack(OP.stoneCracked    .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  5: return UT.Code.bindStack(OP.stoneMossyBricks.mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  6: return UT.Code.bindStack(OP.stoneChiseled   .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		case  7: return UT.Code.bindStack(OP.stonePolished   .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
+		default: return UT.Code.bindStack(OP.stoneBricks     .mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));
 		}
 	}
 	
@@ -425,7 +428,7 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 	public long onToolClick(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, World aWorld, byte aSide, int aX, int aY, int aZ, float aHitX, float aHitY, float aHitZ) {
 		byte aMeta = (byte)aWorld.getBlockMetadata(aX, aY, aZ);
 		if (aTool.equals(TOOL_prospector)) return aMeta == STONE && ToolCompat.prospectStone(this, aMeta, aQuality, aChatReturn, aWorld, aSide, aX, aY, aZ) ? 10000 : 0;
-		if (aTool.equals(TOOL_chisel) && !aSneaking) {
+		if (aTool.equals(TOOL_chisel) && !aSneaking && CHISEL_MAPPINGS[aMeta & 15] != aMeta) {
 			aWorld.setBlockMetadataWithNotify(aX, aY, aZ, CHISEL_MAPPINGS[aMeta & 15], 3);
 			return mBlock == this ? 10000 : 5000;
 		}
@@ -481,14 +484,34 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 		}
 	}
 	
-	@Override public ArrayList<ItemStack> getDrops(World aWorld, int aX, int aY, int aZ, int aMeta, int aFortune) {return new ArrayListNoNulls<>(F, ST.make(this, 1, mBlock == this && aMeta == 0 ? 1 : aMeta));}
-	@Override public boolean isSealable(int aMeta, byte aSide) {return SEALABLE[aMeta] && super.isSealable(aMeta, aSide);}
+	@Override
+	public boolean canSustainPlant(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aSide, IPlantable aPlant) {
+		return PLANTABLE[UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ))] && aPlant.getPlantType(aWorld, aX+aSide.offsetX, aY+aSide.offsetY, aZ+aSide.offsetZ) == EnumPlantType.Cave;
+	}
+	
+	static {
+		LH.add("gt.tooltip.stone.mushroom.yes", "Mushrooms can spread to this rough Stone");
+		LH.add("gt.tooltip.stone.mushroom.no", "Mushrooms cant spread to smooth Stones!");
+	}
+	
+	@Override
+	public void addInformation(ItemStack aStack, int aMeta, EntityPlayer aPlayer, List<String> aList, boolean aF3_H) {
+		super.addInformation(aStack, aMeta, aPlayer, aList, aF3_H);
+		if (PLANTABLE[UT.Code.bind4(aMeta)]) {
+			aList.add(LH.Chat.GREEN + LH.get("gt.tooltip.stone.mushroom.yes"));
+		} else {
+			aList.add(LH.Chat.ORANGE + LH.get("gt.tooltip.stone.mushroom.no"));
+		}
+	}
+	
+	@Override public ArrayList<ItemStack> getDrops(World aWorld, int aX, int aY, int aZ, int aMeta, int aFortune) {return new ArrayListNoNulls<>(F, ST.make(this, 1, mBlock == this && aMeta == STONE ? COBBL : aMeta));}
+	@Override public boolean isSealable(int aMeta, byte aSide) {return SEALABLE[UT.Code.bind4(aMeta)] && super.isSealable(aMeta, aSide);}
 	@Override public int isProvidingWeakPower(IBlockAccess aWorld, int aX, int aY, int aZ, int aSide) {return aWorld.getBlockMetadata(aX, aY, aZ) == RSTBR ? 15 : 0;}
 	@Override public boolean shouldCheckWeakPower(IBlockAccess aWorld, int aX, int aY, int aZ, int aSide) {return mBlock == this && aWorld.getBlockMetadata(aX, aY, aZ) != RSTBR;}
 	@Override public void onNeighborBlockChange2(World aWorld, int aX, int aY, int aZ, Block aBlock) {if (MOSSY[UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ))] && WD.burning(aWorld, aX, aY, aZ)) aWorld.scheduleBlockUpdate(aX, aY, aZ, this, tickRate(aWorld));}
 	@Override public void onBlockAdded2(World aWorld, int aX, int aY, int aZ) {if (MOSSY[UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ))] && WD.burning(aWorld, aX, aY, aZ)) aWorld.scheduleBlockUpdate(aX, aY, aZ, this, tickRate(aWorld));}
 	@Override public int tickRate(World aWorld) {return 100;}
-	@Override public boolean canCreatureSpawn(int aMeta) {return mBlock == this && SPAWNABLE[aMeta];}
+	@Override public boolean canCreatureSpawn(int aMeta) {return mBlock == this && SPAWNABLE[UT.Code.bind4(aMeta)];}
 	@Override public int getFlammability(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {return 0;}
 	@Override public boolean isFlammable(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {return MOSSY[UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ))];}
 	@Override public int getFireSpreadSpeed(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {return MOSSY[UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ))]?3000:0;}

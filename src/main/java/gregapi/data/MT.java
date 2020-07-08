@@ -158,12 +158,12 @@ public class MT {
 	static OreDictMaterial dustdcmp     (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return dust            (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(DECOMPOSABLE);}
 	static OreDictMaterial dustcent     (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return dustdcmp        (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial dustelec     (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return dustdcmp        (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(ELECTROLYSER);}
-	static OreDictMaterial glowstone    (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return oredustcent     (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(PLATES, STICKS, MORTAR, BRITTLE, UNBURNABLE, MELTING, CRYSTAL, GLOWING, LIGHTING).setPriorityPrefix(2).addReRegistrations(ANY.Glowstone).setOreMultiplier(4);}
+	static OreDictMaterial glowstone    (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return oredustcent     (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(PLATES, STICKS, MORTAR, BRITTLE, UNBURNABLE, MELTING, CRYSTAL, G_GEM_ORES_TRANSPARENT, ANY.Glowstone, GLOWING, LIGHTING).setPriorityPrefix(2).setOreMultiplier(4);}
 	static OreDictMaterial redstone     (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return oredustcent     (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(PLATES, STICKS, MORTAR, BRITTLE, UNBURNABLE, MELTING, CRYSTAL, G_GEM_ORES_TRANSPARENT).setPriorityPrefix(2).setOreMultiplier(4);}
 	static OreDictMaterial coal         (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return elec            (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_GEM_ORES, BRITTLE, FLAMMABLE, MORTAR, INGOTS, COAL).setPriorityPrefix(1);}
-	static OreDictMaterial wax          (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return dust            (aID, aNameOreDict, SET_FOOD        , aR, aG, aB, aA).put(FOILS, PLATES, INGOTS, PARTS, FURNACE, MELTING, BRITTLE, MORTAR, EXTRUDER, EXTRUDER_SIMPLE).addReRegistrations(ANY.Wax);}
+	static OreDictMaterial wax          (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return dust            (aID, aNameOreDict, SET_FOOD        , aR, aG, aB, aA).put(ANY.Wax, FOILS, PLATES, INGOTS, PARTS, FURNACE, MELTING, BRITTLE, MORTAR, EXTRUDER, EXTRUDER_SIMPLE);}
 	static OreDictMaterial meat         (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return dustfood        (aID, aNameOreDict, SET_FINE        , aR, aG, aB, aA).put(MEAT, INGOTS, MELTING, EXTRUDER, EXTRUDER_SIMPLE);}
-	static OreDictMaterial grain        (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return dustfood        (aID, aNameOreDict, SET_POWDER      , aR, aG, aB, aA).put(FLAMMABLE).addReRegistrations(ANY.Grains, ANY.FlourGrains);}
+	static OreDictMaterial grain        (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return dustfood        (aID, aNameOreDict, SET_POWDER      , aR, aG, aB, aA).put(ANY.Grains, ANY.FlourGrains, FLAMMABLE);}
 	static OreDictMaterial food         (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(FOOD, MORTAR);}
 	static OreDictMaterial orefood      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return oredust         (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(FOOD, MORTAR);}
 	static OreDictMaterial dustfood     (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return dust            (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(FOOD, MORTAR);}
@@ -172,37 +172,38 @@ public class MT {
 	static OreDictMaterial orefood      (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return oredust         (aID, aNameOreDict, SET_FINE        , aR, aG, aB, aA).put(FOOD, MORTAR);}
 	static OreDictMaterial dustfood     (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return dust            (aID, aNameOreDict, SET_FINE        , aR, aG, aB, aA).put(FOOD, MORTAR);}
 	static OreDictMaterial mixfood      (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return mixdust         (aID, aNameOreDict, SET_FINE        , aR, aG, aB, aA).put(FOOD, MORTAR);}
-	static OreDictMaterial dye          (int aID, String aNameOreDict                    , long aR, long aG, long aB             )  {return dust            (aID, aNameOreDict, SET_FOOD        , aR, aG, aB, 255).aspects(TC.SENSUS, 1).put(DONT_SHOW_THIS_COMPONENT);}
-	static OreDictMaterial quartz       (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, SET_QUARTZ      , aR, aG, aB, aA).put(G_QUARTZ_ORES, MORTAR, BRITTLE, QUARTZ, BLACKLISTED_SMELTER).addReRegistrations(ANY.Quartz, ANY.SiO2).setSmelting(SiO2, U).setPriorityPrefix(1);}
+	static OreDictMaterial dye          (int aID, String aNameOreDict                    , long aR, long aG, long aB             )  {return dust            (aID, aNameOreDict, SET_FOOD        , aR, aG, aB,255).aspects(TC.SENSUS, 1).put(DONT_SHOW_THIS_COMPONENT);}
+	static OreDictMaterial quartz       (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, SET_QUARTZ      , aR, aG, aB, aA).put(G_QUARTZ_ORES, ANY.Quartz, ANY.SiO2, MORTAR, BRITTLE, QUARTZ, BLACKLISTED_SMELTER).setSmelting(SiO2, U).setPriorityPrefix(1);}
 	static OreDictMaterial gem          (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_GEM_ORES).setPriorityPrefix(1);}
 	static OreDictMaterial gemdcmp      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return gem             (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(DECOMPOSABLE);}
 	static OreDictMaterial gemcent      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return gemdcmp         (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial gemelec      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return gemdcmp         (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(ELECTROLYSER);}
-	static OreDictMaterial stone        (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_STONE, STONE, BRITTLE, MORTAR, FURNACE, EXTRUDER, EXTRUDER_SIMPLE).addReRegistrations(ANY.Stone);}
+	static OreDictMaterial stone        (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_STONE, ANY.Stone, STONE, BRITTLE, MORTAR, FURNACE, EXTRUDER, EXTRUDER_SIMPLE);}
 	static OreDictMaterial stonedcmp    (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return stone           (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(DECOMPOSABLE);}
 	static OreDictMaterial stonecent    (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return stonedcmp       (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial stoneelec    (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return stonedcmp       (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(ELECTROLYSER);}
-	static OreDictMaterial stone        (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, SET_STONE       , aR, aG, aB, aA).put(G_STONE, STONE, BRITTLE, MORTAR, FURNACE, EXTRUDER, EXTRUDER_SIMPLE).addReRegistrations(ANY.Stone);}
+	static OreDictMaterial stone        (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, SET_STONE       , aR, aG, aB, aA).put(G_STONE, ANY.Stone, STONE, BRITTLE, MORTAR, FURNACE, EXTRUDER, EXTRUDER_SIMPLE);}
 	static OreDictMaterial stonedcmp    (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return stone           (aID, aNameOreDict, SET_STONE       , aR, aG, aB, aA).put(DECOMPOSABLE);}
 	static OreDictMaterial stonecent    (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return stonedcmp       (aID, aNameOreDict, SET_STONE       , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial stoneelec    (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return stonedcmp       (aID, aNameOreDict, SET_STONE       , aR, aG, aB, aA).put(ELECTROLYSER);}
 	static OreDictMaterial crystal      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_GEM_ORES_TRANSPARENT, CRYSTAL).setPriorityPrefix(1);}
-	static OreDictMaterial crystal_tc   (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return crystal         (aID, aNameOreDict, SET_SHARDS      , aR, aG, aB, 255).lens(aColor).put(MAGICAL, UNBURNABLE, MD.TC).addReRegistrations(ANY.ThaumCrystal).setOreMultiplier(2).visDefault();}
 	static OreDictMaterial crystaldcmp  (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return crystal         (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(DECOMPOSABLE);}
 	static OreDictMaterial crystalcent  (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return crystaldcmp     (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial crystalelec  (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return crystaldcmp     (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(ELECTROLYSER);}
+	static OreDictMaterial crystal_tc   (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return crystal         (aID, aNameOreDict, SET_SHARDS      , aR, aG, aB,255).lens(aColor).put(MD.TC , ANY.ThaumCrystal, COMMON_ORE, MAGICAL, UNBURNABLE).setOreMultiplier(2).visDefault();}
+	static OreDictMaterial hexorium     (int aID                                         , long aR, long aG, long aB, byte aColor)  {return crystal(aID, "Hexorium"+DYE_NAMES[aColor], SET_HEX  , aR, aG, aB,127).lens(aColor).put(MD.HEX, ANY.Hexorium    , COMMON_ORE, GLOWING, MORTAR, BRITTLE, CRYSTALLISABLE, BLACKLISTED_SMELTER).setSmelting(null, 0).setOreMultiplier(aColor == DYE_INDEX_Black || aColor == DYE_INDEX_White ? 3 : 4).aspects(TC.VITREUS, 3, aColor == DYE_INDEX_Black ? TC.TENEBRAE : aColor == DYE_INDEX_White ? TC.LUX : TC.SENSUS, 4).setLocal(DYE_NAMES[aColor] + " Hexorium").qual(2, 5.0F, aColor == DYE_INDEX_Black ? 512 : aColor == DYE_INDEX_White ? 384 : 256, 2).visDefault();}
 	static OreDictMaterial valgem       (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return gem             (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_GEM_ORES_TRANSPARENT, CRYSTAL, VALUABLE);}
 	static OreDictMaterial valgemdcmp   (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return valgem          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(DECOMPOSABLE).setSmelting(null, 0);}
 	static OreDictMaterial valgemcent   (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return valgemdcmp      (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial valgemelec   (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return valgemdcmp      (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(ELECTROLYSER);}
-	static OreDictMaterial diamond      (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemdcmp      (aID, aNameOreDict, SET_DIAMOND     , aR, aG, aB,127).lens(aColor).steal(C    ).aspects(TC.VITREUS, 3, TC.LUCRUM , 4                ).qual(3, 8.0,1280, 3).addReRegistrations(ANY.Diamond   ).setSmelting(C    , 2*U  ).setBurning(Ash, U);}
-	static OreDictMaterial sapphire     (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemcent      (aID, aNameOreDict, SET_GEM_VERTICAL, aR, aG, aB,127).lens(aColor).put(MELTING).aspects(TC.VITREUS, 3, TC.LUCRUM , 4                ).qual(3, 7.0, 512, 3).addReRegistrations(ANY.Sapphire  ).setSmelting(Al2O3, 3*U4 );}
-	static OreDictMaterial emerald      (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_EMERALD     , aR, aG, aB,127).lens(aColor).put(MELTING).aspects(TC.VITREUS, 3, TC.LUCRUM , 3                ).qual(3, 9.0, 128, 2).addReRegistrations(ANY.Emerald   ).setSmelting(Be   ,   U36);}
-	static OreDictMaterial garnet       (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_RUBY        , aR, aG, aB,127).lens(aColor).put(MD.GT  ).aspects(TC.VITREUS, 3, TC.LUCRUM , 1                ).qual(3, 7.0, 128, 2).addReRegistrations(ANY.Garnet    );}
-	static OreDictMaterial jasper       (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_GLASS       , aR, aG, aB,150).lens(aColor).put(MD.RH  ).aspects(TC.VITREUS, 2, TC.LUCRUM , 2, TC.METALLUM, 1).qual(3, 7.0, 256, 2).addReRegistrations(ANY.Jasper    ).uumMcfg( 0, SiO2, 2*U, Fe, 1*U);}
-	static OreDictMaterial tigereye     (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_GLASS       , aR, aG, aB,200).lens(aColor).put(MD.RH  ).aspects(TC.VITREUS, 2, TC.LUCRUM , 1, TC.TERRA   , 1).qual(3, 7.0, 256, 2).addReRegistrations(ANY.TigerEye  ).uumMcfg( 0, SiO2, 1*U);}
-	static OreDictMaterial aventurine   (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_GLASS       , aR, aG, aB,200).lens(aColor).put(MD.RH  ).aspects(TC.VITREUS, 2, TC.LUCRUM , 1, TC.POTENTIA, 1).qual(3, 7.0, 256, 2).addReRegistrations(ANY.Aventurine).uumMcfg( 0, SiO2, 1*U);}
-	static OreDictMaterial fluorite     (int aID, String aNameOreDict                    , long aR, long aG, long aB             )  {return gem             (aID, aNameOreDict, SET_RUBY        , aR, aG, aB,255)             .put(MD.ReC ).aspects(TC.VITREUS, 2, TC.VENENUM, 2                )                     .addReRegistrations(ANY.CaF2      ).uumMcfg( 0, Ca, 1*U, F, 2*U).heat(1633).put(DECOMPOSABLE, ACID, MELTING, MOLTEN, MORTAR, INGOTS, BRITTLE, CRYSTALLISABLE);}
+	static OreDictMaterial diamond      (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemdcmp      (aID, aNameOreDict, SET_DIAMOND     , aR, aG, aB,127).lens(aColor).put(ANY.Diamond   , COMMON_ORE).steal(C).aspects(TC.VITREUS, 3, TC.LUCRUM , 4                ).qual(3, 8.0,1280, 3).setSmelting(C    , 2*U  ).setBurning(Ash, U);}
+	static OreDictMaterial sapphire     (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemcent      (aID, aNameOreDict, SET_GEM_VERTICAL, aR, aG, aB,127).lens(aColor).put(ANY.Sapphire  , COMMON_ORE, MELTING).aspects(TC.VITREUS, 3, TC.LUCRUM , 4                ).qual(3, 7.0, 512, 3).setSmelting(Al2O3, 3*U4 );}
+	static OreDictMaterial emerald      (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_EMERALD     , aR, aG, aB,127).lens(aColor).put(ANY.Emerald   , COMMON_ORE, MELTING).aspects(TC.VITREUS, 3, TC.LUCRUM , 3                ).qual(3, 9.0, 128, 2).setSmelting(Be   ,   U36);}
+	static OreDictMaterial garnet       (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_RUBY        , aR, aG, aB,127).lens(aColor).put(ANY.Garnet    , MD.GT              ).aspects(TC.VITREUS, 3, TC.LUCRUM , 1                ).qual(3, 7.0, 128, 2);}
+	static OreDictMaterial jasper       (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_GLASS       , aR, aG, aB,150).lens(aColor).put(ANY.Jasper    , MD.RH              ).aspects(TC.VITREUS, 2, TC.LUCRUM , 2, TC.METALLUM, 1).qual(3, 7.0, 256, 2).uumMcfg( 0, SiO2, 2*U, Fe, 1*U);}
+	static OreDictMaterial tigereye     (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_GLASS       , aR, aG, aB,200).lens(aColor).put(ANY.TigerEye  , MD.RH              ).aspects(TC.VITREUS, 2, TC.LUCRUM , 1, TC.TERRA   , 1).qual(3, 7.0, 256, 2).uumMcfg( 0, SiO2, 1*U);}
+	static OreDictMaterial aventurine   (int aID, String aNameOreDict                    , long aR, long aG, long aB, byte aColor)  {return valgemelec      (aID, aNameOreDict, SET_GLASS       , aR, aG, aB,200).lens(aColor).put(ANY.Aventurine, MD.RH              ).aspects(TC.VITREUS, 2, TC.LUCRUM , 1, TC.POTENTIA, 1).qual(3, 7.0, 256, 2).uumMcfg( 0, SiO2, 1*U);}
+	static OreDictMaterial fluorite     (int aID, String aNameOreDict                    , long aR, long aG, long aB             )  {return gem             (aID, aNameOreDict, SET_RUBY        , aR, aG, aB,255)             .put(ANY.CaF2      , COMMON_ORE, MD.ReC ).aspects(TC.VITREUS, 2, TC.VENENUM, 2                )                     .uumMcfg( 0, Ca, 1*U, F, 2*U).heat(1633).put(DECOMPOSABLE, ACID, MELTING, MOLTEN, MORTAR, INGOTS, BRITTLE, CRYSTALLISABLE);}
 	static OreDictMaterial mix          (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return dcmp            (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(CENTRIFUGE);}
 	static OreDictMaterial mixdust      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return dustcent        (aID, aNameOreDict, aSets           , aR, aG, aB, aA);}
 	static OreDictMaterial oredust      (int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA    )  {return create          (aID, aNameOreDict, aSets           , aR, aG, aB, aA).put(G_DUST_ORES);}
@@ -268,7 +269,7 @@ public class MT {
 	static OreDictMaterial wood         (int aID, String aNameOreDict                    , long aR, long aG, long aB, long aA    )  {return wood            (aID, aNameOreDict, SET_WOOD        , aR, aG, aB, aA);}
 	
 	static OreDictMaterial wood(int aID, String aNameOreDict, TextureSet[] aSets, long aR, long aG, long aB, long aA)  {
-		OreDictMaterial rMaterial = create(aID, aNameOreDict, aSets, aR, aG, aB, aA).put(G_WOOD, WOOD, MORTAR).addReRegistrations(ANY.Wood, ANY.WoodPlastic);
+		OreDictMaterial rMaterial = create(aID, aNameOreDict, aSets, aR, aG, aB, aA).put(G_WOOD, ANY.Wood, ANY.WoodPlastic, WOOD, MORTAR);
 		String tPlank = "plank"+rMaterial.mNameInternal;
 		OreDictManager.INSTANCE.addAutoBlackListing(tPlank);
 		OreDictManager.INSTANCE.addReRegistration(tPlank, OD.plankAnyWood);
@@ -414,9 +415,9 @@ public class MT {
 	Te      = metalloid     (  520, "Tellurium"             , "Te"      ,  52,  75,   722,  1261,  6.232     , SET_SHINY                                ).put(  G_INGOT_ORES                , UUM, CHALCOGEN              ).aspects(TC.METALLUM, 2, TC.ELECTRUM, 1                 ),
 	I       = diatomic      (  530, "Iodine"                , "I"       ,  53,  74,   386,   457,  4.93      , SET_DULL             , 255, 240, 240, 255).put(  G_CRYSTAL_ORES              , UUM, HALOGEN                ).aspects(TC.VITREUS, 2, TC.TEMPESTAS, 1                 ),
 	Xe      = noblegas      (  540, "Xenon"                 , "Xe"      ,  54,  77,   161,   165,  0.005887  , SET_DULL             ,   0, 255, 255,  15).put(  CONTAINERS_GAS              , UUM                         ).aspects(TC.AER, 3                                      ),
-	Cs      = alkali        (  550, "Caesium"               , "Cs"      ,  55,  77,   301,   944,  1.873     , SET_SHINY                                ).put(  G_INGOT_ORES                , UUM                         ).aspects_met_rad(3, 0                                   ),
+	Cs      = alkali        (  550, "Caesium"               , "Cs"      ,  55,  77,   301,   944,  1.873     , SET_SHINY            , 128,  98,  11, 255).put(  G_INGOT_ORES                , UUM                         ).aspects_met_rad(3, 0                                   ),
 	Ba      = alkaline      (  560, "Barium"                , "Ba"      ,  56,  81,  1000,  2170,  3.594     , SET_METALLIC                             ).put(  G_INGOT_ORES                , UUM                         ).aspects(TC.VINCULUM, 3                                 ),
-	La      = lanthanide    (  570, "Lanthanum"             , "La"      ,  57,  81,  1193,  3737,  6.145     , SET_METALLIC                             ).put(  G_INGOT_ORES                , UUM                         ).aspects_met_rad(3, 0                                   ).put("Lantanum"),
+	La      = lanthanide    (  570, "Lanthanum"             , "La"      ,  57,  81,  1193,  3737,  6.145     , SET_METALLIC         ,  93, 117, 117, 255).put(  G_INGOT_ORES                , UUM                         ).aspects_met_rad(3, 0                                   ).put("Lantanum", "Lantanium", "Lanthanium"),
 	Ce      = lanthanide    (  580, "Cerium"                , "Ce"      ,  58,  82,  1068,  3716,  6.77      , SET_SHINY            , 255, 255, 190, 255).put(  G_INGOT_ORES                , UUM                         ).aspects_met_rad(3, 0                                   ),
 	Pr      = lanthanide    (  590, "Praseodymium"          , "Pr"      ,  59,  81,  1208,  3793,  6.773     , SET_METALLIC                             ).put(  G_INGOT_ORES                , UUM                         ).aspects_met_rad(3, 0                                   ),
 	Nd      = lanthanide    (  600, "Neodymium"             , "Nd"      ,  60,  84,  1297,  3347,  7.007     , SET_SHINY            , 100, 100, 100, 255).put(  G_INGOT_ORES                , UUM                         ).aspects(TC.METALLUM, 2, TC.MAGNETO, 2                  ).qual(3, 6.0, 512, 3).put(MAGNETIC_PASSIVE, MOLTEN),
@@ -448,13 +449,13 @@ public class MT {
 	Rn      = noblegas      (  860, "Radon"                 , "Rn"      ,  86, 134,   202,   211,  0.00973   , SET_DULL             , 255,   0, 255,  15).put(  CONTAINERS_GAS                                            ).aspects(TC.AER, 2, TC.RADIO, 1                         ),
 	Fr      = alkali        (  870, "Francium"              , "Fr"      ,  87, 134,   300,   950,  1.87      , SET_METALLIC                             ).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
 	Ra      = alkaline      (  880, "Radium"                , "Ra"      ,  88, 136,   973,  2010,  5.5       , SET_METALLIC         , 255, 255, 205, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
-	Ac      = actinide      (  890, "Actinium"              , "Ac"      ,  89, 136,  1323,  3471, 10.07      , SET_METALLIC                             ).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
-	Th      = actinide      (  900, "Thorium"               , "Th"      ,  90, 142,  2115,  5061, 11.72      , SET_SHINY            ,   0,  30,   0, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ).qual(3, 6.0, 512, 2),
+	Ac      = actinide      (  890, "Actinium"              , "Ac"      ,  89, 136,  1323,  3471, 10.07      , SET_METALLIC         , 125, 113, 113, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
+	Th      = actinide      (  900, "Thorium"               , "Th"      ,  90, 142,  2115,  5061, 11.72      , SET_SHINY            ,   0,  30,   0, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ).qual(3, 6.0, 512, 2).put("Thorium232"),
 	Pa      = actinide      (  910, "Protactinium"          , "Pa"      ,  91, 138,  1841,  4300, 15.37      , SET_METALLIC                             ).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
 	U_238   = actinide      (  920, "Uranium"               , "U"       ,  92, 146,  1405,  4404, 18.95      , SET_METALLIC         ,  50, 240,  50, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ).qual(3, 6.0, 512, 3).put(MELTING, MOLTEN, "Uranium238", "Uran"), // No, I could not make a Variable named "U" here. That would collide with the Material Unit.
 	U_235   = actinide      (  921, "Uranium-235"           , "U-235"   ,  92, 143,  1405,  4404, 18.95      , SET_SHINY            ,  70, 250,  70, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 2                                   ).qual(3, 6.0, 512, 3).put(MELTING, MOLTEN, "UraniumEnriched"),
 	U_233   = actinide      (  922, "Uranium-233"           , "U-233"   ,  92, 141,  1405,  4404, 18.95      , SET_SHINY            ,  70, 250,  50, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 3                                   ).qual(3, 6.0, 512, 3),
-	Np      = actinide      (  930, "Neptunium"             , "Np"      ,  93, 144,   917,  4273, 20.45      , SET_DULL                                 ).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
+	Np      = actinide      (  930, "Neptunium"             , "Np"      ,  93, 144,   917,  4273, 20.45      , SET_DULL             ,  78,  90,  78, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ),
 	Pu      = actinide      (  940, "Plutonium"             , "Pu"      ,  94, 150,   912,  3501, 19.84      , SET_METALLIC         , 240,  50,  50, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(2, 1                                   ).qual(3, 6.0, 512, 3).put("Plutonium244"),
 	Pu_241  = actinide      (  943, "Plutonium-241"         , "Pu-241"  ,  94, 147,   912,  3501, 19.84      , SET_SHINY            , 245,  70,  70, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 3                                   ).qual(3, 6.0, 512, 3),
 	Pu_243  = actinide      (  945, "Plutonium-243"         , "Pu-243"  ,  94, 149,   912,  3501, 19.84      , SET_SHINY            , 250,  70,  70, 255).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 2                                   ).qual(3, 6.0, 512, 3),
@@ -483,7 +484,7 @@ public class MT {
 	Fl_298  = posttrans     ( 1148, "Flerovium-298"         , "Fl-298"  , 114, 184,   340,   420, 14.0       , SET_SHINY                                ).put(  G_INGOT_ORES                , CRYSTALLOGEN                ).aspects_met_rad(1, 2                                   ),
 	Mc      = element       ( 1150, "Moscovium"             , "Mc"      , 115, 174,   700,  1400, 13.5       , SET_METALLIC                             ).put(  G_INGOT_ORES                , PNICTOGEN                   ).aspects_met_rad(1, 2                                   ),
 	Lv      = element       ( 1160, "Livermorium"           , "Lv"      , 116, 177,   708,  1085, 12.9       , SET_METALLIC                             ).put(  G_INGOT_ORES                , CHALCOGEN                   ).aspects_met_rad(1, 2                                   ),
-	Fa      = element       ( 1170, "Farnsium"              , "Fa"      , 117, 177,   673,   823,  7.2       , SET_SHINY                                ).put(  G_INGOT_ORES                , HALOGEN                     ).aspects_met_rad(1, 2                                   ).put("Tennessine"), Ts = Fa,
+	Fa      = element       ( 1170, "Farnsium"              , "Fa"      , 117, 177,   673,   823,  7.2       , SET_SHINY            ,  60,  70,  80, 255).put(  G_INGOT_ORES                , HALOGEN                     ).aspects_met_rad(1, 2                                   ).put("Tennessine"), Ts = Fa,
 	Og      = element       ( 1180, "Oganesson"             , "Og"      , 118, 176,   258,   263,  5.0       , SET_METALLIC                             ).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 2                                   ),
 	Uue     = element       ( 1190, "Ununennium"            , "Uue"     , 119, 178,   290,   903,           0, SET_METALLIC                             ).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 2                                   ),
 	Ubn     = element       ( 1200, "Unbinilium"            , "Ubn"     , 120, 180,   953,  1973,           0, SET_METALLIC                             ).put(  G_INGOT_ORES                                              ).aspects_met_rad(1, 2                                   ),
@@ -906,7 +907,7 @@ public class MT {
 	
 	
 	KCl                     = oredustdcmp   ( 8203, "Rock Salt"             , SET_CUBE              , 240, 200, 200, 255).put(BRITTLE, MORTAR)                                                                                                                          .uumMcfg( 0, K              , 1*U, Cl               , 1*U)                                                                                                  .aspects(TC.FAMES, 1).setPriorityPrefix(2).heat(1040, 1690),
-	KNO3                    = oredustelec   ( 8205, "Potassium Nitrate"     , SET_FINE              , 230, 230, 230, 255).put(FLAMMABLE, BRITTLE, MORTAR, "Saltpeter", "Nitrate")                                                                                       .uumMcfg( 0, K              , 1*U, N                , 1*U, O                , 3*U)                                                                          .aspects(TC.IGNIS, 2).setPriorityPrefix(2).heat(607),
+	KNO3                    = oredustelec   ( 8205, "Potassium Nitrate"     , SET_FINE              , 230, 230, 230, 255).put(FLAMMABLE, BRITTLE, MORTAR, "Saltpeter", "Nitrate", "Salpeter")                                                                           .uumMcfg( 0, K              , 1*U, N                , 1*U, O                , 3*U)                                                                          .aspects(TC.IGNIS, 2).setPriorityPrefix(2).heat(607),
 	KOH                     = dustelec      ( 8015, "Potassium Hydroxide"   , SET_CUBE              , 250, 220, 220, 255)                                                                                                                                               .uumMcfg( 0, K              , 1*U, O                , 1*U, H                , 1*U)                                                                          ,
 	KHSO4                   = dustdcmp      ( 8232, "Potassium Bisulfate"   , SET_FINE              , 255, 240, 240, 255).put("PotassiumBisulphate")                                                                                                                    .uumMcfg( 0, K              , 1*U, H                , 1*U, S                , 1*U, O                , 4*U)                                                  ,
 	KSO4                    = dustdcmp      ( 8022, "Potassium Persulfate"  , SET_CUBE              , 250, 180, 130, 255).put("PotassiumPersulphate")                                                                                                                   .uumMcfg( 0, K              , 1*U, S                , 1*U, O                , 4*U)                                                                          ,
@@ -1277,37 +1278,48 @@ public class MT {
 	Lazurite                = elec          ( 8330, "Lazurite"              , SET_LAPIS             , 100, 120, 255, 255).put(G_GEM_ORES, DENSEPLATES, CRYSTAL, CRYSTALLISABLE, MORTAR, BRITTLE)                                                                        .uumMcfg( 0, Al2O3          , 6*U, SiO2             , 6*U, Ca               , 8*U, Na               , 8*U)                                                  .aspects(TC.SENSUS, 1),
 	Sodalite                = elec          ( 8331, "Sodalite"              , SET_LAPIS             ,  20,  20, 255, 255).put(G_GEM_ORES, DENSEPLATES, CRYSTAL, CRYSTALLISABLE, MORTAR, BRITTLE)                                                                        .uumMcfg( 0, Al2O3          , 3*U, SiO2             , 3*U, Na               , 4*U, Cl               , 1*U)                                                  .aspects(TC.SENSUS, 1),
 	Lapis                   = cent          ( 8332, "Lapis"                 , SET_LAPIS             ,  70,  70, 220, 255).put(G_GEM_ORES, DENSEPLATES, CRYSTAL, CRYSTALLISABLE, MORTAR, BRITTLE)                                                                        .uumMcfg( 0, Lazurite       ,12*U, Sodalite         , 2*U, Pyrite           , 1*U, CaCO3            , 1*U)                                                  .aspects(TC.SENSUS, 1),
-	Redstone                = redstone      ( 8333, "Redstone"              , SET_REDSTONE          , 200,   0,   0, 255).put(PULVERIZING_CINNABAR).lens(DYE_INDEX_Red)                                                                                                 .uumMcfg( 0, Pyrite         , 5*U, Hg               , 3*U, SiO2             , 1*U, Ruby             , 1*U)                                                  .aspects(TC.MACHINA, 1, TC.POTENTIA, 2).heat(500, 1500).qual(0),
-	Graphene                = dcmp          ( 9175, "Graphene"              , SET_DULL              , 128, 128, 128, 255).put(G_MACHINE, BLACKLISTED_SMELTER, MORTAR, STICKS).setBurning(Ash, U4)                                                                       .uumMcfg( 0, C              , 1*U)                                                                                                                          .setSmelting(C, U2).heat(4300, 4400).setPulver(C, U),
+	
+	
 	Charcoal                = coal          ( 8336, "Charcoal"              , SET_LIGNITE           , 100,  70,  70, 255).put(TICKS_PER_SMELT* 8).setBurning(Ash, U4)                                                                                                   .uumMcfg( 0, C              , 1*U)                                                                                                                          .setSmelting(C, U2).heat(1700, C.mBoilingPoint).setDensity(0.929).aspects(TC.POTENTIA, 2, TC.IGNIS, 2),
 	Coal                    = coal          ( 8334, "Coal"                  , SET_LIGNITE           ,  70,  70,  70, 255).put(TICKS_PER_SMELT* 8).setBurning(DarkAsh, U4)                                                                                               .uumMcfg( 1, C              , 2*U)                                                                                                                          .setSmelting(C, U2).heat(1700, C.mBoilingPoint).setDensity(0.929).aspects(TC.POTENTIA, 2, TC.IGNIS, 2),
 	CoalCoke                = coal          ( 8349, "Coal Coke"             , SET_LIGNITE           , 140, 140, 170, 255).put(TICKS_PER_SMELT*16, "Coke").setBurning(DarkAsh, U9)                                                                                       .uumMcfg( 1, C              , 2*U)                                                                                                                          .setSmelting(C, U ).heat(1700, C.mBoilingPoint).setDensity(0.929).aspects(TC.POTENTIA, 3, TC.IGNIS, 1).steal(Coal),
-	Lignite                 = coal          ( 8337, "Lignite"               , SET_LIGNITE           , 100,  70,  70, 255).put(TICKS_PER_SMELT* 2).setBurning(DarkAsh, U9)                                                                                               .setMcfg( 7, C              , 2*U, H2O              , 4*U, DarkAsh          , 1*U)                                                                          .setDensity(0.865).setLocal("Lignite Coal"),
-	LigniteCoke             = coal          ( 8365, "Lignite Coke"          , SET_LIGNITE           , 140, 100, 100, 255).put(TICKS_PER_SMELT* 4).setBurning(DarkAsh, U18)                                                                                              .setMcfg( 7, C              , 2*U, DarkAsh          , 1*U)                                                                                                  .setDensity(0.865),
 	Anthracite              = coal          ( 8362, "Anthracite"            , SET_LIGNITE           ,  90,  90,  90, 255).put(TICKS_PER_SMELT*24).setBurning(DarkAsh, U2)                                                                                               .uumMcfg( 1, C              , 4*U)                                                                                                                          .setSmelting(C, U2).heat(1700, C.mBoilingPoint).aspects(TC.POTENTIA, 3, TC.IGNIS, 3),
 	Prismane                = coal          ( 8363, "Prismane"              , SET_LIGNITE           , 115, 110, 110, 255).put(TICKS_PER_SMELT*48).setBurning(DarkAsh, U)                                                                                                .uumMcfg( 1, C              , 8*U)                                                                                                                          .aspects(TC.POTENTIA, 4, TC.IGNIS, 4),
 	Lonsdaleite             = coal          ( 8364, "Lonsdaleite"           , SET_DIAMOND           , 140, 130, 130, 255).put(TICKS_PER_SMELT*96).setBurning(DarkAsh, U*2)                                                                                              .uumMcfg( 1, C              ,16*U)                                                                                                                          .aspects(TC.POTENTIA, 6, TC.IGNIS, 6),
+	Lignite                 = coal          ( 8337, "Lignite"               , SET_LIGNITE           , 100,  70,  70, 255).put(TICKS_PER_SMELT* 2).setBurning(DarkAsh, U9)                                                                                               .setMcfg( 7, C              , 2*U, H2O              , 4*U, DarkAsh          , 1*U)                                                                          .setDensity(0.865).setLocal("Lignite Coal"),
+	LigniteCoke             = coal          ( 8365, "Lignite Coke"          , SET_LIGNITE           , 140, 100, 100, 255).put(TICKS_PER_SMELT* 4).setBurning(DarkAsh, U18)                                                                                              .setMcfg( 7, C              , 2*U, DarkAsh          , 1*U)                                                                                                  .setDensity(0.865),
 	PetCoke                 = coal          ( 8390, "Petroleum Coke"        , SET_LIGNITE           , 150, 150, 180, 255).put(TICKS_PER_SMELT*32, "PetCoke").setBurning(DarkAsh, U9)                                                                                    .uumMcfg( 1, C              , 2*U, S                , 1*U)                                                                                                  .setDensity(0.929).aspects(TC.POTENTIA, 3, TC.IGNIS, 1).steal(Coal),
-	HydratedCoal            = mixdust       ( 8335, "Hydrated Coal"         , SET_LIGNITE           ,  70,  70, 100, 255).put(BRITTLE, FURNACE, MORTAR, COAL)                                                                                                           .uumMcfg( 8, Coal           , 8*U, H2O              , 1*U)                                                                                                  ,
 	Peat                    = dust          ( 8360, "Peat"                  , SET_LIGNITE           ,  64,  40,  14, 255).put(TICKS_PER_SMELT*10, INGOTS, MULTIINGOTS, BRITTLE, FLAMMABLE, MORTAR).setBurning(Ash, U2)                                                                                                                                                                                                              .aspects(TC.POTENTIA, 2, TC.IGNIS, 2).setOriginalMod(MD.FR),
 	PeatBituminous          = dust          ( 8361, "PeatBituminous"        , SET_LIGNITE           ,  80,  40,  10, 255).put(TICKS_PER_SMELT*12, INGOTS, MULTIINGOTS, BRITTLE, FLAMMABLE, MORTAR)                                                                                                                                                                                                                                  .aspects(TC.POTENTIA, 3, TC.IGNIS, 3, TC.PERDITIO, 3).setOriginalMod(MD.FR).setLocal("Bituminous Peat"),
+	
+	
+	HydratedCoal            = mixdust       ( 8335, "Hydrated Coal"         , SET_LIGNITE           ,  70,  70, 100, 255).put(BRITTLE, FURNACE, MORTAR, COAL)                                                                                                           .uumMcfg( 8, Coal           , 8*U, H2O              , 1*U)                                                                                                  ,
+	Graphene                = dcmp          ( 9175, "Graphene"              , SET_DULL              , 128, 128, 128, 255).put(G_MACHINE, BLACKLISTED_SMELTER, MORTAR, STICKS).setBurning(Ash, U4)                                                                       .uumMcfg( 0, C              , 1*U)                                                                                                                          .setSmelting(C, U2).heat(4300, 4400).setPulver(C, U),
+	Ectoplasm               = dust          ( 8373, "Ectoplasm"             , SET_FOOD              , 220, 255, 255, 200).put(MAGICAL, LIQUID, GLOWING)                                                                                                                                                                                                                                                                             .aspects(TC.SPIRITUS, 4).heat(400, 3000),
+	Firestone               = create        ( 8342, "Firestone"             , SET_QUARTZ            , 200,  20,   0, 255).put(G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL, QUARTZ, UNBURNABLE, BURNING).qual(3,  6.0, 1280, 3)                                                                                                                                                                                         .aspects(TC.IGNIS, 8),
+	
+	
+	Force                   = create        ( 8343, "Force"                 , SET_REDSTONE          , 255, 255,   0, 255).put(G_GEM_ORES, G_INGOT_MACHINE_ORES).put(CRYSTAL, MAGICAL, UNBURNABLE, GLOWING).qual(3, 10.0, 128, 3)                                                                                                                                                                                                    .aspects(TC.POTENTIA, 4),
+	Forcicium               = create        ( 8344, "Forcicium"             , SET_REDSTONE          ,  50,  50,  70, 255).put(G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL)                                                                                                                                                                                                                                             .aspects(TC.POTENTIA, 2),
+	Forcillium              = create        ( 8345, "Forcillium"            , SET_REDSTONE          ,  50,  50,  70, 255).put(G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL)                                                                                                                                                                                                                                             .aspects(TC.POTENTIA, 2),
 	Monazite                = elec          ( 8338, "Monazite"              , SET_REDSTONE          ,  50,  70,  50, 255).put(G_GEM_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, BLACKLISTED_SMELTER)                                                                        .setMcfg( 0, RareEarth      , 1*U, PO4              , 1*U)                                                                                                  , // Wikipedia: (Ce, La, Nd, Th, Sm, Gd)PO4 Monazite also smelt-extract to Helium, it is brown like the rare earth Item Monazite sand deposits are inevitably of the monazite-(Ce) composition. Typically, the lanthanides in such monazites contain about 45�48% cerium, about 24% lanthanum, about 17% neodymium, about 5% praseodymium, and minor quantities of samarium, gadolinium, and yttrium. Europium concentrations tend to be low, about 0.05% Thorium content of monazite is variable and sometimes can be up to 20�30%
+	
+	
+	Redstone                = redstone      ( 8333, "Redstone"              , SET_REDSTONE          , 200,   0,   0, 255).put(PULVERIZING_CINNABAR).lens(DYE_INDEX_Red)                                                                                                 .uumMcfg( 0, Pyrite         , 5*U, Hg               , 3*U, SiO2             , 1*U, Ruby             , 1*U)                                                  .aspects(TC.MACHINA, 1, TC.POTENTIA, 2).heat(500, 1500).qual(0),
 	Teslatite               = redstone      ( 8339, "Teslatite"             , SET_REDSTONE          ,  60, 180, 200, 255).put(MOLTEN).lens(DYE_INDEX_Cyan)                                                                                                              .uumMcfg( 0, Sodalite       , 5*U, Cu               , 3*U, SiO2             , 1*U, Ar               , 1*U)                                                  .aspects(TC.ELECTRUM, 2).heat(1500, 3000).qual(0),
 	Nikolite                = redstone      ( 8340, "Nikolite"              , SET_REDSTONE          ,  60, 180, 200, 255).put(MOLTEN).lens(DYE_INDEX_Cyan)                                                                                                              .uumMcfg( 0, Sodalite       , 5*U, Cu               , 3*U, SiO2             , 1*U, Ar               , 1*U)                                                  .aspects(TC.ELECTRUM, 2).heat(1500, 3000).qual(0),
 	Electrotine             = redstone      ( 8359, "Electrotine"           , SET_REDSTONE          ,  60, 160, 230, 255).put(MOLTEN).lens(DYE_INDEX_Cyan)                                                                                                              .uumMcfg( 0, Sodalite       , 5*U, Cu               , 3*U, SiO2             , 1*U, Ar               , 1*U)                                                  .aspects(TC.ELECTRUM, 2).heat(1500, 3000).qual(0),
+	
+	
 	Glowstone               = glowstone     ( 8341, "Glowstone"             , SET_REDSTONE          , 255, 255,   0, 255)                                                                                                                                               .uumMcfg( 0, Phosphorite    , 5*U, Au               , 3*U, SiO2             , 1*U, He               , 1*U)                                                  .aspects(TC.LUX, 2, TC.SENSUS, 1).heat(500, 600),
 	GlowstoneCeres          = glowstone     ( 8368, "GlowstoneCeres"        , SET_REDSTONE          ,  70,  90,  70, 255)                                                                                                                                               .uumMcfg( 0, Phosphorite    , 5*U, Au               , 3*U, SiO2             , 1*U, He               , 1*U)                                                  .aspects(TC.LUX, 2, TC.SENSUS, 1, TC.HERBA      , 1).heat(500, 600).setLocal("Ceres Glowstone"),
 	GlowstoneIo             = glowstone     ( 8369, "GlowstoneIo"           , SET_REDSTONE          , 180,  20,   0, 255)                                                                                                                                               .uumMcfg( 0, Phosphorite    , 5*U, Au               , 3*U, SiO2             , 1*U, He               , 1*U)                                                  .aspects(TC.LUX, 2, TC.SENSUS, 1, TC.IGNIS      , 1).heat(500, 600).setLocal("Io Glowstone"),
 	GlowstoneEnceladus      = glowstone     ( 8370, "GlowstoneEnceladus"    , SET_REDSTONE          ,   0, 250, 250, 255)                                                                                                                                               .uumMcfg( 0, Phosphorite    , 5*U, Au               , 3*U, SiO2             , 1*U, He               , 1*U)                                                  .aspects(TC.LUX, 2, TC.SENSUS, 1, TC.AQUA       , 1).heat(500, 600).setLocal("Enceladus Glowstone"),
 	GlowstoneProteus        = glowstone     ( 8371, "GlowstoneProteus"      , SET_REDSTONE          ,  62,  62,  62, 255)                                                                                                                                               .uumMcfg( 0, Phosphorite    , 5*U, Au               , 3*U, SiO2             , 1*U, He               , 1*U)                                                  .aspects(TC.LUX, 2, TC.SENSUS, 1, TC.TENEBRAE   , 1).heat(500, 600).setLocal("Proteus Glowstone"),
 	GlowstonePluto          = glowstone     ( 8372, "GlowstonePluto"        , SET_REDSTONE          , 123, 150, 220, 255)                                                                                                                                               .uumMcfg( 0, Phosphorite    , 5*U, Au               , 3*U, SiO2             , 1*U, He               , 1*U)                                                  .aspects(TC.LUX, 2, TC.SENSUS, 1, TC.GELUM      , 1).heat(500, 600).setLocal("Pluto Glowstone"),
-	Ectoplasm               = dust          ( 8373, "Ectoplasm"             , SET_FOOD              , 220, 255, 255, 200).put(MAGICAL, LIQUID, GLOWING)                                                                                                                                                                                                                                                                             .aspects(TC.SPIRITUS, 4).heat(400, 3000),
-	Force                   = create        ( 8343, "Force"                 , SET_REDSTONE          , 255, 255,   0, 255).put(G_GEM_ORES, G_INGOT_MACHINE_ORES).put(CRYSTAL, MAGICAL, UNBURNABLE, GLOWING).qual(3, 10.0, 128, 3)                                                                                                                                                                                                    .aspects(TC.POTENTIA, 4),
-	Forcicium               = create        ( 8344, "Forcicium"             , SET_REDSTONE          ,  50,  50,  70, 255).put(G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL)                                                                                                                                                                                                                                             .aspects(TC.POTENTIA, 2),
-	Forcillium              = create        ( 8345, "Forcillium"            , SET_REDSTONE          ,  50,  50,  70, 255).put(G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL)                                                                                                                                                                                                                                             .aspects(TC.POTENTIA, 2),
-	Firestone               = create        ( 8342, "Firestone"             , SET_QUARTZ            , 200,  20,   0, 255).put(G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL, QUARTZ, UNBURNABLE, BURNING).qual(3,  6.0, 1280, 3)                                                                                                                                                                                         .aspects(TC.IGNIS, 8),
 	
 	
+	NetherQuartz            = quartz        ( 8346, "Nether Quartz"                                 , 230, 210, 210, 255).put(CRYSTALLISABLE, "Quartz")                                                                                                                 .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS                     , 1).qual(1, 2.5, 32, 1),
 	SunnyQuartz             = quartz        ( 8393, "Sunny Quartz"                                  , 255, 255, 200, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.LUX          , 1).qual(1, 2.5, 32, 1),
 	LavenderQuartz          = quartz        ( 8394, "Lavender Quartz"                               , 255, 200, 255, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.SENSUS       , 1).qual(1, 2.5, 32, 1),
 	RedQuartz               = quartz        ( 8395, "Red Quartz"                                    , 255, 210, 210, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.MACHINA      , 1).qual(1, 2.5, 32, 1),
@@ -1315,12 +1327,17 @@ public class MT {
 	SmokeyQuartz            = quartz        ( 8397, "Smokey Quartz"                                 ,  20,  20,  20, 255).put(CRYSTALLISABLE, "QuartzSmoky", "SmokyQuartz")                                                                                             .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.TENEBRAE     , 1).qual(1, 2.5, 32, 1),
 	ManaQuartz              = quartz        ( 8398, "Mana Quartz"                                   , 210, 210, 255, 255).put(CRYSTALLISABLE)                                                                                                                           .setMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.PRAECANTIO   , 1).qual(1, 2.5, 64, 2),
 	ElvenQuartz             = quartz        ( 8399, "Elven Quartz"                                  , 210, 255, 210, 255).put(CRYSTALLISABLE)                                                                                                                           .setMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.ALIENIS      , 1).qual(1, 2.5, 64, 2),
-	NetherQuartz            = quartz        ( 8346, "Nether Quartz"                                 , 230, 210, 210, 255).put(CRYSTALLISABLE, "Quartz")                                                                                                                 .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS                     , 1).qual(1, 2.5, 32, 1),
 	BlackQuartz             = quartz        ( 8374, "QuartzBlack"                                   ,  20,  20,  20, 255).put(CRYSTALLISABLE, DECOMPOSABLE, CENTRIFUGE)                                                                                                 .uumMcfg( 1, SiO2           , 1*U, C                , 1*U)                                                                                                  .aspects(TC.POTENTIA, 1, TC.VITREUS, 1, TC.TENEBRAE     , 1).qual(1, 2.5, 32, 1).setLocal("Black Quartz"),
 	MilkyQuartz             = quartz        ( 8445, "Milky Quartz"                                  , 210, 210, 210, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS                     , 1).qual(1, 2.5, 32, 1),
-	CertusQuartz            = quartz        ( 8347, "Certus Quartz"                                 , 210, 210, 230, 255).put(CRYSTALLISABLE, MD.AE)                                                                                                                    .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS                     , 1).qual(1, 5.0, 32, 1),
-	ChargedCertusQuartz     = quartz        ( 8348, "Charged Certus Quartz"                         , 210, 210, 230, 255).put(GLOWING, MD.AE)                                                                                                                           .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 2, TC.VITREUS                     , 1).steal(CertusQuartz).setPulver(CertusQuartz, U),
-	Fluix                   = quartz        ( 8389, "Fluix"                                         , 120,  70, 140, 255).put(CRYSTALLISABLE, MD.AE)                                                                                                                    .uumMcfg( 2, SiO2           , 2*U, Redstone         , 1*U)                                                                                                  .aspects(TC.POTENTIA, 2, TC.VITREUS, 1, TC.LUX          , 1),
+	CertusQuartz            = quartz        ( 8347, "Certus Quartz"                                 , 210, 210, 230, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 1, TC.VITREUS                     , 1).qual(1, 5.0, 32, 1),
+	ChargedCertusQuartz     = quartz        ( 8348, "Charged Certus Quartz"                         , 210, 210, 230, 255).put(GLOWING)                                                                                                                                  .uumMcfg( 0, SiO2           , 1*U)                                                                                                                          .aspects(TC.POTENTIA, 2, TC.VITREUS                     , 1).steal(CertusQuartz).setPulver(CertusQuartz, U),
+	Fluix                   = quartz        ( 8389, "Fluix"                                         , 120,  70, 140, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 2, SiO2           , 2*U, Redstone         , 1*U)                                                                                                  .aspects(TC.POTENTIA, 2, TC.VITREUS, 1, TC.LUX          , 1),
+	
+	
+	Petrotheum              = mixdust       ( 8245, "Petrotheum"            , SET_DULL              ,  86,  76,  82, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 2, Clay           , 1*U, Obsidian         , 1*U, Redstone         , 1*U, Basalz           , 1*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.POTENTIA, 1).heat(400, 2000),
+	Aerotheum               = dust          ( 8246, "Aerotheum"             , SET_SHINY             , 200, 176,  83, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 2, Sand           , 1*U, KNO3             , 1*U, Redstone         , 1*U, Blitz            , 1*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.AER, 1).heat(299, 300),
+	Pyrotheum               = mixdust       ( 8212, "Pyrotheum"             , SET_FIERY             , 255, 200, 120, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 2, Coal           , 1*U, S                , 1*U, Redstone         , 1*U, Blaze            , 1*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.IGNIS, 1).heat(3800, 6400),
+	Cryotheum               = dust          ( 8213, "Cryotheum"             , SET_SHINY             , 200, 220, 255, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 8, Snow           , 1*U, KNO3             , 4*U, Redstone         , 4*U, Blizz            , 4*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.GELUM, 1).heat(40, 1000),
 	
 	
 	Redstonia               = gem_aa        ( 8375, "Redstonia"             , SET_EMERALD           , 255,   0,   0, 127, Redstone)                                                                                                                                                                                                                                                                                                 .aspects(TC.VITREUS, 2, TC.MACHINA  , 2).qual(3,  6.0,  300,  2),
@@ -1339,21 +1356,39 @@ public class MT {
 	EnergiumCyan            = crystalcent   ( 8299, "EnergiumCyan"          , SET_DIAMOND           ,   0, 255, 255, 255).put(CRYSTALLISABLE)                                                                                                                           .uumMcfg( 0, Sapphire       , 1*U, Teslatite        , 1*U)                                                                                                  .aspects(TC.LUX, 2, TC.POTENTIA, 4).setLocal("Cyan Energium"),
 	
 	
-	InfusedDull             = crystal_tc    (-8350, "Infused Dull"                                  , 100, 100, 100, DYE_INDEX_Gray        )                                                                                                                                                                                                                                                                                        .aspects(TC.PRAECANTIO, 1, TC.VACUOS    , 2).qual(3, 32.0,   64,  3),
-	InfusedVis              = crystal_tc    (-8351, "Infused Vis"                                   , 255,   0, 255, DYE_INDEX_Magenta     ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.AURAM     , 2).qual(3,  8.0,   64,  3),
+	InfusedDull             = crystal_tc    ( 8350, "Infused Dull"                                  , 100, 100, 100, DYE_INDEX_Gray        )                                                                                                                                                                                                                                                                                        .aspects(TC.PRAECANTIO, 1, TC.VACUOS    , 2).qual(3, 32.0,   64,  3),
+	InfusedVis              = crystal_tc    ( 8351, "Infused Vis"                                   , 255,   0, 255, DYE_INDEX_Magenta     ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.AURAM     , 2).qual(3,  8.0,   64,  3),
 	InfusedAir              = crystal_tc    ( 8352, "Infused Air"                                   , 255, 255,   0, DYE_INDEX_Yellow      ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.AER       , 2).qual(3,  8.0,   64,  3),
 	InfusedFire             = crystal_tc    ( 8353, "Infused Fire"                                  , 255,   0,   0, DYE_INDEX_Red         ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.IGNIS     , 2).qual(3,  8.0,   64,  3),
 	InfusedEarth            = crystal_tc    ( 8354, "Infused Earth"                                 ,   0, 255,   0, DYE_INDEX_Green       ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.TERRA     , 2).qual(3,  8.0,  256,  3),
 	InfusedWater            = crystal_tc    ( 8355, "Infused Water"                                 ,   0,   0, 255, DYE_INDEX_Blue        ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.AQUA      , 2).qual(3,  8.0,   64,  3),
 	InfusedEntropy          = crystal_tc    ( 8356, "Infused Entropy"                               ,  62,  62,  62, DYE_INDEX_Black       ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.PERDITIO  , 2).qual(3, 32.0,   64,  4),
 	InfusedOrder            = crystal_tc    ( 8357, "Infused Order"                                 , 252, 252, 252, DYE_INDEX_White       ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.ORDO      , 2).qual(3,  8.0,   64,  3),
-	InfusedBalance          = crystal_tc    (-8358, "Infused Balance"                               , 252, 252, 252, DYE_INDEX_LightGray   ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.ORDO, 1, TC.PERDITIO, 1, TC.IGNIS, 1, TC.AER, 1, TC.AQUA, 1, TC.TERRA, 1).qual(3, 32.0,  256,  4),
+	InfusedBalance          = crystal_tc    ( 8358, "Infused Balance"                               , 252, 252, 252, DYE_INDEX_LightGray   ).put(GLOWING)                                                                                                                                                                                                                                                                           .aspects(TC.PRAECANTIO, 1, TC.ORDO, 1, TC.PERDITIO, 1, TC.IGNIS, 1, TC.AER, 1, TC.AQUA, 1, TC.TERRA, 1).qual(3, 32.0,  256,  4),
 	
 	
-	Petrotheum              = mixdust       ( 8245, "Petrotheum"            , SET_DULL              ,  86,  76,  82, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 2, Clay           , 1*U, Obsidian         , 1*U, Redstone         , 1*U, Basalz           , 1*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.POTENTIA, 1).heat(400, 2000),
-	Aerotheum               = dust          ( 8246, "Aerotheum"             , SET_SHINY             , 200, 176,  83, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 2, Sand           , 1*U, KNO3             , 1*U, Redstone         , 1*U, Blitz            , 1*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.AER, 1).heat(299, 300),
-	Pyrotheum               = mixdust       ( 8212, "Pyrotheum"             , SET_FIERY             , 255, 200, 120, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 2, Coal           , 1*U, S                , 1*U, Redstone         , 1*U, Blaze            , 1*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.IGNIS, 1).heat(3800, 6400),
-	Cryotheum               = dust          ( 8213, "Cryotheum"             , SET_SHINY             , 200, 220, 255, 255).put(CONTAINERS, MELTING, MORTAR)                                                                                                              .setMcfg( 8, Snow           , 1*U, KNO3             , 4*U, Redstone         , 4*U, Blizz            , 4*U)                                                  .aspects(TC.PRAECANTIO, 2, TC.GELUM, 1).heat(40, 1000),
+	HexoriumBlack           = hexorium      ( 9224,  32,  32,  32, DYE_INDEX_Black    ),
+	HexoriumRed             = hexorium      ( 9225, 128,   0,   0, DYE_INDEX_Red      ),
+	HexoriumGreen           = hexorium      ( 9226,   0, 128,   0, DYE_INDEX_Green    ),
+//  HexoriumBrown           = hexorium      ( 9227,  48,  32,   0, DYE_INDEX_Brown    ),
+	HexoriumBlue            = hexorium      ( 9228,   0,   0, 128, DYE_INDEX_Blue     ),
+//  HexoriumPurple          = hexorium      ( 9229,  64,   0,  64, DYE_INDEX_Purple   ),
+//  HexoriumCyan            = hexorium      ( 9230,   0, 128, 128, DYE_INDEX_Cyan     ),
+//  HexoriumLightGray       = hexorium      ( 9231,  96,  96,  96, DYE_INDEX_LightGray),
+//  HexoriumGray            = hexorium      ( 9232,  64,  64,  64, DYE_INDEX_Gray     ),
+//  HexoriumPink            = hexorium      ( 9233, 128,  96,  96, DYE_INDEX_Pink     ),
+//  HexoriumLime            = hexorium      ( 9234,  64, 128,  64, DYE_INDEX_Lime     ),
+//  HexoriumYellow          = hexorium      ( 9235, 128, 128,   0, DYE_INDEX_Yellow   ),
+//  HexoriumLightBlue       = hexorium      ( 9236,  64,  64, 128, DYE_INDEX_LightBlue),
+//  HexoriumMagenta         = hexorium      ( 9237, 128,   0, 128, DYE_INDEX_Magenta  ),
+//  HexoriumOrange          = hexorium      ( 9238, 128,  64,   0, DYE_INDEX_Orange   ),
+	HexoriumWhite           = hexorium      ( 9239, 224, 224, 224, DYE_INDEX_White    ),
+//  HexoriumDarkGray        = hexorium      ( 9240,  48,  48,  48, DYE_INDEX_Gray     ),
+//  HexoriumTurquoise       = hexorium      ( 9241,   0, 128,  64, DYE_INDEX_Cyan     ),
+//  HexoriumRainbow         = hexorium      ( 9242, 224, 224, 224, DYE_INDEX_White    ),
+	
+	
+	Bedrock                 = create        ( 8599, "Bedrock"               , SET_STONE             ,  64,  64,  64, 255).put(G_STONE, DIRTY_DUSTS, STONE, BRITTLE, MELTING)                                                                                                                                                                                                                                                        .aspects(TC.TERRA       , 5).qual(1, 8.0, 2048, 5).heat(4000).setRGBaLiquid(128,  96,  64, 255).visDefault(),
 	
 	
 	Stone                   = stone         ( 8500, "Stone"                                         , 205, 205, 205, 255).put(MELTING, MOLTEN, UNRECYCLABLE)                                                                                                                                                                                                                                                                        .aspects(TC.TERRA       , 1).qual(1, 2.0, 16, 1).heat(1100).setRGBaLiquid(192,  96,  64, 255),
@@ -1406,10 +1441,10 @@ public class MT {
 	Bluestone               = stone         ( 9185, "Bluestone"                                     ,  52,  52, 252, 255)                                                                                                                                                                                                                                                                                                           .aspects(TC.TERRA       , 1),
 	Epidote                 = stone         ( 9182, "Epidote"                                       , 128, 128, 128, 255)                                                                                                                                                                                                                                                                                                           .aspects(TC.TERRA       , 1),
 	
-	
-	Bedrock                 = create        ( 8599, "Bedrock"               , SET_STONE             ,  64,  64,  64, 255).put(G_STONE, DIRTY_DUSTS, STONE, BRITTLE, MELTING)                                                                                                                                                                                                                                                        .aspects(TC.TERRA       , 5).qual(1, 8.0, 2048, 5).heat(4000).setRGBaLiquid(128,  96,  64, 255).visDefault(),
-	
 	Oilshale                = oredust       ( 9853, "Oilshale"              , SET_STONE             ,  50,  50,  60, 255).put(FLAMMABLE, TICKS_PER_SMELT* 2).setBurning(Stone, U2)                                                                                                                                                                                                                                                  .heat( 500, 1000).aspects(TC.MORTUUS, 2, TC.LUX, 1),
+	
+	
+	
 	
 	WroughtIron             = metalmachnd   ( 8643, "Wrought Iron"          , SET_METALLIC          , 200, 180, 180     ).put(RAILS, MORTAR, MAGNETIC_PASSIVE, MOLTEN, "WrougtIron")                                                                                    .uumMcfg( 0, Fe             , 1*U)                                                                                                                          .aspects(TC.METALLUM, 2, TC.INSTRUMENTUM, 1).setPulver(Fe, U).steal(Fe).qual(3,  6.0,  384,  2).setRGBaLiquid(255, 80, 40, 255).alloyCentrifuge(Fe.mMeltingPoint + 200, Fe.mBoilingPoint),
 	
@@ -1434,9 +1469,9 @@ public class MT {
 	DeepIron                = metalore      ( 8641, "Deep Iron"                                     ,  73,  91, 105     ).qual(3,  6.0,  384, 2).put(MAGNETIC_PASSIVE)                                                                                                                                                                                                                                                              .aspects(TC.METALLUM, 2, TC.MAGNETO                             , 1).heat(Fe),
 	ShadowIron              = metalore      ( 8670, "Shadow Iron"                                   ,  95,  76,  63     ).qual(3,  6.0,  384, 2).put(MAGNETIC_PASSIVE)                                                                                                                                                                                                                                                              .aspects(TC.METALLUM, 2, TC.TENEBRAE                            , 1).heat(WroughtIron),
 	Adamantine              = metalore      ( 8784, "Adamantine"                                    , 255,   0,  64     ).qual(3, 10.0, 4500, 5).put(MAGNETIC_PASSIVE, DECOMPOSABLE, ELECTROLYSER, WITHER_PROOF, ENDER_DRAGON_PROOF)                                    .uumMcfg( 0, Ad             , 3*U, O                , 4*U)                                                                                                  .aspects(TC.METALLUM, 5, TC.PRAECANTIO                          , 5).heat(Ad),
-	AstralSilver            = slloymachore  ( 8676, "Astral Silver"                                 , 230, 230, 255     ).qual(3, 10.0,   64, 2).put(MAGICAL, CENTRIFUGE, MOLTEN, WASHING_MERCURY, VALUABLE, ENDER_DRAGON_PROOF)                                        .setMcfg( 2, Ag             , 2*U, Ma               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 1, TC.PRAECANTIO  , 1).heat(Ag),
-	Midasium                = slloymachore  ( 8677, "Midasium"                                      , 255, 200,  40     ).qual(3, 12.0,   64, 2).put(MAGICAL, CENTRIFUGE, MOLTEN, WASHING_MERCURY, VALUABLE, WITHER_PROOF)                                              .setMcfg( 2, Au             , 2*U, Ma               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 2, TC.PRAECANTIO  , 1).heat(Au),
-	Mithril                 = slloymachore  ( 8678, "Mithril"                                       , 100, 140, 250     ).qual(3, 14.0,   64, 3).put(MAGICAL, CENTRIFUGE, MOLTEN, WASHING_MERCURY, VALUABLE)                                                            .setMcfg( 2, Pt             , 2*U, Ma               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 3, TC.PRAECANTIO  , 1).heat(Pt),
+	AstralSilver            = slloymachore  ( 8676, "Astral Silver"                                 , 230, 230, 255     ).qual(3, 10.0,   64, 2).put(MAGICAL, MOLTEN, WASHING_MERCURY, VALUABLE, CENTRIFUGE, ENDER_DRAGON_PROOF)                                        .setMcfg( 2, Ag             , 2*U, Ma               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 1, TC.PRAECANTIO  , 1).heat(Ag),
+	Midasium                = slloymachore  ( 8677, "Midasium"                                      , 255, 200,  40     ).qual(3, 12.0,   64, 2).put(MAGICAL, MOLTEN, WASHING_MERCURY, VALUABLE, WITHER_PROOF)                                                          .setMcfg( 2, Au             , 2*U, Ma               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 2, TC.PRAECANTIO  , 1).heat(Au),
+	Mithril                 = slloymachore  ( 8678, "Mithril"                                       , 100, 140, 250     ).qual(3, 14.0,   64, 3).put(MAGICAL, MOLTEN, WASHING_MERCURY, VALUABLE, CENTRIFUGE)                                                            .setMcfg( 2, Pt             , 2*U, Ma               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 3, TC.PRAECANTIO  , 1).heat(Pt),
 	ShadowSteel             = alloy         ( 8671, "Shadow Steel"                                  , 136, 115,  98     ).qual(3,  6.0,  768, 2).put(MAGNETIC_PASSIVE)                                                                                                  .setMcfg( 0, ShadowIron     , 1*U, Lemurite         , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.TENEBRAE        , 1, TC.TELUM       , 1).alloyCentrifuge().visDefault(ShadowIron, Lemurite),
 	Inolashite              = alloy         ( 8777, "Inolashite"                                    , 148, 216, 187     ).qual(3,  8.0, 2304, 3)                                                                                                                        .setMcfg( 0, Alduorite      , 1*U, Ceruclase        , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.AER             , 1, TC.AQUA        , 1).alloyCentrifuge().visDefault(Alduorite, Ceruclase),
 	Haderoth                = alloy         ( 8778, "Haderoth"                                      , 119,  52,  30     ).qual(3, 10.0, 3200, 3)                                                                                                                        .setMcfg( 0, Mithril        , 1*U, Rubracium        , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM          , 1, TC.PRAECANTIO  , 1).alloyCentrifuge().visDefault(Rubracium),
@@ -1446,7 +1481,7 @@ public class MT {
 	Amordrine               = alloy         ( 8783, "Amordrine"                                     , 169, 141, 177     ).qual(3,  7.0, 3328, 3)                                                                                                                        .setMcfg( 0, Prometheum     , 1*U, Kalendrite       , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.ORDO            , 1, TC.POTENTIA    , 1).alloyCentrifuge().visDefault(Prometheum, Kalendrite),
 	
 	
-	Electrum                = slloymachore  ( 8600, "Electrum"                                      , 255, 255, 100     ).put(RAILS, WASHING_MERCURY, MORTAR, MOLTEN, WITHER_PROOF, ENDER_DRAGON_PROOF).qual(3, 12.0,   64, 2)                                          .uumMcfg( 0, Ag             , 1*U, Au               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM, 2).alloyCentrifuge(),
+	Electrum                = slloymachore  ( 8600, "Electrum"                                      , 255, 255, 100     ).put(MORTAR, VALUABLE, ENDER_DRAGON_PROOF, RAILS, WASHING_MERCURY, MOLTEN, WITHER_PROOF).qual(3, 12.0,   64, 2)                                .uumMcfg( 0, Ag             , 1*U, Au               , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM, 2).alloyCentrifuge(),
 	SterlingSilver          = slloymachine  ( 8601, "Sterling Silver"                               , 250, 220, 225     ).put(MORTAR, VALUABLE, ENDER_DRAGON_PROOF).qual(3, 13.0,  128, 2)                                                                              .uumMcfg( 0, Cu             , 1*U, Ag               , 4*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM, 2).alloyCentrifuge(),
 	RoseGold                = slloymachine  ( 8602, "Rose Gold"                                     , 255, 230,  30     ).put(MORTAR, VALUABLE, WITHER_PROOF, "Tumbaga").qual(3, 14.0,  128, 2)                                                                         .uumMcfg( 0, Cu             , 1*U, Au               , 4*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM, 2).alloyCentrifuge(),
 	Angmallen               = slloymachine  ( 8603, "Angmallen"                                     , 215, 225, 138     ).put(MORTAR, MAGNETIC_PASSIVE, MOLTEN).qual(3, 10.0,  128, 2)                                                                                  .uumMcfg( 0, Au             , 1*U, WroughtIron      , 1*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.LUCRUM, 1).alloyCentrifuge(),
@@ -1564,9 +1599,9 @@ public class MT {
 	Iffesal                 = oredust       ( 8743, "Iffesal"               , SET_SHINY             ,  14,  25, 171, 255).put(MAGICAL)                                                                                                                                                                                                                                                                                              .aspects(TC.METALLUM, 2, TC.PRAECANTIO, 4),
 	
 	
-	AncientDebris           = metalore      ( 8744, "Ancient Debris"        , SET_LAPIS             , 110,  80,  90, 255).put("Ancient", UNBURNABLE, WITHER_PROOF, VALUABLE, MELTING).qual(0, 1.0,   16,  3)                                                                                                                                                                                                                        .aspects(TC.METALLUM, 2, TC.FABRICO, 2).heat(MeteoricIron),
-	Netherite               = alloymachine  ( 8745, "Netherite"                                     ,  80,  70,  80     ).put(           UNBURNABLE, WITHER_PROOF, VALUABLE, MOLTEN).qual(2, 10.0,  500,  4)                                                            .setMcfg( 1, Au             , 4*U, AncientDebris    , 4*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.FABRICO, 2, TC.LUCRUM, 2).alloyCentrifuge(MeteoricSteel),
-	NetherizedDiamond       = alloymachine  ( 8746, "Netherized Diamond"    , SET_DIAMOND           ,  90,  80,  90, 255).put(G_GEM    , UNBURNABLE, WITHER_PROOF, VALUABLE, COATED).qual(3, 12.0, 2560,  4)                                                            .setMcfg( 4, Netherite      , 1*U, Diamond          , 4*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.FABRICO, 2, TC.LUCRUM, 2, TC.VITREUS, 2).heat(MeteoricSteel),
+	AncientDebris           = metalore      ( 8744, "Ancient Debris"        , SET_SPACE             , 110,  80,  90, 255).put("Ancient", UNBURNABLE, WITHER_PROOF, VALUABLE, MOLTEN, MELTING).qual(0, 1.0,   16,  3)                                                                                                                                                                                                                .aspects(TC.METALLUM, 2, TC.ALIENIS, 2).heat(MeteoricIron),
+	Netherite               = alloymachine  ( 8745, "Netherite"                                     ,  80,  70,  80     ).put(           UNBURNABLE, WITHER_PROOF, VALUABLE, MOLTEN).qual(2, 10.0,  500,  4)                                                            .setMcfg( 1, Au             , 4*U, AncientDebris    , 4*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.ALIENIS, 2, TC.LUCRUM, 2).alloyCentrifuge(MeteoricSteel),
+	NetherizedDiamond       = alloymachine  ( 8746, "Netherized Diamond"    , SET_DIAMOND           ,  90,  80,  90, 255).put(G_GEM    , UNBURNABLE, WITHER_PROOF, VALUABLE, COATED).qual(3, 12.0, 2560,  4)                                                            .setMcfg( 4, Netherite      , 1*U, Diamond          , 4*U)                                                                                                  .aspects(TC.METALLUM, 2, TC.ALIENIS, 2, TC.LUCRUM, 2, TC.VITREUS, 2).heat(MeteoricSteel),
 	
 	
 	Desh                    = metalmachore  ( 8750, "Desh"                  , SET_DULL              ,  40,  40,  40     ).qual(3,  4.0,   1280,  3)                                                                                                                                                                                                                                                                                 .aspects(TC.METALLUM, 2, TC.ALIENIS, 1, TC.TELUM, 1).heat(Steel),
@@ -1672,10 +1707,16 @@ public class MT {
 			
 			Wood                    .put(MD.MC);
 			Stone                   .put(MD.MC);
-			Fe                      .put(MD.MC);
-			Au                      .put(MD.MC);
-			Diamond                 .put(MD.MC);
-			Emerald                 .put(MD.MC);
+			Fe                      .put(MD.MC, COMMON_ORE);
+			Au                      .put(MD.MC, COMMON_ORE);
+			Diamond                 .put(MD.MC, COMMON_ORE);
+			Emerald                 .put(MD.MC, COMMON_ORE);
+			NetherQuartz            .put(MD.MC, COMMON_ORE);
+			Lapis                   .put(MD.MC, COMMON_ORE);
+			Redstone                .put(MD.MC, COMMON_ORE);
+			Glowstone               .put(MD.MC, COMMON_ORE);
+			Coal                    .put(MD.MC, COMMON_ORE);
+			Charcoal                .put(MD.MC);
 			EnderPearl              .put(MD.MC);
 			EnderEye                .put(MD.MC);
 			Blaze                   .put(MD.MC);
@@ -1684,12 +1725,6 @@ public class MT {
 			Cocoa                   .put(MD.MC);
 			Milk                    .put(MD.MC);
 			Paper                   .put(MD.MC);
-			Coal                    .put(MD.MC);
-			Charcoal                .put(MD.MC);
-			NetherQuartz            .put(MD.MC);
-			Lapis                   .put(MD.MC);
-			Redstone                .put(MD.MC);
-			Glowstone               .put(MD.MC);
 			Clay                    .put(MD.MC);
 			Netherrack              .put(MD.MC);
 			NetherBrick             .put(MD.MC);
@@ -1738,12 +1773,16 @@ public class MT {
 			PrismarineDark          .put(MD.EtFu);
 			
 			
+			NaCl                    .put(MD.HaC, COMMON_ORE);
+			
+			
 			Basalt                  .put(MD.NePl);
-			Netherite               .put(MD.NePl);
+			Netherite               .put(MD.NePl, COMMON_ORE);
 			NetherizedDiamond       .put(MD.NePl);
-			AncientDebris           .put(MD.NePl);
+			AncientDebris           .put(MD.NePl, COMMON_ORE);
 			
 			
+			Zn                      .put(MD.GT, COMMON_ORE);
 			Craponite               .put(MD.GT);
 			NitroCarbon             .put(MD.GT);
 			NitroFuel               .put(MD.GT);
@@ -1772,14 +1811,14 @@ public class MT {
 			PlatinumGroupSludge     .put(MD.GT5U);
 			
 			
-			Os                      .setOriginalMod("gravisuite", "Gravisuite (Old IC2 Addon)");
+			Os                      .put(COMMON_ORE).setOriginalMod("gravisuite", "Gravisuite (Old IC2 Addon)");
 			
 			
-			Cu                      .put(MD.IC2);
-			Sn                      .put(MD.IC2);
+			Cu                      .put(MD.IC2, COMMON_ORE);
+			Sn                      .put(MD.IC2, COMMON_ORE);
 			Bronze                  .put(MD.IC2);
 			RefinedIron             .put(MD.IC2);
-			Ir                      .put(MD.IC2);
+			Ir                      .put(MD.IC2, COMMON_ORE);
 			U_238                   .put(MD.IC2);
 			U_235                   .put(MD.IC2);
 			Pu                      .put(MD.IC2);
@@ -1808,7 +1847,7 @@ public class MT {
 			Porcelain               .put(MD.IHL);
 			
 			
-			Bi                      .put(MD.TFC);
+			Bi                      .put(MD.TFC, COMMON_ORE);
 			Jasper                  .put(MD.TFC);
 			WroughtIron             .put(MD.TFC);
 			RoseGold                .put(MD.TFC);
@@ -1821,9 +1860,9 @@ public class MT {
 			DamascusSteel           .put(MD.TFC);
 			
 			
-			S                       .put(MD.RC);
-			KNO3                    .put(MD.RC);
-			Firestone               .put(MD.RC).visDefault();
+			S                       .put(MD.RC, COMMON_ORE);
+			KNO3                    .put(MD.RC, COMMON_ORE);
+			Firestone               .put(MD.RC, COMMON_ORE).visDefault();
 			Creosote                .put(MD.RC);
 			TinAlloy                .put(MD.RC);
 			Steel                   .put(MD.RC);
@@ -1833,15 +1872,15 @@ public class MT {
 			Constantan              .put(MD.IE);
 			
 			
-			Ni                      .put(MD.TE);
-			Pt                      .put(MD.TE);
+			Ni                      .put(MD.TE, COMMON_ORE);
+			Pt                      .put(MD.TE, COMMON_ORE);
 			Invar                   .put(MD.TE);
 			Electrum                .put(MD.TE);
 			Enderium                .put(MD.TE);
 			Signalum                .put(MD.TE);
 			Lumium                  .put(MD.TE);
-			RareEarth               .put(MD.TE);
-			Niter                   .put(MD.TE);
+			RareEarth               .put(MD.TE, COMMON_ORE);
+			Niter                   .put(MD.TE, COMMON_ORE);
 			Basalz                  .put(MD.TE);
 			Blitz                   .put(MD.TE);
 			Blizz                   .put(MD.TE);
@@ -1851,11 +1890,17 @@ public class MT {
 			Cryotheum               .put(MD.TE);
 			
 			
+			CertusQuartz            .put(MD.AE, COMMON_ORE);
+			ChargedCertusQuartz     .put(MD.AE, COMMON_ORE);
+			Fluix                   .put(MD.AE, COMMON_ORE);
+			
+			
 			IronCompressed          .put(MD.PnC).visDefault();
 			
 			
-			Co                      .put(MD.TiC);
-			Ardite                  .put(MD.TiC).visDefault();
+			Al                      .put(MD.TiC);
+			Co                      .put(MD.TiC, COMMON_ORE);
+			Ardite                  .put(MD.TiC, COMMON_ORE).visDefault();
 			Alumite                 .put(MD.TiC);
 			Manyullyn               .put(MD.TiC).visDefault(Ardite);
 			AluminiumBrass          .put(MD.TiC);
@@ -1884,16 +1929,17 @@ public class MT {
 			
 			RefinedGlowstone        .put(MD.Mek).visDefault();
 			RefinedObsidian         .put(MD.Mek).visDefault();
-			FakeOsmium              .put(MD.Mek).visDefault();
+			FakeOsmium              .put(MD.Mek, COMMON_ORE).visDefault();
 			
-			
+
+			InfusedVis              .put(MD.TC).visDefault();
 			Silverwood              .put(MD.TC).visDefault();
 			Greatwood               .put(MD.TC).visDefault();
 			Thaumium                .put(MD.TC).visDefault();
 			VoidMetal               .put(MD.TC).visDefault();
 			Tallow                  .put(MD.TC).visDefault();
-			Amber                   .put(MD.TC);
-			Hg                      .put(MD.TC);
+			Amber                   .put(MD.TC, COMMON_ORE);
+			Hg                      .put(MD.TC, COMMON_ORE);
 			
 			
 			DarkThaumium            .put(MD.TCFM).visDefault();
@@ -1929,30 +1975,31 @@ public class MT {
 			TitaniumAluminide       .put(MD.GC_ADV_ROCKETRY);
 			
 			
-			Anthracite              .put(MD.RoC).visDefault();
+			Anthracite              .put(MD.RoC, COMMON_ORE).visDefault();
 			Prismane                .put(MD.RoC).visDefault();
 			Lonsdaleite             .put(MD.RoC).visDefault();
 			
 			
-			Endium                  .put(MD.GaEn);
+			Endium                  .put(MD.GaEn, COMMON_ORE);
 			
 			
 			FishCooked              .put(MD.MaCu);
 			FishRaw                 .put(MD.MaCu);
 			FishRotten              .put(MD.MaCu);
-			TiO2                    .put(MD.MaCu);
+			TiO2                    .put(MD.MaCu, COMMON_ORE);
+			Ti                      .put(MD.MaCu).visDefault();
 			
 			
-			An                      .put(MD.ABYSSAL).visDefault();
-			Cor                     .put(MD.ABYSSAL).visDefault();
-			Dr                      .put(MD.ABYSSAL).visDefault();
-			Etx                     .put(MD.ABYSSAL).visDefault();
+			An                      .put(MD.ABYSSAL, COMMON_ORE).visDefault();
+			Cor                     .put(MD.ABYSSAL, COMMON_ORE).visDefault();
+			Dr                      .put(MD.ABYSSAL, COMMON_ORE).visDefault();
+			Etx                     .put(MD.ABYSSAL, COMMON_ORE).visDefault();
 			
 			
-			AmberDominican          .put(MD.Fossil).visDefault();
+			AmberDominican          .put(MD.Fossil, COMMON_ORE).visDefault();
 			
 			
-			Draconium               .put(MD.DE).visDefault();
+			Draconium               .put(MD.DE, COMMON_ORE).visDefault();
 			DraconiumAwakened       .put(MD.DE).visDefault();
 			
 			
@@ -1964,26 +2011,30 @@ public class MT {
 			RedMatter               .put(MD.PE).visDefault();
 			
 			
-			EnderAmethyst           .put(MD.BoP).visDefault();
+			Topaz                   .put(MD.BoP, COMMON_ORE);
+			Olivine                 .put(MD.BoP, COMMON_ORE);
+			Amethyst                .put(MD.BoP, COMMON_ORE);
+			EnderAmethyst           .put(MD.BoP, COMMON_ORE).visDefault();
 			
 			
-			Meteorite               .put(MD.FM).visDefault();
+			Meteorite               .put(MD.FM, COMMON_ORE).visDefault();
 			FrozenIron              .put(MD.FM).visDefault();
 			Kreknorite              .put(MD.FM).visDefault();
 			RedMeteor               .put(MD.FM).visDefault();
 			Frezarite               .put(MD.FM).visDefault();
 			
 			
-			Vinteum                 .put(MD.ARS).visDefault();
+			Vinteum                 .put(MD.ARS, COMMON_ORE).visDefault();
 			VinteumPurified         .put(MD.ARS).visDefault();
 			ArcaneAsh               .put(MD.ARS).visDefault();
 			ArcaneCompound          .put(MD.ARS).visDefault();
-			Moonstone               .put(MD.ARS).visDefault();
-			Sunstone                .put(MD.ARS).visDefault();
-			Chimerite               .put(MD.ARS).visDefault();
+			Moonstone               .put(MD.ARS, COMMON_ORE).visDefault();
+			Sunstone                .put(MD.ARS, COMMON_ORE).visDefault();
+			Chimerite               .put(MD.ARS, COMMON_ORE).visDefault();
+			BlueTopaz               .put(MD.ARS, COMMON_ORE);
 			
 			
-			Desh                    .put(MD.GC).visDefault();
+			Desh                    .put(MD.GC, COMMON_ORE).visDefault();
 			MoonTurf                .put(MD.GC).visDefault();
 			MoonRock                .put(MD.GC).visDefault();
 			MarsSand                .put(MD.GC).visDefault();
@@ -1991,9 +2042,9 @@ public class MT {
 			SpaceRock               .put(MD.GC).visDefault();
 			
 			
-			Duralumin               .put(MD.GC_GALAXYSPACE);
-			Oriharukon              .put(MD.GC_GALAXYSPACE).visDefault();
-			Adamantite              .put(MD.GC_GALAXYSPACE).visDefault();
+			Duralumin               .put(MD.GC_GALAXYSPACE, COMMON_ORE);
+			Oriharukon              .put(MD.GC_GALAXYSPACE, COMMON_ORE).visDefault();
+			Adamantite              .put(MD.GC_GALAXYSPACE, COMMON_ORE).visDefault();
 			GlowstoneCeres          .put(MD.GC_GALAXYSPACE).visDefault();
 			GlowstoneIo             .put(MD.GC_GALAXYSPACE).visDefault();
 			GlowstoneEnceladus      .put(MD.GC_GALAXYSPACE).visDefault();
@@ -2017,20 +2068,20 @@ public class MT {
 			Betweenstone            .put(MD.BTL, BETWEENLANDS).visDefault();
 			Pitstone                .put(MD.BTL, BETWEENLANDS).visDefault();
 			Weedwood                .put(MD.BTL, BETWEENLANDS).visDefault();
-			Syrmorite               .put(MD.BTL, BETWEENLANDS).visDefault();
-			Octine                  .put(MD.BTL, BETWEENLANDS).visDefault();
+			Syrmorite               .put(MD.BTL, BETWEENLANDS, COMMON_ORE).visDefault();
+			Octine                  .put(MD.BTL, BETWEENLANDS, COMMON_ORE).visDefault();
 			
 			
 			Skyroot                 .put(MD.AETHER).visDefault();
 			Holystone               .put(MD.AETHER).visDefault();
-			Zanite                  .put(MD.AETHER).visDefault();
-			Ambrosium               .put(MD.AETHER).visDefault();
-			Gravitite               .put(MD.AETHER).visDefault();
-			Continuum               .put(MD.AETHER).visDefault();
+			Zanite                  .put(MD.AETHER, COMMON_ORE).visDefault();
+			Ambrosium               .put(MD.AETHER, COMMON_ORE).visDefault();
+			Gravitite               .put(MD.AETHER, COMMON_ORE).visDefault();
+			Continuum               .put(MD.AETHER, COMMON_ORE).visDefault();
 			
 			
 			W                       .put(MD.RP);
-			Ag                      .put(MD.RP);
+			Ag                      .put(MD.RP, COMMON_ORE);
 			Indigo                  .put(MD.RP);
 			Sapphire                .put(MD.RP);
 			GreenSapphire           .put(MD.RP);
@@ -2040,31 +2091,32 @@ public class MT {
 			Marble                  .put(MD.RP);
 			Brass                   .put(MD.RP);
 			RedAlloy                .put(MD.RP);
-			Nikolite                .put(MD.RP).visDefault();
+			Nikolite                .put(MD.RP, COMMON_ORE).visDefault();
 			NikolineAlloy           .put(MD.RP).visDefault(Nikolite);
 			BlueAlloy               .put(MD.RP).visDefault(Nikolite, Teslatite);
 			
 			
-			Electrotine             .put(MD.PR).visDefault();
+			Electrotine             .put(MD.PR, COMMON_ORE).visDefault();
 			ElectrotineAlloy        .put(MD.PR).visDefault(Electrotine);
 			
 			
-			Teslatite               .put(MD.BP).visDefault();
+			Teslatite               .put(MD.BP, COMMON_ORE).visDefault();
 			TeslatineAlloy          .put(MD.BP).visDefault(Teslatite);
 			PurpleAlloy             .put(MD.BP).visDefault(Teslatite, Nikolite);
 			
 			
-			Pb                      .put(MD.FZ);
+			Pb                      .put(MD.FZ, COMMON_ORE);
+			OREMATS.Galena          .put(MD.FZ, COMMON_ORE);
 			H2SO4                   .put(MD.FZ);
 			AquaRegia               .put(MD.FZ);
 			DarkIron                .put(MD.FZ).visDefault();
 			
 			
-			Yellorium               .put(MD.BR).visDefault();
-			Blutonium               .put(MD.BR).visDefault();
-			Cyanite                 .put(MD.BR).visDefault();
-			Ludicrite               .put(MD.BR).visDefault();
-			Yellorite               .put(MD.BR).visDefault();
+			Yellorium               .put(MD.BR, COMMON_ORE).visDefault();
+			Blutonium               .put(MD.BR, COMMON_ORE).visDefault();
+			Cyanite                 .put(MD.BR, COMMON_ORE).visDefault();
+			Ludicrite               .put(MD.BR, COMMON_ORE).visDefault();
+			Yellorite               .put(MD.BR, COMMON_ORE).visDefault();
 			
 			
 			Angmallen               .put(MD.MET);
@@ -2101,9 +2153,9 @@ public class MT {
 			Amordrine               .put(MD.MET).visDefault();
 			
 			
-			Force                   .visDefault();
-			Forcicium               .visDefault();
-			Forcillium              .visDefault();
+			Force                   .put(COMMON_ORE).visDefault();
+			Forcicium               .put(COMMON_ORE).visDefault();
+			Forcillium              .put(COMMON_ORE).visDefault();
 			
 			
 			Plastic                 .addEnchantmentForTools(Enchantment.knockback, 1);
@@ -2381,18 +2433,21 @@ public class MT {
 			GreenSapphire                   .addOreByProducts(BlueSapphire          , OrangeSapphire            , YellowSapphire        );
 			YellowSapphire                  .addOreByProducts(BlueSapphire          , OrangeSapphire            , GreenSapphire         );
 			OrangeSapphire                  .addOreByProducts(BlueSapphire          , YellowSapphire            , GreenSapphire         );
+			HexoriumRed                     .addOreByProducts(HexoriumWhite         , HexoriumBlack             );
+			HexoriumGreen                   .addOreByProducts(HexoriumWhite         , HexoriumBlack             );
+			HexoriumBlue                    .addOreByProducts(HexoriumWhite         , HexoriumBlack             );
+			HexoriumBlack                   .addOreByProducts(HexoriumRed           , HexoriumGreen             , HexoriumBlue          );
+			HexoriumWhite                   .addOreByProducts(HexoriumRed           , HexoriumGreen             , HexoriumBlue          );
 			OREMATS.Kaolinite               .addOreByProducts(OREMATS.Bauxite       , ClayBrown                 , Al2O3                 );
 			OREMATS.Barite                  .addOreByProducts(CertusQuartz          , Quartzite                 );
 			OREMATS.QuartzSand              .addOreByProducts(CertusQuartz          , Quartzite                 , OREMATS.Barite        );
 			OREMATS.Wollastonite            .addOreByProducts(Fe2O3                 , Mg                        , MnO2                  );
-			
 			BlackQuartz                     .addOreByProducts(OREMATS.Barite        );
 			NetherQuartz                    .addOreByProducts(Netherrack            , OREMATS.Barite            );
 			Quartzite                       .addOreByProducts(CertusQuartz          , OREMATS.Barite            , Fe2O3);
 			MilkyQuartz                     .addOreByProducts(CertusQuartz          , OREMATS.Barite            );
 			CertusQuartz                    .addOreByProducts(MilkyQuartz           , OREMATS.Barite            );
 			ChargedCertusQuartz             .addOreByProducts(MilkyQuartz           , OREMATS.Barite            );
-			
 			Redstone                        .addOreByProducts(OREMATS.Cinnabar      , RareEarth                 , Glowstone             );
 			Os                              .addOreByProducts(Ir                    , Pt                        , Ru                    );
 			Ir                              .addOreByProducts(Pt                    , Os                        , Rh                    );
@@ -3020,7 +3075,7 @@ public class MT {
 		QuartzSand              = oredustcent   ( 9006, "Quartz Sand"               , SET_SAND              , 200, 200, 200, 255).put(MORTAR, BLACKLISTED_SMELTER, QUARTZ                                       ).setSmelting(SiO2, U3)     .setMcfg( 0, CertusQuartz   , 1*U, MilkyQuartz      , 1*U)                                                                                                  ;
 	}
 	
-	/** The "I don't care" Section, everything I don't want to do anything with right now, is right here. Just to make the Material Finder shut up about them. But I do see potential uses in some of these Materials. */
+	/** The "I don't care" Section, everything I don't want to do anything with right now. Just to make the Material Finder shut up about them. But I do see potential uses in some of these Materials. */
 	public static class UNUSED {
 		public static final OreDictMaterial
 		OsmiumTetroxide             = unused        ("Osmium Tetroxide"             ).setMcfg( 0, Os, 1*U, O, 4*U),
@@ -3028,62 +3083,81 @@ public class MT {
 		IridiumSodiumOxide          = unused        ("Iridium Sodium Oxide"         ),
 		SolutionBlueVitriol         = unused        ("SolutionBlueVitriol"          ).setLocal("Blue Vitriol Solution"),
 		SolutionNickelSulfate       = unused        ("SolutionNickelSulfate"        ).setLocal("Nickel Sulfate Solution").put("SolutionNickelSulphate"),
-		Iridiron                    = unused        ("IridiumIron"                  ).put(G_INGOT).setMcfg( 0, Ir, 1*U, Fe, 1*U).setLocal("Iridiron"),
-		IridironReinforced          = unused        ("IridiumIronReinforced"        ).put(G_INGOT).setMcfg( 0, Ir, 1*U, Fe, 1*U).setLocal("Reinforced Iridiron"),
-		Quicklime                   = unused        ("Quicklime"                    ).put(G_DUST).setMcfg( 0, Ca, 1*U, O, 1*U),
+		Iridiron                    = unused        ("IridiumIron"                  ).setPriorityPrefix(3).put(G_INGOT).setMcfg( 0, Ir, 1*U, Fe, 1*U).setLocal("Iridiron"),
+		IridironReinforced          = unused        ("IridiumIronReinforced"        ).setPriorityPrefix(3).put(G_INGOT).setMcfg( 0, Ir, 1*U, Fe, 1*U).setLocal("Reinforced Iridiron"),
+		Quicklime                   = unused        ("Quicklime"                    ).setPriorityPrefix(2).put(G_DUST).setMcfg( 0, Ca, 1*U, O, 1*U),
 		LimePure                    = unused        ("LimePure"                     ).setLocal("Pure Lime"),
 		TNT                         = unused        ("TNT"                          ).put(EXPLOSIVE, FLAMMABLE).aspects(TC.PERDITIO, 3, TC.IGNIS, 1).setOriginalMod(MD.MC),
-		TerrasteelAlloyRaw          = unused        ("TerrasteelAlloyRaw"           ).put(G_INGOT, MAGICAL, "RawTerrasteelAlloy").setLocal("Raw Terrasteel Alloy"),
-		TerrasteelAlloyStrengthened = unused        ("TerrasteelAlloyStrengthened"  ).put(G_INGOT, MAGICAL, "StrengthenedTerrasteelAlloy").setLocal("Strengthened Terrasteel Alloy"),
+		TerrasteelAlloyRaw          = unused        ("TerrasteelAlloyRaw"           ).setPriorityPrefix(3).put(G_INGOT, MAGICAL, "RawTerrasteelAlloy").setLocal("Raw Terrasteel Alloy"),
+		TerrasteelAlloyStrengthened = unused        ("TerrasteelAlloyStrengthened"  ).setPriorityPrefix(3).put(G_INGOT, MAGICAL, "StrengthenedTerrasteelAlloy").setLocal("Strengthened Terrasteel Alloy"),
 		Vis                         = unused        ("Vis"                          ).put(DECOMPOSABLE).setMcfg( 0, Ma, 1*U).aspects(TC.AURAM, 2, TC.PRAECANTIO, 1),
 		Unstable                    = unused        ("Unstable"                     ).put(AUTO_BLACKLIST, "Unstableingot", MD.ExU).aspects(TC.PERDITIO, 4),
 		Voidstone                   = unused        ("Voidstone"                    ).aspects(TC.VITREUS, 1, TC.VACUOS, 1),
-		Mercassium                  = unused        ("Mercassium"                   ).qual(3,  6.0,  64,  1).put(G_INGOT_ORES),
-		Osmonium                    = unused        ("Osmonium"                     ).qual(3,  6.0,  64,  1).put(G_INGOT_ORES),
-		Phoenixite                  = unused        ("Phoenixite"                   ).qual(3,  6.0,  64,  1).put(G_INGOT_ORES),
+		Mercassium                  = unused        ("Mercassium"                   ).setPriorityPrefix(3).qual(3,  6.0,  64,  1).put(G_INGOT_ORES),
+		Osmonium                    = unused        ("Osmonium"                     ).setPriorityPrefix(3).qual(3,  6.0,  64,  1).put(G_INGOT_ORES),
+		Phoenixite                  = unused        ("Phoenixite"                   ).setPriorityPrefix(3).qual(3,  6.0,  64,  1).put(G_INGOT_ORES),
 		Antimatter                  = unused        ("Antimatter"                   ).put(ANTIMATTER),
-		Starconium                  = unused        ("Starconium"                   ).put(G_INGOT_ORES),
-		Thyrium                     = unused        ("Thyrium"                      ).put(G_INGOT_ORES),
-		Zectium                     = unused        ("Zectium"                      ).put(G_INGOT_ORES),
-		Draconic                    = depricated    ("Draconic"                     ).put(G_DUST),
-		InfusedTeslatite            = unused        ("InfusedTeslatite"             ).put(G_DUST), // 1 Redstone + 1 Teslatite = 1 Infused
-		IrridantUranium             = unused        ("Irridant Uranium"             ).put(G_INGOT),
-		IrridantReinforced          = unused        ("IrridantReinforced"           ).put(G_INGOT),
-		IronSharp                   = unused        ("IronSharp"                    ).put(G_INGOT).setLocal("Sharp Iron"),
-		ObsidianFlux                = unused        ("Obsidian Flux"                ).put(G_INGOT),
-		CrystalFlux                 = unused        ("Crystal Flux"                 ).put(G_GEM, CRYSTAL, BRITTLE),
-		Mimichite                   = unused        ("Mimichite"                    ).put(G_GEM_ORES, CRYSTAL, BRITTLE),
+		Starconium                  = unused        ("Starconium"                   ).setPriorityPrefix(3).put(G_INGOT_ORES),
+		Thyrium                     = unused        ("Thyrium"                      ).setPriorityPrefix(3).put(G_INGOT_ORES),
+		Zectium                     = unused        ("Zectium"                      ).setPriorityPrefix(3).put(G_INGOT_ORES),
+		Draconic                    = depricated    ("Draconic"                     ).setPriorityPrefix(2).put(G_DUST),
+		InfusedTeslatite            = unused        ("InfusedTeslatite"             ).setPriorityPrefix(2).put(G_DUST), // 1 Redstone + 1 Teslatite = 1 Infused
+		IrridantUranium             = unused        ("Irridant Uranium"             ).setPriorityPrefix(3).put(G_INGOT),
+		IrridantReinforced          = unused        ("IrridantReinforced"           ).setPriorityPrefix(3).put(G_INGOT),
+		IronSharp                   = unused        ("IronSharp"                    ).setPriorityPrefix(3).put(G_INGOT).setLocal("Sharp Iron"),
+		ObsidianFlux                = unused        ("Obsidian Flux"                ).setPriorityPrefix(3).put(G_INGOT),
+		CrystalFlux                 = unused        ("Crystal Flux"                 ).setPriorityPrefix(1).put(G_GEM, CRYSTAL, BRITTLE),
+		Mimichite                   = unused        ("Mimichite"                    ).setPriorityPrefix(1).put(G_GEM_ORES, CRYSTAL, BRITTLE),
 		Infernal                    = unused        ("Infernal"                     ),
-		Invisium                    = unused        ("Invisium"                     ).put(G_DUST),
-		Lodestone                   = unused        ("Lodestone"                    ).put(G_DUST_ORES),
-		Luminite                    = unused        ("Luminite"                     ).put(G_DUST_ORES),
+		Invisium                    = unused        ("Invisium"                     ).setPriorityPrefix(2).put(G_DUST),
+		Lodestone                   = unused        ("Lodestone"                    ).setPriorityPrefix(2).put(G_DUST_ORES),
+		Luminite                    = unused        ("Luminite"                     ).setPriorityPrefix(2).put(G_DUST_ORES),
 		Magma                       = unused        ("Magma"                        ),
-		Mawsitsit                   = unused        ("Mawsitsit"                    ).put(G_DUST),
+		Mawsitsit                   = unused        ("Mawsitsit"                    ).setPriorityPrefix(2).put(G_DUST),
 		Nether                      = unused        ("Nether"                       ),
-		Onyx                        = unused        ("Onyx"                         ).put(G_DUST),
+		Onyx                        = unused        ("Onyx"                         ).setPriorityPrefix(2).put(G_DUST),
 		Painite                     = unused        ("Painite"                      ),
-		Petroleum                   = unused        ("Petroleum"                    ).put(G_DUST_ORES),
+		Petroleum                   = unused        ("Petroleum"                    ).setPriorityPrefix(2).put(G_DUST_ORES),
 		Pewter                      = unused        ("Pewter"                       ),
 		Potash                      = unused        ("Potash"                       ),
-		Randomite                   = unused        ("Randomite"                    ).put(G_DUST_ORES),
+		Randomite                   = unused        ("Randomite"                    ).setPriorityPrefix(2).put(G_DUST_ORES),
 		RyuDragonRyder              = unused        ("RyuDragonRyder"               ),
-		Sugilite                    = unused        ("Sugilite"                     ).put(G_DUST),
+		Sugilite                    = unused        ("Sugilite"                     ).setPriorityPrefix(2).put(G_DUST),
 		Tar                         = unused        ("Tar"                          ),
-		Tapazite                    = unused        ("Tapazite"                     ).put(G_DUST),
-		Tourmaline                  = unused        ("Tourmaline"                   ).put(G_DUST),
-		Turquoise                   = unused        ("Turquoise"                    ).put(G_DUST),
-		Wimalite                    = unused        ("Wimalite"                     ).put(G_DUST_ORES),
-		Adamite                     = unused        ("Adamite"                      ).put(G_DUST_ORES),
-		Adluorite                   = unused        ("Adluorite"                    ).put(G_DUST_ORES),
-		Agate                       = unused        ("Agate"                        ).put(G_DUST),
-		Ammonium                    = unused        ("Ammonium"                     ).put(G_DUST),
-		Bitumen                     = unused        ("Bitumen"                      ).put(G_DUST_ORES),
-		Bloodstone                  = unused        ("Bloodstone"                   ).put(G_DUST),
-		Citrine                     = unused        ("Citrine"                      ).put(G_DUST),
-		Coral                       = unused        ("Coral"                        ).put(G_DUST),
-		Chrysocolla                 = unused        ("Chrysocolla"                  ).put(G_DUST),
-		DarkStone                   = unused        ("Dark Stone"                   ).put(G_DUST),
-		Demonite                    = unused        ("Demonite"                     ).put(G_DUST),
+		Tapazite                    = unused        ("Tapazite"                     ).setPriorityPrefix(2).put(G_DUST),
+		Tourmaline                  = unused        ("Tourmaline"                   ).setPriorityPrefix(2).put(G_DUST),
+		Turquoise                   = unused        ("Turquoise"                    ).setPriorityPrefix(2).put(G_DUST),
+		Wimalite                    = unused        ("Wimalite"                     ).setPriorityPrefix(2).put(G_DUST_ORES),
+		Adamite                     = unused        ("Adamite"                      ).setPriorityPrefix(2).put(G_DUST_ORES),
+		Adluorite                   = unused        ("Adluorite"                    ).setPriorityPrefix(2).put(G_DUST_ORES),
+		Agate                       = unused        ("Agate"                        ).setPriorityPrefix(2).put(G_DUST),
+		Ammonium                    = unused        ("Ammonium"                     ).setPriorityPrefix(2).put(G_DUST),
+		Bitumen                     = unused        ("Bitumen"                      ).setPriorityPrefix(2).put(G_DUST_ORES),
+		Bloodstone                  = unused        ("Bloodstone"                   ).setPriorityPrefix(2).put(G_DUST),
+		Citrine                     = unused        ("Citrine"                      ).setPriorityPrefix(2).put(G_DUST),
+		Coral                       = unused        ("Coral"                        ).setPriorityPrefix(2).put(G_DUST),
+		Chrysocolla                 = unused        ("Chrysocolla"                  ).setPriorityPrefix(2).put(G_DUST),
+		DarkStone                   = unused        ("Dark Stone"                   ).setPriorityPrefix(2).put(G_DUST),
+		Demonite                    = unused        ("Demonite"                     ).setPriorityPrefix(2).put(G_DUST),
+		InfusedGold                 = unused        ("Infused Gold"                 ).setPriorityPrefix(3).put(G_INGOT),
+		Daffergon                   = unused        ("Daffergon"                    ).setPriorityPrefix(3).put(G_INGOT_ORES, MD.HBM), // Dellite Ore
+		Reiium                      = unused        ("Reiium"                       ).setPriorityPrefix(3).put(G_INGOT_ORES, MD.HBM), // Reiite Ore
+		Weidanium                   = unused        ("Weidanium"                    ).setPriorityPrefix(3).put(G_INGOT_ORES, MD.HBM), // Weidite Ore
+		Verticium                   = unused        ("Verticium"                    ).setPriorityPrefix(3).put(G_INGOT_ORES, MD.HBM),
+		Australium                  = unused        ("Australium"                   ).setPriorityPrefix(3).put(G_INGOT_ORES, MD.HBM),
+		Schrabidium                 = unused        ("Schrabidium"                  ).setPriorityPrefix(3).put(G_INGOT_ORES, MD.HBM, MAGNETIC_ACTIVE, MELTING, MOLTEN).setRGBa( 50, 255, 255, 255),
+		Starmetal                   = unused        ("Starmetal"                    ).setPriorityPrefix(3).put(G_INGOT_MACHINE_ORES, MD.HBM),
+		Unobtainium                 = unused        ("Unobtainium"                  ).setPriorityPrefix(3).put(G_INGOT_MACHINE_ORES, MD.HBM),
+		CMBSteel                    = unused        ("CMB Steel"                    ).setPriorityPrefix(3).put(G_INGOT_MACHINE, MD.HBM),
+		DuraSteel                   = unused        ("DuraSteel"                    ).setPriorityPrefix(3).put(G_INGOT_MACHINE, MD.HBM).setLocal("High-Speed Steel"),
+		AdvancedAlloy               = unused        ("Advanced Alloy"               ).setPriorityPrefix(3).put(G_INGOT_MACHINE, MD.HBM),
+		Saturnite                   = unused        ("Saturnite"                    ).setPriorityPrefix(3).put(G_INGOT_MACHINE, MD.HBM),
+		Dineutronium                = unused        ("Dineutronium"                 ).setPriorityPrefix(3).put(G_INGOT_MACHINE, MD.HBM),
+		MagnetizedTungsten          = unused        ("Magnetized Tungsten"          ).setPriorityPrefix(3).put(G_INGOT, MD.HBM, MAGNETIC_ACTIVE),
+		Euphemium                   = unused        ("Euphemium"                    ).setPriorityPrefix(3).put(G_INGOT, MD.HBM, MELTING, MOLTEN).setRGBa(255, 150, 255, 255),
+		Plutonium240                = unused        ("Plutonium-240"                ).setPriorityPrefix(3).put(G_INGOT, MD.HBM),
+		Plutonium238                = unused        ("Plutonium-238"                ).setPriorityPrefix(3).put(G_INGOT, MD.HBM),
+		Polymer                     = unused        ("Polymer"                      ).put(MD.HBM),
 		Energized                   = unused        ("Energized"                    ),
 		Reinforced                  = unused        ("Reinforced"                   ),
 		Mud                         = unused        ("Mud"                          ),
@@ -3118,7 +3192,6 @@ public class MT {
 		EnrichedCopper              = unused        ("Enriched Copper"              ),
 		DiamondCopper               = unused        ("Diamond Copper"               ),
 		Fairy                       = unused        ("Fairy"                        ),
-		Pokefennium                 = unused        ("Pokefennium"                  ),
-		InfusedGold                 = unused        ("Infused Gold"                 );
+		Pokefennium                 = unused        ("Pokefennium"                  );
 	}
 }

@@ -248,43 +248,43 @@ public class CS {
 
 	/** A few Default Values for Light Opacity. */
 	public static final int LIGHT_OPACITY_NONE = 0, LIGHT_OPACITY_LEAVES = 1, LIGHT_OPACITY_WATER = 3, LIGHT_OPACITY_MAX = 255;
-
+	
 	public static final Set<String>
-	  BIOMES_RIVER              = new HashSetNoNulls<>(F, BiomeGenBase.river.biomeName, BiomeGenBase.frozenRiver.biomeName, "Lush River", "Estuary", "Twilight Stream", "Tropical River") // "Creek Bed" Unsure whether to add this
-	, BIOMES_RIVER_LAKE         = new HashSetNoNulls<>(F, BiomeGenBase.river.biomeName, BiomeGenBase.frozenRiver.biomeName, "Lush River", "Estuary", "Twilight Stream", "Tropical River", "Tropical Lake", "Twilight Lake", "Lake", "Oasis") // "Ephemeral Lake", "Ephemeral Lake Edge" those are vapourizing Lakes that vanish depending on Season.
-	, BIOMES_OCEAN              = new HashSetNoNulls<>(F, BiomeGenBase.ocean.biomeName, BiomeGenBase.frozenOcean.biomeName, BiomeGenBase.deepOcean.biomeName, "Coral Reef", "Kelp Forest", "Mangrove", "Ocean Oil Field", "Improved Oceans", "Tropical Ocean")
-	, BIOMES_OCEAN_BEACH        = new HashSetNoNulls<>(F, BiomeGenBase.ocean.biomeName, BiomeGenBase.frozenOcean.biomeName, BiomeGenBase.deepOcean.biomeName, BiomeGenBase.beach.biomeName, BiomeGenBase.coldBeach.biomeName, BiomeGenBase.stoneBeach.biomeName, BiomeGenBase.mushroomIslandShore.biomeName, "Coral Reef", "Kelp Forest", "Mangrove", "Ocean Oil Field", "Improved Oceans", "Tropical Ocean", "Tropical Beach")
-	, BIOMES_INFINITE_WATER     = new HashSetNoNulls<>(F, BiomeGenBase.ocean.biomeName, BiomeGenBase.frozenOcean.biomeName, BiomeGenBase.deepOcean.biomeName, BiomeGenBase.beach.biomeName, BiomeGenBase.coldBeach.biomeName, BiomeGenBase.stoneBeach.biomeName, BiomeGenBase.mushroomIslandShore.biomeName, "Coral Reef", "Kelp Forest", "Mangrove", "Ocean Oil Field", "Improved Oceans", "Tropical Ocean", "Tropical Beach", BiomeGenBase.river.biomeName, BiomeGenBase.frozenRiver.biomeName, "Lush River", "Estuary", "Twilight Lake", "Lake", "Oasis", "Woodland Lake", "Woodland Lake Edge")
-	, BIOMES_JUNGLE             = new HashSetNoNulls<>(F, BiomeGenBase.jungle.biomeName, BiomeGenBase.jungleHills.biomeName, BiomeGenBase.jungleEdge.biomeName, "Undergound Jungle", "Undergound Jungle M", "Jungle Island", "Extreme Jungle", "Jungle M", "JungleEdge M", "Mini Jungle", "Rainforest Hills")
-	, BIOMES_DESERT             = new HashSetNoNulls<>(F, BiomeGenBase.desert.biomeName, BiomeGenBase.desertHills.biomeName, "Sahara", "Red Desert", "Desert Archipelago", "Oasis", "Sandstone Canyon", "Sandstone Canyon 2", "Sandstone Ranges", "Sandstone Ranges M", "Sahel", "Lush Desert", "Desert Oil Field", "Desert Island", "Desert M", "Mountainous Desert", "Desert Mountains", "Volcanic Desert", "Volcanic Desert M", "Ulterior Outback", "Ulterior Outback M")
-	, BIOMES_MESA               = new HashSetNoNulls<>(F, BiomeGenBase.mesa.biomeName, BiomeGenBase.mesaPlateau.biomeName, BiomeGenBase.mesaPlateau_F.biomeName, "Canyon", "Mesa (Bryce)", "Mesa Plateau F M", "Mesa Plateau M", "Mesa", "Clay Hills")
-	, BIOMES_SAVANNA            = new HashSetNoNulls<>(F, BiomeGenBase.savanna.biomeName, BiomeGenBase.savannaPlateau.biomeName, "Steppe", "Subterranean Savannah", "Subterranean Savannah M", "Oak Savanna", "Savannah", "Savanna M", "Savanna Plateau M", "Savanna", "Shrubland", "Shrublands", "Roofed Shrublands", "Xeric Savanna", "Xeric Shrubland", "Prairie")
-	, BIOMES_SWAMP              = new HashSetNoNulls<>(F, BiomeGenBase.swampland.biomeName, "Swampland M", "Green Swamplands", "DeepSwamp", "Land of Lakes Marsh", "Marsh", "Lush Swamp", "Moor", "Mire", "Bog", "Twilight Swamp", "Submerged Swamp", "Submerged Swamp M", "Fire Swamp")
-	, BIOMES_TAIGA              = new HashSetNoNulls<>(F, BiomeGenBase.taiga.biomeName, BiomeGenBase.taigaHills.biomeName, BiomeGenBase.coldTaiga.biomeName, BiomeGenBase.coldTaigaHills.biomeName, BiomeGenBase.megaTaiga.biomeName, BiomeGenBase.megaTaigaHills.biomeName, "Mountain Taiga", "Cold Taiga M", "Taiga M", "Pinelands", "Tall Pine Forest", "Shield", "Cold Boreal Forest", "Cold Cypress Forest", "Cold Fir Forest", "Cold Pine Forest", "Boreal Archipelago", "Boreal Forest", "Boreal Plateau", "Boreal Plateau M")
-	, BIOMES_FROZEN             = new HashSetNoNulls<>(F, BiomeGenBase.icePlains.biomeName, BiomeGenBase.iceMountains.biomeName, BiomeGenBase.coldTaiga.biomeName, BiomeGenBase.coldTaigaHills.biomeName, "Snow Island", "Ice Plains Spikes", "Ice Wasteland", "Cold Taiga M", "Frost Forest", "Snowy Rainforest", "Snow Forest", "Snowy Forest", "Twilight Glacier", "Alpine", "Glacier", "Tundra", "Snowy Desert", "Snowy Plateau", "Snowy Ranges", "Snowy Wastelands", "Polar Desert", "Ice Sheet", "Frozen Archipelago", "Alpine Mountains", "Alpine Mountains Edge", "Alpine Mountains M", "Alpine Tundra")
-	, BIOMES_WOODS              = new HashSetNoNulls<>(F, BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName, "Autumn Forest", "Elysian Forest M", "Elysian Forest", "Meadow Forest", "Seasonal Forest", "Seasonal Forest Clearing", "Forested Hills", "Forested Island", "Snow Forest", "Forest Island", "Forested Archipelago", "Forested Mountains", "Forested Valley", "Redwood Forest", "Woodlands", "Woodland Mountains", "Woodland Field", "Woodland Hills", "Woodland Lake", "Woodland Lake Edge", "Maple Woods", BiomeGenBase.roofedForest.biomeName, BiomeGenBase.birchForest.biomeName, BiomeGenBase.birchForestHills.biomeName, "Pine Forest", "Rainforest", "Rainforest Valley", "Redwood Forest", "Lush Redwoods", "Dense Twilight Forest", "Twilight Forest", "Firefly Forest", "Spruce Woods", "Autumn Woods", "Flower Forest", "Birch Hills", "Birch Forest M", "Birch Forest Hills M", "Roofed Forest M", "Woodlands", "Temperate Rainforest", "Pinelands", "Tall Pine Forest", "Shield", "Mystic Grove", "Ominous Woods", "Blossom Hills", "Blossom Woods", "Aspen Forest", "Aspen Hills", "Cypress Forest", "Silver Pine Forest", "Silver Pine Hills", "Fir Forest", "Flowery Archipelago", "Oak Forest", "Pine Forest", "Pine Forest Archipelago", "Rainforest Hills", "Rainforest Mountains", "Extreme Rainforest Mountains")
-	, BIOMES_FOREST             = new HashSetNoNulls<>(F, BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName, "Autumn Forest", "Elysian Forest M", "Elysian Forest", "Meadow Forest", "Seasonal Forest", "Seasonal Forest Clearing", "Forested Hills", "Forested Island", "Snow Forest", "Forest Island", "Forested Archipelago", "Forested Mountains", "Forested Valley", "Redwood Forest", "Woodlands", "Woodland Mountains", "Woodland Field", "Woodland Hills", "Woodland Lake", "Woodland Lake Edge")
-	, BIOMES_MAPLE              = new HashSetNoNulls<>(F, BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName, "Autumn Forest", "Elysian Forest M", "Elysian Forest", "Meadow Forest", "Seasonal Forest", "Seasonal Forest Clearing", "Forested Hills", "Forested Island", "Snow Forest", "Forest Island", "Forested Archipelago", "Forested Mountains", "Forested Valley", "Maple Woods")
-	, BIOMES_PLAINS             = new HashSetNoNulls<>(F, BiomeGenBase.plains.biomeName, "Meadow", "Meadow M", "Grassland", "Flower Field", "Sunflower Plains", "Clearing", "Twilight Clearing", "Elysian Fields", "Elysian Fields M", "Lowlands", "Origin Valley", "Grassy Archipelago", "Alfheim", "Rainforest Plains", "Tropics", "Highlands", "Bald Hill", "Tundra", "Low Hills")
-	, BIOMES_HAZEL              = new HashSetNoNulls<>(F, BiomeGenBase.plains.biomeName, "Meadow", "Meadow M", "Grassland", "Flower Field", "Sunflower Plains", "Clearing", "Twilight Clearing", "Elysian Fields", "Elysian Fields M", "Lowlands", "Origin Valley", "Grassy Archipelago", "Alfheim")
-	, BIOMES_MOUNTAINS          = new HashSetNoNulls<>(F, BiomeGenBase.extremeHills.biomeName, BiomeGenBase.extremeHillsEdge.biomeName, BiomeGenBase.extremeHillsPlus.biomeName, BiomeGenBase.stoneBeach.biomeName, "Extreme Hills M", "Extreme Hills+ M", "Mountainous Archipelago", "Mountains", "Mountains Edge", "Plateau", "Highlands", "Highlands Center", "Alps", "Cliffs", "Flying Mountains", "Rock Mountains", "Snow Mountains", "Rock Island", "Valley", "Alpine Mountains", "Alpine Mountains Edge", "Alpine Mountains M", "Alpine Tundra", "Stone Canyon", "Stone Canyon 2", "Rocky Desert", "Rocky Hills", "Rainforest Mountains", "Extreme Rainforest Mountains")
-	, BIOMES_NETHER             = new HashSetNoNulls<>(F, BiomeGenBase.hell.biomeName)
-	, BIOMES_END                = new HashSetNoNulls<>(F, BiomeGenBase.sky.biomeName)
-	, BIOMES_WASTELANDS         = new HashSetNoNulls<>(F, "Wasteland", "Wastelands", "Wasteland Mountains", "Wasteland Forest", "Radioactive Wasteland")
-	, BIOMES_RADIOACTIVE        = new HashSetNoNulls<>(F, "Radioactive Wasteland")
-	, BIOMES_SHROOM             = new HashSetNoNulls<>(F, BiomeGenBase.mushroomIsland.biomeName, BiomeGenBase.mushroomIslandShore.biomeName, "Fungal Forest", "Fungal Forest M")
-	, BIOMES_MAGICAL            = new HashSetNoNulls<>(F, "Magical Forest", "Tainted Land", "Eerie", "WyvernBiome", "Eldritch", "Enchanted Forest", "Mystic Grove", "Alfheim")
-	, BIOMES_MAGICAL_GOOD       = new HashSetNoNulls<>(F, "Magical Forest", "Eldritch", "Enchanted Forest", "Mystic Grove", "Alfheim")
-	, BIOMES_MAGICAL_BAD        = new HashSetNoNulls<>(F, "Tainted Land", "Eerie", "WyvernBiome", "Ominous Woods")
-	, BIOMES_EREBUS             = new HashSetNoNulls<>(F, "Undergound Jungle", "Volcanic Desert", "Subterranean Savannah", "Elysian Fields", "Ulterior Outback", "Fungal Forest", "Submerged Swamp", "Elysian Forest", "Undergound Jungle M", "Volcanic Desert M", "Subterranean Savannah M", "Elysian Fields M", "Ulterior Outback M", "Fungal Forest M", "Submerged Swamp M", "Elysian Forest M")
-	, BIOMES_VOID               = new HashSetNoNulls<>(F, "Space", "space")
-	, BIOMES_MOON               = new HashSetNoNulls<>(F, "Moon", "moon")
-	, BIOMES_MARS               = new HashSetNoNulls<>(F, "Mars", "mars", "marsFlat")
-	, BIOMES_ASTEROIDS          = new HashSetNoNulls<>(F, "Asteroids", "asteroids")
-	, BIOMES_SPACE              = new HashSetNoNulls<>(F, "Space", "Alien Forest", "Moon", "mercury", "venus", "jupiter", "saturn", "uranus", "neptune", "pluto", "ceres", "eris", "europa", "io", "deimos", "phobos", "triton", "callisto", "ganymede", "rhea", "titan", "Hot Dry Rock", "Stormland", "CrystalChasms", "moon", "marsFlat", "Asteroids", "asteroids", "space", "DeepSwamp", "Marsh", "OceanSpires", "SpacePartiallySubmerged", "SpaceLowIslands", "SpaceRockyWaters", "SpaceMidHills", "SpaceHighPlateaus", "SpaceLowHills", "SpaceMidPlains", "SpaceLowPlains", "SpaceDeepOceans", "SpaceOceans", "SpaceShallowWaters", "SpaceDefault", "Pluto", "Pluto2", "Pluto3", "Pluto4", "Kuiper Belt", "Io", "IoAsh", "Haumea");
-
-	// "Wasteland City", "Fens", "Carr", "Kakadu", "Scree", "Scrub", "Riparian Zone", "Basin", "Badlands", "Outback", "Tropical Islands", "Tropical Archipelago", "Windy Island", "Volcano Island", "Volcano", "Volcano M"
-
+	  BIOMES_RIVER          = new HashSetNoNulls<>(F, BiomeGenBase.river.biomeName, BiomeGenBase.frozenRiver.biomeName, "Lush River", "Estuary", "Twilight Stream", "Tropical River", "Riparian Zone", "Sandstone Canyon", "Sandstone Canyon 2", "Creek Bed")
+	, BIOMES_RIVER_LAKE     = new HashSetNoNulls<>(F, BiomeGenBase.river.biomeName, BiomeGenBase.frozenRiver.biomeName, "Lush River", "Estuary", "Twilight Stream", "Tropical River", "Riparian Zone", "Sandstone Canyon", "Sandstone Canyon 2", "Creek Bed", "Tropical Lake", "Twilight Lake", "Lake", "Oasis", "Woodland Lake", "Woodland Lake Edge") // "Ephemeral Lake", "Ephemeral Lake Edge" those are vapourizing Lakes that vanish depending on Season.
+	, BIOMES_OCEAN          = new HashSetNoNulls<>(F, BiomeGenBase.ocean.biomeName, BiomeGenBase.frozenOcean.biomeName, BiomeGenBase.deepOcean.biomeName, "Coral Reef", "Kelp Forest", "Mangrove", "Ocean Oil Field", "Improved Oceans", "Tropical Ocean")
+	, BIOMES_OCEAN_BEACH    = new HashSetNoNulls<>(F, BiomeGenBase.ocean.biomeName, BiomeGenBase.frozenOcean.biomeName, BiomeGenBase.deepOcean.biomeName, BiomeGenBase.beach.biomeName, BiomeGenBase.coldBeach.biomeName, BiomeGenBase.stoneBeach.biomeName, BiomeGenBase.mushroomIslandShore.biomeName, "Coral Reef", "Kelp Forest", "Mangrove", "Ocean Oil Field", "Improved Oceans", "Tropical Ocean", "Tropical Beach")
+	, BIOMES_INFINITE_WATER = new HashSetNoNulls<>(F, BiomeGenBase.ocean.biomeName, BiomeGenBase.frozenOcean.biomeName, BiomeGenBase.deepOcean.biomeName, BiomeGenBase.beach.biomeName, BiomeGenBase.coldBeach.biomeName, BiomeGenBase.stoneBeach.biomeName, BiomeGenBase.mushroomIslandShore.biomeName, "Coral Reef", "Kelp Forest", "Mangrove", "Ocean Oil Field", "Improved Oceans", "Tropical Ocean", "Tropical Beach", BiomeGenBase.river.biomeName, BiomeGenBase.frozenRiver.biomeName, "Lush River", "Estuary", "Twilight Stream", "Tropical River", "Riparian Zone", "Sandstone Canyon", "Sandstone Canyon 2", "Creek Bed", "Tropical Lake", "Twilight Lake", "Lake", "Oasis", "Woodland Lake", "Woodland Lake Edge")
+	, BIOMES_JUNGLE         = new HashSetNoNulls<>(F, BiomeGenBase.jungle.biomeName, BiomeGenBase.jungleHills.biomeName, BiomeGenBase.jungleEdge.biomeName, "Undergound Jungle", "Undergound Jungle M", "Jungle Island", "Extreme Jungle", "Jungle M", "JungleEdge M", "Mini Jungle", "Rainforest Hills")
+	, BIOMES_DESERT         = new HashSetNoNulls<>(F, BiomeGenBase.desert.biomeName, BiomeGenBase.desertHills.biomeName, "Sahara", "Red Desert", "Desert Archipelago", "Oasis", "Sandstone Canyon", "Sandstone Canyon 2", "Sandstone Ranges", "Sandstone Ranges M", "Sahel", "Lush Desert", "Desert Oil Field", "Desert Island", "Desert M", "Mountainous Desert", "Desert Mountains", "Volcanic Desert", "Volcanic Desert M", "Ulterior Outback", "Ulterior Outback M")
+	, BIOMES_MESA           = new HashSetNoNulls<>(F, BiomeGenBase.mesa.biomeName, BiomeGenBase.mesaPlateau.biomeName, BiomeGenBase.mesaPlateau_F.biomeName, "Canyon", "Mesa (Bryce)", "Mesa Plateau F M", "Mesa Plateau M", "Mesa", "Clay Hills")
+	, BIOMES_SAVANNA        = new HashSetNoNulls<>(F, BiomeGenBase.savanna.biomeName, BiomeGenBase.savannaPlateau.biomeName, "Steppe", "Subterranean Savannah", "Subterranean Savannah M", "Oak Savanna", "Savannah", "Savanna M", "Savanna Plateau M", "Savanna", "Shrubland", "Shrublands", "Roofed Shrublands", "Xeric Savanna", "Xeric Shrubland", "Prairie")
+	, BIOMES_SWAMP          = new HashSetNoNulls<>(F, BiomeGenBase.swampland.biomeName, "Swampland M", "Green Swamplands", "DeepSwamp", "Land of Lakes Marsh", "Marsh", "Lush Swamp", "Moor", "Mire", "Bog", "Twilight Swamp", "Submerged Swamp", "Submerged Swamp M", "Fire Swamp")
+	, BIOMES_TAIGA          = new HashSetNoNulls<>(F, BiomeGenBase.taiga.biomeName, BiomeGenBase.taigaHills.biomeName, BiomeGenBase.coldTaiga.biomeName, BiomeGenBase.coldTaigaHills.biomeName, BiomeGenBase.megaTaiga.biomeName, BiomeGenBase.megaTaigaHills.biomeName, "Mountain Taiga", "Cold Taiga M", "Taiga M", "Pinelands", "Tall Pine Forest", "Shield", "Cold Boreal Forest", "Cold Cypress Forest", "Cold Fir Forest", "Cold Pine Forest", "Boreal Archipelago", "Boreal Forest", "Boreal Plateau", "Boreal Plateau M")
+	, BIOMES_FROZEN         = new HashSetNoNulls<>(F, BiomeGenBase.icePlains.biomeName, BiomeGenBase.iceMountains.biomeName, BiomeGenBase.coldTaiga.biomeName, BiomeGenBase.coldTaigaHills.biomeName, "Snow Island", "Ice Plains Spikes", "Ice Wasteland", "Cold Taiga M", "Frost Forest", "Snowy Rainforest", "Snow Forest", "Snowy Forest", "Twilight Glacier", "Alpine", "Glacier", "Tundra", "Snowy Desert", "Snowy Plateau", "Snowy Ranges", "Snowy Wastelands", "Polar Desert", "Ice Sheet", "Frozen Archipelago", "Alpine Mountains", "Alpine Mountains Edge", "Alpine Mountains M", "Alpine Tundra")
+	, BIOMES_WOODS          = new HashSetNoNulls<>(F, BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName, "Autumn Forest", "Elysian Forest M", "Elysian Forest", "Meadow Forest", "Seasonal Forest", "Seasonal Forest Clearing", "Forested Hills", "Forested Island", "Snow Forest", "Forest Island", "Forested Archipelago", "Forested Mountains", "Forested Valley", "Redwood Forest", "Woodlands", "Woodland Mountains", "Woodland Field", "Woodland Hills", "Woodland Lake", "Woodland Lake Edge", "Maple Woods", BiomeGenBase.roofedForest.biomeName, BiomeGenBase.birchForest.biomeName, BiomeGenBase.birchForestHills.biomeName, "Pine Forest", "Rainforest", "Rainforest Valley", "Redwood Forest", "Lush Redwoods", "Dense Twilight Forest", "Twilight Forest", "Firefly Forest", "Spruce Woods", "Autumn Woods", "Flower Forest", "Birch Hills", "Birch Forest M", "Birch Forest Hills M", "Roofed Forest M", "Woodlands", "Temperate Rainforest", "Pinelands", "Tall Pine Forest", "Shield", "Mystic Grove", "Ominous Woods", "Blossom Hills", "Blossom Woods", "Aspen Forest", "Aspen Hills", "Cypress Forest", "Silver Pine Forest", "Silver Pine Hills", "Fir Forest", "Flowery Archipelago", "Oak Forest", "Pine Forest", "Pine Forest Archipelago", "Rainforest Hills", "Rainforest Mountains", "Extreme Rainforest Mountains")
+	, BIOMES_FOREST         = new HashSetNoNulls<>(F, BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName, "Autumn Forest", "Elysian Forest M", "Elysian Forest", "Meadow Forest", "Seasonal Forest", "Seasonal Forest Clearing", "Forested Hills", "Forested Island", "Snow Forest", "Forest Island", "Forested Archipelago", "Forested Mountains", "Forested Valley", "Redwood Forest", "Woodlands", "Woodland Mountains", "Woodland Field", "Woodland Hills", "Woodland Lake", "Woodland Lake Edge")
+	, BIOMES_MAPLE          = new HashSetNoNulls<>(F, BiomeGenBase.forest.biomeName, BiomeGenBase.forestHills.biomeName, "Autumn Forest", "Elysian Forest M", "Elysian Forest", "Meadow Forest", "Seasonal Forest", "Seasonal Forest Clearing", "Forested Hills", "Forested Island", "Snow Forest", "Forest Island", "Forested Archipelago", "Forested Mountains", "Forested Valley", "Maple Woods")
+	, BIOMES_PLAINS         = new HashSetNoNulls<>(F, BiomeGenBase.plains.biomeName, "Meadow", "Meadow M", "Grassland", "Flower Field", "Sunflower Plains", "Clearing", "Twilight Clearing", "Elysian Fields", "Elysian Fields M", "Lowlands", "Origin Valley", "Grassy Archipelago", "Alfheim", "Rainforest Plains", "Tropics", "Highlands", "Bald Hill", "Tundra", "Low Hills")
+	, BIOMES_HAZEL          = new HashSetNoNulls<>(F, BiomeGenBase.plains.biomeName, "Meadow", "Meadow M", "Grassland", "Flower Field", "Sunflower Plains", "Clearing", "Twilight Clearing", "Elysian Fields", "Elysian Fields M", "Lowlands", "Origin Valley", "Grassy Archipelago", "Alfheim")
+	, BIOMES_MOUNTAINS      = new HashSetNoNulls<>(F, BiomeGenBase.extremeHills.biomeName, BiomeGenBase.extremeHillsEdge.biomeName, BiomeGenBase.extremeHillsPlus.biomeName, BiomeGenBase.stoneBeach.biomeName, "Extreme Hills M", "Extreme Hills+ M", "Mountainous Archipelago", "Mountains", "Mountains Edge", "Plateau", "Highlands", "Highlands Center", "Alps", "Cliffs", "Flying Mountains", "Rock Mountains", "Snow Mountains", "Rock Island", "Valley", "Alpine Mountains", "Alpine Mountains Edge", "Alpine Mountains M", "Alpine Tundra", "Stone Canyon", "Stone Canyon 2", "Rocky Desert", "Rocky Hills", "Rainforest Mountains", "Extreme Rainforest Mountains")
+	, BIOMES_NETHER         = new HashSetNoNulls<>(F, BiomeGenBase.hell.biomeName)
+	, BIOMES_END            = new HashSetNoNulls<>(F, BiomeGenBase.sky.biomeName)
+	, BIOMES_WASTELANDS     = new HashSetNoNulls<>(F, "Wasteland", "Wastelands", "Wasteland Mountains", "Wasteland Forest", "Radioactive Wasteland")
+	, BIOMES_RADIOACTIVE    = new HashSetNoNulls<>(F, "Radioactive Wasteland")
+	, BIOMES_SHROOM         = new HashSetNoNulls<>(F, BiomeGenBase.mushroomIsland.biomeName, BiomeGenBase.mushroomIslandShore.biomeName, "Fungal Forest", "Fungal Forest M")
+	, BIOMES_MAGICAL        = new HashSetNoNulls<>(F, "Magical Forest", "Tainted Land", "Eerie", "WyvernBiome", "Eldritch", "Enchanted Forest", "Mystic Grove", "Alfheim")
+	, BIOMES_MAGICAL_GOOD   = new HashSetNoNulls<>(F, "Magical Forest", "Eldritch", "Enchanted Forest", "Mystic Grove", "Alfheim")
+	, BIOMES_MAGICAL_BAD    = new HashSetNoNulls<>(F, "Tainted Land", "Eerie", "WyvernBiome", "Ominous Woods")
+	, BIOMES_EREBUS         = new HashSetNoNulls<>(F, "Undergound Jungle", "Volcanic Desert", "Subterranean Savannah", "Elysian Fields", "Ulterior Outback", "Fungal Forest", "Submerged Swamp", "Elysian Forest", "Undergound Jungle M", "Volcanic Desert M", "Subterranean Savannah M", "Elysian Fields M", "Ulterior Outback M", "Fungal Forest M", "Submerged Swamp M", "Elysian Forest M")
+	, BIOMES_VOID           = new HashSetNoNulls<>(F, "Space", "space")
+	, BIOMES_MOON           = new HashSetNoNulls<>(F, "Moon", "moon")
+	, BIOMES_MARS           = new HashSetNoNulls<>(F, "Mars", "mars", "marsFlat")
+	, BIOMES_ASTEROIDS      = new HashSetNoNulls<>(F, "Asteroids", "asteroids")
+	, BIOMES_SPACE          = new HashSetNoNulls<>(F, "Space", "Alien Forest", "Moon", "mercury", "venus", "jupiter", "saturn", "uranus", "neptune", "pluto", "ceres", "eris", "europa", "io", "deimos", "phobos", "triton", "callisto", "ganymede", "rhea", "titan", "Hot Dry Rock", "Stormland", "CrystalChasms", "moon", "marsFlat", "Asteroids", "asteroids", "space", "DeepSwamp", "Marsh", "OceanSpires", "SpacePartiallySubmerged", "SpaceLowIslands", "SpaceRockyWaters", "SpaceMidHills", "SpaceHighPlateaus", "SpaceLowHills", "SpaceMidPlains", "SpaceLowPlains", "SpaceDeepOceans", "SpaceOceans", "SpaceShallowWaters", "SpaceDefault", "Pluto", "Pluto2", "Pluto3", "Pluto4", "Kuiper Belt", "Io", "IoAsh", "Haumea");
+	
+	// "Wasteland City", "Fens", "Carr", "Kakadu", "Scree", "Scrub", "Basin", "Badlands", "Outback", "Tropical Islands", "Tropical Archipelago", "Windy Island", "Volcano Island", "Volcano", "Volcano M"
+	
 	/** Stores the Coordinates that any given Player last interacted with. */
 	public static final Map<EntityPlayer, ChunkCoordinates> PLAYER_LAST_CLICKED = new IdentityHashMap<>();
 
@@ -439,7 +439,8 @@ public class CS {
 	public static final String[] DYE_OREDICTS_MIXABLE       = {"dyeMixableBlack", "dyeMixableRed", "dyeMixableGreen", "dyeMixableBrown", "dyeMixableBlue", "dyeMixablePurple", "dyeMixableCyan", "dyeMixableLightGray", "dyeMixableGray", "dyeMixablePink", "dyeMixableLime", "dyeMixableYellow", "dyeMixableLightBlue", "dyeMixableMagenta", "dyeMixableOrange", "dyeMixableWhite"};
 	public static final String[] DYE_OREDICTS_LENS          = {"craftingLensBlack", "craftingLensRed", "craftingLensGreen", "craftingLensBrown", "craftingLensBlue", "craftingLensPurple", "craftingLensCyan", "craftingLensLightGray", "craftingLensGray", "craftingLensPink", "craftingLensLime", "craftingLensYellow", "craftingLensLightBlue", "craftingLensMagenta", "craftingLensOrange", "craftingLensWhite"};
 	public static final String[] DYE_OREDICTS_POST          = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
-
+	public static final String[] HEXORIUM_MONOLITHS         = {"blockEnergizedHexoriumMonolithBlack", "blockEnergizedHexoriumMonolithRed", "blockEnergizedHexoriumMonolithGreen", "blockEnergizedHexoriumMonolithDarkGray", "blockEnergizedHexoriumMonolithBlue", "blockEnergizedHexoriumMonolithPurple", "blockEnergizedHexoriumMonolithCyan", "blockEnergizedHexoriumMonolithLightGray", "blockEnergizedHexoriumMonolithGray", "blockEnergizedHexoriumMonolithPink", "blockEnergizedHexoriumMonolithLime", "blockEnergizedHexoriumMonolithYellow", "blockEnergizedHexoriumMonolithSkyBlue", "blockEnergizedHexoriumMonolithMagenta", "blockEnergizedHexoriumMonolithOrange", "blockEnergizedHexoriumMonolithWhite", "blockEnergizedHexoriumMonolithTurquoise", "blockEnergizedHexoriumMonolithRainbow"};
+	
 	public static final short[][] DYES                      = {DYE_Black, DYE_Red, DYE_Green, DYE_Brown, DYE_Blue, DYE_Purple, DYE_Cyan, DYE_LightGray, DYE_Gray, DYE_Pink, DYE_Lime, DYE_Yellow, DYE_LightBlue, DYE_Magenta, DYE_Orange, DYE_White};
 	public static final short[][] DYES_INVERTED             = {DYES[15], DYES[14], DYES[13], DYES[12], DYES[11], DYES[10], DYES[ 9], DYES[ 8], DYES[ 7], DYES[ 6], DYES[ 5], DYES[ 4], DYES[ 3], DYES[ 2], DYES[ 1], DYES[ 0]};
 
@@ -781,26 +782,26 @@ public class CS {
 
 	/** This way it is possible to have a Call Hierarchy of NullPointers in Block based Functions, and also because most of the time I don't know what kind of Data Type the "null" stands for, when there are shitloads of Parameters for a Function */
 	public static final Block NB = Blocks.air;
-
+	
 	/** The Logs: Debug, Output, Error, OreDict and Material List. */
 	public static PrintStream DEB = new LogBuffer(), OUT = new LogBuffer(), ERR = new LogBuffer(), ORD = new LogBuffer(), MAT_LOG = null;
-
+	
 	/** States of Matter */
 	public static final byte STATE_SOLID = 0, STATE_LIQUID = 1, STATE_GASEOUS = 2, STATE_PLASMA = 3;
-
+	
 	/** The weight of Air at Atmospheric Pressure per Cubic Centimetre. */
 	public static final double WEIGHT_AIR_G_PER_CUBIC_CENTIMETER = 0.0012;
 	/** The weight of Air at Atmospheric Pressure per Cubic Meter. */
 	public static final double WEIGHT_AIR_KG_PER_CUBIC_METER = 1.2;
 	/** The weight of Air at Atmospheric Pressure per Material Unit. */
 	public static final double WEIGHT_AIR_KG_PER_UNIT = WEIGHT_AIR_KG_PER_CUBIC_METER / 9;
-
+	
 	/** Not really Constants, but they set using the Config and therefore should be constant. */
 	@SuppressWarnings("deprecation")
-	public static boolean D1 = F, D2 = F, D3 = F, CLIENT_BLOCKUPDATE_SOUNDS = F, NEI = F, APRIL_FOOLS = (new Date().getMonth() == 3 && new Date().getDate() <= 3), TOOL_SOUNDS = T, EMIT_EU_AS_RF = F, DISABLE_GT6_CRAFTING_RECIPES = F, ENABLE_ADDING_IC2_MACERATOR_RECIPES = T, DISABLE_ALL_IC2_MACERATOR_RECIPES = F, ENABLE_ADDING_IC2_EXTRACTOR_RECIPES = T, DISABLE_ALL_IC2_EXTRACTOR_RECIPES = F, ENABLE_ADDING_IC2_COMPRESSOR_RECIPES = T, DISABLE_ALL_IC2_COMPRESSOR_RECIPES = F, ENABLE_ADDING_IC2_OREWASHER_RECIPES = T, DISABLE_ALL_IC2_OREWASHER_RECIPES = F, ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES = T, DISABLE_ALL_IC2_CENTRIFUGE_RECIPES = F, FAST_LEAF_DECAY = T, NERFED_WOOD = T, FOOD_OVERDOSE_DEATH = T, OWNERSHIP_RESET = F, SPAWN_ZONE_MOB_PROTECTION = T, CONSTANT_ENERGY = T, RAIN_EXPLOSIONS = F, WATER_EXPLOSIONS = F, THUNDER_EXPLOSIONS = F, FIRE_EXPLOSIONS = F, OVERCHARGE_EXPLOSIONS = F, FIRE_BREAKING = F, RAIN_BREAKING = F, WATER_BREAKING = F, THUNDER_BREAKING = F, OVERCHARGE_BREAKING = F, SHOW_MICROBLOCKS = F, SHOW_CHEM_FORMULAS = T, SHOW_INTERNAL_NAMES = F, SHOW_HIDDEN_MATERIALS = F, SHOW_HIDDEN_PREFIXES = F, SHOW_ORE_BLOCK_PREFIXES = F, SHOW_HIDDEN_ITEMS = F, DRINKS_ALWAYS_DRINKABLE = F, HUNGER_BY_INVENTORY_WEIGHT = F, INVENTORY_UNIFICATION = T, XP_ORB_COMBINING = T, ADVENTURE_MODE_KIT = F, SURVIVAL_INTO_ADVENTURE_MODE = F, DISPLAY_TEMP_TOOLTIP = T, GENERATE_STONE = T, GENERATE_STREETS = F, GENERATE_NEXUS = F, GENERATE_TESTING = F, GENERATE_BEACON = F, GENERATE_BIOMES = F;
+	public static boolean D1 = F, D2 = F, D3 = F, CLIENT_BLOCKUPDATE_SOUNDS = F, NEI = F, APRIL_FOOLS = (new Date().getMonth() == 3 && new Date().getDate() <= 3), TOOL_SOUNDS = T, EMIT_EU_AS_RF = F, DISABLE_GT6_CRAFTING_RECIPES = F, ENABLE_ADDING_IC2_MACERATOR_RECIPES = T, DISABLE_ALL_IC2_MACERATOR_RECIPES = F, ENABLE_ADDING_IC2_EXTRACTOR_RECIPES = T, DISABLE_ALL_IC2_EXTRACTOR_RECIPES = F, ENABLE_ADDING_IC2_COMPRESSOR_RECIPES = T, DISABLE_ALL_IC2_COMPRESSOR_RECIPES = F, ENABLE_ADDING_IC2_OREWASHER_RECIPES = T, DISABLE_ALL_IC2_OREWASHER_RECIPES = F, ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES = T, DISABLE_ALL_IC2_CENTRIFUGE_RECIPES = F, FAST_LEAF_DECAY = T, NERFED_WOOD = T, FOOD_OVERDOSE_DEATH = T, NUTRITION_SYSTEM = T, OWNERSHIP_RESET = F, SPAWN_ZONE_MOB_PROTECTION = T, CONSTANT_ENERGY = T, RAIN_EXPLOSIONS = F, WATER_EXPLOSIONS = F, THUNDER_EXPLOSIONS = F, FIRE_EXPLOSIONS = F, OVERCHARGE_EXPLOSIONS = F, FIRE_BREAKING = F, RAIN_BREAKING = F, WATER_BREAKING = F, THUNDER_BREAKING = F, OVERCHARGE_BREAKING = F, SHOW_MICROBLOCKS = F, SHOW_CHEM_FORMULAS = T, SHOW_INTERNAL_NAMES = F, SHOW_HIDDEN_MATERIALS = F, SHOW_HIDDEN_PREFIXES = F, SHOW_ORE_BLOCK_PREFIXES = F, SHOW_HIDDEN_ITEMS = F, DRINKS_ALWAYS_DRINKABLE = F, HUNGER_BY_INVENTORY_WEIGHT = F, INVENTORY_UNIFICATION = T, XP_ORB_COMBINING = T, ADVENTURE_MODE_KIT = F, SURVIVAL_INTO_ADVENTURE_MODE = F, DISPLAY_TEMP_TOOLTIP = T, GENERATE_STONE = T, GENERATE_STREETS = F, GENERATE_NEXUS = F, GENERATE_TESTING = F, GENERATE_BEACON = F, GENERATE_BIOMES = F;
 	/** This means that Client or Server specific Base Files are definitely existing and loaded! Not if the World is actually client side or server side! */
 	public static boolean CODE_UNCHECKED = T, CODE_CLIENT = F, CODE_SERVER = F;
-
+	
 	/** Not really Constants, but they set using the Config and therefore should be constant. */
 	public static double HARDNESS_MULTIPLIER_SAND = 1.0, HARDNESS_MULTIPLIER_ROCK = 1.0, HARDNESS_MULTIPLIER_ORES = 1.0;
 	/** Those are the values derived directly by the Configuration File. DO NOT USE THEM, USE THE VALUES ABOVE INSTEAD!!! */
@@ -811,13 +812,13 @@ public class CS {
 	public static int ENTITY_CRAMMING = 3;
 	/** Item Related */
 	public static int ITEM_DESPAWN_TIME = 6000;
-
+	
 	/** Gets set when the Player dies. Only works Client Side and gets lost when the Client restarts, but not when the Client just relogs. */
 	public static ChunkCoordinates LAST_DEATH_OF_THE_PLAYER = null;
-
+	
 	/** Gets set when a TileEntity gets broken, in order to be able to access it for Drops, even though it just got deleted. */
 	public static ThreadLocal<TileEntity> LAST_BROKEN_TILEENTITY = new ThreadLocal<>();
-
+	
 	/** If you have to give something a World Parameter but there is no World... (Dummy World) */
 	public static DummyWorld DW;
 	/** Dimension Types that I use as parameter for my WorldGenerators, aside from the Vanilla Dimension IDs none of these IDs is accurate as they are just the Defaults of their Respective Mods! */
@@ -1598,7 +1599,7 @@ public class CS {
 		//   0 = null
 		//   1 = Book/Written Book/Writable Book/Default
 		//   2 = Enchanted Book
-		//   3 = Black, 4 = White, 5 = Red, 6 = Green, 7 = Blue, 8 = Cyan, 9 = Magenta, 10 = Yellow, 48 = Orange, 49 = Purple
+		//   3 = Black, 4 = White, 5 = Red, 6 = Green, 7 = Blue, 8 = Cyan, 9 = Magenta, 10 = Yellow, 48 = Orange, 49 = Purple, 53 = Dusty
 		//  11 = Material Dictionary
 		//  12 = GT Book
 		//  13 = Thaumonomicon
@@ -1613,7 +1614,7 @@ public class CS {
 		//  22 = Brewing
 		//  23 = Vampires
 		//  24 = Reika
-		//  25 = Default Folder, 26 = Red Folder, 27 = Green Folder, 28 = Blue Folder
+		//  25 = Default Black Folder, 26 = Red Folder, 27 = Green Folder, 28 = Blue Folder
 		//  29 = Clipboard
 		//  30 = Records
 		//  31 = Printing Plates
@@ -1714,6 +1715,7 @@ public class CS {
 		CLIENT = null,
 		SPECIAL = null,
 		RECIPES = null,
+		GREGTECH = null,
 		MACHINES = null,
 		WORLDGEN = null,
 		MATERIAL = null,
@@ -1867,28 +1869,29 @@ public class CS {
 		, GrC_Hops          = "Growthcraft|Hops"
 		, GrC_Milk          = "Growthcraft|Milk"
 		, GrC_Rice          = "Growthcraft|Rice"
-
+		
 		, CrGu              = "craftguide"
 		, SmAc              = "SimpleAchievements"
 		, HQM               = "HardcoreQuesting"
-
+		
+		, HEX               = "hexcraft"
 		, DE                = "DraconicEvolution"
 		, AV                = "Avaritia"
-
+		
 		, EB                = "enhancedbiomes"
 		, EBXL              = "ExtrabiomesXL"
 		, BoP               = "BiomesOPlenty"
 		, HiL               = "Highlands"
-
+		
 		, ATG               = "ATG"
 		, RTG               = "RTG"
 		, RWG               = "RWG"
-
+		
 		, GaSu              = "ganyssurface"
 		, GaNe              = "ganysnether"
 		, GaEn              = "ganysend"
 		, WdSt              = "woodstuff"
-
+		
 		, LycM              = "lycanitesmobs"
 		, LycM_Fresh        = "freshwatermobs"
 		, LycM_Salt         = "saltwatermobs"

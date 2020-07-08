@@ -28,6 +28,7 @@ import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetComparatorInputOve
 import gregapi.code.TagData;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
+import gregapi.data.MD;
 import gregapi.data.OP;
 import gregapi.data.TD;
 import gregapi.old.Textures;
@@ -52,7 +53,7 @@ public class MultiTileEntityWireRedstoneInsulated extends TileEntityBase10Connec
 	public static final int REDSTONE_ID = -1;
 	
 	public long mRedstone = 0, mLoss = 1;
-	public byte mRenderType = 0, mReceived = SIDE_UNDEFINED, mMode = 0;
+	public byte mRenderType = 0, mReceived = SIDE_UNDEFINED, mMode = 0, mVanillaSides[] = {-1,-1,-1,-1,-1,-1,-1};
 	public boolean mConnectedToNonWire = T;
 	
 	@Override
@@ -98,6 +99,7 @@ public class MultiTileEntityWireRedstoneInsulated extends TileEntityBase10Connec
 		super.onTick2(aTimer, aIsServerSide);
 		
 		if (aIsServerSide) {
+			for (int i : ALL_SIDES) mVanillaSides[i] = -1;
 			if (mBlockUpdated) updateConnectionStatus();
 			if (updateRedstone(REDSTONE_ID)) ITileEntityRedstoneWire.Util.doRedstoneUpdate(this, REDSTONE_ID);
 		}
@@ -106,20 +108,25 @@ public class MultiTileEntityWireRedstoneInsulated extends TileEntityBase10Connec
 	public long getRedstoneAtSide(byte aSide) {
 		if (SIDES_INVALID[aSide]) return 0;
 		DelegatorTileEntity<TileEntity> tDelegator = getAdjacentTileEntity(aSide);
-		return tDelegator.mTileEntity instanceof ITileEntityRedstoneWire ? canAcceptRedstoneFromWire(aSide, REDSTONE_ID) && ((ITileEntityRedstoneWire)tDelegator.mTileEntity).canEmitRedstoneToWire(tDelegator.mSideOfTileEntity, REDSTONE_ID) ? ((ITileEntityRedstoneWire)tDelegator.mTileEntity).getRedstoneMinusLoss(tDelegator.mSideOfTileEntity, REDSTONE_ID) : 0 : canAcceptRedstoneFromVanilla(aSide) ? MAX_RANGE * getRedstoneIncoming(aSide) - mLoss : 0;
+		if (tDelegator.mTileEntity instanceof ITileEntityRedstoneWire) return canAcceptRedstoneFromWire(aSide, REDSTONE_ID) && ((ITileEntityRedstoneWire)tDelegator.mTileEntity).canEmitRedstoneToWire(tDelegator.mSideOfTileEntity, REDSTONE_ID) ? ((ITileEntityRedstoneWire)tDelegator.mTileEntity).getRedstoneMinusLoss(tDelegator.mSideOfTileEntity, REDSTONE_ID) : 0;
+		if (!canAcceptRedstoneFromVanilla(aSide)) return 0;
+		// Making sure the Glowstone Illuminators from Thermal Expansion are not flickering due to their weird Redstone emitting Mechanics.
+		if (MD.TE.mLoaded && tDelegator.mTileEntity != null && tDelegator.mTileEntity.getClass().getName().startsWith("cofh.thermalexpansion.block.light")) return 0;
+		if (mVanillaSides[aSide] < 0) mVanillaSides[aSide] = getRedstoneIncoming(aSide);
+		return MAX_RANGE * mVanillaSides[aSide] - mLoss;
 	}
 	
 	@Override
 	public boolean updateRedstone(int aRedstoneID) {
 		if (aRedstoneID != REDSTONE_ID) return F;
-		long tRedstoneOld = mRedstone, tRedstone = mMode * MAX_RANGE - mLoss;
-		byte tReceivedOld = mReceived;
-		if ((mRedstone = getRedstoneAtSide(tReceivedOld)) <= tRedstone) {
+		long oRedstone = mRedstone, tRedstone = mMode * MAX_RANGE - mLoss;
+		byte oReceived = mReceived;
+		if ((mRedstone = getRedstoneAtSide(oReceived)) <= tRedstone) {
 			mRedstone = tRedstone;
 			mReceived = SIDE_UNDEFINED;
 		}
-		for (byte tSide : ALL_SIDES_VALID_BUT[tReceivedOld]) if ((tRedstone = getRedstoneAtSide(tSide)) > mRedstone) {mRedstone = tRedstone; mReceived = tSide;}
-		if (mRedstone != tRedstoneOld) {if (mConnectedToNonWire) causeBlockUpdate(); return T;}
+		for (byte tSide : ALL_SIDES_VALID_BUT[oReceived]) if ((tRedstone = getRedstoneAtSide(tSide)) > mRedstone) {mRedstone = tRedstone; mReceived = tSide;}
+		if (mRedstone != oRedstone) {if (mConnectedToNonWire) causeBlockUpdate(); return T;}
 		return F;
 	}
 	

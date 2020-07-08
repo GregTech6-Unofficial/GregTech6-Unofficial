@@ -397,13 +397,13 @@ public class LoaderItemData implements Runnable {
 		OM.reg("listAllfishcooked"                  , ST.make(Items.cooked_fished, 1, 1));
 		OM.reg("listAllmushroom"                    , ST.make(Blocks.brown_mushroom, 1, W));
 		OM.reg("listAllmushroom"                    , ST.make(Blocks.red_mushroom, 1, W));
-		OM.reg("paperEmpty"                         , ST.make(Items.paper, 1, W));
-		OM.reg("paperMap"                           , ST.make(Items.map, 1, W));
-		OM.reg("paperMap"                           , ST.make(Items.filled_map, 1, W));
-		OM.reg("bookEmpty"                          , ST.make(Items.book, 1, W));
-		OM.reg("bookWritable"                       , ST.make(Items.writable_book, 1, W));
-		OM.reg("bookWritten"                        , ST.make(Items.written_book, 1, W));
-		OM.reg("bookEnchanted"                      , ST.make(Items.enchanted_book, 1, W));
+		OM.reg(OD.paperEmpty                        , ST.make(Items.paper, 1, W));
+		OM.reg(OD.paperMap                          , ST.make(Items.map, 1, W));
+		OM.reg(OD.paperMap                          , ST.make(Items.filled_map, 1, W));
+		OM.reg(OD.bookEmpty                         , ST.make(Items.book, 1, W));
+		OM.reg(OD.bookWritable                      , ST.make(Items.writable_book, 1, W));
+		OM.reg(OD.bookWritten                       , ST.make(Items.written_book, 1, W));
+		OM.reg(OD.bookEnchanted                     , ST.make(Items.enchanted_book, 1, W));
 		OM.reg(OD.craftingFirestarter               , ST.make(Items.fire_charge, 1, W));
 		OM.reg(OD.craftingFirestarter               , ST.make(Items.flint_and_steel, 1, W));
 		OM.reg("bucketWater"                        , ST.make(Items.water_bucket, 1, W));
@@ -613,6 +613,10 @@ public class LoaderItemData implements Runnable {
 		OM.reg(OP.dustSmall.dat(MT.Cyanite)         , ST.make(MD.BINNIE_BEE, "misc", 1,29));
 		
 		
+		OM.reg(OD.record                            , ST.make(MD.HBM, "item.record_lc", 1, 0));
+		OM.reg(OD.record                            , ST.make(MD.HBM, "item.record_ss", 1, 0));
+		OM.reg(OD.record                            , ST.make(MD.HBM, "item.record_vc", 1, 0));
+		OM.reg(OD.record                            , ST.make(MD.HBM, "item.record_glass", 1, 0));
 		OM.reg(OD.record                            , ST.make(MD.NePl, "PigStep", 1, 0));
 		OM.reg(OD.record                            , ST.make(MD.MFR, "record.blank", 1, 0));
 		OM.reg(OD.record                            , ST.make(MD.RoC, "rotarycraft_item_disk", 1, 0));
@@ -706,6 +710,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.OC, "item"                                       , 1,  98, MT.Paper              , U*3);
 		OM.data(MD.HQM, "quest_book"                                , 1,   W, MT.Paper              , U*3);
 		OM.data(MD.TC, "ItemResearchNotes"                          , 1,   W, MT.Paper              , U);
+		OM.data(MD.TC, "ItemResource"                               , 1,   9, MT.Paper              , U9);
 		OM.data(MD.MoCr, "scrollofsale"                             , 1,   W, MT.Paper              , U);
 		OM.data(MD.MoCr, "scrollofowner"                            , 1,   W, MT.Paper              , U);
 		OM.data(MD.MoCr, "scrolloffreedom"                          , 1,   W, MT.Paper              , U);
@@ -1479,6 +1484,15 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.HaC, "venisoncookedItem"                 , 1,   W, MT.MeatCooked         ,  U * 2, MT.Bone,  U9);
 		
 		
+		OM.data(MD.HBM, "item.apple_lead"                   , 1,   0, MT.Pb                 ,  OP.nugget.mAmount * 8);
+		OM.data(MD.HBM, "item.apple_lead"                   , 1,   1, MT.Pb                 ,  OP.ingot.mAmount * 8);
+		OM.data(MD.HBM, "item.apple_lead"                   , 1,   2, MT.Pb                 ,  OP.blockIngot.mAmount * 8);
+		OM.data(MD.HBM, "item.apple_schrabidium"            , 1,   0, MT.UNUSED.Schrabidium ,  OP.nugget.mAmount * 8);
+		OM.data(MD.HBM, "item.apple_schrabidium"            , 1,   1, MT.UNUSED.Schrabidium ,  OP.ingot.mAmount * 8);
+		OM.data(MD.HBM, "item.apple_schrabidium"            , 1,   2, MT.UNUSED.Schrabidium ,  OP.blockIngot.mAmount * 8);
+		OM.data(MD.HBM, "item.apple_euphemium"              , 1,   0, MT.UNUSED.Euphemium   ,  OP.nugget.mAmount * 8);
+		
+		
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  25, ANY.Stone             ,  U * 6);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  27, ANY.Iron              ,  U * 6);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  30, ANY.Iron              ,  U * 1, MT.Flint,  U2);
@@ -1537,6 +1551,74 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.AA, "itemMisc"                           , 1,  11, MT.Charcoal           ,  U8);
 		
 		
+		OM.data(MD.HEX, "blockHexoriumMonolithRed"               , 1,   W, MT.HexoriumRed        ,  U *16);
+		OM.data(MD.HEX, "blockHexoriumMonolithGreen"             , 1,   W, MT.HexoriumGreen      ,  U *16);
+		OM.data(MD.HEX, "blockHexoriumMonolithBlue"              , 1,   W, MT.HexoriumBlue       ,  U *16);
+		OM.data(MD.HEX, "blockHexoriumMonolithBlack"             , 1,   W, MT.HexoriumBlack      ,  U *12);
+		OM.data(MD.HEX, "blockHexoriumMonolithWhite"             , 1,   W, MT.HexoriumWhite      ,  U *12);
+		OM.data(MD.HEX, "blockHexoriumNetherMonolithRed"         , 1,   W, MT.HexoriumRed        ,  U *12);
+		OM.data(MD.HEX, "blockHexoriumNetherMonolithGreen"       , 1,   W, MT.HexoriumGreen      ,  U *12);
+		OM.data(MD.HEX, "blockHexoriumNetherMonolithBlue"        , 1,   W, MT.HexoriumBlue       ,  U *12);
+		OM.data(MD.HEX, "blockHexoriumNetherMonolithBlack"       , 1,   W, MT.HexoriumBlack      ,  U *16);
+		OM.data(MD.HEX, "blockHexoriumNetherMonolithWhite"       , 1,   W, MT.HexoriumWhite      ,  U *16);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithRed"      , 1,   W, MT.HexoriumRed        ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithGreen"    , 1,   W, MT.HexoriumGreen      ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithBlue"     , 1,   W, MT.HexoriumBlue       ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithBlack"    , 1,   W, MT.HexoriumBlack      ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithWhite"    , 1,   W, MT.HexoriumWhite      ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithDarkGray" , 1,   W, MT.HexoriumBlack      ,  U * 6, MT.HexoriumWhite      ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithGray"     , 1,   W, MT.HexoriumBlack      ,  U * 4, MT.HexoriumWhite      ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithLightGray", 1,   W, MT.HexoriumBlack      ,  U * 2, MT.HexoriumWhite      ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithOrange"   , 1,   W, MT.HexoriumRed        ,  U * 6, MT.HexoriumGreen      ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithYellow"   , 1,   W, MT.HexoriumRed        ,  U * 4, MT.HexoriumGreen      ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithLime"     , 1,   W, MT.HexoriumRed        ,  U * 2, MT.HexoriumGreen      ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithTurquoise", 1,   W, MT.HexoriumGreen      ,  U * 6, MT.HexoriumBlue       ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithCyan"     , 1,   W, MT.HexoriumGreen      ,  U * 4, MT.HexoriumBlue       ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithSkyBlue"  , 1,   W, MT.HexoriumGreen      ,  U * 2, MT.HexoriumBlue       ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithPurple"   , 1,   W, MT.HexoriumBlue       ,  U * 6, MT.HexoriumRed        ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithMagenta"  , 1,   W, MT.HexoriumBlue       ,  U * 4, MT.HexoriumRed        ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithPink"     , 1,   W, MT.HexoriumBlue       ,  U * 2, MT.HexoriumRed        ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMonolithRainbow"  , 1,   W, MT.HexoriumWhite      ,  U * 2, MT.HexoriumRed        ,  U * 2, MT.HexoriumGreen      ,  U * 2, MT.HexoriumBlue       ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumRed"              , 1,   W, MT.HexoriumRed        ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumGreen"            , 1,   W, MT.HexoriumGreen      ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumBlue"             , 1,   W, MT.HexoriumBlue       ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumBlack"            , 1,   W, MT.HexoriumBlack      ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumWhite"            , 1,   W, MT.HexoriumWhite      ,  U * 8);
+		OM.data(MD.HEX, "blockEnergizedHexoriumDarkGray"         , 1,   W, MT.HexoriumBlack      ,  U * 6, MT.HexoriumWhite      ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumGray"             , 1,   W, MT.HexoriumBlack      ,  U * 4, MT.HexoriumWhite      ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumLightGray"        , 1,   W, MT.HexoriumBlack      ,  U * 2, MT.HexoriumWhite      ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumOrange"           , 1,   W, MT.HexoriumRed        ,  U * 6, MT.HexoriumGreen      ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumYellow"           , 1,   W, MT.HexoriumRed        ,  U * 4, MT.HexoriumGreen      ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumLime"             , 1,   W, MT.HexoriumRed        ,  U * 2, MT.HexoriumGreen      ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumTurquoise"        , 1,   W, MT.HexoriumGreen      ,  U * 6, MT.HexoriumBlue       ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumCyan"             , 1,   W, MT.HexoriumGreen      ,  U * 4, MT.HexoriumBlue       ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumSkyBlue"          , 1,   W, MT.HexoriumGreen      ,  U * 2, MT.HexoriumBlue       ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumPurple"           , 1,   W, MT.HexoriumBlue       ,  U * 6, MT.HexoriumRed        ,  U * 2);
+		OM.data(MD.HEX, "blockEnergizedHexoriumMagenta"          , 1,   W, MT.HexoriumBlue       ,  U * 4, MT.HexoriumRed        ,  U * 4);
+		OM.data(MD.HEX, "blockEnergizedHexoriumPink"             , 1,   W, MT.HexoriumBlue       ,  U * 2, MT.HexoriumRed        ,  U * 6);
+		OM.data(MD.HEX, "blockEnergizedHexoriumRainbow"          , 1,   W, MT.HexoriumWhite      ,  U * 2, MT.HexoriumRed        ,  U * 2, MT.HexoriumGreen      ,  U * 2, MT.HexoriumBlue       ,  U * 2);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumRed"          , 1,   W, MT.HexoriumRed        ,  U8* 8);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumGreen"        , 1,   W, MT.HexoriumGreen      ,  U8* 8);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumBlue"         , 1,   W, MT.HexoriumBlue       ,  U8* 8);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumBlack"        , 1,   W, MT.HexoriumBlack      ,  U8* 8);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumWhite"        , 1,   W, MT.HexoriumWhite      ,  U8* 8);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumDarkGray"     , 1,   W, MT.HexoriumBlack      ,  U8* 6, MT.HexoriumWhite      ,  U8* 2);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumGray"         , 1,   W, MT.HexoriumBlack      ,  U8* 4, MT.HexoriumWhite      ,  U8* 4);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumLightGray"    , 1,   W, MT.HexoriumBlack      ,  U8* 2, MT.HexoriumWhite      ,  U8* 6);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumOrange"       , 1,   W, MT.HexoriumRed        ,  U8* 6, MT.HexoriumGreen      ,  U8* 2);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumYellow"       , 1,   W, MT.HexoriumRed        ,  U8* 4, MT.HexoriumGreen      ,  U8* 4);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumLime"         , 1,   W, MT.HexoriumRed        ,  U8* 2, MT.HexoriumGreen      ,  U8* 6);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumTurquoise"    , 1,   W, MT.HexoriumGreen      ,  U8* 6, MT.HexoriumBlue       ,  U8* 2);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumCyan"         , 1,   W, MT.HexoriumGreen      ,  U8* 4, MT.HexoriumBlue       ,  U8* 4);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumSkyBlue"      , 1,   W, MT.HexoriumGreen      ,  U8* 2, MT.HexoriumBlue       ,  U8* 6);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumPurple"       , 1,   W, MT.HexoriumBlue       ,  U8* 6, MT.HexoriumRed        ,  U8* 2);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumMagenta"      , 1,   W, MT.HexoriumBlue       ,  U8* 4, MT.HexoriumRed        ,  U8* 4);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumPink"         , 1,   W, MT.HexoriumBlue       ,  U8* 2, MT.HexoriumRed        ,  U8* 6);
+		OM.data(MD.HEX, "blockMiniEnergizedHexoriumRainbow"      , 1,   W, MT.HexoriumWhite      ,  U8* 2, MT.HexoriumRed        ,  U8* 2, MT.HexoriumGreen      ,  U8* 2, MT.HexoriumBlue       ,  U8* 2);
+		
+		
+		
+		
 		OM.data(MD.BOTA, "quartzSlabManaHalf"               , 1,   W, MT.ManaQuartz         ,  U * 2);
 		OM.data(MD.BOTA, "quartzSlabManaFull"               , 1,   W, MT.ManaQuartz         ,  U * 4);
 		OM.data(MD.BOTA, "quartzTypeMana"                   , 1,   W, MT.ManaQuartz         ,  U * 4);
@@ -1573,6 +1655,9 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.BOTA, "livingrock1Stairs"                , 1,   W, MT.Livingrock         ,  U2* 3);
 		OM.data(MD.BOTA, "livingrock0Slab"                  , 1,   W, MT.Livingrock         ,  U2);
 		OM.data(MD.BOTA, "livingrock1Slab"                  , 1,   W, MT.Livingrock         ,  U2);
+		OM.dat2(MD.BOTA, "terraAxe"                         , 1,   W, MT.Terrasteel         ,  U * 4, OM.stack(MT.Livingwood, OP.stick.mAmount * 2), OM.stack(MT.Glowstone, U * 4));
+		OM.dat2(MD.BOTA, "terraPick"                        , 1,   W, MT.Terrasteel         ,  U * 4, OM.stack(MT.Livingwood, OP.stick.mAmount * 2), OM.stack(MT.Livingrock, U * 8));
+		OM.dat2(MD.BOTA, "glassPick"                        , 1,   W, MT.Manasteel          ,  U * 1, OM.stack(MT.Livingwood, OP.stick.mAmount * 2), OM.stack(MT.Glass, U * 2));
 		
 		
 		OM.data(MD.WTCH, "perpetualice"                     , 1,   W, MT.Ice                ,  U);
@@ -1610,6 +1695,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.TC, "ItemBaubleBlanks"                   , 1,   7, MT.Au                 ,  4* U9, MT.InfusedOrder   , U4);
 		OM.data(MD.TC, "ItemBaubleBlanks"                   , 1,   8, MT.Au                 ,  4* U9, MT.InfusedEntropy , U4);
 		OM.data(MD.TC, "blockCandle"                        , 1,   W, MT.Tallow             ,  2* U3);
+		OM.data(MD.TC, "ItemZombieBrain"                    , 1,   W, MT.MeatRotten         ,  U * 1);
 		OM.data(MD.TC, "ItemGolemPlacer"                    , 1,   0, MT.Wheat              ,  U * 9);
 		OM.data(MD.TC, "ItemGolemPlacer"                    , 1,   1, MT.Greatwood          ,  U * 8);
 		OM.data(MD.TC, "ItemGolemPlacer"                    , 1,   2, MT.Tallow             ,  U * 9);
@@ -1618,6 +1704,13 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.TC, "ItemGolemPlacer"                    , 1,   5, ANY.Stone             ,  U * 1);
 		OM.data(MD.TC, "ItemGolemPlacer"                    , 1,   6, ANY.Fe                ,  U * 9);
 		OM.data(MD.TC, "ItemGolemPlacer"                    , 1,   7, MT.Thaumium           ,  U * 9);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   0, MT.InfusedAir         ,  U * 6);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   1, MT.InfusedFire        ,  U * 6);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   2, MT.InfusedWater       ,  U * 6);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   3, MT.InfusedEarth       ,  U * 6);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   4, MT.InfusedOrder       ,  U * 6);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   5, MT.InfusedEntropy     ,  U * 6);
+		OM.data(MD.TC, "blockCrystal"                       , 1,   6, MT.InfusedAir         ,  U, MT.InfusedFire, U, MT.InfusedWater, U, MT.InfusedEarth, U, MT.InfusedOrder, U, MT.InfusedEntropy, U);
 		
 		
 		OM.data(MD.ZTONES, "minicoal"                       , 1,   W, MT.Coal               ,  U8);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -98,7 +98,7 @@ public class MultiTileEntityFilter extends MultiTileEntityExtender implements IT
 	@Override public String getTileEntityName() {return "gt.multitileentity.filter";}
 	
 	public boolean allowInput(ItemStack aStack) {
-		for (ItemStack tStack : mFilter) if (ST.valid(tStack) && ST.equal_(tStack, aStack, !tStack.hasTagCompound())) return !mInverted;
+		for (ItemStack tStack : mFilter) if (ST.valid(tStack) && ST.equal_(tStack, aStack, !tStack.hasTagCompound() || ST.meta_(tStack) == W)) return !mInverted;
 		return mInverted;
 	}
 	public boolean allowInput(FluidStack aFluid) {
@@ -284,9 +284,9 @@ public class MultiTileEntityFilter extends MultiTileEntityExtender implements IT
 							if (tFluid != null && (((MultiTileEntityFilter)mTileEntity).mModes & MODE_TANK) != 0) {
 								tSlot.putStack(FL.display(tFluid.getFluid()));
 							} else {
-								if (tStack.hasTagCompound()) {
+								if (tStack.hasTagCompound() && ST.meta_(tStack) != W) {
 									tStack.setTagCompound(null);
-								} else if (ST.isGT_(tStack) || !ST.item_(tStack).getHasSubtypes()) {
+								} else {
 									tStack.setItemDamage(W);
 								}
 							}
