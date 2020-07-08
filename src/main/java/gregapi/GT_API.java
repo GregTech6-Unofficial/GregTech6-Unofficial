@@ -160,7 +160,7 @@ import net.minecraftforge.oredict.RecipeSorter;
  * 
  * This loads before the compatible Mods, except Micdoodlecore. GT_API_Post loads after all compatible Mods.
  */
-@Mod(modid=ModIDs.GAPI, name="Greg-API", version="GT6-MC1710", dependencies="required-before:"+ModIDs.GAPI_POST+"; after:"+ModIDs.MD8+"; before:"+ModIDs.IC2+"; before:"+ModIDs.IC2C+"; before:"+ModIDs.NC+"; before:"+ModIDs.IHL+"; before:"+ModIDs.FMB+"; before:"+ModIDs.FUNK+"; before:"+ModIDs.BAUBLES+"; before:"+ModIDs.GaSu+"; before:"+ModIDs.GaNe+"; before:"+ModIDs.GaEn+"; before:"+ModIDs.WdSt+"; before:"+ModIDs.CrGu+"; before:"+ModIDs.COFH_API+"; before:"+ModIDs.COFH_API_ENERGY+"; before:"+ModIDs.CC+"; before:"+ModIDs.OC+"; before:"+ModIDs.DE+"; before:"+ModIDs.AV+"; before:"+ModIDs.FR+"; before:"+ModIDs.FRMB+"; before:"+ModIDs.BINNIE+"; before:"+ModIDs.BINNIE_BEE+"; before:"+ModIDs.BINNIE_TREE+"; before:"+ModIDs.BINNIE_GENETICS+"; before:"+ModIDs.BINNIE_BOTANY+"; before:"+ModIDs.IE+"; before:"+ModIDs.UB+"; before:"+ModIDs.COG+"; before:"+ModIDs.PFAA+"; before:"+ModIDs.MIN+"; before:"+ModIDs.RH+"; before:"+ModIDs.CANDY+"; before:"+ModIDs.ABYSSAL+"; before:"+ModIDs.SOULFOREST+"; before:"+ModIDs.ARS+"; before:"+ModIDs.TC+"; before:"+ModIDs.TCFM+"; before:"+ModIDs.BOTA+"; before:"+ModIDs.ALF+"; before:"+ModIDs.WTCH+"; before:"+ModIDs.HOWL+"; before:"+ModIDs.MoCr+"; before:"+ModIDs.GoG+"; before:"+ModIDs.LycM+"; before:"+ModIDs.LycM_Arctic+"; before:"+ModIDs.LycM_Demon+"; before:"+ModIDs.LycM_Desert+"; before:"+ModIDs.LycM_Forest+"; before:"+ModIDs.LycM_Fresh+"; before:"+ModIDs.LycM_Inferno+"; before:"+ModIDs.LycM_Jungle+"; before:"+ModIDs.LycM_Mountain+"; before:"+ModIDs.LycM_Plains+"; before:"+ModIDs.LycM_Salt+"; before:"+ModIDs.LycM_Shadow+"; before:"+ModIDs.LycM_Swamp+"; before:"+ModIDs.RC+"; before:"+ModIDs.BP+"; before:"+ModIDs.PR+"; before:"+ModIDs.PR_EXPANSION+"; before:"+ModIDs.PR_INTEGRATION+"; before:"+ModIDs.PR_TRANSMISSION+"; before:"+ModIDs.PR_TRANSPORT+"; before:"+ModIDs.PR_EXPLORATION+"; before:"+ModIDs.PR_COMPATIBILITY+"; before:"+ModIDs.PR_FABRICATION+"; before:"+ModIDs.PR_ILLUMINATION+"; before:"+ModIDs.PE+"; before:"+ModIDs.AE+"; before:"+ModIDs.MO+"; before:"+ModIDs.TE_FOUNDATION+"; before:"+ModIDs.TE_DYNAMICS+"; before:"+ModIDs.TE+"; before:"+ModIDs.ZTONES+"; before:"+ModIDs.CHSL+"; before:"+ModIDs.NePl+"; before:"+ModIDs.EtFu+"; before:"+ModIDs.BB+"; before:"+ModIDs.DYNAMIC_TREES+"; before:"+ModIDs.BbLC+"; before:"+ModIDs.CARP+"; before:"+ModIDs.BETTER_RECORDS+"; before:"+ModIDs.TF+"; before:"+ModIDs.ERE+"; before:"+ModIDs.MFR+"; before:"+ModIDs.PnC+"; before:"+ModIDs.ExU+"; before:"+ModIDs.ExS+"; before:"+ModIDs.EIO+"; before:"+ModIDs.RT+"; before:"+ModIDs.AA+"; before:"+ModIDs.TreeCap+"; before:"+ModIDs.HaC+"; before:"+ModIDs.CookBook+"; before:"+ModIDs.APC+"; before:"+ModIDs.ENVM+"; before:"+ModIDs.MaCr+"; before:"+ModIDs.BC_TRANSPORT+"; before:"+ModIDs.BC_SILICON+"; before:"+ModIDs.BC_FACTORY+"; before:"+ModIDs.BC_ENERGY+"; before:"+ModIDs.BC_ROBOTICS+"; before:"+ModIDs.BC+"; before:"+ModIDs.BC_BUILDERS+"; before:"+ModIDs.MgC+"; before:"+ModIDs.BR+"; before:"+ModIDs.HBM+"; before:"+ModIDs.ELN+"; before:"+ModIDs.DRGN+"; before:"+ModIDs.ElC+"; before:"+ModIDs.CrC+"; before:"+ModIDs.ReC+"; before:"+ModIDs.RoC+"; before:"+ModIDs.Mek+"; before:"+ModIDs.Mek_Tools+"; before:"+ModIDs.Mek_Generators+"; before:"+ModIDs.GC+"; before:"+ModIDs.GC_PLANETS+"; before:"+ModIDs.GC_GALAXYSPACE+"; before:"+ModIDs.VULPES+"; before:"+ModIDs.GC_ADV_ROCKETRY+"; before:"+ModIDs.BTL+"; before:"+ModIDs.AETHER+"; before:"+ModIDs.TROPIC+"; before:"+ModIDs.ATUM+"; before:"+ModIDs.EB+"; before:"+ModIDs.EBXL+"; before:"+ModIDs.BoP+"; before:"+ModIDs.HiL+"; before:"+ModIDs.ATG+"; before:"+ModIDs.RTG+"; before:"+ModIDs.RWG+"; before:"+ModIDs.MYST+"; before:"+ModIDs.WARPBOOK+"; before:"+ModIDs.LOSTBOOKS+"; before:"+ModIDs.LOOTBAGS+"; before:"+ModIDs.EUREKA+"; before:"+ModIDs.ENCHIRIDION+"; before:"+ModIDs.ENCHIRIDION2+"; before:"+ModIDs.SmAc+"; before:"+ModIDs.HQM+"; before:"+ModIDs.JABBA+"; before:"+ModIDs.MaCu+"; before:"+ModIDs.PdC+"; before:"+ModIDs.Bamboo+"; before:"+ModIDs.PMP+"; before:"+ModIDs.Fossil+"; before:"+ModIDs.GrC+"; before:"+ModIDs.GrC_Apples+"; before:"+ModIDs.GrC_Bamboo+"; before:"+ModIDs.GrC_Bees+"; before:"+ModIDs.GrC_Cellar+"; before:"+ModIDs.GrC_Fish+"; before:"+ModIDs.GrC_Grapes+"; before:"+ModIDs.GrC_Hops+"; before:"+ModIDs.GrC_Milk+"; before:"+ModIDs.GrC_Rice+"; before:"+ModIDs.BWM+"; before:"+ModIDs.OMT+"; before:"+ModIDs.TG+"; before:"+ModIDs.FM+"; before:"+ModIDs.FZ+"; before:"+ModIDs.MNTL+"; before:"+ModIDs.OB+"; before:"+ModIDs.TiC+"; before:"+ModIDs.MF2+"; before:"+ModIDs.WR_CBE_C+"; before:"+ModIDs.WR_CBE_A+"; before:"+ModIDs.WR_CBE_L+"; before:"+ModIDs.VOLTZ+"; before:"+ModIDs.MFFS+"; before:"+ModIDs.ICBM+"; before:"+ModIDs.ATSCI+"; before:inventorytweaks; before:ironbackpacks; before:journeymap; before:LogisticsPipes; before:LunatriusCore; before:NEIAddons; before:NEIAddons|Developer; before:NEIAddons|AppEng; before:NEIAddons|Botany; before:NEIAddons|Forestry; before:NEIAddons|CraftingTables; before:NEIAddons|ExNihilo; before:neiintegration; before:openglasses; before:simplyjetpacks; before:Stackie; before:StevesCarts; before:TiCTooltips; before:worldedit; before:McMultipart; before:OpenPeripheralCore; before:OpenPeripheralIntegration; before:OpenPeripheral; ")
+@Mod(modid=ModIDs.GAPI, name="Greg-API", version="GT6-MC1710", dependencies="required-before:"+ModIDs.GAPI_POST+"; after:"+ModIDs.MD8+"; before:"+ModIDs.IC2+"; before:"+ModIDs.IC2C+"; before:"+ModIDs.NC+"; before:"+ModIDs.IHL+"; before:"+ModIDs.FMB+"; before:"+ModIDs.FUNK+"; before:"+ModIDs.BAUBLES+"; before:"+ModIDs.GaSu+"; before:"+ModIDs.GaNe+"; before:"+ModIDs.GaEn+"; before:"+ModIDs.WdSt+"; before:"+ModIDs.CrGu+"; before:"+ModIDs.COFH_API+"; before:"+ModIDs.COFH_API_ENERGY+"; before:"+ModIDs.CC+"; before:"+ModIDs.OC+"; before:"+ModIDs.HEX+"; before:"+ModIDs.DE+"; before:"+ModIDs.AV+"; before:"+ModIDs.FR+"; before:"+ModIDs.FRMB+"; before:"+ModIDs.BINNIE+"; before:"+ModIDs.BINNIE_BEE+"; before:"+ModIDs.BINNIE_TREE+"; before:"+ModIDs.BINNIE_GENETICS+"; before:"+ModIDs.BINNIE_BOTANY+"; before:"+ModIDs.IE+"; before:"+ModIDs.UB+"; before:"+ModIDs.COG+"; before:"+ModIDs.PFAA+"; before:"+ModIDs.MIN+"; before:"+ModIDs.RH+"; before:"+ModIDs.CANDY+"; before:"+ModIDs.ABYSSAL+"; before:"+ModIDs.SOULFOREST+"; before:"+ModIDs.ARS+"; before:"+ModIDs.TC+"; before:"+ModIDs.TCFM+"; before:"+ModIDs.BOTA+"; before:"+ModIDs.ALF+"; before:"+ModIDs.WTCH+"; before:"+ModIDs.HOWL+"; before:"+ModIDs.MoCr+"; before:"+ModIDs.GoG+"; before:"+ModIDs.LycM+"; before:"+ModIDs.LycM_Arctic+"; before:"+ModIDs.LycM_Demon+"; before:"+ModIDs.LycM_Desert+"; before:"+ModIDs.LycM_Forest+"; before:"+ModIDs.LycM_Fresh+"; before:"+ModIDs.LycM_Inferno+"; before:"+ModIDs.LycM_Jungle+"; before:"+ModIDs.LycM_Mountain+"; before:"+ModIDs.LycM_Plains+"; before:"+ModIDs.LycM_Salt+"; before:"+ModIDs.LycM_Shadow+"; before:"+ModIDs.LycM_Swamp+"; before:"+ModIDs.RC+"; before:"+ModIDs.BP+"; before:"+ModIDs.PR+"; before:"+ModIDs.PR_EXPANSION+"; before:"+ModIDs.PR_INTEGRATION+"; before:"+ModIDs.PR_TRANSMISSION+"; before:"+ModIDs.PR_TRANSPORT+"; before:"+ModIDs.PR_EXPLORATION+"; before:"+ModIDs.PR_COMPATIBILITY+"; before:"+ModIDs.PR_FABRICATION+"; before:"+ModIDs.PR_ILLUMINATION+"; before:"+ModIDs.PE+"; before:"+ModIDs.AE+"; before:"+ModIDs.MO+"; before:"+ModIDs.TE_FOUNDATION+"; before:"+ModIDs.TE_DYNAMICS+"; before:"+ModIDs.TE+"; before:"+ModIDs.ZTONES+"; before:"+ModIDs.CHSL+"; before:"+ModIDs.NePl+"; before:"+ModIDs.EtFu+"; before:"+ModIDs.BB+"; before:"+ModIDs.DYNAMIC_TREES+"; before:"+ModIDs.BbLC+"; before:"+ModIDs.CARP+"; before:"+ModIDs.BETTER_RECORDS+"; before:"+ModIDs.TF+"; before:"+ModIDs.ERE+"; before:"+ModIDs.MFR+"; before:"+ModIDs.PnC+"; before:"+ModIDs.ExU+"; before:"+ModIDs.ExS+"; before:"+ModIDs.EIO+"; before:"+ModIDs.RT+"; before:"+ModIDs.AA+"; before:"+ModIDs.TreeCap+"; before:"+ModIDs.HaC+"; before:"+ModIDs.CookBook+"; before:"+ModIDs.APC+"; before:"+ModIDs.ENVM+"; before:"+ModIDs.MaCr+"; before:"+ModIDs.BC_TRANSPORT+"; before:"+ModIDs.BC_SILICON+"; before:"+ModIDs.BC_FACTORY+"; before:"+ModIDs.BC_ENERGY+"; before:"+ModIDs.BC_ROBOTICS+"; before:"+ModIDs.BC+"; before:"+ModIDs.BC_BUILDERS+"; before:"+ModIDs.MgC+"; before:"+ModIDs.BR+"; before:"+ModIDs.HBM+"; before:"+ModIDs.ELN+"; before:"+ModIDs.DRGN+"; before:"+ModIDs.ElC+"; before:"+ModIDs.CrC+"; before:"+ModIDs.ReC+"; before:"+ModIDs.RoC+"; before:"+ModIDs.Mek+"; before:"+ModIDs.Mek_Tools+"; before:"+ModIDs.Mek_Generators+"; before:"+ModIDs.GC+"; before:"+ModIDs.GC_PLANETS+"; before:"+ModIDs.GC_GALAXYSPACE+"; before:"+ModIDs.VULPES+"; before:"+ModIDs.GC_ADV_ROCKETRY+"; before:"+ModIDs.BTL+"; before:"+ModIDs.AETHER+"; before:"+ModIDs.TROPIC+"; before:"+ModIDs.ATUM+"; before:"+ModIDs.EB+"; before:"+ModIDs.EBXL+"; before:"+ModIDs.BoP+"; before:"+ModIDs.HiL+"; before:"+ModIDs.ATG+"; before:"+ModIDs.RTG+"; before:"+ModIDs.RWG+"; before:"+ModIDs.MYST+"; before:"+ModIDs.WARPBOOK+"; before:"+ModIDs.LOSTBOOKS+"; before:"+ModIDs.LOOTBAGS+"; before:"+ModIDs.EUREKA+"; before:"+ModIDs.ENCHIRIDION+"; before:"+ModIDs.ENCHIRIDION2+"; before:"+ModIDs.SmAc+"; before:"+ModIDs.HQM+"; before:"+ModIDs.JABBA+"; before:"+ModIDs.MaCu+"; before:"+ModIDs.PdC+"; before:"+ModIDs.Bamboo+"; before:"+ModIDs.PMP+"; before:"+ModIDs.Fossil+"; before:"+ModIDs.GrC+"; before:"+ModIDs.GrC_Apples+"; before:"+ModIDs.GrC_Bamboo+"; before:"+ModIDs.GrC_Bees+"; before:"+ModIDs.GrC_Cellar+"; before:"+ModIDs.GrC_Fish+"; before:"+ModIDs.GrC_Grapes+"; before:"+ModIDs.GrC_Hops+"; before:"+ModIDs.GrC_Milk+"; before:"+ModIDs.GrC_Rice+"; before:"+ModIDs.BWM+"; before:"+ModIDs.OMT+"; before:"+ModIDs.TG+"; before:"+ModIDs.FM+"; before:"+ModIDs.FZ+"; before:"+ModIDs.MNTL+"; before:"+ModIDs.OB+"; before:"+ModIDs.TiC+"; before:"+ModIDs.MF2+"; before:"+ModIDs.WR_CBE_C+"; before:"+ModIDs.WR_CBE_A+"; before:"+ModIDs.WR_CBE_L+"; before:"+ModIDs.VOLTZ+"; before:"+ModIDs.MFFS+"; before:"+ModIDs.ICBM+"; before:"+ModIDs.ATSCI+"; before:inventorytweaks; before:ironbackpacks; before:journeymap; before:LogisticsPipes; before:LunatriusCore; before:NEIAddons; before:NEIAddons|Developer; before:NEIAddons|AppEng; before:NEIAddons|Botany; before:NEIAddons|Forestry; before:NEIAddons|CraftingTables; before:NEIAddons|ExNihilo; before:neiintegration; before:openglasses; before:simplyjetpacks; before:Stackie; before:StevesCarts; before:TiCTooltips; before:worldedit; before:McMultipart; before:OpenPeripheralCore; before:OpenPeripheralIntegration; before:OpenPeripheral; ")
 public class GT_API extends Abstract_Mod {
 	@SidedProxy(modId = ModIDs.GAPI, clientSide = "gregapi.GT_API_Proxy_Client", serverSide = "gregapi.GT_API_Proxy_Server")
 	public static GT_API_Proxy api_proxy;
@@ -326,9 +326,14 @@ public class GT_API extends Abstract_Mod {
 		if (!tFile.exists()) tFile = new File(DirectoriesGT.CONFIG_GT, "ids.cfg");
 		Config.sConfigFileIDs = new Configuration(tFile); Config.sConfigFileIDs.save();
 		
-		tFile = new File(DirectoriesGT.CONFIG_GT, "GregTech.cfg");
-		if (!tFile.exists()) tFile = new File(DirectoriesGT.CONFIG_GT, "gregtech.cfg");
-		Configuration tMainConfig = new Configuration(tFile);
+		ConfigsGT.GREGTECH      = new Config("GregTech.cfg").setUseDefaultInNames(F);
+		ConfigsGT.RECIPES       = new Config("Recipes.cfg");
+		ConfigsGT.WORLDGEN      = new Config("WorldGenerationNew.cfg");
+		ConfigsGT.MATERIAL      = new Config("Materials.cfg");
+		ConfigsGT.OREPROCESSING = new Config("OreProcessing.cfg");
+		// Deprecated Config Files.
+		ConfigsGT.OVERPOWERED = ConfigsGT.MACHINES = ConfigsGT.SPECIAL = ConfigsGT.GREGTECH;
+		
 		
 		tFile = new File(DirectoriesGT.CONFIG_GT, "Stacksizes.cfg");
 		if (!tFile.exists()) tFile = new File(DirectoriesGT.CONFIG_GT, "stacksizes.cfg");
@@ -347,7 +352,7 @@ public class GT_API extends Abstract_Mod {
 		
 		for (String tString : tList) OUT.println(tString);
 		
-		if (tMainConfig.get("general", "LoggingErrors", T).getBoolean(T)) {
+		if (ConfigsGT.GREGTECH.get("general", "LoggingErrors", T)) {
 			tList = ((LogBuffer)ERR).mBufferedLog;
 			ERR = OUT;
 			for (String tString : tList) ERR.println(tString);
@@ -385,7 +390,7 @@ public class GT_API extends Abstract_Mod {
 			for (String tString : tList) ORD.println(tString);
 		} catch (Throwable e) {/*Do nothing*/}
 		
-		if (tMainConfig.get("general", "LoggingPlayerActivity", !CODE_CLIENT).getBoolean(!CODE_CLIENT)) {
+		if (ConfigsGT.GREGTECH.get("general", "LoggingPlayerActivity", !CODE_CLIENT)) {
 			tFile = new File(DirectoriesGT.LOGS, "playeractivity_"+(System.currentTimeMillis()/60000)+".log");
 			if (!tFile.exists()) {try {tFile.createNewFile();} catch (Throwable e) {/*Do nothing*/}}
 			try {mPlayerLogger = new LoggerPlayerActivity(new PrintStream(tFile));} catch (Throwable e) {/*Do nothing*/}
@@ -393,11 +398,11 @@ public class GT_API extends Abstract_Mod {
 		
 		ConfigsGT.CLIENT = new Config(DirectoriesGT.MINECRAFT, "GregTech.cfg");
 		
-		D1 = ConfigsGT.CLIENT.get("debug" , "logs"    , F);
-		D2 = ConfigsGT.CLIENT.get("debug" , "oredict" , F);
-		D3 = ConfigsGT.CLIENT.get("debug" , "misc"    , F);
-		CLIENT_BLOCKUPDATE_SOUNDS = ConfigsGT.CLIENT.get("debug" , "block_update_sounds"    , F);
-		if ( ConfigsGT.CLIENT.get("debug" , "april"   , F)) APRIL_FOOLS = T;
+		D1 = ConfigsGT.CLIENT.get("debug" , "logs"   , F);
+		D2 = ConfigsGT.CLIENT.get("debug" , "oredict", F);
+		D3 = ConfigsGT.CLIENT.get("debug" , "misc"   , F);
+		CLIENT_BLOCKUPDATE_SOUNDS = ConfigsGT.CLIENT.get("debug" , "block_update_sounds", F);
+		if ( ConfigsGT.CLIENT.get("debug" , "april"  , F)) APRIL_FOOLS = T;
 		
 		if (APRIL_FOOLS && CODE_CLIENT) {
 			MT.W.setLocal("Wolframium");
@@ -485,40 +490,39 @@ public class GT_API extends Abstract_Mod {
 		}
 		
 		for (OreDictPrefix tPrefix : OreDictPrefix.VALUES) if (!tPrefix.contains(TD.Prefix.PREFIX_UNUSED)) {
-			int tDefault = tMainConfig.get("stacksizes", tPrefix.mNameInternal+"_"+tPrefix.mDefaultStackSize, tPrefix.mDefaultStackSize).getInt();
-			tPrefix.setConfigStacksize(tStackConfig.get("stacksizes", tPrefix.mNameInternal+"_"+tDefault, tDefault).getInt());
+			tPrefix.setConfigStacksize(tStackConfig.get("stacksizes", tPrefix.mNameInternal+"_"+tPrefix.mDefaultStackSize, tPrefix.mDefaultStackSize).getInt());
 		}
+		tStackConfig.save();
 		
-		tMainConfig.removeCategory(tMainConfig.getCategory("stacksizes"));
+		SURVIVAL_INTO_ADVENTURE_MODE            = ConfigsGT.GREGTECH.get("general", "forceAdventureMode"               , F);
+		ADVENTURE_MODE_KIT                      = ConfigsGT.GREGTECH.get("general", "AdventureModeStartingKit"         , !MD.GT.mLoaded);
+		HUNGER_BY_INVENTORY_WEIGHT              = ConfigsGT.GREGTECH.get("general", "AFK_Hunger"                       ,  MD.GT.mLoaded);
+		INVENTORY_UNIFICATION                   = ConfigsGT.GREGTECH.get("general", "InventoryUnification"             , T);
+		XP_ORB_COMBINING                        = ConfigsGT.GREGTECH.get("general", "XP_Orb_Combining"                 , T);
+		CONFIG_HARDNESS_MULTIPLIER_SAND         = ConfigsGT.GREGTECH.get("general", "HardnessMultiplier_Sand"          , 1);
+		CONFIG_HARDNESS_MULTIPLIER_ROCK         = ConfigsGT.GREGTECH.get("general", "HardnessMultiplier_Rock"          , 1);
+		CONFIG_HARDNESS_MULTIPLIER_ORES         = ConfigsGT.GREGTECH.get("general", "HardnessMultiplier_Ores"          , 1);
+		ITEM_DESPAWN_TIME                       = ConfigsGT.GREGTECH.get("general", "ItemDespawnTime"                  ,6000);
+		TREE_GROWTH_TIME                        = ConfigsGT.GREGTECH.get("general", "Tree_Growth_Time"                 , 1);
+		ENTITY_CRAMMING                         = ConfigsGT.GREGTECH.get("general", "MaxEqualEntitiesAtOneSpot"        , 3);
+		DRINKS_ALWAYS_DRINKABLE                 = ConfigsGT.GREGTECH.get("general", "drinks_always_drinkable"          , F);
+		EMIT_EU_AS_RF                           = ConfigsGT.GREGTECH.get("general", "Emit_EU_as_RF_from_Blocks"        , F);
+		NERFED_WOOD                             = ConfigsGT.GREGTECH.get("general", "WoodNeedsSawForCrafting"          , T);
+		FAST_LEAF_DECAY                         = ConfigsGT.GREGTECH.get("general", "FastLeafDecay"                    , T);
+		CONSTANT_ENERGY                         = ConfigsGT.GREGTECH.get("general", "UninterruptedEnergyRequirement"   , T);
+		FOOD_OVERDOSE_DEATH                     = ConfigsGT.GREGTECH.get("general", "DeathByOverdosingCertainFoods"    , T);
+		NUTRITION_SYSTEM                        = ConfigsGT.GREGTECH.get("general", "NutritionSystem"                  , T);
+		OWNERSHIP_RESET                         = ConfigsGT.GREGTECH.get("general", "ResetPlayerOwnershipOfGT6Blocks"  , F);
+		SPAWN_ZONE_MOB_PROTECTION               = ConfigsGT.GREGTECH.get("general", "PreventMobSpawnsCloseToSpawn"     , T);
+		DISABLE_GT6_CRAFTING_RECIPES            = ConfigsGT.GREGTECH.get("general", "DisableGT6CraftingRecipesDEBUG"   , F);
+		TOOL_SOUNDS                             = ConfigsGT.GREGTECH.get("general", "sound_tools"                      , T);
+		UT.Sounds.MULTITHREADED                 = ConfigsGT.GREGTECH.get("general", "sound_multi_threading"            , F);
 		
-		SURVIVAL_INTO_ADVENTURE_MODE            = tMainConfig.get("general", "forceAdventureMode"               , F).getBoolean(F);
-		ADVENTURE_MODE_KIT                      = tMainConfig.get("general", "AdventureModeStartingKit"         , !MD.GT.mLoaded).getBoolean(!MD.GT.mLoaded);
-		HUNGER_BY_INVENTORY_WEIGHT              = tMainConfig.get("general", "AFK_Hunger"                       ,  MD.GT.mLoaded).getBoolean( MD.GT.mLoaded);
-		INVENTORY_UNIFICATION                   = tMainConfig.get("general", "InventoryUnification"             , T).getBoolean(T);
-		XP_ORB_COMBINING                        = tMainConfig.get("general", "XP_Orb_Combining"                 , T).getBoolean(T);
-		CONFIG_HARDNESS_MULTIPLIER_SAND         = tMainConfig.get("general", "HardnessMultiplier_Sand"          , 1).getDouble(1);
-		CONFIG_HARDNESS_MULTIPLIER_ROCK         = tMainConfig.get("general", "HardnessMultiplier_Rock"          , 1).getDouble(1);
-		CONFIG_HARDNESS_MULTIPLIER_ORES         = tMainConfig.get("general", "HardnessMultiplier_Ores"          , 1).getDouble(1);
-		ITEM_DESPAWN_TIME                       = tMainConfig.get("general", "ItemDespawnTime"                  ,6000).getInt(6000);
-		TREE_GROWTH_TIME                        = tMainConfig.get("general", "Tree_Growth_Time"                 , 1).getInt(1);
-		ENTITY_CRAMMING                         = tMainConfig.get("general", "MaxEqualEntitiesAtOneSpot"        , 3).getInt(3);
-		DRINKS_ALWAYS_DRINKABLE                 = tMainConfig.get("general", "drinks_always_drinkable"          , F).getBoolean(F);
-		EMIT_EU_AS_RF                           = tMainConfig.get("general", "Emit_EU_as_RF_from_Blocks"        , F).getBoolean(F);
-		NERFED_WOOD                             = tMainConfig.get("general", "WoodNeedsSawForCrafting"          , T).getBoolean(T);
-		FAST_LEAF_DECAY                         = tMainConfig.get("general", "FastLeafDecay"                    , T).getBoolean(T);
-		CONSTANT_ENERGY                         = tMainConfig.get("general", "UninterruptedEnergyRequirement"   , T).getBoolean(T);
-		FOOD_OVERDOSE_DEATH                     = tMainConfig.get("general", "DeathByOverdosingCertainFoods"    , T).getBoolean(T);
-		OWNERSHIP_RESET                         = tMainConfig.get("general", "ResetPlayerOwnershipOfGT6Blocks"  , F).getBoolean(F);
-		SPAWN_ZONE_MOB_PROTECTION               = tMainConfig.get("general", "PreventMobSpawnsCloseToSpawn"     , T).getBoolean(T);
-		DISABLE_GT6_CRAFTING_RECIPES            = tMainConfig.get("general", "DisableGT6CraftingRecipesDEBUG"   , F).getBoolean(F);
-		TOOL_SOUNDS                             = tMainConfig.get("general", "sound_tools"                      , T).getBoolean(T);
-		UT.Sounds.MULTITHREADED                 = tMainConfig.get("general", "sound_multi_threading"            , F).getBoolean(F);
-		
-		ENABLE_ADDING_IC2_MACERATOR_RECIPES     = tMainConfig.get("ic2", "EnableAddingMaceratorRecipes"         , T).getBoolean(T);
-		ENABLE_ADDING_IC2_EXTRACTOR_RECIPES     = tMainConfig.get("ic2", "EnableAddingExtractorRecipes"         , T).getBoolean(T);
-		ENABLE_ADDING_IC2_COMPRESSOR_RECIPES    = tMainConfig.get("ic2", "EnableAddingCompressorRecipes"        , T).getBoolean(T);
-		ENABLE_ADDING_IC2_OREWASHER_RECIPES     = tMainConfig.get("ic2", "EnableAddingOreWasherRecipes"         , T).getBoolean(T);
-		ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES    = tMainConfig.get("ic2", "EnableAddingThermalCentrifugeRecipes" , T).getBoolean(T);
+		ENABLE_ADDING_IC2_MACERATOR_RECIPES     = ConfigsGT.GREGTECH.get("ic2", "EnableAddingMaceratorRecipes"         , T);
+		ENABLE_ADDING_IC2_EXTRACTOR_RECIPES     = ConfigsGT.GREGTECH.get("ic2", "EnableAddingExtractorRecipes"         , T);
+		ENABLE_ADDING_IC2_COMPRESSOR_RECIPES    = ConfigsGT.GREGTECH.get("ic2", "EnableAddingCompressorRecipes"        , T);
+		ENABLE_ADDING_IC2_OREWASHER_RECIPES     = ConfigsGT.GREGTECH.get("ic2", "EnableAddingOreWasherRecipes"         , T);
+		ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES    = ConfigsGT.GREGTECH.get("ic2", "EnableAddingThermalCentrifugeRecipes" , T);
 		
 		if (MD.IC2C.mLoaded) {
 		DISABLE_ALL_IC2_MACERATOR_RECIPES       = F;
@@ -532,15 +536,15 @@ public class GT_API extends Abstract_Mod {
 		DISABLE_ALL_IC2_CENTRIFUGE_RECIPES      = F;
 		ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES    = F;
 		} else if (MD.IC2.mLoaded) {
-		DISABLE_ALL_IC2_MACERATOR_RECIPES       = tMainConfig.get("ic2", "DisableAllMaceratorRecipes"           , F).getBoolean(F);
+		DISABLE_ALL_IC2_MACERATOR_RECIPES       = ConfigsGT.GREGTECH.get("ic2", "DisableAllMaceratorRecipes"           , F);
 		if (DISABLE_ALL_IC2_MACERATOR_RECIPES) ENABLE_ADDING_IC2_MACERATOR_RECIPES = F;
-		DISABLE_ALL_IC2_EXTRACTOR_RECIPES       = tMainConfig.get("ic2", "DisableAllExtractorRecipes"           , F).getBoolean(F);
+		DISABLE_ALL_IC2_EXTRACTOR_RECIPES       = ConfigsGT.GREGTECH.get("ic2", "DisableAllExtractorRecipes"           , F);
 		if (DISABLE_ALL_IC2_EXTRACTOR_RECIPES) ENABLE_ADDING_IC2_EXTRACTOR_RECIPES = F;
-		DISABLE_ALL_IC2_COMPRESSOR_RECIPES      = tMainConfig.get("ic2", "DisableAllCompressorRecipes"          , F).getBoolean(F);
+		DISABLE_ALL_IC2_COMPRESSOR_RECIPES      = ConfigsGT.GREGTECH.get("ic2", "DisableAllCompressorRecipes"          , F);
 		if (DISABLE_ALL_IC2_COMPRESSOR_RECIPES) ENABLE_ADDING_IC2_COMPRESSOR_RECIPES = F;
-		DISABLE_ALL_IC2_OREWASHER_RECIPES       = tMainConfig.get("ic2", "DisableAllOreWasherRecipes"           , F).getBoolean(F);
+		DISABLE_ALL_IC2_OREWASHER_RECIPES       = ConfigsGT.GREGTECH.get("ic2", "DisableAllOreWasherRecipes"           , F);
 		if (DISABLE_ALL_IC2_OREWASHER_RECIPES) ENABLE_ADDING_IC2_OREWASHER_RECIPES = F;
-		DISABLE_ALL_IC2_CENTRIFUGE_RECIPES      = tMainConfig.get("ic2", "DisableAllThermalCentrifugeRecipes"   , F).getBoolean(F);
+		DISABLE_ALL_IC2_CENTRIFUGE_RECIPES      = ConfigsGT.GREGTECH.get("ic2", "DisableAllThermalCentrifugeRecipes"   , F);
 		if (DISABLE_ALL_IC2_CENTRIFUGE_RECIPES) ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES = F;
 		} else {
 		DISABLE_ALL_IC2_MACERATOR_RECIPES       = F;
@@ -555,21 +559,21 @@ public class GT_API extends Abstract_Mod {
 		ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES    = F;
 		}
 		
-		if (tMainConfig.get("general", "disable_STDOUT"             , F).getBoolean(F)) System.out.close();
-		if (tMainConfig.get("general", "disable_STDERR"             , F).getBoolean(F)) System.err.close();
-		if (tMainConfig.get("general", "hardermobspawners"          , T).getBoolean(T)) Blocks.mob_spawner.setHardness(500.0F);
-		if (tMainConfig.get("general", "blastresistantmobspawners"  , T).getBoolean(T)) Blocks.mob_spawner.setResistance(6000000.0F);
+		if (ConfigsGT.GREGTECH.get("general", "disable_STDOUT"             , F)) System.out.close();
+		if (ConfigsGT.GREGTECH.get("general", "disable_STDERR"             , F)) System.err.close();
+		if (ConfigsGT.GREGTECH.get("general", "hardermobspawners"          , T)) Blocks.mob_spawner.setHardness(500.0F);
+		if (ConfigsGT.GREGTECH.get("general", "blastresistantmobspawners"  , T)) Blocks.mob_spawner.setResistance(6000000.0F);
 		
-		FIRE_EXPLOSIONS                     = tMainConfig.get("machines", "explode_by_fire"    , T).getBoolean(T);
-		RAIN_EXPLOSIONS                     = tMainConfig.get("machines", "explode_by_rain"    , T).getBoolean(T);
-		WATER_EXPLOSIONS                    = tMainConfig.get("machines", "explode_by_water"   , T).getBoolean(T);
-		THUNDER_EXPLOSIONS                  = tMainConfig.get("machines", "explode_by_thunder" , T).getBoolean(T);
-		OVERCHARGE_EXPLOSIONS               = tMainConfig.get("machines", "explode_by_overload", F).getBoolean(F);
-		FIRE_BREAKING                       = tMainConfig.get("machines", "break_by_fire"      , T).getBoolean(T);
-		RAIN_BREAKING                       = tMainConfig.get("machines", "break_by_rain"      , T).getBoolean(T);
-		WATER_BREAKING                      = tMainConfig.get("machines", "break_by_water"     , T).getBoolean(T);
-		THUNDER_BREAKING                    = tMainConfig.get("machines", "break_by_thunder"   , T).getBoolean(T);
-		OVERCHARGE_BREAKING                 = tMainConfig.get("machines", "break_by_overload"  , F).getBoolean(F);
+		FIRE_EXPLOSIONS                     = ConfigsGT.GREGTECH.get("machines", "explode_by_fire"    , T);
+		RAIN_EXPLOSIONS                     = ConfigsGT.GREGTECH.get("machines", "explode_by_rain"    , T);
+		WATER_EXPLOSIONS                    = ConfigsGT.GREGTECH.get("machines", "explode_by_water"   , T);
+		THUNDER_EXPLOSIONS                  = ConfigsGT.GREGTECH.get("machines", "explode_by_thunder" , T);
+		OVERCHARGE_EXPLOSIONS               = ConfigsGT.GREGTECH.get("machines", "explode_by_overload", F);
+		FIRE_BREAKING                       = ConfigsGT.GREGTECH.get("machines", "break_by_fire"      , T);
+		RAIN_BREAKING                       = ConfigsGT.GREGTECH.get("machines", "break_by_rain"      , T);
+		WATER_BREAKING                      = ConfigsGT.GREGTECH.get("machines", "break_by_water"     , T);
+		THUNDER_BREAKING                    = ConfigsGT.GREGTECH.get("machines", "break_by_thunder"   , T);
+		OVERCHARGE_BREAKING                 = ConfigsGT.GREGTECH.get("machines", "break_by_overload"  , F);
 		
 		if (FIRE_EXPLOSIONS      ) FIRE_BREAKING       = T;
 		if (RAIN_EXPLOSIONS      ) RAIN_BREAKING       = T;
@@ -585,17 +589,14 @@ public class GT_API extends Abstract_Mod {
 		HARDNESS_MULTIPLIER_ROCK = CONFIG_HARDNESS_MULTIPLIER_ROCK;
 		HARDNESS_MULTIPLIER_ORES = CONFIG_HARDNESS_MULTIPLIER_ORES;
 		
-		if (tMainConfig.get("compat", "IC2Classic"          , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add((ICompat)UT.Reflection.callConstructor("gregapi.compat.industrialcraft.CompatIC2C", 0, null, D2));
-		if (tMainConfig.get("compat", "IC2EnergyItems"      , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_EU_ITEM   = (ICompatIC2EUItem )UT.Reflection.callConstructor("gregapi.compat.industrialcraft.CompatIC2EUItem" , 0, null, D2));
-		if (tMainConfig.get("compat", "IndustrialCraft2"    , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_IC2       = (ICompatIC2       )UT.Reflection.callConstructor("gregapi.compat.industrialcraft.CompatIC2"       , 0, null, D2));
-		if (tMainConfig.get("compat", "ThaumCraft"          , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_TC        = (ICompatTC        )UT.Reflection.callConstructor("gregapi.compat.thaumcraft.CompatTC"             , 0, null, D2));
-		if (tMainConfig.get("compat", "BuildCraft"          , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_BC        = (ICompatBC        )UT.Reflection.callConstructor("gregapi.compat.buildcraft.CompatBC"             , 0, null, D2));
-		if (tMainConfig.get("compat", "ComputerCraft"       , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_CC        = (ICompatCC        )UT.Reflection.callConstructor("gregapi.compat.computercraft.CompatCC"          , 0, null, D2));
-		if (tMainConfig.get("compat", "Forestry"            , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_FR        = (ICompatFR        )UT.Reflection.callConstructor("gregapi.compat.forestry.CompatFR"               , 0, null, D2));
-		if (tMainConfig.get("compat", "GalactiCraft"        , T).getBoolean(T)) ICompat.COMPAT_CLASSES.add(COMPAT_GC        = (ICompatGC        )UT.Reflection.callConstructor("gregapi.compat.galacticraft.CompatGC"           , 0, null, D2));
-		
-		tMainConfig.save();
-		tStackConfig.save();
+		if (ConfigsGT.GREGTECH.get("compat", "IC2Classic"          , T)) ICompat.COMPAT_CLASSES.add((ICompat)UT.Reflection.callConstructor("gregapi.compat.industrialcraft.CompatIC2C", 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "IC2EnergyItems"      , T)) ICompat.COMPAT_CLASSES.add(COMPAT_EU_ITEM   = (ICompatIC2EUItem )UT.Reflection.callConstructor("gregapi.compat.industrialcraft.CompatIC2EUItem" , 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "IndustrialCraft2"    , T)) ICompat.COMPAT_CLASSES.add(COMPAT_IC2       = (ICompatIC2       )UT.Reflection.callConstructor("gregapi.compat.industrialcraft.CompatIC2"       , 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "ThaumCraft"          , T)) ICompat.COMPAT_CLASSES.add(COMPAT_TC        = (ICompatTC        )UT.Reflection.callConstructor("gregapi.compat.thaumcraft.CompatTC"             , 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "BuildCraft"          , T)) ICompat.COMPAT_CLASSES.add(COMPAT_BC        = (ICompatBC        )UT.Reflection.callConstructor("gregapi.compat.buildcraft.CompatBC"             , 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "ComputerCraft"       , T)) ICompat.COMPAT_CLASSES.add(COMPAT_CC        = (ICompatCC        )UT.Reflection.callConstructor("gregapi.compat.computercraft.CompatCC"          , 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "Forestry"            , T)) ICompat.COMPAT_CLASSES.add(COMPAT_FR        = (ICompatFR        )UT.Reflection.callConstructor("gregapi.compat.forestry.CompatFR"               , 0, null, D2));
+		if (ConfigsGT.GREGTECH.get("compat", "GalactiCraft"        , T)) ICompat.COMPAT_CLASSES.add(COMPAT_GC        = (ICompatGC        )UT.Reflection.callConstructor("gregapi.compat.galacticraft.CompatGC"           , 0, null, D2));
 		
 		SHOW_HIDDEN_ITEMS                   = ConfigsGT.CLIENT.get(ConfigCategories.visibility, "HiddenGTItems"           , F);
 		SHOW_HIDDEN_MATERIALS               = ConfigsGT.CLIENT.get(ConfigCategories.visibility, "HiddenGTMaterials"       , F);
@@ -607,12 +608,6 @@ public class GT_API extends Abstract_Mod {
 		
 		ITexture.Util.GT_ALPHA_BLENDING     = ConfigsGT.CLIENT.get(ConfigCategories.general, "useGTAlphaBlending"      , ITexture.Util.GT_ALPHA_BLENDING);
 		ITexture.Util.MC_ALPHA_BLENDING     = ConfigsGT.CLIENT.get(ConfigCategories.general, "useMCAlphaBlending"      , ITexture.Util.MC_ALPHA_BLENDING);
-		
-		ConfigsGT.RECIPES                   = new Config("Recipes.cfg");
-		ConfigsGT.WORLDGEN                  = new Config("WorldGenerationNew.cfg");
-		ConfigsGT.MATERIAL                  = new Config("Materials.cfg");
-		ConfigsGT.OREPROCESSING             = new Config("OreProcessing.cfg");
-		ConfigsGT.OVERPOWERED = ConfigsGT.MACHINES = ConfigsGT.SPECIAL = new Config("GregTech.cfg");
 		
 		GT6WorldGenerator.PFAA = (ConfigsGT.WORLDGEN.get(ConfigCategories.general, "AutoDetectPFAA", T) && MD.PFAA.mLoaded);
 		
@@ -806,7 +801,16 @@ public class GT_API extends Abstract_Mod {
 		
 		for (ICompat tCompat : ICompat.COMPAT_CLASSES) try {tCompat.onPostLoad(aEvent);} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
 		
-		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && !tMaterial.contains(TD.Properties.INVALID_MATERIAL)) MAT_LOG.println(tMaterial.mNameInternal);
+		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && !tMaterial.contains(TD.Properties.INVALID_MATERIAL)) {
+			if (tMaterial.mID < 10000) MAT_LOG.print(" ");
+			if (tMaterial.mID <  1000) MAT_LOG.print(" ");
+			if (tMaterial.mID <   100) MAT_LOG.print(" ");
+			if (tMaterial.mID <    10) MAT_LOG.print(" ");
+			MAT_LOG.print(tMaterial.mID);
+			MAT_LOG.print(": ");
+			MAT_LOG.print(tMaterial.mNameInternal);
+			MAT_LOG.println();
+		}
 	}
 	
 	@Override

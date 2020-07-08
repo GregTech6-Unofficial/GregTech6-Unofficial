@@ -454,6 +454,7 @@ public class CS {
 	public static final String[] DYE_OREDICTS_MIXABLE       = {"dyeMixableBlack", "dyeMixableRed", "dyeMixableGreen", "dyeMixableBrown", "dyeMixableBlue", "dyeMixablePurple", "dyeMixableCyan", "dyeMixableLightGray", "dyeMixableGray", "dyeMixablePink", "dyeMixableLime", "dyeMixableYellow", "dyeMixableLightBlue", "dyeMixableMagenta", "dyeMixableOrange", "dyeMixableWhite"};
 	public static final String[] DYE_OREDICTS_LENS          = {"craftingLensBlack", "craftingLensRed", "craftingLensGreen", "craftingLensBrown", "craftingLensBlue", "craftingLensPurple", "craftingLensCyan", "craftingLensLightGray", "craftingLensGray", "craftingLensPink", "craftingLensLime", "craftingLensYellow", "craftingLensLightBlue", "craftingLensMagenta", "craftingLensOrange", "craftingLensWhite"};
 	public static final String[] DYE_OREDICTS_POST          = {"Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White"};
+	public static final String[] HEXORIUM_MONOLITHS         = {"blockEnergizedHexoriumMonolithBlack", "blockEnergizedHexoriumMonolithRed", "blockEnergizedHexoriumMonolithGreen", "blockEnergizedHexoriumMonolithDarkGray", "blockEnergizedHexoriumMonolithBlue", "blockEnergizedHexoriumMonolithPurple", "blockEnergizedHexoriumMonolithCyan", "blockEnergizedHexoriumMonolithLightGray", "blockEnergizedHexoriumMonolithGray", "blockEnergizedHexoriumMonolithPink", "blockEnergizedHexoriumMonolithLime", "blockEnergizedHexoriumMonolithYellow", "blockEnergizedHexoriumMonolithSkyBlue", "blockEnergizedHexoriumMonolithMagenta", "blockEnergizedHexoriumMonolithOrange", "blockEnergizedHexoriumMonolithWhite", "blockEnergizedHexoriumMonolithTurquoise", "blockEnergizedHexoriumMonolithRainbow"};
 
 	public static final short[][] DYES                      = {DYE_Black, DYE_Red, DYE_Green, DYE_Brown, DYE_Blue, DYE_Purple, DYE_Cyan, DYE_LightGray, DYE_Gray, DYE_Pink, DYE_Lime, DYE_Yellow, DYE_LightBlue, DYE_Magenta, DYE_Orange, DYE_White};
 	public static final short[][] DYES_INVERTED             = {DYES[15], DYES[14], DYES[13], DYES[12], DYES[11], DYES[10], DYES[ 9], DYES[ 8], DYES[ 7], DYES[ 6], DYES[ 5], DYES[ 4], DYES[ 3], DYES[ 2], DYES[ 1], DYES[ 0]};
@@ -812,7 +813,7 @@ public class CS {
 
 	/** Not really Constants, but they set using the Config and therefore should be constant. */
 	@SuppressWarnings("deprecation")
-	public static boolean D1 = F, D2 = F, D3 = F, CLIENT_BLOCKUPDATE_SOUNDS = F, NEI = F, APRIL_FOOLS = (new Date().getMonth() == 3 && new Date().getDate() <= 3), TOOL_SOUNDS = T, EMIT_EU_AS_RF = F, DISABLE_GT6_CRAFTING_RECIPES = F, ENABLE_ADDING_IC2_MACERATOR_RECIPES = T, DISABLE_ALL_IC2_MACERATOR_RECIPES = F, ENABLE_ADDING_IC2_EXTRACTOR_RECIPES = T, DISABLE_ALL_IC2_EXTRACTOR_RECIPES = F, ENABLE_ADDING_IC2_COMPRESSOR_RECIPES = T, DISABLE_ALL_IC2_COMPRESSOR_RECIPES = F, ENABLE_ADDING_IC2_OREWASHER_RECIPES = T, DISABLE_ALL_IC2_OREWASHER_RECIPES = F, ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES = T, DISABLE_ALL_IC2_CENTRIFUGE_RECIPES = F, FAST_LEAF_DECAY = T, NERFED_WOOD = T, FOOD_OVERDOSE_DEATH = T, OWNERSHIP_RESET = F, SPAWN_ZONE_MOB_PROTECTION = T, CONSTANT_ENERGY = T, RAIN_EXPLOSIONS = F, WATER_EXPLOSIONS = F, THUNDER_EXPLOSIONS = F, FIRE_EXPLOSIONS = F, OVERCHARGE_EXPLOSIONS = F, FIRE_BREAKING = F, RAIN_BREAKING = F, WATER_BREAKING = F, THUNDER_BREAKING = F, OVERCHARGE_BREAKING = F, SHOW_MICROBLOCKS = F, SHOW_CHEM_FORMULAS = T, SHOW_INTERNAL_NAMES = F, SHOW_HIDDEN_MATERIALS = F, SHOW_HIDDEN_PREFIXES = F, SHOW_ORE_BLOCK_PREFIXES = F, SHOW_HIDDEN_ITEMS = F, DRINKS_ALWAYS_DRINKABLE = F, HUNGER_BY_INVENTORY_WEIGHT = F, INVENTORY_UNIFICATION = T, XP_ORB_COMBINING = T, ADVENTURE_MODE_KIT = F, SURVIVAL_INTO_ADVENTURE_MODE = F, DISPLAY_TEMP_TOOLTIP = T, GENERATE_STONE = T, GENERATE_STREETS = F, GENERATE_NEXUS = F, GENERATE_TESTING = F, GENERATE_BEACON = F, GENERATE_BIOMES = F;
+	public static boolean D1 = F, D2 = F, D3 = F, CLIENT_BLOCKUPDATE_SOUNDS = F, NEI = F, APRIL_FOOLS = (new Date().getMonth() == 3 && new Date().getDate() <= 3), TOOL_SOUNDS = T, EMIT_EU_AS_RF = F, DISABLE_GT6_CRAFTING_RECIPES = F, ENABLE_ADDING_IC2_MACERATOR_RECIPES = T, DISABLE_ALL_IC2_MACERATOR_RECIPES = F, ENABLE_ADDING_IC2_EXTRACTOR_RECIPES = T, DISABLE_ALL_IC2_EXTRACTOR_RECIPES = F, ENABLE_ADDING_IC2_COMPRESSOR_RECIPES = T, DISABLE_ALL_IC2_COMPRESSOR_RECIPES = F, ENABLE_ADDING_IC2_OREWASHER_RECIPES = T, DISABLE_ALL_IC2_OREWASHER_RECIPES = F, ENABLE_ADDING_IC2_CENTRIFUGE_RECIPES = T, DISABLE_ALL_IC2_CENTRIFUGE_RECIPES = F, FAST_LEAF_DECAY = T, NERFED_WOOD = T, FOOD_OVERDOSE_DEATH = T, NUTRITION_SYSTEM = T, OWNERSHIP_RESET = F, SPAWN_ZONE_MOB_PROTECTION = T, CONSTANT_ENERGY = T, RAIN_EXPLOSIONS = F, WATER_EXPLOSIONS = F, THUNDER_EXPLOSIONS = F, FIRE_EXPLOSIONS = F, OVERCHARGE_EXPLOSIONS = F, FIRE_BREAKING = F, RAIN_BREAKING = F, WATER_BREAKING = F, THUNDER_BREAKING = F, OVERCHARGE_BREAKING = F, SHOW_MICROBLOCKS = F, SHOW_CHEM_FORMULAS = T, SHOW_INTERNAL_NAMES = F, SHOW_HIDDEN_MATERIALS = F, SHOW_HIDDEN_PREFIXES = F, SHOW_ORE_BLOCK_PREFIXES = F, SHOW_HIDDEN_ITEMS = F, DRINKS_ALWAYS_DRINKABLE = F, HUNGER_BY_INVENTORY_WEIGHT = F, INVENTORY_UNIFICATION = T, XP_ORB_COMBINING = T, ADVENTURE_MODE_KIT = F, SURVIVAL_INTO_ADVENTURE_MODE = F, DISPLAY_TEMP_TOOLTIP = T, GENERATE_STONE = T, GENERATE_STREETS = F, GENERATE_NEXUS = F, GENERATE_TESTING = F, GENERATE_BEACON = F, GENERATE_BIOMES = F;
 	/** This means that Client or Server specific Base Files are definitely existing and loaded! Not if the World is actually client side or server side! */
 	public static boolean CODE_UNCHECKED = T, CODE_CLIENT = F, CODE_SERVER = F;
 
@@ -1261,7 +1262,7 @@ public class CS {
 
 	/** List of Visually Full Opaque Blocks. For minor Render optimisations. */
 	public static final HashSetNoNulls<Block> VISUALLY_OPAQUE_BLOCKS = new HashSetNoNulls<>(F, Blocks.bedrock, Blocks.command_block, Blocks.hardened_clay, Blocks.stained_hardened_clay, Blocks.gravel, Blocks.sand, Blocks.sandstone, Blocks.end_stone, Blocks.nether_brick, Blocks.netherrack, Blocks.obsidian, Blocks.planks, Blocks.log, Blocks.log2, Blocks.stone, Blocks.cobblestone, Blocks.mossy_cobblestone, Blocks.grass, Blocks.dirt, Blocks.clay, Blocks.stonebrick, Blocks.redstone_block, Blocks.glowstone, Blocks.redstone_lamp, Blocks.lit_redstone_lamp, Blocks.lit_redstone_ore, Blocks.pumpkin, Blocks.melon_block);
-	
+
 
 	public static class GarbageGT {
 		/** The List of Hazmat Armors */
@@ -1613,7 +1614,7 @@ public class CS {
 		//   0 = null
 		//   1 = Book/Written Book/Writable Book/Default
 		//   2 = Enchanted Book
-		//   3 = Black, 4 = White, 5 = Red, 6 = Green, 7 = Blue, 8 = Cyan, 9 = Magenta, 10 = Yellow, 48 = Orange, 49 = Purple
+		//   3 = Black, 4 = White, 5 = Red, 6 = Green, 7 = Blue, 8 = Cyan, 9 = Magenta, 10 = Yellow, 48 = Orange, 49 = Purple, 53 = Dusty
 		//  11 = Material Dictionary
 		//  12 = GT Book
 		//  13 = Thaumonomicon
@@ -1628,7 +1629,7 @@ public class CS {
 		//  22 = Brewing
 		//  23 = Vampires
 		//  24 = Reika
-		//  25 = Default Folder, 26 = Red Folder, 27 = Green Folder, 28 = Blue Folder
+		//  25 = Default Black Folder, 26 = Red Folder, 27 = Green Folder, 28 = Blue Folder
 		//  29 = Clipboard
 		//  30 = Records
 		//  31 = Printing Plates
@@ -1729,6 +1730,7 @@ public class CS {
 		CLIENT = null,
 		SPECIAL = null,
 		RECIPES = null,
+		GREGTECH = null,
 		MACHINES = null,
 		WORLDGEN = null,
 		MATERIAL = null,
@@ -1887,6 +1889,7 @@ public class CS {
 		, SmAc              = "SimpleAchievements"
 		, HQM               = "HardcoreQuesting"
 
+		, HEX               = "hexcraft"
 		, DE                = "DraconicEvolution"
 		, AV                = "Avaritia"
 
