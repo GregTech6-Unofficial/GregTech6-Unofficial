@@ -83,7 +83,7 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.BiomassFlora.make(10)), ZL_FS, IL.Culture_Dish_Biomass_Flora.get(1));
 
-        RM.Incubator.addRecipe1(T, 16, 24000, IL.Culture_Dish_Biomass_Flora.get(1), FL.AmylumSolution.make(1000), FL.BiomassFlora.make(1000), IL.Culture_Dish_Empty.get(1));
+        RM.Incubator.addRecipe1(T, 16, 2048, IL.Culture_Dish_Biomass_Flora.get(1), FL.AmylumSolution.make(1000), FL.BiomassFlora.make(1000), IL.Culture_Dish_Empty.get(1));
 
         RM.BioLab.addRecipeX(T, 128, 2000, ST.array(IL.Mixing_Rod.get(0), ST.tag(1)), FL.array(FL.BiomassFlora.make(1000)), FL.array(FL.Biowaste.make(900), FL.Yeast.make(1)), ZL_IS).setSpecialNumber(200000);
 
@@ -101,13 +101,13 @@ public class MultiItemBiology extends MultiItemRandom{
 
         RM.Injector.addRecipe1(T, 16, 512, IL.Culture_Dish_Empty.get(1), FL.array(FL.BacteriaMedium.make(1000), FL.Clostridia.make(10)), ZL_FS, IL.Culture_Dish_Clostridia.get(1));
 
-        RM.Incubator.addRecipe1(T, 16, 24000, IL.Culture_Dish_Yeast.get(1), FL.AmylumSolution.make(1000), FL.Yeast.make(1000), IL.Culture_Dish_Empty.get(1));
+        RM.Incubator.addRecipe1(T, 16, 2048, IL.Culture_Dish_Yeast.get(1), FL.AmylumSolution.make(1000), FL.Yeast.make(1000), IL.Culture_Dish_Empty.get(1));
 
-        RM.Incubator.addRecipe1(T, 16, 36000, IL.Culture_Dish_Methanogens.get(1), FL.AmylumSolution.make(1000), FL.Methanogens.make(1000), IL.Culture_Dish_Empty.get(1));
+        RM.Incubator.addRecipe1(T, 16, 4096, IL.Culture_Dish_Methanogens.get(1), FL.AmylumSolution.make(1000), FL.Methanogens.make(1000), IL.Culture_Dish_Empty.get(1));
 
-        RM.Incubator.addRecipe1(T, 16, 48000, IL.Culture_Dish_Bacillus.get(1), FL.AmylumSolution.make(1000), FL.Bacillus.make(1000), IL.Culture_Dish_Empty.get(1));
+        RM.Incubator.addRecipe1(T, 16, 4096, IL.Culture_Dish_Bacillus.get(1), FL.AmylumSolution.make(1000), FL.Bacillus.make(1000), IL.Culture_Dish_Empty.get(1));
 
-        RM.Incubator.addRecipe1(T, 16, 48000, IL.Culture_Dish_Clostridia.get(1), FL.AmylumSolution.make(1000), FL.Clostridia.make(1000), IL.Culture_Dish_Empty.get(1));
+        RM.Incubator.addRecipe1(T, 16, 4096, IL.Culture_Dish_Clostridia.get(1), FL.AmylumSolution.make(1000), FL.Clostridia.make(1000), IL.Culture_Dish_Empty.get(1));
 
 
         // Functions of bacteria
