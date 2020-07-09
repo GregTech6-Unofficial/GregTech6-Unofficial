@@ -128,7 +128,7 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
         //空培养皿的合成
 
-        RM.Centrifuge.addRecipe1(T,1024,200, ST.make(Items.bone,1,0), ZL_FS, FL.FieryBlood.make(1),OP.dust.mat(MT.Bone,4));
+        RM.Centrifuge.addRecipe1(T,1024,200, ST.make(Items.bone,1,0), ZL_FS, FL.BoneMarrow.make(1),OP.dust.mat(MT.Bone,4));
         //骨髓血
 
         RM.Mixer.addRecipe1(T,16,64,OP.dustDiv72.mat(MT.NaCl,81), MT.DistWater.liquid(U*125,T), FL.SPSS.make(125000),ZL_IS);
