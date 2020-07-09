@@ -167,7 +167,11 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(2000000);
         //还是接种干细胞
 
-        RM.Incubator.addRecipe2(T, 16, 20000 + 4096, IL.Culture_Dish_Stem_Cell_Embryonic.get(1), ST.tag(1), FL.MSCSupplement.make(1000), NF, IL.Culture_Dish_Stem_Cell_Somatic.get(1));
+        RM.BioLab.addRecipe2(T, 16, 64, IL.Culture_Dish_Stem_Cell_Somatic.get(1), ST.tag(0), NF, NF, ST.array(IL.Stem_Cell.get(9), OP.scrapGt.mat(MT.PTFE, 3)));
+        //从培养完成的培养皿中提取干细胞
+
+        RM.Incubator.addRecipe2(T, 16, 60000 + 4096, IL.Culture_Dish_Stem_Cell_Embryonic.get(1), ST.tag(1), FL.MSCSupplement.make(1000), NF, IL.Culture_Dish_Stem_Cell_Somatic.get(1));
+        //培养干细胞
 
         RM.Distillery.addRecipe1(T, 512, 128,ST.tag(0), MT.Petrol.liquid(U, T), FL.Dodecane.make(150), ZL_IS);
         RM.Distillery.addRecipe1(T, 512, 192,ST.tag(0), MT.Diesel.liquid(U, T), FL.Dodecane.make(200), ZL_IS);
@@ -224,13 +228,13 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe0(T, 16, 4096, MT.Lava.liquid(U*16, T), FL.taqDNAPolymerase.make(1), ZL_IS).setSpecialNumber(200000);;
         //taqDNA聚合酶
 
-        RM.BioLab.addRecipeX(T, 16, 4096, ST.array(IL.Culture_Dish_Empty.get(1), OP.ingot.mat(MT.MeatCooked, 1), ST.make(Blocks.dirt, 1, 0)), MT.Water.liquid(U, T), FL.EscherichiaColi.make(1) , ZL_IS).setSpecialNumber(200000);;
+        RM.BioLab.addRecipeX(T, 64, 8192, ST.array(IL.Culture_Dish_Empty.get(1), OP.ingot.mat(MT.MeatCooked, 1), ST.make(Blocks.dirt, 1, 0)), MT.Water.liquid(U, T), FL.EscherichiaColi.make(1) , ZL_IS).setSpecialNumber(200000);;
         //大肠杆菌
 
-        RM.Incubator.addRecipe1(T, 16, 4096, OP.ingot.mat(MT.MeatCooked, 4), FL.EscherichiaColi.make(1), FL.EscherichiaColi.make(1000), ZL_IS);
+        RM.Incubator.addRecipe1(T, 16, 32768, OP.ingot.mat(MT.MeatCooked, 4), FL.EscherichiaColi.make(1), FL.EscherichiaColi.make(1000), ZL_IS);
         //培养大肠杆菌
 
-        RM.BioLab.addRecipe1(T, 256, 2048, ST.tag(0), FL.EscherichiaColi.make(1000), FL.RestrictionEndonuclease.make(1), ZL_IS);
+        RM.BioLab.addRecipe1(T, 256, 4096, ST.tag(0), FL.EscherichiaColi.make(1000), FL.RestrictionEndonuclease.make(1), ZL_IS);
         //提取限制性核酸内切酶
 
         RM.BioLab.addRecipe1(T, 16, 1024, new long[]{100}, OP.tube.mat(MT.Glass, 1), FL.array(FL.DNASolution.make(1), FL.RestrictionEndonuclease.make(1)), ZL_FS, IL.Gene_Samples.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Differentiation promoting protein (nerve cell)"))).setSpecialNumber(200000);;
@@ -239,10 +243,10 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe1(T, 64, 1024, IL.Gene_Samples.getWithNameAndNBT(1, "Gene Data", UT.NBT.makeString("gt.gene", "Differentiation promoting protein (nerve cell)")), FL.array(FL.Primer.make(100), FL.Deoxyribonucleotide.make(1000)), FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), ZL_IS).setSpecialNumber(200000);;
         //扩增基因样本
 
-        RM.BioLab.addRecipe1(T, 16, 256, OP.dust.mat(MT.CaCl2, 1), FL.array(FL.DifferentiationPromotingProtein_NerveCell_Gene.make(100), FL.EscherichiaColi.make(10)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1), ZL_IS).setSpecialNumber(200000);;
+        RM.BioLab.addRecipe1(T, 16, 256, OP.dust.mat(MT.CaCl2, 1), FL.array(FL.DifferentiationPromotingProtein_NerveCell_Gene.make(1000), FL.EscherichiaColi.make(10)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1), ZL_IS).setSpecialNumber(200000);;
         //导入基因。本来要用林业那个附属的基因的，但是这里没有，但是正好加了大肠杆菌，就用了，也挺好
 
-        RM.Incubator.addRecipe1(T, 16, 4096, ST.tag(0),  FL.array(FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1),FL.MSCSupplement.make(1000)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(100), ZL_IS);
+        RM.Incubator.addRecipe1(T, 16, 32768, ST.tag(0),  FL.array(FL.Bacteria_DifferentiationPromotingProteinNeuron.make(1),FL.MSCSupplement.make(1000)), FL.Bacteria_DifferentiationPromotingProteinNeuron.make(100), ZL_IS);
         //培养导入基因后的细菌
 
         RM.Centrifuge.addRecipe0(T, 256, 512, FL.Bacteria_DifferentiationPromotingProteinNeuron.make(100), FL.DifferentiationPromotingProteinNeuron.make(10), ZL_IS);
@@ -251,7 +255,7 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe1(T, 16, 256, new long[]{1000}, ST.make(Items.egg, 1, 0), ZL_FS, ZL_FS, IL.Unformed_Embryo.get(1)).setSpecialNumber(200000);;
         //从鸡蛋里拿出未成形胚胎
 
-        RM.BioLab.addRecipe1(T, 16, 514, IL.Culture_Dish_Stem_Cell_Somatic.get(1), FL.DifferentiationPromotingProteinNeuron.make(10), NF, IL.Neuron_Cell.get(1)).setSpecialNumber(200000);;
+        RM.BioLab.addRecipe1(T, 16, 16384, new long[]{5000}, IL.Culture_Dish_Stem_Cell_Somatic.get(1), FL.DifferentiationPromotingProteinNeuron.make(10), NF, IL.Neuron_Cell.get(1)).setSpecialNumber(200000);;
         //神经细胞培养皿
 
     }
