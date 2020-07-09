@@ -49,7 +49,7 @@ Nothing
 [CHANGED] The Circuit production is majorly changed. Different Circuits now need different Circuit Plates to craft, and you need Electro-Etching solution to make Circuit Board.
 [CHANGED] Press now have fluid input and output.
 [ADDED] GT6U Achievement Page and some Achievements.
-[ADDED] Biology Item Group.
+[ADDED] Biology Item Group. Note: Many things in this group are in no way useful at current version. This is somewhat a WIP process.
 [ADDED] Large Extruder. A Multiblock using EU that is able to do 64 parallel recipes with 50% efficiency.
 [ADDED] Large Crystallisation Crucible. A Multiblock using HU that is able to do 64 parallel recipes.
 [ADDED] Draining Well. A Multiblock that drains water from underground using RU. This is an alternative to Infinite Water for some modpacks.
