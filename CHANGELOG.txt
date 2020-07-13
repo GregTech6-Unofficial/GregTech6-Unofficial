@@ -37,7 +37,6 @@ Nothing
 [FIXED] Recipe for Titanium Niobium Carbide Turbine Mainblock.
 [FIXED] Recipes for Large Mass Fab and Mass Replicator Mainblocks are the same.
 [FIXED] When centrifuging energy crystal dust you can get more sapphire dust.
-[FIXED] TerraFirmaCraft and TerraFirmaCraft Plus rocks and ores cannot be harvested by GT pickaxes and drills.
 [FIXED] A log error of NetheritePlus recipe when NePl is not loaded.
 [CHANGED] The Mod name is now 'GregTech 6 Unofficial' to avoid ambiguity.
 [CHANGED] Thanks to Greg notifying me that dust not being able to put into Extruders will cause plastic and similar materials unable to be processed into capsules, etc. I reverted the change so Extruders can process them now again.
