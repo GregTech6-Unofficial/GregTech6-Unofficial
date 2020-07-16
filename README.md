@@ -1,5 +1,10 @@
 # GregTech-6 Unofficial [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/gzwsGuR) [![Join our QQ Group!](https://img.shields.io/badge/QQ-Join%20US-brightgreen)](https://jq.qq.com/?_wv=1027&k=uhBLbHnI) ![Build](https://github.com/GregTech6-Unofficial/GregTech6-Unofficial/workflows/Build/badge.svg) 
 
+## Downloads
+
+[Curseforge](https://www.curseforge.com/minecraft/mc-mods/gregtech6-unofficial)
+
+
 ## Introduction
 
 This mod is an [unofficial but approved](https://forum.mechaenetia.com/tag/approved) continuation of [GregTech-6](https://github.com/GregTech6/gregtech6). 
@@ -94,10 +99,6 @@ Nothing here now :p
 ## Videos and Streams
 
 [Bear's Den](https://www.youtube.com/playlist?list=PLt-FxKYxk8Lj30lntAvgCfZcde142pste)
-
-## Downloads
-
-[Curseforge](https://www.curseforge.com/minecraft/mc-mods/gregtech6-unofficial)
 
 ## Other Links
 
