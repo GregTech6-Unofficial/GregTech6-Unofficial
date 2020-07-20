@@ -11,8 +11,12 @@ Nothing
 6.14.04: (Not released yet).
 Nothing
 
-6.14.03: (Not released yet).
+6.14.03:
 [COMPAT] When TerraFirmaCraft or TerraFirmaCraft Plus is loaded, the heat, electric, and chemical damage is accommodated.
+[FIXED] Titanium not showing up in NEI.
+[FIXED] Biochemical Research Lab cannot form in some direction of facing.
+[FIXED] Fermenting recipe conflicts.
+[CHANGED] Less time is now required to incubate the biomass-origin bacterias.
 
 6.14.02:
 [NOTE] This is a quite major update, read the changelog before update is recommended...
