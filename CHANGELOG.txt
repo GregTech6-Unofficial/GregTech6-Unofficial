@@ -1,4 +1,7 @@
 This is the Changelog for GregTech6-Unofficial
+6.14.08: (Not released yet).
+Nothing
+
 6.14.07: (Not released yet).
 Nothing
 
@@ -8,8 +11,9 @@ Nothing
 6.14.05: (Not released yet).
 Nothing
 
-6.14.04: (Not released yet).
-Nothing
+6.14.04:
+[NOTE] This is not a really important update, just for the hotfix. I will not merge GT6 until the Asmization is tested with some time.
+[FIXED] MacOs File System causes some config files to reset during launch.
 
 6.14.03:
 [COMPAT] When TerraFirmaCraft or TerraFirmaCraft Plus is loaded, the heat, electric, and chemical damage is accommodated.
