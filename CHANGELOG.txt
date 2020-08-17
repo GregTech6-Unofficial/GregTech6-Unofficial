@@ -1,4 +1,10 @@
 This is the Changelog for GregTech6-Unofficial
+6.14.10: (Not released yet).
+Nothing
+
+6.14.09: (Not released yet).
+Nothing
+
 6.14.08: (Not released yet).
 Nothing
 
@@ -9,7 +15,8 @@ Nothing
 Nothing
 
 6.14.05: (Not released yet).
-Nothing
+[FIXED] Perforated Bushing having wrong material information.
+[CHANGED] Increased the yield of Epoxid Resin and Photoresist production
 
 6.14.04:
 [NOTE] This is not a really important update, just for the hotfix. I will not merge GT6 until the Asmization is tested with some time.

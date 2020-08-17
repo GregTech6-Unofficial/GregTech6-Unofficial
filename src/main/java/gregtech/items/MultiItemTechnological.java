@@ -653,7 +653,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Circuit_Plate_Empty_Epoxid.set(      addItem(tLastID = 30018, "Epoxid Circuit Plate"                     , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
 		IL.Circuit_Plate_Empty_Multilayer.set(  addItem(tLastID = 30019, "Multilayer Epoxid Circuit Plate"          , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U), TC.stack(TC.FABRICO, 1)));
 		IL.Circuit_plate_Empty_Crystal.set(     addItem(tLastID = 30020, "Aluminium Printed Circuit Plate"          , "Needs Circuit Wiring"                            , new OreDictItemData(ANY.Cu, U*2, MT.Epoxid, U*2), TC.stack(TC.FABRICO, 1)));
-		IL.Perforated_Bushing.set(              addItem(tLastID = 30021, "Perforated Bushing"                       , "Used to manufacture glass fiber"                 , new OreDictItemData(ANY.Steel, U10*35), TC.stack(TC.FABRICO, 1)));
+		IL.Perforated_Bushing.set(              addItem(tLastID = 30021, "Perforated Bushing"                       , "Used to manufacture glass fiber"                 , new OreDictItemData(ANY.Steel, U10*65), TC.stack(TC.FABRICO, 1)));
 		IL.Glass_Fiber.set(                     addItem(tLastID = 30022, "Fibreglass"                               , "About 1/20 of your hair's diameter"              , new OreDictItemData(MT.Glass, U100), TC.stack(TC.FABRICO, 1)));
 
 
@@ -731,24 +731,24 @@ public class MultiItemTechnological extends MultiItemRandom {
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.dustTiny.mat(MT.Redstone, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Basic        .get(1));
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.dustTiny.mat(MT.Redstone, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Basic        .get(1));
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.dustTiny.mat(MT.Redstone, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Basic        .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 48, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.Cu            , 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,  32, 16, ST.array(OP.wireFine.mat(MT.AnnealedCopper, 1), OP.wireFine.mat(MT.RedAlloy, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Good         .get(1));
 		RM.Assembler.addRecipeX(T, F, F, F, T,  128, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Advanced     .get(1));
 		RM.Assembler.addRecipeX(T, F, F, F, T,  128, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Advanced     .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T, 512, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Elite        .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,2048, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Master       .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,2048, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Master       .get(1));
-		RM.Assembler.addRecipeX(T, F, F, F, T,4096, 48, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Ultimate     .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T, 128, 48, ST.array(OP.wireFine.mat(MT.Au            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Elite        .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,128, 192, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Master       .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,128, 192, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Master       .get(1));
+		RM.Assembler.addRecipeX(T, F, F, F, T,128, 192, ST.array(OP.wireFine.mat(MT.Pt            , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.RedstoneAlloy, 1)), IL.Circuit_Part_Ultimate     .get(1));
 
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.Thaumium      , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Si           , 1)), IL.Circuit_Part_Magic        .get(1));
 		RM.Press.addRecipeX(T, F, F, F, T, 16, 16, ST.array(OP.wireFine.mat(MT.Thaumium      , 1), OP.wireFine.mat(MT.Signalum, 1), OP.plateGemTiny.mat(MT.Ge           , 1)), IL.Circuit_Part_Magic        .get(1));

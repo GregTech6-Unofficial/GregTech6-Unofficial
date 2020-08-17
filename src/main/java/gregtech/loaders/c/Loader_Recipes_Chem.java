@@ -364,16 +364,15 @@ public class Loader_Recipes_Chem implements Runnable {
         RM.HeatMixer        .addRecipe1(T, 128, 400,  OP.dust.mat(MT.KOH, 0),   FL.array(FL.Dichloroisopropanol.make(1000)), FL.array(FL.epichlorohydrin.make(500)), ZL_IS);
         RM.HeatMixer        .addRecipe1(T, 128, 400,  OP.dust.mat(MT.AlCl3, 0), FL.array(FL.benzene.make(1000), FL.Propylene.make(1000)), FL.array(FL.Cumene.make(1000)), ZL_IS);
         RM.HeatMixer        .addRecipe0(T, 128, 400,  FL.array(FL.Cumene.make(1000), MT.H2SO4.liquid(U*1, T), MT.O.gas(U*1, T)), FL.array(FL.phenol.make(500), FL.acetone.make(500)), ZL_IS);
-        RM.HeatMixer        .addRecipe0(T, 128, 400,  FL.array(FL.phenol.make(1000), FL.acetone.make(1000)), FL.array(FL.bisphenol.make(1000)), ZL_IS);
-        RM.HeatMixer        .addRecipe1(T, 128, 400,  OP.dust.mat(MT.NaOH, 4), FL.array(FL.epichlorohydrin.make(1000), FL.bisphenol.make(1000), MT.H3PO4.liquid(U100*5, T)), ZL_FS, OP.dust.mat(MT.Epoxid, 1));
-        //RM.Fluidsolidifier  .addRecipe1(T,  32,  32,  ST.tag(0), FL.array(FL.epoxid.make(666)), ZL_FS, OP.plate.mat(MT.Epoxid, 1));
+        RM.HeatMixer        .addRecipe0(T, 128, 400,  FL.array(FL.phenol.make(1000), FL.acetone.make(1000)), FL.array(FL.bisphenol.make(2000)), ZL_IS);
+        RM.HeatMixer        .addRecipe1(T, 128, 400,  OP.dust.mat(MT.NaOH, 4), FL.array(FL.epichlorohydrin.make(1000), FL.bisphenol.make(1000), MT.H3PO4.liquid(U100*5, T)), ZL_FS, OP.dust.mat(MT.Epoxid, 3));
 
         //Photoresist
         RM.HeatMixer        .addRecipe0(T, 128, 200, FL.array(FL.Propylene.make(1000), MT.Cl.gas(U*1, T)), FL.array(FL.Allyl_Chloride.make(1000), MT.HCl.liquid(U*1, F)), ZL_IS);
         RM.HeatMixer        .addRecipeX(T, 128, 100, ST.array(ST.tag(0), OP.dust.mat(MT.Ag , 0), OP.dust.mat(MT.NaOH, 1)), FL.array(FL.Allyl_Chloride.make(1000), MT.H2O.liquid(U*1, T), MT.O.gas(U*1, T)), FL.array(FL.Acrylic_Acid.make(1000)), OP.dust.mat(MT.NaCl, 1));
         RM.HeatMixer        .addRecipe0(T, 128, 400, FL.array(FL.Acrylic_Acid.make(1000), FL.BioEthanol.make(1000), MT.H2SO4.liquid(U*1, T)), FL.array(FL.Ethyl_Acrylate.make(1000), MT.H2SO4.liquid(U10*8, F)), ZL_IS);
         RM.HeatMixer        .addRecipe1(T, 128, 200, OP.dust.mat(MT.Pt, 0), FL.array(FL.Ethylene.make(1000), FL.benzene.make(1000)), FL.array(FL.Styrene.make(1000)), ZL_IS);
-        RM.HeatMixer        .addRecipe1(T, 128, 400, OP.dust.mat(MT.V2O5, 0), FL.array(FL.Ethyl_Acrylate.make(1000), FL.Styrene.make(1000), MT.TiCl4.liquid(U100, T)), FL.array(FL.Photoresist.make(1000)), ZL_IS);
+        RM.HeatMixer        .addRecipe1(T, 128, 400, OP.dust.mat(MT.V2O5, 0), FL.array(FL.Ethyl_Acrylate.make(1000), FL.Styrene.make(1000), MT.TiCl4.liquid(U100, T)), FL.array(FL.Photoresist.make(2000)), ZL_IS);
 
         //Chromium production
         RM.HeatMixer        .addRecipe2(T, 16, 288, OM.dust(MT.OREMATS.Chromite, U*28), OP.dust.mat(MT.Na2CO3, 48), FL.array(MT.O.gas(U*14, T)), FL.array(MT.CO2.gas(U*24, F)), OP.dust.mat(MT.Na2CrO4, 56), OM.dust(MT.OREMATS.Hematite, U*10));
