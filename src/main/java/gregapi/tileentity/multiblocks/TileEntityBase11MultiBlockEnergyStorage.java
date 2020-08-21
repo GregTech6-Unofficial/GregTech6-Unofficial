@@ -20,6 +20,8 @@ import static gregapi.data.CS.*;
  */
 public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntityBase10MultiBlockBase implements ITileEntityEnergy, IMultiBlockEnergy, ITileEntityRunningActively {
     public long mCapacity = 99999999;
+    public long mInput = 2048;
+    public long mOutput = 2048;
 
     protected boolean mStopped = F;
     protected byte mExplosionPrevention = 0;
@@ -28,10 +30,6 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     public TE_Behavior_Energy_Capacitor mStorage = null;
     public TE_Behavior_Energy_Buffer_Converter mBufferConverter = null;
     public TE_Behavior_Active_Trinary mActivity = null;
-
-    public long getDynamicCapacity() {
-        return mCapacity;
-    }
 
     @Override
     public void readFromNBT2(NBTTagCompound aNBT) {
@@ -51,9 +49,9 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     }
 
     public void readEnergyBehavior(NBTTagCompound aNBT) {
-        long tInput = aNBT.getLong(NBT_INPUT), tOutput = aNBT.getLong(NBT_OUTPUT);
-        mStorage    = new TE_Behavior_Energy_Capacitor  (this, aNBT, this.getDynamicCapacity());
-        mEnergyIN   = new TE_Behavior_Energy_Stats      (this, aNBT, aNBT.hasKey(NBT_ENERGY_ACCEPTED) ? TagData.createTagData(aNBT.getString(NBT_ENERGY_ACCEPTED)) : TD.Energy.QU   , mStorage, tInput <= 16 ? 1 : tInput / 2, tInput, tInput * 2);
+        long tInput = mInput, tOutput = mOutput;
+        mStorage    = new TE_Behavior_Energy_Capacitor  (this, aNBT, mCapacity);
+        mEnergyIN   = new TE_Behavior_Energy_Stats      (this, aNBT, aNBT.hasKey(NBT_ENERGY_ACCEPTED) ? TagData.createTagData(aNBT.getString(NBT_ENERGY_ACCEPTED)) : TD.Energy.QU   , mStorage, 1, tInput, tInput * 2);
         mEnergyOUT  = new TE_Behavior_Energy_Stats      (this, aNBT, aNBT.hasKey(NBT_ENERGY_EMITTED ) ? TagData.createTagData(aNBT.getString(NBT_ENERGY_EMITTED )) : mEnergyIN.mType, mStorage, tOutput / 2, tOutput, tOutput * 2);
     }
 
@@ -69,7 +67,7 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     @Override
     public void onMagnifyingGlass2(List<String> aChatReturn) {
         aChatReturn.add("Structure is formed already!");
-        aChatReturn.add("Energy Stored: " + mStorage.mEnergy + "EU/" + mStorage.mCapacity + "EU");
+        aChatReturn.add("Energy Stored: " + mStorage.mEnergy + mEnergyIN.mType.getLocalisedNameShort() + "/" + mStorage.mCapacity + mEnergyIN.mType.getLocalisedNameShort());
     }
 
     @Override

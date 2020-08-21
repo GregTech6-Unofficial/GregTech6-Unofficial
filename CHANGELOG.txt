@@ -16,7 +16,10 @@ Nothing
 
 6.14.05: (Not released yet).
 [FIXED] Perforated Bushing having wrong material information.
-[CHANGED] Increased the yield of Epoxid Resin and Photoresist production
+[CHANGED] Increased the yield of Epoxid Resin and Photoresist production.
+[CHANGED] Removed IV Batteries crafting recipes.
+[CHANGED] NEI recipes no longer display that misleading "Tier".
+[ADDED] Multiblock Energy Storage Unit. Its size can be changed in a range, providing different voltages and energy capacity.
 
 6.14.04:
 [NOTE] This is not a really important update, just for the hotfix. I will not merge GT6 until the Asmization is tested with some time.
