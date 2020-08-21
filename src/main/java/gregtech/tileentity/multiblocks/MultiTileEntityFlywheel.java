@@ -19,12 +19,9 @@ public class MultiTileEntityFlywheel extends TileEntityBase11MultiBlockEnergySto
 
     public short mBatteryCore = 18022;
 
-    public int mTheBatteryLength = 0;
+    public int mCoreLength = 1;
 
-    @Override
-    public long getDynamicCapacity() {
-        return mTheBatteryLength*100000000;
-    }
+    public int mSyncLength;
 
     @Override
     public void readFromNBT2(NBTTagCompound aNBT) {
@@ -41,30 +38,44 @@ public class MultiTileEntityFlywheel extends TileEntityBase11MultiBlockEnergySto
     public boolean checkStructure2() {
 
         for (int mLength = 1; mLength <= 8; mLength++) {
+            System.out.println("mLength=" + mLength);
+            System.out.println("CoreLength="+mCoreLength);
             int
-                    tMinX = xCoord-(SIDE_X_NEG==mFacing?0:SIDE_X_POS==mFacing?mLength+1:1),
-                    tMinY = yCoord-(SIDE_Y_NEG==mFacing?0:SIDE_Y_POS==mFacing?mLength+1:1),
-                    tMinZ = zCoord-(SIDE_Z_NEG==mFacing?0:SIDE_Z_POS==mFacing?mLength+1:1),
-                    tMaxX = xCoord+(SIDE_X_POS==mFacing?0:SIDE_X_NEG==mFacing?mLength+1:1),
-                    tMaxY = yCoord+(SIDE_Y_POS==mFacing?0:SIDE_Y_NEG==mFacing?mLength+1:1),
-                    tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?mLength+1:1),
-                    tOutX = getOffsetXN(mFacing, mLength+1),
-                    tOutY = getOffsetYN(mFacing, mLength+1),
-                    tOutZ = getOffsetZN(mFacing, mLength+1);
+                    tMinX = xCoord-(SIDE_X_NEG==mFacing?0:SIDE_X_POS==mFacing?mCoreLength+1:1),
+                    tMinY = yCoord-(SIDE_Y_NEG==mFacing?0:SIDE_Y_POS==mFacing?mCoreLength+1:1),
+                    tMinZ = zCoord-(SIDE_Z_NEG==mFacing?0:SIDE_Z_POS==mFacing?mCoreLength+1:1),
+                    tMaxX = xCoord+(SIDE_X_POS==mFacing?0:SIDE_X_NEG==mFacing?mCoreLength+1:1),
+                    tMaxY = yCoord+(SIDE_Y_POS==mFacing?0:SIDE_Y_NEG==mFacing?mCoreLength+1:1),
+                    tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?mCoreLength+1:1),
+                    tOutX = getOffsetXN(mFacing, mCoreLength+1),
+                    tOutY = getOffsetYN(mFacing, mCoreLength+1),
+                    tOutZ = getOffsetZN(mFacing, mCoreLength+1);
 
             if (worldObj.blockExists(tMinX, tMinY, tMinZ) && worldObj.blockExists(tMaxX, tMaxY, tMaxZ)) {
+                System.out.println("Block Exists!");
                 mEmitter = null;
                 boolean tSuccess = T;
                 for (int tX = tMinX; tX <= tMaxX; tX++) for (int tY = tMinY; tY <= tMaxY; tY++) for (int tZ = tMinZ; tZ <= tMaxZ; tZ++) {
                     if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, tY, tZ, (SIDES_AXIS_X[mFacing] ? tX != tMinX && tX != tMaxX : SIDES_AXIS_Z[mFacing] ? tZ != tMinZ && tZ != tMaxZ : tY != tMinY && tY != tMaxY) ? 18040 : mBatteryCore, getMultiTileEntityRegistryID(), tX == tOutX && tY == tOutY && tZ == tOutZ ? 2 : 0, tX == tOutX && tY == tOutY && tZ == tOutZ ? MultiTileEntityMultiBlockPart.ONLY_ENERGY_IN : MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 }
 
-                if (tSuccess) {mTheBatteryLength = mLength;} else continue;
+                if (!tSuccess) {
+                    if (mLength == 8) {mCoreLength = 1;}
+                    else {mCoreLength = mLength + 1;}
+                    continue;
+                } else {
+                    mSyncLength = mLength;
+                }
                 return tSuccess;
             }
             return mStructureOkay;
         }
         return F;
+    }
+
+    @Override
+    public long getDynamicCapacity() {
+        return (long) mSyncLength * 100000000;
     }
 
     @Override
