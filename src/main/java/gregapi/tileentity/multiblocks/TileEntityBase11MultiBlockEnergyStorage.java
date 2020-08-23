@@ -67,27 +67,24 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     @Override
     public void onMagnifyingGlass2(List<String> aChatReturn) {
         aChatReturn.add("Structure is formed already!");
-        aChatReturn.add("Energy Stored: " + mStorage.mEnergy + mEnergyIN.mType.getLocalisedNameShort() + "/" + mStorage.mCapacity + mEnergyIN.mType.getLocalisedNameShort());
     }
 
     @Override
     public void onTick2(long aTimer, boolean aIsServerSide) {
         super.onTick2(aTimer, aIsServerSide);
         if (aIsServerSide && checkStructure(F)) {
-            doEmitEnergy(aTimer);
+            onTickEnergy(aTimer);
         }
     }
 
-    public void doEmitEnergy(long aTimer) {
-        mActivity.mActive = mBufferConverter.doEmitEnergy(aTimer, getEmittingTileEntity(), getEmittingSide(), (byte)0, F);
+    public void onTickEnergy(long aTimer) {
+        mActivity.mActive = mBufferConverter.onTickEnergy(aTimer, getEmittingTileEntity(), getEmittingSide(), (byte)0, F);
     }
 
     @Override
     public long doInject(TagData aEnergyType, byte aSide, long aSize, long aAmount, boolean aDoInject) {
         aSize = Math.abs(aSize);
-
         long tConsumed = mEnergyIN.doInject(aSize, aAmount, aDoInject);
-        // if(aDoInject) mStorage.mEnergy += tConsumed * aSize;
         return tConsumed;
     }
 

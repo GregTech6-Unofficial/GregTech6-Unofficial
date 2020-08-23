@@ -18,54 +18,71 @@ public class MultiTileEntityEnergyStation extends TileEntityBase11MultiBlockEner
 
     MultiTileEntityRegistry tRegistry = MultiTileEntityRegistry.getRegistry("gt.multitileentity");
 
-    public short mBatteryCasing = 18022;
+    public short mBatteryCasing = 18122;
 
-    public short[] mBatteryCores = {18040,18041,18042,18043,18044,18045};
+    public short[] aBatteryCores = {18124,18125,18126,18127,18128,18129};
 
-    public int mCoreLength = 1;
+    public short[] aElectrodes = {18120, 18121};
 
-    public int mSyncLength = 1;
+    public int mBatteryCoreLength = 1;
+
+    public int mSyncBatteryCoreLength = 1;
+
+    public int mSyncBatteryCoreWidth = 0;
 
     public byte mSyncBatteryCoreType = 0;
+
+    public byte mSyncElectrodeType = 0;
 
     public long mSyncBatteryCoreCapacity = 0;
 
     @Override
     public boolean checkStructure2() {
 
-        for (int mLength = 1; mLength <= 8; mLength++)  for (byte i = 0; i <=5; i++) {
+        for (int coreLength = 1; coreLength <= 8; coreLength++) for (byte halfCoreWidth = 0; halfCoreWidth<=3; halfCoreWidth++) for (byte coreIterator = 0; coreIterator <=5; coreIterator++) for (byte electrodeIterator = 0; electrodeIterator <=1; electrodeIterator++) {
 
-            short mBatteryCore = mBatteryCores[i];
+            short mBatteryCore = aBatteryCores[coreIterator];
+            short mElectrode = aElectrodes[electrodeIterator];
 
             int
-                    tMinX = xCoord-(SIDE_X_NEG==mFacing?0:SIDE_X_POS==mFacing?mCoreLength+1:1),
-                    tMinY = yCoord-(SIDE_Y_NEG==mFacing?0:SIDE_Y_POS==mFacing?mCoreLength+1:1),
-                    tMinZ = zCoord-(SIDE_Z_NEG==mFacing?0:SIDE_Z_POS==mFacing?mCoreLength+1:1),
-                    tMaxX = xCoord+(SIDE_X_POS==mFacing?0:SIDE_X_NEG==mFacing?mCoreLength+1:1),
-                    tMaxY = yCoord+(SIDE_Y_POS==mFacing?0:SIDE_Y_NEG==mFacing?mCoreLength+1:1),
-                    tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?mCoreLength+1:1),
-                    tOutX = getOffsetXN(mFacing, mCoreLength+1),
-                    tOutY = getOffsetYN(mFacing, mCoreLength+1),
-                    tOutZ = getOffsetZN(mFacing, mCoreLength+1);
+                    tMinX = xCoord-(SIDE_X_NEG==mFacing?-1:SIDE_X_POS==mFacing? mBatteryCoreLength +2:halfCoreWidth),
+                    tMinY = yCoord-(SIDE_Y_NEG==mFacing?-1:SIDE_Y_POS==mFacing? mBatteryCoreLength +2:halfCoreWidth),
+                    tMinZ = zCoord-(SIDE_Z_NEG==mFacing?-1:SIDE_Z_POS==mFacing? mBatteryCoreLength +2:halfCoreWidth),
+                    tMaxX = xCoord+(SIDE_X_POS==mFacing?-1:SIDE_X_NEG==mFacing? mBatteryCoreLength +2:halfCoreWidth),
+                    tMaxY = yCoord+(SIDE_Y_POS==mFacing?-1:SIDE_Y_NEG==mFacing? mBatteryCoreLength +2:halfCoreWidth),
+                    tMaxZ = zCoord+(SIDE_Z_POS==mFacing?-1:SIDE_Z_NEG==mFacing? mBatteryCoreLength +2:halfCoreWidth),
+                    tOutX = getOffsetXN(mFacing, mBatteryCoreLength + 3),
+                    tOutY = getOffsetYN(mFacing, mBatteryCoreLength + 3),
+                    tOutZ = getOffsetZN(mFacing, mBatteryCoreLength + 3);
 
             if (worldObj.blockExists(tMinX, tMinY, tMinZ) && worldObj.blockExists(tMaxX, tMaxY, tMaxZ)) {
                 mEmitter = null;
                 boolean tSuccess = T;
-                for (int tX = tMinX; tX <= tMaxX; tX++) for (int tY = tMinY; tY <= tMaxY; tY++) for (int tZ = tMinZ; tZ <= tMaxZ; tZ++) {
+                for (int tX = tMinX-1; tX <= tMaxX+1; tX++) for (int tY = tMinY-1; tY <= tMaxY+1; tY++) for (int tZ = tMinZ-1; tZ <= tMaxZ+1; tZ++) {
 
-                    if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, tY, tZ, (SIDES_AXIS_X[mFacing] ? tX != tMinX && tX != tMaxX : SIDES_AXIS_Z[mFacing] ? tZ != tMinZ && tZ != tMaxZ : tY != tMinY && tY != tMaxY) ? mBatteryCore : mBatteryCasing, getMultiTileEntityRegistryID(), tX == tOutX && tY == tOutY && tZ == tOutZ ? 2 : 0, tX == tOutX && tY == tOutY && tZ == tOutZ ? MultiTileEntityMultiBlockPart.ONLY_ENERGY_IN : MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
+                    if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, tY, tZ,
+                              (tX == tMinX-1 || tX == tMaxX+1 || tY == tMinY-1 || tY == tMaxY+1 || tZ == tMinZ-1 || tZ == tMaxZ+1) ? mBatteryCasing
+                            : (SIDES_AXIS_X[mFacing] ? tX == tMinX || tX == tMaxX: SIDES_AXIS_Z[mFacing] ? tZ == tMinZ-1 || tZ == tMaxZ : tY == tMinY || tY == tMaxY) ? mElectrode
+                            : mBatteryCore
+                            , getMultiTileEntityRegistryID(), tX == tOutX && tY == tOutY && tZ == tOutZ ? 2 : 0, tX == tOutX && tY == tOutY && tZ == tOutZ ? MultiTileEntityMultiBlockPart.ONLY_ENERGY_IN : MultiTileEntityMultiBlockPart.NOTHING)) tSuccess = F;
                 }
 
                 if (!tSuccess) {
-                    if (mLength == 8) {mCoreLength = 1;}
-                    else {mCoreLength = mLength + 1;}
+                    if (coreLength == 8) {
+                        mBatteryCoreLength = 1;}
+                    else {
+                        mBatteryCoreLength = coreLength + 1;}
                     continue;
                 } else {
-                    mSyncBatteryCoreType = i;
-                    mSyncLength = mCoreLength;
+                    mSyncBatteryCoreType = coreIterator;
+                    mSyncElectrodeType = electrodeIterator;
+
+                    mSyncBatteryCoreWidth = halfCoreWidth*2+1;
+                    mSyncBatteryCoreLength = mBatteryCoreLength;
 
                     mSyncBatteryCoreCapacity = this.getBatteryCoreCapacity();
-                    mStorage.mCapacity = mSyncLength*9*mSyncBatteryCoreCapacity;
+                    mStorage.mCapacity = mSyncBatteryCoreLength * mSyncBatteryCoreWidth * mSyncBatteryCoreWidth * mSyncBatteryCoreCapacity;
+
                     mEnergyIN.mRec = mEnergyOUT.mRec = this.getBatteryInputVoltage();
                     mEnergyIN.mMax = mEnergyOUT.mMax = this.getBatteryInputVoltage()*2;
                     mEnergyOUT.mMin = this.getBatteryInputVoltage();
@@ -81,14 +98,14 @@ public class MultiTileEntityEnergyStation extends TileEntityBase11MultiBlockEner
     @Override
     public boolean isInsideStructure(int aX, int aY, int aZ) {
         boolean result = F;
-        for (int mLength = 1; mLength <= 8; mLength++) {
+        for (int coreLength = 1; coreLength <= 8; coreLength++) for (byte halfCoreWidth = 0; halfCoreWidth<=3; halfCoreWidth++) {
             result =
-                            aX >= xCoord - (SIDE_X_NEG == mFacing ? 0 : SIDE_X_POS == mFacing ? mLength+1 : 1) &&
-                            aY >= yCoord - (SIDE_Y_NEG == mFacing ? 0 : SIDE_Y_POS == mFacing ? mLength+1 : 1) &&
-                            aZ >= zCoord - (SIDE_Z_NEG == mFacing ? 0 : SIDE_Z_POS == mFacing ? mLength+1 : 1) &&
-                            aX <= xCoord + (SIDE_X_POS == mFacing ? 0 : SIDE_X_NEG == mFacing ? mLength+1 : 1) &&
-                            aY <= yCoord + (SIDE_Y_POS == mFacing ? 0 : SIDE_Y_NEG == mFacing ? mLength+1 : 1) &&
-                            aZ <= zCoord + (SIDE_Z_POS == mFacing ? 0 : SIDE_Z_NEG == mFacing ? mLength+1 : 1);
+                            aX >= xCoord - (SIDE_X_NEG == mFacing ? -1 : SIDE_X_POS == mFacing ? coreLength+2 : halfCoreWidth) &&
+                            aY >= yCoord - (SIDE_Y_NEG == mFacing ? -1 : SIDE_Y_POS == mFacing ? coreLength+2 : halfCoreWidth) &&
+                            aZ >= zCoord - (SIDE_Z_NEG == mFacing ? -1 : SIDE_Z_POS == mFacing ? coreLength+2 : halfCoreWidth) &&
+                            aX <= xCoord + (SIDE_X_POS == mFacing ? -1 : SIDE_X_NEG == mFacing ? coreLength+2 : halfCoreWidth) &&
+                            aY <= yCoord + (SIDE_Y_POS == mFacing ? -1 : SIDE_Y_NEG == mFacing ? coreLength+2 : halfCoreWidth) &&
+                            aZ <= zCoord + (SIDE_Z_POS == mFacing ? -1 : SIDE_Z_NEG == mFacing ? coreLength+2 : halfCoreWidth);
             if (!result) continue;
             return result;
         }
@@ -99,36 +116,52 @@ public class MultiTileEntityEnergyStation extends TileEntityBase11MultiBlockEner
     public void onMagnifyingGlass2(List<String> aChatReturn) {
         super.onMagnifyingGlass2(aChatReturn);
         String mBatteryCoreName = this.getBatteryCoreName();
-        aChatReturn.add("Battery Core: " + mBatteryCoreName);
+        String mElectrodeName = this.getElectodeName();
+        aChatReturn.add("Core Type: " + mBatteryCoreName);
+        aChatReturn.add("Electrode Type: " + mElectrodeName);
         aChatReturn.add("Voltage Level: " + mEnergyOUT.mRec);
+        aChatReturn.add("Core Amount:  " + mSyncBatteryCoreWidth * mSyncBatteryCoreWidth * mSyncBatteryCoreLength);
+        aChatReturn.add("Energy Stored: " + mStorage.mEnergy + mEnergyIN.mType.getLocalisedNameShort() + "/" + mStorage.mCapacity + mEnergyIN.mType.getLocalisedNameShort());
     }
 
     public String getBatteryCoreName() {
         switch(mSyncBatteryCoreType) {
-            case 0: return "Core 1";
-            case 1: return "Core 2";
-            case 2: return "Core 3";
-            case 3: return "Core 4";
-            case 4: return "Core 5";
-            case 5: return "Core 6";
+            case 0: return "Lead-Acid";
+            case 1: return "Alkaline";
+            case 2: return "Nickel-Cadmium";
+            case 3: return "Lithium-Cobalt";
+            case 4: return "Lithium-Manganese";
+            case 5: return "Lithium-Phosphate";
         }
         return "No Battery Core!";
     }
 
+    public String getElectodeName() {
+        switch(mSyncElectrodeType) {
+            case 0: return "Graphite";
+            case 1: return "Graphene";
+        }
+        return "No Electrode!";
+    }
+
     public long getBatteryCoreCapacity() {
         switch(mSyncBatteryCoreType) {
-            case 0: return V[0]*512000;
-            case 1: return V[1]*512000;
-            case 2: return V[2]*512000;
-            case 3: return V[3]*512000;
-            case 4: return V[4]*512000;
-            case 5: return V[5]*512000;
+            case 0: return V[0]*256000;
+            case 1: return V[1]*256000;
+            case 2: return V[2]*256000;
+            case 3: return V[3]*256000;
+            case 4: return V[4]*256000;
+            case 5: return V[5]*256000;
         }
         return 0;
     }
 
     public long getBatteryInputVoltage() {
-        return mSyncLength*2048;
+        switch(mSyncElectrodeType) {
+            case 0: return mSyncBatteryCoreLength * 2048;
+            case 1: return mSyncBatteryCoreLength * 4096;
+        }
+        return 0;
     }
 
     public ITileEntityUnloadable mEmitter = null;

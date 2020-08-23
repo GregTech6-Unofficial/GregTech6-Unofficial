@@ -58,7 +58,7 @@ public class TE_Behavior_Energy_Buffer_Converter extends TE_Behavior {
 		UT.NBT.setBoolean(aNBT, NBT_CAN_ENERGY, mCanEmitEnergy);
 	}
 	
-	public boolean doEmitEnergy(long aTimer, TileEntity aEmitter, byte aSide, byte aMode, boolean aNegative) {
+	public boolean onTickEnergy(long aTimer, TileEntity aEmitter, byte aSide, byte aMode, boolean aNegative) {
 		long tOutput = mEnergyOUT.mRec;
 		long tEmittedPackets;
 		mCanEmitEnergy = mStorage.mEnergy >= tOutput;
