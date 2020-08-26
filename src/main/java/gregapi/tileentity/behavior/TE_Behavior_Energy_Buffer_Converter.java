@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GT6U-Team
  *
  * This file is part of GregTech.
  *
@@ -27,6 +27,9 @@ import net.minecraft.tileentity.TileEntity;
 
 import static gregapi.data.CS.*;
 
+/**
+ * @author YueSha
+ */
 public class TE_Behavior_Energy_Buffer_Converter extends TE_Behavior {
 	public TE_Behavior_Energy_Stats mEnergyIN, mEnergyOUT;
 	public TE_Behavior_Energy_Capacitor mStorage;

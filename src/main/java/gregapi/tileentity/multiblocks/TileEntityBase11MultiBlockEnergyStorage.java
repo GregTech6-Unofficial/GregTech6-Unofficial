@@ -7,6 +7,9 @@ import gregapi.tileentity.behavior.*;
 import gregapi.tileentity.energy.ITileEntityEnergy;
 import gregapi.tileentity.machines.ITileEntityRunningActively;
 import gregapi.util.UT;
+import net.minecraft.entity.Entity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -62,6 +65,35 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     public void writeEnergyBehavior(NBTTagCompound aNBT) {
         mStorage.save(aNBT);
         mBufferConverter.save(aNBT);
+    }
+
+    @Override
+    public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
+        long rReturn = super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
+        if (rReturn > 0) return rReturn;
+
+        if (isClientSide()) return 0;
+
+        if (aTool.equals(TOOL_magnifyingglass)) {
+            if (aChatReturn != null) onMagnifyingGlass(aChatReturn);
+            return 1;
+        }
+        if (aTool.equals(TOOL_screwdriver) && !aSneaking) {
+            if (aChatReturn != null) onScrewdriver(aChatReturn);
+            return 1;
+        }
+        if (aTool.equals(TOOL_screwdriver) && aSneaking) {
+            if (aChatReturn != null) onScrewdriverSneaking(aChatReturn);
+        }
+        return 0;
+    }
+
+    public void onScrewdriver(List<String> aChatReturn) {
+        aChatReturn.add("Structure is formed already!");
+    }
+
+    public void onScrewdriverSneaking(List<String> aChatReturn) {
+        aChatReturn.add("Structure is formed already!");
     }
 
     @Override
