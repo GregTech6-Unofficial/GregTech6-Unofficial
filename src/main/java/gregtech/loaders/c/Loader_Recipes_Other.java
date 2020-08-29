@@ -918,6 +918,8 @@ public class Loader_Recipes_Other implements Runnable {
 
 		RM.Well.addRecipe1(T, 16,   1800, new long[] {100}, ST.tag(1), ZL_FS, MT.H2O.liquid(U*2, F), ST.array(IL.Mud_Ball.get(1)));
 
+		RM.Extruder.addRecipe2(T, 512,   512, OP.dust.mat(MT.Graphite, 1), IL.Shape_Extruder_Plate.get(0), OP.plate.mat(MT.Graphite, 1));
+
 		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_ARRAY) if (tMaterial != null && tMaterial.mNeutrons+tMaterial.mProtons > 0 && tMaterial.contains(TD.Atomic.ELEMENT) && !tMaterial.contains(TD.Atomic.ANTIMATTER)) {
 			ItemStack
 					tInput = OP.dust.mat(tMaterial, 1);          if (tInput != null)       RM.Massfab.addRecipe1(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tInput, NF, tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));

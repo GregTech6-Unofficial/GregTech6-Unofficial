@@ -1383,8 +1383,13 @@ public class MT {
 	Naphtha                 = lquddcmp      (15201, "Naphtha"                                       , 255, 255, 102, 255).put(LIQUID, EXPLOSIVE, FLAMMABLE)                                                                                                                                                                                                                                                                         .heat( 100,  400).aspects(TC.MORTUUS, 1, TC.POTENTIA, 1),
     H_Ion                   = lquddcmp      (15202, "Ionized Hydrogen"                              , 255, 255, 102, 255).put(PLASMA).heat(1, 12),
     He_Ion                  = lquddcmp      (15203, "Ionized Helium"                                , 255, 255, 102, 255).put(PLASMA).heat(2, 8),
-	ElectroEtchingSolution  = lqudacidcent  (15204, "Electro-Etching Solution"                      , 193, 255,  193, 255).put(LIQUID)                                                                                                                                   .uumMcfg( 0, H2O           , 3*U, HCl              , 1*U, H2O2              , 2*U)                                                                                                  .heat( 200,  400),
-	H2S2O8                  = lqudaciddcmp  (15205, "Peroxydisulfuric Acid"                         , 255, 250,  205, 255).put(LIQUID)                                                                                                                                   .uumMcfg( 0, H              , 2*U, S                , 2*U, O                , 8*U)                                                                          .heat( 200,  400),
+	ElectroEtchingSolution  = lqudacidcent  (15204, "Electro-Etching Solution"                      , 193, 255, 193, 255).put(LIQUID)                                                                                                                                   .uumMcfg( 0, H2O           , 3*U, HCl              , 1*U, H2O2              , 2*U)                                                                                                  .heat( 200,  400),
+	H2S2O8                  = lqudaciddcmp  (15205, "Peroxydisulfuric Acid"                         , 255, 250, 205, 255).put(LIQUID)                                                                                                                                   .uumMcfg( 0, H              , 2*U, S                , 2*U, O                , 8*U)                                                                          .heat( 200,  400),
+	PF5                     = gaschemelec   (15206, "Phosphorus Pentafluoride"                      , 241, 220, 207, 100).put(GASSES)                                                                                                                                    .uumMcfg( 0, P              , 1*U, F                , 5*U)                                                                                                  ,
+	COCl2                   = gaschemelec   (15207, "Phosgen"                                       , 241, 220, 207, 100).put(GASSES).uumMcfg( 0, C , 1*U, O  , 1*U,  Cl,  2*U),
+	C5H10O3                 = lqudchemelec  (15208, "Diethyl Carbonate"                             , 241, 220, 207, 100).put(LIQUID).uumMcfg( 0, C , 5*U, H  , 10*U,  O,  3*U),
+	C4H8O3                  = lqudchemelec  (15209, "Ethyl Methyl Carbonate"                        , 241, 200, 207, 100).put(LIQUID).uumMcfg( 0, C , 4*U, H  , 8*U,   O,  3*U),
+	C3H6O3                  = lqudchemelec  (15210, "Dimethyl Carbonate"                            , 241, 180, 207, 100).put(LIQUID).uumMcfg( 0, C , 3*U, H  , 6*U,   O,  3*U),
 
 
 	PTFE                    = create        (15400, "Polytetrafluoroethylene", SET_DULL             , 250, 250, 250, 255).put(G_INGOT_MACHINE, APPROXIMATE, FLAMMABLE, EXTRUDER, EXTRUDER_SIMPLE, WIRES, MORTAR, BOUNCY, BRITTLE, FURNACE)                      .uumMcfg( 0, C              , 2*U, F                , 4*U)                                                                                                  .aspects(TC.MOTUS, 2).heat(423).setBurning(Ash, U9).setSmelting(null, 2*U3).qual(1, 3.0, 32, 1),
@@ -1393,10 +1398,14 @@ public class MT {
     Epoxid                  = create        (15403, "Epoxid"                , SET_DULL              , 192, 255,  62, 255).put(G_INGOT_MACHINE, APPROXIMATE, FLAMMABLE, EXTRUDER, EXTRUDER_SIMPLE, WIRES, MORTAR, BOUNCY, BRITTLE, FURNACE)                      .uumMcfg( 0, C              , 11*U, H                , 12*U, O, 3*U)                                                                                                  .aspects(TC.MOTUS, 2).heat(423).setBurning(Ash, U9).setSmelting(null, 2*U3).qual(1, 3.0, 32, 1),
 
 
-	Na2CrO4                 = dustdcmp      (15600, "Sodium Chromate"       , SET_DULL              , 255, 255,   0, 255).put(MELTING).setMcfg( 0, Cr, 1*U, O, 4*U, Na, 2*U),
-    Na2Cr2O7                = dustdcmp      (15601, "Sodium Dichromate"     , SET_DULL              , 255,  69,   0, 255).put(MELTING).setMcfg( 0, Cr, 2*U, O, 7*U, Na, 2*U),
-    Cr2O3                   = dustdcmp      (15602, "Chromium Oxide"        , SET_DULL              ,   0, 139,   0, 255).put(MELTING).setMcfg( 0, Cr, 2*U, O, 3*U),
-	AlCl3                   = dustdcmp      (15603, "Aluminium Chloride"    , SET_DULL              , 255, 250, 205, 255).put(MELTING).setMcfg( 0, Al             , 1*U, Cl                , 3*U);
+	Na2CrO4                 = dustdcmp      (15600, "Sodium Chromate"       , SET_FINE              , 255, 255,   0, 255).put(MELTING).setMcfg( 0, Cr, 1*U, O, 4*U, Na, 2*U),
+    Na2Cr2O7                = dustdcmp      (15601, "Sodium Dichromate"     , SET_FINE              , 255,  69,   0, 255).put(MELTING).setMcfg( 0, Cr, 2*U, O, 7*U, Na, 2*U),
+    Cr2O3                   = dustdcmp      (15602, "Chromium Oxide"        , SET_FINE              ,   0, 139,   0, 255).put(MELTING).setMcfg( 0, Cr, 2*U, O, 3*U),
+	AlCl3                   = dustdcmp      (15603, "Aluminium Chloride"    , SET_FINE              , 255, 250, 205, 255).put(MELTING).setMcfg( 0, Al              , 1*U, Cl                , 3*U),
+	P2O5                    = dustdcmp      (15604, "Phosphorus Pentoxide"  , SET_DULL              , 255, 250, 205, 255)             .setMcfg( 0, P               , 2*U, O                 , 5*U),
+	LiF                     = dustdcmp      (15605, "Lithium Fluoride"      , SET_CUBE              , 204, 218, 218, 255).put(MELTING).setMcfg( 0, Li              , 1*U, F                 , 1*U),
+	LiPF6                   = dustdcmp      (15606, "Lithium Hexafluorophosphate"       , SET_FINE  , 229, 209, 226, 255)             .setMcfg( 0, Li, 1*U, P, 1*U, F, 6*U),
+	CaO                     = dustdcmp      (15607, "Calcium Oxide"         , SET_FINE              , 255, 255, 255, 255).put(MELTING).setMcfg( 0, Ca              , 1*U, O                 , 1*U);
 
 
 	static {

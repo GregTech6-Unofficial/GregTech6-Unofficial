@@ -380,7 +380,19 @@ public class Loader_Recipes_Chem implements Runnable {
         RM.HeatMixer        .addRecipe2(T, 16, 288, OP.dust.mat(MT.Na2Cr2O7, 11), OP.dust.mat(MT.C, 2), ZL_FS, FL.array(MT.CO.gas(U*2, F)), OP.dust.mat(MT.Cr2O3, 5), OP.dust.mat(MT.Na2CO3, 6));
         RM.BurnMixer        .addRecipe2(T, 16, 144, OP.dust.mat(MT.Cr2O3, 5), OP.dust.mat(MT.Al, 2), ZL_FS, FL.array(MT.Cr.liquid(U*2, F)), OP.dust.mat(MT.Al2O3, 5));
 
-        RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.Pyrite                  ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Fe,   U3 ));
+        //F6LiP
+		RM.HeatMixer        .addRecipe1(T, 64, 400, OP.dust.mat(MT.CaF2, 15), FL.array(MT.H3PO4.fluid(U*16, F)), FL.array(MT.PF5.fluid(U*12, F), MT.H2O.fluid(U*9, F)), OP.dust.mat(MT.CaO, 10));
+		RM.HeatMixer        .addRecipe1(T, 64, 300, OP.dust.mat(MT.PO4, 20), FL.array(MT.HF.fluid(U*40, F)), FL.array(MT.PF5.fluid(U*24, F), MT.H2O.fluid(U*30, F), MT.O.fluid(U*6, F)), NI);
+		RM.Bath             .addRecipe1(T, 0, 200, OP.dust.mat(MT.LiOH, 3), FL.array(MT.HF.fluid(U*2, F)), FL.array(MT.H2O.fluid(U*3, F)), OP.dust.mat(MT.LiF, 2));
+		RM.Drying           .addRecipe1(T, 16, 4000, OP.dust.mat(MT.LiF, 2), FL.array(MT.PF5.fluid(U*6, F)), ZL_FS, OP.dust.mat(MT.LiPF6, 8));
+
+		//Ethyl Methyl Carbonate
+		RM.Lightning        .addRecipe0(T, 256, 300, FL.array(MT.CO.fluid(U*2, T), MT.Cl.fluid(U*2, T)), FL.array(MT.COCl2.gas(U*4, F)), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,  400, FL.array(MT.COCl2.gas(U*4, T), FL.BioEthanol.make(2000)), FL.array(MT.C5H10O3.liquid(U*18, F), MT.HCl.fluid(U*4, F)), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,  400, FL.array(MT.C5H10O3.liquid(U*72, T), FL.Methanol.make(6000)), FL.array(FL.MixedEster.make(78000)), ZL_IS);
+		RM.DistillationTower.addRecipe0(T, 64, 1000, FL.array(FL.MixedEster.make(78000)), FL.array(MT.C3H6O3.liquid(U*12, F), MT.C5H10O3.liquid(U*18, F), MT.C4H8O3.liquid(U*30, F), FL.Methanol.make(2000), FL.BioEthanol.make(4000)), ZL_IS);
+
+		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.Pyrite                  ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Fe,   U3 ));
 		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.OREMATS.Sphalerite      ), MT. O .gas( 2*U2 , T), MT.SO2.gas( 3*U2 , F), OM.dust(MT.Zn,   U2 ));
 		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.OREMATS.Molybdenite     ), MT. O .gas( 4*U3 , T), MT.SO2.gas( 6*U3 , F), OM.dust(MT.Mo,   U3 ));
 		RM.Roasting     .addRecipe1(T, 16,  512, OM.dust(MT.OREMATS.Stibnite        ), MT. O .gas( 6*U5 , T), MT.SO2.gas( 9*U5 , F), OM.dust(MT.Sb, 2*U5 ));

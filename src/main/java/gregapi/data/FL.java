@@ -516,6 +516,9 @@ public enum FL {
 	, Bacillus                  ("bacillus"                                                 , SIMPLE, LIQUID) //芽孢杆菌（Bacillus）吸氧 产氢气 + 氧气
 	, Clostridia                ("clostridia"                                               , SIMPLE, LIQUID) //产氢梭菌Clostridia 厌氧 + 氦气
 
+	//other
+	, MixedEster                ("mixedester"                                               , SIMPLE, LIQUID) //混酯液体
+
 	//I don't know the reason why it only has a texture ,so I added it here.
 	//,Ethanol                    ("ethanol"                                                  , SIMPLE, LIQUID)
 

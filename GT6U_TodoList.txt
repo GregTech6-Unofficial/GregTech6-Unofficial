@@ -167,3 +167,67 @@ crystal: 环氧树脂-铝基板- 玻璃纤维*16+4铝箔+4铜箔+熔融环氧树
 H2S2O8 + 2H2O → 2H2SO4 + H2O2 c
 
 12U 6U 14U 4U
+
+
+
+2H3PO4 + 5CaF2 =高温搅拌机= 2PF5 + 5CaO + 3H2O
+
+4PO4 + 20HF =浸洗机= 4PF5 + 10H2O + 3O2
+
+20 40 24 30 6
+
+LiOH + HF =搅拌机= LiF + H2O
+
+3 2 2 3
+
+PF5 + LiF =干燥器= F6LiP
+
+6 2 8
+
+
+
+五氧化二磷P2O5(Phosphorus Pentoxide)
+
+五氟化磷PF5(Phosphorus Pentafluoride) gas
+
+氟化锂LiF（Lithium Fluoride）
+
+六氟磷酸锂F6LiP(Lithium Hexafluorophosphate)
+
+六氟磷酸锂溶液，五氧化二磷P2O5(phosphorus pentoxide)和氟化钙CaF2得五氟化磷PF5(phosphorus pentafluoride)，五氟化磷PF5直接和氟化锂LiF（lithium fluoride）得六氟磷酸锂F6LiP(lithium hexafluorophosphate)
+
+CO + Cl2 =闪电处理器= COCl2 (phosgen 光气)
+
+2 2 = 4
+
+COCl2 + 2乙醇 =搅拌机= C5H10O3 (碳酸二乙酯) + 2HCl
+
+4 2000 = 18 4
+
+4C5H10O3 (二乙)，6甲醇 =蒸馏= 1二甲C3H6O3 + 1二乙 + 2 C4H8O3 (Ethyl Methyl Carbonate 碳酸甲乙酯) + 2甲醇 + 4乙醇
+
+72 6000 = 12 18 30 2000 4000
+
+
+
+
+
+COCl2 + Methanol -> C2H3ClO2 (Methyl Chloroformate 氯甲酸甲酯) + HCl
+
+C2H3ClO2 + C2H6O (ethanol) -> C4H8O3 (Ethyl Methyl Carbonate 碳酸甲乙酯) + HCl
+
+
+
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lead-Acid Battery Core (Filled)"                     , "Multiblock Machines", 18124, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore1"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18130), MT.H2SO4.fluid(U*16, F), NF, aRegistry.getItem());
+		aMat = MT.BatteryAlloy;         aRegistry.add("Alkaline Battery Core (Filled)"                      , "Multiblock Machines", 18125, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore2"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18131), MT.DistWater.fluid(U*16, F), NF, aRegistry.getItem());
+		aMat = MT.BatteryAlloy;         aRegistry.add("Nickel-Cadmium Battery Core (Filled)"                , "Multiblock Machines", 18126, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore3"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18132), MT.DistWater.fluid(U*16, F), NF, aRegistry.getItem());
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Cobalt Battery Core (Filled)"                , "Multiblock Machines", 18127, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore4"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18133), MT.HCl.fluid(U*16, F), NF, aRegistry.getItem());
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Manganese Battery Core (Filled)"             , "Multiblock Machines", 18128, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore5"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18134), MT.HF.fluid(U*16, F), NF, aRegistry.getItem());
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-F-Phosphate Battery Core (Filled)"           , "Multiblock Machines", 18129, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore6"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18135), MT.C4H8O3.fluid(U*16, F), NF, aRegistry.getItem());
+
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lead-Acid Battery Core (Empty)"                      , "Multiblock Machines", 18130, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore1empty"       , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_Lead_Acid_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+		aMat = MT.BatteryAlloy;         aRegistry.add("Alkaline Battery Core (Empty)"                       , "Multiblock Machines", 18131, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore2empty"       , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_Alkaline_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+		aMat = MT.BatteryAlloy;         aRegistry.add("Nickel-Cadmium Battery Core (Empty)"                 , "Multiblock Machines", 18132, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore3empty"       , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_NiCd_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Cobalt Battery Core (Empty)"                 , "Multiblock Machines", 18133, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_LiCoO2_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Manganese Battery Core (Empty)"              , "Multiblock Machines", 18134, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_LiMn_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-F-Phosphate Battery Core (Empty)"            , "Multiblock Machines", 18135, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "DDD", "WAW", "PPP", 'W', OP.blockDust.mat(MT.LiPF6, 1), "D", OP.plateCurved.mat(MT.Graphite, 1), "P", OP.plateCurved.mat(MT.Pt, 1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));

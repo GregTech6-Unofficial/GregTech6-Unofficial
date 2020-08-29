@@ -194,6 +194,7 @@ public class Loader_Fluids implements Runnable {
 		FL.create("liquidhydrogen"           , "Liquid Hydrogen"     , MT.H                  , 1,   1000,    20);
 		FL.create("electro_etching_solution" , "Electro-Etching Solution", MT.ElectroEtchingSolution , 1,   1000,    273);
 		FL.create("peroxydisulfuricacid"     , "Peroxydisulfuric Acid", MT.H2S2O8            , 1,   1000,    273);
+		FL.create("mixedester"               , "Ester Mixture", null, 1, 1000, 273);
 
 		// -------------------
 		FL.create("chargedmatter"            , "Charged Matter"      , null                  , 1,      1,     1).setDensity(-5000).setLuminosity(15);
