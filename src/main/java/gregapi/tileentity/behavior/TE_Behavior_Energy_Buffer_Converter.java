@@ -48,19 +48,33 @@ public class TE_Behavior_Energy_Buffer_Converter extends TE_Behavior {
 		mLimitConsumption = aLimitConsumption;
 		if (aNegativeOutput) mFactor = -1;
 	}
-	
+
 	@Override
 	public void load(NBTTagCompound aNBT) {
 		mEmitsEnergy = aNBT.getBoolean(NBT_ACTIVE_ENERGY);
 		mCanEmitEnergy = aNBT.getBoolean(NBT_CAN_ENERGY);
+//		if (aNBT.hasKey(NBT_MULTIPLIER)) mMultiplier = aNBT.getLong(NBT_MULTIPLIER);
+//		if (aNBT.hasKey(NBT_OUTPUT_MAX)) mEnergyOUT.mMax = aNBT.getLong(NBT_OUTPUT_MAX);
+//		if (aNBT.hasKey(NBT_OUTPUT)) mEnergyOUT.mRec = aNBT.getLong(NBT_OUTPUT);
+//		if (aNBT.hasKey(NBT_OUTPUT_MIN)) mEnergyOUT.mMin = aNBT.getLong(NBT_OUTPUT_MIN);
+//		if (aNBT.hasKey(NBT_INPUT_MAX)) mEnergyIN.mMax = aNBT.getLong(NBT_INPUT_MAX);
+//		if (aNBT.hasKey(NBT_INPUT)) mEnergyIN.mRec = aNBT.getLong(NBT_INPUT);
+//		if (aNBT.hasKey(NBT_INPUT_MIN)) mEnergyIN.mMin = aNBT.getLong(NBT_INPUT_MIN);
 	}
-	
+
 	@Override
 	public void save(NBTTagCompound aNBT) {
 		UT.NBT.setBoolean(aNBT, NBT_ACTIVE_ENERGY, mEmitsEnergy);
 		UT.NBT.setBoolean(aNBT, NBT_CAN_ENERGY, mCanEmitEnergy);
+		UT.NBT.setNumber(aNBT, NBT_MULTIPLIER, mMultiplier);
+		UT.NBT.setNumber(aNBT, NBT_OUTPUT_MAX, mEnergyOUT.mMax);
+		UT.NBT.setNumber(aNBT, NBT_OUTPUT, mEnergyOUT.mRec);
+		UT.NBT.setNumber(aNBT, NBT_OUTPUT_MIN, mEnergyOUT.mMin);
+		UT.NBT.setNumber(aNBT, NBT_INPUT_MAX, mEnergyIN.mMax);
+		UT.NBT.setNumber(aNBT, NBT_INPUT, mEnergyIN.mRec);
+		UT.NBT.setNumber(aNBT, NBT_INPUT_MIN, mEnergyIN.mMin);
 	}
-	
+
 	public boolean onTickEnergy(long aTimer, TileEntity aEmitter, byte aSide, byte aMode, boolean aNegative) {
 		long tOutput = mEnergyOUT.mRec;
 		long tEmittedPackets;

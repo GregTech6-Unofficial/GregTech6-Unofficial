@@ -11,13 +11,11 @@ Nothing
 6.14.07: (Not released yet).
 Nothing
 
-6.14.06: (Not released yet).
-Nothing
-
-6.14.05:
+6.14.06:
+[FIXED] MESU cannot save energy correctly.
 [FIXED] Perforated Bushing having wrong material information.
 [CHANGED] Increased the yield of Epoxid Resin and Photoresist production.
-[CHANGED] Degraded IV Batteries capacity.
+[CHANGED] Degraded IV Batteries capacity and their recipes are now like before.
 [CHANGED] NEI recipes no longer display that misleading "Tier".
 [ADDED] Multiblock Energy Storage Unit (MESU).
 Its dimensions can be changed in a range, providing different voltages and energy capacity. Longer it is, higher voltage it has. Larger it is, greater capacity it has.
@@ -25,6 +23,9 @@ Use a screwdriver to alter its current output, up to 32 Amps.
 [ADDED] Lithium-F-Phosphate, a salt used in Li-ion battery electrolyte, Ethyl Methyl Carbonate.
 [ADDED] Six battery cores for MESU. Each has different capacity.
 [ADDED] Two battery electrode parts for MESU. Each allows different length-voltage multiplier of the battery.
+
+6.14.05:
+Broken, do not use!
 
 6.14.04:
 [NOTE] This is not a really important update, just for the hotfix. I will not merge GT6 until the Asmization is tested with some time.

@@ -4,8 +4,11 @@ import gregapi.code.ArrayListNoNulls;
 import gregapi.code.TagData;
 import gregapi.data.TD;
 import gregapi.tileentity.behavior.*;
+import gregapi.tileentity.data.ITileEntityProgress;
 import gregapi.tileentity.energy.ITileEntityEnergy;
+import gregapi.tileentity.energy.ITileEntityEnergyDataCapacitor;
 import gregapi.tileentity.machines.ITileEntityRunningActively;
+import gregapi.tileentity.machines.ITileEntitySwitchableOnOff;
 import gregapi.util.UT;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.IInventory;
@@ -21,7 +24,7 @@ import static gregapi.data.CS.*;
 /**
  * @author YueSha
  */
-public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntityBase10MultiBlockBase implements ITileEntityEnergy, IMultiBlockEnergy, ITileEntityRunningActively {
+public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntityBase10MultiBlockBase implements IMultiBlockEnergy, ITileEntityEnergy, ITileEntityEnergyDataCapacitor, ITileEntityRunningActively, ITileEntitySwitchableOnOff, ITileEntityProgress {
     public long mCapacity = 99999999;
     public long mInput = 2048;
     public long mOutput = 2048;
@@ -59,6 +62,7 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     }
 
     public void readEnergyConverter(NBTTagCompound aNBT) {
+        mStorage.load(aNBT);
         mBufferConverter = new TE_Behavior_Energy_Buffer_Converter  (this, aNBT, mStorage, mEnergyIN, mEnergyOUT, aNBT.hasKey(NBT_MULTIPLIER) ? aNBT.getLong(NBT_MULTIPLIER) : 1, aNBT.getBoolean(NBT_WASTE_ENERGY), F, aNBT.hasKey(NBT_LIMIT_CONSUMPTION) ? aNBT.getBoolean(NBT_LIMIT_CONSUMPTION) : TD.Energy.ALL_COMSUMPTION_LIMITED.contains(mEnergyIN.mType));
     }
 
@@ -141,8 +145,16 @@ public abstract class TileEntityBase11MultiBlockEnergyStorage extends TileEntity
     @Override public boolean getStateRunningPossible() {return T;}
     @Override public boolean getStateRunningPassively() {return mActivity.mActive;}
     @Override public boolean getStateRunningActively() {return mBufferConverter.mEmitsEnergy;}
-    public boolean setStateOnOff(boolean aOnOff) {mStopped = !aOnOff; return !mStopped;}
-    public boolean getStateOnOff() {return !mStopped;}
+    @Override public boolean setStateOnOff(boolean aOnOff) {mStopped = !aOnOff; return !mStopped;}
+    @Override public boolean getStateOnOff() {return !mStopped;}
+
+    @Override public long getEnergyStored(TagData aEnergyType, byte aSide) {return mStorage.mEnergy; }
+    @Override public long getEnergyCapacity(TagData aEnergyType, byte aSide) {return mStorage.mCapacity; }
+    @Override public boolean isEnergyCapacitorType(TagData aEnergyType, byte aSide) {return aEnergyType==mEnergyOUT.mType; }
+    @Override public Collection<TagData> getEnergyCapacitorTypes(byte aSide) {return mEnergyOUT.mType.AS_LIST; }
+
+    @Override public long getProgressValue(byte aSide) {return mStorage.mEnergy;}
+    @Override public long getProgressMax(byte aSide) {return mStorage.mCapacity;}
 
     @Override public boolean canDrop(int aInventorySlot) {return T;}
 

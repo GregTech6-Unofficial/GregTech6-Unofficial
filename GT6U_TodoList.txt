@@ -231,3 +231,11 @@ C2H3ClO2 + C2H6O (ethanol) -> C4H8O3 (Ethyl Methyl Carbonate 碳酸甲乙酯) + 
 		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Cobalt Battery Core (Empty)"                 , "Multiblock Machines", 18133, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_LiCoO2_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
 		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Manganese Battery Core (Empty)"              , "Multiblock Machines", 18134, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_LiMn_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
 		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-F-Phosphate Battery Core (Empty)"            , "Multiblock Machines", 18135, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "DDD", "WAW", "PPP", 'W', OP.blockDust.mat(MT.LiPF6, 1), "D", OP.plateCurved.mat(MT.Graphite, 1), "P", OP.plateCurved.mat(MT.Pt, 1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+
+
+
+
+
+
+
+
