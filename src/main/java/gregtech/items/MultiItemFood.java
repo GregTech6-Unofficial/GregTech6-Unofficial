@@ -21,6 +21,9 @@ package gregtech.items;
 
 import static gregapi.data.CS.*;
 
+import cpw.mods.fml.common.Optional;
+import gregapi.compat.terrafirmacraft.GFoodStatTFC;
+import gregapi.compat.terrafirmacraft.IFoodTFC;
 import gregapi.data.*;
 import gregapi.data.CS.BlocksGT;
 import gregapi.data.CS.BushesGT;
@@ -45,6 +48,7 @@ import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -52,7 +56,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-public class MultiItemFood extends MultiItemRandom implements IItemRottable {
+import java.util.List;
+
+public class MultiItemFood extends MultiItemRandom implements IItemRottable, IFoodTFC {
 	public MultiItemFood() {
 		super(MD.GT.mID, "gt.multiitem.food");
 		setCreativeTab(new CreativeTab(getUnlocalizedName(), "GregTech: Nature & Foods", this, (short)12000));
@@ -167,7 +173,7 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 
 
 
-		IL.Food_Lemon.set(                          addItem(tLastID =     0, "Lemon"                                    , "Don't make Lemonade"         , "cropLemon"                   , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Lemon.set(                          addItem(tLastID =     0, "Lemon"                                    , "Don't make Lemonade"         , "cropLemon"                   , new GFoodStatTFC(5, 5, 5, 5, 5), new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Lemon_Sliced.set(                   addItem(tLastID =     1, "Lemon Slice"                              , "Ideal to put on your Drink"                                  , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		CR.shaped(IL.Food_Lemon_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropLemon");
 
@@ -749,4 +755,73 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 	}
 
 	@Override public ItemStack getRotten(ItemStack aStack, World aWorld, int aX, int aY, int aZ) {return getRotten(aStack);}
+
+
+	// TFC Compat
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public ItemStack onEaten(ItemStack aStack, World aWorld, EntityPlayer aPlayer)
+	{
+		//super.onEaten(aStack,aWorld, aPlayer);
+		if (!aWorld.isRemote && MD.TFC.mLoaded) {
+			com.bioxx.tfc.Core.Player.FoodStatsTFC foodstats = com.bioxx.tfc.Core.TFC_Core.getPlayerFoodStats(aPlayer);
+			GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(aStack));
+			if (this.isEdible(aStack)) {
+				float weight = com.bioxx.tfc.api.Food.getWeight(aStack);
+				float decay = Math.max(com.bioxx.tfc.api.Food.getDecay(aStack), 0);
+				float eatAmount = Math.min(weight - decay, 5f);
+				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
+
+				if(stomachDiff > 0) eatAmount-=stomachDiff;
+				foodstats.addNutrition(((IFoodTFC)(aStack.getItem())).getFoodGroup(), 5f);
+				foodstats.stomachLevel += 5f;
+				aStack.stackSize -= 1;
+			}
+			com.bioxx.tfc.Core.TFC_Core.setPlayerFoodStats(aPlayer, foodstats);
+		}
+		return aStack;
+	}
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public void addAdditionalToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
+		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(aStack));
+		if (tStatTFC != null) tStatTFC.addAdditionalToolTips(this, aList, aStack, aF3_H);
+	}
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public int getTasteSweet(ItemStack is) {
+		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(is));
+		return tStatTFC.mSweetness;
+	}
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public int getTasteSour(ItemStack is) {
+		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(is));
+		return tStatTFC.mSourness;
+	}
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public int getTasteSalty(ItemStack is) {
+		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(is));
+		return tStatTFC.mSaltiness;
+	}
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public int getTasteBitter(ItemStack is) {
+		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(is));
+		return tStatTFC.mBitterness;
+	}
+
+	@Override
+	@Optional.Method(modid = CS.ModIDs.TFC)
+	public int getTasteSavory(ItemStack is) {
+		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(is));
+		return tStatTFC.mSavory;
+	}
 }

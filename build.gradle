@@ -153,8 +153,8 @@ group = "com.gregoriust.gregtech"
 archivesBaseName = "gregtech_1.7.10"
 version = "<UNKNOWN>"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 compileJava.options.bootClasspath = org.gradle.internal.jvm.Jvm.current().getJre().getHomeDir().toString() +"/lib/rt.jar"
 compileJava {
 	options.encoding = "UTF-8"
