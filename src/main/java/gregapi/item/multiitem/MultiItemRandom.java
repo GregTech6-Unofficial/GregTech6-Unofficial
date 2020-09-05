@@ -35,7 +35,7 @@ import gregapi.code.ArrayListNoNulls;
 import gregapi.code.IItemContainer;
 import gregapi.code.ItemStackSet;
 import gregapi.code.TagData;
-import gregapi.compat.terrafirmacraft.GFoodStatTFC;
+import gregapi.compat.terrafirmacraft.IFoodStatTFC;
 import gregapi.cover.CoverRegistry;
 import gregapi.cover.ICover;
 import gregapi.data.CS.ModIDs;
@@ -49,6 +49,7 @@ import gregapi.data.TD;
 import gregapi.item.IItemEnergy;
 import gregapi.item.multiitem.behaviors.IBehavior;
 import gregapi.item.multiitem.energy.EnergyStatDebug;
+import gregapi.item.multiitem.food.FoodStat;
 import gregapi.item.multiitem.food.IFoodStat;
 import gregapi.item.prefixitem.PrefixItem;
 import gregapi.old.Textures;
@@ -89,12 +90,10 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 	public final BitSet mVisibleItems = new BitSet(32767);
 	public final IIcon[][] mIconList = new IIcon[32767][1];
 	
-	public final HashMap<Short, IFoodStat> mFoodStats = new HashMap<>();
+	public final HashMap<Short, FoodStat> mFoodStats = new HashMap<>();
 	public final HashMap<Short, IItemEnergy> mElectricStats = new HashMap<>();
 	public final HashMap<Short, Short> mBurnValues = new HashMap<>();
 
-	public final HashMap<Short, GFoodStatTFC> mFoodStatsTFC = new HashMap<>();
-	
 	/**
 	 * Creates the Item using these Parameters.
 	 * @param aUnlocalized The unlocalised Name of this Item. DO NOT START YOUR UNLOCALISED NAME WITH "gt."!!!
@@ -126,9 +125,8 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 		IFoodStat tStat = mFoodStats.get((short)getDamage(aStack));
 		if (tStat != null && (UT.Entities.isCreative(aPlayer) || aPlayer.getFoodStats().needFood() || tStat.alwaysEdible(this, aStack, aPlayer))) aPlayer.setItemInUse(aStack, getMaxItemUseDuration(aStack));
 		if (MD.TFC.mLoaded) {
-			GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(aStack));
 			com.bioxx.tfc.Core.Player.FoodStatsTFC foodstats = com.bioxx.tfc.Core.TFC_Core.getPlayerFoodStats(aPlayer);
-			if (foodstats.needFood()) aPlayer.setItemInUse(aStack, 32);
+			if (tStat != null && (UT.Entities.isCreative(aPlayer) || foodstats.needFood() || foodstats.needDrink() || tStat.alwaysEdible(this, aStack, aPlayer))) aPlayer.setItemInUse(aStack, getMaxItemUseDuration(aStack));
 		}
 		return super.onItemRightClick(aStack, aWorld, aPlayer);
 	}
@@ -173,16 +171,13 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 					setBurnValue(aID, ((Number)tRandomData).intValue());
 					continue;
 				}
-				if (tRandomData instanceof IFoodStat) {
-					setFoodBehavior(aID, (IFoodStat)tRandomData);
+				if (tRandomData instanceof FoodStat) {
+					setFoodBehavior(aID, (FoodStat)tRandomData);
 					if (IL.IC2_Food_Can_Empty.exists() && IL.IC2_Food_Can_Filled.exists() && getContainerItem(rStack) == null) {
-						int tFoodValue = ((IFoodStat)tRandomData).getFoodLevel(this, rStack, null);
-						if (tFoodValue > 0) RM.Canner.addRecipe2(T, 16, tFoodValue * 16, rStack, IL.IC2_Food_Can_Empty.get(tFoodValue), ((IFoodStat)tRandomData).isRotten(this, rStack, null)?IL.IC2_Food_Can_Spoiled.get(tFoodValue, IL.IC2_Food_Can_Filled.get(tFoodValue)):IL.IC2_Food_Can_Filled.get(tFoodValue));
+						int tFoodValue = ((FoodStat)tRandomData).getFoodLevel(this, rStack, null);
+						if (tFoodValue > 0) RM.Canner.addRecipe2(T, 16, tFoodValue * 16, rStack, IL.IC2_Food_Can_Empty.get(tFoodValue), ((FoodStat)tRandomData).isRotten(this, rStack, null)?IL.IC2_Food_Can_Spoiled.get(tFoodValue, IL.IC2_Food_Can_Filled.get(tFoodValue)):IL.IC2_Food_Can_Filled.get(tFoodValue));
 					}
 					tUseOreDict = F;
-				}
-				if (tRandomData instanceof GFoodStatTFC) {
-					setTFCFoodBehavior(aID, (GFoodStatTFC)tRandomData);
 				}
 				if (tRandomData instanceof ICover) {
 					CoverRegistry.put(rStack, (ICover)tRandomData);
@@ -257,15 +252,9 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 	 * @param aFoodBehavior the Food Behavior you want to add.
 	 * @return the Item itself for convenience in constructing.
 	 */
-	public MultiItemRandom setFoodBehavior(int aMetaValue, IFoodStat aFoodBehavior) {
+	public MultiItemRandom setFoodBehavior(int aMetaValue, FoodStat aFoodBehavior) {
 		if (aMetaValue < 0 || aMetaValue >= W) return this;
 		if (aFoodBehavior == null) mFoodStats.remove((short)aMetaValue); else mFoodStats.put((short)aMetaValue, aFoodBehavior);
-		return this;
-	}
-
-	public MultiItemRandom setTFCFoodBehavior(int aMetaValue, GFoodStatTFC aFoodBehavior) {
-		if (aMetaValue < 0 || aMetaValue >= W) return this;
-		if (aFoodBehavior == null) mFoodStatsTFC.remove((short)aMetaValue); else mFoodStatsTFC.put((short)aMetaValue, aFoodBehavior);
 		return this;
 	}
 	
@@ -327,6 +316,7 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 	@Override
 	public ItemStack onEaten(ItemStack aStack, World aWorld, EntityPlayer aPlayer) {
 		IFoodStat tStat = mFoodStats.get((short)getDamage(aStack));
+		IFoodStatTFC tStatTFC = mFoodStats.get((short)getDamage(aStack));
 		if (tStat != null) {
 			
 			int tFoodLevel = tStat.getFoodLevel(this, aStack, aPlayer);
@@ -351,6 +341,32 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 				} catch(Throwable e) {
 					e.printStackTrace(ERR);
 				}
+			}
+			if (!aWorld.isRemote && MD.TFC.mLoaded) {
+				com.bioxx.tfc.api.Enums.EnumFoodGroup[] mFoodGroups = {com.bioxx.tfc.api.Enums.EnumFoodGroup.Dairy, com.bioxx.tfc.api.Enums.EnumFoodGroup.Fruit, com.bioxx.tfc.api.Enums.EnumFoodGroup.Grain, com.bioxx.tfc.api.Enums.EnumFoodGroup.Protein, com.bioxx.tfc.api.Enums.EnumFoodGroup.Vegetable, com.bioxx.tfc.api.Enums.EnumFoodGroup.None};
+
+				com.bioxx.tfc.Core.Player.FoodStatsTFC foodstats = com.bioxx.tfc.Core.TFC_Core.getPlayerFoodStats(aPlayer);
+
+				float tasteFactor = 0.85f;
+				int[] tastePref = foodstats.getPrefTaste();
+
+				tasteFactor += foodstats.getTasteDistanceFactor(tastePref[0], tStatTFC.getSweetness(this, aStack, aPlayer));
+				tasteFactor += foodstats.getTasteDistanceFactor(tastePref[1], tStatTFC.getSourness(this, aStack, aPlayer));
+				tasteFactor += foodstats.getTasteDistanceFactor(tastePref[2], tStatTFC.getSaltiness(this, aStack, aPlayer));
+				tasteFactor += foodstats.getTasteDistanceFactor(tastePref[3], tStatTFC.getBitterness(this, aStack, aPlayer));
+				tasteFactor += foodstats.getTasteDistanceFactor(tastePref[4], tStatTFC.getSavory(this, aStack, aPlayer));
+
+				if (tStatTFC.isEdible(this, aStack, aPlayer)) {
+					float eatAmount = tStat.getFoodLevel(this, aStack, aPlayer) * 1.2f;
+					float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
+					if(stomachDiff > 0) eatAmount-=stomachDiff;
+
+					foodstats.addNutrition(mFoodGroups[tStatTFC.getFoodGroupTFC(this, aStack, aPlayer)], 5f);
+					foodstats.stomachLevel += eatAmount*tasteFactor;
+					foodstats.waterLevel += tStat.getHydration(this, aStack, aPlayer)*480;
+					foodstats.waterLevel -= ((FoodStat)tStat).getDehydration(this, aStack, aPlayer)*480;
+				}
+				com.bioxx.tfc.Core.TFC_Core.setPlayerFoodStats(aPlayer, foodstats);
 			}
 			tStat.onEaten(this, aStack, aPlayer, T);
 		}

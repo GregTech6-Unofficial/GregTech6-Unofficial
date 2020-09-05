@@ -21,8 +21,6 @@ package gregtech.items;
 
 import static gregapi.data.CS.*;
 
-import cpw.mods.fml.common.Optional;
-import gregapi.compat.terrafirmacraft.GFoodStatTFC;
 import gregapi.data.*;
 import gregapi.data.CS.BlocksGT;
 import gregapi.data.CS.BushesGT;
@@ -47,15 +45,12 @@ import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 	public MultiItemFood() {
@@ -172,46 +167,46 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 
 
 		//TODO: finish the properties setup
-		IL.Food_Lemon.set(                          addItem(tLastID =     0, "Lemon"                                    , "Don't make Lemonade"         , "cropLemon"                   , new GFoodStatTFC(T, 1, 5, 5, 5, 5, 5), new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Lemon_Sliced.set(                   addItem(tLastID =     1, "Lemon Slice"                              , "Ideal to put on your Drink"                                  , new GFoodStatTFC(T, 1, 5, 5, 5, 5, 5), new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		IL.Food_Lemon.set(                          addItem(tLastID =     0, "Lemon"                                    , "Don't make Lemonade"         , "cropLemon"                   , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Lemon_Sliced.set(                   addItem(tLastID =     1, "Lemon Slice"                              , "Ideal to put on your Drink"                                  , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		CR.shaped(IL.Food_Lemon_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropLemon");
 
 
-		IL.Food_Tomato.set(                         addItem(tLastID =    10, "Tomato"                                   , "Solid Ketchup"               , "cropTomato"                  , new GFoodStatTFC(T, 1, 5, 5, 5, 5, 5), new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Tomato_Sliced.set(                  addItem(tLastID =    11, "Tomato Slice"                             , "Solid Ketchup"                                               , new GFoodStatTFC(T, 1, 5, 5, 5, 5, 5), new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		IL.Food_Tomato.set(                         addItem(tLastID =    10, "Tomato"                                   , "Solid Ketchup"               , "cropTomato"                  , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Tomato_Sliced.set(                  addItem(tLastID =    11, "Tomato Slice"                             , "Solid Ketchup"                                               , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		CR.shaped(IL.Food_Tomato_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropTomato");
 
 
-		IL.Food_MTomato.set(                        addItem(tLastID =    20, "Max Tomato"                               , "Ten Hearts in one Tomato"    , "cropTomato"                  , new FoodStat( 9, 1.000F,  50, C+36,  0.30F,   0,   0,   0,  10,   0, EnumAction.eat, null                                 , F, T, F, T, Potion.regeneration.id, 60, 4, 100), TC.stack(TC.MESSIS, 1), TC.stack(TC.SANO, 3), TC.stack(TC.FAMES, 1)));
+		IL.Food_MTomato.set(                        addItem(tLastID =    20, "Max Tomato"                               , "Ten Hearts in one Tomato"    , "cropTomato"                  , new FoodStat( 9, 1.000F,  50, C+36,  0.30F,   0,   0,   0,  10,   0, 1, EnumAction.eat, null                                 , F, T, F, T, Potion.regeneration.id, 60, 4, 100), TC.stack(TC.MESSIS, 1), TC.stack(TC.SANO, 3), TC.stack(TC.FAMES, 1)));
 		RM.food_can(IL.Food_MTomato.get(1),10, "Canned Max Tomato", IL.CANS_VEGGIE);
 
 
-		IL.Food_Onion.set(                          addItem(tLastID =    30, "Onion"                                    , "Taking over the whole Taste" , "cropOnion"                   , new FoodStat( 1, 1.200F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Onion_Sliced.set(                   addItem(tLastID =    31, "Onion Slice"                              , "ONIONS, UNITE!"                                              , new FoodStat( 0, 0.300F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		IL.Food_Onion.set(                          addItem(tLastID =    30, "Onion"                                    , "Taking over the whole Taste" , "cropOnion"                   , new FoodStat( 1, 1.200F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Onion_Sliced.set(                   addItem(tLastID =    31, "Onion Slice"                              , "ONIONS, UNITE!"                                              , new FoodStat( 0, 0.300F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		CR.shaped(IL.Food_Onion_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropOnion");
 
 
-		IL.Food_Cucumber.set(                       addItem(tLastID =    40, "Cucumber"                                 , "Not a Sea Cucumber!"         , "cropCucumber"                , new FoodStat( 1, 1.200F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Cucumber_Sliced.set(                addItem(tLastID =    41, "Cucumber Slice"                           , "QUEWWWCUMMMBURRR!!!"                                         , new FoodStat( 0, 0.300F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		IL.Food_Cucumber.set(                       addItem(tLastID =    40, "Cucumber"                                 , "Not a Sea Cucumber!"         , "cropCucumber"                , new FoodStat( 1, 1.200F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Cucumber_Sliced.set(                addItem(tLastID =    41, "Cucumber Slice"                           , "QUEWWWCUMMMBURRR!!!"                                         , new FoodStat( 0, 0.300F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		CR.shaped(IL.Food_Cucumber_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropCucumber");
 
 
-		IL.Food_Chili_Pepper.set(                   addItem(tLastID =    50, "Chili Pepper"                             , "It is red and hot"           , "cropChilipepper"             , new FoodStat( 1, 1.200F, -10, C+40,  0.50F,   0,   0,  10,   0,   0, EnumAction.eat, null                                 , F, T, F, T, Potion.confusion.id, 200, 1, 40), TC.stack(TC.MESSIS, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Chili_Pepper.set(                   addItem(tLastID =    50, "Chili Pepper"                             , "It is red and hot"           , "cropChilipepper"             , new FoodStat( 1, 1.200F, -10, C+40,  0.50F,   0,   0,  10,   0,   0, 4, EnumAction.eat, null                                 , F, T, F, T, Potion.confusion.id, 200, 1, 40), TC.stack(TC.MESSIS, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.FAMES, 1)));
 
 
-		IL.Food_Grapes_Green.set(                   addItem(tLastID =    60, "Green Grapes"                             , "Source of Wine"              , "cropGrapeGreen"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Raisins_Green.set(                  addItem(tLastID =    61, "Green Raisins"                            , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Grapes_Green.set(                   addItem(tLastID =    60, "Green Grapes"                             , "Source of Wine"              , "cropGrapeGreen"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Raisins_Green.set(                  addItem(tLastID =    61, "Green Raisins"                            , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
 
-		IL.Food_Grapes_White.set(                   addItem(tLastID =    63, "White Grapes"                             , "Source of Wine"              , "cropGrapeWhite"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Raisins_White.set(                  addItem(tLastID =    64, "White Raisins"                            , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Grapes_White.set(                   addItem(tLastID =    63, "White Grapes"                             , "Source of Wine"              , "cropGrapeWhite"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Raisins_White.set(                  addItem(tLastID =    64, "White Raisins"                            , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
 
-		IL.Food_Grapes_Red.set(                     addItem(tLastID =    66, "Red Grapes"                               , "Source of Wine"              , "cropGrapeRed"                , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Raisins_Red.set(                    addItem(tLastID =    67, "Red Raisins"                              , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Grapes_Red.set(                     addItem(tLastID =    66, "Red Grapes"                               , "Source of Wine"              , "cropGrapeRed"                , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Raisins_Red.set(                    addItem(tLastID =    67, "Red Raisins"                              , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
 
-		IL.Food_Grapes_Purple.set(                  addItem(tLastID =    70, "Purple Grapes"                            , "Source of Wine"              , "cropGrapePurple"             , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Raisins_Purple.set(                 addItem(tLastID =    71, "Purple Raisins"                           , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Grapes_Purple.set(                  addItem(tLastID =    70, "Purple Grapes"                            , "Source of Wine"              , "cropGrapePurple"             , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Raisins_Purple.set(                 addItem(tLastID =    71, "Purple Raisins"                           , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
 
-		IL.Food_Raisins_Chocolate.set(              addItem(tLastID =    72, "Chocolate Raisins"                        , "Dried Grapes coated in Chocolate", "foodChocolateraisins"    , new FoodStat( 3, 1.200F,   0, C+37,  0.20F,   0,   0,   0,  40,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.SANO, 1)));
+		IL.Food_Raisins_Chocolate.set(              addItem(tLastID =    72, "Chocolate Raisins"                        , "Dried Grapes coated in Chocolate", "foodChocolateraisins"    , new FoodStat( 3, 1.200F,   0, C+37,  0.20F,   0,   0,   0,  40,   0, 2, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.SANO, 1)));
 
 
 		IL.Food_Carrot.set(                         ST.make(Items.carrot, 1, 0)); FoodsGT.put(ST.make(Items.carrot, 1, W), 0, 0, 0, 8, 0);//                                            , new FoodStat( 5, 1.200F,   0, C+37,  0.10F,   0,   0,   0,   8,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1), TC.stack(TC.IGNIS, 1), Behavior_FeedPig.INSTANCE));
@@ -755,49 +750,4 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 
 	@Override public ItemStack getRotten(ItemStack aStack, World aWorld, int aX, int aY, int aZ) {return getRotten(aStack);}
 
-
-	// TFC Compat
-
-	@Override
-	@Optional.Method(modid = CS.ModIDs.TFC)
-	public ItemStack onEaten(ItemStack aStack, World aWorld, EntityPlayer aPlayer)
-	{
-		//super.onEaten(aStack,aWorld, aPlayer);
-		if (!aWorld.isRemote && MD.TFC.mLoaded) {
-			com.bioxx.tfc.api.Enums.EnumFoodGroup[] mFoodGroups = {com.bioxx.tfc.api.Enums.EnumFoodGroup.Dairy, com.bioxx.tfc.api.Enums.EnumFoodGroup.Fruit, com.bioxx.tfc.api.Enums.EnumFoodGroup.Grain, com.bioxx.tfc.api.Enums.EnumFoodGroup.Protein, com.bioxx.tfc.api.Enums.EnumFoodGroup.Vegetable, com.bioxx.tfc.api.Enums.EnumFoodGroup.None};
-
-			com.bioxx.tfc.Core.Player.FoodStatsTFC foodstats = com.bioxx.tfc.Core.TFC_Core.getPlayerFoodStats(aPlayer);
-			GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(aStack));
-
-			float tasteFactor = 0.85f;
-			int[] tastePref = foodstats.getPrefTaste();
-
-			tasteFactor += foodstats.getTasteDistanceFactor(tastePref[0], tStatTFC.mSweetness);
-			tasteFactor += foodstats.getTasteDistanceFactor(tastePref[1], tStatTFC.mSourness);
-			tasteFactor += foodstats.getTasteDistanceFactor(tastePref[2], tStatTFC.mSaltiness);
-			tasteFactor += foodstats.getTasteDistanceFactor(tastePref[3], tStatTFC.mBitterness);
-			tasteFactor += foodstats.getTasteDistanceFactor(tastePref[4], tStatTFC.mSavory);
-
-			if (tStatTFC.mEdible) {
-				float weight = tStatTFC.mWeight;
-				float eatAmount = Math.min(weight, 5f);
-				float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
-
-				if(stomachDiff > 0) eatAmount-=stomachDiff;
-
-				foodstats.addNutrition(mFoodGroups[tStatTFC.mFoodGroup], 5f);
-				foodstats.stomachLevel += eatAmount*tasteFactor;
-				aStack.stackSize -= 1;
-			}
-			com.bioxx.tfc.Core.TFC_Core.setPlayerFoodStats(aPlayer, foodstats);
-		}
-		return aStack;
-	}
-
-	@Override
-	@Optional.Method(modid = CS.ModIDs.TFC)
-	public void addAdditionalToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		GFoodStatTFC tStatTFC = mFoodStatsTFC.get((short)getDamage(aStack));
-		if (tStatTFC != null) tStatTFC.addAdditionalToolTips(this, aList, aStack, aF3_H);
-	}
 }

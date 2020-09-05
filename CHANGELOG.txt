@@ -9,7 +9,7 @@ Nothing
 Nothing
 
 6.14.07:
-[COMPAT] Compatibility on TFC food system. GT Foods can now be consumed when Terra Firma Craft is installed and they have the five tastes (sweetness, sourness, bitterness, saltiness, and savory) in TFC now.
+[COMPAT] Compatibility with TFC food system. GT Foods can now be consumed when Terra Firma Craft is installed and they have the five tastes (sweetness, sourness, bitterness, saltiness, and savory) in TFC now.
 
 6.14.06:
 [FIXED] MESU cannot save energy correctly.
