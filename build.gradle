@@ -222,6 +222,7 @@ dependencies {
 	compileOnly "com.builtbroken:VoltzEngine:1.7.10-1.11.0b466:deobf"
 	compileOnly "com.hbm:hbm:1.0.27:dev"
 	compileOnly "com.celestek.hexcraft:HEXCraft:1.7.10-0.13.1:dev"
+	compileOnly "com.bioxx.tfc:TerraFirmaCraft_1.7.10:0.79.28.908:deobf"
 
 	// List of potentially useful mods that may or may not be linked in here:
 	//compileOnly "appeng:appliedenergistics2:rv3-beta-6:dev"
@@ -241,7 +242,6 @@ dependencies {
 	//compileOnly "com.amadornes.framez:Framez:1.7.10-0.2-33:deobf"
 	//compileOnly "com.amadornes.jtraits:JTraits:0.1"
 	//compileOnly "com.azanor.baubles:Baubles:1.7.10-1.0.1.10:deobf"
-	//compileOnly "com.bioxx.tfc:TerraFirmaCraft_1.7.10:0.79.28.908:deobf"
 	//compileOnly "com.bluepowermod:BluePower:1.7.10-0.2.963:deobf"
 	//compileOnly "com.builtbroken:AddictedToRed:1.7.10-0.4.0b145:deobf"
 	//compileOnly "com.builtbroken:Assembly-Line:1.7.10-0.5.7b180:deobf-dev"
