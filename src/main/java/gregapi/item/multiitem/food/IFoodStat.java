@@ -45,6 +45,24 @@ public interface IFoodStat {
 	public EnumAction getFoodAction(Item aItem, ItemStack aStack);
 	/** Warning: the "aPlayer" Parameter may be null! */
 	public boolean useAppleCoreFunctionality(Item aItem, ItemStack aStack, EntityPlayer aPlayer);
+	/** Warning: the "aPlayer" Parameter may be null! Get the food sweetness (TFC). */
+	default int getSweetness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
+	/** Warning: the "aPlayer" Parameter may be null! Get the food sourness (TFC). */
+	default int getSourness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
+	/** Warning: the "aPlayer" Parameter may be null! Get the food saltiness (TFC). */
+	default int getSaltiness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
+	/** Warning: the "aPlayer" Parameter may be null! Get the food bitterness (TFC). */
+	default int getBitterness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
+	/** Warning: the "aPlayer" Parameter may be null! Get the food savory (TFC). */
+	default int getSavory(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
+	/** Warning: the "aPlayer" Parameter may be null! Whether the food can be eaten. */
+	default boolean isEdible(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return true;}
+	/** Warning: the "aPlayer" Parameter may be null! Get the food weight in Ounce. */
+	default int getFoodWeight(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 5;}
+	/** Warning: the "aPlayer" Parameter may be null! Get the dehydration level. */
+	default int getDehydration(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
+	/** Warning: the "aPlayer" Parameter may be null! Get an integer that represents six matching com.bioxx.tfc.api.Enums.EnumFoodGroup. The matching is: 0-Diary, 1-Fruit, 2-Grain, 3-Protein, 4-Vegetable, 5-None*/
+	default int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 5;}
 	
 	public void onEaten(Item aItem, ItemStack aStack, EntityPlayer aPlayer, boolean aConsumeItem);
 	

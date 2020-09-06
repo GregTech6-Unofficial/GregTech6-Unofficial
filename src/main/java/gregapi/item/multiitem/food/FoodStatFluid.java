@@ -115,7 +115,88 @@ public class FoodStatFluid implements IFoodStat {
 		if (rStats == null) return F;
 		return rStats.useAppleCoreFunctionality(aItem, aStack, aPlayer);
 	}
-	
+
+	@Override
+	public int getSweetness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getSweetness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getSourness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getSourness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getSaltiness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getSaltiness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getBitterness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getBitterness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getSavory(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getSavory(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public boolean isEdible(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return T;
+		return rStats.isEdible(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getFoodWeight(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getFoodWeight(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getDehydration(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getDehydration(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		IFoodStat rStats = null;
+		FluidStack tFluid = FL.getFluid(aStack, T);
+		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
+		if (rStats == null) return 0;
+		return rStats.getFoodGroupTFC(aItem, aStack, aPlayer);
+	}
+
 	@Override
 	public void onEaten(Item aItem, ItemStack aStack, EntityPlayer aPlayer, boolean aConsumeItem) {
 		IFoodStat rStats = null;

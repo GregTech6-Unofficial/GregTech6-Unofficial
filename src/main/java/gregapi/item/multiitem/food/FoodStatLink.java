@@ -89,7 +89,52 @@ public class FoodStatLink implements IFoodStat {
 	public boolean useAppleCoreFunctionality(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
 		return mStats.useAppleCoreFunctionality(aItem, aStack, aPlayer);
 	}
-	
+
+	@Override
+	public int getSweetness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getSweetness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getSourness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getSourness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getSaltiness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getSaltiness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getBitterness(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getBitterness(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getSavory(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getSavory(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public boolean isEdible(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.isEdible(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getFoodWeight(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getFoodWeight(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getDehydration(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getDehydration(aItem, aStack, aPlayer);
+	}
+
+	@Override
+	public int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		return mStats.getFoodGroupTFC(aItem, aStack, aPlayer);
+	}
+
 	@Override
 	public void onEaten(Item aItem, ItemStack aStack, EntityPlayer aPlayer, boolean aConsumeItem) {
 		mStats.onEaten(aItem, aStack, aPlayer, aConsumeItem);

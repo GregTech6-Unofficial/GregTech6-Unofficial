@@ -23,7 +23,6 @@ import static gregapi.data.CS.*;
 
 import java.util.List;
 
-import gregapi.compat.terrafirmacraft.IFoodStatTFC;
 import gregapi.damage.DamageSources;
 import gregapi.data.CS.PotionsGT;
 import gregapi.data.LH;
@@ -38,8 +37,9 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.MathHelper;
 
-public class FoodStat implements IFoodStat, IFoodStatTFC {
+public class FoodStat implements IFoodStat {
 	private final int mFoodLevel, mAlcohol, mCaffeine, mDehydration, mSugar, mFat;
 	private final int[] mPotionEffects;
 	private final float mSaturation, mHydration, mTemperature, mTemperatureEffect;
@@ -125,6 +125,7 @@ public class FoodStat implements IFoodStat, IFoodStatTFC {
 		return this;
 	}
 
+	@Override
 	public int getDehydration(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
 		return mDehydration;
 	}
@@ -273,12 +274,12 @@ public class FoodStat implements IFoodStat, IFoodStatTFC {
 			if (mFoodGroup == 1) aList.add(LH.Chat.PURPLE + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.fruit"));
 			if (mFoodGroup == 2) aList.add(LH.Chat.YELLOW + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.grain"));
 			if (mFoodGroup == 3) aList.add(LH.Chat.DRED + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.protein"));
-			if (mFoodGroup == 4) aList.add(LH.Chat.GREEN + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.vegetable"));
+			if (mFoodGroup == 4) aList.add(LH.Chat.DGREEN + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.vegetable"));
 			if (mFoodGroup == 5) aList.add(LH.Chat.RED + "None");
 
-			aList.add(com.bioxx.tfc.Core.TFC_Core.translate("gui.food.amount") + LH.Chat.GRAY + " " + mFoodLevel*1.2 + " oz / " + mFoodLevel*1.2 + " oz");
-			if (mHydration > 0) aList.add(LH.Chat.BLUE + "Water - " + mHydration);
-			if (mDehydration > 0) aList.add(LH.Chat.ORANGE + "Losing Water");
+			aList.add(com.bioxx.tfc.Core.TFC_Core.translate("gui.food.amount") + LH.Chat.GRAY + " " + Math.round(mFoodLevel*1.2) + ".0 oz / " + Math.round(mFoodLevel*1.2) + ".0 oz");
+			if (mHydration > 0) aList.add(LH.Chat.BLUE + "Containing Water - " + mHydration);
+			if (mDehydration > 0) aList.add(LH.Chat.ORANGE + "Dehydration - " + mDehydration);
 
 			aList.add(com.bioxx.tfc.Core.TFC_Core.translate("gui.showtaste"));
 
