@@ -266,7 +266,7 @@ public class FoodStat implements IFoodStat {
 		if (UT.Code.stringValid(tString) && MD.ENVM.mLoaded) aList.add(LH.Chat.RED + tString);
 		if (mExplosive) aList.add(LH.Chat.DRED + "smells like explosives");
 		if (mIsRotten) aList.add(LH.Chat.DRED + "smells rotten");
-		if (MD.TFC.mLoaded) {
+		if (MD.TFC.mLoaded || MD.TFCP.mLoaded) {
 			aList.add("\u2696" + com.bioxx.tfc.Core.TFC_Core.translate("gui.Weight.Light") + " \u21F2" + com.bioxx.tfc.Core.TFC_Core.translate("gui.Size.VerySmall"));
 
 

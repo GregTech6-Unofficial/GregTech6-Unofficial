@@ -124,7 +124,7 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 		isItemStackUsable(aStack);
 		IFoodStat tStat = mFoodStats.get((short)getDamage(aStack));
 		if (tStat != null && (UT.Entities.isCreative(aPlayer) || aPlayer.getFoodStats().needFood() || tStat.alwaysEdible(this, aStack, aPlayer))) aPlayer.setItemInUse(aStack, getMaxItemUseDuration(aStack));
-		if (MD.TFC.mLoaded) {
+		if (MD.TFC.mLoaded || MD.TFCP.mLoaded) {
 			com.bioxx.tfc.Core.Player.FoodStatsTFC foodstats = com.bioxx.tfc.Core.TFC_Core.getPlayerFoodStats(aPlayer);
 			if (tStat != null && (UT.Entities.isCreative(aPlayer) || ((tStat instanceof FoodStatDrink || tStat instanceof FoodStatFluid) && foodstats.needDrink()) || foodstats.needFood() || tStat.alwaysEdible(this, aStack, aPlayer))) {
 				aPlayer.setItemInUse(aStack, getMaxItemUseDuration(aStack));
@@ -343,7 +343,7 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 					e.printStackTrace(ERR);
 				}
 			}
-			if (!aWorld.isRemote && MD.TFC.mLoaded) {
+			if (!aWorld.isRemote && (MD.TFC.mLoaded || MD.TFCP.mLoaded)) {
 				com.bioxx.tfc.api.Enums.EnumFoodGroup[] mFoodGroups = {com.bioxx.tfc.api.Enums.EnumFoodGroup.Dairy, com.bioxx.tfc.api.Enums.EnumFoodGroup.Fruit, com.bioxx.tfc.api.Enums.EnumFoodGroup.Grain, com.bioxx.tfc.api.Enums.EnumFoodGroup.Protein, com.bioxx.tfc.api.Enums.EnumFoodGroup.Vegetable, com.bioxx.tfc.api.Enums.EnumFoodGroup.None};
 
 				com.bioxx.tfc.Core.Player.FoodStatsTFC foodstats = com.bioxx.tfc.Core.TFC_Core.getPlayerFoodStats(aPlayer);
