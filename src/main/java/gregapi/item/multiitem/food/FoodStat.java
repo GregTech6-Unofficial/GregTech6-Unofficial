@@ -37,7 +37,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.MathHelper;
 
 public class FoodStat implements IFoodStat {
 	private final int mFoodLevel, mAlcohol, mCaffeine, mDehydration, mSugar, mFat;
@@ -51,7 +50,7 @@ public class FoodStat implements IFoodStat {
 	//TFC Compat
 	private int mSweetness, mSourness, mSaltiness, mBitterness, mSavory = 0;
 	private boolean mEdible;
-	private int mFoodGroup;
+	private int[] mFoodGroup;
 	private int mWeight;
 	
 	/**
@@ -69,7 +68,7 @@ public class FoodStat implements IFoodStat {
 	 * Level of the Effect. [0, 1, 2] are for [I, II, III], negative to remove existing levels.
 	 * The likelihood that this Potion Effect takes place upon being eaten [1 - 100]
 	 */
-	public FoodStat(int aFoodLevel, float aSaturation, float aHydration, float aTemperature, float aTemperatureEffect, int aAlcohol, int aCaffeine, int aDehydration, int aSugar, int aFat, int aBitterness, int aSourness, int aSavory, int aFoodGroup, EnumAction aAction, ItemStack aEmptyContainer, boolean aAlwaysEdible, boolean aInvisibleParticles, boolean aIsRotten, boolean aAutoDetectEmpty, boolean aEdible, int... aPotionEffects) {
+	public FoodStat(int aFoodLevel, float aSaturation, float aHydration, float aTemperature, float aTemperatureEffect, int aAlcohol, int aCaffeine, int aDehydration, int aSugar, int aFat, int aBitterness, int aSourness, int aSavory, int[] aFoodGroup, EnumAction aAction, ItemStack aEmptyContainer, boolean aAlwaysEdible, boolean aInvisibleParticles, boolean aIsRotten, boolean aAutoDetectEmpty, boolean aEdible, int... aPotionEffects) {
 		mFoodLevel = aFoodLevel;
 		mSaturation = aSaturation;
 		mHydration = aHydration;
@@ -99,13 +98,17 @@ public class FoodStat implements IFoodStat {
 
 	/** Original constructor */
 	public FoodStat(int aFoodLevel, float aSaturation, float aHydration, float aTemperature, float aTemperatureEffect, int aAlcohol, int aCaffeine, int aDehydration, int aSugar, int aFat, EnumAction aAction, ItemStack aEmptyContainer, boolean aAlwaysEdible, boolean aInvisibleParticles, boolean aIsRotten, boolean aAutoDetectEmpty, int... aPotionEffects) {
-		this(aFoodLevel, aSaturation, aHydration, aTemperature, aTemperatureEffect, aAlcohol, aCaffeine, aDehydration, aSugar, aFat, 0, 0, 20, 5, aAction, aEmptyContainer, aAlwaysEdible, aInvisibleParticles, aIsRotten, aAutoDetectEmpty, T, aPotionEffects);
+		this(aFoodLevel, aSaturation, aHydration, aTemperature, aTemperatureEffect, aAlcohol, aCaffeine, aDehydration, aSugar, aFat, 0, 0, 20, new int[] {5}, aAction, aEmptyContainer, aAlwaysEdible, aInvisibleParticles, aIsRotten, aAutoDetectEmpty, T, aPotionEffects);
 	}
 
 	public FoodStat(int aFoodLevel, float aSaturation, float aHydration, float aTemperature, float aTemperatureEffect, int aAlcohol, int aCaffeine, int aDehydration, int aSugar, int aFat, int aFoodGroup, EnumAction aAction, ItemStack aEmptyContainer, boolean aAlwaysEdible, boolean aInvisibleParticles, boolean aIsRotten, boolean aAutoDetectEmpty, int... aPotionEffects) {
+		this(aFoodLevel, aSaturation, aHydration, aTemperature, aTemperatureEffect, aAlcohol, aCaffeine, aDehydration, aSugar, aFat, 0, 0, 20, new int[] {aFoodGroup}, aAction, aEmptyContainer, aAlwaysEdible, aInvisibleParticles, aIsRotten, aAutoDetectEmpty, T, aPotionEffects);
+	}
+
+	public FoodStat(int aFoodLevel, float aSaturation, float aHydration, float aTemperature, float aTemperatureEffect, int aAlcohol, int aCaffeine, int aDehydration, int aSugar, int aFat, int aFoodGroup[], EnumAction aAction, ItemStack aEmptyContainer, boolean aAlwaysEdible, boolean aInvisibleParticles, boolean aIsRotten, boolean aAutoDetectEmpty, int... aPotionEffects) {
 		this(aFoodLevel, aSaturation, aHydration, aTemperature, aTemperatureEffect, aAlcohol, aCaffeine, aDehydration, aSugar, aFat, 0, 0, 20, aFoodGroup, aAction, aEmptyContainer, aAlwaysEdible, aInvisibleParticles, aIsRotten, aAutoDetectEmpty, T, aPotionEffects);
 	}
-	
+
 	public FoodStat(int aFoodLevel, float aSaturation, float aHydration, float aTemperature, float aTemperatureEffect, EnumAction aAction, ItemStack aEmptyContainer, boolean aAlwaysEdible, boolean aInvisibleParticles, boolean aIsRotten, boolean aAutoDetectEmpty, int... aPotionEffects) {
 		this(aFoodLevel, aSaturation, aHydration, aTemperature, aTemperatureEffect, 0, 0, 0, 0, 0, aAction, aEmptyContainer, aAlwaysEdible, aInvisibleParticles, aIsRotten, aAutoDetectEmpty, aPotionEffects);
 	}
@@ -191,7 +194,7 @@ public class FoodStat implements IFoodStat {
 	}
 
 	@Override
-	public int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+	public int[] getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
 		return mFoodGroup;
 	}
 	
@@ -269,13 +272,14 @@ public class FoodStat implements IFoodStat {
 		if (MD.TFC.mLoaded || MD.TFCP.mLoaded) {
 			aList.add("\u2696" + com.bioxx.tfc.Core.TFC_Core.translate("gui.Weight.Light") + " \u21F2" + com.bioxx.tfc.Core.TFC_Core.translate("gui.Size.VerySmall"));
 
-
-			if (mFoodGroup == 0) aList.add(LH.Chat.WHITE + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.dairy"));
-			if (mFoodGroup == 1) aList.add(LH.Chat.PURPLE + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.fruit"));
-			if (mFoodGroup == 2) aList.add(LH.Chat.YELLOW + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.grain"));
-			if (mFoodGroup == 3) aList.add(LH.Chat.DRED + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.protein"));
-			if (mFoodGroup == 4) aList.add(LH.Chat.DGREEN + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.vegetable"));
-			if (mFoodGroup == 5) aList.add(LH.Chat.RED + "None");
+			for (int foodGroup : mFoodGroup) {
+				if (foodGroup == 0) aList.add(LH.Chat.WHITE + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.dairy"));
+				if (foodGroup == 1) aList.add(LH.Chat.PURPLE + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.fruit"));
+				if (foodGroup == 2) aList.add(LH.Chat.YELLOW + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.grain"));
+				if (foodGroup == 3) aList.add(LH.Chat.DRED + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.protein"));
+				if (foodGroup == 4) aList.add(LH.Chat.DGREEN + com.bioxx.tfc.Core.TFC_Core.translate("gui.food.vegetable"));
+				if (foodGroup == 5) aList.add(LH.Chat.RED + "None");
+			}
 
 			aList.add(com.bioxx.tfc.Core.TFC_Core.translate("gui.food.amount") + LH.Chat.GRAY + " " + Math.round(mFoodLevel*1.2) + ".0 oz / " + Math.round(mFoodLevel*1.2) + ".0 oz");
 			if (mHydration > 0) aList.add(LH.Chat.BLUE + "Containing Water - " + mHydration);

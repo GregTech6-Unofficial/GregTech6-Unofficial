@@ -362,10 +362,13 @@ public abstract class MultiItemRandom extends MultiItem implements Runnable, squ
 					float stomachDiff = foodstats.stomachLevel+eatAmount-foodstats.getMaxStomach(foodstats.player);
 					if(stomachDiff > 0) eatAmount-=stomachDiff;
 
-					foodstats.addNutrition(mFoodGroups[tStat.getFoodGroupTFC(this, aStack, aPlayer)], 5f);
+					int nutritionNumber = tStat.getFoodGroupTFC(this, aStack, aPlayer).length;
+					for (int foodGroup : tStat.getFoodGroupTFC(this, aStack, aPlayer)) {
+						foodstats.addNutrition(mFoodGroups[foodGroup], eatAmount*tasteFactor/nutritionNumber);
+					}
 					foodstats.stomachLevel += eatAmount*tasteFactor;
 					foodstats.waterLevel = Math.min(foodstats.getMaxWater(foodstats.player), foodstats.waterLevel + tStat.getHydration(this, aStack, aPlayer)*480);
-					foodstats.waterLevel = Math.max(0, foodstats.waterLevel - tStat.getDehydration(this, aStack, aPlayer)*480);
+					foodstats.waterLevel = Math.max(0, foodstats.waterLevel - tStat.getDehydration(this, aStack, aPlayer)*240);
 				}
 				com.bioxx.tfc.Core.TFC_Core.setPlayerFoodStats(aPlayer, foodstats);
 			}

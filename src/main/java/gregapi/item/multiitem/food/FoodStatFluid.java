@@ -189,11 +189,11 @@ public class FoodStatFluid implements IFoodStat {
 	}
 
 	@Override
-	public int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+	public int[] getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
 		IFoodStat rStats = null;
 		FluidStack tFluid = FL.getFluid(aStack, T);
 		if (tFluid != null) rStats = DrinksGT.REGISTER.get(tFluid.getFluid().getName());
-		if (rStats == null) return 0;
+		if (rStats == null) {int[] foodGroups = {5}; return foodGroups;}
 		return rStats.getFoodGroupTFC(aItem, aStack, aPlayer);
 	}
 

@@ -62,7 +62,10 @@ public interface IFoodStat {
 	/** Warning: the "aPlayer" Parameter may be null! Get the dehydration level. */
 	default int getDehydration(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 0;}
 	/** Warning: the "aPlayer" Parameter may be null! Get an integer that represents six matching com.bioxx.tfc.api.Enums.EnumFoodGroup. The matching is: 0-Diary, 1-Fruit, 2-Grain, 3-Protein, 4-Vegetable, 5-None*/
-	default int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {return 5;}
+	default int[] getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+		int [] foodGroups = {5};
+		return foodGroups;
+	}
 	
 	public void onEaten(Item aItem, ItemStack aStack, EntityPlayer aPlayer, boolean aConsumeItem);
 	

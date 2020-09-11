@@ -131,7 +131,7 @@ public class FoodStatLink implements IFoodStat {
 	}
 
 	@Override
-	public int getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
+	public int[] getFoodGroupTFC(Item aItem, ItemStack aStack, EntityPlayer aPlayer) {
 		return mStats.getFoodGroupTFC(aItem, aStack, aPlayer);
 	}
 
