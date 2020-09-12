@@ -9,6 +9,8 @@ Nothing
 Nothing
 
 6.14.07:
+[NOTE] I am busy during this end of 2020 and will not be able to update GT6u again until around 2021 February.
+You can still report any bug or suggestion you found in GT6u. See you then.
 [FIXED] Fuel Cleaner now auto-searches for any kind of sulfured fuel that are in the fluid slots of it. And it will automatically change to execute that fuel cleaning recipe.
 [COMPAT] Compatibility with TFC & TFC-Plus food system. GT Foods can now be consumed when Terra Firma Craft is installed and they have the five tastes (sweetness, sourness, bitterness, saltiness, and savory) in TFC now.
 
