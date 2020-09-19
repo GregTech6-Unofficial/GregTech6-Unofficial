@@ -372,7 +372,7 @@ public class MT {
 	 * I guessed some of the Values for Melting and Boiling Points, because they were not listed in Wikipedia at that time.
 	 * Those guessed Values are postfixed with an empty Space.
 	 */
-	public static final OreDictMaterial
+	public static final OreDictMaterial // TODO: FUSION recipes still need to fix.
 	H       = diatomicgas (  10, "Hydrogen"       , "H"     ,   1,   0,    14,    20,  0.00008988, SET_DULL    ,   0,   0, 255,  15, UUM                         , CONTAINERS_GAS                                                                                  ).aspects(TC.AQUA, 1                                     ),
 	D       = diatomicgas (  11, "Deuterium"      , "D"     ,   1,   1,    14,    20,  0.00008988, SET_RAD     , 255, 255,   0,  15,      FUSION                 , CONTAINERS_GAS                                                                                  ).aspects(TC.AQUA, 2                                     ), H_2=D,
 	T       = diatomicgas (  12, "Tritium"        , "T"     ,   1,   2,    14,    20,  0.00008988, SET_RAD     , 255,   0,   0,  15,      FUSION                 , CONTAINERS_GAS                                                                                  ).aspects(TC.AQUA, 3                                     ), H_3=T,
