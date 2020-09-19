@@ -46,15 +46,16 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class Loader_Recipes_Vanilla implements Runnable {
 	@Override public void run() {
+		CR.remove(ST.make(Items.reeds, 1, 0));
+		CR.remove(ST.make(Items.reeds, 1, 0), ST.make(Items.reeds, 1, 0), ST.make(Items.reeds, 1, 0));
 		CR.remove(ST.make(Blocks.cobblestone, 1, 0), ST.make(Items.quartz, 1, 0), NI, ST.make(Items.quartz, 1, 0), ST.make(Blocks.cobblestone, 1, 0));
 		CR.remove(ST.make(Items.blaze_rod, 1, 0));
-		CR.remove(ST.make(Items.reeds, 1, 0));
 		CR.remove(ST.make(Items.bone, 1, 0));
 		
-		CR.shapeless(OP.dust.mat(MT.White, 1), DEF_NAC, new Object[] {ST.make(Items.bone, 1, W)});
-		CR.shapeless(ST.make(Items.blaze_powder, 1, 0), DEF_NAC, new Object[] {ST.make(Items.blaze_rod, 1, W)});
-		CR.shaped(ST.make(Items.paper, 1, 0), DEF_NAC, "XXX", 'X', ST.make(Items.reeds, 1, 0));
-		CR.shapeless(ST.make(Items.book, 1, 0), DEF, new Object[] {OD.craftingLeather, "paperEmpty", "paperEmpty", "paperEmpty"});
+		CR.shapeless(OP.dust.mat(MT.White, 1), DEF_NAC, new Object[] {Items.bone});
+		CR.shapeless(ST.make(Items.blaze_powder, 1, 0), DEF_NAC, new Object[] {Items.blaze_rod});
+		CR.shaped(ST.make(Items.paper, 1, 0), DEF_NAC, "XXX", 'X', Items.reeds);
+		CR.shapeless(ST.make(Items.book, 1, 0), DEF, new Object[] {OD.craftingLeather, OD.paperEmpty, OD.paperEmpty, OD.paperEmpty});
 		
 		CR.shaped(ST.make(Blocks.furnace, 1, 0), DEF_NCC, "XXX", "XFX", "XXX", 'X', OP.cobblestone, 'F', OD.craftingFirestarter);
 		
@@ -166,97 +167,98 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		CR.shaped(ST.make(Blocks.planks                     , 1, 7), DEF, "B", "B", 'B', ST.make(Blocks.wooden_slab, 1, 7));
 		CR.shaped(ST.make(Blocks.stone_slab                 , 1, 4), DEF, "BB", 'B', ST.make(Items.brick, 1, 0));
 		
-		CR.shaped(ST.make(Items.stick                       , 2, 0), DEF, "s", "X", 'X', ST.make(Blocks.deadbush, 1, W));
-		CR.shaped(ST.make(Items.stick                       , 2, 0), DEF, "k", "X", 'X', ST.make(Blocks.deadbush, 1, W));
-		CR.shaped(ST.make(Items.stick                       , 2, 0), DEF, "s", "X", 'X', ST.make(Blocks.tallgrass, 1, 0));
-		CR.shaped(ST.make(Items.stick                       , 2, 0), DEF, "k", "X", 'X', ST.make(Blocks.tallgrass, 1, 0));
-		CR.shaped(ST.make(Items.stick                       , 1, 0), DEF, "s", "X", 'X', OP.treeSapling);
-		CR.shaped(ST.make(Items.stick                       , 1, 0), DEF, "k", "X", 'X', OP.treeSapling);
+		CR.shaped(stick.mat(MT.WOODS.Dead, 2), DEF, "s", "X", 'X', ST.make(Blocks.deadbush, 1, W));
+		CR.shaped(stick.mat(MT.WOODS.Dead, 2), DEF, "k", "X", 'X', ST.make(Blocks.deadbush, 1, W));
+		CR.shaped(stick.mat(MT.WOODS.Dead, 2), DEF, "s", "X", 'X', ST.make(Blocks.tallgrass, 1, 0));
+		CR.shaped(stick.mat(MT.WOODS.Dead, 2), DEF, "k", "X", 'X', ST.make(Blocks.tallgrass, 1, 0));
+		CR.shaped(IL.Stick.get(1), DEF, "s", "X", 'X', OP.treeSapling);
+		CR.shaped(IL.Stick.get(1), DEF, "k", "X", 'X', OP.treeSapling);
 		
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.gem.dat(MT.S)                        );
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.dust.dat(MT.S)                       );
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushed.dat(MT.S)                    );
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedPurified.dat(MT.S)            );
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedCentrifuged.dat(MT.S)         );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.gem.dat(MT.P)                        );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.dust.dat(MT.P)                       );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushed.dat(MT.P)                    );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedPurified.dat(MT.P)            );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedCentrifuged.dat(MT.P)         );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.gem.dat(MT.Phosphorus)               );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.dust.dat(MT.Phosphorus)              );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushed.dat(MT.Phosphorus)           );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedPurified.dat(MT.Phosphorus)   );
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedCentrifuged.dat(MT.Phosphorus));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OD.itemResin                            );
-		CR.shaped(ST.make(Blocks.torch, 1, 0), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OD.itemGrassDry                         );
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.gem.dat(MT.S)                        );
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.dust.dat(MT.S)                       );
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushed.dat(MT.S)                    );
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedPurified.dat(MT.S)            );
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedCentrifuged.dat(MT.S)         );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.gem.dat(MT.P)                        );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.dust.dat(MT.P)                       );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushed.dat(MT.P)                    );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedPurified.dat(MT.P)            );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedCentrifuged.dat(MT.P)         );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.gem.dat(MT.Phosphorus)               );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.dust.dat(MT.Phosphorus)              );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushed.dat(MT.Phosphorus)           );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedPurified.dat(MT.Phosphorus)   );
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OP.crushedCentrifuged.dat(MT.Phosphorus));
+		CR.shaped(IL.Torch.get(4), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OD.itemResin                            );
+		CR.shaped(IL.Torch.get(1), DEF_NAC,  "X" ,  "S" , 'S', OP.stick.dat(ANY.Wood), 'X', OD.itemGrassDry                         );
 		
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rubbertreesap, 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000spruceresin  , 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000maplesap     , 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250maplesap      , 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rainbowsap   , 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250rainbowsap    , 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000creosote     , 'W', ST.make(Blocks.wool, 1, W));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250creosote      , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rubbertreesap, 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000spruceresin  , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000maplesap     , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250maplesap      , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(8), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rainbowsap   , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(4), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250rainbowsap    , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(6), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000creosote     , 'W', ST.make(Blocks.wool, 1, W));
+		CR.shaped(IL.Torch.get(2), DEF_NAC,  "WC",  "S ", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250creosote      , 'W', ST.make(Blocks.wool, 1, W));
 		
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rubbertreesap, 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000spruceresin  , 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000maplesap     , 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250maplesap      , 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rainbowsap   , 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250rainbowsap    , 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 6, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000creosote     , 'W', OD.itemString);
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250creosote      , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(6), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rubbertreesap, 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(6), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000spruceresin  , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(6), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000maplesap     , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250maplesap      , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000rainbowsap   , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250rainbowsap    , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(6), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container1000creosote     , 'W', OD.itemString);
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "WCW", "WSW", 'S', OP.stick.dat(ANY.Wood), 'C', OD.container250creosote      , 'W', OD.itemString);
 		
 		if (ConfigsGT.RECIPES.get(ConfigCategories.Recipes.disabledrecipes, "torchesFromCoal", F)) {
 		CR.remove(ST.make(Items.coal, 1, 0), NI, NI, ST.make(Items.stick, 1, 0));
 		CR.remove(ST.make(Items.coal, 1, 1), NI, NI, ST.make(Items.stick, 1, 0));
 		} else {
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.Charcoal)                    , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.Charcoal)                      , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.Charcoal)                     , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.Charcoal)                    , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.Charcoal)                      , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.Charcoal)                     , 'S', OP.stick.dat(ANY.Wood));
 		
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.Coal)                       , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.Coal)                        , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.Coal)                          , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.Coal)                         , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.Coal)                      , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.Coal)              , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.Coal)           , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.Coal)                       , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.Coal)                        , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.Coal)                          , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.Coal)                         , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.Coal)                      , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.Coal)              , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.Coal)           , 'S', OP.stick.dat(ANY.Wood));
 		
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.CoalCoke)                   , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.CoalCoke)                    , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.CoalCoke)                      , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.CoalCoke)                     , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.CoalCoke)                  , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.CoalCoke)          , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 8, 0), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.CoalCoke)       , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.CoalCoke)                   , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.CoalCoke)                    , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.CoalCoke)                      , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.CoalCoke)                     , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.CoalCoke)                  , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.CoalCoke)          , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(8), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.CoalCoke)       , 'S', OP.stick.dat(ANY.Wood));
 		
-		CR.shaped(ST.make(Blocks.torch, 1, 0), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.Lignite)                    , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.Lignite)                     , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.Lignite)                       , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.Lignite)                      , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.Lignite)                   , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.Lignite)           , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.Lignite)        , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(1), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.Lignite)                    , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.Lignite)                     , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.Lignite)                       , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.Lignite)                      , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.Lignite)                   , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.Lignite)           , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.Lignite)        , 'S', OP.stick.dat(ANY.Wood));
 		
-		CR.shaped(ST.make(Blocks.torch, 2, 0), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.LigniteCoke)                , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.LigniteCoke)                 , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.LigniteCoke)                   , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.LigniteCoke)                  , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.LigniteCoke)               , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.LigniteCoke)       , 'S', OP.stick.dat(ANY.Wood));
-		CR.shaped(ST.make(Blocks.torch, 4, 0), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.LigniteCoke)    , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(2), DEF_NAC, "X", "S", 'X', OP.rockGt.dat(MT.LigniteCoke)                , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.ingot.dat(MT.LigniteCoke)                 , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.gem.dat(MT.LigniteCoke)                   , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.dust.dat(MT.LigniteCoke)                  , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.crushed.dat(MT.LigniteCoke)               , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.crushedPurified.dat(MT.LigniteCoke)       , 'S', OP.stick.dat(ANY.Wood));
+		CR.shaped(IL.Torch.get(4), DEF_NAC, "X", "S", 'X', OP.crushedCentrifuged.dat(MT.LigniteCoke)    , 'S', OP.stick.dat(ANY.Wood));
 		}
 		
-		CR.shaped(ST.make(Items.coal   , 1, 0), DEF, "  ", " X", 'X', OP.ingot.dat(MT.Coal    ));
-		CR.shaped(ST.make(Items.coal   , 1, 1), DEF, "  ", " X", 'X', OP.ingot.dat(MT.Charcoal));
-		CR.shaped(OP.ingot.mat(MT.Coal    , 1), DEF, "  ", " X", 'X', ST.make(Items.coal, 1, 0));
+		CR.shaped(ST.make(Items.coal, 1, 0), DEF, "  ", " X", 'X', OP.ingot.dat(MT.Coal));
+		CR.shaped(OP.ingot.mat(MT.Coal, 1), DEF, "  ", " X", 'X', ST.make(Items.coal, 1, 0));
+		RM.generify(OP.ingot.mat(MT.Coal, 1), ST.make(Items.coal, 1, 0));
+		RM.generify(ST.make(Items.coal, 1, 0), OP.ingot.mat(MT.Coal, 1));
+		
+		CR.shaped(ST.make(Items.coal, 1, 1), DEF, "  ", " X", 'X', OP.ingot.dat(MT.Charcoal));
 		CR.shaped(OP.ingot.mat(MT.Charcoal, 1), DEF, "  ", " X", 'X', ST.make(Items.coal, 1, 1));
-		RM.generify(OP.ingot.mat(MT.Coal    , 1), ST.make(Items.coal, 1, 0));
 		RM.generify(OP.ingot.mat(MT.Charcoal, 1), ST.make(Items.coal, 1, 1));
-		RM.generify(ST.make(Items.coal, 1, 0), OP.ingot.mat(MT.Coal    , 1));
 		RM.generify(ST.make(Items.coal, 1, 1), OP.ingot.mat(MT.Charcoal, 1));
 		
 		CR.shaped(OP.gem  .mat(MT.NetherizedDiamond, 1), DEF, "  ", " X", 'X', OP.ingot.dat(MT.NetherizedDiamond));
@@ -284,6 +286,7 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		CR.shaped(ST.make(Blocks.dispenser              , 1, 0), DEF                            ,  "B" ,  "D"        , 'B', ST.make(Items.bow, 1, 0), 'D', Blocks.dropper);
 		CR.shaped(ST.make(Blocks.noteblock              , 1, 0), DEF | DEL_OTHER_SHAPED_RECIPES , "WWW", "WRW", "WWW", 'W', OD.plankAnyWood, 'R', OD.itemRedstone);
 		CR.shaped(ST.make(Blocks.redstone_lamp          , 1, 0), DEF | DEL_OTHER_SHAPED_RECIPES , " R ", "RGR", " R ", 'G', Blocks.glowstone, 'R', OD.itemRedstone);
+		CR.shaped(ST.make(Items.name_tag                , 1, 0), DEF_MIR                        , " S" ,  "Pq"       , 'S', OD.itemString, 'P', OD.paperEmpty);
 		
 		CR.shaped(ST.make(Blocks.tnt                    , 1, 0), DEF                            , "GSG", "SGS", "GSG", 'G', OP.dust.dat(MT.Gunpowder), 'S', OP.dust.dat(ANY.SiO2));
 		
@@ -394,6 +397,14 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Lathe        .addRecipe1(T, 16,  16, ST.make(Blocks.stone, 1, W), OP.stickLong.mat(MT.Stone, 1));
 		RM.Lathe        .addRecipe1(T, 16,  32, IL.Module_Stone_Generator.get(  0), OP.stickLong.mat(MT.Stone, 1));
 		
+		if (IL.NePl_Quartz_Bricks.exists())
+		RM.Hammer       .addRecipe1(T, 16,  16, IL.NePl_Quartz_Bricks.get(                   1), OP.gem.mat(MT.NetherQuartz, 4));
+		if (IL.NeLi_Quartz_Bricks.exists())
+		RM.Hammer       .addRecipe1(T, 16,  16, IL.NeLi_Quartz_Bricks.get(                   1), OP.gem.mat(MT.NetherQuartz, 4));
+		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.quartz_block             , 1, W), OP.gem.mat(MT.NetherQuartz, 4));
+		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.double_stone_slab        , 1, 7), OP.gem.mat(MT.NetherQuartz, 4));
+		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.quartz_stairs            , 1, W), OP.gem.mat(MT.NetherQuartz, 6));
+		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stone_slab               , 1, 7), OP.gem.mat(MT.NetherQuartz, 2));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stonebrick               , 1, 0), ST.make(Blocks.stonebrick, 1, 2));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stone                    , 1, 0), ST.make(Blocks.cobblestone, 1, 0));
 		RM.Hammer       .addRecipe1(T, 16,  32, IL.Module_Stone_Generator.get(               0), ST.make(Blocks.cobblestone, 1, 0));
@@ -407,16 +418,19 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stained_glass            , 1, W), OM.dust(MT.Glass));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.glass_pane               , 1, W), OM.dust(MT.Glass, 3*U8));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stained_glass_pane       , 1, W), OM.dust(MT.Glass, 3*U8));
-		RM.Hammer       .addRecipe1(T, 16,  16, IL.NePl_Quartz_Bricks.get(                   1), OP.gem.mat(MT.NetherQuartz, 4));
-		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.quartz_block             , 1, W), OP.gem.mat(MT.NetherQuartz, 4));
-		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.double_stone_slab        , 1, 7), OP.gem.mat(MT.NetherQuartz, 4));
-		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.quartz_stairs            , 1, W), OP.gem.mat(MT.NetherQuartz, 6));
-		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stone_slab               , 1, 7), OP.gem.mat(MT.NetherQuartz, 2));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.brick_block              , 1, W), ST.make(Items.brick, 3, 0));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.double_stone_slab        , 1, 4), ST.make(Items.brick, 3, 0));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.brick_stairs             , 1, W), ST.make(Items.brick, 5, 0));
 		RM.Hammer       .addRecipe1(T, 16,  16, ST.make(Blocks.stone_slab               , 1, 4), ST.make(Items.brick, 1, 0));
 		
+		if (IL.NePl_Quartz_Bricks.exists())
+		RM.Crusher      .addRecipe1(T, 16,  32, IL.NePl_Quartz_Bricks.get(                   1), OP.gem.mat(MT.NetherQuartz, 4));
+		if (IL.NeLi_Quartz_Bricks.exists())
+		RM.Crusher      .addRecipe1(T, 16,  32, IL.NeLi_Quartz_Bricks.get(                   1), OP.gem.mat(MT.NetherQuartz, 4));
+		RM.Crusher      .addRecipe1(T, 16,  32, ST.make(Blocks.quartz_block             , 1, W), OP.gem.mat(MT.NetherQuartz, 4));
+		RM.Crusher      .addRecipe1(T, 16,  16, ST.make(Blocks.double_stone_slab        , 1, 7), OP.gem.mat(MT.NetherQuartz, 4));
+		RM.Crusher      .addRecipe1(T, 16,  48, ST.make(Blocks.quartz_stairs            , 1, W), OP.gem.mat(MT.NetherQuartz, 6));
+		RM.Crusher      .addRecipe1(T, 16,  16, ST.make(Blocks.stone_slab               , 1, 7), OP.gem.mat(MT.NetherQuartz, 2));
 		RM.Crusher      .addRecipe1(T, 16,  32, ST.make(Blocks.stonebrick               , 1, 0), ST.make(Blocks.stonebrick, 1, 2));
 		RM.Crusher      .addRecipe1(T, 16,  32, ST.make(Blocks.stonebrick               , 1, 1), ST.make(Blocks.cobblestone, 1, 0));
 		RM.Crusher      .addRecipe1(T, 16,  32, ST.make(Blocks.stonebrick               , 1, 2), ST.make(Blocks.cobblestone, 1, 0));
@@ -425,11 +439,6 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Crusher      .addRecipe1(T, 16,  32, IL.Module_Stone_Generator.get(               0), ST.make(Blocks.cobblestone, 1, 0));
 		RM.Crusher      .addRecipe1(T, 16,  32, ST.make(Blocks.cobblestone              , 1, 0), ST.make(Blocks.gravel, 1, 0));
 		RM.Crusher      .addRecipe1(T, 16,  16, ST.make(Blocks.sandstone                , 1, W), ST.make(Blocks.sand, 1, 0));
-		RM.Crusher      .addRecipe1(T, 16,  32, IL.NePl_Quartz_Bricks.get(                   1), OP.gem.mat(MT.NetherQuartz, 4));
-		RM.Crusher      .addRecipe1(T, 16,  32, ST.make(Blocks.quartz_block             , 1, W), OP.gem.mat(MT.NetherQuartz, 4));
-		RM.Crusher      .addRecipe1(T, 16,  16, ST.make(Blocks.double_stone_slab        , 1, 7), OP.gem.mat(MT.NetherQuartz, 4));
-		RM.Crusher      .addRecipe1(T, 16,  48, ST.make(Blocks.quartz_stairs            , 1, W), OP.gem.mat(MT.NetherQuartz, 6));
-		RM.Crusher      .addRecipe1(T, 16,  16, ST.make(Blocks.stone_slab               , 1, 7), OP.gem.mat(MT.NetherQuartz, 2));
 		RM.Crusher      .addRecipe1(T, 16,  64, new long[] {10000, 9000, 8000, 7000}, ST.make(Blocks.brick_block        , 1, W), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0));
 		RM.Crusher      .addRecipe1(T, 16,  64, new long[] {10000, 9000, 8000, 7000}, ST.make(Blocks.double_stone_slab  , 1, 4), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0));
 		RM.Crusher      .addRecipe1(T, 16,  64, new long[] {10000, 9000, 8000, 7000}, ST.make(Blocks.brick_stairs       , 1, W), ST.make(Items.brick, 2, 0), ST.make(Items.brick, 2, 0), ST.make(Items.brick, 1, 0), ST.make(Items.brick, 1, 0));
@@ -467,9 +476,9 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.sawing(16, 128, F, 100, ST.make(Blocks.trapped_chest             , 1, W), IL.Plank.get(8), ST.make(Blocks.tripwire_hook, 1, 0));
 		RM.sawing(16, 128, F, 100, ST.make(Blocks.noteblock                 , 1, W), IL.Plank.get(8), OP.dust.mat(MT.Redstone, 1));
 		RM.sawing(16, 128, F, 100, ST.make(Blocks.jukebox                   , 1, W), IL.Plank.get(8), OP.gem.mat(MT.Diamond, 1));
-		RM.sawing(16,  64, F, 100, ST.make(Items.painting                   , 1, W), ST.make(Items.stick, 8, 0));
-		RM.sawing(16,  64, F, 100, ST.make(Items.item_frame                 , 1, W), ST.make(Items.stick, 8, 0));
-		RM.sawing(16,  40, F, 100, ST.make(Blocks.ladder                    , 1, W), ST.make(Items.stick, 2, 0), OM.dust(MT.Wood, OP.stick.mAmount / 3));
+		RM.sawing(16,  64, F, 100, ST.make(Items.painting                   , 1, W), IL.Stick.get(8));
+		RM.sawing(16,  64, F, 100, ST.make(Items.item_frame                 , 1, W), IL.Stick.get(8));
+		RM.sawing(16,  40, F, 100, ST.make(Blocks.ladder                    , 1, W), IL.Stick.get(2), OM.dust(MT.Wood, OP.stick.mAmount / 3));
 		RM.sawing(16,  16, T,  50, ST.make(Blocks.melon_block               , 1, W), ST.make(Items.melon, 8, 0), ST.make(Items.melon_seeds, 1, 0));
 		
 		CR.shapeless(IL.Plank.get(1), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(Blocks.wooden_button          , 1, W)});
@@ -502,8 +511,10 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Compressor   .addRecipe1(T, 16,   32, ST.make(Blocks.sand, 4, 0), ST.make(Blocks.sandstone, 1, 0));
 		RM.Compressor   .addRecipe1(T, 16,   32, ST.make(Items.clay_ball, 4, W), ST.make(Blocks.clay, 1, 0));
 		RM.Compressor   .addRecipe1(T, 16,   32, IL.Clay_Ball_Brown.get(4), ST.make(BlocksGT.Diggables, 1, 1));
+		RM.Compressor   .addRecipe1(T, 16,   32, IL.Clay_Ball_Red.get(4), ST.make(BlocksGT.Diggables, 1, 3));
 		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.Clay, 4*U), ST.make(Blocks.clay, 1, 0));
 		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.ClayBrown, 4*U), ST.make(BlocksGT.Diggables, 1, 1));
+		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.ClayRed, 4*U), ST.make(BlocksGT.Diggables, 1, 3));
 		RM.Compressor   .addRecipe1(T, 16,   64, OM.dust(MT.Glowstone, 4*U), ST.make(Blocks.glowstone, 1, 0));
 		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.Blaze), OP.plate.mat(MT.Blaze, 1));
 		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.Lapis), OP.plateGem.mat(MT.Lapis, 1));
@@ -511,25 +522,36 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.Lazurite), OP.plateGem.mat(MT.Lazurite, 1));
 		RM.Compressor   .addRecipe1(T, 16,   32, OM.dust(MT.Sodalite), OP.plateGem.mat(MT.Sodalite, 1));
 		
+		
 		RM.Freezer      .addRecipe1(T, 16,   16, ST.tag(0), FL.Water.make( 250), FL.Ice.make(250), ZL_IS);
+		RM.Freezer      .addRecipe1(T, 16,   64, ST.tag(0), FL.SpDew.make( 250), FL.Ice.make(250), ZL_IS);
 		RM.Freezer      .addRecipe1(T, 16,   16, ST.tag(0), FL.DistW.make( 250), FL.Ice.make(250), ZL_IS);
 		RM.Freezer      .addRecipe1(T, 16,   16, ST.tag(1), FL.Water.make( 250), NF, ST.make(Items.snowball, 1, 0));
+		RM.Freezer      .addRecipe1(T, 16,   64, ST.tag(1), FL.SpDew.make( 250), NF, ST.make(Items.snowball, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,   16, ST.tag(1), FL.DistW.make( 250), NF, ST.make(Items.snowball, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,   32, ST.tag(2), FL.Water.make( 500), NF, ST.make(Blocks.snow_layer, 1, 0));
+		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(2), FL.SpDew.make( 500), NF, ST.make(Blocks.snow_layer, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,   32, ST.tag(2), FL.DistW.make( 500), NF, ST.make(Blocks.snow_layer, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,   64, ST.tag(3), FL.Water.make(1000), NF, ST.make(Blocks.snow, 1, 0));
+		RM.Freezer      .addRecipe1(T, 16,  256, ST.tag(3), FL.SpDew.make(1000), NF, ST.make(Blocks.snow, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,   64, ST.tag(3), FL.DistW.make(1000), NF, ST.make(Blocks.snow, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(4), FL.Water.make(1000), NF, ST.make(Blocks.ice, 1, 0));
+		RM.Freezer      .addRecipe1(T, 16,  512, ST.tag(4), FL.SpDew.make(1000), NF, ST.make(Blocks.ice, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(4), FL.DistW.make(1000), NF, ST.make(Blocks.ice, 1, 0));
 		RM.Freezer      .addRecipe1(T, 16,   32, ST.tag(5), FL.Water.make( 250), NF, OP.gemChipped.mat(MT.Ice, 1));
+		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(5), FL.SpDew.make( 250), NF, OP.gemChipped.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,   32, ST.tag(5), FL.DistW.make( 250), NF, OP.gemChipped.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,   64, ST.tag(6), FL.Water.make( 500), NF, OP.gemFlawed.mat(MT.Ice, 1));
+		RM.Freezer      .addRecipe1(T, 16,  256, ST.tag(6), FL.SpDew.make( 500), NF, OP.gemFlawed.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,   64, ST.tag(6), FL.DistW.make( 500), NF, OP.gemFlawed.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(7), FL.Water.make(1000), NF, OP.gem.mat(MT.Ice, 1));
+		RM.Freezer      .addRecipe1(T, 16,  512, ST.tag(7), FL.SpDew.make(1000), NF, OP.gem.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(7), FL.DistW.make(1000), NF, OP.gem.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(8), FL.Water.make(1000), NF, OP.dust.mat(MT.Ice, 1));
+		RM.Freezer      .addRecipe1(T, 16,  512, ST.tag(8), FL.SpDew.make(1000), NF, OP.dust.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(8), FL.DistW.make(1000), NF, OP.dust.mat(MT.Ice, 1));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(9), FL.Water.make(1000), NF, OP.dust.mat(MT.Snow, 1));
+		RM.Freezer      .addRecipe1(T, 16,  512, ST.tag(9), FL.SpDew.make(1000), NF, OP.dust.mat(MT.Snow, 1));
 		RM.Freezer      .addRecipe1(T, 16,  128, ST.tag(9), FL.DistW.make(1000), NF, OP.dust.mat(MT.Snow, 1));
 		
 		RM.Mortar       .addRecipe1(T, 16, 32, ST.make(Blocks.glass             , 1, W), OM.dust(MT.Glass));
@@ -539,9 +561,11 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Mortar       .addRecipe1(T, 16, 32, ST.make(Items.bone, 1, W), IL.Dye_Bonemeal.get(2));
 		RM.Mortar       .addRecipe1(T, 16, 32, ST.make(Items.blaze_rod, 1, W), ST.make(Items.blaze_powder, 2, 0));
 		RM.Mortar       .addRecipe1(T, 16, 16, ST.make(Items.clay_ball, 1, W), OM.dust(MT.Clay));
-		RM.Mortar       .addRecipe1(T, 16, 64, ST.make(Blocks.clay, 1, W), OM.dust(MT.Clay, U*4));
 		RM.Mortar       .addRecipe1(T, 16, 16, IL.Clay_Ball_Brown.get(1), OM.dust(MT.ClayBrown));
+		RM.Mortar       .addRecipe1(T, 16, 16, IL.Clay_Ball_Red.get(1), OM.dust(MT.ClayRed));
+		RM.Mortar       .addRecipe1(T, 16, 64, ST.make(Blocks.clay, 1, W), OM.dust(MT.Clay, U*4));
 		RM.Mortar       .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 1), OM.dust(MT.ClayBrown, U*4));
+		RM.Mortar       .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 3), OM.dust(MT.ClayRed, U*4));
 		RM.Mortar       .addRecipe1(T, 16, 16, ST.make(Items.flint, 1, W), OP.dustSmall.mat(MT.Flint, 1));
 		RM.Mortar       .addRecipe1(T, 16, 32, ST.make(Blocks.gravel, 1, W), ST.make(Items.flint, 1, 0));
 		RM.Mortar       .addRecipe1(T, 16, 16, ST.make(Items.coal, 1, 0), OM.dust(MT.Coal));
@@ -579,11 +603,12 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Loom         .addRecipe2(T, 16,   16, ST.tag(0), OP.plantGtFiber.mat(MT.DATA.Dye_Materials[15-i], 4), ST.make(Blocks.wool, 1, i));
 		}
 		
-		for (FluidStack tWater : FL.array(FL.Water.make(125), FL.DistW.make(100))) {
+		for (FluidStack tWater : FL.array(FL.Water.make(125), FL.SpDew.make(125), FL.DistW.make(100))) {
 		RM.Bath         .addRecipe1(T,  0,   16, ST.make(Items.reeds, 1, W)             , tWater, NF, ST.make(Items.paper, 1, 0));
 		RM.Bath         .addRecipe1(T,  0,   16, OM.dust(MT.Paper)                      , tWater, NF, ST.make(Items.paper, 1, 0));
 		RM.Bath         .addRecipe1(T,  0,   16, OM.dust(MT.Clay)                       , tWater, NF, ST.make(Items.clay_ball, 1, 0));
 		RM.Bath         .addRecipe1(T,  0,   16, OM.dust(MT.ClayBrown)                  , tWater, NF, IL.Clay_Ball_Brown.get(1));
+		RM.Bath         .addRecipe1(T,  0,   16, OM.dust(MT.ClayRed)                    , tWater, NF, IL.Clay_Ball_Red.get(1));
 		}
 		
 		RM.Bath         .addRecipe1(T,  0,   16, ST.make(Blocks.stained_hardened_clay   , 1, W), MT.Cl.fluid(U20, T), NF, ST.make(Blocks.hardened_clay  , 1, 0));
@@ -727,9 +752,11 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Bath         .addRecipe1(T,  0,   16, ST.make(Items.melon        , 1, W), MT.Au.liquid(8*U9, T), NF, ST.make(Items.speckled_melon, 1, 0));
 		RM.Mixer        .addRecipe2(T, 16,   16, ST.make(Items.melon        , 1, W), OP.nugget.mat(MT.Au, 8), ST.make(Items.speckled_melon, 1, 0));
 		RM.Mixer        .addRecipe0(T, 16,   16, FL.array(FL.Water.make(50), FL.Lava.make(1000)), NF, ST.make(Blocks.obsidian, 1, 0));
+		RM.Mixer        .addRecipe0(T, 16,   16, FL.array(FL.SpDew.make(50), FL.Lava.make(1000)), NF, ST.make(Blocks.obsidian, 1, 0));
 		RM.Mixer        .addRecipe0(T, 16,   16, FL.array(FL.DistW.make(50), FL.Lava.make(1000)), NF, ST.make(Blocks.obsidian, 1, 0));
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Redrock), FL.Water.make(3000), NF, IL.Clay_Ball_Brown.get(4));
-		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Redrock), FL.DistW.make(3000), NF, IL.Clay_Ball_Brown.get(4));
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Redrock), FL.Water.make(3000), NF, IL.Clay_Ball_Red.get(4));
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Redrock), FL.SpDew.make(3000), NF, IL.Clay_Ball_Red.get(4));
+		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.Redrock), FL.DistW.make(3000), NF, IL.Clay_Ball_Red.get(4));
 		RM.Mixer        .addRecipe2(T, 16,   16, OM.dust(MT.EnderPearl), OM.dust(MT.Blaze), OM.dust(MT.EnderEye));
 		RM.Mixer        .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Sugar              ), ST.make(Items.spider_eye, 1, W), ST.make(Blocks.brown_mushroom, 1, W)), ST.make(Items.fermented_spider_eye, 1, 0));
 		RM.Mixer        .addRecipeX(T, 16,   16, ST.array(OP.gemChipped.mat(MT.Sugar , 4), ST.make(Items.spider_eye, 1, W), ST.make(Blocks.brown_mushroom, 1, W)), ST.make(Items.fermented_spider_eye, 1, 0));
@@ -739,8 +766,9 @@ public class Loader_Recipes_Vanilla implements Runnable {
 		RM.Mixer        .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.LigniteCoke        ), OM.dust(MT.Blaze), OM.dust(MT.Gunpowder)), ST.make(Items.fire_charge, 3, 0));
 		
 		
-		RM.Electrolyzer .addRecipe1(T, 16, 3000, ST.tag(0), FL.DistW.make(3000), MT.H.gas(2*U, F), MT.O.gas(U, F));
 		RM.Electrolyzer .addRecipe1(T, 16, 3200, ST.tag(0), FL.Water.make(3000), MT.H.gas(2*U, F), MT.O.gas(U, F));
+		RM.Electrolyzer .addRecipe1(T, 16, 3200, ST.tag(0), FL.SpDew.make(3000), MT.H.gas(2*U, F), MT.O.gas(U, F));
+		RM.Electrolyzer .addRecipe1(T, 16, 3000, ST.tag(0), FL.DistW.make(3000), MT.H.gas(2*U, F), MT.O.gas(U, F));
 		RM.Electrolyzer .addRecipe2(T, 64,   64, ST.tag(0), ST.make(Blocks.sand, 1, 0), OM.dust(MT.SiO2));
 		
 		RM.Centrifuge   .addRecipe1(T, 16,   16, OM.dust(MT.SlimyBone), NF, FL.Slime_Green.make(250), OM.dust(MT.Bone));

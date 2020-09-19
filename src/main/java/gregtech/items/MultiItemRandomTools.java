@@ -20,10 +20,10 @@
 package gregtech.items;
 
 import static gregapi.data.CS.*;
+import static gregapi.data.OP.*;
 
 import gregapi.GT_API;
 import gregapi.code.IItemContainer;
-import gregapi.code.ItemStackContainer;
 import gregapi.cover.covers.CoverTextureCanvas;
 import gregapi.data.*;
 import gregapi.data.CS.BlocksGT;
@@ -75,8 +75,8 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Compound_Brass.set(                  addItem(tLastID =     1, "Brass Compound"               , "Put in Furnace to smelt it"      , new OreDictItemData(MT.Brass        , U9), TC.stack(TC.METALLUM, 1)));
 		IL.Compound_BismuthBronze.set(          addItem(tLastID =     2, "Bismuth Bronze Compound"      , "Put in Furnace to smelt it"      , new OreDictItemData(MT.BismuthBronze, U9), TC.stack(TC.METALLUM, 1)));
 		
-		RM.add_smelting(IL.Compound_Bronze       .get(1), OP.nugget.mat(MT.Bronze, 1));
-		RM.add_smelting(IL.Compound_Brass        .get(1), OP.nugget.mat(MT.Brass, 1));
+		RM.add_smelting(IL.Compound_Bronze       .get(1), OP.nugget.mat(MT.Bronze       , 1));
+		RM.add_smelting(IL.Compound_Brass        .get(1), OP.nugget.mat(MT.Brass        , 1));
 		RM.add_smelting(IL.Compound_BismuthBronze.get(1), OP.nugget.mat(MT.BismuthBronze, 1));
 		
 		IL.Ceramic_Jug_Raw.set(                 addItem(tLastID =   996, "Raw Clay Jug"                 , "Put in Furnace to harden it"     , new OreDictItemData(MT.Clay, U*6), TC.stack(TC.VACUOS, 1), TC.stack(TC.TERRA, 2)));
@@ -84,10 +84,10 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Food_Can_Empty.set(                  addItem(tLastID =   998, "Empty Food Can"               , "Used for canning Food"           , new OreDictItemData(MT.TinAlloy, OP.plateCurved.mAmount), TC.stack(TC.VACUOS, 1), TC.stack(TC.FABRICO, 1)));
 		IL.Spray_Empty.set(                     addItem(tLastID =   999, "Empty Spray Can"              , "Used for making Sprays"          , new OreDictItemData(MT.Sn, OP.plateCurved.mAmount, MT.Redstone, OP.dust.mAmount), TC.stack(TC.VACUOS, 1), TC.stack(TC.MOTUS, 1)));
 		
-		CR.shaped(IL.Ceramic_Jug_Raw    .get(1), CR.DEF_NCC     , "kCR", "C C", "CCC", 'C', "itemClay", 'R', OreDictToolNames.rollingpin);
-		CR.shaped(IL.Measuring_Pot_Raw  .get(1), CR.DEF_NCC     , "CkC", "CCR"     , 'C', "itemClay", 'R', OreDictToolNames.rollingpin);
-		CR.shaped(IL.Food_Can_Empty     .get(1), CR.DEF_NAC_NCC , "fh" , "oP"       , 'P', OP.plateCurved.dat(MT.TinAlloy));
-		CR.shaped(IL.Spray_Empty        .get(1), CR.DEF_NCC     , "Rf" , "Cs"       , 'R', OD.itemRedstone, 'C', OP.plateCurved.dat(MT.Sn));
+		CR.shaped(IL.Ceramic_Jug_Raw    .get(1), CR.DEF_NCC     , "kCR", "C C", "CCC", 'C', OD.itemClay, 'R', OreDictToolNames.rollingpin);
+		CR.shaped(IL.Measuring_Pot_Raw  .get(1), CR.DEF_NCC     , "CkC", "CCR"       , 'C', OD.itemClay, 'R', OreDictToolNames.rollingpin);
+		CR.shaped(IL.Food_Can_Empty     .get(1), CR.DEF_NAC_NCC , "fh" , "oP"        , 'P', OP.plateCurved.dat(MT.TinAlloy));
+		CR.shaped(IL.Spray_Empty        .get(1), CR.DEF_NCC     , "Rf" , "Cs"        , 'R', OD.itemRedstone, 'C', OP.plateCurved.dat(MT.Sn));
 		
 		RM.RollBender.addRecipe1(T, 16, 64, OP.plateCurved.mat(MT.TinAlloy, 1), IL.Food_Can_Empty.get(1));
 		
@@ -137,7 +137,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		tBehaviour = new Behavior_Spray_Foam_Remover(IL.Spray_Empty.get(1), IL.Spray_Foam_Remover_Used.get(1), IL.Spray_Foam_Remover.get(1), 256);
 		addItemBehavior(1196, tBehaviour); addItemBehavior(1197, tBehaviour);
 		RM.Canner.addRecipe1(T, 16, 256, IL.Spray_Empty.get(1), MT.H2SO4.fluid(16*U, T), NF, IL.Spray_Foam_Remover.get(1));
-		RM.Canner.addRecipe1(T, 16, 256, IL.Spray_Empty.get(1), MT.HNO3.fluid(16*U, T), NF, IL.Spray_Foam_Remover.get(1));
+		RM.Canner.addRecipe1(T, 16, 256, IL.Spray_Empty.get(1), MT.HNO3 .fluid(16*U, T), NF, IL.Spray_Foam_Remover.get(1));
 		ItemsGT.addNEIRedirects(IL.Spray_Foam_Remover_Used.get(1), IL.Spray_Foam_Remover.get(1));
 		
 		
@@ -162,25 +162,28 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		
-		OreDictMaterial[] tBucketMaterials = new OreDictMaterial[] {MT.Cu, MT.Sn, MT.Zn, MT.Pb, MT.Bi, MT.Brass, MT.Bronze, MT.BismuthBronze};
+		OreDictMaterial[] tBucketMaterials = new OreDictMaterial[] {ANY.Cu, MT.Sn, MT.Zn, MT.Pb, MT.Bi, MT.Brass, MT.Bronze, MT.BismuthBronze};
 		for (int i = 0; i < 8; i++) {
 			OreDictItemData tData = new OreDictItemData(ANY.Wood, U*3, OM.stack(tBucketMaterials[i], U*1));
 			ItemStack tBucket = addItem(tLastID = 2000 + i*100, "Wooden Bucket", "Empty", TC.stack(TC.ARBOR, 2), TC.stack(TC.VACUOS, 2), Behavior_Bucket_Simple.INSTANCE, tData);
 			CR.shaped(tBucket, CR.DEF_NCC, "WPW", " Wh", 'P', OP.plate.dat(tBucketMaterials[i]), 'W', OD.plankAnyWood);
 			ItemsGT.addNEIRedirects(tBucket
-			, addItem(++tLastID, "Wooden Bucket", "Water"                                   , TC.stack(TC.ARBOR, 2), TC.stack(TC.AQUA       , 2), new Behavior_Bucket_Simple(ST.make(Items.water_bucket, 1, 0))                       , tData.copy(), FL.Water.make(1000), FL.DistW.make(1000), FL.River_Water.make(1000)     , OD.container1000water)
-			, addItem(++tLastID, "Wooden Bucket", "Milk (you cannot drink out of Buckets!)" , TC.stack(TC.ARBOR, 2), TC.stack(TC.SANO       , 2), new Behavior_Bucket_Simple(ST.make(Items.milk_bucket, 1, 0))                        , tData.copy(), FL.Milk.make(1000), FL.MilkGrC.make(1000)                               , OD.container1000milk)
-			, addItem(++tLastID, "Wooden Bucket", "Latex"                                   , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS      , 2), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.Latex.make(1000), FL.make("molten.latex", 1000)               , OD.container1000latex)
-			, addItem(++tLastID, "Wooden Bucket", "Creosote Oil"                            , TC.stack(TC.ARBOR, 2), TC.stack(TC.IGNIS      , 2), new Behavior_Bucket_Simple(IL.RC_Creosote_Bucket.get(1))                            , tData.copy(), FL.Oil_Creosote.make(1000)                                              , OD.container1000creosote)
-			, addItem(++tLastID, "Wooden Bucket", "Sea Water (you cannot place this!)"      , TC.stack(TC.ARBOR, 2), TC.stack(TC.TEMPESTAS  , 2), new Behavior_Switch_Metadata(2000 + i*100)                                          , tData.copy(), FL.Ocean.make(1000), FL.OceanGrC.make(1000), FL.Tropics_Water.make(1000))
-			, addItem(++tLastID, "Wooden Bucket", "Rubber Tree Sap"                         , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS      , 2), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.Resin_Rubber.make(1000)                                              , OD.container1000rubbertreesap)
-			, addItem(++tLastID, "Wooden Bucket", "Spruce Tree Resin"                       , TC.stack(TC.ARBOR, 3), TC.stack(TC.LIMUS      , 1), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.Resin_Spruce.make(1000)                                              , OD.container1000spruceresin)
-			, addItem(++tLastID, "Wooden Bucket", "Honey"                                   , TC.stack(TC.ARBOR, 3), TC.stack(TC.BESTIA     , 1), new Behavior_Bucket_Simple(ST.make(MD.ERE, "bucketHoney", 1, 0, IL.FR_Honey_Bucket)), tData.copy(), FL.Honey.make(1000), FL.HoneyGrC.make(1000), FL.HoneyBoP.make(1000)     , OD.container1000honey)
-			, addItem(++tLastID, "Wooden Bucket", "Dirty Water (you cannot place this!)"    , TC.stack(TC.ARBOR, 2), TC.stack(TC.AQUA       , 1), TC.stack(TC.VENENUM, 1), new Behavior_Switch_Metadata(2000 + i*100)                 , tData.copy(), FL.Dirty_Water.make(1000)                                               )
-			, addItem(++tLastID, "Wooden Bucket", "Lubricant"                               , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS      , 2), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.LubRoCant.make(1000), FL.Lubricant.make(1000)                        , OD.container1000lubricant)
-			, addItem(++tLastID, "Wooden Bucket", "Milk (you cannot drink out of Buckets!)" , TC.stack(TC.ARBOR, 2), TC.stack(TC.VENENUM    , 2), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.Milk_Spoiled.make(1000)                                              )
-			, addItem(++tLastID, "Wooden Bucket", "Maple Sap"                               , TC.stack(TC.ARBOR, 2), TC.stack(TC.FAMES      , 2), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.Sap_Maple.make(1000)                                                 , OD.container1000maplesap)
-			, addItem(++tLastID, "Wooden Bucket", "Rainbow Sap"                             , TC.stack(TC.ARBOR, 2), TC.stack(TC.AURAM      , 2), Behavior_Bucket_Simple.INSTANCE                                                     , tData.copy(), FL.Sap_Rainbow.make(1000)                                               , OD.container1000rainbowsap)
+			, addItem(++tLastID, "Wooden Bucket", "Water"                                  , TC.stack(TC.ARBOR, 2), TC.stack(TC.AQUA     , 2), new Behavior_Bucket_Simple(ST.make(Items.water_bucket, 1, 0))                                                                                        , tData.copy(), FL.Water.make(1000), FL.DistW.make(1000), FL.River_Water.make(1000)     , OD.container1000water)
+			, addItem(++tLastID, "Wooden Bucket", "Milk (you cannot drink out of Buckets!)", TC.stack(TC.ARBOR, 2), TC.stack(TC.SANO     , 2), new Behavior_Bucket_Simple(ST.make(Items.milk_bucket, 1, 0))                                                                                         , tData.copy(), FL.Milk.make(1000), FL.MilkGrC.make(1000)                               , OD.container1000milk)
+			, addItem(++tLastID, "Wooden Bucket", "Latex"                                  , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Latex.make(1000), FL.make("molten.latex", 1000)                      , OD.container1000latex)
+			, addItem(++tLastID, "Wooden Bucket", "Creosote Oil"                           , TC.stack(TC.ARBOR, 2), TC.stack(TC.IGNIS    , 2), new Behavior_Bucket_Simple(IL.RC_Creosote_Bucket.get(1))                                                                                             , tData.copy(), FL.Oil_Creosote.make(1000)                                              , OD.container1000creosote)
+			, addItem(++tLastID, "Wooden Bucket", "Sea Water (you cannot place this!)"     , TC.stack(TC.ARBOR, 2), TC.stack(TC.TEMPESTAS, 2), new Behavior_Switch_Metadata(2000 + i*100)                                                                                                           , tData.copy(), FL.Ocean.make(1000), FL.OceanGrC.make(1000), FL.Tropics_Water.make(1000))
+			, addItem(++tLastID, "Wooden Bucket", "Rubber Tree Sap"                        , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Resin_Rubber.make(1000)                                              , OD.container1000rubbertreesap)
+			, addItem(++tLastID, "Wooden Bucket", "Spruce Tree Resin"                      , TC.stack(TC.ARBOR, 3), TC.stack(TC.LIMUS    , 1), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Resin_Spruce.make(1000)                                              , OD.container1000spruceresin)
+			, addItem(++tLastID, "Wooden Bucket", "Honey"                                  , TC.stack(TC.ARBOR, 3), TC.stack(TC.BESTIA   , 1), new Behavior_Bucket_Simple(ST.make(MD.ERE, "bucketHoney", 1, 0, IL.FR_Honey_Bucket))                                                                 , tData.copy(), FL.Honey.make(1000), FL.HoneyGrC.make(1000), FL.HoneyBoP.make(1000)     , OD.container1000honey)
+			, addItem(++tLastID, "Wooden Bucket", "Dirty Water (you cannot place this!)"   , TC.stack(TC.ARBOR, 2), TC.stack(TC.AQUA     , 1), TC.stack(TC.VENENUM, 1), new Behavior_Switch_Metadata(2000 + i*100)                                                                                  , tData.copy(), FL.Dirty_Water.make(1000)                                               )
+			, addItem(++tLastID, "Wooden Bucket", "Lubricant"                              , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.LubRoCant.make(1000), FL.Lubricant.make(1000)                        , OD.container1000lubricant)
+			, addItem(++tLastID, "Wooden Bucket", "Milk (you cannot drink out of Buckets!)", TC.stack(TC.ARBOR, 2), TC.stack(TC.VENENUM  , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Milk_Spoiled.make(1000)                                              )
+			, addItem(++tLastID, "Wooden Bucket", "Maple Sap"                              , TC.stack(TC.ARBOR, 2), TC.stack(TC.FAMES    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Sap_Maple.make(1000)                                                 , OD.container1000maplesap)
+			, addItem(++tLastID, "Wooden Bucket", "Rainbow Sap"                            , TC.stack(TC.ARBOR, 2), TC.stack(TC.AURAM    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Sap_Rainbow.make(1000)                                               , OD.container1000rainbowsap)
+			, addItem(++tLastID, "Wooden Bucket", "Soy Milk"                               , TC.stack(TC.ARBOR, 2), TC.stack(TC.HERBA    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.MilkSoy.make(1000)                                                   , OD.container1000soymilk)
+			, addItem(++tLastID, "Wooden Bucket", "Glue"                                   , TC.stack(TC.ARBOR, 2), TC.stack(TC.LIMUS    , 2), Behavior_Bucket_Simple.INSTANCE                                                                                                                      , tData.copy(), FL.Glue.make(1000)                                                      , OD.container1000glue)
+			, addItem(++tLastID, "Wooden Bucket", "Spectral Dew"                           , TC.stack(TC.ARBOR, 2), TC.stack(TC.SPIRITUS , 2), new Behavior_Bucket_Simple(IL.NeLi_Bucket_Spectral_Dew.getWithNBT(1, UT.NBT.make("Fluid", UT.NBT.make("FluidName", FL.SpDew.mName, "Amount", 1000)))), tData.copy(), FL.SpDew.make(1000)                                                     , OD.container1000water)
 			);
 		}
 		
@@ -196,10 +199,12 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		IL.Tool_Matches.set(                    addItem(tLastID =  5000, "Match"                            , ""                                            , new Behavior_Lighter(9000), TC.stack(TC.IGNIS, 1), TC.stack(TC.VACUOS, 1), OD.craftingFirestarter));
-		RM.Assembler.addRecipe2(T, 16, 16, OP.bolt.mat(MT.Wood, 1), OP.dustSmall.mat(MT.P           , 1), IL.Tool_Matches.get(1));
-		RM.Assembler.addRecipe2(T, 16, 16, OP.bolt.mat(MT.Wood, 1), OP.dustSmall.mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(1));
-		RM.Assembler.addRecipe2(T, 16, 64, OP.bolt.mat(MT.Wood, 4), OP.dust     .mat(MT.P           , 1), IL.Tool_Matches.get(4));
-		RM.Assembler.addRecipe2(T, 16, 64, OP.bolt.mat(MT.Wood, 4), OP.dust     .mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(4));
+		for (OreDictMaterial tWood : ANY.Wood.mToThis) {
+		RM.Assembler.addRecipe2(T, 16, 16, OP.bolt.mat(tWood, 1), OP.dustSmall.mat(MT.P           , 1), IL.Tool_Matches.get(1));
+		RM.Assembler.addRecipe2(T, 16, 16, OP.bolt.mat(tWood, 1), OP.dustSmall.mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(1));
+		RM.Assembler.addRecipe2(T, 16, 64, OP.bolt.mat(tWood, 4), OP.dust     .mat(MT.P           , 1), IL.Tool_Matches.get(4));
+		RM.Assembler.addRecipe2(T, 16, 64, OP.bolt.mat(tWood, 4), OP.dust     .mat(MT.Phosphorus  , 1), IL.Tool_Matches.get(4));
+		}
 		CR.shaped(IL.Tool_Matches.get(1), CR.DEF, "P", "S", 'P', OP.dustSmall.dat(MT.P                  ), 'S', OP.bolt.dat(ANY.Wood));
 		CR.shaped(IL.Tool_Matches.get(1), CR.DEF, "P", "S", 'P', OP.dustSmall.dat(MT.Phosphorus         ), 'S', OP.bolt.dat(ANY.Wood));
 		CR.shaped(IL.Tool_Matches.get(4), CR.DEF, " S ", "SPS", " S ", 'P', OP.dust.dat(MT.P            ), 'S', OP.bolt.dat(ANY.Wood));
@@ -249,30 +254,31 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		
-		IL.Tool_Fire_Starter.set(               addItem(tLastID =  5014, "Fire Starter"                     , "(Made with Dry Grass)"                       , new OreDictItemData(MT.Wood, U), new Behavior_Lighter(5000), TC.stack(TC.IGNIS, 1), TC.stack(TC.ARBOR, 1), TC.stack(TC.HERBA, 1), OD.craftingFirestarter));
+		IL.Tool_Fire_Starter.set(               addItem(tLastID =  5014, "Fire Starter"                     , "(Made with Dry Grass)"                       , new OreDictItemData(ANY.Wood, U), new Behavior_Lighter(5000), TC.stack(TC.IGNIS, 1), TC.stack(TC.ARBOR, 1), TC.stack(TC.HERBA, 1), OD.craftingFirestarter));
 		CR.shaped(IL.Tool_Fire_Starter.get(1)       , CR.DEF_NAC_NCC_MIR, "S ", "GS", 'S', OP.stick.dat(ANY.Wood), 'G', OD.itemGrassDry);
 		
-		IL.Tool_Fire_Starter_Bark.set(          addItem(tLastID =  5015, "Fire Starter"                     , "(Made with Dry Tree Bark)"                   , new OreDictItemData(MT.Wood, U), new Behavior_Lighter(5500), TC.stack(TC.IGNIS, 1), TC.stack(TC.ARBOR, 2), OD.craftingFirestarter));
+		IL.Tool_Fire_Starter_Bark.set(          addItem(tLastID =  5015, "Fire Starter"                     , "(Made with Dry Tree Bark)"                   , new OreDictItemData(ANY.Wood, U), new Behavior_Lighter(5500), TC.stack(TC.IGNIS, 1), TC.stack(TC.ARBOR, 2), OD.craftingFirestarter));
 		CR.shaped(IL.Tool_Fire_Starter_Bark.get(1)  , CR.DEF_NAC_NCC_MIR, "S ", "GS", 'S', OP.stick.dat(ANY.Wood), 'G', OD.itemBarkDry);
 		
 		
-		IL.Pellet_Wood.set(                     addItem(tLastID =  5999, "Wood Pellet"                      , ""                                            , new OreDictItemData(MT.Wood, U), TICKS_PER_SMELT, TC.stack(TC.POTENTIA, 1)));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.LiveRoot      , U2), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 32, OM.dust(MT.LiveRoot          ), FL.Glue.make(250), NF, IL.Pellet_Wood.get(2));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Livingwood    , U2), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 32, OM.dust(MT.Livingwood        ), FL.Glue.make(250), NF, IL.Pellet_Wood.get(2));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Greatwood     , U2), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 32, OM.dust(MT.Greatwood         ), FL.Glue.make(250), NF, IL.Pellet_Wood.get(2));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Dreamwood     , U4), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 64, OM.dust(MT.Dreamwood         ), FL.Glue.make(500), NF, IL.Pellet_Wood.get(4));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Shimmerwood   , U4), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 64, OM.dust(MT.Shimmerwood       ), FL.Glue.make(500), NF, IL.Pellet_Wood.get(4));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Silverwood    , U4), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 64, OM.dust(MT.Silverwood        ), FL.Glue.make(500), NF, IL.Pellet_Wood.get(4));
+		IL.Pellet_Wood.set(                     addItem(tLastID =  5999, "Wood Pellet"                      , ""                                            , new OreDictItemData(ANY.Wood, U), TICKS_PER_SMELT, TC.stack(TC.POTENTIA, 1)));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.LiveRoot   , U2), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 32, OM.dust(MT.LiveRoot       ), FL.Glue.make(250), NF, IL.Pellet_Wood.get(2));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Livingwood , U2), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 32, OM.dust(MT.Livingwood     ), FL.Glue.make(250), NF, IL.Pellet_Wood.get(2));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Greatwood  , U2), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 32, OM.dust(MT.Greatwood      ), FL.Glue.make(250), NF, IL.Pellet_Wood.get(2));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Dreamwood  , U4), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 64, OM.dust(MT.Dreamwood      ), FL.Glue.make(500), NF, IL.Pellet_Wood.get(4));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Shimmerwood, U4), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 64, OM.dust(MT.Shimmerwood    ), FL.Glue.make(500), NF, IL.Pellet_Wood.get(4));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Silverwood , U4), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 64, OM.dust(MT.Silverwood     ), FL.Glue.make(500), NF, IL.Pellet_Wood.get(4));
 		for (OreDictMaterial tWood : ANY.Wood.mToThis)
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(tWood), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
-		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Bark), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(tWood             ), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.Bark           ), FL.Glue.make(125), NF, IL.Pellet_Wood.get(1));
 		RM.Compressor.addRecipe1(T, 16, 16, IL.Pellet_Wood.get(2), ST.make(BlocksGT.Planks, 1, 8));
+		RM.CokeOven.addRecipe1(T, 0, 900, IL.Pellet_Wood.get(1), NF, FL.Oil_Creosote.make(25), chunkGt.mat(MT.Charcoal, 1));
 		
 		
 		IL.Module_Stone_Generator.set(          addItem(tLastID =  6000, "Stone Generator Module"           , "Generates Stone for Recipes"                 , TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
@@ -281,15 +287,15 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		IL.Paper_Printed_Pages.set(             addItem(tLastID =  7002, "Printed Pages"                    , ""                                                            , Behavior_PrintedPages.INSTANCE, new OreDictItemData(MT.Paper, U*3), TC.stack(TC.COGNITO, 3)));
 		IL.Paper_Printed_Pages_Many.set(        addItem(tLastID =  7003, "Many Printed Pages"               , ""                                                            , Behavior_PrintedPages.INSTANCE, new OreDictItemData(MT.Paper, U*6), TC.stack(TC.COGNITO, 6)));
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Paper_Printed_Pages.get(1)), (byte)26);
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Paper_Printed_Pages_Many.get(1)), (byte)26);
+		BooksGT.BOOK_REGISTER.put(IL.Paper_Printed_Pages, (byte)26);
+		BooksGT.BOOK_REGISTER.put(IL.Paper_Printed_Pages_Many, (byte)26);
 		
 		IL.Paper_Blueprint_Empty.set(           addItem(tLastID =  7010, "Empty Blueprint"                  , "Place in Blueprint Slot and Shiftclick it, to assign Recipe" , new OreDictItemData(MT.Paper, U), TC.stack(TC.COGNITO, 1)));
 		IL.Paper_Blueprint_Used.set(            addItem(tLastID =  7011, "Blueprint"                        , "Blueprint containing a Crafting Recipe"                      , new OreDictItemData(MT.Paper, U), TC.stack(TC.COGNITO, 2), "gt:autocrafterblueprintitem"));
 		for (FluidStack tDye : DYE_FLUIDS[DYE_INDEX_Blue])
 		RM.Bath.addRecipe1(T, 0, 16, ST.make(Items.paper, 1, W), tDye, NF, IL.Paper_Blueprint_Empty.get(1));
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Paper_Blueprint_Empty.get(1)), (byte)25);
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Paper_Blueprint_Used.get(1)), (byte)28);
+		BooksGT.BOOK_REGISTER.put(IL.Paper_Blueprint_Empty, (byte)25);
+		BooksGT.BOOK_REGISTER.put(IL.Paper_Blueprint_Used, (byte)28);
 		ItemsGT.addNEIRedirects(IL.Paper_Blueprint_Empty.get(1), IL.Paper_Blueprint_Used.get(1));
 		
 		
@@ -299,7 +305,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		for (int i = 0; i < 16; i++) if (i != DYE_INDEX_White) for (FluidStack tDye : DYE_FLUIDS[i])
 		RM.Bath.addRecipe1(T, 0, 16, ST.make(this, 1, 7030+DYE_INDEX_White), tDye, NF, ST.make(this, 1, 7030+i));
 		for (int i = 0; i < 16; i++)
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(ST.make(this, 1, 7030+i)), (byte)27);
+		BooksGT.BOOK_REGISTER.put(this, 7030+i, (byte)27);
 		
 		IL.Robot_Tip_Wrench.set(                addItem(tLastID =  8000, "Robot Arm Wrench Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.wrench                                , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
 		IL.Robot_Tip_Screwdriver.set(           addItem(tLastID =  8001, "Robot Arm Screwdriver Tip"    , "Infinitely usable inside an Autocrafter", OreDictToolNames.screwdriver                           , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
@@ -327,17 +333,17 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Tool_Cheat.set(                      addItem(tLastID =  9001, "Debug Scanner"            , "", Behavior_Cropnalyzer.INSTANCE, ItemsGT.DEBUG_ITEMS, ItemsGT.ILLEGAL_DROPS, GarbageGT.BLACKLIST, new Behavior_Scanner(Integer.MAX_VALUE), EnergyStatDebug.INSTANCE, TC.stack(TC.SENSUS,10), TC.stack(TC.INSTRUMENTUM,10)));
 		IL.Tool_Scanner.set(                    addItem(tLastID =  9002, "Portable Scanner"         , "", Behavior_Cropnalyzer.INSTANCE, new Behavior_Scanner(2), EnergyStat.makeTool(TD.Energy.EU, V[3]*8000, V[3], 2, ST.make(this, 1, tLastID)), TC.stack(TC.SENSUS,10), TC.stack(TC.INSTRUMENTUM,10)));
 		IL.Tool_Cropnalyzer.set(                addItem(tLastID =  9003, "Portable Cropnalyzer"     , "", Behavior_Cropnalyzer.INSTANCE, EnergyStat.makeTool(TD.Energy.EU, V[2]*8000, V[2], 2, ST.make(this, 1, tLastID)), TC.stack(TC.SENSUS, 5), TC.stack(TC.INSTRUMENTUM, 5), TC.stack(TC.HERBA, 5)));
-		
 		IL.Tool_Worldgen_Debugger.set(          addItem(tLastID =  9999, "Worldgen Debug Wand"      , "", Behavior_Worldgen_Debugger.INSTANCE, ItemsGT.DEBUG_ITEMS, ItemsGT.ILLEGAL_DROPS, GarbageGT.BLACKLIST, TC.stack(TC.TERRA,10), TC.stack(TC.PRAECANTIO,10), TC.stack(TC.INSTRUMENTUM,10)));
 		
 		CR.shaped(IL.Tool_Remote_Activator      .get(1), CR.DEF_REV, "TPE", "BCd", "xPT", 'P', OP.plate.dat(MT.Cr), 'T', OP.screw.dat(MT.Cr), 'C', OD_CIRCUITS[4], 'E', IL.EMITTERS[4], 'B', ST.make(Blocks.stone_button, 1, W));
+		BooksGT.BOOK_REGISTER.put(IL.Tool_Remote_Activator, (byte)1);
 //      Moved to the Battery Section of the MTE Loader.
 //      CR.shaped(IL.Tool_Scanner               .get(1), CR.DEF_REV, "EXR", "CPU", "BXB", 'B', IL.Battery_Alkaline_HV, 'X', OP.plate.dat(MT.Cr), 'U', OD_USB_STICKS[3], 'C', OD_USB_CABLES[3], 'E', IL.EMITTERS[4], 'R', IL.SENSORS[4], 'P', IL.Processor_Crystal_Sapphire);
 //      CR.shaped(IL.Tool_Cropnalyzer           .get(1), CR.DEF_REV, "EXR", "CPU", "BXB", 'B', IL.Battery_Alkaline_MV, 'X', OP.plate.dat(MT.Al), 'U', OD_USB_STICKS[1], 'C', OD_USB_CABLES[1], 'E', IL.EMITTERS[2], 'R', IL.SENSORS[2], 'P', OD_CIRCUITS[6]);
 		
-		IL.Thermometer_Quicksilver.set(         addItem(tLastID = 10000, "Quicksilver Thermometer"  , "", new Behavior_Tool(TOOL_thermometer  , null, 0, T), TC.stack(TC.VENENUM, 1), TC.stack(TC.VITREUS, 1)));
-		IL.Geiger_Counter_Empty.set(            addItem(tLastID = 10001, "Geiger Counter (Empty)"   , "Fill with proper inert Gas"                         , TC.stack(TC.SENSUS, 1), TC.stack(TC.RADIO, 1)));
-		IL.Geiger_Counter.set(                  addItem(tLastID = 10002, "Geiger Counter"           , "", new Behavior_Tool(TOOL_geigercounter, null, 0, T), TC.stack(TC.SENSUS, 5), TC.stack(TC.RADIO, 5)));
+		IL.Thermometer_Quicksilver.set(         addItem(tLastID = 10000, "Quicksilver Thermometer"  , "", new Behavior_Tool(TOOL_thermometer  ), TC.stack(TC.VENENUM, 1), TC.stack(TC.VITREUS, 1)));
+		IL.Geiger_Counter_Empty.set(            addItem(tLastID = 10001, "Geiger Counter (Empty)"   , "Fill with proper inert Gas"             , TC.stack(TC.SENSUS, 1), TC.stack(TC.RADIO, 1)));
+		IL.Geiger_Counter.set(                  addItem(tLastID = 10002, "Geiger Counter"           , "", new Behavior_Tool(TOOL_geigercounter), TC.stack(TC.SENSUS, 5), TC.stack(TC.RADIO, 5)));
 		
 		RM.Canner.addRecipe1(T, 16, 64, IL.Geiger_Counter_Empty.get(1), FL.Helium.make(1000), NF, IL.Geiger_Counter.get(1));
 		RM.Canner.addRecipe1(T, 16, 64, IL.Geiger_Counter_Empty.get(1), FL.Neon  .make(1000), NF, IL.Geiger_Counter.get(1));
@@ -361,6 +367,9 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Tape_Used.set(                       addItem(tLastID = 12001, "Tape", "Used Roll", TC.stack(TC.PANNUS, 1), TC.stack(TC.LIMUS, 1)));
 		CR.shaped(IL.Tape.get(1), CR.DEF, "PPP", " G ", 'P', OD.paperEmpty, 'G', OD.itemGlue);
 		tBehaviour = new Behavior_Duct_Tape(null, IL.Tape_Used.get(1), IL.Tape.get(1), 0, 10000);
+		ItemsGT.addNEIRedirects(IL.Tape.get(1), IL.Tape_Used.get(1));
+		BooksGT.BOOK_REGISTER.put(IL.Tape           , (byte)57);
+		BooksGT.BOOK_REGISTER.put(IL.Tape_Used      , (byte)57);
 		addItemBehavior(12000, tBehaviour);
 		addItemBehavior(12001, tBehaviour);
 		
@@ -368,6 +377,9 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Duct_Tape_Used.set(                  addItem(tLastID = 12003, "Duct Tape", "Used Roll", TC.stack(TC.FABRICO, 1), TC.stack(TC.LIMUS, 1)));
 		CR.shaped(IL.Duct_Tape.get(1), CR.DEF, "PPP", " G ", 'P', OP.foil.dat(MT.Plastic), 'G', OD.itemGlue);
 		tBehaviour = new Behavior_Duct_Tape(null, IL.Duct_Tape_Used.get(1), IL.Duct_Tape.get(1), 1, 100000);
+		ItemsGT.addNEIRedirects(IL.Duct_Tape.get(1), IL.Duct_Tape_Used.get(1));
+		BooksGT.BOOK_REGISTER.put(IL.Duct_Tape      , (byte)58);
+		BooksGT.BOOK_REGISTER.put(IL.Duct_Tape_Used , (byte)58);
 		addItemBehavior(12002, tBehaviour);
 		addItemBehavior(12003, tBehaviour);
 		
@@ -375,6 +387,9 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Brain_Tape_Used.set(                 addItem(tLastID = 12009, "BrainTech Aerospace Advanced Reinforced Duct Tape FAL-84", "Used Roll", TC.stack(TC.TUTAMEN, 1), TC.stack(TC.LIMUS, 1), OD.craftingDuctTape));
 		CR.shaped(IL.Brain_Tape.get(1), CR.DEF, "PPP", " G ", 'P', OP.foil.dat(ANY.W), 'G', OD.itemGlue);
 		tBehaviour = new Behavior_Duct_Tape(null, IL.Brain_Tape_Used.get(1), IL.Brain_Tape.get(1), 2, 10000000);
+		ItemsGT.addNEIRedirects(IL.Brain_Tape.get(1), IL.Brain_Tape_Used.get(1));
+		BooksGT.BOOK_REGISTER.put(IL.Brain_Tape     , (byte)59);
+		BooksGT.BOOK_REGISTER.put(IL.Brain_Tape_Used, (byte)59);
 		addItemBehavior(12008, tBehaviour);
 		addItemBehavior(12009, tBehaviour);
 		
@@ -392,7 +407,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Key_Plastic.set(                     addItem(tLastID = 30009, "Plastic Key" , "", OD.itemKey, new OreDictItemData(MT.Plastic, U4), Behavior_Key.INSTANCE, TC.stack(TC.MACHINA, 1))); CR.shaped(IL.Key_Plastic .get(3), CR.DEF_NCC, "fPx", 'P', OP.plate.dat(MT.Plastic));
 		
 		// In order to be able to hide Keys inside Bookshelves
-		for (IItemContainer tContainer : IL.KEYS) BooksGT.BOOK_REGISTER.put(new ItemStackContainer(tContainer.get(1)), (byte)1);
+		for (IItemContainer tContainer : IL.KEYS) BooksGT.BOOK_REGISTER.put(tContainer, (byte)1);
 	}
 	
 	@Override public int getRenderPasses(int aMetaData) {return UT.Code.inside(11000, 11004, aMetaData) ? 2 : 1;}
@@ -434,7 +449,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 	
 	@Override
 	public ItemStack getContainerItem(ItemStack aStack) {
-		int aMeta = ST.meta_(aStack);
+		short aMeta = ST.meta_(aStack);
 		if (aMeta >=  1000 && aMeta <=  1999) return ST.make(this, 1,   999);
 		if (aMeta >   2000 && aMeta <=  2099) return ST.make(this, 1,  2000);
 		if (aMeta >   2100 && aMeta <=  2199) return ST.make(this, 1,  2100);
@@ -450,13 +465,18 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		if (aMeta ==  5006 || aMeta ==  5009) return ST.make(this, 1, aMeta - 2);
 		if (aMeta ==  5011) return ST.make(this, 1,  5013);
 		if (aMeta ==  5012) return ST.make(this, 1,  5010);
-//      if (aMeta == 32401) return ST.make(this, 1, aMeta - 1);
 		return super.getContainerItem(aStack);
 	}
 	
 	@Override
+	public boolean canBeStoredInToolbox(ItemStack aStack) {
+		short aMeta = ST.meta_(aStack);
+		return aMeta >= 9000 || aMeta == 6000 || (aMeta >= 1000 && aMeta < 5999);
+	}
+	
+	@Override
 	public int getDefaultStackLimit(ItemStack aStack) {
-		int aMeta = ST.meta_(aStack);
+		short aMeta = ST.meta_(aStack);
 		switch (aMeta) {
 		case 5002: case 5005: case 5008: case 5011: case 5014: case 5015: case 9001: case 9002: return 1;
 		default: return (aMeta >= 2000 && aMeta < 3000) ? 1 : 64;

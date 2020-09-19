@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -41,7 +41,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTreeLeaves extends BlockBaseLeaves {
+public class BlockTreeLeaves extends BlockBaseLeaves implements Runnable {
 	public BlockTreeLeaves(String aUnlocalised, Block aSaplings) {
 		super(null, aUnlocalised, Material.leaves, soundTypeGrass, 8, Textures.BlockIcons.LEAVES, aSaplings, new Block[] {BlocksGT.LogA, BlocksGT.LogA, BlocksGT.LogA, BlocksGT.LogA, BlocksGT.LogB, BlocksGT.LogB, BlocksGT.LogB, BlocksGT.LogB}, new byte[] {0, 1, 2, 3, 0, 1, 2, 3});
 		LH.add(getUnlocalizedName()+ ".0.name", "Rubber Leaves");
@@ -50,7 +50,7 @@ public class BlockTreeLeaves extends BlockBaseLeaves {
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Leaves");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Leaves");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Leaves");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Leaves");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Leaves");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbow Leaves");
 		LH.add(getUnlocalizedName()+ ".8.name", "Rubber Leaves");
 		LH.add(getUnlocalizedName()+ ".9.name", "Maple Leaves");
@@ -58,45 +58,48 @@ public class BlockTreeLeaves extends BlockBaseLeaves {
 		LH.add(getUnlocalizedName()+".11.name", "Blue Mahoe Leaves");
 		LH.add(getUnlocalizedName()+".12.name", "Hazel Leaves");
 		LH.add(getUnlocalizedName()+".13.name", "Cinnamon Leaves");
-		LH.add(getUnlocalizedName()+".14.name", "Palm Leaves");
+		LH.add(getUnlocalizedName()+".14.name", "Coconut Leaves");
 		LH.add(getUnlocalizedName()+".15.name", "Rainbow Leaves");
 		
 		for (int i = 0; i < 16; i++) OM.reg(ST.make(this, 1, i), OP.treeLeaves);
 		
-		if (COMPAT_FR != null) COMPAT_FR.addWindfall(OP.stick.mat(MT.Wood, 1));
+		GAPI.mAfterPostInit.add(this);
+	}
+	
+	@Override
+	public void run() {
+		if (COMPAT_FR != null) {
+			COMPAT_FR.addWindfall(IL.Food_Hazelnut.get(1));
+			COMPAT_FR.addWindfall(IL.Food_Coconut.get(1));
+			COMPAT_FR.addWindfall(IL.Stick.get(1));
+			COMPAT_FR.addWindfall(OP.stick.mat(MT.WOODS.Willow   , 1));
+			COMPAT_FR.addWindfall(OP.stick.mat(MT.WOODS.BlueMahoe, 1));
+			COMPAT_FR.addWindfall(OP.stick.mat(MT.WOODS.Hazel    , 1));
+		}
 	}
 	
 	@Override
 	public int getLeavesRangeSide(byte aMeta) {
-		switch(aMeta & 7) {
-		case 0: return 2;
-		case 1: return 3;
-		case 2: return 4;
-		case 3: return 3;
-		case 4: return 3;
-		case 5: return 3;
-		case 6: return 3;
-		case 7: return 3;
+		switch(aMeta) {
+		case  0: case  8: return 2;
+		case  2: case 10: return 4;
+		case  6: case 14: return 4;
+		default:          return 3;
 		}
-		return 3;
 	}
 	
 	@Override
 	public int getLeavesRangeYNeg(byte aMeta) {
-		switch(aMeta & 7) {
-		case 0: return 2;
-		case 1: return 2;
-		case 2: return 2;
-		case 3: return 4;
-		case 4: return 2;
-		case 5: return 3;
-		case 6: return 3;
-		case 7: return 3;
+		switch(aMeta) {
+		case  3: case 11: return 4;
+		case  5: case 13: return 3;
+		case  6: case 14: return 1;
+		case  7: case 15: return 3;
+		default:          return 2;
 		}
-		return 2;
 	}
 	
-	@Override public int getLeavesRangeYPos(byte aMeta) {return 0;}
+	@Override public int getLeavesRangeYPos(byte aMeta) {return 0;} // There is no instance where Leaves are below the Logs for these Trees.
 	
 	@Override
 	public ArrayList<ItemStack> getDrops(World aWorld, int aX, int aY, int aZ, int aMeta, int aFortune) {
@@ -106,12 +109,17 @@ public class BlockTreeLeaves extends BlockBaseLeaves {
 			tChance -= 5 << aFortune;
 			if (tChance < 5) tChance = 5;
 		}
-		if (RNGSUS.nextInt(tChance) == 0) {
+		if (RNGSUS.nextInt(tChance) < ((aMeta & 7) == 6 ? 2 : 1)) {
 			rDrops.add(ST.make(getItemDropped(aMeta, RNGSUS, aFortune), 1, damageDropped(aMeta)));
 		} else {
-			switch(aMeta & 7) {case 2: case 3: case 4: if (RNGSUS.nextInt(tChance) < 2) rDrops.add(OP.stick.mat(MT.Wood, 1));}
+			switch(aMeta & 7) {
+			case 2: if (RNGSUS.nextInt(tChance) < 2) rDrops.add(OP.stick.mat(MT.WOODS.Willow   , 1)); break;
+			case 3: if (RNGSUS.nextInt(tChance) < 2) rDrops.add(OP.stick.mat(MT.WOODS.BlueMahoe, 1)); break;
+			case 4: if (RNGSUS.nextInt(tChance) < 2) rDrops.add(OP.stick.mat(MT.WOODS.Hazel    , 1)); break;
+			}
 		}
 		if ((aMeta & 7) == 4 && RNGSUS.nextInt(tChance) < 2) rDrops.add(IL.Food_Hazelnut.get(1));
+		if ((aMeta & 7) == 6 && RNGSUS.nextInt(tChance) < 2) rDrops.add(IL.Food_Coconut.get(1));
 		return rDrops;
 	}
 	

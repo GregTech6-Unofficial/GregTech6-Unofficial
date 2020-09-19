@@ -53,6 +53,7 @@ import gregapi.block.metatype.BlockBasePlanks;
 import gregapi.block.misc.BlockBaseBale;
 import gregapi.block.multitileentity.MultiTileEntityItemInternal;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
+import gregapi.block.prefixblock.PrefixBlockTileEntity;
 import gregapi.block.tree.BlockBaseBeam;
 import gregapi.block.tree.BlockBaseLog;
 import gregapi.block.tree.BlockBaseSapling;
@@ -123,7 +124,9 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.MobSpawnerBaseLogic;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
@@ -221,9 +224,9 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		mSaveLocation = null;
 	}
 	
-	@SubscribeEvent public void onWorldSave(WorldEvent.Save aEvent) {mSaveLocation = aEvent.world.getSaveHandler().getWorldDirectory();}
-	@SubscribeEvent public void onWorldLoad(WorldEvent.Load aEvent) {mSaveLocation = aEvent.world.getSaveHandler().getWorldDirectory();}
-	@SubscribeEvent public void onWorldUnload(WorldEvent.Unload aEvent) {mSaveLocation = aEvent.world.getSaveHandler().getWorldDirectory();}
+	@SubscribeEvent public void onWorldSave  (WorldEvent.Save   aEvent) {if (mSaveLocation == null) mSaveLocation = aEvent.world.getSaveHandler().getWorldDirectory();}
+	@SubscribeEvent public void onWorldLoad  (WorldEvent.Load   aEvent) {if (mSaveLocation == null) mSaveLocation = aEvent.world.getSaveHandler().getWorldDirectory();}
+	@SubscribeEvent public void onWorldUnload(WorldEvent.Unload aEvent) {if (mSaveLocation == null) mSaveLocation = aEvent.world.getSaveHandler().getWorldDirectory();}
 	
 	public  static final List<ITileEntityServerTickPre  > SERVER_TICK_PRE                = new ArrayListNoNulls<>(), SERVER_TICK_PR2  = new ArrayListNoNulls<>();
 	public  static final List<ITileEntityServerTickPost > SERVER_TICK_POST               = new ArrayListNoNulls<>(), SERVER_TICK_PO2T = new ArrayListNoNulls<>();
@@ -281,6 +284,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 					
 					for (ItemStack tOutput : tStacks) {
 						if (OreDictManager.INSTANCE.isOreDictItem(tOutput)) {
+							ERR.println("GT-ERR-01: @ " + tOutput.getUnlocalizedName() + "   " + tOutput.getDisplayName());
 							FMLLog.severe("GT-ERR-01: @ " + tOutput.getUnlocalizedName() + "   " + tOutput.getDisplayName());
 							if (CS.CODE_CLIENT) {
 								FMLLog.severe("A Recipe used an OreDict Item as Output directly, without copying it before!!! This is a typical CallByReference/CallByValue Error");
@@ -446,7 +450,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		
 		Block tBlock = aEvent.entityLiving.worldObj.getBlock(tX, tY, tZ);
 		if (tBlock instanceof IBlockOnHeadInside) ((IBlockOnHeadInside)tBlock).onHeadInside(aEvent.entityLiving, aEvent.entityLiving.worldObj, tX, tY, tZ);
-
+		
 		if (aEvent.entityLiving.onGround) {
 			tY = UT.Code.roundDown(aEvent.entityLiving.boundingBox.minY-0.001F);
 			tBlock = aEvent.entityLiving.worldObj.getBlock(tX, tY, tZ);
@@ -561,13 +565,13 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 					aEvent.player.capabilities.allowEdit = F;
 					if (ADVENTURE_MODE_KIT) {
 						if (MD.GT.mLoaded) {
-							UT.Entities.chat(aEvent.player, "Thanks for choosing our Adventure Mode Starter Kit.");
-							UT.Entities.chat(aEvent.player, "We know you could have chosen any other Kit.");
-							UT.Entities.chat(aEvent.player, "And are proud that you chose ours as the best.");
-							ST.drop(aEvent.player, ST.make(Items.flint, 12, 0));
-							ST.drop(aEvent.player, ST.make(Items.stick,  8, 0));
-							ST.drop(aEvent.player, IL.Grass_Dry.get(8));
+							UT.Entities.chat(aEvent.player, CHAT_GREG + "Thank you for choosing the GregTech-6 Adventure Mode Starter Kit.");
 							ST.drop(aEvent.player, IL.Bottle_Purple_Drink.get(6));
+							ST.drop(aEvent.player, IL.Grass_Dry.get(8));
+							ST.drop(aEvent.player, IL.Stick.get(16));
+							ST.drop(aEvent.player, Items.flint, 12, 0);
+							ST.drop(aEvent.player, Blocks.dirt, 16, 0);
+							ST.drop(aEvent.player, Blocks.sapling, 4, 0);
 							switch (RNGSUS.nextInt(4)) {
 							case 0: ST.drop(aEvent.player, IL.Food_Large_Sandwich_Veggie.get(1)); break;
 							case 1: ST.drop(aEvent.player, IL.Food_Large_Sandwich_Cheese.get(1)); break;
@@ -575,8 +579,8 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 							case 3: ST.drop(aEvent.player, IL.Food_Large_Sandwich_Bacon .get(1)); break;
 							}
 						} else {
-							UT.Entities.chat(aEvent.player, "It's dangerous to go alone! Take this.");
-							ST.drop(aEvent.player, ST.make(Items.stone_axe, 1, 0));
+							UT.Entities.chat(aEvent.player, CHAT_GREG + "It's dangerous to go alone! Take this.");
+							ST.drop(aEvent.player, Items.stone_axe, 1, 0);
 						}
 					}
 				}
@@ -634,37 +638,37 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 								if (tPlayer == null) continue;
 								if ("Bear989Sr".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
 									if (tPlayer.posY < 20) {
-										UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " Stop making Holes in the Ground, Bear!"));
+										UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "Stop making Holes in the Ground, Bear!"));
 									} else {
 										switch(tEmptySlots) {
-										case 0: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " You are full of shit, Bear!!!")); break;
-										case 1: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " Your Inventory is almost full, Bear!!")); break;
-										case 2: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " You should clean up your Inventory, Bear!")); break;
-										case 3: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " Bear, your Inventory starts to get full.")); break;
+										case 0: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "You are full of shit, Bear!!!")); break;
+										case 1: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "Your Inventory is almost full, Bear!!")); break;
+										case 2: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "You should clean up your Inventory, Bear!")); break;
+										case 3: UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "Bear, your Inventory starts to get full.")); break;
 										}
 									}
 								} else if ("Bear989jr".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
 									UT.Inventories.addStackToPlayerInventoryOrDrop(tPlayer, UT.NBT.addEnchantment(ST.make(Items.cookie, 1, 0, "Jr. Cookie"), Enchantment_WerewolfDamage.INSTANCE, 1), F);
-									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " Have a Jr. Cookie. Please tell Fatass to clean his Inventory, or smack him with it."));
+									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "Have a Jr. Cookie. Please tell Fatass to clean his Inventory, or smack him with it."));
 								} else if ("CrazyJ1984".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
 									ItemStack tArrow = ST.update(OP.arrowGtWood.mat(MT.Craponite, 1), aEvent.player);
 									if (ST.valid(tArrow)) {
 										UT.Inventories.addStackToPlayerInventoryOrDrop(tPlayer, tArrow, F);
-										UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " I'm not trying to tell you what to do, but please don't hurt Bear with this."));
+										UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "I'm not trying to tell you what to do, but please don't hurt Bear with this."));
 									} else {
-										UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " I'm not trying to tell you what to do, but please don't hurt Bear."));
+										UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "I'm not trying to tell you what to do, but please don't hurt Bear."));
 									}
 								} else if ("GregoriusT".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
-									UT.Inventories.addStackToPlayerInventoryOrDrop(tPlayer, ST.update(OP.arrowGtWood.mat(MT.Tc, 1), aEvent.player), F);
+									UT.Inventories.addStackToPlayerInventoryOrDrop(tPlayer, ST.update(OP.arrowGtPlastic.mat(MT.Tc, 1), aEvent.player), F);
 									UT.Entities.chat(tPlayer, new ChatComponentText(LH.Chat.BOLD + "You have received an Arrow"));
 								} else if ("Ilirith".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
-									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " Could you tell Bear989Sr very gently, that his Inventory is a fucking mess again?"));
+									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "Could you tell Bear989Sr very gently, that his Inventory is a fucking mess again?"));
 								} else if ("Shadowkn1ght18".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
-									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " Here is your special Message to make you tell Bear989Sr to clean his Inventory."));
+									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "Here is your special Message to make you tell Bear989Sr to clean his Inventory."));
 								} else if ("e99999".equalsIgnoreCase(tPlayer.getCommandSenderName())) {
 									UT.Entities.chat(tPlayer, new ChatComponentText(LH.Chat.DGRAY + "You get the sneaking suspicion that Bears Inventory may or may not be full right now."));
 								} else {
-									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + " There is this fella called Bear-Nine-Eight-Nine, needing be reminded of his Inventory being a major Pine."));
+									UT.Entities.chat(tPlayer, new ChatComponentText(CHAT_GREG + "There is this fella called Bear-Nine-Eight-Nine, needing be reminded of his Inventory being a major Pine."));
 								}
 							}
 						}
@@ -791,29 +795,52 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		PLAYER_LAST_CLICKED.put(aEvent.entityPlayer, new ChunkCoordinates(aEvent.x, aEvent.y, aEvent.z));
 		
 		ItemStack aStack = aEvent.entityPlayer.inventory.getCurrentItem();
-//      Block aBlock = aEvent.world.getBlock(aEvent.x, aEvent.y, aEvent.z);
+		Block aBlock = WD.block(aEvent.world, aEvent.x, aEvent.y, aEvent.z);
 		TileEntity aTileEntity = aEvent.world.getTileEntity(aEvent.x, aEvent.y, aEvent.z);
 		
 		if (aEvent.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK) {
+			// Fixing a Vanilla Dupe Bug with stacked Music Discs and the Jukebox.
 			if (aTileEntity instanceof TileEntityJukebox) {
 				ItemStack tStack = ((TileEntityJukebox)aTileEntity).func_145856_a();
 				if (tStack != null) tStack.stackSize = 1;
 				return;
 			}
+			// You can easily recycle most things in GT6 anyways, so this should not be needed.
+			if (IL.TF_Uncrafting.equal(aBlock)) {
+				UT.Entities.chat(aEvent.entityPlayer, CHAT_GREG + "No cheating! ;)");
+				aEvent.setCanceled(T);
+				return;
+			}
+			// Just rightclick the Trophy to get the Achievement/Progress.
+			if (IL.TF_Trophy.equal(aBlock)) {
+				UT.Inventories.checkAchievements(aEvent.entityPlayer, ST.make(aBlock.getItemDropped(0, RNGSUS, 0), 1, aBlock.getDamageValue(aEvent.world, aEvent.x, aEvent.y, aEvent.z)));
+				return;
+			}
+			// Some Clientside Only Stuff.
+			if (aEvent.entityPlayer.worldObj.isRemote && !aEvent.entityPlayer.isSneaking()) {
+				if (aTileEntity instanceof PrefixBlockTileEntity) {
+					// Show uses for Bedrock Ore when clicking it.
+					if (aBlock == BlocksGT.oreBedrock || aBlock == BlocksGT.oreSmallBedrock) {
+						RM.BedrockOreList.openNEI();
+					//  RM.BedrockOreList.guiUsesNEI(ST.make((Block)BlocksGT.oreBedrock, 1, ((PrefixBlockTileEntity)aTileEntity).mMetaData));
+					}
+				}
+			}
 			if (ST.valid(aStack)) {
+				// Preventing a Railcraft Crash with Fluid Container Items.
 				if (aStack.getItem() instanceof IFluidContainerItem && !aEvent.entityPlayer.isSneaking() && aTileEntity != null && aTileEntity.getClass().getName().startsWith("mods.railcraft.common")) {
 					aEvent.setCanceled(T);
 					return;
 				}
-				/*
+				/* I think this was for fixing some Adventure Mode related thing. Probably placing Scaffolds with Leftclick was broken, but I ended up fixing it another way.
 				if (MD.IC2.mLoaded && SIDES_HORIZONTAL[aEvent.face] && !aEvent.entityPlayer.isSneaking() && !aEvent.entityPlayer.capabilities.allowEdit && !aEvent.world.canPlaceEntityOnSide(aBlock, aEvent.x+OFFSETS_X[aEvent.face], aEvent.y, aEvent.z+OFFSETS_Z[aEvent.face], F, aEvent.face, aEvent.entityPlayer, aStack)) {
-					if (IL.IC2_Scaffold.exists() && aBlock == IL.IC2_Scaffold.block() && IL.IC2_Scaffold.equal(aStack, F, T)) {
+					if (IL.IC2_Scaffold.equal(aBlock) && IL.IC2_Scaffold.equal(aStack, F, T)) {
 						aBlock.onBlockClicked(aEvent.world, aEvent.x, aEvent.y, aEvent.z, aEvent.entityPlayer);
 						aEvent.entityPlayer.swingItem();
 						aEvent.setCanceled(T);
 						return;
 					}
-					if (IL.IC2_Scaffold_Iron.exists() && aBlock == IL.IC2_Scaffold_Iron.block() && IL.IC2_Scaffold_Iron.equal(aStack, F, T)) {
+					if (IL.IC2_Scaffold_Iron.equal(aBlock) && IL.IC2_Scaffold_Iron.equal(aStack, F, T)) {
 						aBlock.onBlockClicked(aEvent.world, aEvent.x, aEvent.y, aEvent.z, aEvent.entityPlayer);
 						aEvent.entityPlayer.swingItem();
 						aEvent.setCanceled(T);
@@ -824,15 +851,16 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 					// Dollies won't work on GT6 TileEntities, so to prevent a Crash and deleted Resources, I just disable the interaction.
 					if (IL.JABBA_Dolly.equal(aStack, T, T) || IL.JABBA_Dolly_Diamond.equal(aStack, T, T)) {
 						if (aTileEntity instanceof ITileEntitySpecificPlacementBehavior) {
-							UT.Entities.chat(aEvent.entityPlayer, CHAT_GREG + " The Code of this Dolly is not smart enough to move this TileEntity.", CHAT_GREG + "It would crash if it actually did, so be glad I prevented that mistake.");
+							UT.Entities.chat(aEvent.entityPlayer, CHAT_GREG + "The Code of this Dolly is not smart enough to move this TileEntity.", CHAT_GREG + "It would crash if it actually did, so be glad I prevented that mistake.");
 							aEvent.setCanceled(T);
 						}
 						return;
 					}
+					// Make Railcrafts Crowbars work on GT6 Stuff.
 					if (IL.RC_Crowbar_Iron.equal(aStack, T, T) || IL.RC_Crowbar_Steel.equal(aStack, T, T) || IL.RC_Crowbar_Thaumium.equal(aStack, T, T) || IL.RC_Crowbar_Voidmetal.equal(aStack, T, T)) {
 						List<String> tChatReturn = new ArrayListNoNulls<>();
 						long tDamage = IBlockToolable.Util.onToolClick(TOOL_crowbar, Long.MAX_VALUE, 2, aEvent.entityPlayer, tChatReturn, aEvent.entityPlayer.inventory, aEvent.entityPlayer.isSneaking(), aStack, aEvent.entityPlayer.worldObj, (byte)aEvent.face, aEvent.x, aEvent.y, aEvent.z, 0.5F, 0.5F, 0.5F);
-						UT.Entities.chat(aEvent.entityPlayer, tChatReturn, F);
+						UT.Entities.sendchat(aEvent.entityPlayer, tChatReturn, F);
 						if (tDamage > 0) {
 							aStack.damageItem((int)UT.Code.units(tDamage, 10000, 1, T), aEvent.entityPlayer);
 							if (aStack.getItemDamage() >= aStack.getMaxDamage()) ST.use(aEvent.entityPlayer, aStack);
@@ -840,21 +868,52 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 						}
 						return;
 					}
+					// Make Forestry Scoops work on GT6 Stuff.
 					if (IL.FR_Scoop.equal(aStack, T, T)) {
 						List<String> tChatReturn = new ArrayListNoNulls<>();
-						long tDamage = IBlockToolable.Util.onToolClick(TOOL_scoop, Long.MAX_VALUE, 0, aEvent.entityPlayer, tChatReturn, aEvent.entityPlayer.inventory, aEvent.entityPlayer.isSneaking(), aStack, aEvent.entityPlayer.worldObj, (byte)aEvent.face, aEvent.x, aEvent.y, aEvent.z, 0.5F, 0.5F, 0.5F);
-						UT.Entities.chat(aEvent.entityPlayer, tChatReturn, F);
+						long tDamage = IBlockToolable.Util.onToolClick(TOOL_scoop, Long.MAX_VALUE, 0, aEvent.entityPlayer, tChatReturn, aEvent.entityPlayer.inventory, aEvent.entityPlayer.isSneaking(), aStack, aEvent.world, (byte)aEvent.face, aEvent.x, aEvent.y, aEvent.z, 0.5F, 0.5F, 0.5F);
+						UT.Entities.sendchat(aEvent.entityPlayer, tChatReturn, F);
 						if (tDamage > 0) {
 							aStack.damageItem((int)UT.Code.units(tDamage, 10000, 1, T), aEvent.entityPlayer);
 							if (aStack.getItemDamage() >= aStack.getMaxDamage()) ST.use(aEvent.entityPlayer, aStack);
 							aEvent.setCanceled(T);
 						}
 						return;
+					}
+					// Make Twilight Forests Lamp of Cinders work as infinite Flint and Steel on TNT and GT6 Machines
+					if (IL.TF_Lamp_of_Cinders.equal(aStack, T, T)) {
+						List<String> tChatReturn = new ArrayListNoNulls<>();
+						long tDamage = IBlockToolable.Util.onToolClick(TOOL_igniter, Long.MAX_VALUE, Long.MAX_VALUE, aEvent.entityPlayer, tChatReturn, aEvent.entityPlayer.inventory, aEvent.entityPlayer.isSneaking(), aStack, aEvent.world, (byte)aEvent.face, aEvent.x, aEvent.y, aEvent.z, 0.5F, 0.5F, 0.5F);
+						UT.Entities.sendchat(aEvent.entityPlayer, tChatReturn, F);
+						if (tDamage > 0) aEvent.setCanceled(T);
+						return;
+					}
+					if (IL.TF_Transformation_Powder.equal(aStack, T, T)) {
+						// Make Twilight Forests Transformation Powder work on Mob Spawners
+						if (aTileEntity instanceof TileEntityMobSpawner) {
+							if (aEvent.world.isRemote) return;
+							MobSpawnerBaseLogic tSpawner = ((TileEntityMobSpawner)aTileEntity).func_145881_a();
+							String tResult = TRANSFORMATION_POWDER_SPAWNER_MAP.get(tSpawner.getEntityNameToSpawn());
+							if (UT.Code.stringValid(tResult)) {
+								if (ST.use(aEvent.entityPlayer, aStack, 16)) {
+									tSpawner.setEntityName(tResult);
+									// I hope this works sync the new Mob Data over.
+									aEvent.world.markBlockForUpdate(aEvent.x, aEvent.y, aEvent.z);
+								} else {
+									UT.Entities.sendchat(aEvent.entityPlayer, "You need 16 Bags of Transformation Powder to convert this!");
+								}
+							} else {
+								UT.Entities.sendchat(aEvent.entityPlayer, "This Spawner does not have a Counterpart to convert into!");
+							}
+							aEvent.setCanceled(T);
+							return;
+						}
 					}
 				}
 			}
 		}
 		
+		// Make sure that shelvable Items don't do a Rightclick Action instead of being shelved.
 		if (aEvent.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK || aEvent.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
 			if (ST.valid(aStack)) {
 				if (aTileEntity instanceof ITileEntityBookShelf && ((ITileEntityBookShelf)aTileEntity).isShelfFace((byte)aEvent.face)) {
@@ -864,6 +923,11 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 				}
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public void onUseHoeEvent(net.minecraftforge.event.entity.player.UseHoeEvent aEvent) {
+		if (aEvent.world.getBlock(aEvent.x, aEvent.y, aEvent.z) == Blocks.dirt && aEvent.world.getBlockMetadata(aEvent.x, aEvent.y, aEvent.z) != 0) aEvent.setCanceled(T);
 	}
 	
 	@SubscribeEvent
@@ -906,11 +970,6 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 	}
 	
 	@SubscribeEvent
-	public void onUseHoeEvent(net.minecraftforge.event.entity.player.UseHoeEvent aEvent) {
-		if (aEvent.world.getBlock(aEvent.x, aEvent.y, aEvent.z) == Blocks.dirt && aEvent.world.getBlockMetadata(aEvent.x, aEvent.y, aEvent.z) != 0) aEvent.setCanceled(T);
-	}
-	
-	@SubscribeEvent
 	public void onBlockHarvestingEvent(BlockEvent.HarvestDropsEvent aEvent) {
 		Iterator<ItemStack> aDrops = aEvent.drops.iterator();
 		while (aDrops.hasNext()) {
@@ -931,48 +990,55 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 				if (aStack.getItem() instanceof MultiItemTool) {
 					((MultiItemTool)aStack.getItem()).onHarvestBlockEvent(aEvent.drops, aStack, aEvent.harvester, aEvent.block, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.blockMetadata, aEvent.fortuneLevel, aEvent.isSilkTouching, aEvent);
 				}
-				if (tFireAspect) for (ItemStack tDrop : aEvent.drops) {
-					ItemStack tSmeltingOutput = RM.get_smelting(tDrop, F, null);
-					if (tSmeltingOutput != null) {
-						tDrop.stackSize *= tSmeltingOutput.stackSize;
-						ST.set(tDrop, tSmeltingOutput, F, T);
+				
+				if (tFireAspect) {
+				//  if (aEvent.world.isRemote) for (int i = 0; i < 4; i++) {
+				//      double tX = RNGSUS.nextGaussian()/50, tY = RNGSUS.nextGaussian()/50, tZ = RNGSUS.nextGaussian()/50;
+				//      aEvent.world.spawnParticle("flame", aEvent.x+0.5+tX*20, aEvent.y+0.5+tY*20, aEvent.z+0.5+tZ*20,-tX,-tY,-tZ);
+				//  }
+					for (ItemStack tDrop : aEvent.drops) {
+						ItemStack tSmeltingOutput = RM.get_smelting(tDrop, F, null);
+						if (tSmeltingOutput != null) {
+							tDrop.stackSize *= tSmeltingOutput.stackSize;
+							ST.set(tDrop, tSmeltingOutput, F, T);
+						}
 					}
 				}
 				
 				for (ItemStack tDrop : aEvent.drops) {
 					OM.set(tDrop);
-					// TODO HASHMAP
+					// TODO Hashmap (one for Silk Touching and another for normal Harvesting)
 					if (MD.GT.mLoaded) {
-					if (IL.CHSL_Granite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.EtFu_Granite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.GaSu_Granite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.BOTA_Granite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.CHSL_Granite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
-					if (IL.EtFu_Granite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
-					if (IL.GaSu_Granite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
-					if (IL.BOTA_Granite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
-					if (IL.BOTA_Granite_Bricks      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 3), F, F); else
-					if (IL.BOTA_Granite_Chiseled    .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 6), F, F); else
-					if (IL.CHSL_Diorite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.EtFu_Diorite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.GaSu_Diorite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.BOTA_Diorite             .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.CHSL_Diorite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
-					if (IL.EtFu_Diorite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
-					if (IL.GaSu_Diorite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
-					if (IL.BOTA_Diorite_Smooth      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
-					if (IL.BOTA_Diorite_Bricks      .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 3), F, F); else
-					if (IL.BOTA_Diorite_Chiseled    .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 6), F, F); else
-					if (IL.CHSL_Andesite            .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.EtFu_Andesite            .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.GaSu_Andesite            .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.BOTA_Andesite            .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
-					if (IL.CHSL_Andesite_Smooth     .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
-					if (IL.EtFu_Andesite_Smooth     .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
-					if (IL.GaSu_Andesite_Smooth     .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
-					if (IL.BOTA_Andesite_Smooth     .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
-					if (IL.BOTA_Andesite_Bricks     .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 3), F, F); else
-					if (IL.BOTA_Andesite_Chiseled   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 6), F, F);
+					if (IL.CHSL_Granite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.EtFu_Granite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.GaSu_Granite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.BOTA_Granite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.CHSL_Granite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
+					if (IL.EtFu_Granite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
+					if (IL.GaSu_Granite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
+					if (IL.BOTA_Granite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 7), F, F); else
+					if (IL.BOTA_Granite_Bricks   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 3), F, F); else
+					if (IL.BOTA_Granite_Chiseled .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Granite , 1, 6), F, F); else
+					if (IL.CHSL_Diorite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.EtFu_Diorite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.GaSu_Diorite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.BOTA_Diorite          .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.CHSL_Diorite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
+					if (IL.EtFu_Diorite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
+					if (IL.GaSu_Diorite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
+					if (IL.BOTA_Diorite_Smooth   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 7), F, F); else
+					if (IL.BOTA_Diorite_Bricks   .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 3), F, F); else
+					if (IL.BOTA_Diorite_Chiseled .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Diorite , 1, 6), F, F); else
+					if (IL.CHSL_Andesite         .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.EtFu_Andesite         .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.GaSu_Andesite         .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.BOTA_Andesite         .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, aEvent.isSilkTouching ? 0 : 1), F, F); else
+					if (IL.CHSL_Andesite_Smooth  .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
+					if (IL.EtFu_Andesite_Smooth  .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
+					if (IL.GaSu_Andesite_Smooth  .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
+					if (IL.BOTA_Andesite_Smooth  .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 7), F, F); else
+					if (IL.BOTA_Andesite_Bricks  .equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 3), F, F); else
+					if (IL.BOTA_Andesite_Chiseled.equal(tDrop, F, T)) ST.set(tDrop, ST.make(BlocksGT.Andesite, 1, 6), F, F);
 					}
 				}
 				
@@ -994,11 +1060,11 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 	
 	@SubscribeEvent
 	public void onLoginEvent(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent aEvent) {
-		if (DISABLE_ALL_IC2_COMPRESSOR_RECIPES  ) ic2.api.recipe.Recipes.compressor.getRecipes().clear();
-		if (DISABLE_ALL_IC2_EXTRACTOR_RECIPES   ) ic2.api.recipe.Recipes.extractor .getRecipes().clear();
-		if (DISABLE_ALL_IC2_MACERATOR_RECIPES   ) ic2.api.recipe.Recipes.macerator .getRecipes().clear();
-		if (DISABLE_ALL_IC2_OREWASHER_RECIPES   ) ic2.api.recipe.Recipes.oreWashing.getRecipes().clear();
-		if (DISABLE_ALL_IC2_CENTRIFUGE_RECIPES  ) ic2.api.recipe.Recipes.centrifuge.getRecipes().clear();
+		if (DISABLE_ALL_IC2_COMPRESSOR_RECIPES) ic2.api.recipe.Recipes.compressor.getRecipes().clear();
+		if (DISABLE_ALL_IC2_EXTRACTOR_RECIPES ) ic2.api.recipe.Recipes.extractor .getRecipes().clear();
+		if (DISABLE_ALL_IC2_MACERATOR_RECIPES ) ic2.api.recipe.Recipes.macerator .getRecipes().clear();
+		if (DISABLE_ALL_IC2_OREWASHER_RECIPES ) ic2.api.recipe.Recipes.oreWashing.getRecipes().clear();
+		if (DISABLE_ALL_IC2_CENTRIFUGE_RECIPES) ic2.api.recipe.Recipes.centrifuge.getRecipes().clear();
 		
 		if (aEvent.player.worldObj.isRemote) return;
 		if (aEvent.player instanceof EntityPlayerMP) mNewPlayers.add((EntityPlayerMP)aEvent.player);
@@ -1047,7 +1113,7 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 	
 	@SubscribeEvent
 	public void onCheckSpawnEvent(LivingSpawnEvent.CheckSpawn aEvent) {
-		if (aEvent.getResult() == Result.DENY || aEvent.world.provider.dimensionId != 0 || aEvent.y <= 50) return;
+		if (aEvent.getResult() == Result.DENY || aEvent.world.provider.dimensionId != 0 || aEvent.y + 16 < WD.waterLevel(aEvent.world)) return;
 		if (GENERATE_BIOMES) {
 			if (UT.Code.inside(-96,  95, (int)aEvent.x) && UT.Code.inside(-96,  95, (int)aEvent.z)) {aEvent.setResult(Result.DENY); return;}
 		} else if (GENERATE_NEXUS) {
@@ -1159,6 +1225,11 @@ public abstract class GT_API_Proxy extends Abstract_Proxy implements IGuiHandler
 		if (tData != null && (tData.mPrefix == null || tData.mPrefix.contains(TD.Prefix.BURNABLE))) {
 			long tBurnTime = 0;
 			for (OreDictMaterialStack tMaterial : tData.getAllMaterialStacks()) tBurnTime += UT.Code.units(tMaterial.mMaterial.mFurnaceBurnTime, U, tMaterial.mAmount, F);
+			if (tData.mPrefix == OP.stick          && ANY.Wood.mToThis.contains(tData.mMaterial.mMaterial)) return UT.Code.bind15(Math.max( TICKS_PER_SMELT     /2, tBurnTime));
+			if (tData.mPrefix == OP.stickLong      && ANY.Wood.mToThis.contains(tData.mMaterial.mMaterial)) return UT.Code.bind15(Math.max( TICKS_PER_SMELT       , tBurnTime));
+			if (tData.mPrefix == OP.blockPlate     && ANY.Wood.mToThis.contains(tData.mMaterial.mMaterial)) return UT.Code.bind15(Math.max((TICKS_PER_SMELT* 27)/2, tBurnTime));
+			if (tData.mPrefix == OP.crateGtPlate   && ANY.Wood.mToThis.contains(tData.mMaterial.mMaterial)) return UT.Code.bind15(Math.max((TICKS_PER_SMELT* 51)/2, tBurnTime));
+			if (tData.mPrefix == OP.crateGt64Plate && ANY.Wood.mToThis.contains(tData.mMaterial.mMaterial)) return UT.Code.bind15(Math.max((TICKS_PER_SMELT*195)/2, tBurnTime));
 			rFuelValue = Math.max(rFuelValue, tBurnTime);
 		}
 		return UT.Code.bind15(rFuelValue);

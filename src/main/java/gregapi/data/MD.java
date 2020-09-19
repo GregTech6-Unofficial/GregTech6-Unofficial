@@ -49,6 +49,7 @@ public class MD {
 	
 	, TC                = new ModData(ModIDs.TC                 , "Thaumcraft")
 	, TCFM              = new ModData(ModIDs.TCFM               , "Forbidden Magic")
+	, TECHNOM           = new ModData(ModIDs.TECHNOM            , "Technomancy")
 	, BOTA              = new ModData(ModIDs.BOTA               , "Botania")
 	, ALF               = new ModData(ModIDs.ALF                , "Alfheim")
 	, PE                = new ModData(ModIDs.PE                 , "Project E")
@@ -89,6 +90,7 @@ public class MD {
 	, CHSL              = new ModData(ModIDs.CHSL               , "Chisel")
 	
 	, NePl              = new ModData(ModIDs.NePl               , "Netherite Plus")
+	, NeLi              = new ModData(ModIDs.NeLi               , "Netherlicious")
 	, EtFu              = new ModData(ModIDs.EtFu               , "Et Futurum")
 	, BB                = new ModData(ModIDs.BB                 , "Better Beginnings")
 	, DYNAMIC_TREES     = new ModData(ModIDs.DYNAMIC_TREES      , "Dynamic Trees")
@@ -124,6 +126,7 @@ public class MD {
 	, EIO               = new ModData(ModIDs.EIO                , "Ender IO")
 	, RT                = new ModData(ModIDs.RT                 , "Random Things")
 	, AA                = new ModData(ModIDs.AA                 , "Actually Additions")
+	, SD                = new ModData(ModIDs.SD                 , "Storage Drawers")
 	, JABBA             = new ModData(ModIDs.JABBA              , "JABBA")
 	
 	, MgC               = new ModData(ModIDs.MgC                , "Magneticraft")
@@ -233,12 +236,14 @@ public class MD {
 	, WR_CBE_A          = new ModData(ModIDs.WR_CBE_A           , "Wireless Redstone Chickenbones Edition")
 	, WR_CBE_L          = new ModData(ModIDs.WR_CBE_L           , "Wireless Redstone Chickenbones Edition")
 	
-	, COFH_API          = new ModData(ModIDs.COFH_API           , "CoFHAPI")
-	, COFH_API_ENERGY   = new ModData(ModIDs.COFH_API_ENERGY    , "CoFHAPI Energy")
+	, COFH_API          = new ModData(ModIDs.COFH_API           , "CoFH-API")
+	, COFH_API_ENERGY   = new ModData(ModIDs.COFH_API_ENERGY    , "CoFH-API Energy")
+	, COFH_CORE         = new ModData(ModIDs.COFH_CORE          , "CoFH-Core")
 	
 	, OB                = new ModData(ModIDs.OB                 , "Open Blocks")
 	, MNTL              = new ModData(ModIDs.MNTL               , "Mantle")
 	, TiC               = new ModData(ModIDs.TiC                , "Tinkers Construct")
+	, Natura            = new ModData(ModIDs.Natura             , "Natura")
 	, MF2               = new ModData(ModIDs.MF2                , "MineFantasy II")
 	, FZ                = new ModData(ModIDs.FZ                 , "Factorization")
 	, BWM               = new ModData(ModIDs.BWM                , "Balkon's Weapon Mod")

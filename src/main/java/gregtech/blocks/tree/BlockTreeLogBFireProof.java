@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -29,7 +29,6 @@ import gregapi.block.tree.BlockBaseLog;
 import gregapi.data.CS.BlocksGT;
 import gregapi.data.IL;
 import gregapi.data.LH;
-import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.old.Textures;
 import gregapi.util.OM;
@@ -64,10 +63,10 @@ public class BlockTreeLogBFireProof extends BlockBaseLog implements IBlockToolab
 		OM.reg(ST.make(this, 1, 9), "logWood");
 		OM.reg(ST.make(this, 1,13), "logWood");
 		
-		LH.add(getUnlocalizedName()+ ".2.name", "Log (Fireproof)");
-		LH.add(getUnlocalizedName()+ ".6.name", "Log (Fireproof)");
-		LH.add(getUnlocalizedName()+".10.name", "Log (Fireproof)");
-		LH.add(getUnlocalizedName()+".14.name", "Log (Fireproof)");
+		LH.add(getUnlocalizedName()+ ".2.name", "Coconut Log (Fireproof)");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Log (Fireproof)");
+		LH.add(getUnlocalizedName()+".10.name", "Coconut Log (Fireproof)");
+		LH.add(getUnlocalizedName()+".14.name", "Coconut Log (Fireproof)");
 		OM.reg(ST.make(this, 1, 2), "logWood");
 		OM.reg(ST.make(this, 1, 6), "logWood");
 		OM.reg(ST.make(this, 1,10), "logWood");
@@ -93,7 +92,7 @@ public class BlockTreeLogBFireProof extends BlockBaseLog implements IBlockToolab
 			if (aWorld.isRemote) return 0;
 			byte aMeta = (byte)aWorld.getBlockMetadata(aX, aY, aZ);
 			aWorld.setBlock(aX, aY, aZ, BlocksGT.BeamB, aMeta, 3);
-			UT.Inventories.addStackToPlayerInventoryOrDrop(aPlayer instanceof EntityPlayer ? (EntityPlayer)aPlayer : null, (aMeta & 3) == 1 ? ST.make(MD.HaC, "cinnamonItem", 1, 0, IL.Food_Cinnamon) : OM.dust(MT.Bark), aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide]);
+			UT.Inventories.addStackToPlayerInventoryOrDrop(aPlayer instanceof EntityPlayer ? (EntityPlayer)aPlayer : null, (aMeta & 3) == 1 ? IL.HaC_Cinnamon.get(1, IL.Food_Cinnamon.get(1, OM.dust(MT.Cinnamon))) : OM.dust(MT.Bark), aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide]);
 			return aTool.equals(TOOL_axe) ? 500 : 1000;
 		}
 		return ToolCompat.onToolClick(this, aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aWorld, aSide, aX, aY, aZ, aHitX, aHitY, aHitZ);

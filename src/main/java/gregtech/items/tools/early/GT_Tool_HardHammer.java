@@ -104,7 +104,7 @@ public class GT_Tool_HardHammer extends ToolStats {
 					aDrops.remove(i--);
 					if (tRecipe.mOutputs.length > 0) for (byte j = 0; j < tStackSize; j++) {
 						ItemStack[] tHammeringOutput = tRecipe.getOutputs();
-						for (int k = 0; k < tHammeringOutput.length; k++) if (tHammeringOutput[k] != null) tDrops.add(tHammeringOutput[k]);
+						for (int k = 0; k < tHammeringOutput.length; k++) tDrops.add(tHammeringOutput[k]);
 					}
 				}
 			}
@@ -120,18 +120,18 @@ public class GT_Tool_HardHammer extends ToolStats {
 	
 	@Override
 	public IIconContainer getIcon(boolean aIsToolHead, ItemStack aStack) {
-		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mTextureSetsItems.get(OP.toolHeadHammer.mIconIndexItem) : MultiItemTool.getSecondaryMaterial(aStack, MT.Wood).mTextureSetsItems.get(OP.stick.mIconIndexItem);
+		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mTextureSetsItems.get(OP.toolHeadHammer.mIconIndexItem) : MultiItemTool.getSecondaryMaterial(aStack, MT.WOODS.Spruce).mTextureSetsItems.get(OP.stick.mIconIndexItem);
 	}
 	
 	@Override
 	public short[] getRGBa(boolean aIsToolHead, ItemStack aStack) {
-		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mRGBaSolid : MultiItemTool.getSecondaryMaterial(aStack, MT.Wood).mRGBaSolid;
+		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mRGBaSolid : MultiItemTool.getSecondaryMaterial(aStack, MT.WOODS.Spruce).mRGBaSolid;
 	}
 	
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
-		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_hammer        , SFX.MC_ANVIL_LAND, 100, T));
-		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_prospector    , SFX.MC_ANVIL_USE ,  10, T));
+		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_hammer        , SFX.MC_ANVIL_LAND, 100, T, T));
+		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_prospector    , SFX.MC_ANVIL_USE ,  10, T, T));
 	}
 	
 	@Override

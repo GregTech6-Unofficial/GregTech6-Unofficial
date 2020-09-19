@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -22,8 +22,8 @@ package gregtech.blocks.wood;
 import gregapi.block.metatype.BlockBasePlanks;
 import gregapi.block.metatype.BlockMetaType;
 import gregapi.block.metatype.ItemBlockMetaType;
+import gregapi.data.ANY;
 import gregapi.data.LH;
-import gregapi.data.MT;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.render.IIconContainer;
@@ -32,14 +32,14 @@ import net.minecraft.item.ItemBlock;
 
 public class BlockTreePlanksFireProof extends BlockBasePlanks {
 	public BlockTreePlanksFireProof(String aName) {
-		super(ItemBlockMetaType.class, Material.wood, soundTypeWood, aName, "", MT.Wood, 1, 1, 0, 16, Textures.BlockIcons.PLANKS);
+		super(ItemBlockMetaType.class, Material.wood, soundTypeWood, aName, "", ANY.Wood, 1, 1, 0, 16, Textures.BlockIcons.PLANKS);
 		LH.add(getUnlocalizedName()+ ".0.name", "Rubberwood Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".1.name", "Maple Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".2.name", "Willow Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Planks (Fireproof)");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Planks (Fireproof)");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbowood Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".8.name", "Compressed Wood Planks (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".9.name", "Wood Planks (Fireproof)");
@@ -64,7 +64,7 @@ public class BlockTreePlanksFireProof extends BlockBasePlanks {
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Slab (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Slab (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Slab (Fireproof)");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Slab (Fireproof)");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Slab (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbowood Slab (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".8.name", "Compressed Wood Slab (Fireproof)");
 		LH.add(getUnlocalizedName()+ ".9.name", "Wood Slab (Fireproof)");

@@ -64,9 +64,10 @@ public class OP {
 	oreSpace                    = create("oreSpace"                     , "Space Ores"                      , "Space "                          , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.ALIENIS    , 1).setTextureSetName("ore"),
 	oreHolystone                = create("oreHolystone"                 , "Holystone Ores"                  , "Holystone "                      , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.LUX        , 1).setTextureSetName("ore"),
 	oreLivingrock               = create("oreLivingrock"                , "Livingrock Ores"                 , "Livingrock "                     , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.VICTUS     , 1).setTextureSetName("ore"),
-	oreUmberstone               = create("oreUmberstone"                , "Umberstone Ores"                 , "Umberstone "                     , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.BESTIA     , 1).setTextureSetName("ore"),
+	oreDeadrock                 = create("oreDeadrock"                  , "Deadrock Ores"                   , "Deadrock "                       , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.MORTUUS    , 1).setTextureSetName("ore"),
 	oreBetweenstone             = create("oreBetweenstone"              , "Betweenstone Ores"               , "Betweenstone "                   , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.MORTUUS    , 1).setTextureSetName("ore"),
 	orePitstone                 = create("orePitstone"                  , "Pitstone Ores"                   , "Pitstone "                       , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.MORTUUS    , 1).setTextureSetName("ore"),
+	oreUmberstone               = create("oreUmberstone"                , "Umberstone Ores"                 , "Umberstone "                     , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.BESTIA     , 1).setTextureSetName("ore"),
 	oreKomatiite                = create("oreKomatiite"                 , "Komatiite Ores"                  , "Komatiite "                      , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.TERRA      , 1).setTextureSetName("ore"),
 	oreBasalt                   = create("oreBasalt"                    , "Basalt Ores"                     , "Basalt "                         , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.TERRA      , 1).setTextureSetName("ore"),
 	oreMarble                   = create("oreMarble"                    , "Marble Ores"                     , "Marble "                         , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED, STANDARD_ORE).aspects(TC.TERRA      , 1).setTextureSetName("ore"),
@@ -102,24 +103,24 @@ public class OP {
 	oreSmall                    = create("oreSmall"                     , "Small Ores"                      , "Small "                          , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED              ).aspects(TC.TERRA      , 1), // Prefix of TFC.
 	orePoor                     = create("orePoor"                      , "Poor Ores"                       , "Poor "                           , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(UNIFICATABLE, ORE, UNIFICATABLE_RECIPES, MATERIAL_BASED, BLOCK_BASED              ).aspects(TC.TERRA      , 1), // Prefix of Railcraft.
 	
-	crushed                     = create("crushed"                      , "Crushed Ores"                    , "Crushed "                        , " Ore"                            ).setMaterialStats( 9*U8)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.PERFODIO, 1),
-	crushedTiny                 = create("crushedTiny"                  , "Tiny Crushed Ores"               , "Tiny Crushed "                   , " Ore"                            ).setMaterialStats( 9*U72)    .setCondition(crushed)                                                                                      .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.PERFODIO, 1),
-	crushedPurified             = create("crushedPurified"              , "Purified Ores"                   , "Purified "                       , " Ore"                            ).setMaterialStats(10*U8)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN).aspects(TC.PERFODIO, 1),
-	crushedPurifiedTiny         = create("crushedPurifiedTiny"          , "Tiny Purified Ores"              , "Tiny Purified "                  , " Ore"                            ).setMaterialStats(10*U72)    .setCondition(crushedPurified)                                                                              .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN).aspects(TC.PERFODIO, 1),
+	crushed                     = create("crushed"                      , "Crushed Ores"                    , "Crushed "                        , " Ore"                            ).setMaterialStats( 9*U8)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.PERFODIO, 1),
+	crushedTiny                 = create("crushedTiny"                  , "Tiny Crushed Ores"               , "Tiny Crushed "                   , " Ore"                            ).setMaterialStats( 9*U72)    .setCondition(crushed)                                                                                      .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.PERFODIO, 1),
+	crushedPurified             = create("crushedPurified"              , "Purified Ores"                   , "Purified "                       , " Ore"                            ).setMaterialStats(10*U8)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN  ).aspects(TC.PERFODIO, 1),
+	crushedPurifiedTiny         = create("crushedPurifiedTiny"          , "Tiny Purified Ores"              , "Tiny Purified "                  , " Ore"                            ).setMaterialStats(10*U72)    .setCondition(crushedPurified)                                                                              .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN  ).aspects(TC.PERFODIO, 1),
 	crushedCentrifuged          = create("crushedCentrifuged"           , "Refined Ores"                    , "Refined "                        , " Ore"                            ).setMaterialStats(11*U8)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_REFINED).aspects(TC.PERFODIO, 1),
 	crushedCentrifugedTiny      = create("crushedCentrifugedTiny"       , "Tiny Refined Ores"               , "Tiny Refined "                   , " Ore"                            ).setMaterialStats(11*U72)    .setCondition(crushedCentrifuged)                                                                           .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_REFINED).aspects(TC.PERFODIO, 1),
-	rockGt                      = create("rockGt"                       , "Rocks"                           , ""                                , " bearing Rock"                   ).setMaterialStats(U4   )     .setCondition(new Or(ORES, STONE))                                                                          .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN).aspects(TC.TERRA, 1),
-	rawOreChunk                 = create("rawOreChunk"                  , "Raw Ore Chunks"                  , "Raw Chunk of "                   , " Ore"                            ).setMaterialStats(27*U72)    .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.TERRA, 1), // Prefix of Harder Ores
-	clump                       = create("clump"                        , "Clumps"                          , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN).aspects(TC.FABRICO, 1),
-	cluster                     = create("cluster"                      , "Native Clusters"                 , "Native "                         , " Cluster"                        ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.ORDO, 1, TC.TERRA, 1), // Introduced by Thaumcraft
-	reduced                     = create("reduced"                      , "Reduced Gravels"                 , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN).aspects(TC.FABRICO, 1),
+	rockGt                      = create("rockGt"                       , "Rocks"                           , ""                                , " bearing Rock"                   ).setMaterialStats(U4   )     .setCondition(new Or(ORES, STONE))                                                                          .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN  ).aspects(TC.TERRA, 1),
+	rawOreChunk                 = create("rawOreChunk"                  , "Raw Ore Chunks"                  , "Raw Chunk of "                   , " Ore"                            ).setMaterialStats(27*U72)    .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.TERRA, 1), // Prefix of Harder Ores
+	clump                       = create("clump"                        , "Clumps"                          , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN  ).aspects(TC.FABRICO, 1),
+	cluster                     = create("cluster"                      , "Native Clusters"                 , "Native "                         , " Cluster"                        ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.ORDO, 1, TC.TERRA, 1), // Introduced by Thaumcraft
 //  RoC?                        = create("RoC?"                         , "Flakes"                          , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_REFINED).aspects(TC.FABRICO, 1), // Introduced by RotaryCraft
-	crystalline                 = create("crystalline"                  , "Crystallised Metals"             , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_REFINED).aspects(TC.FABRICO, 1),
-	pebbles                     = create("pebbles"                      , "Pebbles"                         , ""                                , ""                                ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.FABRICO, 1),
-	rubble                      = create("rubble"                       , "Rubble"                          , ""                                , ""                                ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.FABRICO, 1),
-	chunk                       = create("chunk"                        , "Chunks"                          , ""                                , ""                                ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.FABRICO, 1),
-	cleanGravel                 = create("cleanGravel"                  , "Clean Gravels"                   , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN).aspects(TC.FABRICO, 1),
-	dirtyGravel                 = create("dirtyGravel"                  , "Dirty Gravels"                   , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY).aspects(TC.FABRICO, 1),
+	pebbles                     = create("pebbles"                      , "Pebbles"                         , ""                                , ""                                ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.FABRICO, 1),
+	rubble                      = create("rubble"                       , "Rubble"                          , ""                                , ""                                ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.FABRICO, 1),
+	chunk                       = create("chunk"                        , "Chunks"                          , ""                                , ""                                ).setMaterialStats(U * 2)     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.FABRICO, 1),
+	crystalline                 = create("crystalline"                  , "Crystallised Metals"             , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_REFINED).aspects(TC.FABRICO, 1), // Introduced by Factorization
+	reduced                     = create("reduced"                      , "Reduced Gravels"                 , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN  ).aspects(TC.FABRICO, 1), // Introduced by Factorization
+	cleanGravel                 = create("cleanGravel"                  , "Clean Gravels"                   , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_CLEAN  ).aspects(TC.FABRICO, 1), // Introduced by Factorization
+	dirtyGravel                 = create("dirtyGravel"                  , "Dirty Gravels"                   , ""                                , ""                                ).setMaterialStats(U    )     .setCondition(ORES)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, ORE_PROCESSING_BASED, ORE_PROCESSING_DIRTY  ).aspects(TC.FABRICO, 1), // Introduced by Factorization
 	
 	dust                        = create("dust"                         , "Dusts"                           , ""                                , " Dust"                           ).setMaterialStats(U    )     .setCondition(new Or(DUSTS, DIRTY_DUSTS))                                                                   .add(UNIFICATABLE, BURNABLE, RECYCLABLE, SIMPLIFIABLE, DUST_BASED, SCANNABLE, EXTRUDER_FODDER, TOOLTIP_MATERIAL).setMinStacksize(64).aspects(TC.PERDITIO, 1).addIdenticalNames("pulp", "itemDust"), // Pure Dust worth of one Ingot or Gem. Introduced by Alblaka.
 	dustSmall                   = create("dustSmall"                    , "Small Dusts"                     , "Small Pile of "                  , " Dust"                           ).setMaterialStats(U4   )     .setCondition(dust)                                                                                         .add(UNIFICATABLE, BURNABLE, RECYCLABLE, SIMPLIFIABLE, DUST_BASED, SCANNABLE, EXTRUDER_FODDER, TOOLTIP_MATERIAL).setMinStacksize( 4), // 1/4th of a Dust.
@@ -516,6 +517,8 @@ public class OP {
 	bar                         = unused("bar"                          ).setCategoryName("Bars");
 	
 	static {
+		ANY.init();
+		
 		crushed     .addListener(new OreDictListenerItem_Washing(crushedPurified, 2, nugget, gemChipped, crushedPurifiedTiny, crushedPurifiedTiny, dustTiny, dustTiny));
 		dustImpure  .addListener(new OreDictListenerItem_Washing(dust, 3, dustTiny));
 		dustPure    .addListener(new OreDictListenerItem_Washing(dust, 4, dustTiny));
@@ -544,7 +547,7 @@ public class OP {
 			if (tPrefix1.mNameInternal.startsWith("cableGt" ) && tPrefix2.mNameInternal.startsWith("cableGt"    )) tPrefix1.addFamiliarPrefix(tPrefix2);
 		}
 		
-		// Items which are already there in vanilla MC and IC2, or make Issues like with Mekanism.
+		// Items which are already there in vanilla MC, or make Issues like with Mekanism.
 		gem                 .disableItemGeneration(MT.Coal, MT.Charcoal, MT.NetherStar, MT.Diamond, MT.Emerald, MT.NetherQuartz, MT.EnderPearl, MT.EnderEye, MT.Flint, MT.Lapis);
 		dust                .disableItemGeneration(MT.Bone, MT.Redstone, MT.Glowstone, MT.Gunpowder, MT.Sugar, MT.Blaze, MT.RefinedObsidian, MT.RefinedGlowstone);
 		dustRefined         .disableItemGeneration(MT.Obsidian, MT.Glowstone);
@@ -555,11 +558,14 @@ public class OP {
 		bucket              .disableItemGeneration(MT.Empty, MT.H2O, MT.Lava, MT.Milk);
 		bottle              .disableItemGeneration(MT.Empty, MT.H2O);
 		
-		gemChipped          .forceItemGeneration(MT.Ice, MT.NaCl, MT.KCl, MT.KIO3, MT.Sugar);
-		gemFlawed           .forceItemGeneration(MT.Ice, MT.NaCl, MT.KCl, MT.KIO3);
-		gem                 .forceItemGeneration(MT.Ice, MT.NaCl, MT.KCl, MT.KIO3);
-		bouleGt             .forceItemGeneration(MT.Si, MT.Ge, MT.RedstoneAlloy, MT.NikolineAlloy, MT.TeslatineAlloy, MT.Sapphire, MT.GreenSapphire, MT.YellowSapphire, MT.OrangeSapphire, MT.BlueSapphire, MT.PurpleSapphire, MT.Ruby, MT.HexoriumRed, MT.HexoriumGreen, MT.HexoriumBlue, MT.HexoriumBlack, MT.HexoriumWhite);
+		gemChipped          .forceItemGeneration(MT.Ice, MT.NaCl, MT.KCl, MT.KIO3, MT.Firestone, MT.Sugar);
+		gemFlawed           .forceItemGeneration(MT.Ice, MT.NaCl, MT.KCl, MT.KIO3, MT.Firestone);
+		gem                 .forceItemGeneration(MT.Ice, MT.NaCl, MT.KCl, MT.KIO3, MT.Firestone);
+		bouleGt             .forceItemGeneration(MT.Si, MT.Ge, MT.RedstoneAlloy, MT.NikolineAlloy, MT.TeslatineAlloy);
 		plateTiny           .forceItemGeneration(MT.Paper);
+		
+		for (OreDictMaterial tMat : ANY.Sapphire.mToThis) bouleGt.forceItemGeneration(tMat);
+		for (OreDictMaterial tMat : ANY.Hexorium.mToThis) bouleGt.forceItemGeneration(tMat);
 		
 		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_MAP.values()) {
 			switch (tMaterial.mPriorityPrefixIndex) {
@@ -574,70 +580,81 @@ public class OP {
 		
 		//-----
 		
-		pipeRestrictiveTiny.mByProducts     .add(OM.stack(ANY.Steel             , ring.mAmount));
-		pipeRestrictiveSmall.mByProducts    .add(OM.stack(ANY.Steel             , ring.mAmount * 2));
-		pipeRestrictiveMedium.mByProducts   .add(OM.stack(ANY.Steel             , ring.mAmount * 3));
-		pipeRestrictiveLarge.mByProducts    .add(OM.stack(ANY.Steel             , ring.mAmount * 4));
-		pipeRestrictiveHuge.mByProducts     .add(OM.stack(ANY.Steel             , ring.mAmount * 5));
-		cableGt12.mByProducts               .add(OM.stack(MT.Rubber             , plate.mAmount * 4));
-		cableGt08.mByProducts               .add(OM.stack(MT.Rubber             , plate.mAmount * 3));
-		cableGt04.mByProducts               .add(OM.stack(MT.Rubber             , plate.mAmount * 2));
-		cableGt02.mByProducts               .add(OM.stack(MT.Rubber             , plate.mAmount));
-		cableGt01.mByProducts               .add(OM.stack(MT.Rubber             , plate.mAmount));
-//      bucket.mByProducts                  .add(OM.stack(MT.Fe                 , ingot.mAmount * 3));
-		cell.mByProducts                    .add(OM.stack(MT.Sn                 , plateCurved.mAmount));
-		bottle.mByProducts                  .add(OM.stack(MT.Glass              , U));
-		chemtube.mByProducts                .add(OM.stack(MT.Glass              , U3));
-		oreBedrock.mByProducts              .add(OM.stack(MT.Bedrock            , dust.mAmount));
-		oreAndesite.mByProducts             .add(OM.stack(MT.Andesite           , dust.mAmount));
-		oreDiorite.mByProducts              .add(OM.stack(MT.Diorite            , dust.mAmount));
-		oreBlackstone.mByProducts           .add(OM.stack(MT.Blackstone         , dust.mAmount));
-		oreRedgranite.mByProducts           .add(OM.stack(MT.GraniteRed         , dust.mAmount));
-		oreBlackgranite.mByProducts         .add(OM.stack(MT.GraniteBlack       , dust.mAmount));
-		oreVanillagranite.mByProducts       .add(OM.stack(MT.Granite            , dust.mAmount));
-		oreVanillastone.mByProducts         .add(OM.stack(MT.Stone              , dust.mAmount));
-		oreMoon.mByProducts                 .add(OM.stack(MT.MoonRock           , dust.mAmount));
-		oreMars.mByProducts                 .add(OM.stack(MT.MarsRock           , dust.mAmount));
-		oreHolystone.mByProducts            .add(OM.stack(MT.Holystone          , dust.mAmount));
-		oreLivingrock.mByProducts           .add(OM.stack(MT.Livingrock         , dust.mAmount));
-		oreUmberstone.mByProducts           .add(OM.stack(MT.Umber              , dust.mAmount));
-		oreBetweenstone.mByProducts         .add(OM.stack(MT.Betweenstone       , dust.mAmount));
-		orePitstone.mByProducts             .add(OM.stack(MT.Pitstone           , dust.mAmount));
-		oreKomatiite.mByProducts            .add(OM.stack(MT.Komatiite          , dust.mAmount));
-		oreBasalt.mByProducts               .add(OM.stack(MT.Basalt             , dust.mAmount));
-		oreMarble.mByProducts               .add(OM.stack(MT.Marble             , dust.mAmount));
-		oreLimestone.mByProducts            .add(OM.stack(MT.Limestone          , dust.mAmount));
-		oreSiltstone.mByProducts            .add(OM.stack(MT.Siltstone          , dust.mAmount));
-		oreShale.mByProducts                .add(OM.stack(MT.Shale              , dust.mAmount));
-		oreSlate.mByProducts                .add(OM.stack(MT.Slate              , dust.mAmount));
-		oreGreenschist.mByProducts          .add(OM.stack(MT.Greenschist        , dust.mAmount));
-		oreBlueschist.mByProducts           .add(OM.stack(MT.Blueschist         , dust.mAmount));
-		oreLightprismarine.mByProducts      .add(OM.stack(MT.PrismarineLight    , dust.mAmount));
-		oreDarkprismarine.mByProducts       .add(OM.stack(MT.PrismarineDark     , dust.mAmount));
-		oreKimberlite.mByProducts           .add(OM.stack(MT.Kimberlite         , dust.mAmount));
-		oreQuartzite.mByProducts            .add(OM.stack(MT.Quartzite          , dust.mAmount));
-		oreNetherrack.mByProducts           .add(OM.stack(MT.Netherrack         , dust.mAmount));
-		oreNether.mByProducts               .add(OM.stack(MT.Netherrack         , dust.mAmount));
-		oreHee.mByProducts                  .add(OM.stack(MT.Endstone           , dust.mAmount));
-		oreEndstone.mByProducts             .add(OM.stack(MT.Endstone           , dust.mAmount));
-		oreEnd.mByProducts                  .add(OM.stack(MT.Endstone           , dust.mAmount));
-		orePoor.mByProducts                 .add(OM.stack(MT.Stone              , dust.mAmount * 2));
-		oreSmall.mByProducts                .add(OM.stack(MT.Stone              , dust.mAmount * 2));
-		oreNormal.mByProducts               .add(OM.stack(MT.Stone              , dust.mAmount * 2));
-		oreRich.mByProducts                 .add(OM.stack(MT.Stone              , dust.mAmount * 2));
-		crushed.mByProducts                 .add(OM.stack(MT.Stone              , dust.mAmount));
-		toolHeadPickaxeGem.mByProducts      .add(OM.stack(ANY.Steel             , toolHeadPickaxe.mAmount));
-		toolHeadDrill.mByProducts           .add(OM.stack(ANY.Steel             , plate.mAmount * 4));
-		toolHeadChainsaw.mByProducts        .add(OM.stack(ANY.Steel             , plate.mAmount * 4 + ring.mAmount * 2));
-		toolHeadWrench.mByProducts          .add(OM.stack(ANY.Steel             , ring.mAmount + screw.mAmount * 2));
-		plantGtTwig.mByProducts             .add(OM.stack(ANY.Wood              , stick.mAmount));
-		arrowGtWood.mByProducts             .add(OM.stack(ANY.Wood              , stick.mAmount));
-		arrowGtPlastic.mByProducts          .add(OM.stack(MT.Plastic            , stick.mAmount));
-		bulletGtSmall.mByProducts           .add(OM.stack(MT.Brass              , U9));
-		bulletGtMedium.mByProducts          .add(OM.stack(MT.Brass              , 2*U9));
-		bulletGtLarge.mByProducts           .add(OM.stack(MT.Brass              , U3));
-		bulletGtSmall.mByProducts           .add(OM.stack(MT.Gunpowder          , U9));
-		bulletGtMedium.mByProducts          .add(OM.stack(MT.Gunpowder          , 2*U9));
-		bulletGtLarge.mByProducts           .add(OM.stack(MT.Gunpowder          , U3));
+		pipeRestrictiveTiny     .mByProducts.add(OM.stack(ANY.Steel             , ring.mAmount));
+		pipeRestrictiveSmall    .mByProducts.add(OM.stack(ANY.Steel             , ring.mAmount * 2));
+		pipeRestrictiveMedium   .mByProducts.add(OM.stack(ANY.Steel             , ring.mAmount * 3));
+		pipeRestrictiveLarge    .mByProducts.add(OM.stack(ANY.Steel             , ring.mAmount * 4));
+		pipeRestrictiveHuge     .mByProducts.add(OM.stack(ANY.Steel             , ring.mAmount * 5));
+		cableGt12               .mByProducts.add(OM.stack(MT.Rubber             , plate.mAmount * 4));
+		cableGt08               .mByProducts.add(OM.stack(MT.Rubber             , plate.mAmount * 3));
+		cableGt04               .mByProducts.add(OM.stack(MT.Rubber             , plate.mAmount * 2));
+		cableGt02               .mByProducts.add(OM.stack(MT.Rubber             , plate.mAmount));
+		cableGt01               .mByProducts.add(OM.stack(MT.Rubber             , plate.mAmount));
+//      bucket                  .mByProducts.add(OM.stack(MT.Fe                 , ingot.mAmount * 3));
+		cell                    .mByProducts.add(OM.stack(MT.Sn                 , plateCurved.mAmount));
+		bottle                  .mByProducts.add(OM.stack(MT.Glass              , U));
+		chemtube                .mByProducts.add(OM.stack(MT.Glass              , U3));
+		oreBedrock              .mByProducts.add(OM.stack(MT.Bedrock            , dust.mAmount));
+		oreAndesite             .mByProducts.add(OM.stack(MT.Andesite           , dust.mAmount));
+		oreDiorite              .mByProducts.add(OM.stack(MT.Diorite            , dust.mAmount));
+		oreBlackstone           .mByProducts.add(OM.stack(MT.Blackstone         , dust.mAmount));
+		oreRedgranite           .mByProducts.add(OM.stack(MT.GraniteRed         , dust.mAmount));
+		oreBlackgranite         .mByProducts.add(OM.stack(MT.GraniteBlack       , dust.mAmount));
+		oreVanillagranite       .mByProducts.add(OM.stack(MT.Granite            , dust.mAmount));
+		oreVanillastone         .mByProducts.add(OM.stack(MT.Stone              , dust.mAmount));
+		oreMoon                 .mByProducts.add(OM.stack(MT.MoonRock           , dust.mAmount));
+		oreMars                 .mByProducts.add(OM.stack(MT.MarsRock           , dust.mAmount));
+		oreHolystone            .mByProducts.add(OM.stack(MT.Holystone          , dust.mAmount));
+		oreLivingrock           .mByProducts.add(OM.stack(MT.Livingrock         , dust.mAmount));
+		oreDeadrock             .mByProducts.add(OM.stack(MT.Deadrock           , dust.mAmount));
+		oreBetweenstone         .mByProducts.add(OM.stack(MT.Betweenstone       , dust.mAmount));
+		orePitstone             .mByProducts.add(OM.stack(MT.Pitstone           , dust.mAmount));
+		oreUmberstone           .mByProducts.add(OM.stack(MT.Umber              , dust.mAmount));
+		oreKomatiite            .mByProducts.add(OM.stack(MT.Komatiite          , dust.mAmount));
+		oreBasalt               .mByProducts.add(OM.stack(MT.Basalt             , dust.mAmount));
+		oreMarble               .mByProducts.add(OM.stack(MT.Marble             , dust.mAmount));
+		oreLimestone            .mByProducts.add(OM.stack(MT.Limestone          , dust.mAmount));
+		oreSiltstone            .mByProducts.add(OM.stack(MT.Siltstone          , dust.mAmount));
+		oreShale                .mByProducts.add(OM.stack(MT.Shale              , dust.mAmount));
+		oreSlate                .mByProducts.add(OM.stack(MT.Slate              , dust.mAmount));
+		oreGreenschist          .mByProducts.add(OM.stack(MT.Greenschist        , dust.mAmount));
+		oreBlueschist           .mByProducts.add(OM.stack(MT.Blueschist         , dust.mAmount));
+		oreLightprismarine      .mByProducts.add(OM.stack(MT.PrismarineLight    , dust.mAmount));
+		oreDarkprismarine       .mByProducts.add(OM.stack(MT.PrismarineDark     , dust.mAmount));
+		oreKimberlite           .mByProducts.add(OM.stack(MT.Kimberlite         , dust.mAmount));
+		oreQuartzite            .mByProducts.add(OM.stack(MT.Quartzite          , dust.mAmount));
+		oreNetherrack           .mByProducts.add(OM.stack(MT.Netherrack         , dust.mAmount));
+		oreNether               .mByProducts.add(OM.stack(MT.Netherrack         , dust.mAmount));
+		oreHee                  .mByProducts.add(OM.stack(MT.Endstone           , dust.mAmount));
+		oreEndstone             .mByProducts.add(OM.stack(MT.Endstone           , dust.mAmount));
+		oreEnd                  .mByProducts.add(OM.stack(MT.Endstone           , dust.mAmount));
+		orePoor                 .mByProducts.add(OM.stack(MT.Stone              , dust.mAmount * 2));
+		oreSmall                .mByProducts.add(OM.stack(MT.Stone              , dust.mAmount * 2));
+		oreNormal               .mByProducts.add(OM.stack(MT.Stone              , dust.mAmount * 2));
+		oreRich                 .mByProducts.add(OM.stack(MT.Stone              , dust.mAmount * 2));
+		crushed                 .mByProducts.add(OM.stack(MT.Stone              , dust.mAmount));
+		toolHeadPickaxeGem      .mByProducts.add(OM.stack(ANY.Steel             , toolHeadPickaxe.mAmount));
+		toolHeadDrill           .mByProducts.add(OM.stack(ANY.Steel             , plate.mAmount * 4));
+		toolHeadChainsaw        .mByProducts.add(OM.stack(ANY.Steel             , plate.mAmount * 4 + ring.mAmount * 2));
+		toolHeadWrench          .mByProducts.add(OM.stack(ANY.Steel             , ring.mAmount + screw.mAmount * 2));
+		crateGtGem              .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGtDust             .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGtIngot            .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGtPlate            .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGtPlateGem         .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGt64Gem            .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGt64Dust           .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGt64Ingot          .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGt64Plate          .mByProducts.add(OM.stack(ANY.Wood              , U));
+		crateGt64PlateGem       .mByProducts.add(OM.stack(ANY.Wood              , U));
+		plantGtTwig             .mByProducts.add(OM.stack(ANY.Wood              , stick.mAmount));
+		arrowGtWood             .mByProducts.add(OM.stack(ANY.Wood              , stick.mAmount));
+		arrowGtPlastic          .mByProducts.add(OM.stack(MT.Plastic            , stick.mAmount));
+		bulletGtSmall           .mByProducts.add(OM.stack(MT.Brass              , U9));
+		bulletGtMedium          .mByProducts.add(OM.stack(MT.Brass              , 2*U9));
+		bulletGtLarge           .mByProducts.add(OM.stack(MT.Brass              , U3));
+		bulletGtSmall           .mByProducts.add(OM.stack(MT.Gunpowder          , U9));
+		bulletGtMedium          .mByProducts.add(OM.stack(MT.Gunpowder          , 2*U9));
+		bulletGtLarge           .mByProducts.add(OM.stack(MT.Gunpowder          , U3));
 	}
 }

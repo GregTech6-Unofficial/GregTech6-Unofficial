@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -22,8 +22,8 @@ package gregtech.blocks.wood;
 import gregapi.block.metatype.BlockBasePlanksFlammable;
 import gregapi.block.metatype.BlockMetaType;
 import gregapi.block.metatype.ItemBlockMetaType;
+import gregapi.data.ANY;
 import gregapi.data.LH;
-import gregapi.data.MT;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.render.IIconContainer;
@@ -34,14 +34,14 @@ import net.minecraft.world.World;
 
 public class BlockTreePlanks extends BlockBasePlanksFlammable {
 	public BlockTreePlanks(String aName) {
-		super(ItemBlockMetaType.class, Material.wood, soundTypeWood, aName, "", MT.Wood, 1, 1, 0, 16, Textures.BlockIcons.PLANKS);
+		super(ItemBlockMetaType.class, Material.wood, soundTypeWood, aName, "", ANY.Wood, 1, 1, 0, 16, Textures.BlockIcons.PLANKS);
 		LH.add(getUnlocalizedName()+ ".0.name", "Rubberwood Planks");
 		LH.add(getUnlocalizedName()+ ".1.name", "Maple Planks");
 		LH.add(getUnlocalizedName()+ ".2.name", "Willow Planks");
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Planks");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Planks");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Planks");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Planks");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Planks");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbowood Planks");
 		LH.add(getUnlocalizedName()+ ".8.name", "Compressed Wood Planks");
 		LH.add(getUnlocalizedName()+ ".9.name", "Wood Planks");
@@ -66,7 +66,7 @@ public class BlockTreePlanks extends BlockBasePlanksFlammable {
 		LH.add(getUnlocalizedName()+ ".3.name", "Blue Mahoe Slab");
 		LH.add(getUnlocalizedName()+ ".4.name", "Hazel Slab");
 		LH.add(getUnlocalizedName()+ ".5.name", "Cinnamon Slab");
-		LH.add(getUnlocalizedName()+ ".6.name", "Palm Slab");
+		LH.add(getUnlocalizedName()+ ".6.name", "Coconut Slab");
 		LH.add(getUnlocalizedName()+ ".7.name", "Rainbowood Slab");
 		LH.add(getUnlocalizedName()+ ".8.name", "Compressed Wood Slab");
 		LH.add(getUnlocalizedName()+ ".9.name", "Wood Slab");
