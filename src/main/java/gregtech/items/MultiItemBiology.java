@@ -46,10 +46,10 @@ public class MultiItemBiology extends MultiItemRandom{
 
     @Override
     public void addItems() {
-        IL.Culture_Dish_Empty.set(addItem(1000, "Culture Dish (Empty)", "A fundamental tool of laboratory biology"), new OreDictItemData(MT.PTFE, U));
-        IL.Culture_Dish_MSC.set(addItem(1001,"Culture Dish (MSC)","Stem cell culture medium inside"), new OreDictItemData(MT.PTFE, U));
-        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in Incubator"), new OreDictItemData(MT.PTFE, U));
-        IL.Culture_Dish_Stem_Cell_Somatic.set(addItem(1003,"Culture Dish (stem cells)","Stem cells inside"), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Empty.set(addItem(1000, "Culture Dish (Empty)", "A fundamental tool of laboratory biology"), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Culture_Dish_MSC.set(addItem(1001,"Culture Dish (MSC)","Stem cell culture medium inside"), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Culture_Dish_Stem_Cell_Embryonic.set(addItem(1002,"Culture Dish (Inoculated stem cells)","can be cultured in Incubator"), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Culture_Dish_Stem_Cell_Somatic.set(addItem(1003,"Culture Dish (stem cells)","Stem cells inside"), new OreDictItemData(MT.GT6U.PTFE, U));
         IL.dust_Inorganic_Salt_Mixture.set(addItem(1004,"Inorganic Salt Mixture Dust","Inorganic salts for cell culture"));
         IL.dust_Tiny_Inorganic_Salt_Mixture.set(addItem(1005,"Tiny InorganicSalt Mixture Dust","Inorganic salts for cell culture"));
         IL.dust_Glucose.set(addItem(1006,"Glucose Dust","Can't be eaten now"));
@@ -59,18 +59,18 @@ public class MultiItemBiology extends MultiItemRandom{
         IL.Precision_Manipulator.set(addItem(1010,"Percision Manipulator","Very accurate"));
         IL.Lauryl_Sulfate.set(addItem(1011,"Lauryl Sulfate",""));
         IL.SDS.set(addItem(1012,"SDS",""));
-        IL.Culture_Dish_Biomass_Flora.set(addItem(1013,"Culture Dish (Biomass Flora)",""), new OreDictItemData(MT.PTFE, U));
-        IL.Mixing_Rod.set(addItem(1014,"Mixing Rod","Used to differentiate bacteria"), new OreDictItemData(MT.PTFE, U10*5));
-        IL.Culture_Dish_Yeast.set(addItem(1015,"Culture Dish (Yeast)",""), new OreDictItemData(MT.PTFE, U));
-        IL.Culture_Dish_Methanogens.set(addItem(1016,"Culture Dish (Methanogens)",""), new OreDictItemData(MT.PTFE, U));
-        IL.Culture_Dish_Bacillus.set(addItem(1017,"Culture Dish (Bacillus)",""), new OreDictItemData(MT.PTFE, U));
-        IL.Culture_Dish_Clostridia.set(addItem(1018,"Culture Dish (Clostridia)",""), new OreDictItemData(MT.PTFE, U));
+        IL.Culture_Dish_Biomass_Flora.set(addItem(1013,"Culture Dish (Biomass Flora)",""), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Mixing_Rod.set(addItem(1014,"Mixing Rod","Used to differentiate bacteria"), new OreDictItemData(MT.GT6U.PTFE, U10*5));
+        IL.Culture_Dish_Yeast.set(addItem(1015,"Culture Dish (Yeast)",""), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Culture_Dish_Methanogens.set(addItem(1016,"Culture Dish (Methanogens)",""), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Culture_Dish_Bacillus.set(addItem(1017,"Culture Dish (Bacillus)",""), new OreDictItemData(MT.GT6U.PTFE, U));
+        IL.Culture_Dish_Clostridia.set(addItem(1018,"Culture Dish (Clostridia)",""), new OreDictItemData(MT.GT6U.PTFE, U));
         IL.Gene_Samples.set(addItem(1019, "Gene Samples", ""));
         IL.Protein_Sample.set(addItem(1020, "Protein Sample", ""));
 
 
         // Bacteria
-        RM.Sharpening.addRecipe1(T, 16, 128, OP.stick.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Mixing_Rod.get(1));
+        RM.Sharpening.addRecipe1(T, 16, 128, OP.stick.mat(MT.GT6U.PTFE, 1), ZL_FS, ZL_FS, IL.Mixing_Rod.get(1));
 
         RM.Mixer.addRecipe1(T, 16, 128, NI, FL.array(FL.BiomassIC2.make(100), MT.DistWater.fluid(U, T)), FL.array(FL.DilutedBiomass.make(1100)), ZL_IS);
         RM.Mixer.addRecipe1(T, 16, 128, NI, FL.array(FL.Biomass.make(100), MT.DistWater.fluid(U, T)), FL.array(FL.DilutedBiomass.make(1100)), ZL_IS);
@@ -125,7 +125,7 @@ public class MultiItemBiology extends MultiItemRandom{
 
         // Bacteria ends
 
-        RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
+        RM.Sharpening.addRecipe1(T, 16, 128, OP.plate.mat(MT.GT6U.PTFE, 1), ZL_FS, ZL_FS, IL.Culture_Dish_Empty.get(1));
         //空培养皿的合成
 
         RM.Centrifuge.addRecipe1(T,1024,200, ST.make(Items.bone,1,0), ZL_FS, FL.BoneMarrow.make(1),OP.dust.mat(MT.Bone,4));
@@ -167,7 +167,7 @@ public class MultiItemBiology extends MultiItemRandom{
         RM.BioLab.addRecipe2(T, 64, 256, IL.Culture_Dish_Empty.get(4), IL.Stem_Cell.get(1), FL.MSCBasalMedium.make(1000), NF, IL.Culture_Dish_Stem_Cell_Embryonic.get(1)).setSpecialNumber(2000000);
         //还是接种干细胞
 
-        RM.BioLab.addRecipe2(T, 16, 64, IL.Culture_Dish_Stem_Cell_Somatic.get(1), ST.tag(0), NF, NF, ST.array(IL.Stem_Cell.get(9), OP.scrapGt.mat(MT.PTFE, 3)));
+        RM.BioLab.addRecipe2(T, 16, 64, IL.Culture_Dish_Stem_Cell_Somatic.get(1), ST.tag(0), NF, NF, ST.array(IL.Stem_Cell.get(9), OP.scrapGt.mat(MT.GT6U.PTFE, 3)));
         //从培养完成的培养皿中提取干细胞
 
         RM.Incubator.addRecipe2(T, 16, 60000 + 4096, IL.Culture_Dish_Stem_Cell_Embryonic.get(1), ST.tag(1), FL.MSCSupplement.make(1000), NF, IL.Culture_Dish_Stem_Cell_Somatic.get(1));

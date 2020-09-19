@@ -62,10 +62,13 @@ import net.minecraftforge.fluids.IFluidTank;
 @SuppressWarnings("unchecked")
 public enum FL {
 	  Error                     ("error")
+
 	, UUM                       ("ic2uumatter"                                              , LIQUID, ENCHANTED_EFFECT)
 	, MatterNeutral             ("neutralmatter"                                            , LIQUID, ENCHANTED_EFFECT)
 	, MatterCharged             ("chargedmatter"                                            , LIQUID, ENCHANTED_EFFECT)
-	, XP                        ("xpjuice"                                                  , SIMPLE, LIQUID)
+
+	, XP                        ("xpjuice"                                                  , SIMPLE, LIQUID, VOID_OVERFLOW)
+	, Mob                       ("mobessence"                                               , SIMPLE, LIQUID, VOID_OVERFLOW)
 
 	, Air                       ("air"                                                      , SIMPLE, GAS, AIR)
 	, Air_End                   ("enderair"                                                 , SIMPLE, GAS, AIR)
@@ -94,7 +97,7 @@ public enum FL {
     , HeliumI("ionizedhelium", GAS)
 
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
-
+    , Liquid_Nitrogen           ("liquidnitrogen"                                           , LIQUID)
 
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
 	, Deuterium                 ("deuterium"                                                , GAS)
@@ -103,6 +106,7 @@ public enum FL {
 	, Helium_3                  ("helium-3"                                                 , GAS)
 	, Neon                      ("neon"                                                     , GAS)
 	, Argon                     ("argon"                                                    , GAS)
+    , CarbonDioxide             ("carbondioxide"                                            , GAS)
     , Iron                      ("iron"                                                  , LIQUID)
 
     // Anti Elements
@@ -118,14 +122,11 @@ public enum FL {
 	, Steam                     ("steam"                                                    , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2                 ("ic2steam"                                                 , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
 	, Steam_IC2_Superheated     ("ic2superheatedsteam"                                      , SIMPLE, GAS, STEAM, POWER_CONDUCTING)
-
+	
 	, Coolant_IC2               ("ic2coolant"                                               , SIMPLE, LIQUID)
 	, Coolant_IC2_Hot           ("ic2hotcoolant"                                            , SIMPLE, LIQUID, POWER_CONDUCTING)
 	, Freezing_Ooze             ("ooze"                                                     , SIMPLE, LIQUID, BROKEN)
-
-	, Lava                      ("lava"                                                     , SIMPLE, LIQUID)
-	, Lava_Pahoehoe             ("ic2pahoehoelava"                                          , SIMPLE, LIQUID)
-	, Lava_Pure                 ("purelava"                                                 , SIMPLE, LIQUID, BROKEN, INFINITE) // Lycanite Lava, Warning: Infinite like vanilla Water!
+	, Thorium_Salt              ("thoriumsalt"                                              , SIMPLE, LIQUID)
 
 	, Hot_Molten_Sodium         ("hotmoltensodium"                                          , SIMPLE, LIQUID, POWER_CONDUCTING)
 	, Hot_Molten_Tin            ("hotmoltentin"                                             , SIMPLE, LIQUID, POWER_CONDUCTING)
@@ -135,12 +136,15 @@ public enum FL {
 	, Hot_Molten_LiCl           ("hotmoltenlicl"                                            , SIMPLE, LIQUID, POWER_CONDUCTING)
 	, Hot_Carbon_Dioxide        ("hotcarbondioxide"                                         , SIMPLE, GAS, POWER_CONDUCTING)
 	, Hot_Helium                ("hothelium"                                                , SIMPLE, GAS, POWER_CONDUCTING)
+	, Lava                      ("lava"                                                     , SIMPLE, LIQUID)
+	, Lava_Pahoehoe             ("ic2pahoehoelava"                                          , SIMPLE, LIQUID)
+	, Lava_Pure                 ("purelava"                                                 , SIMPLE, LIQUID, BROKEN, INFINITE) // Lycanite Lava, Warning: Infinite like vanilla Water!
 
-	, Thorium_Salt              ("thoriumsalt"                                              , SIMPLE, LIQUID)
 	, Water                     ("water"                                                    , SIMPLE, LIQUID, FOOD, WATER)
 	, DistW                     ("ic2distilledwater"                                        , SIMPLE, LIQUID, FOOD, WATER)
 	, River_Water               ("riverwater"                                               , SIMPLE, LIQUID, FOOD, WATER)
-	, Water_Hot                 ("ic2hotwater"                                              , SIMPLE, LIQUID, FOOD, WATER)
+	, SpDew                     ("spectral_dew"                                             , SIMPLE, LIQUID, FOOD, WATER, INFINITE) // Something is broken with its Fluid Icon and its Bucket Registration. It is "Nether Water" from Netherlicious btw.
+	, Water_Hot                 ("ic2hotwater"                                              , SIMPLE, LIQUID, FOOD, WATER, THERMOS)
 	, Ice                       ("ice"                                                      , SIMPLE, LIQUID, FOOD, WATER, THERMOS)
 	, Heavy_Reiker              ("rc heavy water"                                           , SIMPLE, LIQUID)
 	, Mineralwater              ("potion.mineralwater"                                      , SIMPLE, LIQUID, FOOD)
@@ -189,6 +193,7 @@ public enum FL {
 	, Juice_Plum                ("binnie.juiceplum"                                         , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Peach               ("binnie.juicepeach"                                        , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Elderberry          ("binnie.juiceelderberry"                                   , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
+	, Juice_Hellderberry        ("hellderberryjuice"                                        , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Grapefruit          ("binnie.juicegrapefruit"                                   , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Apricot             ("binnie.juiceapricot"                                      , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Pear                ("binnie.juicepear"                                         , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
@@ -268,6 +273,8 @@ public enum FL {
 	, Resin_Spruce              ("spruceresin"                                              , SIMPLE, LIQUID)
 	, Resin_Rubber              ("fluidrubbertreesap"                                       , SIMPLE, LIQUID)
 
+	, Turpentine                ("turpentine"                                               , SIMPLE, LIQUID)
+
 	, Sap                       ("sap"                                                      , SIMPLE, LIQUID, FOOD)
 	, Sap_Rainbow               ("rainbowsap"                                               , SIMPLE, LIQUID, FOOD)
 	, Sap_Maple                 ("maplesap"                                                 , SIMPLE, LIQUID, FOOD)
@@ -292,7 +299,6 @@ public enum FL {
 	, Sauce_Diablo              ("potion.diablosauce"                                       , SIMPLE, LIQUID, FOOD)
 	, Sauce_Snitches            ("potion.diablosauce.strong"                                , SIMPLE, LIQUID, FOOD)
 
-
 	, Slime_Pink                ("pinkslime"                                                , SIMPLE, LIQUID, FOOD, SLIME)
 	, Slime_Green               ("slime"                                                    , SIMPLE, LIQUID, FOOD, SLIME)
 	, BAWLS                     ("bawls"                                                    , SIMPLE, LIQUID, FOOD)
@@ -304,7 +310,6 @@ public enum FL {
 	, Purple_Drink              ("purpledrink"              , "potion.purpledrink"          , SIMPLE, LIQUID, FOOD)
 	, Lemonade                  ("potion.lemonade"                                          , SIMPLE, LIQUID, FOOD)
 	, Grenade_Juice             ("potion.cavejohnsonsgrenadejuice"                          , SIMPLE, LIQUID, FOOD)
-
 
 	, Vinegar_Grape             ("vinegar"                  , "potion.vinegar"              , SIMPLE, LIQUID, FOOD, ALCOHOLIC, VINEGAR)
 	, Vinegar_Apple             ("applevinegar"                                             , SIMPLE, LIQUID, FOOD, ALCOHOLIC, VINEGAR)
@@ -392,6 +397,7 @@ public enum FL {
 
 	, Rum_White                 ("binnie.rumwhite"          , "potion.rum", "rum"           , SIMPLE, LIQUID, FOOD, ALCOHOLIC, RUM)
 	, Rum_Dark                  ("binnie.rumdark"           , "potion.piratebrew"           , SIMPLE, LIQUID, FOOD, ALCOHOLIC, RUM)
+	, Pina_Colada               ("pina.colada"                                              , SIMPLE, LIQUID, FOOD, ALCOHOLIC, RUM)
 
 	, Vodka                     ("binnie.vodka"             , "potion.vodka", "vodka"       , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, Leninade                  ("potion.leninade"                                          , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
@@ -432,7 +438,7 @@ public enum FL {
 	, Propylene                 ("propylene"                , "propene"                     , GAS)
 	, Naphtha                   ("naphtha"                                                  , SIMPLE, LIQUID)
     , benzene                   ("benzene"                                                  , SIMPLE, LIQUID)
-    , lpg                       ("lpg"                                                      , SIMPLE, LIQUID)
+//    , lpg                       ("lpg"                                                      , SIMPLE, LIQUID)
     , phenol                    ("phenol"                                                   , SIMPLE, LIQUID)
     , acetone                   ("acetone"                                                  , SIMPLE, LIQUID)
     , bisphenol                 ("bisphenol"                                                , SIMPLE, LIQUID)
@@ -441,6 +447,8 @@ public enum FL {
     , Fuel                      ("fuel"                                                     , SIMPLE, LIQUID)
     , Diesel                    ("diesel"                                                   , SIMPLE, LIQUID)
     , Kerosine                  ("kerosine"                 , "kerosene"                    , SIMPLE, LIQUID)
+    , LPG                       ("lpg"                                                      , LIQUID)
+    , JetFuel                   ("rc jet fuel"                                              , LIQUID)
     , Isoprene                  ("isoprene"                                                 , SIMPLE, LIQUID)
 	, Dichloroisopropanol       ("dichloroisopropanol"                                      , SIMPLE, LIQUID)
 	, Cumene                    ("cumene"                                                   , SIMPLE, LIQUID)
@@ -541,7 +549,7 @@ public enum FL {
 	, BioDiesel                 ("biodiesel"                                                , SIMPLE, LIQUID)
 	, BioEthanol                ("bioethanol"               , "ethanol"                     , SIMPLE, LIQUID)
 	, Reikanol                  ("rc ethanol"                                               , SIMPLE, LIQUID)
-
+	
 	, Glue                      ("glue"                                                     , SIMPLE, LIQUID)
 	, Latex                     ("latex"                    , "molten.latex"                , SIMPLE, LIQUID)
 	, Concrete                  ("concrete"                 , "molten.concrete"             , SIMPLE, LIQUID)
@@ -550,20 +558,25 @@ public enum FL {
 	, Sludge                    ("sludge"                                                   , SIMPLE, LIQUID)
 	, Glass                     ("glass"                    , "molten.glass"                , SIMPLE, LIQUID)
 	, Sluice                    ("sluicejuice"                                              , SIMPLE, LIQUID)
-
+	
 	, Myst_Ink                  ("myst.ink.black"                                           , SIMPLE, LIQUID, ENCHANTED_EFFECT)
-
+	
 	, Blaze                     ("blaze"                    , "molten.blaze"                , LIQUID, ENCHANTED_EFFECT) // 144 per Unit
 	, FieryBlood                ("fieryblood"                                               , LIQUID, ENCHANTED_EFFECT) // 144 per Unit
 	, FieryTears                ("fierytears"                                               , LIQUID, ENCHANTED_EFFECT) // 144 per Unit
+	, Pyrotheum                 ("pyrotheum"                                                , LIQUID) // 250 per Unit
+	, Cryotheum                 ("cryotheum"                                                , LIQUID) // 250 per Unit
+	, Petrotheum                ("petrotheum"                                               , LIQUID) // 250 per Unit
+	, Aerotheum                 ("aerotheum"                                                , GAS) // 250 per Unit
 	, Mana_TE                   ("mana"                                                     , LIQUID, ENCHANTED_EFFECT) // 250 per Unit
 	, Ender                     ("molten.enderpearl"                                        , LIQUID, ENCHANTED_EFFECT) // 144 per Unit
 	, Ender_TE                  ("ender"                                                    , LIQUID, ENCHANTED_EFFECT) // 250 per Unit
 	, Redstone                  ("molten.redstone"                                          , LIQUID) // 144 per Unit
 	, Redstone_TE               ("redstone"                                                 , LIQUID) // 100 per Unit
 	, Glowstone_TE              ("glowstone"                                                , GAS) // 250 per Unit
-
+	
 	, Calcite                   ("molten.calcite"                                           , LIQUID) // 144 per Unit
+
 	, Med_Heal                  ("medicine.heal"                                            , SIMPLE, LIQUID, BATH)
 	, Med_Laxative              ("medicine.laxative"                                        , SIMPLE, LIQUID, BATH)
 
@@ -696,8 +709,8 @@ public enum FL {
 
 
 	public int id() {return FluidRegistry.getFluidID(mName);}
-	public Fluid fluid() {return FluidRegistry.getFluid(mName);}
-	public boolean exists() {return FluidRegistry.getFluid(mName) != null;}
+	public Fluid fluid() {return fluid_(mName);}
+	public boolean exists() {return fluid() != null;}
 	public ItemStack display() {return display(make(0), F, F);}
 	public ItemStack display(long aAmount) {return display(make(aAmount), aAmount, F, F);}
 
@@ -737,7 +750,7 @@ public enum FL {
 	public static short id (FluidStack aFluid) {return aFluid == null ? -1 : id_(aFluid);}
 	public static short id_(FluidStack aFluid) {return id(aFluid.getFluid());}
 	public static short id (Fluid aFluid) {return aFluid == null ? -1 : id_(aFluid);}
-	public static short id_(Fluid aFluid) {return (short)FluidRegistry.getFluidID(aFluid);}
+	public static short id_(Fluid aFluid) {return (short)FluidRegistry.getFluidID(aFluid);} // catch(Throwable e) {ERR.println("What the fuck?! Why does the Fluid Registry Crash!? Who is responsible for this?!"); e.printStackTrace(ERR);} return -1;}
 
 	public static Fluid fluid (int aID) {return aID < 0 ? null : FluidRegistry.getFluid(aID);}
 	public static Fluid fluid (String aFluidName) {return Code.stringInvalid(aFluidName) ? null : fluid_(aFluidName);}
@@ -750,14 +763,17 @@ public enum FL {
 	public static boolean is(FluidStack aFluid, String... aNames) {return aFluid != null && is(aFluid.getFluid(), aNames);}
 	public static boolean is(Fluid aFluid, String... aNames) {if (aFluid != null) for (String aName : aNames) if (aFluid.getName().equalsIgnoreCase(aName)) return T; return F;}
 
-	public static boolean exists(String aFluidName) {return FluidRegistry.getFluid(aFluidName) != null;}
+	public static boolean exists(String aFluidName) {return aFluidName != null && fluid_(aFluidName) != null;}
 
-	public static ItemStack display(Fluid aFluid) {return aFluid == null ? null : display(make(aFluid, 0), F, F);}
-	public static ItemStack display(FluidStack aFluid, boolean aUseStackSize, boolean aLimitStackSize) {return display(aFluid, aFluid == null ? 0 : aFluid.amount, aUseStackSize, aLimitStackSize);}
+	public static ItemStack display(Fluid aFluid) {return aFluid == null ? null : display(make(aFluid, 0), F, F, T);}
+	public static ItemStack display(FluidStack aFluid, boolean aUseStackSize, boolean aLimitStackSize) {return display(aFluid, aUseStackSize, aLimitStackSize, T);}
+	public static ItemStack display(FluidStack aFluid, boolean aUseStackSize, boolean aLimitStackSize, boolean aUseBucketSize) {return display(aFluid, aFluid == null ? 0 : aFluid.amount, aUseStackSize, aLimitStackSize, aUseBucketSize);}
 	public static ItemStack display(FluidTankGT aTank, boolean aUseStackSize, boolean aLimitStackSize) {return display(aTank.getFluid(), aTank.amount(), aUseStackSize, aLimitStackSize);}
-	public static ItemStack display(FluidStack aFluid, long aAmount, boolean aUseStackSize, boolean aLimitStackSize) {
-		if (aFluid == null || aFluid.getFluid() == null) return null;
-		ItemStack rStack = IL.Display_Fluid.getWithMeta(aUseStackSize ? aLimitStackSize ? UT.Code.bind7(aAmount / 1000) : aAmount / 1000 : 1, id_(aFluid));
+	public static ItemStack display(FluidStack aFluid, long aAmount, boolean aUseStackSize, boolean aLimitStackSize) {return display(aFluid, aAmount, aUseStackSize, aLimitStackSize, T);}
+	public static ItemStack display(FluidStack aFluid, long aAmount, boolean aUseStackSize, boolean aLimitStackSize, boolean aUseBucketSize) {
+		short aID = id(aFluid);
+		if (aID < 0) return null;
+		ItemStack rStack = IL.Display_Fluid.getWithMeta(Math.max(1, aUseStackSize ? aUseBucketSize ? aLimitStackSize ? UT.Code.bind7(aAmount / 1000) : aAmount / 1000 : aLimitStackSize ? UT.Code.bind7(aAmount) : aAmount : 1), aID);
 		if (rStack == null) return null;
 		NBTTagCompound tNBT = NBT.makeString("f", aFluid.getFluid().getName());
 		if (aAmount != 0) NBT.setNumber(tNBT, "a", aAmount);
@@ -771,14 +787,14 @@ public enum FL {
 	/** @return if that Liquid is Water or Distilled Water */
 	public static boolean water(FluidStack aFluid) {return aFluid != null && water(aFluid.getFluid());}
 	/** @return if that Liquid is Water or Distilled Water */
-	public static boolean water(Fluid aFluid) {return aFluid == FluidRegistry.WATER || FL.DistW.is(aFluid);}
+	public static boolean water(Fluid aFluid) {return aFluid == FluidRegistry.WATER || FL.DistW.is(aFluid) || FL.SpDew.is(aFluid);}
 
 	/** @return if that Liquid is distilled Water */
 	public static boolean distw(IFluidTank aFluid) {return aFluid != null && distw(aFluid.getFluid());}
 	/** @return if that Liquid is distilled Water */
 	public static boolean distw(FluidStack aFluid) {return aFluid != null && distw(aFluid.getFluid());}
 	/** @return if that Liquid is distilled Water */
-	public static boolean distw(Fluid aFluid) {return  FL.DistW.is(aFluid);}
+	public static boolean distw(Fluid aFluid) {return FL.DistW.is(aFluid);}
 
 	/** @return if that Liquid is Lava */
 	public static boolean lava(IFluidTank aFluid) {return aFluid != null && lava(aFluid.getFluid());}
@@ -873,14 +889,14 @@ public enum FL {
 
 	public static FluidStack make (int aFluid, long aAmount) {return aFluid < 0 ? null : new FluidStack(fluid(aFluid), Code.bindInt(aAmount));}
 	public static FluidStack make (Fluid aFluid, long aAmount) {return aFluid == null ? null : new FluidStack(aFluid, Code.bindInt(aAmount));}
-	public static FluidStack make (String aFluidName, long aAmount) {return make(FluidRegistry.getFluid(aFluidName), aAmount);}
+	public static FluidStack make (String aFluidName, long aAmount) {return make(fluid(aFluidName), aAmount);}
 	public static FluidStack make (String aFluidName, long aAmount, String aReplacementFluidName) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make(aReplacementFluidName, aAmount) : rFluid;}
 	public static FluidStack make (String aFluidName, long aAmount, String aReplacementFluidName, long aReplacementAmount) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make(aReplacementFluidName, aReplacementAmount) : rFluid;}
 	public static FluidStack make (String aFluidName, long aAmount, FluidStack aReplacementFluid) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? aReplacementFluid : rFluid;}
 
 	public static FluidStack make_(int aFluid, long aAmount) {return aFluid < 0 ? FL.Error.make(0) : new FluidStack(fluid(aFluid), Code.bindInt(aAmount));}
 	public static FluidStack make_(Fluid aFluid, long aAmount) {return aFluid == null ? FL.Error.make(0) : new FluidStack(aFluid, Code.bindInt(aAmount));}
-	public static FluidStack make_(String aFluidName, long aAmount) {return make_(FluidRegistry.getFluid(aFluidName), aAmount);}
+	public static FluidStack make_(String aFluidName, long aAmount) {return make_(fluid(aFluidName), aAmount);}
 	public static FluidStack make_(String aFluidName, long aAmount, String aReplacementFluidName) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make_(aReplacementFluidName, aAmount) : rFluid;}
 	public static FluidStack make_(String aFluidName, long aAmount, String aReplacementFluidName, long aReplacementAmount) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make_(aReplacementFluidName, aReplacementAmount) : rFluid;}
 
@@ -921,18 +937,18 @@ public enum FL {
 	public static long move_(@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Integer.MAX_VALUE);}
 	public static long move (@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {return aFrom != null && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMaxMoved) : 0;}
 	public static long move_(@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; long rAmount = 0; for (Object tFrom : aFrom) if (tFrom instanceof IFluidTank) rAmount += move_((IFluidTank)tFrom, aTo, aMaxMoved); return rAmount;}
-
-
+	
+	
 	public static String configName(FluidStack aFluid) {
 		return aFluid == null || aFluid.getFluid() == null ? "" : aFluid.getFluid().getName();
 	}
-
+	
 	public static String configNames(FluidStack... aFluids) {
 		String rString = "";
 		for (FluidStack tFluid : aFluids) rString += (tFluid == null ? "null;" : configName(tFluid) + ";");
 		return rString;
 	}
-
+	
 	public static String name(Fluid aFluid, boolean aLocalized) {
 		if (aFluid == null) return "";
 		if (!aLocalized) return aFluid.getUnlocalizedName();
@@ -943,24 +959,24 @@ public enum FL {
 		}
 		return aFluid.getName().startsWith("rc ") ? "Reika's " + rName : rName;
 	}
-
+	
 	public static String name(FluidStack aFluid, boolean aLocalized) {
 		return aFluid == null ? "" : name(aFluid.getFluid(), aLocalized);
 	}
-
+	
 	public static String name(IFluidTank aTank, boolean aLocalized) {
 		return aTank == null ? "" : name(aTank.getFluid(), aLocalized);
 	}
-
+	
 	public static FluidStack[] copy(FluidStack... aFluids) {
 		FluidStack[] rStacks = new FluidStack[aFluids.length];
 		for (int i = 0; i < aFluids.length; i++) if (aFluids[i] != null) rStacks[i] = aFluids[i].copy();
 		return rStacks;
 	}
-
+	
 	public static final Map<ItemStackContainer, FluidContainerData> FULL_TO_DATA = new ItemStackMap<>();
 	public static final Map<ItemStackContainer, Map<String, FluidContainerData>> EMPTY_TO_FLUID_TO_DATA = new ItemStackMap<>();
-
+	
 	public static void reg(FluidStack aFluid, ItemStack aFull, ItemStack aEmpty) {
 		reg(aFluid, aFull, aEmpty, F);
 	}
@@ -1090,7 +1106,8 @@ public enum FL {
 		}
 		return NI;
 	}
-
+	
+	
 
 
 	/** Loads a FluidStack properly. */
@@ -1103,14 +1120,24 @@ public enum FL {
 		String aName = aNBT.getString("FluidName");
 		if (Code.stringInvalid(aName)) return null;
 		String tName = FluidsGT.FLUID_RENAMINGS.get(aName);
-		if (Code.stringValid(tName)) aName = tName;
-		Fluid aFluid = FluidRegistry.getFluid(aName);
-		if (aFluid == null) return FL.LubRoCant.is(aName) ? FL.Lubricant.make(aNBT.getInteger("Amount")) : FL.Reikanol.is(aName) ? FL.BioEthanol.make(aNBT.getInteger("Amount")) : null;
+		Fluid aFluid;
+		if (Code.stringValid(tName) && (aFluid = fluid(tName)) != null) {
+			aName = tName;
+		} else {
+			aFluid = fluid(aName);
+		}
+		if (aFluid == null) {
+			if (FL.LubRoCant      .is(aName)) return FL.Lubricant    .make(aNBT.getInteger("Amount"));
+			if (FL.Reikanol       .is(aName)) return FL.BioEthanol   .make(aNBT.getInteger("Amount"));
+			if (FL.Liquid_Reikygen.is(aName)) return FL.Oxygen       .make(aNBT.getInteger("Amount"));
+			if (FL.Reikygen       .is(aName)) return FL.Liquid_Oxygen.make(aNBT.getInteger("Amount"));
+			return null;
+		}
 		FluidStack rFluid = new FluidStack(aFluid, aNBT.getInteger("Amount"));
 		if (aNBT.hasKey("Tag")) rFluid.tag = aNBT.getCompoundTag("Tag");
 		return rFluid;
 	}
-
+	
 	/** Saves a FluidStack properly. */
 	public static NBTTagCompound save(NBTTagCompound aNBT, String aTagName, FluidStack aFluid) {
 		if (aNBT == null) aNBT = NBT.make();
@@ -1122,7 +1149,6 @@ public enum FL {
 	public static NBTTagCompound save (FluidStack aFluid) {return aFluid == null || aFluid.getFluid() == null ? null : save_(aFluid);}
 	/** Saves a FluidStack properly. */
 	public static NBTTagCompound save_(FluidStack aFluid) {return aFluid.writeToNBT(NBT.make());}
-
 
 
 	@SafeVarargs public static Fluid createLiquid(OreDictMaterial aMaterial, Set<String>... aFluidList) {return createLiquid(aMaterial, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_MOLTEN), aFluidList);}
@@ -1149,23 +1175,25 @@ public enum FL {
 	@SafeVarargs
 	public static Fluid create(String aName, IIconContainer aTexture, String aLocalized, OreDictMaterial aMaterial, short[] aRGBa, int aState, long aAmountPerUnit, long aTemperatureK, ItemStack aFullContainer, ItemStack aEmptyContainer, int aFluidAmount, Set<String>... aFluidList) {
 		aName = aName.toLowerCase();
+		aLocalized = (aLocalized==null?aMaterial==null||aMaterial==MT.NULL?UT.Code.capitaliseWords(aName):aMaterial.getLocal():aLocalized);
+
 		Fluid rFluid = new FluidGT(aName, aTexture, aRGBa == null ? UNCOLOURED : aRGBa, aTemperatureK, aState == 2 || aState == 3);
-		LH.add(rFluid.getUnlocalizedName(), aLocalized==null?aName:aLocalized);
-		LH.add(rFluid.getUnlocalizedName()+".name", aLocalized==null?aName:aLocalized);
+		LH.add(rFluid.getUnlocalizedName(), aLocalized);
+		LH.add(rFluid.getUnlocalizedName()+".name", aLocalized);
 
 		for (Set<String> tSet : aFluidList) tSet.add(aName);
 
 		switch (aState) {
-		case STATE_SOLID:           rFluid.setViscosity(10000); break;
-		case STATE_LIQUID:          rFluid.setViscosity( 1000); FluidsGT.LIQUID.add(aName); break;
-		case STATE_GASEOUS:         rFluid.setViscosity(  200); rFluid.setDensity(   -100); FluidsGT.GAS.add(aName); break;
-		case STATE_PLASMA:          rFluid.setViscosity(   10); rFluid.setDensity(-100000); rFluid.setLuminosity(15); FluidsGT.PLASMA.add(aName); break;
-		case 4:                     rFluid.setViscosity( 1000); break;
+		case STATE_SOLID  : rFluid.setViscosity(10000); break;
+		case STATE_LIQUID : rFluid.setViscosity( 1000); FluidsGT.LIQUID.add(aName); break;
+		case STATE_GASEOUS: rFluid.setViscosity(  200); rFluid.setDensity(   -100); FluidsGT.GAS.add(aName); break;
+		case STATE_PLASMA : rFluid.setViscosity(   10); rFluid.setDensity(-100000); rFluid.setLuminosity(15); FluidsGT.PLASMA.add(aName); break;
+		case 4            : rFluid.setViscosity( 1000); break;
 		}
 
-		if (!FluidRegistry.registerFluid(rFluid)) {
+		if (FL.exists(aName) || !FluidRegistry.registerFluid(rFluid)) {
 			rFluid = FluidRegistry.getFluid(aName);
-			LH.add(rFluid.getUnlocalizedName(), aLocalized==null?aName:aLocalized);
+			LH.add(rFluid.getUnlocalizedName(), aLocalized);
 			if (rFluid.getTemperature() == new Fluid("test").getTemperature() || rFluid.getTemperature() <= 0) rFluid.setTemperature(UT.Code.bindInt(aTemperatureK));
 			rFluid.setGaseous(aState == 2 || aState == 3);
 		}
@@ -1175,9 +1203,9 @@ public enum FL {
 			if (aMaterial.contains(TD.Properties.GLOWING )) rFluid.setLuminosity(Math.max(rFluid.getLuminosity(), 5));
 			if (aMaterial.contains(TD.Properties.LIGHTING)) rFluid.setLuminosity(Math.max(rFluid.getLuminosity(), 15));
 			switch (aState) {
-			case STATE_LIQUID:  aMaterial.liquid(make(rFluid, UT.Code.bindInt(aAmountPerUnit))); break;
+			case STATE_LIQUID : aMaterial.liquid(make(rFluid, UT.Code.bindInt(aAmountPerUnit))); break;
 			case STATE_GASEOUS: aMaterial.gas   (make(rFluid, UT.Code.bindInt(aAmountPerUnit))); break;
-			case STATE_PLASMA:  aMaterial.plasma(make(rFluid, UT.Code.bindInt(aAmountPerUnit))); break;
+			case STATE_PLASMA : aMaterial.plasma(make(rFluid, UT.Code.bindInt(aAmountPerUnit))); break;
 			}
 			// Translating Real Life Density to that weird Integer based Density System.
 			if (aMaterial.mGramPerCubicCentimeter > 0 && (aState == STATE_LIQUID || aState == STATE_GASEOUS)) {

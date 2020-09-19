@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -26,6 +26,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import gregapi.api.Abstract_Mod;
 import gregapi.code.ModData;
 import gregapi.compat.CompatMods;
+import gregapi.data.ANY;
 import gregapi.data.CS.OreDictToolNames;
 import gregapi.data.FL;
 import gregapi.data.IL;
@@ -46,9 +47,11 @@ public class Compat_Recipes_Aether extends CompatMods {
 	@Override public void onPostLoad(FMLPostInitializationEvent aInitEvent) {OUT.println("GT_Mod: Doing Aether Recipes.");
 		ST.item(MD.AETHER, "moaEgg").setMaxStackSize(64);
 		
-		CR.shaped(ST.make(MD.AETHER, "shoyrootBowl", 1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "k", "X", 'X', OD.plankSkyroot);
-		CR.shapeless(ST.make(Items.bowl, 1, 0), CR.DEF_NAC_NCC, new Object[] {ST.make(MD.AETHER, "shoyrootBowl", 1, 0)});
-		RM.generify(ST.make(MD.AETHER, "shoyrootBowl", 1, 0), ST.make(Items.bowl, 1, 0));
+		CR.shaped(IL.AETHER_Bowl.get(1), DEF | DEL_OTHER_SHAPED_RECIPES, "k", "X", 'X', OD.plankSkyroot);
+		CR.shapeless(ST.make(Items.bowl, 1, 0), CR.DEF_NAC_NCC, new Object[] {IL.AETHER_Bowl});
+		RM.generify(IL.AETHER_Bowl.get(1), ST.make(Items.bowl, 1, 0));
+		
+		CR.shapeless(ST.make(MD.AETHER, "cornstarchBowl", 1, 0), CR.DEF_NAC_NCC, new Object[] {IL.AETHER_Bowl, OP.dust.dat(ANY.Flour)});
 		
 		RM.sawing(16,  32, F, 100, ST.make(MD.AETHER, "skyrootSignItem"         , 1, W), IL.AETHER_Skyroot_Planks.get(2), OM.dust(MT.Skyroot, OP.stick.mAmount / 3));
 		RM.sawing(16,  32, F, 100, ST.make(MD.AETHER, "skyrootFenceGate"        , 1, W), IL.AETHER_Skyroot_Planks.get(2), OM.dust(MT.Skyroot, OP.stick.mAmount * 4));
@@ -59,14 +62,14 @@ public class Compat_Recipes_Aether extends CompatMods {
 		RM.sawing(16,  96, F, 100, ST.make(MD.AETHER, "skyrootBookshelf"        , 1, W), IL.AETHER_Skyroot_Planks.get(6), ST.make(Items.book, 3, 0));
 		RM.sawing(16, 128, F, 100, ST.make(MD.AETHER, "skyrootChest"            , 1, W), IL.AETHER_Skyroot_Planks.get(8));
 		
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(2), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootSignItem"      , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(2), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootFenceGate"     , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(3), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootTrapDoor"      , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(3), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootBedItem"       , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(4), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootCraftingTable" , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(6), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootDoorItem"      , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(6), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootBookshelf"     , 1, W)});
-		CR.shapeless(IL.AETHER_Skyroot_Planks.get(8), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.make(MD.AETHER, "skyrootChest"         , 1, W)});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(2), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootSignItem"     )});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(2), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootFenceGate"    )});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(3), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootTrapDoor"     )});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(3), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootBedItem"      )});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(4), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootCraftingTable")});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(6), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootDoorItem"     )});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(6), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootBookshelf"    )});
+		CR.shapeless(IL.AETHER_Skyroot_Planks.get(8), CR.DEF_NAC_NCC, new Object[] {OreDictToolNames.saw, ST.item(MD.AETHER, "skyrootChest"        )});
 		
 		RM.unbox(IL.AETHER_Skyroot_Planks.get(3), ST.make(MD.AETHER, "skyrootBookshelf", 1, W), ST.make(Items.book, 3, 0));
 		

@@ -257,11 +257,11 @@ public class TD {
 		public static final TagData DUST_ORE                                = TagData.createTagData("PREFIX.DUST_ORE", "Dust Ore");
 		/** If this Prefix is for Dense Ores */
 		public static final TagData DENSE_ORE                               = TagData.createTagData("PREFIX.DENSE_ORE", "Dense Ore");
-		/** If this Prefix is used for Ore Processing, like "crushed" for example */
+		/** If this Prefix is used for Ore Processing */
 		public static final TagData ORE_PROCESSING_DIRTY                    = TagData.createTagData("PREFIX.ORE_PROCESSING_DIRTY", "Ore Processing Dirty");
-		/** If this Prefix is used for Ore Processing, like "crushed" for example */
+		/** If this Prefix is used for Ore Processing */
 		public static final TagData ORE_PROCESSING_CLEAN                    = TagData.createTagData("PREFIX.ORE_PROCESSING_CLEAN", "Ore Processing Clean");
-		/** If this Prefix is used for Ore Processing, like "crushed" for example */
+		/** If this Prefix is used for Ore Processing */
 		public static final TagData ORE_PROCESSING_REFINED                  = TagData.createTagData("PREFIX.ORE_PROCESSING_REFINED", "Ore Processing Refined");
 		/** If this Prefix is used for Ore Processing, like "crushed" for example */
 		public static final TagData ORE_PROCESSING_BASED                    = TagData.createTagData("PREFIX.ORE_PROCESSING_BASED", "Ore Processing Based");
@@ -400,6 +400,8 @@ public class TD {
 		public static final TagData MAGICAL                                 = TagData.createTagData("PROPERTIES.MAGICAL", "Magical");
 		/** If this Material is useable in the Betweenlands */
 		public static final TagData BETWEENLANDS                            = TagData.createTagData("PROPERTIES.BETWEENLANDS", "Betweenlands");
+		/** If this Material can break Twilight Mazes */
+		public static final TagData MAZEBREAKER                             = TagData.createTagData("PROPERTIES.MAZEBREAKER", "Maze Breaker");
 		/** If this Material is having a constantly burning Aura (like Blaze Rods) */
 		public static final TagData BURNING                                 = TagData.createTagData("PROPERTIES.BURNING", "Burning Aura");
 		/** If this Material is some kind of flammable */
@@ -481,6 +483,8 @@ public class TD {
 		public static final TagData CENTRIFUGE                              = TagData.createTagData("PROCESSING.CENTRIFUGABLE", "Centrifugable");
 		/** If this Material is decomposable by an Electrolyser. Requires Compounds.DECOMPOSABLE too */
 		public static final TagData ELECTROLYSER                            = TagData.createTagData("PROCESSING.ELECTROLYSABLE", "Electrolysable");
+		/** If this Material can be alloyed in a Crucible. */
+		public static final TagData CRUCIBLE_ALLOY                          = TagData.createTagData("PROCESSING.CRUCIBLE_ALLOY", "Crucible Alloyable");
 		/** If this Material can be used in an Extruder. */
 		public static final TagData EXTRUDER                                = TagData.createTagData("PROCESSING.EXTRUDABLE", "Extrudable");
 		/** If this Material can be used in a low Tech Extruder. */
@@ -491,11 +495,8 @@ public class TD {
 		public static final TagData FUSION                                  = TagData.createTagData("PROCESSING.FUSION_SYNTHESISABLE", "Fusion Synthesisable");
 		/** If this Material can be ground by a Mortar. */
 		public static final TagData MORTAR                                  = TagData.createTagData("PROCESSING.MORTAR_GRINDABLE", "Mortar Grindable");
-        /** If this Material can be created using Particle Collider.  */
-        //public static final TagData PARTICLECOLLIDER                        = TagData.createTagData("PROCESSING.PARTICLECOLLIDER_SYNTHESISABLE", "Particle Collider Synthesisable");
-
-
-        public static final TagData SMITHABLE                               = TagData.createTagData("PROCESSING.SMITHABLE", "Smithable");
+		
+		public static final TagData SMITHABLE                               = TagData.createTagData("PROCESSING.SMITHABLE", "Smithable");
 		/** If this Material can be directly cooked in a regular Furnace */
 		public static final TagData FURNACE                                 = TagData.createTagData("PROCESSING.FURNACE", "Furnace Smeltable");
 		/** If this Material can be molten in a Crucible (every Material can, this is just for NEI Stuff) */
@@ -515,7 +516,7 @@ public class TD {
 		public static final TagData WASHING_MERCURY                         = TagData.createTagData("PROCESSING.WASHING_MERCURY", "Mercury Washable");
 		public static final TagData PULVERIZING_CINNABAR                    = TagData.createTagData("PROCESSING.PULVERIZING_CINNABAR", "Cinnabar Pulverisation Byproduct");
 		
-		public static final List<TagData> ALL_MACHINES                      = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, FURNACE, SMITHABLE, MELTING, MORTAR, UUM, ELECTROLYSER, CENTRIFUGE, UNRECYCLABLE, SOLDERING_MATERIAL));
+		public static final List<TagData> ALL_MACHINES                      = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, CRUCIBLE_ALLOY, FURNACE, SMITHABLE, MELTING, MORTAR, FUSION, UUM, ELECTROLYSER, CENTRIFUGE, UNRECYCLABLE, SOLDERING_MATERIAL));
 		public static final List<TagData> ALL_ORES                          = new ArrayListNoNulls<>(Arrays.asList(CRYSTALLISABLE, WASHING_PERSULFATE, WASHING_MERCURY, PULVERIZING_CINNABAR));
 	}
 	

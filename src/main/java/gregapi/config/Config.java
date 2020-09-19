@@ -85,7 +85,7 @@ public class Config implements Runnable {
 			ERR.println("RANDOM EXCEPTION WHEN ACCESSING CONFIG: " + tPathLowercase);
 			e.printStackTrace(ERR);
 		}
-
+		
 		mConfig = new Configuration(tPathUsed);
 		mConfig.load();
 		mConfig.save();

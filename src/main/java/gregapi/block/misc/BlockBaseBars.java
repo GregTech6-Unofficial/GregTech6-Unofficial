@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2020 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -60,6 +60,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 	
 	public BlockBaseBars(String aNameInternal, OreDictMaterial aMat, Material aVanillaMaterial, SoundType aSoundType) {
 		super(null, aNameInternal, aVanillaMaterial, aSoundType);
+		setCreativeTab(CreativeTabs.tabRedstone);
 		mMat = aMat;
 		
 		CR.shaped(ST.make(this, 1, 0), CR.DEF_REV_NCC_MIR, "BBB", aVanillaMaterial == Material.wood ? "r v" : "h w", "BBB", 'B', OP.stick.dat(mMat));
@@ -134,14 +135,15 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 	@Override public int getLightOpacity() {return LIGHT_OPACITY_NONE;}
 	@Override public int damageDropped(int aMeta) {return 0;}
 	@Override public int quantityDropped(int aMeta, int aFortune, Random aRandom) {return aMeta == 0 ? 1 : FACE_CONNECTION_COUNT[aMeta];}
+	@Override public byte maxMeta() {return 1;}
 	@Override public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {return 5;}
-	@Override public float getExplosionResistance(int aMeta) {return 5;}
-	@Override public boolean doesPistonPush(short aMeta) {return T;}
+	@Override public float getExplosionResistance(byte aMeta) {return 5;}
+	@Override public boolean doesPistonPush(byte aMeta) {return T;}
 	@Override public boolean renderAsNormalBlock() {return F;}
 	@Override public boolean isOpaqueCube() {return F;}
 	@Override public boolean isNormalCube(IBlockAccess aWorld, int aX, int aY, int aZ) {return F;}
 	@Override public boolean isSideSolid(int aMeta, byte aSide) {return F;}
-	@Override public boolean isSealable(int aMeta, byte aSide) {return F;}
+	@Override public boolean isSealable(byte aMeta, byte aSide) {return F;}
 	@Override public boolean shouldSideBeRendered(IBlockAccess aWorld, int aX, int aY, int aZ, int aSide) {return T;}
 	@SuppressWarnings("unchecked") @Override public void getSubBlocks(Item aItem, CreativeTabs aTab, @SuppressWarnings("rawtypes") List aList) {aList.add(ST.make(aItem, 1, 0));}
 	
@@ -156,7 +158,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 				return  AxisAlignedBB.getBoundingBox(aX         , aY, aZ         , aX+1       , aY+1, aZ+1       );
 			}
 		}
-		switch (aWorld.getBlockMetadata(aX, aY, aZ)) {
+		switch (WD.meta(aWorld, aX, aY, aZ)) {
 		case  1: return AxisAlignedBB.getBoundingBox(aX         , aY, aZ         , aX+1       , aY+1, aZ+PX_P[ 1]);
 		case  2: return AxisAlignedBB.getBoundingBox(aX         , aY, aZ+PX_P[15], aX+1       , aY+1, aZ+1       );
 		case  4: return AxisAlignedBB.getBoundingBox(aX         , aY, aZ         , aX+PX_P[ 1], aY+1, aZ+1       );
@@ -173,7 +175,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 				return;
 			}
 		}
-		switch (aWorld.getBlockMetadata(aX, aY, aZ)) {
+		switch (WD.meta(aWorld, aX, aY, aZ)) {
 		case  1: setBlockBounds(0, 0, 0, 1, 1, PX_P[ 1]); return;
 		case  2: setBlockBounds(0, 0, PX_P[15], 1, 1, 1); return;
 		case  4: setBlockBounds(0, 0, 0, PX_P[ 1], 1, 1); return;
@@ -206,7 +208,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 	@Override public int getRenderPasses(ItemStack aStack) {return 0;}
 	@Override public int getRenderPasses(IBlockAccess aWorld, int aX, int aY, int aZ, boolean[] aShouldSideBeRendered) {return 0;}
 	@Override public IRenderedBlockObject passRenderingToObject(ItemStack aStack) {return mRenderers[0];}
-	@Override public IRenderedBlockObject passRenderingToObject(IBlockAccess aWorld, int aX, int aY, int aZ) {return mRenderers[aWorld.getBlockMetadata(aX, aY, aZ)];}
+	@Override public IRenderedBlockObject passRenderingToObject(IBlockAccess aWorld, int aX, int aY, int aZ) {return mRenderers[WD.meta(aWorld, aX, aY, aZ)];}
 	
 	public BarRendererBase[] mRenderers = new BarRendererBase[16];
 	

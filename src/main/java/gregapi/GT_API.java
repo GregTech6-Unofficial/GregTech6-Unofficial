@@ -70,7 +70,6 @@ import gregapi.cover.CoverRegistry;
 import gregapi.cover.ICover;
 import gregapi.cover.covers.CoverRedstoneRepeater;
 import gregapi.cover.covers.CoverRedstoneTorch;
-import gregapi.data.AM;
 import gregapi.data.BI;
 import gregapi.data.CS.ConfigsGT;
 import gregapi.data.CS.DirectoriesGT;
@@ -181,10 +180,9 @@ public class GT_API extends Abstract_Mod {
 		
 		if (!MD.ENCHIRIDION.mLoaded) MD.MaCu.mLoaded = F;
 		
-		// A bunch of Code that is there to statically initialise the Database in the right order.
+		// A bunch of Code that is there to statically initialize the Database in the right order and without crashes.
 		BI.BAROMETER.toString();
 		MT.NULL.toString();
-		AM.Hydrogen.toString();
 		OP.ore.toString();
 		
 		Textures.BlockIcons.VOID.toString();
@@ -404,7 +402,7 @@ public class GT_API extends Abstract_Mod {
 		CLIENT_BLOCKUPDATE_SOUNDS = ConfigsGT.CLIENT.get("debug" , "block_update_sounds", F);
 		if ( ConfigsGT.CLIENT.get("debug" , "april"  , F)) APRIL_FOOLS = T;
 		
-		if (APRIL_FOOLS && CODE_CLIENT) {
+		if (APRIL_FOOLS) {
 			MT.W.setLocal("Wolframium");
 			MT.V.setLocal("Vandalium");
 			MT.B.setLocal("Boring");
@@ -434,13 +432,13 @@ public class GT_API extends Abstract_Mod {
 			MT.Zr.setLocal("Diamond");
 			MT.Au.setLocal("Pyrite");
 			MT.Pyrite.setLocal("Gold");
-			MT.Fe.setLocal("Iran");
-			MT.IronWood.setLocal("Iranwood");
-			MT.ShadowIron.setLocal("Shade Iran");
-			MT.DarkIron.setLocal("Dank Iran");
-			MT.MeteoricIron.setLocal("Metaur Iran");
-			MT.GildedIron.setLocal("Guild Iran");
-			MT.WroughtIron.setLocal("Wrecked Iran");
+			MT.Fe.setLocal("Irun");
+			MT.IronWood.setLocal("Irunwood");
+			MT.ShadowIron.setLocal("Shade Irun");
+			MT.DarkIron.setLocal("Dank Irun");
+			MT.MeteoricIron.setLocal("Metaur Irun");
+			MT.GildedIron.setLocal("Guild Irun");
+			MT.WroughtIron.setLocal("Wrecked Irun");
 			MT.Steel.setLocal("Style");
 			MT.RedSteel.setLocal("Rad Style");
 			MT.BlueSteel.setLocal("Blu Style");
@@ -455,12 +453,28 @@ public class GT_API extends Abstract_Mod {
 			MT.FierySteel.setLocal("Fury Style");
 			MT.Thaumium.setLocal("Thaumanominum");
 			MT.DarkThaumium.setLocal("Dank Thaumanominum");
+			MT.Coal.setLocal("Cool");
+			MT.Charcoal.setLocal("Charred Cole");
+			MT.Lapis.setLocal("Le Piss");
+			MT.Redstone.setLocal("Blingstone");
+			MT.Glowstone.setLocal("Klostein");
+			MT.Emerald.setLocal("Chaos Emerald");
+			MT.Craponite.setLocal("Pink Diamond");
+			MT.Diamond.setLocal("Sapphire");
+			MT.DiamondPink.setLocal("Craponite");
+			MT.Bedrock.setLocal("Sofarock");
+			MT.Plastic.setLocal("LEGO");
+			MT.Asbestos.setLocal("Bestos");
+			MT.AncientDebris.setLocal("Cinnabun");
+			MT.Cinnamon.setLocal("Ancient Debris");
+			MT.WOODS.Cinnamon.setLocal("Ancient Debris");
 			MT.Rb.setLocal("Ruby");
 			MT.Ruby.setLocal("Red Sapphire");
 			MT.KNO3.setLocal("Niter");
 			MT.NaNO3.setLocal("Nitre");
 			MT.Glyceryl.setLocal("Nitro");
 			MT.Gunpowder.setLocal("Boompowder");
+			MT.Lubricant.setLocal("Lube");
 			MT.H2SO4.setLocal("Sulphuric Acid");
 			MT.H2S2O7.setLocal("Disulphuric Acid");
 			MT.Greenschist.setLocal("Green Shit");
@@ -474,13 +488,18 @@ public class GT_API extends Abstract_Mod {
 			MT.BlackBronze.setLocal("Afroamerican Tinkerers Alloy");
 			MT.Constantan.setLocal("Cupronickel");
 			MT.FakeOsmium.setLocal("Platinum");
+			MT.NetherQuartz.setLocal("Weather Quartz");
 			MT.MilkyQuartz.setLocal("Milk Quartz");
 			MT.CertusQuartz.setLocal("Citrus Quartz");
 			MT.ChargedCertusQuartz.setLocal("Charged Citrus Quartz");
+			MT.UUMatter.setLocal("UwU-Matter");
+			MT.UUAmplifier.setLocal("UwU-Amplifier");
 			MT.OREMATS.Galena.setLocal("Silverlead");
 			MT.OREMATS.Huebnerite.setLocal("Boobnerite");
 			MT.OREMATS.Bromargyrite.setLocal("Bromagnerite");
 			MT.OREMATS.Chalcopyrite.setLocal("Chackapackerite");
+
+			for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_MAP.values()) if (tMaterial.mNameLocal.toLowerCase().contains("wood")) tMaterial.setLocal(tMaterial.mNameLocal + " >:] nice");
 		}
 		
 		if (D1) {
@@ -512,6 +531,7 @@ public class GT_API extends Abstract_Mod {
 		CONSTANT_ENERGY                         = ConfigsGT.GREGTECH.get("general", "UninterruptedEnergyRequirement"   , T);
 		FOOD_OVERDOSE_DEATH                     = ConfigsGT.GREGTECH.get("general", "DeathByOverdosingCertainFoods"    , T);
 		NUTRITION_SYSTEM                        = ConfigsGT.GREGTECH.get("general", "NutritionSystem"                  , T);
+		OBSTRUCTION_CHECKS                      = ConfigsGT.GREGTECH.get("general", "ObstructionChecks"                , T);
 		OWNERSHIP_RESET                         = ConfigsGT.GREGTECH.get("general", "ResetPlayerOwnershipOfGT6Blocks"  , F);
 		SPAWN_ZONE_MOB_PROTECTION               = ConfigsGT.GREGTECH.get("general", "PreventMobSpawnsCloseToSpawn"     , T);
 		DISABLE_GT6_CRAFTING_RECIPES            = ConfigsGT.GREGTECH.get("general", "DisableGT6CraftingRecipesDEBUG"   , F);
@@ -610,13 +630,15 @@ public class GT_API extends Abstract_Mod {
 		ITexture.Util.MC_ALPHA_BLENDING     = ConfigsGT.CLIENT.get(ConfigCategories.general, "useMCAlphaBlending"      , ITexture.Util.MC_ALPHA_BLENDING);
 		
 		GT6WorldGenerator.PFAA = (ConfigsGT.WORLDGEN.get(ConfigCategories.general, "AutoDetectPFAA", T) && MD.PFAA.mLoaded);
-		
+		GT6WorldGenerator.TFC  = (ConfigsGT.WORLDGEN.get(ConfigCategories.general, "AutoDetectTFC" , T) && (MD.TFC.mLoaded || MD.TFCP.mLoaded));
+
 		// Register Crafting Recipe Classes.
-		RecipeSorter.register("gregtech:shaped"         , AdvancedCraftingShaped.class              , net.minecraftforge.oredict.RecipeSorter.Category.SHAPED       , "after:minecraft:shaped before:minecraft:shapeless");
-		RecipeSorter.register("gregtech:shapeless"      , AdvancedCraftingShapeless.class           , net.minecraftforge.oredict.RecipeSorter.Category.SHAPELESS    , "after:minecraft:shapeless");
-		RecipeSorter.register("gregtech:1ToY"           , AdvancedCrafting1ToY.class                , net.minecraftforge.oredict.RecipeSorter.Category.SHAPELESS    , "after:gregtech:shapeless");
-		RecipeSorter.register("gregtech:XToY"           , AdvancedCraftingXToY.class                , net.minecraftforge.oredict.RecipeSorter.Category.SHAPELESS    , "after:gregtech:1ToY");
-		RecipeSorter.register("gregtech:tool"           , AdvancedCraftingTool.class                , net.minecraftforge.oredict.RecipeSorter.Category.SHAPELESS    , "after:gregtech:1ToY");
+		RecipeSorter.register("gregtech:shaped"   , AdvancedCraftingShaped.class   , RecipeSorter.Category.SHAPED   , "after:minecraft:shaped before:minecraft:shapeless");
+		RecipeSorter.register("gregtech:shapeless", AdvancedCraftingShapeless.class, RecipeSorter.Category.SHAPELESS, "after:gregtech:shaped after:minecraft:shapeless");
+		RecipeSorter.register("gregtech:1ToY"     , AdvancedCrafting1ToY.class     , RecipeSorter.Category.SHAPELESS, "after:gregtech:shaped after:gregtech:shapeless");
+		RecipeSorter.register("gregtech:XToY"     , AdvancedCraftingXToY.class     , RecipeSorter.Category.SHAPELESS, "after:gregtech:shaped after:gregtech:1ToY");
+		RecipeSorter.register("gregtech:tool"     , AdvancedCraftingTool.class     , RecipeSorter.Category.SHAPELESS, "after:gregtech:shaped after:gregtech:XToY");
+
 		// A Default Packet Handler for some of the already existing Code. Yes, all those Packets are generalised special cases in order to save on Bandwidth.
 		// [        +127] = PacketConfig
 		// [        +126] = PacketPrefix
@@ -708,9 +730,9 @@ public class GT_API extends Abstract_Mod {
 		// Initialises the Fluid Display Item.
 		IL.Display_Fluid.set(new ItemFluidDisplay());
 		// Initialises the Integrated Circuit Item.
-		IL.Circuit_Selector.set(new ItemIntegratedCircuit("gt.integrated_circuit"));
+		IL.Circuit_Selector.set(new ItemIntegratedCircuit());
 		// Initialises the Empty Slot Marker Item.
-		IL.Empty_Slot.set(new ItemEmptySlot("gt.empty_slot"));
+		IL.Empty_Slot.set(new ItemEmptySlot());
 		// Register the GUI Handler.
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, api_proxy);
 		// Fixing vanilla Oak Plank Slab Recipe.
@@ -836,7 +858,35 @@ public class GT_API extends Abstract_Mod {
 	
 	@Mod.EventHandler
 	public void onIDChangingEvent(FMLModIdMappingEvent aEvent) {
+		// Fixing missing Blocks caused by DragonAPI. The Issue is more complicated but it should fix some part of it.
+		if (Block.blockRegistry.getObjectById( 26) == null) Block.blockRegistry.addObject( 26, "bed", Blocks.bed);
+		if (Block.blockRegistry.getObjectById( 34) == null) Block.blockRegistry.addObject( 34, "piston_head", Blocks.piston_head);
+		if (Block.blockRegistry.getObjectById( 55) == null) Block.blockRegistry.addObject( 55, "redstone_wire", Blocks.redstone_wire);
+		if (Block.blockRegistry.getObjectById( 59) == null) Block.blockRegistry.addObject( 59, "wheat", Blocks.wheat);
+		if (Block.blockRegistry.getObjectById( 63) == null) Block.blockRegistry.addObject( 63, "standing_sign", Blocks.standing_sign);
+		if (Block.blockRegistry.getObjectById( 64) == null) Block.blockRegistry.addObject( 64, "wooden_door", Blocks.wooden_door);
+		if (Block.blockRegistry.getObjectById( 68) == null) Block.blockRegistry.addObject( 68, "wall_sign", Blocks.wall_sign);
+		if (Block.blockRegistry.getObjectById( 71) == null) Block.blockRegistry.addObject( 71, "iron_door", Blocks.iron_door);
+		if (Block.blockRegistry.getObjectById( 74) == null) Block.blockRegistry.addObject( 74, "lit_redstone_ore", Blocks.lit_redstone_ore);
+		if (Block.blockRegistry.getObjectById( 75) == null) Block.blockRegistry.addObject( 75, "unlit_redstone_torch", Blocks.unlit_redstone_torch);
+		if (Block.blockRegistry.getObjectById( 83) == null) Block.blockRegistry.addObject( 83, "reeds", Blocks.reeds);
+		if (Block.blockRegistry.getObjectById( 92) == null) Block.blockRegistry.addObject( 92, "cake", Blocks.cake);
+		if (Block.blockRegistry.getObjectById( 93) == null) Block.blockRegistry.addObject( 93, "unpowered_repeater", Blocks.unpowered_repeater);
+		if (Block.blockRegistry.getObjectById( 94) == null) Block.blockRegistry.addObject( 94, "powered_repeater", Blocks.powered_repeater);
+		if (Block.blockRegistry.getObjectById(104) == null) Block.blockRegistry.addObject(104, "pumpkin_stem", Blocks.pumpkin_stem);
+		if (Block.blockRegistry.getObjectById(105) == null) Block.blockRegistry.addObject(105, "melon_stem", Blocks.melon_stem);
+		if (Block.blockRegistry.getObjectById(115) == null) Block.blockRegistry.addObject(115, "nether_wart", Blocks.nether_wart);
+		if (Block.blockRegistry.getObjectById(117) == null) Block.blockRegistry.addObject(117, "brewing_stand", Blocks.brewing_stand);
+		if (Block.blockRegistry.getObjectById(118) == null) Block.blockRegistry.addObject(118, "cauldron", Blocks.cauldron);
+		if (Block.blockRegistry.getObjectById(124) == null) Block.blockRegistry.addObject(124, "lit_redstone_lamp", Blocks.lit_redstone_lamp);
+		if (Block.blockRegistry.getObjectById(132) == null) Block.blockRegistry.addObject(132, "tripwire", Blocks.tripwire);
+		if (Block.blockRegistry.getObjectById(140) == null) Block.blockRegistry.addObject(140, "flower_pot", Blocks.flower_pot);
+		if (Block.blockRegistry.getObjectById(144) == null) Block.blockRegistry.addObject(144, "skull", Blocks.skull);
+		if (Block.blockRegistry.getObjectById(149) == null) Block.blockRegistry.addObject(149, "unpowered_comparator", Blocks.unpowered_comparator);
+		if (Block.blockRegistry.getObjectById(150) == null) Block.blockRegistry.addObject(150, "powered_comparator", Blocks.powered_comparator);
+
 		OUT.println(getModNameForLog() + ": Remapping ItemStackMaps due to ID Map change. Those damn Items should have a consistent Hashcode, but noooo, ofcourse they break Basic Code Conventions! Thanks Forge and Mojang!");
+
 		for (Map<ItemStackContainer, ?> tMap : STACKMAPS) UT.Code.reMap(tMap);
 		for (ICompat tCompat : ICompat.COMPAT_CLASSES) try {tCompat.onIDChanging(aEvent);} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
 	}

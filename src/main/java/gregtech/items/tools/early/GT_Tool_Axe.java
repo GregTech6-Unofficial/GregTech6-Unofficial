@@ -93,7 +93,7 @@ public class GT_Tool_Axe extends ToolStats {
 	@Override
 	public boolean isMinableBlock(Block aBlock, byte aMeta) {
 		String tTool = aBlock.getHarvestTool(aMeta);
-		return (tTool != null && tTool.equalsIgnoreCase(TOOL_axe)) || aBlock.getMaterial() == Material.wood || aBlock.getMaterial() == Material.cactus || aBlock.getMaterial() == Material.leaves || aBlock.getMaterial() == Material.vine || aBlock.getMaterial() == Material.plants || aBlock.getMaterial() == Material.gourd;
+		return (tTool != null && tTool.equalsIgnoreCase(TOOL_axe)) || aBlock.getMaterial() == Material.wood || aBlock.getMaterial() == Material.cactus || aBlock.getMaterial() == Material.leaves || aBlock.getMaterial() == Material.vine || aBlock.getMaterial() == Material.plants || aBlock.getMaterial() == Material.gourd || aBlock.getMaterial() == Material.coral;
 	}
 	
 	private static boolean LOCK = T;
@@ -134,17 +134,17 @@ public class GT_Tool_Axe extends ToolStats {
 	
 	@Override
 	public IIconContainer getIcon(boolean aIsToolHead, ItemStack aStack) {
-		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mTextureSetsItems.get(OP.toolHeadAxe.mIconIndexItem) : MultiItemTool.getSecondaryMaterial(aStack, MT.Wood).mTextureSetsItems.get(OP.stick.mIconIndexItem);
+		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mTextureSetsItems.get(OP.toolHeadAxe.mIconIndexItem) : MultiItemTool.getSecondaryMaterial(aStack, MT.WOODS.Spruce).mTextureSetsItems.get(OP.stick.mIconIndexItem);
 	}
 	
 	@Override
 	public short[] getRGBa(boolean aIsToolHead, ItemStack aStack) {
-		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mRGBaSolid : MultiItemTool.getSecondaryMaterial(aStack, MT.Wood).mRGBaSolid;
+		return aIsToolHead ? MultiItemTool.getPrimaryMaterial(aStack, MT.Steel).mRGBaSolid : MultiItemTool.getSecondaryMaterial(aStack, MT.WOODS.Spruce).mRGBaSolid;
 	}
 	
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
-		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_axe, SFX.MC_DIG_WOOD, getToolDamagePerContainerCraft(), T));
+		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_axe, SFX.MC_DIG_WOOD, getToolDamagePerContainerCraft(), T, T));
 	}
 	
 	@Override

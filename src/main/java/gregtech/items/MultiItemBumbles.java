@@ -216,10 +216,18 @@ public class MultiItemBumbles extends MultiItemRandom implements IItemBumbleBee 
 			}
 			return null;
 		case   3:
-			Block tFireFlower = ST.block(MD.BoP, "flowers2", null);
+			Block tFireFlower  = ST.block(MD.BoP , "flowers2", null);
+			Block tWartCrimson = ST.block(MD.NeLi, "CrimsonWartCrop", null);
+			Block tWartWarped  = ST.block(MD.NeLi, "WarpedWartCrop", null);
+			Block tWartSoggy   = ST.block(MD.NeLi, "SoggyWartCrop", null);
 			for (int j : tOrderY) for (int i : tOrderX) for (int k : tOrderZ) {
 				Block tBlock = WD.block(aWorld, aX+i, aY+j, aZ+k, F);
-				if (tBlock == Blocks.nether_wart) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
+				if (tBlock == NB) continue;
+				if (tBlock == Blocks.nether_wart    ) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
+				if (tBlock == tWartCrimson          ) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
+				if (tBlock == tWartWarped           ) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
+				if (tBlock == tWartSoggy            ) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
+				if (IL.NeLi_Wither_Rose.equal(tBlock)) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
 				if (tBlock == tFireFlower) {
 					if (WD.meta(aWorld, aX+i, aY+j, aZ+k) == 2) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
 					continue;
@@ -286,7 +294,7 @@ public class MultiItemBumbles extends MultiItemRandom implements IItemBumbleBee 
 		case 100:
 			for (int j : tOrderY) for (int i : tOrderX) for (int k : tOrderZ) {
 				Block tBlock = WD.block(aWorld, aX+i, aY+j, aZ+k, F);
-				if (tBlock == Blocks.clay || (tBlock == BlocksGT.Diggables && WD.meta(aWorld, aX+i, aY+j, aZ+k) == 1)) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
+				if (tBlock == Blocks.clay || (tBlock == BlocksGT.Diggables && WD.meta(aWorld, aX+i, aY+j, aZ+k) % 2 == 1)) return new ChunkCoordinates(aX+i, aY+j, aZ+k);
 			}
 			return null;
 		case 101:
@@ -499,8 +507,8 @@ public class MultiItemBumbles extends MultiItemRandom implements IItemBumbleBee 
 		}
 	}
 
-	@Override public ItemStack bumbleScan(ItemStack aBumbleBee) {ItemStack rStack = ST.copy(aBumbleBee); short aMeta = ST.meta_(rStack); if (aMeta % 10 < 5) ST.meta_(rStack, aMeta + 5); return rStack;}
-	@Override public ItemStack bumbleKill(ItemStack aBumbleBee) {ItemStack rStack = ST.copy(aBumbleBee); short aMeta = ST.meta_(rStack); if (aMeta % 5 != 4) ST.meta_(rStack, (aMeta / 5) * 5 + 4); return rStack;}
+	@Override public ItemStack bumbleScan (ItemStack aBumbleBee) {ItemStack rStack = ST.copy(aBumbleBee); short aMeta = ST.meta_(rStack); if (aMeta % 10 < 5) ST.meta_(rStack, aMeta + 5); return rStack;}
+	@Override public ItemStack bumbleKill (ItemStack aBumbleBee) {ItemStack rStack = ST.copy(aBumbleBee); short aMeta = ST.meta_(rStack); if (aMeta % 5 != 4) ST.meta_(rStack, (aMeta / 5) * 5 + 4); return rStack;}
 	@Override public ItemStack bumbleCrown(ItemStack aBumbleBee) {ItemStack rStack = ST.copy(aBumbleBee); short aMeta = ST.meta_(rStack); if (aMeta % 5 != 2) ST.meta_(rStack, (aMeta / 5) * 5 + 2); return rStack;}
 	@Override public boolean bumbleEqual(ItemStack aBumbleBeeA, short aMetaDataA, ItemStack aBumbleBeeB, short aMetaDataB) {return aBumbleBeeA.getItem() == aBumbleBeeB.getItem() && aMetaDataA / 10 == aMetaDataB / 10;}
 	@Override public byte bumbleType(ItemStack aBumbleBee) {return (byte)(ST.meta_(aBumbleBee) % 10);}
@@ -551,7 +559,7 @@ public class MultiItemBumbles extends MultiItemRandom implements IItemBumbleBee 
 
 		RM.BumbleQueens.addFakeRecipe(F, ST.array(ST.make(this, 1, aSpeciesID+2), ST.make(this, 1, aSpeciesID+7)), tOutputs, null, tChances, null, null, 0, 0, 0);
 	}
-
+	
 	private static boolean checkFlowers(World aWorld, int aX, int aY, int aZ) {
 		Block aBlock = WD.block(aWorld, aX, aY, aZ, F);
 		if (aBlock == NB) return F;
@@ -582,16 +590,16 @@ public class MultiItemBumbles extends MultiItemRandom implements IItemBumbleBee 
 		}
 		return F;
 	}
-
+	
 	public IIcon PRINCESS, QUEEN, SCANNED, DEAD;
-
+	
 	@Override public IIcon getIconIndex(ItemStack aStack) {return mIconList[(ST.meta_(aStack)/10)*10][0];}
 	@Override public IIcon getIconFromDamage(int aMetaData) {aMetaData /= 10; aMetaData *= 10; return UT.Code.exists(aMetaData, mIconList) ? mIconList[aMetaData][0] : Textures.ItemIcons.RENDERING_ERROR.getIcon(0);}
 	@Override public IIcon getIcon(ItemStack aStack, int aRenderPass, EntityPlayer aPlayer, ItemStack aUsedStack, int aUseRemaining) {return getIcon(aStack, aRenderPass);}
 	@Override public IIcon getIcon(ItemStack aStack, int aRenderPass) {return getIconFromDamageForRenderPass(ST.meta_(aStack), aRenderPass);}
-
+	
 	@Override public boolean requiresMultipleRenderPasses() {return T;}
-
+	
 	@Override
 	public int getRenderPasses(int aMetaData) {
 		switch(aMetaData % 10) {

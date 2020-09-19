@@ -151,6 +151,20 @@ public class GT_API_Post extends Abstract_Mod {
 		}
 		if (MD.TiC.mLoaded) {
 			MT.Co.addOreByProducts(MT.Ardite);
+			MT.OREMATS.Cobaltite.addOreByProducts(MT.Ardite);
+			MT.FakeOsmium.addOreByProducts(MT.Ardite);
+		}
+		if (MD.RP.mLoaded) {
+			MT.Monazite.addOreByProducts(MT.Nikolite);
+			MT.OREMATS.Bastnasite.addOreByProducts(MT.Nikolite);
+		}
+		if (MD.PR.mLoaded) {
+			MT.Monazite.addOreByProducts(MT.Electrotine);
+			MT.OREMATS.Bastnasite.addOreByProducts(MT.Electrotine);
+		}
+		if (MD.BP.mLoaded) {
+			MT.Monazite.addOreByProducts(MT.Teslatite);
+			MT.OREMATS.Bastnasite.addOreByProducts(MT.Teslatite);
 		}
 		if (MD.BR.mLoaded) {
 			MT.Th.addOreByProducts(MT.Cyanite);
@@ -164,11 +178,12 @@ public class GT_API_Post extends Abstract_Mod {
 			MT.Am.addOreByProducts(MT.Blutonium);
 		}
 		if (MD.AE.mLoaded) {
-			OP.gem  .disableItemGeneration(MT.CertusQuartz, MT.Fluix);
-			OP.dust .disableItemGeneration(MT.CertusQuartz, MT.Fluix);
+			OP.gem .disableItemGeneration(MT.CertusQuartz, MT.Fluix);
+			OP.dust.disableItemGeneration(MT.CertusQuartz, MT.Fluix);
 		}
 		if (MD.AA.mLoaded) {
 			MT.OREMATS.Barite.addOreByProducts(MT.BlackQuartz);
+			MT.MilkyQuartz.addOreByProducts(MT.BlackQuartz);
 		}
 	}
 
@@ -356,6 +371,9 @@ public class GT_API_Post extends Abstract_Mod {
 		if (MD.WR_CBE_C.mLoaded) {
 			OreDictManager.INSTANCE.setTarget(OP.stick  , MT.Obsidian      , ST.make(MD.WR_CBE_C, "obsidianStick", 1, 0));
 		}
+		if (MD.FMB.mLoaded) {
+			OreDictManager.INSTANCE.setTarget(OP.stick  , MT.Stone         , ST.make(MD.FMB, "stoneRod", 1, 0));
+		}
 
 		// Oh look, Matter Overdrive does this shit too...
 		if (MD.MO.mLoaded) {
@@ -387,12 +405,12 @@ public class GT_API_Post extends Abstract_Mod {
 		if (MD.GoG.mLoaded) {
 			OreDictManager.INSTANCE.setTarget(OP.chunkGt, MT.Fe, ST.make(MD.GoG, "item.GrimoireOfGaia.Shard", 1, 0));
 			OreDictManager.INSTANCE.setTarget(OP.chunkGt, MT.Au, ST.make(MD.GoG, "item.GrimoireOfGaia.Shard", 1, 1));
-			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"     , 1, 2, MT.Diamond      ,  U4);
-			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"     , 1, 3, MT.Emerald      ,  U4);
-			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"     , 1, 4, MT.NetherStar   ,  U4);
-			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"     , 1, 5, MT.EnderPearl   ,  U4);
-			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"     , 1, 6, MT.Blaze        ,  U8);
-			OM.data(MD.GoG, "item.GrimoireOfGaia.Fragment"  , 1, 0, MT.Emerald      ,  U8);
+			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 2, MT.Diamond   , U4);
+			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 3, MT.Emerald   , U4);
+			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 4, MT.NetherStar, U4);
+			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 5, MT.EnderPearl, U4);
+			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 6, MT.Blaze     , U8);
+			OM.data(MD.GoG, "item.GrimoireOfGaia.Fragment", 1, 0, MT.Emerald   , U8);
 		}
 
 		// Seems like it isn't "better" in all aspects.
@@ -594,33 +612,57 @@ public class GT_API_Post extends Abstract_Mod {
 			}
 		}
 		
-		for (SaplingEntry tTree : WoodDictionary.SAPLINGS.values()) {
-		RM.Trees.addFakeRecipe(F, ST.array(tTree.mSapling, tTree.mLeafEntry == null ? NI : tTree.mLeafEntry.mLeaf), tTree.mWoodEntry == null ? tTree.mLeafEntry == null ? ZL_IS : ST.array(tTree.mLeafEntry.mLeaf) : ST.array(tTree.mLeafEntry == null ? NI : tTree.mLeafEntry.mLeaf
+		for (SaplingEntry tTree : WoodDictionary.LIST_SAPLINGS) {
+		RM.Trees.addFakeRecipe(F, ST.array(tTree.mSapling, tTree.mLeafEntry == null ? NI : tTree.mLeafEntry.mLeaf), tTree.mWoodEntry == null ? tTree.mLeafEntry == null ? ZL_IS : ST.array(tTree.mLeafEntry.mLeaf) : ST.array(
+		  tTree.mLeafEntry == null ? NI : tTree.mLeafEntry.mLeaf
 		, tTree.mWoodEntry.mLog
 		, tTree.mWoodEntry.mBeamEntry  == null ? NI : tTree.mWoodEntry.mBeamEntry .mBeam
 		, tTree.mWoodEntry.mPlankEntry == null ? NI : tTree.mWoodEntry.mPlankEntry.mSlab
 		, tTree.mWoodEntry.mPlankEntry == null ? NI : tTree.mWoodEntry.mPlankEntry.mStair
 		, tTree.mWoodEntry.mPlankEntry == null ? NI : tTree.mWoodEntry.mPlankEntry.mPlank
+		, tTree.mWoodEntry.mPlankEntry == null ? NI : ST.validMeta_(tTree.mWoodEntry.mPlankEntry.mStickCountLathe, tTree.mWoodEntry.mPlankEntry.mStick)
+		, tTree.mWoodEntry.mBeamEntry  == null ? NI : ST.validMeta_(tTree.mWoodEntry.mBeamEntry .mStickCountLathe, tTree.mWoodEntry.mBeamEntry .mStick)
+		, tTree.mWoodEntry.mPlankEntry == null ? NI : OP.crateGt64Plate.mat(tTree.mWoodEntry.mPlankEntry.mMaterialPlank, 1)
+		, OM.dust(tTree.mWoodEntry.mMaterialWood.mTargetPulver, tTree.mWoodEntry.mPlankCountBuzz+2, 1)
+		, tTree.mWoodEntry.mBark
+		, tTree.mWoodEntry.mCharcoalCount <= 0 ? NI : OP.gem.mat(MT.Charcoal, tTree.mWoodEntry.mCharcoalCount)
 		), null, null, null, null, 0, 0, 0);
 		}
 		
 		new LoaderBookList().run();
 		
-		/** Diatomic Elements get a Subscript 2 appended to their ToolTip after PostInit. That way the ToolTip Calculation works properly until PostInit happens. */
-		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_MAP.values()) if (tMaterial.contains(TD.Atomic.DIATOMIC_NONMETAL)) tMaterial.mTooltipChemical += "\u2082";
+		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_MAP.values()) {
+			// Diatomic Elements get a Subscript 2 appended to their ToolTip after PostInit. That way the ToolTip Calculation works properly until PostInit happens.
+			if (tMaterial.contains(TD.Atomic.DIATOMIC_NONMETAL)) tMaterial.mTooltipChemical += "\u2082";
+			// Simple automatically added Alloying Recipes.
+			if (tMaterial.contains(TD.Processing.CRUCIBLE_ALLOY)) if (tMaterial.mComponents != null) tMaterial.addAlloyingRecipe(tMaterial.mComponents); else ERR.println("ERROR: Alloying Recipe for " + tMaterial.mNameLocal + " cannot be added due to lack of Component Information");
+		}
 		
-		MT.P.mTooltipChemical += "\u2084";
-		MT.S.mTooltipChemical += "\u2088";
+		MT.P .mTooltipChemical += "\u2084";
+		MT.S .mTooltipChemical += "\u2088";
 		MT.Se.mTooltipChemical += "\u2088";
+
+		// And now to stop CoFH-Core from crashing and lagging the Game in Singleplayer with the FMLProxyPacket race condition Bug.
+		// I hate having to do this, but there is no other proper way to actually fix this Issue...
+		// It would be so much easier to just say to not use this Mod, but ofcourse a lot of Stuff depends on it "existing" for no good reasons.
+		// This Bug has caused many people way too much wasted time to just leave it alone. So Baseball Bat instead of Surgical Precision it is!
+
+		// Replaced by ASM Stuff.
+		//if (CODE_CLIENT && MD.COFH_CORE.mLoaded && ConfigsGT.CLIENT.get(ConfigCategories.general, "BrutallyFixCoFHCoreInSinglePlayer", T)) try {
+		//  MinecraftForge.EVENT_BUS.unregister(cofh.CoFHCore.instance);
+		//  FMLCommonHandler.instance().bus().unregister(cofh.core.util.FMLEventHandler.instance);
+		//} catch (Throwable e) {
+		//  e.printStackTrace(ERR);
+		//}
 	}
 
 	@Override
 	public void onModServerStarting2(FMLServerStartingEvent aEvent) {
-		if (DISABLE_ALL_IC2_COMPRESSOR_RECIPES  ) ic2.api.recipe.Recipes.compressor.getRecipes().clear();
-		if (DISABLE_ALL_IC2_EXTRACTOR_RECIPES   ) ic2.api.recipe.Recipes.extractor .getRecipes().clear();
-		if (DISABLE_ALL_IC2_MACERATOR_RECIPES   ) ic2.api.recipe.Recipes.macerator .getRecipes().clear();
-		if (DISABLE_ALL_IC2_OREWASHER_RECIPES   ) ic2.api.recipe.Recipes.oreWashing.getRecipes().clear();
-		if (DISABLE_ALL_IC2_CENTRIFUGE_RECIPES  ) ic2.api.recipe.Recipes.centrifuge.getRecipes().clear();
+		if (DISABLE_ALL_IC2_COMPRESSOR_RECIPES) ic2.api.recipe.Recipes.compressor.getRecipes().clear();
+		if (DISABLE_ALL_IC2_EXTRACTOR_RECIPES ) ic2.api.recipe.Recipes.extractor .getRecipes().clear();
+		if (DISABLE_ALL_IC2_MACERATOR_RECIPES ) ic2.api.recipe.Recipes.macerator .getRecipes().clear();
+		if (DISABLE_ALL_IC2_OREWASHER_RECIPES ) ic2.api.recipe.Recipes.oreWashing.getRecipes().clear();
+		if (DISABLE_ALL_IC2_CENTRIFUGE_RECIPES) ic2.api.recipe.Recipes.centrifuge.getRecipes().clear();
 	}
 
 	@Override public void onModServerStarted2(FMLServerStartedEvent aEvent) {/**/}

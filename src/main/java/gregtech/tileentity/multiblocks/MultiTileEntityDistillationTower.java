@@ -27,6 +27,7 @@ import gregapi.data.FL;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
 import gregapi.data.TD;
+import gregapi.fluid.FluidTankGT;
 import gregapi.tileentity.delegate.DelegatorTileEntity;
 import gregapi.tileentity.energy.ITileEntityEnergy;
 import gregapi.tileentity.machines.ITileEntityAdjacentOnOff;
@@ -148,7 +149,7 @@ public class MultiTileEntityDistillationTower extends TileEntityBase10MultiBlock
 			IFluidTank tTank = mTanksOutput[i];
 			FluidStack tFluid = tTank.getFluid();
 			if (tFluid != null && tFluid.amount > 0) {
-				DelegatorTileEntity<TileEntity> tDelegator = null;				
+				DelegatorTileEntity<TileEntity> tDelegator = null;
 				tDelegator = WD.te(worldObj, getOffsetXN(mFacing, 3), yCoord+i+1, getOffsetZN(mFacing, 3), mFacing, F);
 				
 				if (FL.move(tTank, tDelegator) > 0) updateInventory();
