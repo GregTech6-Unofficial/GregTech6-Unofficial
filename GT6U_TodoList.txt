@@ -25,45 +25,7 @@ Cr2O3 + 2 Al → Al2O3 + 2 Cr
 聚四氟乙烯管道不耐腐蚀
 铬线配平GT化
 
-聚变mk2 mk3
-mk2:
-输入液氦 MK2聚变机械外壳 UV超导线圈
-mk3:
-输入液氦 MK3聚变机械外壳 PUV1超导线
-
-粒子对撞机
-电离粒子对撞机：
-铱锇合金壁板 UV超导线圈
-正负电子对撞机：
-粒子对撞机械外壳 PUV1超导线
-大型强子对撞机：
-粒子对撞机械外壳 PUV2超导线
-
-反物质发LU
-
-水井
-3x3x4，主方块在底面中心，顶面中心自动输出水，顶面其他方块可以被抽取水。
-本质上是一个机器
-1个输入物品槽，1个输出流体槽
-
-铂线流体
-
-Engine and turbine:
-
-火花塞内燃机20%-30%，压燃内燃机30%-40%，燃气内燃机50%-60%
-
-Fusion:
-
-Energy capture
-Multiple approaches have been proposed for energy capture. The simplest is to heat a fluid. Most designs concentrate on the D-T reaction, which releases much of its energy in a neutron. Electrically neutral, the neutron escapes the confinement. In most such designs, it is ultimately captured in a thick "blanket" of lithium surrounding the reactor core. When struck by a high-energy neutron, the lithium can produce tritium, which is then fed back into the reactor. The energy of this reaction also heats the blanket, which is then actively cooled with a working fluid and then that fluid is used to drive conventional turbomachinery.
-
-It has also been proposed to use the neutrons to breed additional fission fuel in a blanket of nuclear waste, a concept known as a fission-fusion hybrid. In these systems, the power output is enhanced by the fission events, and power is extracted using systems like those in conventional fission reactors.[7]
-
-Designs that use other fuels, notably the p-B reaction, release much more of their energy in the form of charged particles. In these cases, alternate power extraction systems based on the movement of these charges are possible. Direct energy conversion was developed at LLNL in the 1980s as a method to maintain a voltage using the fusion reaction products. This has demonstrated energy capture efficiency of 48 percent.[8]
-
-When Greg replaced GT5 fusion mechanic with GT6, it was arguably more realistic because you could pretend that the GT6 fusion reactor was doing some kind of direct energy conversion. I think that replacing it with a turbine that outputs RU is moving things back to being unrealistic. My suggestion is that either you rename the "plasma turbine" to "plasma MHD generator" and have it directly output EU instead of RU, or implement a lithium (or lithium+U238) blanket system that would be used with the heat exchanger.
-
-https://baike.baidu.com/item/%E7%BB%86%E8%8F%8C%E5%8F%91%E7%94%B5/5392077?fr=aladdin
+/** About BACTERIA */
 
 细菌发电
 细菌发电的原理是让细菌在电池组里分解分子，以释放出电子向阳极运动产生电能。在细菌发电期间，还要往电池里不断充入空气，用以搅拌细菌培养液和氧化物质的混合物。 [1-3]
@@ -121,6 +83,9 @@ https://baike.baidu.com/item/%E7%94%9F%E7%89%A9%E5%88%B6%E6%B0%A2%E5%BE%AE%E7%94
 
 https://www.jianshu.com/p/4678a761faaa CRISPER
 
+
+/** About CIRCUITRY */
+
 电路基板：
 
 
@@ -169,6 +134,8 @@ H2S2O8 + 2H2O → 2H2SO4 + H2O2 c
 12U 6U 14U 4U
 
 
+/** About MESU */
+
 
 2H3PO4 + 5CaF2 =高温搅拌机= 2PF5 + 5CaO + 3H2O
 
@@ -183,8 +150,6 @@ LiOH + HF =搅拌机= LiF + H2O
 PF5 + LiF =干燥器= F6LiP
 
 6 2 8
-
-
 
 五氧化二磷P2O5(Phosphorus Pentoxide)
 
@@ -208,30 +173,52 @@ COCl2 + 2乙醇 =搅拌机= C5H10O3 (碳酸二乙酯) + 2HCl
 
 72 6000 = 12 18 30 2000 4000
 
-
-
-
-
 COCl2 + Methanol -> C2H3ClO2 (Methyl Chloroformate 氯甲酸甲酯) + HCl
 
 C2H3ClO2 + C2H6O (ethanol) -> C4H8O3 (Ethyl Methyl Carbonate 碳酸甲乙酯) + HCl
 
+// Water well
+
+水井
+3x3x4，主方块在底面中心，顶面中心自动输出水，顶面其他方块可以被抽取水。
+本质上是一个机器
+1个输入物品槽，1个输出流体槽
+
+// Fusion and particle colliders
+
+聚变mk2 mk3
+mk2:
+输入液氦 MK2聚变机械外壳 UV超导线圈
+mk3:
+输入液氦 MK3聚变机械外壳 PUV1超导线
+
+Energy capture
+Multiple approaches have been proposed for energy capture. The simplest is to heat a fluid. Most designs concentrate on the D-T reaction, which releases much of its energy in a neutron. Electrically neutral, the neutron escapes the confinement. In most such designs, it is ultimately captured in a thick "blanket" of lithium surrounding the reactor core. When struck by a high-energy neutron, the lithium can produce tritium, which is then fed back into the reactor. The energy of this reaction also heats the blanket, which is then actively cooled with a working fluid and then that fluid is used to drive conventional turbomachinery.
+
+It has also been proposed to use the neutrons to breed additional fission fuel in a blanket of nuclear waste, a concept known as a fission-fusion hybrid. In these systems, the power output is enhanced by the fission events, and power is extracted using systems like those in conventional fission reactors.[7]
+
+Designs that use other fuels, notably the p-B reaction, release much more of their energy in the form of charged particles. In these cases, alternate power extraction systems based on the movement of these charges are possible. Direct energy conversion was developed at LLNL in the 1980s as a method to maintain a voltage using the fusion reaction products. This has demonstrated energy capture efficiency of 48 percent.[8]
+
+When Greg replaced GT5 fusion mechanic with GT6, it was arguably more realistic because you could pretend that the GT6 fusion reactor was doing some kind of direct energy conversion. I think that replacing it with a turbine that outputs RU is moving things back to being unrealistic. My suggestion is that either you rename the "plasma turbine" to "plasma MHD generator" and have it directly output EU instead of RU, or implement a lithium (or lithium+U238) blanket system that would be used with the heat exchanger.
+
+https://baike.baidu.com/item/%E7%BB%86%E8%8F%8C%E5%8F%91%E7%94%B5/5392077?fr=aladdin
+
+粒子对撞机
+电离粒子对撞机：
+铱锇合金壁板 UV超导线圈
+正负电子对撞机：
+粒子对撞机械外壳 PUV1超导线
+大型强子对撞机：
+粒子对撞机械外壳 PUV2超导线
+
+反物质发LU
 
 
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lead-Acid Battery Core (Filled)"                     , "Multiblock Machines", 18124, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore1"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18130), MT.H2SO4.fluid(U*16, F), NF, aRegistry.getItem());
-		aMat = MT.BatteryAlloy;         aRegistry.add("Alkaline Battery Core (Filled)"                      , "Multiblock Machines", 18125, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore2"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18131), MT.DistWater.fluid(U*16, F), NF, aRegistry.getItem());
-		aMat = MT.BatteryAlloy;         aRegistry.add("Nickel-Cadmium Battery Core (Filled)"                , "Multiblock Machines", 18126, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore3"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18132), MT.DistWater.fluid(U*16, F), NF, aRegistry.getItem());
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Cobalt Battery Core (Filled)"                , "Multiblock Machines", 18127, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore4"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18133), MT.HCl.fluid(U*16, F), NF, aRegistry.getItem());
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Manganese Battery Core (Filled)"             , "Multiblock Machines", 18128, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore5"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18134), MT.HF.fluid(U*16, F), NF, aRegistry.getItem());
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-F-Phosphate Battery Core (Filled)"           , "Multiblock Machines", 18129, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore6"            , NBT_DESIGNS, 0));  RM.Canner.addRecipe1(F, 16, 512, aRegistry.getItem(18135), MT.C4H8O3.fluid(U*16, F), NF, aRegistry.getItem());
+// Gas motors and engine
 
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lead-Acid Battery Core (Empty)"                      , "Multiblock Machines", 18130, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore1empty"       , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_Lead_Acid_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
-		aMat = MT.BatteryAlloy;         aRegistry.add("Alkaline Battery Core (Empty)"                       , "Multiblock Machines", 18131, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore2empty"       , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_Alkaline_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
-		aMat = MT.BatteryAlloy;         aRegistry.add("Nickel-Cadmium Battery Core (Empty)"                 , "Multiblock Machines", 18132, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycore3empty"       , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_NiCd_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Cobalt Battery Core (Empty)"                 , "Multiblock Machines", 18133, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_LiCoO2_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-Manganese Battery Core (Empty)"              , "Multiblock Machines", 18134, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "WWW", "WAW", "WWW", 'W', IL.Battery_LiMn_Cell_Empty.get(1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
-		aMat = MT.BatteryAlloy;         aRegistry.add("Lithium-F-Phosphate Battery Core (Empty)"            , "Multiblock Machines", 18135, 17101, aClass                                   , aMat.mToolQuality, 64, aMachine   , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_TEXTURE, "batterycoreliempty"      , NBT_DESIGNS, 0), "DDD", "WAW", "PPP", 'W', OP.blockDust.mat(MT.LiPF6, 1), "D", OP.plateCurved.mat(MT.Graphite, 1), "P", OP.plateCurved.mat(MT.Pt, 1), "A", OP.plateDense.mat(MT.BatteryAlloy, 1));
+Engine and turbine:
 
+火花塞内燃机20%-30%，压燃内燃机30%-40%，燃气内燃机50%-60%
 
 
 
