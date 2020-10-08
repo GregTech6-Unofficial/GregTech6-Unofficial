@@ -13,19 +13,21 @@ Note: GT6 official branch is still being developed, though it will be mostly bug
 
 The development work of GT6U is undertaken by development team GT6U-Team, and its development direction is to continue to improve the technology line of GT6 and add more practical equipment.
 
-* Added dozens of new fluids to make the organic chemical tech tree more complete
+* Added dozens of new fluids to make the petroluem/organic chemistry tech tree more complete.
 
-* Brand new chromite treatment!
+* Added an achievment page for an overview of Gregtech tech tree and milestones. 
 
-* Brand new PVC, PTFE, epoxy resin, and their derivatives (pipes, storage tanks)!
+* Added a variety of large machines, including large roasting oven, industrial coke oven, fuel cleaner, large dryer, cracking tower, particle collider, mask aligner, large heat mixer, draining well, biochemical research lab, large extruder, large crystallisation crucible, etc. 
 
-* Added a variety of large machines, including large roasting ovens, industrial coke ovens, large dryers, cracking towers, particle colliders, mask aligners, large high-temperature mixers, etc.
+* Added a variety of small machines, including circuit assembly machine, laser cutting machine, electric autoclave, heat mixer, incubator, etc.
 
-* Added a variety of small machines, including circuit assembly machine, fluid curing machine, laser cutting machine, electric autoclave, high temperature mixer, etc.
+* Brand new polymers: PVC, PTFE, Epoxid, and their derivatives (pipes, storage tanks, etc).
 
-* Some adjustments to the original electronic industry.
+* Brand new chromite treatment.
 
-* Diversified gameplay, such as nuclear power reactors that can be cooled with distilled water.
+* Adjusted the original circuitry manufacture to be more closely related to new polymers. 
+
+* Diversified gameplay, such as nuclear power reactors that can be cooled with distilled water, coconut trees, water wells, etc. 
 
 ## Changelogs
 
@@ -68,13 +70,13 @@ Test & Debug Support：@Contrl
 
 Also thanks to GregoriousT!
 
-## Support
+## Support Us
 
-You can use the Issue Tracker or join Discord or QQ group. 
+If you do like the new content we added to GregTech, consider supporting us at https://www.patreon.com/TeamMoeg (INTERNATIONAL) or https://afdian.net/@teammoeg (CN). Remember: your support is only toward to the new content we added, excluding the stuff Greg created. I would like to put a Patreon link to Greg's site, but he closed it earlier this year. So just join https://forum.mechaenetia.com/ to get in touch with this awesome guy who created GT6 and give him a warm appreciation. 
 
 ## Contribution
 
-Please do ^^ But if you make major changes please make sure you understand their consequences that might bring up because I don't guarantee that I can discover them. 
+Please do. But if you make major changes please make sure you understand their consequences that might bring up. I will help look at any Pull Requests and merge them if they are appropriate. 
 
 ## Related Projects
 
