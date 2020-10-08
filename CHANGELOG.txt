@@ -8,10 +8,6 @@ Nothing
 
 
 6.15.02: (Not released yet).
-Nothing
-
-
-6.15.01: (Not released yet).
 [WIP] Fusion Reactor Mk2 and Mk3 and their component blocks.
 [WIP] New Fusion system.
 The new systems will focus on two aspects of fusion:
@@ -29,6 +25,11 @@ It will consume the coolant and output equivalent amount of gaseous coolant thro
 This means you have to prepare a system of cooling devices to support your fusion reactors.
 To compensate for the increased maintenance cost and complexity, the energy production of fusion reactors will be boosted.
 Building a self-sustaining fusion plant will be one of the final aims in GregTech.
+
+
+6.15.01:
+[NOTE] This is a Hotfix (Minor change).
+[FIXED] Empty Laser Emitter requiring Circuit (T2) to craft, which makes it impossible to craft.
 
 
 6.15.00:
