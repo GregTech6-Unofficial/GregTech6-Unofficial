@@ -1,14 +1,14 @@
 This is the Changelog for GregTech-6-Unofficial
-6.15.06: (Not released yet).
+6.15.06-unofficial: (Not released yet).
 Nothing
 
-6.15.05: (Not released yet).
+6.15.05-unofficial: (Not released yet).
 Nothing
 
-6.15.04: (Not released yet).
+6.15.04-unofficial: (Not released yet).
 Nothing
 
-6.15.03: (Not released yet).
+6.15.03-unofficial: (Not released yet).
 [WIP] Fusion Reactor Mk2 and Mk3 and their component blocks.
 [WIP] New Fusion system.
 The new systems will focus on two aspects of fusion:
@@ -27,14 +27,15 @@ This means you have to prepare a system of cooling devices to support your fusio
 To compensate for the increased maintenance cost and complexity, the energy production of fusion reactors will be boosted.
 Building a self-sustaining fusion plant will be one of the final aims in GregTech.
 
-6.15.02:
+6.15.02-unofficial:
+[NOTE] Future GT6U version will have a "-unofficial" at the end.
 [NOTE] Because the 6.15.00 update is a major merge with Official branch, please report any bugs (e.g. recipes are gone) to the Issues tracker. Thank you.
 [FIXED] Some fusion recipes are gone.
 [FIXED] Matter Fabrication recipes for Charged Matter and Neutral Matter are gone.
 [FIXED] Recipes for superconducter wires are gone.
 [FIXED] Biomass recipes in fermenter are gone.
 
-6.15.01:
+6.15.01-unofficial:
 [NOTE] This is a Hotfix (Minor change).
 [FIXED] Empty Laser Emitter requiring Circuit (T2) to craft, which makes it impossible to craft.
 
