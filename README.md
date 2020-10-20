@@ -13,6 +13,12 @@ Note: GT6 official branch is still being developed, though it will be mostly bug
 
 The development work of GT6U is undertaken by development team GT6U-Team, and its development direction is to continue to improve the technology line of GT6 and add more practical equipment.
 
+## Summary
+
+Adding both more complexity at some places (Circuit-industry, Organic/Inorganic Chemistry-industry, and some misc parts of the game, such as requiring Aluminium to build cryo-distillation tower), as well as adding functionality to the game (More batteries, multiblock batteries, more multiblock machines, and end-game cool stuff regarding fusion and particle collider).
+
+## What We Added (Brief)
+
 * Added dozens of new fluids to make the petroluem/organic chemistry tech tree more complete.
 
 * Added an achievment page for an overview of Gregtech tech tree and milestones. 
