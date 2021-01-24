@@ -56,7 +56,8 @@ public class TD {
 		public static final TagData WIRE_LASER                              = TagData.createTagData("CONNECTORS.WIRE_LASER", "Laser Wire");
 		public static final TagData WIRE_LOGISTICS                          = TagData.createTagData("CONNECTORS.WIRE_LOGISTICS", "Logistics Wire");
 		public static final TagData AXLE_ROTATION                           = TagData.createTagData("CONNECTORS.AXLE_ROTATION", "Rotational Axle");
-		
+		public static final TagData WIRE_OpticalFiber                       = TagData.createTagData("CONNECTORS.WIRE_OPTICSLFIBER", "Optical Fiber");
+
 		/** Contains all known Energy Tags, which are related to Item Transport. */
 		public static final List<TagData> ALL_ITEM_TRANSPORT                = new ArrayListNoNulls<>(F, PNEUMATIC_ITEM);
 	}
@@ -140,6 +141,14 @@ public class TD {
 		public static final TagData QUANTUM                                 = TagData.createTagData("ENERGY.QUANTUM", "QU", "Quantum Energy", LH.Chat.PURPLE), QU = QUANTUM;
 		
 		/**
+		 * Energy Tag for sun light Energy. (Light Power)
+		 * Size = Nobody knows
+		 * Amount = Nobody knows
+		 */
+		public static final TagData LP                                 = TagData.createTagData("ENERGY.LP", "Lp", "Quantum Energy", LH.Chat.YELLOW);
+
+
+		/**
 		 * Energy Tag for Time. Machines which simply run on time use this token. This can for example also be used to make a "Time"-Energy emitting thing that accelerates chemical procedures.
 		 * Size = unused (always 1)
 		 * Amount = Ticks
@@ -200,7 +209,7 @@ public class TD {
 		/** Contains all known Energy Tags, which are electric. */
 		public static final List<TagData> ALL_ELECTRIC                      = new ArrayListNoNulls<>(F, EU);
 		/** Contains all known Energy Tags, which are electric. */
-		public static final List<TagData> ALL_NEGATIVE_ALLOWED              = new ArrayListNoNulls<>(F, AU, QU, MU, KU, RU, EU);
+		public static final List<TagData> ALL_NEGATIVE_ALLOWED              = new ArrayListNoNulls<>(F, AU, QU, MU, KU, RU, EU, LP);
 		/** Contains all known Energy Tags, which are weak to Water, such as electricity. */
 		public static final List<TagData> ALL_WEAK_TO_WATER                 = new ArrayListNoNulls<>(F, EU, HU, CU);
 		/** Contains all known Energy Tags, which are weak to Thunder, such as electricity. */
@@ -538,6 +547,7 @@ public class TD {
 		PARTS                                                               = TagData.createTagData("ITEMGENERATOR.PARTS"),
 		PIPES                                                               = TagData.createTagData("ITEMGENERATOR.PIPES"),
 		WIRES                                                               = TagData.createTagData("ITEMGENERATOR.WIRES"),
+		OPTICALFIBERS                                                       = TagData.createTagData("ITEMGENERATOR.OPTICALFIBERS"),
 		FOILS                                                               = TagData.createTagData("ITEMGENERATOR.FOILS"),
 		RAILS                                                               = TagData.createTagData("ITEMGENERATOR.RAILS"),
 		LENSES                                                              = TagData.createTagData("ITEMGENERATOR.LENSES"),
