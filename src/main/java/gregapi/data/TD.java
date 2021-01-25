@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech6-Unofficial Team
  *
  * This file is part of GregTech.
  *
@@ -141,11 +141,11 @@ public class TD {
 		public static final TagData QUANTUM                                 = TagData.createTagData("ENERGY.QUANTUM", "QU", "Quantum Energy", LH.Chat.PURPLE), QU = QUANTUM;
 		
 		/**
-		 * Energy Tag for sun light Energy. (Light Power)
+		 * Energy Tag for light Energy(From the sun). (Light Power)
 		 * Size = Nobody knows
 		 * Amount = Nobody knows
 		 */
-		public static final TagData LP                                 = TagData.createTagData("ENERGY.LP", "Lp", "Quantum Energy", LH.Chat.YELLOW);
+		public static final TagData LP                                 = TagData.createTagData("ENERGY.LP", "LP", "Light Energy", LH.Chat.YELLOW);
 
 
 		/**
