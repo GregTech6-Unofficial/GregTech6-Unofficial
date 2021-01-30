@@ -205,5 +205,5 @@ public class MultiTileEntitySPP extends TileEntityBase09FacingSingle implements 
 		new Textures.BlockIcons.CustomIcon("machines/solarpanels/solarpanel_electric_8eu/overlay_active/top"),
 	};
 
-	@Override public String getTileEntityName() {return "gt.multitileentity.lightcollector.electric_8eu";}
+	@Override public String getTileEntityName() {return "gt.multitileentity.spp.electric_8eu";}
 }
