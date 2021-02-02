@@ -45,10 +45,12 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 	@Override
 	public boolean checkStructure2() {
 		int
-				tMinX = xCoord-(SIDE_X_NEG==mFacing?0:SIDE_X_POS==mFacing?6:1),
-				tMinZ = zCoord-(SIDE_Z_NEG==mFacing?0:SIDE_Z_POS==mFacing?6:1),
-				tMaxX = xCoord+(SIDE_X_POS==mFacing?0:SIDE_X_NEG==mFacing?6:1),
-				tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?6:1);
+				tMinX = xCoord-(SIDE_X_NEG==mFacing?0:SIDE_X_POS==mFacing?6:2),
+				tMinZ = zCoord-(SIDE_Z_NEG==mFacing?0:SIDE_Z_POS==mFacing?6:2),
+				tMaxX = xCoord+(SIDE_X_POS==mFacing?0:SIDE_X_NEG==mFacing?6:2),
+				tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?6:2);
+		int
+				tD = mActive?2:mRunning?1:0;
 
 		if (worldObj.blockExists(tMinX, yCoord, tMinZ) && worldObj.blockExists(tMaxX, yCoord+2, tMaxZ)) {
 			boolean tSuccess = T;
@@ -60,31 +62,21 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 				boolean isNotSides = tX != tMinX && tX != tMaxX && tZ != tMinZ && tZ != tMaxZ;
 
 				// Layer 1
-				if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord, tZ, isSides ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
+				if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord, tZ, isSides ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ENERGY)) tSuccess = F;
 
 				// Layer 2
 				if (isNotSides) {
-					if (getWater(tX, yCoord + 1, tZ)) worldObj.setBlock(tX, yCoord + 1, tZ, Blocks.water); else tSuccess = F;
+					if (getWater(tX, yCoord + 1, tZ)) worldObj.setBlock(tX, yCoord + 1, tZ, Blocks.water, 0, 3); else tSuccess = F;
 				} else {
-					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 1, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
+					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 1, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), isCorners ? 0 : tD, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
 				}
 
 				// Layer 3
 				if (isNotSides) {
-					if (getAir(tX, yCoord + 2, tZ)) worldObj.setBlock(tX, yCoord + 2, tZ, Blocks.water); else tSuccess = F;
+					if (getWater(tX, yCoord + 2, tZ)) worldObj.setBlock(tX, yCoord + 2, tZ, Blocks.water, 0, 3); else tSuccess = F;
 				} else {
-					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 2, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
+					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 2, tZ, 18002, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID)) tSuccess = F;
 				}
-
-				// Layer 4
-				if (isNotSides) {
-					if (getAir(tX, yCoord + 3, tZ)) worldObj.setBlock(tX, yCoord + 3, tZ, Blocks.water); else tSuccess = F;
-				} else {
-					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 3, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
-				}
-
-				// Layer 5
-				if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 4, tZ, isSides ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
 
 			}
 			return tSuccess;
@@ -101,11 +93,13 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 
 	
 	static {
-		LH.add("gt.tooltip.multiblock.fishery.1", "5x11x5 Hollow Cube");
-		LH.add("gt.tooltip.multiblock.fishery.2", "The Edges of the Cube are Stainless Steel Walls");
-		LH.add("gt.tooltip.multiblock.fishery.3", "The Faces of the Cube are Fishery Blocks");
-		LH.add("gt.tooltip.multiblock.fishery.4", "Stuff can go in and out on any of the Stainless Steel Walls");
-		LH.add("gt.tooltip.multiblock.fishery.5", "Main Block centered on Slim-Side-Bottom and facing outwards");
+		LH.add("gt.tooltip.multiblock.fishery.1", "5(Width)x3(Height)x7(Length) Hollow Cube with top side opened");
+		LH.add("gt.tooltip.multiblock.fishery.2", "Main Block centered on 5x3-Side-Bottom and facing outwards");
+		LH.add("gt.tooltip.multiblock.fishery.3", "The Edges of the Cube are Stainless Steel Walls");
+		LH.add("gt.tooltip.multiblock.fishery.4", "The Faces of the Cube are Fishery Blocks");
+		LH.add("gt.tooltip.multiblock.fishery.5", "Fill the Hollow space with Still Water");
+		LH.add("gt.tooltip.multiblock.fishery.6", "Stuff can go in and out at middle and top layer");
+		LH.add("gt.tooltip.multiblock.fishery.7", "Energy input at the bottom layer");
 	}
 	
 	@Override
@@ -116,6 +110,8 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.3"));
 		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.4"));
 		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.5"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.6"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.7"));
 		super.addToolTips(aList, aStack, aF3_H);
 	}
 
@@ -123,12 +119,12 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 	@Override
 	public boolean isInsideStructure(int aX, int aY, int aZ) {
 		return
-				aX >= xCoord - (SIDE_X_NEG == mFacing ? 0 : SIDE_X_POS == mFacing ? 6 : 1) &&
+				aX >= xCoord - (SIDE_X_NEG == mFacing ? 0 : SIDE_X_POS == mFacing ? 6 : 2) &&
 						aY >= yCoord &&
-						aZ >= zCoord - (SIDE_Z_NEG == mFacing ? 0 : SIDE_Z_POS == mFacing ? 6 : 1) &&
-						aX <= xCoord + (SIDE_X_POS == mFacing ? 0 : SIDE_X_NEG == mFacing ? 6 : 1) &&
-						aY <= yCoord + 4 &&
-						aZ <= zCoord + (SIDE_Z_POS == mFacing ? 0 : SIDE_Z_NEG == mFacing ? 6 : 1);
+						aZ >= zCoord - (SIDE_Z_NEG == mFacing ? 0 : SIDE_Z_POS == mFacing ? 6 : 2) &&
+						aX <= xCoord + (SIDE_X_POS == mFacing ? 0 : SIDE_X_NEG == mFacing ? 6 : 2) &&
+						aY <= yCoord + 2 &&
+						aZ <= zCoord + (SIDE_Z_POS == mFacing ? 0 : SIDE_Z_NEG == mFacing ? 6 : 2);
 	}
 
 	@Override

@@ -939,7 +939,19 @@ public class Loader_Recipes_Other implements Runnable {
 			tFluid = tMaterial.plasma(U, T); if (!FL.Error.is(tFluid)) RM.Massfab.addRecipe0(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tFluid,     tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
 		}
 
-		RM.Well.addRecipe1(T, 16,1800, new long[] {100}, ST.tag(1), ZL_FS, MT.H2O.liquid(U*2, F), ST.array(IL.Mud_Ball.get(1)));
+		RM.Mixer.addRecipe1(T, 16, 200, OP.dust.mat(MT.MeatRaw, 1), FL.Water.make(500), FL.AquaticNutrition.make(500), ZL_IS);
+		RM.Mixer.addRecipe1(T, 16, 200, OP.dust.mat(MT.MeatRotten, 1), FL.Water.make(500), FL.AquaticNutrition.make(500), ZL_IS);
+		RM.Centrifuge.addRecipe1(T, 64, 200, new long[] {500}, NI, FL.AquaticWaste.make(1000), FL.Water.make(1000), new ItemStack(Blocks.sand, 1));
+
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {1500, 1500, 1500, 1500}, new ItemStack(Items.fish, 1, 0), FL.Water.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 6, 0), new ItemStack(Items.fish, 6, 0), new ItemStack(Items.fish, 6, 0), new ItemStack(Items.fish, 6, 0)));
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {1500, 1500, 1500, 1500}, new ItemStack(Items.fish, 1, 1), FL.Water.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 4, 1), new ItemStack(Items.fish, 4, 1), new ItemStack(Items.fish, 4, 1), new ItemStack(Items.fish, 4, 1)));
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {1500, 1500, 1500, 1500}, new ItemStack(Items.fish, 1, 2), FL.Water.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 4, 2), new ItemStack(Items.fish, 4, 2), new ItemStack(Items.fish, 4, 2), new ItemStack(Items.fish, 4, 2)));
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {1500, 1500, 1500, 1500}, new ItemStack(Items.fish, 1, 3), FL.Water.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 3, 3), new ItemStack(Items.fish, 3, 3), new ItemStack(Items.fish, 3, 3), new ItemStack(Items.fish, 3, 3)));
+
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {3000, 3000, 3000, 3000}, new ItemStack(Items.fish, 1, 0), FL.AquaticNutrition.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 6, 0), new ItemStack(Items.fish, 6, 0), new ItemStack(Items.fish, 6, 0), new ItemStack(Items.fish, 6, 0)));
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {3000, 3000, 3000, 3000}, new ItemStack(Items.fish, 1, 1), FL.AquaticNutrition.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 4, 1), new ItemStack(Items.fish, 4, 1), new ItemStack(Items.fish, 4, 1), new ItemStack(Items.fish, 4, 1)));
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {3000, 3000, 3000, 3000}, new ItemStack(Items.fish, 1, 2), FL.AquaticNutrition.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 4, 2), new ItemStack(Items.fish, 4, 2), new ItemStack(Items.fish, 4, 2), new ItemStack(Items.fish, 4, 2)));
+		RM.Fishery.addRecipe1(T, 256,200, new long[] {3000, 3000, 3000, 3000}, new ItemStack(Items.fish, 1, 3), FL.AquaticNutrition.make(50),            FL.AquaticWaste.make(50), ST.array(new ItemStack(Items.fish, 3, 3), new ItemStack(Items.fish, 3, 3), new ItemStack(Items.fish, 3, 3), new ItemStack(Items.fish, 3, 3)));
 
 	}
 }
