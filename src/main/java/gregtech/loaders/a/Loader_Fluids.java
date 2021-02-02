@@ -37,7 +37,6 @@ import gregapi.oredict.OreDictMaterial;
 import gregapi.render.IIconContainer;
 import gregapi.render.TextureSet;
 import gregapi.util.ST;
-import gregapi.util.UT;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.potion.Potion;
@@ -216,24 +215,24 @@ public class Loader_Fluids implements Runnable {
 		FL.create("hotmoltensodium"          , "Hot Molten Sodium"   , null                  , 1,   1000,  1100);
 		FL.create("hotmoltentin"             , "Hot Molten Tin"      , null                  , 1,   1000,  2800);
 		FL.create("hotmoltenlicl"            , "Hot Molten Lithium Chloride", null           , 1,   1000,  1600);
-
+		
 		FL.create("hotheavywater"            , "Hot Heavy Water"     , null                  , 1,   1000,   600);
 		FL.create("hotsemiheavywater"        , "Hot Semiheavy Water" , null                  , 1,   1000,   550);
 		FL.create("hottritiatedwater"        , "Hot Tritiated Water" , null                  , 1,   1000,   650);
-
+		
 		FL.create("hotcarbondioxide"         , "Hot Carbon Dioxide"  , null                  , 1,   1000,   950);
 		FL.create("hothelium"                , "Hot Helium"          , null                  , 1,   1000,  1150);
 		FL.create("thoriumsalt"              , "Molten Thorium Salt" , null                  , 1,   1000,   600);
-
+		
 		FL.create("ic2pahoehoelava"          , "Pahoehoe Lava"       , null                  , 1,   1000,  1200).setLuminosity(10).setDensity(50000).setViscosity(250000);
-
+		
 		MT.Lubricant.liquid(FL.LubRoCant.make(1000));
 		FL.create("Lubricant"                , null                  , MT.Lubricant          , 1);
-
+		
 		MT.Ethanol.liquid(FL.Reikanol.make(1000));
 		FL.create("ethanol"                  , "Ethanol"             , MT.Ethanol            , 1);
 		FL.create("bioethanol"               , "Ethanol"             , MT.Ethanol            , 1);
-
+		
 		FL.create("mcguffium"                , "Mc Guffium 239"      , MT.Mcg                , 1,      L,   300);
 		FL.create("hotfryingoil"             , "Hot Frying Oil"      , MT.FryingOilHot       , 1,   1000,   400);
 		FL.create("dragonbreath"             , "Dragon's Breath"     , null                  , 2,   1000,   300, IL.EtFu_Dragon_Breath.get(1), IL.Bottle_Empty.get(1), 250).setDensity(100).setLuminosity(5);
@@ -245,16 +244,16 @@ public class Loader_Fluids implements Runnable {
 
 		FL.create("fieryblood"               , "Fiery Blood"         , null                  , 1,      L,  1500).setLuminosity(10);
 		FL.create("fierytears"               , "Fiery Tears"         , null                  , 1,      L,  1500).setLuminosity(10);
-
+		
 		DYE_FLUIDS[0].add(FL.make(FL.create("squidink"    , "Squid Ink"       , null, 1, L, 300, FluidsGT.SIMPLE, FluidsGT.DYE), L));
 		DYE_FLUIDS[4].add(FL.make(FL.create("indigo"      , "Indigo Dye"      , null, 1, L, 300, FluidsGT.SIMPLE, FluidsGT.DYE), L));
-
+		
 		IIconContainer
 		tDyeWaterMixed  = new Textures.BlockIcons.CustomIcon("fluids/dyes.water"),
 		tDyeFlower      = new Textures.BlockIcons.CustomIcon("fluids/dyes.flower"),
 		tDyeChemical    = new Textures.BlockIcons.CustomIcon("fluids/dyes.chemical"),
 		tDyedCFoam      = new Textures.BlockIcons.CustomIcon("fluids/cfoam");
-
+		
 		for (byte i = 0; i < 16; i++) {
 			DYE_FLUIDS[i].add(DYE_FLUIDS_WATER      [i] = FL.make(FL.create("dye.watermixed." + DYE_OREDICTS_POST[i].toLowerCase(), tDyeWaterMixed    , "Water Mixed " + DYE_NAMES[i] + " Dye"    , null, DYES[i], 1,   L, 300, NI, NI, 0, FluidsGT.SIMPLE, FluidsGT.DYE), L));
 			DYE_FLUIDS[i].add(DYE_FLUIDS_FLOWER     [i] = FL.make(FL.create("dye.flower."     + DYE_OREDICTS_POST[i].toLowerCase(), tDyeFlower        , DYE_NAMES[i] + " Flower Dye"              , null, DYES[i], 1,   L, 300, NI, NI, 0, FluidsGT.SIMPLE, FluidsGT.DYE), L));
@@ -290,17 +289,22 @@ public class Loader_Fluids implements Runnable {
 			tFluid.getFluid().setTemperature((int)MT.Glowstone.mBoilingPoint);
 			MT.Glowstone.gas(tFluid);
 		}
-
+		tFluid = FL.make("molten_tritanium", 144);
+		if (tFluid != null) {
+			tFluid.getFluid().setTemperature((int)MT.TritaniumAlloy.mMeltingPoint);
+			MT.TritaniumAlloy.liquid(tFluid);
+		}
+		
 		FL.create("plastic"                  , "Molten Plastic"      , MT.Plastic        , 1, 1000,   423);
 		FL.create("glass"                    , "Molten Glass"        , MT.Glass          , 1, 1000,  1200);
 		FL.create("molten.enderpearl"        , "Molten Enderpearls"  , MT.EnderPearl     , 1,    L,  2723).setLuminosity( 5);
 		FL.create("molten.redstone"          , "Molten Redstone"     , MT.Redstone       , 1,    L,   500).setLuminosity( 5);
-		FL.create("blaze"                    , "Blazing Goo"         , MT.Blaze          , 1,    L,  4000).setLuminosity(15);
+		FL.create("blaze"                    , "Blazing Goo"         , MT.Blaze          , 1,  9*L,  4000).setLuminosity(15);
 		FL.create("concrete"                 , "Wet Concrete"        , MT.Concrete       , 1,    L,   300);
 		FL.create("molten.latex"             , "Latex"               , MT.Latex          , 1,    L, DEF_ENV_TEMP);
 		FL.create("latex"                    , "Latex"               , MT.Latex          , 1,    L, DEF_ENV_TEMP);
 		FL.create("molten hsla"              , "Molten HSLA Steel"   , MT.HSLA           , 1,    L,  1873).setLuminosity( 5);
-
+		
 		FL.createMolten(MT.Chocolate         , TextureSet.SET_FLUID[0].mList.get(IconsGT.INDEX_BLOCK_MOLTEN), FluidsGT.SIMPLE);
 		FL.createMolten(MT.Cheese            , TextureSet.SET_FLUID[0].mList.get(IconsGT.INDEX_BLOCK_MOLTEN), FluidsGT.SIMPLE);
 		FL.createMolten(MT.Sugar             , TextureSet.SET_FLUID[0].mList.get(IconsGT.INDEX_BLOCK_MOLTEN), FluidsGT.SIMPLE);
@@ -313,9 +317,9 @@ public class Loader_Fluids implements Runnable {
 		FL.createMolten(MT.WaxMagic          , TextureSet.SET_FLUID[0].mList.get(IconsGT.INDEX_BLOCK_MOLTEN), FluidsGT.SIMPLE);
 		FL.createMolten(MT.WaxAmnesic        , TextureSet.SET_FLUID[0].mList.get(IconsGT.INDEX_BLOCK_MOLTEN), FluidsGT.SIMPLE);
 		FL.createMolten(MT.WaxSoulful        , TextureSet.SET_FLUID[0].mList.get(IconsGT.INDEX_BLOCK_MOLTEN), FluidsGT.SIMPLE);
-
+		
 		FL.createMolten(MT.Al2O3             , 504);
-
+		
 		/*
 		for (OreDictMaterial tMaterial : OreDictMaterial.MATERIAL_MAP.values()) {
 			if (tMaterial.mLiquid == null && !tMaterial.contains(TD.Properties.INVALID_MATERIAL) && tMaterial.contains(TD.Properties.MELTING) && tMaterial.mTargetSmelting.mAmount > 0) {
@@ -325,11 +329,11 @@ public class Loader_Fluids implements Runnable {
 				}
 			}
 		}*/
-
+		
 		//-----
-
+		
 		new FoodStatDrink(FL.create("potion.tainted"                             , "Tainted Brew"                            , null, 1, 1000, 300)                                                                                       , "tainted between the lands"               ,  0, 0.0F  ,  20, C+37,  0.00F, EnumAction.drink, T, F, F, Potion.poison           .id, 100, 3, 100, Potion.hunger         .id, 100, 3, 100);
-
+		
 		new FoodStatDrink(FL.create("potion.awkward"                             , "Awkward Brew"                            , null, 1, 1000, 300, ST.make(Items.potionitem, 1,    16), IL.Bottle_Empty.get(1), 250)                     , "well, that's awkward"                    ,  0, 0.0F  ,  20, C+37,  0.00F, EnumAction.drink, T, F, F);
 		new FoodStatDrink(FL.create("potion.thick"                               , "Thick Brew"                              , null, 1, 1000, 300, ST.make(Items.potionitem, 1,    32), IL.Bottle_Empty.get(1), 250)                     , "thick and gooey"                         ,  0, 0.0F  ,  15, C+37,  0.00F, EnumAction.drink, T, F, F);
 		new FoodStatDrink(FL.create("potion.mundane"                             , "Mundane Brew"                            , null, 1, 1000, 300, ST.make(Items.potionitem, 1,    64), IL.Bottle_Empty.get(1), 250)                     , "how mundane of you"                      ,  0, 0.0F  ,  25, C+37,  0.00F, EnumAction.drink, T, F, F);
@@ -393,6 +397,7 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink(FL.create("potion.invisibility.long"                   , "Stretched Invisible Brew"                , null, 1, 1000, 300, ST.make(Items.potionitem, 1,  8270), IL.Bottle_Empty.get(1), 250).setLuminosity( 5)   , LH.Chat.CYAN  + "Invisibility (8:00)"     ,  0, 0.0F  ,   0, C+37,  0.00F, EnumAction.drink, T, F, F, Potion.invisibility     .id,9600, 0, 100);
 		new FoodStatDrink(FL.create("potion.invisibility.splash"                 , "Splash Invisible Brew"                   , null, 1, 1000, 300, ST.make(Items.potionitem, 1, 16398), IL.Bottle_Empty.get(1), 250)                     , LH.Chat.CYAN  + "Invisibility (2:15)"     ,  0, 0.0F  ,   0, C+37,  0.00F, EnumAction.drink, T, F, F, Potion.invisibility     .id,2700, 0, 100);
 		new FoodStatDrink(FL.create("potion.invisibility.long.splash"            , "Stretched Splash Invisible Brew"         , null, 1, 1000, 300, ST.make(Items.potionitem, 1, 16462), IL.Bottle_Empty.get(1), 250).setLuminosity( 5)   , LH.Chat.CYAN  + "Invisibility (6:00)"     ,  0, 0.0F  ,   0, C+37,  0.00F, EnumAction.drink, T, F, F, Potion.invisibility     .id,7200, 0, 100);
+
 
 		// Those Potions are broken duplicates, which cannot be improved with Redstone or Glowstone anymore, so I need to at least add them for emptying the Bottles.
 		FL.reg(FL.make("potion.weakness"           , 250), ST.make(Items.potionitem, 1,  8232), IL.Bottle_Empty.get(1));
@@ -596,11 +601,11 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink("binnie.whiskeyrye"                                                                                                                                                                                                                       , ""                                                                ,  2, 0.1F  ,  10, C+35,  0.50F, 30,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.resistance               .id, 400, 1,  60);
 		new FoodStatDrink(FL.create("binnie.whiskeywheat"                        , "Scotch"                                  , null                  , 1, 1000, 275)                                                                                                , "Technically this is just a Whisky"                               ,  2, 0.1F  ,  10, C+35,  0.50F, 30,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.resistance               .id, 400, 1,  60);
 		new FoodStatDrink(FL.create("glenmckenner"                               , "Glen McKenner"                           , null                  , 1, 1000, 275)                                                                                                , "Don't hand to easily surprised people, they will shatter it."    ,  2, 0.1F  ,   5, C+35,  0.50F, 50,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.resistance               .id, 400, 2,  90);
-
+		
 		new FoodStatDrink(FL.create("binnie.rumwhite"                            , "Rum"                                     , null                  , 1, 1000, 300)                                                                                                , "A buddle o' rum"                                                 ,  4, 0.4F  ,  10, C+37,  0.50F, 30,  0,  0, 10,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 300, 1,  60);
 		new FoodStatDrink(FL.create("binnie.rumdark"                             , "Pirate Brew"                             , null                  , 1, 1000, 300)                                                                                                , "Set the Sails, we are going to Torrentuga!"                      ,  4, 0.4F  ,   5, C+37,  0.50F, 60,  0,  0, 10,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 300, 2,  90);
 		new FoodStatDrink(FL.create("pina.colada"                                , "Piña Colada"                             , null                  , 1, 1000, 300)                                                                                                , ""                                                                ,  4, 0.4F  ,  10, C+37,  0.50F, 20,  0,  0, 10,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 300, 1,  60);
-
+		
 		new FoodStatDrink("binnie.ciderpear"                                                                                                                                                                                                                        , "If you have nothing better to do with your Pears"                ,  4, 0.2F  ,  10, C+35,  0.50F, 30,  0,  0, 20,  0, EnumAction.drink, F, F, F, Potion.resistance               .id, 400, 1,  60);
 		new FoodStatDrink("binnie.ciderpeach"                                                                                                                                                                                                                       , "If you have nothing better to do with your Peaches"              ,  4, 0.2F  ,  10, C+35,  0.50F, 30,  0,  0, 20,  0, EnumAction.drink, F, F, F, Potion.resistance               .id, 400, 1,  60);
 		new FoodStatDrink(FL.create("binnie.winepineapple"                       , "Ananas Cider"                            , null                  , 1, 1000, 300)                                                                                                , "If you have nothing better to do with your Pineapples"           ,  4, 0.2F  ,  10, C+35,  0.50F, 30,  0,  0, 10,  0, EnumAction.drink, F, F, F, Potion.resistance               .id, 400, 1,  60);
@@ -637,7 +642,8 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink(FL.create("binnie.vodka"                               , "Vodka"                                   , null                  , 1, 1000, 275)                                                                                                , "Not to be confused with Water"                                   ,  2, 0.2F  ,  10, C+35,  0.50F, 55,  0,  0,  0,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 500, 1,  60);
 		new FoodStatDrink(FL.create("potion.leninade"                            , "Leninade"                                , null                  , 1, 1000, 275, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.ALCOHOLIC)                                            , "Let the Communism flow through you!"                             ,  2, 0.2F  ,   5, C+35,  0.50F, 65,  0,  0, 20,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 500, 2,  90);
 		new FoodStatDrink(FL.create("potion.alcopops"                            , "Alcopops"                                , null                  , 1, 1000, 275, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.ALCOHOLIC)                                            , "Don't let your Children drink this junk!"                        ,  2, 0.2F  ,  10, C+30,  0.50F, 30,  0,  0, 30,  0, EnumAction.drink, F, F, F, Potion.digSpeed                 .id, 900, 1,  90);
-		new FoodStatDrink(FL.create("short.mead"                                 , "Mead"                                    , null                  , 1, 1000, 300)                                                                                                , "A Vikings favourite brew"                                        ,  3, 0.1F  ,  10, C+37,  0.50F, 30,  0,  0, 30,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 300, 1,  60, Potion.resistance.id, 300, 1,  60);
+		new FoodStatDrink(FL.create("short.mead"                                 , "Short Mead"                              , null                  , 1, 1000, 300)                                                                                                , "A Vikings favourite brew"                                        ,  3, 0.1F  ,  10, C+37,  0.50F, 30,  0,  0, 30,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 300, 1,  60, Potion.resistance.id, 300, 1,  60);
+		new FoodStatDrink(FL.create("mead"                                       , "Mead"                                    , null                  , 1, 1000, 300)                                                                                                , "A Vikings favourite brew"                                        ,  3, 0.1F  ,  10, C+37,  0.50F, 30,  0,  0, 30,  0, EnumAction.drink, F, F, F, Potion.damageBoost              .id, 300, 1,  60, Potion.resistance.id, 300, 1,  60);
 
 
 
@@ -652,16 +658,16 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink(FL.create("potion.diabolosauce"                        , "Diabolo Sauce"                           , null                  , 1, 1000, 350, FluidsGT.SIMPLE, FluidsGT.FOOD)                                                                , "As if the Devil made this Sauce"                                 ,  2, 0.1F  ,  10, C+46,  0.50F,  0,  0, 30, 10,  0, EnumAction.drink, F, F, F, Potion.confusion                .id,3000, 1,  50, Potion.fireResistance.id,3000, 0,  80, PotionsGT.ID_DEHYDRATION      , 400, 2, 100, PotionsGT.ID_INSANITY    , 600, 0, 100);
 		new FoodStatDrink(FL.create("potion.diablosauce"                         , "Diablo Sauce"                            , null                  , 1, 1000, 375, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.ACID)                                                 , "Diablo always comes back!"                                       ,  2, 0.1F  ,  10, C+48,  0.50F,  0,  0, 40, 10,  0, EnumAction.drink, F, F, F, Potion.confusion                .id,4000, 1,  70, Potion.fireResistance.id,4000, 0,  90, PotionsGT.ID_DEHYDRATION      , 400, 3, 100, PotionsGT.ID_INSANITY    , 600, 1, 100);
 		new FoodStatDrink(FL.create("potion.diablosauce.strong"                  , "Old Man Snitches glitched Diablo Sauce"  , null                  , 1, 1000, 999, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.ACID, FluidsGT.ENCHANTED_EFFECT).setLuminosity(15)    , "[Missing No]"                                                ,  2, 0.1F  ,  10, C+50,  0.50F,  0,  0, 99, 10,  0, EnumAction.drink, F, F, F, Potion.confusion                .id,9999, 2, 999, Potion.fireResistance.id,9999, 9, 999, PotionsGT.ID_DEHYDRATION      , 400, 4, 100, PotionsGT.ID_INSANITY    , 600, 2, 100);
-
-
+		
+		
 		new FoodStatDrink(FL.create("honey"                                      , "Honey (BoP, Erebus)"                     , MT.Honey              , 1, 1000, 300)                                                                                                , "Bee careful with it"                                             ,  1, 0.1F  ,  20, C+37,  0.50F,  0,  0,  0, 40,  0, EnumAction.drink, T, F, F).setMilk();
 		new FoodStatDrink(FL.create("grc.honey"                                  , "Honey (GrC)"                             , MT.Honey              , 1, 1000, 300)                                                                                                , "Bee careful with it"                                             ,  1, 0.1F  ,  20, C+37,  0.50F,  0,  0,  0, 40,  0, EnumAction.drink, T, F, F).setMilk();
 		new FoodStatDrink(FL.create("for.honey"                                  , "Honey"                                   , MT.Honey              , 1, 1000, 300)                                                                                                , "Bee careful with it"                                             ,  1, 0.1F  ,  20, C+37,  0.50F,  0,  0,  0, 40,  0, EnumAction.drink, T, F, F).setMilk();
 		new FoodStatDrink(FL.create("honeydew"                                   , "Honeydew"                                , MT.Honeydew           , 1, 1000, 300)                                                                                                , "Sweet sweet Honeydew"                                            ,  2, 0.2F  ,  20, C+37,  0.50F, 10,  0,  0, 30,  0, EnumAction.drink, T, F, F, Potion.moveSpeed                .id, 600, 0, 100).setMilk();
 		new FoodStatDrink(FL.create("potion.ambrosia"                            , "Ambrosia"                                , null                  , 1, 1000, 275)                                                                                                , "It's the Bee Movie, but everytime someone says Bee, it will..."  ,  2, 0.2F  ,  20, C+37,  0.75F, 30,  0,  0, 40,  0, EnumAction.drink, T, F, F, Potion.regeneration             .id, 150, 0, 100).setMilk();
-		new FoodStatDrink(FL.create("royaljelly"                                 , "Royal jelly"                             , null                  , 1, 1000, 275)                                                                                                , "you jelly?"                                                      ,  2, 0.2F  ,  20, C+37,  0.75F,  0,  0,  0, 40,  0, EnumAction.drink, T, F, F, Potion.regeneration             .id, 150, 1, 100).setMilk();
-
-
+		new FoodStatDrink(FL.create("royaljelly"                                 , "Royal Jelly"                             , null                  , 1, 1000, 275)                                                                                                , "you jelly?"                                                      ,  2, 0.2F  ,  20, C+37,  0.75F,  0,  0,  0, 40,  0, EnumAction.drink, T, F, F, Potion.regeneration             .id, 150, 1, 100).setMilk();
+		
+		
 		new FoodStatDrink(FL.create("sunfloweroil"                               , "Sunflower Oil"                           , MT.SunflowerOil       , 1, 1000, 300, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.COOKING_OIL)                                          , ""                                                                ,  2, 0.2F  ,  10, C+37,  0.50F,  0,  0, 20,  0, 20, EnumAction.drink, F, F, F, Potion.hunger                   .id, 400, 1,  70);
 		new FoodStatDrink(FL.create("nutoil"                                     , "Nut Oil"                                 , MT.NutOil             , 1, 1000, 300, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.COOKING_OIL)                                          , ""                                                                ,  2, 0.2F  ,  10, C+37,  0.50F,  0,  0, 20,  0, 20, EnumAction.drink, F, F, F, Potion.hunger                   .id, 400, 1,  70);
 		new FoodStatDrink(FL.create("binnie.juiceolive"                          , "Olive Oil"                               , MT.OliveOil           , 1, 1000, 300, FluidsGT.SIMPLE, FluidsGT.FOOD, FluidsGT.COOKING_OIL)                                          , ""                                                                ,  2, 0.2F  ,  10, C+37,  0.50F,  0,  0, 20,  0, 20, EnumAction.drink, F, F, F, Potion.hunger                   .id, 400, 1,  70);
@@ -722,14 +728,14 @@ public class Loader_Fluids implements Runnable {
 		new FoodStatDrink(FL.create("tea"                                        , "Tea"                                     , null                  , 1, 1000, 300)                                                               , "Side Effects may include: Infinite Wealth, clipping through Walls and ascending to Godhood",  2, 0.2F  ,  20, C+39,  0.50F,  0, 30,  0,  0,  0, EnumAction.drink, F, F, F);
 		new FoodStatDrink(FL.create("sweettea"                                   , "Sweet Tea"                               , null                  , 1, 1000, 300)                                                                                         , "How about an actual Tea Party? In Boston?"                       ,  2, 0.2F  ,  20, C+39,  0.50F,  0, 30,  0, 30,  0, EnumAction.drink, F, F, F);
 		new FoodStatDrink(FL.create("icetea"                                     , "Ice Tea"                                 , null                  , 1, 1000, 255)                                                                                         , "Ice 'T'"                                                         ,  6, 0.4F  ,  30, C+35,  0.50F,  0, 10,  0, 30,  0, EnumAction.drink, F, F, F);
-
-
+		
+		
 		new FoodStatDrink(FL.create("medicine.heal"                              , "Medicine"                                , null                  , 1, 1000, 300)                                                                                         , "Heals up to 20 Hearts"                                           ,  0, 0.0F  ,   0, C+37,  0.00F,  0,  0,  0,  0,  0, EnumAction.drink, T, F, F, Potion.regeneration             .id, 120, 4, 100);
 		new FoodStatDrink(FL.create("medicine.laxative"                          , "Laxative"                                , null                  , 1, 1000, 300)                                                                                         , "Removes 10 Hunger/Saturation"                                    ,  0, 0.0F  ,   0, C+37,  0.00F,  0,  0,  0,  0,  0, EnumAction.drink, T, F, F, Potion.hunger                   .id, 300,10, 100);
-
-
+		
+		
 		DYE_FLUIDS[4].add(FL.make("blueberryjuice", 250));
-
+		
 		for (OreDictMaterial tMaterial : MT.ALL_MATERIALS_REGISTERED_HERE) {
 			if (tMaterial.contains(TD.ItemGenerator.LIQUID)) FL.createLiquid(tMaterial);
 			if (tMaterial.contains(TD.ItemGenerator.MOLTEN)) FL.createMolten(tMaterial);
@@ -737,11 +743,11 @@ public class Loader_Fluids implements Runnable {
 			if (tMaterial.contains(TD.ItemGenerator.VAPORS)) FL.createVapour(tMaterial);
 			if (tMaterial.contains(TD.ItemGenerator.PLASMA)) FL.createPlasma(tMaterial);
 		}
-
+		
 		FL.Air       .fluid().setDensity(0);
 		FL.Air_Nether.fluid().setDensity(0);
 		FL.Air_End   .fluid().setDensity(0);
-
+		
 		FL.reg(FL.Air               .make(1000), IL.Cell_Air                     .get(1), IL.Cell_Empty.get(1), F, T, T);
 		FL.reg(FL.Air_Nether        .make(1000), IL.Cell_Air                     .get(1), IL.Cell_Empty.get(1), F, T, F);
 		FL.reg(FL.Air_End           .make(1000), IL.Cell_Air                     .get(1), IL.Cell_Empty.get(1), F, T, F);
@@ -758,37 +764,37 @@ public class Loader_Fluids implements Runnable {
 		FL.reg(FL.Honey             .make(1000), IL.GrC_Honey_Jar                .get(1), ST.make(Items.flower_pot, 1, 0));
 		FL.reg(FL.Honey             .make( 500), IL.BoP_Jar_Honey                .get(1), IL.BoP_Jar_Empty.get(1, IL.Bottle_Empty.get(1)));
 		FL.reg(FL.Potion_Poison_2   .make( 500), IL.BoP_Jar_Poison               .get(1), IL.BoP_Jar_Empty.get(1, IL.Bottle_Empty.get(1)));
-
-		// This one is "Special"...
-		FL.reg(FL.SpDew.make(1000), IL.NeLi_Bucket_Spectral_Dew.getWithNBT(1, UT.NBT.make("Fluid", UT.NBT.make("FluidName", FL.SpDew.mName, "Amount", 1000))), ST.make(Items.bucket, 1, 0), F, T, T);
-
+		FL.reg(FL.Water             .make(1000), IL.AETHER_Bucket_Water          .get(1), IL.AETHER_Bucket_Empty.get(1));
+		FL.reg(FL.Milk              .make(1000), IL.AETHER_Bucket_Milk           .get(1), IL.AETHER_Bucket_Empty.get(1));
+		FL.reg(FL.SpDew             .make(1000), IL.NeLi_Bucket_Spectral_Dew     .get(1), ST.make(Items.bucket, 1, 0), F, T, T);
+		
 		/* TODO
-		FL.registerFluidContainer(FL.make("potion.poison"        , 125), IL.Arrow_Head_Glass_Poison          .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.poison.long"   , 125), IL.Arrow_Head_Glass_Poison_Long     .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.poison.strong" , 125), IL.Arrow_Head_Glass_Poison_Strong   .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.slowness"      , 125), IL.Arrow_Head_Glass_Slowness        .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.slowness.long" , 125), IL.Arrow_Head_Glass_Slowness_Long   .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.weakness"      , 125), IL.Arrow_Head_Glass_Weakness        .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.weakness.long" , 125), IL.Arrow_Head_Glass_Weakness_Long   .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("holywater"            , 125), IL.Arrow_Head_Glass_Holy_Water      .get(1), IL.Arrow_Head_Glass_Emtpy.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison"        , 125), IL.Arrow_Head_Glass_Poison          .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison.long"   , 125), IL.Arrow_Head_Glass_Poison_Long     .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison.strong" , 125), IL.Arrow_Head_Glass_Poison_Strong   .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.slowness"      , 125), IL.Arrow_Head_Glass_Slowness        .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.slowness.long" , 125), IL.Arrow_Head_Glass_Slowness_Long   .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.weakness"      , 125), IL.Arrow_Head_Glass_Weakness        .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.weakness.long" , 125), IL.Arrow_Head_Glass_Weakness_Long   .get(1), IL.Arrow_Head_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("holywater"            , 125), IL.Arrow_Head_Glass_Holy_Water      .get(1), IL.Arrow_Head_Glass_Empty.get(1));
 
-		FL.registerFluidContainer(FL.make("potion.poison"        , 125), IL.Arrow_Wooden_Glass_Poison        .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.poison.long"   , 125), IL.Arrow_Wooden_Glass_Poison_Long   .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.poison.strong" , 125), IL.Arrow_Wooden_Glass_Poison_Strong .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.slowness"      , 125), IL.Arrow_Wooden_Glass_Slowness      .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.slowness.long" , 125), IL.Arrow_Wooden_Glass_Slowness_Long .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.weakness"      , 125), IL.Arrow_Wooden_Glass_Weakness      .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.weakness.long" , 125), IL.Arrow_Wooden_Glass_Weakness_Long .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("holywater"            , 125), IL.Arrow_Wooden_Glass_Holy_Water    .get(1), IL.Arrow_Wooden_Glass_Emtpy.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison"        , 125), IL.Arrow_Wooden_Glass_Poison        .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison.long"   , 125), IL.Arrow_Wooden_Glass_Poison_Long   .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison.strong" , 125), IL.Arrow_Wooden_Glass_Poison_Strong .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.slowness"      , 125), IL.Arrow_Wooden_Glass_Slowness      .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.slowness.long" , 125), IL.Arrow_Wooden_Glass_Slowness_Long .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.weakness"      , 125), IL.Arrow_Wooden_Glass_Weakness      .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.weakness.long" , 125), IL.Arrow_Wooden_Glass_Weakness_Long .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("holywater"            , 125), IL.Arrow_Wooden_Glass_Holy_Water    .get(1), IL.Arrow_Wooden_Glass_Empty.get(1));
 
-		FL.registerFluidContainer(FL.make("potion.poison"        , 125), IL.Arrow_Plastic_Glass_Poison       .get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.poison.long"   , 125), IL.Arrow_Plastic_Glass_Poison_Long  .get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.poison.strong" , 125), IL.Arrow_Plastic_Glass_Poison_Strong.get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.slowness"      , 125), IL.Arrow_Plastic_Glass_Slowness     .get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.slowness.long" , 125), IL.Arrow_Plastic_Glass_Slowness_Long.get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.weakness"      , 125), IL.Arrow_Plastic_Glass_Weakness     .get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("potion.weakness.long" , 125), IL.Arrow_Plastic_Glass_Weakness_Long.get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
-		FL.registerFluidContainer(FL.make("holywater"            , 125), IL.Arrow_Plastic_Glass_Holy_Water   .get(1), IL.Arrow_Plastic_Glass_Emtpy.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison"        , 125), IL.Arrow_Plastic_Glass_Poison       .get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison.long"   , 125), IL.Arrow_Plastic_Glass_Poison_Long  .get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.poison.strong" , 125), IL.Arrow_Plastic_Glass_Poison_Strong.get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.slowness"      , 125), IL.Arrow_Plastic_Glass_Slowness     .get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.slowness.long" , 125), IL.Arrow_Plastic_Glass_Slowness_Long.get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.weakness"      , 125), IL.Arrow_Plastic_Glass_Weakness     .get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("potion.weakness.long" , 125), IL.Arrow_Plastic_Glass_Weakness_Long.get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
+		FL.registerFluidContainer(FL.make("holywater"            , 125), IL.Arrow_Plastic_Glass_Holy_Water   .get(1), IL.Arrow_Plastic_Glass_Empty.get(1));
 		*/
 	}
 }

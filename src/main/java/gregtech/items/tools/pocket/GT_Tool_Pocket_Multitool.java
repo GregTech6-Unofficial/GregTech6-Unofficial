@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -31,6 +31,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 public class GT_Tool_Pocket_Multitool extends ToolStats {
+	@Override public float getMaxDurabilityMultiplier() {return 4.0F;}
 	public final int mSwitchIndex;
 	
 	public GT_Tool_Pocket_Multitool(int aSwitchIndex) {
@@ -49,7 +50,7 @@ public class GT_Tool_Pocket_Multitool extends ToolStats {
 	
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
-		aItem.addItemBehavior(aID, new Behavior_Switch_Metadata(mSwitchIndex));
+		aItem.addItemBehavior(aID, new Behavior_Switch_Metadata(mSwitchIndex, T, T));
 	}
 	
 	@Override
@@ -60,10 +61,5 @@ public class GT_Tool_Pocket_Multitool extends ToolStats {
 	@Override
 	public boolean isMinableBlock(Block aBlock, byte aMetaData) {
 		return F;
-	}
-	
-	@Override
-	public float getMaxDurabilityMultiplier() {
-		return 4.0F;
 	}
 }

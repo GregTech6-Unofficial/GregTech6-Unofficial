@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -22,6 +22,7 @@ package gregapi.data;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 import gregapi.api.Abstract_Mod;
 import gregapi.block.BlockBase;
@@ -287,7 +288,7 @@ public class CS {
 	, BIOMES_HAZEL          = new BiomeNameSet(BiomeGenBase.plains, "Meadow", "Grassland", "Flower Field", "Sunflower Plains", "Clearing", "Twilight Clearing", "Elysian Fields", "Lowlands", "Origin Valley", "Grassy Archipelago", "Alfheim")
 	, BIOMES_COCONUT        = new BiomeNameSet(BiomeGenBase.beach, "Tropical Ocean", "Tropical Beach", "Tropical River", "Tropical Lake", "Tropical Archipelago", "Tropical Islands", "Tropics", "Oasis")
 	, BIOMES_MOUNTAINS      = new BiomeNameSet(BiomeGenBase.extremeHills, BiomeGenBase.extremeHillsEdge, BiomeGenBase.extremeHillsPlus, BiomeGenBase.stoneBeach, "Mountainous Archipelago", "Mountains", "Mountains Edge", "Plateau", "Highlands", "Highlands Center", "Twilight Highlands", "Thornlands", "Alps", "Cliffs", "Flying Mountains", "Rock Mountains", "Snow Mountains", "Rock Island", "Valley", "Alpine Mountains", "Alpine Mountains Edge", "Alpine Tundra", "Stone Canyon", "Stone Canyon 2", "Rocky Desert", "Rocky Hills", "Rainforest Mountains", "Extreme Rainforest Mountains")
-	, BIOMES_NETHER         = new BiomeNameSet(BiomeGenBase.hell, "Basalt Deltas", "Crimson Forest", "Soul Sand Valley", "Warped Forest", "Foxfire Swamp")
+	, BIOMES_NETHER         = new BiomeNameSet(BiomeGenBase.hell, "Ruptured Chasm", "Abyssal Shadowland", "Crystalline Crag", "Basalt Deltas", "Crimson Forest", "Soul Sand Valley", "Warped Forest", "Foxfire Swamp")
 	, BIOMES_END            = new BiomeNameSet(BiomeGenBase.sky)
 	, BIOMES_VOLCANIC       = new BiomeNameSet("Fire Swamp", "Volcano", "Volcano Island", "Volcanic Desert")
 	, BIOMES_WASTELANDS     = new BiomeNameSet("Wasteland", "Wastelands", "Wasteland Mountains", "Wasteland Forest", "Radioactive Wasteland")
@@ -315,6 +316,8 @@ public class CS {
 	public static long SERVER_TIME = 0;
 	/** Current Time on the Client. Used for Animations. */
 	public static long CLIENT_TIME = 0;
+	/** Is locked updateEntities and similar are running on the tick. */
+	public static final ReentrantLock TICK_LOCK = new ReentrantLock();
 
 	/** If I ever need to talk in Chat. XD */
 	public static final String CHAT_GREG = LH.Chat.WHITE+"<"+LH.Chat.BLUE+"GregoriusT"+LH.Chat.WHITE+"> ";
@@ -737,7 +740,7 @@ public class CS {
 		SIDES_AXIS_Y, SIDES_AXIS_Y, SIDES_AXIS_Y, SIDES_AXIS_Y,
 		SIDES_AXIS_X, SIDES_AXIS_X, SIDES_AXIS_X, SIDES_AXIS_X,
 		SIDES_AXIS_Z, SIDES_AXIS_Z, SIDES_AXIS_Z, SIDES_AXIS_Z,
-		SIDES_AXIS_Y, SIDES_AXIS_Y, SIDES_AXIS_Y, SIDES_AXIS_Y,
+		SIDES_NONE  , SIDES_NONE  , SIDES_NONE  , SIDES_NONE  ,
 	};
 
 	public static final boolean[] TRUE_6 = {T,T,T,T,T,T};
@@ -893,8 +896,9 @@ public class CS {
 	, GEN_ALFHEIM       = new ArrayListNoNulls<>()
 	, GEN_TROPICS       = new ArrayListNoNulls<>()
 	, GEN_CANDY         = new ArrayListNoNulls<>()
-	, GEN_FLOOR[]       = new List[] {GEN_OVERWORLD, GEN_GT, GEN_PFAA, GEN_TFC, GEN_NETHER, GEN_MOON, GEN_MARS, GEN_TWILIGHT, GEN_EREBUS, GEN_BETWEENLANDS, GEN_ATUM, GEN_ENVM, GEN_ALFHEIM, GEN_DEEPDARK, GEN_TROPICS, GEN_CANDY}
-	, GEN_ALL[]         = new List[] {GEN_OVERWORLD, GEN_GT, GEN_PFAA, GEN_TFC, GEN_NETHER, GEN_MOON, GEN_MARS, GEN_TWILIGHT, GEN_EREBUS, GEN_BETWEENLANDS, GEN_ATUM, GEN_ENVM, GEN_ALFHEIM, GEN_DEEPDARK, GEN_TROPICS, GEN_CANDY, GEN_AETHER, GEN_END, GEN_PLANETS, GEN_ASTEROIDS}
+	, GEN_GEMS[]        = new List[] {GEN_OVERWORLD, GEN_GT, GEN_PFAA, GEN_ENVM, GEN_EREBUS, GEN_BETWEENLANDS, GEN_ATUM, GEN_MARS, GEN_AETHER}
+	, GEN_FLOOR[]       = new List[] {GEN_OVERWORLD, GEN_GT, GEN_PFAA, GEN_ENVM, GEN_EREBUS, GEN_BETWEENLANDS, GEN_ATUM, GEN_MARS, GEN_DEEPDARK, GEN_TFC, GEN_NETHER, GEN_MOON, GEN_TWILIGHT, GEN_ALFHEIM, GEN_TROPICS, GEN_CANDY}
+	, GEN_ALL[]         = new List[] {GEN_OVERWORLD, GEN_GT, GEN_PFAA, GEN_ENVM, GEN_EREBUS, GEN_BETWEENLANDS, GEN_ATUM, GEN_MARS, GEN_DEEPDARK, GEN_TFC, GEN_NETHER, GEN_MOON, GEN_TWILIGHT, GEN_ALFHEIM, GEN_TROPICS, GEN_CANDY, GEN_AETHER, GEN_END, GEN_PLANETS, GEN_ASTEROIDS}
 	;
 
 	/** Lists of all the active Large Ore Vein generation by Dimension Type, these are getting initialised in Load! */
@@ -1306,10 +1310,7 @@ public class CS {
 		public static long trash(ItemStack[] aInventory) {
 			if (aInventory == null) return 0;
 			long rTrashed = 0;
-			for (int i = 0; i < aInventory.length; i++) {
-				rTrashed += trash(aInventory[i]);
-				aInventory[i] = NI;
-			}
+			for (int i = 0; i < aInventory.length; i++) {rTrashed += trash(aInventory[i]); aInventory[i] = NI;}
 			return rTrashed;
 		}
 		public static int trash(ItemStack[] aInventory, int aIndex) {
@@ -1318,40 +1319,40 @@ public class CS {
 			aInventory[aIndex] = NI;
 			return rTrashed;
 		}
-		public static int trash(FluidStack aFluid) {
-			if (aFluid == null || aFluid.amount <= 0) return 0;
-			for (FluidTankGT tGarbage : GARBAGE_FLUIDS) if (tGarbage.contains(aFluid)) {
-				tGarbage.add(aFluid.amount);
-				return aFluid.amount;
-			}
-			GARBAGE_FLUIDS.add(new FluidTankGT(aFluid.copy(), Long.MAX_VALUE).setPreventDraining().setVoidExcess());
-			return aFluid.amount;
+
+		public static int trash(OreDictMaterialStack aMaterial) {
+			if (aMaterial == null || aMaterial.mAmount < OP.scrapGt.mAmount) return 0;
+			return trash(OP.scrapGt.mat(aMaterial.mMaterial, aMaterial.mAmount / OP.scrapGt.mAmount));
 		}
-		public static int trash(IFluidTank aTank) {
+
+		public static long trash(FluidStack aFluid) {
+			return aFluid == null ? 0 : trash(aFluid, aFluid.amount);
+		}
+		public static long trash(FluidStack aFluid, long aAmount) {
+			if (aFluid == null || aAmount <= 0) return 0;
+			for (FluidTankGT tGarbage : GARBAGE_FLUIDS) if (tGarbage.contains(aFluid)) {
+				tGarbage.add(aAmount);
+				return aAmount;
+			}
+			GARBAGE_FLUIDS.add(new FluidTankGT(aFluid, aAmount, Long.MAX_VALUE).setPreventDraining().setVoidExcess());
+			return aAmount;
+		}
+		public static long trash(IFluidTank aTank) {
 			return trash(aTank, Long.MAX_VALUE);
 		}
-		public static int trash(IFluidTank aTank, long aTrashed) {
+		public static long trash(IFluidTank aTank, long aTrashed) {
 			if (aTank == null || aTrashed <= 0) return 0;
-			FluidStack tFluid = aTank.drain(UT.Code.bindInt(aTrashed), T);
-			if (tFluid == null || tFluid.amount <= 0) return 0;
-			trash(tFluid);
-			return tFluid.amount;
+			return aTank instanceof FluidTankGT ? trash(aTank.getFluid(), ((FluidTankGT)aTank).remove(aTrashed)) : trash(aTank.drain(UT.Code.bindInt(aTrashed), T));
 		}
 		public static long trash(IFluidTank[] aTanks) {
 			if (aTanks == null) return 0;
 			long rTrashed = 0;
-			for (int i = 0; i < aTanks.length; i++) {
-				rTrashed += trash(aTanks[i]);
-			}
+			for (int i = 0; i < aTanks.length; i++) rTrashed += trash(aTanks[i]);
 			return rTrashed;
 		}
-		public static int trash(IFluidTank[] aTanks, int aIndex) {
+		public static long trash(IFluidTank[] aTanks, int aIndex) {
 			if (aTanks == null || aIndex < 0 || aIndex >= aTanks.length) return 0;
 			return trash(aTanks[aIndex]);
-		}
-		public static int trash(OreDictMaterialStack aMaterial) {
-			if (aMaterial == null || aMaterial.mAmount < OP.scrapGt.mAmount) return 0;
-			return trash(OP.scrapGt.mat(aMaterial.mMaterial, aMaterial.mAmount / OP.scrapGt.mAmount));
 		}
 
 
@@ -1516,9 +1517,9 @@ public class CS {
 
 		public static BlockBaseFluid OilLight, OilMedium, OilHeavy, OilExtraHeavy, GasNatural;
 		public static BlockFluidClassic Ocean, Swamp, River;
-
-		public static BlockBase Sands, Diggables, Grass, Paths, RockOres, VanillaOresA;
-
+		
+		public static BlockBase Sands, Diggables, Grass, Paths, RockOres, CrystalOres, VanillaOresA;
+		
 		public static IBlockBase FlowersA, FlowersB;
 		public static BlockBase Glowtus, Sapling, Leaves, BalesGrass, BalesCrop;
 		public static BlockBase Log1, Log1FireProof, LogA, LogAFireProof, LogB, LogBFireProof, BeamA, BeamAFireProof, BeamB, BeamBFireProof, Beam1, Beam1FireProof, Beam2, Beam2FireProof, Beam3, Beam3FireProof, Planks, PlanksFireProof;
@@ -1527,10 +1528,10 @@ public class CS {
 		public static BlockBase LongDistWire01, LongDistPipe01;
 
 		public static IBlockBase
-		RailAluminium, RailBronze, RailStainlessSteel, RailSteel, RailTitanium, RailTungsten, RailTungstenCarbide, RailTungstenSteel,
-		RailAluminiumBooster, RailBronzeBooster, RailStainlessSteelBooster, RailSteelBooster, RailTitaniumBooster, RailTungstenBooster, RailTungstenCarbideBooster, RailTungstenSteelBooster,
-		RailAluminiumDetector, RailBronzeDetector, RailStainlessSteelDetector, RailSteelDetector, RailTitaniumDetector, RailTungstenDetector, RailTungstenCarbideDetector, RailTungstenSteelDetector;
-
+		RailAluminium, RailMagnalium, RailBronze, RailStainlessSteel, RailSteel, RailTitanium, RailTungsten, RailTungstenCarbide, RailTungstenSteel,
+		RailAluminiumBooster, RailMagnaliumBooster, RailBronzeBooster, RailStainlessSteelBooster, RailSteelBooster, RailTitaniumBooster, RailTungstenBooster, RailTungstenCarbideBooster, RailTungstenSteelBooster,
+		RailAluminiumDetector, RailMagnaliumDetector, RailBronzeDetector, RailStainlessSteelDetector, RailSteelDetector, RailTitaniumDetector, RailTungstenDetector, RailTungstenCarbideDetector, RailTungstenSteelDetector;
+		
 		/** GT6 Stone Type. */
 		public static BlockBase GraniteBlack, GraniteRed, Basalt, Marble, Limestone, Granite, Diorite, Andesite, Komatiite, SchistGreen, SchistBlue, Kimberlite, Quartzite, PrismarineLight, PrismarineDark;
 		/** Contains all GT6 Stone Types. */
@@ -1593,7 +1594,7 @@ public class CS {
 	/** Contains the Tool IDs for my MetaTool. */
 	public static class ToolsGT {
 		public static final short
-		  SWORD = 0, PICKAXE = 2, SHOVEL = 4, AXE = 6, HOE = 8, SAW = 10, HARDHAMMER = 12, SOFTHAMMER = 14, WRENCH = 16, FILE = 18, CROWBAR = 20, SCREWDRIVER = 22, CLUB = 24, WIRECUTTER = 26, SCOOP = 28, BRANCHCUTTER = 30, UNIVERSALSPADE = 32, KNIFE = 34, BUTCHERYKNIFE = 36, SICKLE = 38, SENSE = 40, PLOW = 42, PLUNGER = 44, ROLLING_PIN = 46, CHISEL = 48, FLINT_AND_TINDER = 50, MONKEY_WRENCH = 52, BENDING_CYLINDER = 54, BENDING_CYLINDER_SMALL = 56, DOUBLE_AXE = 58, CONSTRUCTION_PICK = 60, MAGNIFYING_GLASS = 62, SCISSORS = 64, PINCERS = 66, SPADE = 68, GEM_PICK = 70, HAND_DRILL = 72
+		  SWORD = 0, PICKAXE = 2, SHOVEL = 4, AXE = 6, HOE = 8, SAW = 10, HARDHAMMER = 12, SOFTHAMMER = 14, WRENCH = 16, FILE = 18, CROWBAR = 20, SCREWDRIVER = 22, CLUB = 24, WIRECUTTER = 26, SCOOP = 28, BRANCHCUTTER = 30, UNIVERSALSPADE = 32, KNIFE = 34, BUTCHERYKNIFE = 36, SICKLE = 38, SENSE = 40, PLOW = 42, PLUNGER = 44, ROLLING_PIN = 46, CHISEL = 48, FLINT_AND_TINDER = 50, MONKEY_WRENCH = 52, BENDING_CYLINDER = 54, BENDING_CYLINDER_SMALL = 56, DOUBLE_AXE = 58, CONSTRUCTION_PICK = 60, MAGNIFYING_GLASS = 62, SCISSORS = 64, PINCERS = 66, SPADE = 68, GEM_PICK = 70, HAND_DRILL = 72, BUILDERWAND = 74
 		, MININGDRILL_LV = 100, MININGDRILL_MV = 102, MININGDRILL_HV = 104, MININGDRILL_EV = 106, CHAINSAW_LV = 110, CHAINSAW_MV = 112, CHAINSAW_HV = 114, CHAINSAW_EV = 116, WRENCH_LV = 120, WRENCH_MV = 122, WRENCH_HV = 124, WRENCH_EV = 126, JACKHAMMER_HV_Normal = 130, JACKHAMMER_EV_Normal = 134, JACKHAMMER_HV_No_Ores = 132, BUZZSAW_LV = 140, SCREWDRIVER_LV = 150, DRILL_LV = 160, MIXER_LV = 170, MONKEY_WRENCH_LV = 180, MONKEY_WRENCH_MV = 182, MONKEY_WRENCH_HV = 184, MONKEY_WRENCH_EV = 186,TRIMMER_LV = 190
 		, POCKET_MULTITOOL = 1000, POCKET_KNIFE = 1002, POCKET_SAW = 1004, POCKET_FILE = 1006, POCKET_SCREWDRIVER = 1008, POCKET_WIRECUTTER = 1010, POCKET_SCISSORS = 1012, POCKET_CHISEL = 1014
 		, PISTOL = 5000
@@ -1929,6 +1930,8 @@ public class CS {
 		, GaEn              = "ganysend"
 		, WdSt              = "woodstuff"
 		
+		, HEE               = "HardcoreEnderExpansion"
+
 		, LycM              = "lycanitesmobs"
 		, LycM_Fresh        = "freshwatermobs"
 		, LycM_Salt         = "saltwatermobs"
@@ -1972,12 +1975,14 @@ public class CS {
 		, COFH_CORE         = "CoFHCore"
 
 		, OB                = "OpenBlocks"
+		, PA                = "progressiveautomation"
 		, MNTL              = "Mantle"
 		, TiC               = "TConstruct"
 		, Natura            = "Natura"
 		, MF2               = "minefantasy2"
 		, FZ                = "factorization"
 		, BWM               = "weaponmod"
+		, BG2               = "battlegear2"
 		, OMT               = "openmodularturrets"
 		, TG                = "Techguns"
 

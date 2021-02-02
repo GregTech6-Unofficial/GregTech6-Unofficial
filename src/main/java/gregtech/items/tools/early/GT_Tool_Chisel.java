@@ -35,6 +35,7 @@ import gregapi.render.IIconContainer;
 import gregapi.util.ST;
 import gregtech.GT6_Main;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSilverfish;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -80,7 +81,7 @@ public class GT_Tool_Chisel extends ToolStats {
 	@Override
 	public boolean isMinableBlock(Block aBlock, byte aMetaData) {
 		String tTool = aBlock.getHarvestTool(aMetaData);
-		return (tTool != null && tTool.equalsIgnoreCase(TOOL_chisel)) || aBlock == Blocks.monster_egg || aBlock == Blocks.stone || aBlock == Blocks.stonebrick || aBlock instanceof BlockStones;
+		return (tTool != null && tTool.equalsIgnoreCase(TOOL_chisel)) || aBlock instanceof BlockSilverfish || aBlock == Blocks.stone || aBlock == Blocks.stonebrick || aBlock instanceof BlockStones;
 	}
 	
 	@Override

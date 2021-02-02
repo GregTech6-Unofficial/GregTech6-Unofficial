@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -51,6 +51,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 
 public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 	public MultiItemFood() {
@@ -62,218 +63,334 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 	public void addItems() {
 		int tLastID = 0;
 
-		IL.Grass.set(                               addItem(tLastID = 12000, "Grass"                                    , "Make 9 of this into a Bale in order to dry it"               , Behavior_FeedGrass.INSTANCE, OD.itemGrass         , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1)));
-		IL.Grass_Dry.set(                           addItem(tLastID = 12001, "Dry Grass"                                , "Useful for making a simple Fire Starter"                     , Behavior_FeedGrass.INSTANCE, OD.itemGrassDry      , TICKS_PER_SMELT / 2, TC.stack(TC.MESSIS, 1)));
-		IL.Grass_Moldy.set(                         addItem(tLastID = 12002, "Moldy Grass"                              , ""                                                                                         , OD.itemGrassMoldy    , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
-		IL.Grass_Rotten.set(                        addItem(tLastID = 12003, "Rotten Grass"                             , ""                                                                                         , OD.itemGrassRotten   , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
-		IL.Crop_Rye.set(                            addItem(tLastID = 12004, "Rye"                                      , ""                                                            , Behavior_FeedGrass.INSTANCE, "cropRye"            , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
-		IL.Crop_Oats.set(                           addItem(tLastID = 12005, "Oats"                                     , ""                                                            , Behavior_FeedGrass.INSTANCE, "cropOats"           , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
-		IL.Crop_Barley.set(                         addItem(tLastID = 12006, "Barley"                                   , ""                                                            , Behavior_FeedGrass.INSTANCE, "cropBarley"         , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
-		IL.Crop_Rice.set(                           addItem(tLastID = 12007, "Rice"                                     , ""                                                            , Behavior_FeedGrass.INSTANCE, "cropRice"           , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
-		CR.shaped(IL.Bale               .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrass);
-		CR.shaped(IL.Bale_Dry           .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrassDry);
-		CR.shaped(IL.Bale_Moldy         .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrassMoldy);
-		CR.shaped(IL.Bale_Rotten        .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrassRotten);
-		CR.shaped(IL.Bale_Rye           .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropRye");
-		CR.shaped(IL.Bale_Oats          .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropOats");
-		CR.shaped(IL.Bale_Barley        .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropBarley");
-		CR.shaped(IL.Bale_Rice          .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropRice");
-		CR.shapeless(IL.Grass           .get(1), CR.DEF_NAC_NCC, new Object[] {OD.itemGrassTall});
-		CR.shapeless(IL.Grass           .get(9), CR.DEF_NAC_NCC, new Object[] {"baleGrass"});
-		CR.shapeless(IL.Grass_Dry       .get(9), CR.DEF_NAC_NCC, new Object[] {"baleGrassDry"});
-		CR.shapeless(IL.Grass_Moldy     .get(9), CR.DEF_NAC_NCC, new Object[] {"baleGrassMoldy"});
-		CR.shapeless(IL.Grass_Rotten    .get(9), CR.DEF_NAC_NCC, new Object[] {"baleGrassRotten"});
-		CR.shapeless(IL.Crop_Rye        .get(9), CR.DEF_NAC_NCC, new Object[] {"baleRye"});
-		CR.shapeless(IL.Crop_Oats       .get(9), CR.DEF_NAC_NCC, new Object[] {"baleOats"});
-		CR.shapeless(IL.Crop_Barley     .get(9), CR.DEF_NAC_NCC, new Object[] {"baleBarley"});
-		CR.shapeless(IL.Crop_Rice       .get(9), CR.DEF_NAC_NCC, new Object[] {"baleRice"});
-		ItemsGT.addNEIRedirects(IL.Bale         .get(1), IL.Grass           .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Dry     .get(1), IL.Grass_Dry       .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Moldy   .get(1), IL.Grass_Moldy     .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Rotten  .get(1), IL.Grass_Rotten    .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Rye     .get(1), IL.Crop_Rye        .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Oats    .get(1), IL.Crop_Oats       .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Barley  .get(1), IL.Crop_Barley     .get(1));
-		ItemsGT.addNEIRedirects(IL.Bale_Rice    .get(1), IL.Crop_Rice       .get(1));
+		IL.Grass       .set(addItem(tLastID = 12000, "Grass"       , "Make 9 of this into a Bale in order to dry it", Behavior_FeedGrass.INSTANCE, OD.itemGrass         , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1)));
+		IL.Grass_Dry   .set(addItem(tLastID = 12001, "Dry Grass"   , "Useful for making a simple Fire Starter"      , Behavior_FeedGrass.INSTANCE, OD.itemGrassDry      , TICKS_PER_SMELT / 2, TC.stack(TC.MESSIS, 1)));
+		IL.Grass_Moldy .set(addItem(tLastID = 12002, "Moldy Grass" , ""                                                                          , OD.itemGrassMoldy    , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
+		IL.Grass_Rotten.set(addItem(tLastID = 12003, "Rotten Grass", ""                                                                          , OD.itemGrassRotten   , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
+		IL.Crop_Rye    .set(addItem(tLastID = 12004, "Rye"         , ""                                             , Behavior_FeedGrass.INSTANCE, "cropRye"            , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
+		IL.Crop_Oats   .set(addItem(tLastID = 12005, "Oats"        , ""                                             , Behavior_FeedGrass.INSTANCE, "cropOats"           , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
+		IL.Crop_Barley .set(addItem(tLastID = 12006, "Barley"      , ""                                             , Behavior_FeedGrass.INSTANCE, "cropBarley"         , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
+		IL.Crop_Rice   .set(addItem(tLastID = 12007, "Rice"        , ""                                             , Behavior_FeedGrass.INSTANCE, "cropRice"           , TICKS_PER_SMELT / 4, TC.stack(TC.MESSIS, 1)));
+		RM.replicateOrganic( 1,  2, IL.Grass      .get(1));
+		RM.replicateOrganic( 1,  3, IL.Crop_Wheat .get(1));
+		RM.replicateOrganic( 1,  4, IL.Crop_Rye   .get(1));
+		RM.replicateOrganic( 1,  5, IL.Crop_Oats  .get(1));
+		RM.replicateOrganic( 1,  6, IL.Crop_Barley.get(1));
+		RM.replicateOrganic( 1,  7, IL.Crop_Rice  .get(1));
+		CR.shaped(IL.Bale           .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrass);
+		CR.shaped(IL.Bale_Dry       .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrassDry);
+		CR.shaped(IL.Bale_Moldy     .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrassMoldy);
+		CR.shaped(IL.Bale_Rotten    .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', OD.itemGrassRotten);
+		CR.shaped(IL.Bale_Rye       .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropRye");
+		CR.shaped(IL.Bale_Oats      .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropOats");
+		CR.shaped(IL.Bale_Barley    .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropBarley");
+		CR.shaped(IL.Bale_Rice      .get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', "cropRice");
+		CR.shapeless(IL.Grass       .get(1), CR.DEF_NAC_NCC, new Object[] {OD.itemGrassTall});
+		CR.shapeless(IL.Grass       .get(9), CR.DEF_NAC_NCC, new Object[] {OD.baleGrass});
+		CR.shapeless(IL.Grass_Dry   .get(9), CR.DEF_NAC_NCC, new Object[] {OD.baleGrassDry});
+		CR.shapeless(IL.Grass_Moldy .get(9), CR.DEF_NAC_NCC, new Object[] {OD.baleGrassMoldy});
+		CR.shapeless(IL.Grass_Rotten.get(9), CR.DEF_NAC_NCC, new Object[] {OD.baleGrassRotten});
+		CR.shapeless(IL.Crop_Rye    .get(9), CR.DEF_NAC_NCC, new Object[] {"baleRye"});
+		CR.shapeless(IL.Crop_Oats   .get(9), CR.DEF_NAC_NCC, new Object[] {"baleOats"});
+		CR.shapeless(IL.Crop_Barley .get(9), CR.DEF_NAC_NCC, new Object[] {"baleBarley"});
+		CR.shapeless(IL.Crop_Rice   .get(9), CR.DEF_NAC_NCC, new Object[] {"baleRice"});
+		ItemsGT.addNEIRedirects(IL.Bale       .get(1), IL.Grass       .get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Dry   .get(1), IL.Grass_Dry   .get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Moldy .get(1), IL.Grass_Moldy .get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Rotten.get(1), IL.Grass_Rotten.get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Rye   .get(1), IL.Crop_Rye    .get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Oats  .get(1), IL.Crop_Oats   .get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Barley.get(1), IL.Crop_Barley .get(1));
+		ItemsGT.addNEIRedirects(IL.Bale_Rice  .get(1), IL.Crop_Rice   .get(1));
 		RM.Other.addFakeRecipe(F, ST.array(ST.make(ToolsGT.sMetaTool, 1, ToolsGT.KNIFE, "Just cut Tall Grass with this"), ST.make(ToolsGT.sMetaTool, 1, ToolsGT.SENSE, "Or cut Tall Grass with this"), ST.make(Blocks.tallgrass, 1, 1)), ST.array(IL.Grass.get(1), IL.Bale.get(1)), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
 		RM.Other.addFakeRecipe(F, ST.array(IL.Bale.getWithName(1, "Put the Bale Outside")), ST.array(IL.Bale_Dry.getWithName(1, "When its dry Outside"), IL.Bale_Moldy.getWithName(1, "When its wet Outside"), IL.Bale_Rotten.getWithName(1, "When its wet Outside and more time passed"), IL.Grass_Dry.getWithName(1, "When its dry Outside"), IL.Grass_Moldy.getWithName(1, "When its wet Outside"), IL.Grass_Rotten.getWithName(1, "When its wet Outside and more time passed")), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
 		
 		
 		
 		
-		IL.Cerublossom.set(                         addItem(tLastID = 12010, "Cerublossom"                              , "Used for magical Purposes"                                   , new Behavior_Turn_Into(IL.ARS_Cerublossom ), IL.ARS_Cerublossom   .exists() ? TD.Creative.HIDDEN : "flowerCerublossom"    , TC.stack(TC.HERBA, 1), TC.stack(TC.PRAECANTIO, 1), TC.stack(TC.LUX, 1)));
-		IL.DesertNova.set(                          addItem(tLastID = 12011, "Desert Nova"                              , "Used for magical Purposes"                                   , new Behavior_Turn_Into(IL.ARS_DesertNova  ), IL.ARS_DesertNova    .exists() ? TD.Creative.HIDDEN : "flowerDesertNova"     , TC.stack(TC.HERBA, 1), TC.stack(TC.PRAECANTIO, 1), TC.stack(TC.LUX, 1)));
-
-
-		IL.Resin.set(                               addItem(tLastID = 12050, "Rubber Resin"                             , ""                                                            , new Behavior_Turn_Into(IL.IC2_Resin       ), IL.IC2_Resin         .exists() ? TD.Creative.HIDDEN : OD.itemResin           , TC.stack(TC.LIMUS, 1), TICKS_PER_SMELT / 2));
-
-
-		IL.Remains_Plant.set(                       addItem(tLastID = 12100, "Plant Remains"                            , ""                                                            , OD.itemPlantRemains, TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1)));
-		IL.Remains_Fruit.set(                       addItem(tLastID = 12101, "Fruit Remains"                            , ""                                                            , OD.itemPlantRemains, TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1)));
-		IL.Remains_Veggie.set(                      addItem(tLastID = 12102, "Vegetable Remains"                        , ""                                                            , OD.itemPlantRemains, TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1)));
-		IL.Remains_Nut.set(                         addItem(tLastID = 12103, "Nut Remains"                              , ""                                                            , OD.itemPlantRemains, TICKS_PER_SMELT / 2, TC.stack(TC.HERBA, 1)));
-
-
-		IL.Bark_Dry.set(                            addItem(tLastID = 12201, "Dry Bark"                                 , "Useful for making a simple Fire Starter"                     , OD.itemBarkDry, TICKS_PER_SMELT / 4, TC.stack(TC.ARBOR, 1), new OreDictItemData(MT.Bark, U2)));
-
-
-		IL.Mud_Ball.set(                            addItem(tLastID = 12300, "Mud Ball"                                 , ""                                                            , OD.itemMud , TC.stack(TC.TERRA, 1)));
-		IL.Clay_Ball_Brown.set(                     addItem(tLastID = 12310, "Brown Clay Ball"                          , "Perfectly Balanced With No Exploits, except INFINITE CLAY!!!", OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.ClayBrown, U)));
-		IL.Clay_Ball_Red.set(                       addItem(tLastID = 12311, "Red Clay Ball"                            , "Perfectly Balanced With No Exploits, except INFINITE CLAY!!!", OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.ClayRed, U)));
-		RM.generify(IL.Clay_Ball_Brown.get(1), ST.make(Items.clay_ball, 1, 0));
-		RM.generify(IL.Clay_Ball_Red  .get(1), ST.make(Items.clay_ball, 1, 0));
-		RM.add_smelting(IL.Clay_Ball_Brown.get(1), ST.make(Items.brick, 1, 0));
-		RM.add_smelting(IL.Clay_Ball_Red  .get(1), ST.make(Items.brick, 1, 0));
+		IL.Cerublossom     .set(addItem(tLastID = 12010, "Cerublossom"      , "Used for magical Purposes"              , new Behavior_Turn_Into(IL.ARS_Cerublossom ), IL.ARS_Cerublossom.exists() ? TD.Creative.HIDDEN : "flowerCerublossom", TC.stack(TC.HERBA, 1), TC.stack(TC.PRAECANTIO, 1), TC.stack(TC.LUX, 1)));
+		IL.DesertNova      .set(addItem(tLastID = 12011, "Desert Nova"      , "Used for magical Purposes"              , new Behavior_Turn_Into(IL.ARS_DesertNova  ), IL.ARS_DesertNova .exists() ? TD.Creative.HIDDEN : "flowerDesertNova" , TC.stack(TC.HERBA, 1), TC.stack(TC.PRAECANTIO, 1), TC.stack(TC.LUX, 1)));
+		RM.replicateOrganic( 2,  3, IL.ARS_Cerublossom.exists() ? IL.ARS_Cerublossom.get(1) : IL.Cerublossom.get(1));
+		RM.replicateOrganic( 2,  4, IL.ARS_DesertNova .exists() ? IL.ARS_DesertNova .get(1) : IL.DesertNova .get(1));
+		
+		
+		IL.Resin           .set(addItem(tLastID = 12050, "Rubber Resin"     , ""                                       , new Behavior_Turn_Into(IL.IC2_Resin       ), IL.IC2_Resin      .exists() ? TD.Creative.HIDDEN : OD.itemResin       , TC.stack(TC.LIMUS, 1), TICKS_PER_SMELT / 2));
+		RM.replicateOrganic( 2,  5, IL.IC2_Resin.exists() ? IL.IC2_Resin.get(1) : IL.Resin.get(1));
+		
+		
+		IL.Slimeball_Borax .set(addItem(tLastID = 12099, "Slimeball"        , "Borax mixed with Glue"                  , OD.slimeball, OD.slimeballBorax, TC.stack(TC.LIMUS, 2)));
+		RM.Mixer.addRecipe1(T, 16, 16, OM.dust(MT.OREMATS.Borax), FL.Glue.make(250), NF, IL.Slimeball_Borax.get(1));
+		
+		
+		IL.Remains_Plant   .set(addItem(tLastID = 12100, "Plant Remains"    , ""                                       , OD.itemPlantRemains, TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1)));
+		IL.Remains_Fruit   .set(addItem(tLastID = 12101, "Fruit Remains"    , ""                                       , OD.itemPlantRemains, TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1)));
+		IL.Remains_Veggie  .set(addItem(tLastID = 12102, "Vegetable Remains", ""                                       , OD.itemPlantRemains, TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1)));
+		IL.Remains_Nut     .set(addItem(tLastID = 12103, "Nut Remains"      , ""                                       , OD.itemPlantRemains, TICKS_PER_SMELT / 2, TC.stack(TC.HERBA, 1)));
+		
+		
+		IL.Bark_Dry        .set(addItem(tLastID = 12201, "Dry Bark"         , "Useful for making a simple Fire Starter", OD.itemBarkDry, TICKS_PER_SMELT / 4, TC.stack(TC.ARBOR, 1), new OreDictItemData(MT.Bark, U2)));
+		RM.replicateOrganic( 2,  6, IL.Bark_Dry.get(1));
+		
+		
+		IL.Mud_Ball        .set(addItem(tLastID = 12300, "Mud"              , ""                                       , OD.itemMud , TC.stack(TC.TERRA, 1)));
+		IL.Clay_Ball_Brown .set(addItem(tLastID = 12310, "Brown Clay"       , "Contains small amounts of Lithium"      , OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.ClayBrown, U)));
+		IL.Clay_Ball_Red   .set(addItem(tLastID = 12311, "Red Clay"         , "Perfectly Balanced With No Exploits!"   , OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.ClayRed, U)));
+		IL.Clay_Ball_Yellow.set(addItem(tLastID = 12312, "Yellow Clay"      , "Bentonite Clay"                         , OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.Bentonite, U)));
+		IL.Clay_Ball_Blue  .set(addItem(tLastID = 12313, "Blue Clay"        , "Palygorskite Clay / Fullers Earth"      , OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.Palygorskite, U)));
+		IL.Clay_Ball_White .set(addItem(tLastID = 12314, "White Clay"       , "Kaolinite Clay / Porcelain Clay"        , OD.itemClay, TC.stack(TC.TERRA, 1), new OreDictItemData(MT.Kaolinite, U)));
 		CR.remove(ST.make(Items.clay_ball, 1, 0), ST.make(Items.clay_ball, 1, 0), NI, ST.make(Items.clay_ball, 1, 0), ST.make(Items.clay_ball, 1, 0));
-		CR.shaped       (ST.make(BlocksGT.Diggables, 1, 0), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Mud_Ball);
-		CR.shaped       (ST.make(BlocksGT.Diggables, 1, 1), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_Brown);
-		CR.shaped       (ST.make(BlocksGT.Diggables, 1, 3), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_Red);
-		CR.shaped       (ST.make(Blocks.clay       , 1, 0), CR.DEF_NAC_NCC, "XX", "XX", 'X', ST.make(Items.clay_ball, 1, W));
-		CR.shapeless    (IL.Mud_Ball               .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 0)});
-		CR.shapeless    (IL.Clay_Ball_Brown        .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 1)});
-		CR.shapeless    (IL.Clay_Ball_Red          .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 3)});
-		CR.shapeless    (ST.make(Items.clay_ball   , 4, 0), CR.DEF_NAC_NCC, new Object[] {ST.make(Blocks.clay       , 1, W)});
-
-
-		IL.Comb_Honey.set(          addItem(tLastID = 30000, "Honey Comb"           , "", OD.beeComb, OD.materialHoneycomb, "foodFilledhoneycomb", TC.stack(TC.LIMUS, 1), TC.stack(TC.FAMES, 1), TC.stack(TC.SANO, 1)));
-		IL.Comb_Water.set(          addItem(tLastID = 30001, "Water Comb"           , "", OD.beeComb, TC.stack(TC.AQUA, 2)));
-		IL.Comb_Magic.set(          addItem(tLastID = 30002, "Magic Comb"           , "", OD.beeComb, TC.stack(TC.PRAECANTIO, 2)));
-		IL.Comb_Nether.set(         addItem(tLastID = 30003, "Nether Comb"          , "", OD.beeComb, TC.stack(TC.IGNIS, 2)));
-		IL.Comb_End.set(            addItem(tLastID = 30004, "End Comb"             , "", OD.beeComb, TC.stack(TC.ALIENIS, 2)));
-		IL.Comb_Rock.set(           addItem(tLastID = 30005, "Rock Comb"            , "", OD.beeComb, TC.stack(TC.TERRA, 2)));
-		IL.Comb_Jungle.set(         addItem(tLastID = 30006, "Jungle Comb"          , "", OD.beeComb, TC.stack(TC.HERBA, 2)));
-		IL.Comb_Frozen.set(         addItem(tLastID = 30007, "Frozen Comb"          , "", OD.beeComb, TC.stack(TC.GELUM, 2)));
-		IL.Comb_Shroom.set(         addItem(tLastID = 30008, "Shroomy Comb"         , "", OD.beeComb, TC.stack(TC.VITIUM, 1), TC.stack(TC.HERBA, 1)));
-		IL.Comb_Sandy.set(          addItem(tLastID = 30009, "Sandy Comb"           , "", OD.beeComb, TC.stack(TC.TERRA, 1), TC.stack(TC.IGNIS, 1)));
-
-		IL.Comb_Clay.set(           addItem(tLastID = 30100, "Clay Comb"            , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
-		IL.Comb_Sticky.set(         addItem(tLastID = 30101, "Sticky Comb"          , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.LIMUS, 2)));
-		IL.Comb_Royal.set(          addItem(tLastID = 30102, "Royal Comb"           , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.LIMUS, 1), TC.stack(TC.SANO, 1)));
-		IL.Comb_Soul.set(           addItem(tLastID = 30103, "Soul Comb"            , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.SPIRITUS, 2)));
-		IL.Comb_Amnesic.set(        addItem(tLastID = 30104, "Amnesic Comb"         , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.LIMUS, 1), TC.stack(TC.STRONTIO, 1)));
-		IL.Comb_Military.set(       addItem(tLastID = 30105, "Military Comb"        , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.TELUM, 2)));
-
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Honey     .get(1), NF, FL.Honey           .make( 100), OM.dust(MT.WaxBee)                 , IL.FR_Propolis.get(1));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Water     .get(1), NF, FL.Water           .make(1000), OM.dust(MT.WaxBee)                 );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Magic     .get(1), NF, FL.Ambrosia        .make( 100), OM.dust(MT.WaxMagic)               );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Nether    .get(1), NF, FL.Blaze           .make(   L), OM.dust(MT.WaxRefractory)          );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000,  1000}        , IL.Comb_End       .get(1), NF, FL.Dragon_Breath   .make( 125), OM.dust(MT.Endstone)               , IL.FR_Propolis_Pulsating.get(1), IL.EtFu_Chorus_Fruit.get(1));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Rock      .get(1), NF, FL.Concrete        .make(   L), OM.dust(MT.Stone)                  );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Jungle    .get(1), NF, MT.Chocolate     .liquid(U, T), OM.dust(MT.Cocoa)                  , IL.FR_Propolis_Silky.get(1));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Frozen    .get(1), NF, FL.Ice             .make(1000), OM.dust(MT.Ice)                    );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] { 4000,  4000,  2000,  2000} , IL.Comb_Shroom    .get(1), NF, FL.Soup_Mushroom   .make(1000), ST.make(Blocks.red_mushroom, 1, 0) , ST.make(Blocks.brown_mushroom, 1, 0), ST.make(Blocks.red_mushroom_block, 1, 0), ST.make(Blocks.brown_mushroom_block, 1, 0));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Sandy     .get(1), NF, FL.Juice_Cactus    .make( 100), ST.make(Blocks.sand, 1, 0)         );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] { 4000,  4000,  4000}        , IL.Comb_Clay      .get(1), NF, FL.Concrete        .make(   L), OM.dust(MT.Clay)                   , OM.dust(MT.ClayBrown), OM.dust(MT.ClayRed));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  3000}               , IL.Comb_Sticky    .get(1), NF, FL.Latex           .make(   L), OM.dust(MT.WaxBee)                 , IL.FR_Propolis_Sticky.get(1, IL.IC2_Resin.get(1, IL.Resin.get(1))));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000}                      , IL.Comb_Royal     .get(1), ZL_FS,FL.array(FL.Honey.make(  50), FL.RoyalJelly.make(10))            , OM.dust(MT.WaxBee));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Soul      .get(1), NF, FL.Oil_Soulsand    .make(  50), OM.dust(MT.WaxSoulful)             , OM.dust(MT.SoulSand));
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Amnesic   .get(1), NF, FL                 .lube(1000), OM.dust(MT.WaxAmnesic)             );
-		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}               , IL.Comb_Military  .get(1), NF, FL.Juice_Cactus    .make( 150), OM.dust(MT.Bone)                   );
-
-
-		//TODO: finish the properties setup
-		IL.Food_Lemon.set(                          addItem(tLastID =     0, "Lemon"                                    , "Don't make Lemonade"         , "cropLemon"                   , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
-		IL.Food_Lemon_Sliced.set(                   addItem(tLastID =     1, "Lemon Slice"                              , "Ideal to put on your Drink"                                  , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.generify(IL.Clay_Ball_Brown .get(1), ST.make(Items.clay_ball, 1, 0));
+		RM.generify(IL.Clay_Ball_Red   .get(1), ST.make(Items.clay_ball, 1, 0));
+		RM.generify(IL.Clay_Ball_Yellow.get(1), ST.make(Items.clay_ball, 1, 0));
+		RM.generify(IL.Clay_Ball_Blue  .get(1), ST.make(Items.clay_ball, 1, 0));
+		RM.generify(IL.Clay_Ball_White .get(1), ST.make(Items.clay_ball, 1, 0));
+		RM.add_smelting(IL.Clay_Ball_Brown .get(1), ST.make(Items.brick, 1, 0));
+		RM.add_smelting(IL.Clay_Ball_Red   .get(1), ST.make(Items.brick, 1, 0));
+		RM.add_smelting(IL.Clay_Ball_Yellow.get(1), ST.make(Items.brick, 1, 0));
+		RM.add_smelting(IL.Clay_Ball_Blue  .get(1), ST.make(Items.brick, 1, 0));
+		RM.add_smelting(IL.Clay_Ball_White .get(1), ST.make(Items.brick, 1, 0));
+		CR.shaped    (OP.plate.mat(MT.Clay         , 1), CR.DEF_NAC_NCC, "R", "C", 'R', OreDictToolNames.rollingpin, 'C', Items.clay_ball);
+		CR.shaped    (OP.plate.mat(MT.ClayBrown    , 1), CR.DEF_NAC_NCC, "R", "C", 'R', OreDictToolNames.rollingpin, 'C', IL.Clay_Ball_Brown);
+		CR.shaped    (OP.plate.mat(MT.ClayRed      , 1), CR.DEF_NAC_NCC, "R", "C", 'R', OreDictToolNames.rollingpin, 'C', IL.Clay_Ball_Red);
+		CR.shaped    (OP.plate.mat(MT.Bentonite    , 1), CR.DEF_NAC_NCC, "R", "C", 'R', OreDictToolNames.rollingpin, 'C', IL.Clay_Ball_Yellow);
+		CR.shaped    (OP.plate.mat(MT.Palygorskite , 1), CR.DEF_NAC_NCC, "R", "C", 'R', OreDictToolNames.rollingpin, 'C', IL.Clay_Ball_Blue);
+		CR.shaped    (OP.plate.mat(MT.Kaolinite    , 1), CR.DEF_NAC_NCC, "R", "C", 'R', OreDictToolNames.rollingpin, 'C', IL.Clay_Ball_White);
+		CR.shaped    (ST.make(BlocksGT.Diggables, 1, 0), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Mud_Ball);
+		CR.shaped    (ST.make(BlocksGT.Diggables, 1, 1), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_Brown);
+		CR.shaped    (ST.make(BlocksGT.Diggables, 1, 3), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_Red);
+		CR.shaped    (ST.make(BlocksGT.Diggables, 1, 4), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_Yellow);
+		CR.shaped    (ST.make(BlocksGT.Diggables, 1, 5), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_Blue);
+		CR.shaped    (ST.make(BlocksGT.Diggables, 1, 6), CR.DEF_NAC_NCC, "XX", "XX", 'X', IL.Clay_Ball_White);
+		CR.shaped    (ST.make(Blocks.clay       , 1, 0), CR.DEF_NAC_NCC, "XX", "XX", 'X', Items.clay_ball);
+		CR.shapeless (IL.Mud_Ball               .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 0)});
+		CR.shapeless (IL.Clay_Ball_Brown        .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 1)});
+		CR.shapeless (IL.Clay_Ball_Red          .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 3)});
+		CR.shapeless (IL.Clay_Ball_Yellow       .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 4)});
+		CR.shapeless (IL.Clay_Ball_Blue         .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 5)});
+		CR.shapeless (IL.Clay_Ball_White        .get(4), CR.DEF_NAC_NCC, new Object[] {ST.make(BlocksGT.Diggables, 1, 6)});
+		CR.shapeless (ST.make(Items.clay_ball   , 4, 0), CR.DEF_NAC_NCC, new Object[] {Blocks.clay});
+		RM.packunpack(IL.Mud_Ball               .get(4), ST.make(BlocksGT.Diggables, 1, 0));
+		RM.packunpack(IL.Clay_Ball_Brown        .get(4), ST.make(BlocksGT.Diggables, 1, 1));
+		RM.packunpack(IL.Clay_Ball_Red          .get(4), ST.make(BlocksGT.Diggables, 1, 3));
+		RM.packunpack(IL.Clay_Ball_Yellow       .get(4), ST.make(BlocksGT.Diggables, 1, 4));
+		RM.packunpack(IL.Clay_Ball_Blue         .get(4), ST.make(BlocksGT.Diggables, 1, 5));
+		RM.packunpack(IL.Clay_Ball_White        .get(4), ST.make(BlocksGT.Diggables, 1, 6));
+		RM.packunpack(ST.make(Items.clay_ball   , 4, 0), ST.make(Blocks.clay       , 1, 0));
+		RM.RollBender.addRecipe1(T, 16, 32, ST.make(Items.clay_ball   , 1, 0), OP.plate.mat(MT.Clay        , 1));
+		RM.RollBender.addRecipe1(T, 16, 32, IL.Clay_Ball_Brown        .get(1), OP.plate.mat(MT.ClayBrown   , 1));
+		RM.RollBender.addRecipe1(T, 16, 32, IL.Clay_Ball_Red          .get(1), OP.plate.mat(MT.ClayRed     , 1));
+		RM.RollBender.addRecipe1(T, 16, 32, IL.Clay_Ball_Yellow       .get(1), OP.plate.mat(MT.Bentonite   , 1));
+		RM.RollBender.addRecipe1(T, 16, 32, IL.Clay_Ball_Blue         .get(1), OP.plate.mat(MT.Palygorskite, 1));
+		RM.RollBender.addRecipe1(T, 16, 32, IL.Clay_Ball_White        .get(1), OP.plate.mat(MT.Kaolinite   , 1));
+		RM.Compressor.addRecipe1(T, 16, 32, IL.Mud_Ball               .get(4), ST.make(BlocksGT.Diggables, 1, 0));
+		RM.Compressor.addRecipe1(T, 16, 32, ST.make(Items.clay_ball   , 4, 0), ST.make(Blocks.clay       , 1, 0));
+		RM.Compressor.addRecipe1(T, 16, 32, IL.Clay_Ball_Brown        .get(4), ST.make(BlocksGT.Diggables, 1, 1));
+		RM.Compressor.addRecipe1(T, 16, 32, IL.Clay_Ball_Red          .get(4), ST.make(BlocksGT.Diggables, 1, 3));
+		RM.Compressor.addRecipe1(T, 16, 32, IL.Clay_Ball_Yellow       .get(4), ST.make(BlocksGT.Diggables, 1, 4));
+		RM.Compressor.addRecipe1(T, 16, 32, IL.Clay_Ball_Blue         .get(4), ST.make(BlocksGT.Diggables, 1, 5));
+		RM.Compressor.addRecipe1(T, 16, 32, IL.Clay_Ball_White        .get(4), ST.make(BlocksGT.Diggables, 1, 6));
+		RM.Compressor.addRecipe1(T, 16, 32, OM.dust(MT.Clay           , 4* U), ST.make(Blocks.clay       , 1, 0));
+		RM.Compressor.addRecipe1(T, 16, 32, OM.dust(MT.ClayBrown      , 4* U), ST.make(BlocksGT.Diggables, 1, 1));
+		RM.Compressor.addRecipe1(T, 16, 32, OM.dust(MT.ClayRed        , 4* U), ST.make(BlocksGT.Diggables, 1, 3));
+		RM.Compressor.addRecipe1(T, 16, 32, OM.dust(MT.Bentonite      , 4* U), ST.make(BlocksGT.Diggables, 1, 4));
+		RM.Compressor.addRecipe1(T, 16, 32, OM.dust(MT.Palygorskite   , 4* U), ST.make(BlocksGT.Diggables, 1, 5));
+		RM.Compressor.addRecipe1(T, 16, 32, OM.dust(MT.Kaolinite      , 4* U), ST.make(BlocksGT.Diggables, 1, 6));
+		RM.Mortar    .addRecipe1(T, 16, 16, ST.make(Items.clay_ball   , 1, W), OM.dust(MT.Clay));
+		RM.Mortar    .addRecipe1(T, 16, 16, IL.Clay_Ball_Brown        .get(1), OM.dust(MT.ClayBrown));
+		RM.Mortar    .addRecipe1(T, 16, 16, IL.Clay_Ball_Red          .get(1), OM.dust(MT.ClayRed));
+		RM.Mortar    .addRecipe1(T, 16, 16, IL.Clay_Ball_Yellow       .get(1), OM.dust(MT.Bentonite));
+		RM.Mortar    .addRecipe1(T, 16, 16, IL.Clay_Ball_Blue         .get(1), OM.dust(MT.Palygorskite));
+		RM.Mortar    .addRecipe1(T, 16, 16, IL.Clay_Ball_White        .get(1), OM.dust(MT.Kaolinite));
+		RM.Mortar    .addRecipe1(T, 16, 64, ST.make(Blocks.clay       , 1, W), OM.dust(MT.Clay, U*4));
+		RM.Mortar    .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 1), OM.dust(MT.ClayBrown, U*4));
+		RM.Mortar    .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 3), OM.dust(MT.ClayRed, U*4));
+		RM.Mortar    .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 4), OM.dust(MT.Bentonite, U*4));
+		RM.Mortar    .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 5), OM.dust(MT.Palygorskite, U*4));
+		RM.Mortar    .addRecipe1(T, 16, 64, ST.make(BlocksGT.Diggables, 1, 6), OM.dust(MT.Kaolinite, U*4));
+		for (FluidStack tWater : FL.array(FL.Water.make(125), FL.SpDew.make(125), FL.DistW.make(100))) {
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.Ceramic      ), FL.mul(tWater, 5), NF, ST.make(Items.clay_ball, 1, 0));
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.Clay         ),        tWater    , NF, ST.make(Items.clay_ball, 1, 0));
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.ClayRed      ),        tWater    , NF, IL.Clay_Ball_Red.get(1));
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.ClayBrown    ),        tWater    , NF, IL.Clay_Ball_Brown.get(1));
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.Bentonite    ),        tWater    , NF, IL.Clay_Ball_Yellow.get(1));
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.Palygorskite ),        tWater    , NF, IL.Clay_Ball_Blue.get(1));
+		RM.Bath      .addRecipe1(T,  0, 16, OM.dust(MT.Kaolinite    ),        tWater    , NF, IL.Clay_Ball_White.get(1));
+		}
+		
+		IL.Comb_Honey   .set(addItem(tLastID = 30000, "Honey Comb"   , "", OD.beeComb, OD.materialHoneycomb, "foodFilledhoneycomb", TC.stack(TC.LIMUS, 1), TC.stack(TC.FAMES, 1), TC.stack(TC.SANO, 1)));
+		IL.Comb_Water   .set(addItem(tLastID = 30001, "Water Comb"   , "", OD.beeComb, TC.stack(TC.AQUA, 2)));
+		IL.Comb_Magic   .set(addItem(tLastID = 30002, "Magic Comb"   , "", OD.beeComb, TC.stack(TC.PRAECANTIO, 2)));
+		IL.Comb_Nether  .set(addItem(tLastID = 30003, "Nether Comb"  , "", OD.beeComb, TC.stack(TC.IGNIS, 2)));
+		IL.Comb_End     .set(addItem(tLastID = 30004, "End Comb"     , "", OD.beeComb, TC.stack(TC.ALIENIS, 2)));
+		IL.Comb_Rock    .set(addItem(tLastID = 30005, "Rock Comb"    , "", OD.beeComb, TC.stack(TC.TERRA, 2)));
+		IL.Comb_Jungle  .set(addItem(tLastID = 30006, "Jungle Comb"  , "", OD.beeComb, TC.stack(TC.HERBA, 2)));
+		IL.Comb_Frozen  .set(addItem(tLastID = 30007, "Frozen Comb"  , "", OD.beeComb, TC.stack(TC.GELUM, 2)));
+		IL.Comb_Shroom  .set(addItem(tLastID = 30008, "Shroomy Comb" , "", OD.beeComb, TC.stack(TC.VITIUM, 1), TC.stack(TC.HERBA, 1)));
+		IL.Comb_Sandy   .set(addItem(tLastID = 30009, "Sandy Comb"   , "", OD.beeComb, TC.stack(TC.TERRA, 1), TC.stack(TC.IGNIS, 1)));
+		
+		IL.Comb_Clay    .set(addItem(tLastID = 30100, "Clay Comb"    , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
+		IL.Comb_Sticky  .set(addItem(tLastID = 30101, "Sticky Comb"  , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.LIMUS, 2)));
+		IL.Comb_Royal   .set(addItem(tLastID = 30102, "Royal Comb"   , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.LIMUS, 1), TC.stack(TC.SANO, 1)));
+		IL.Comb_Soul    .set(addItem(tLastID = 30103, "Soul Comb"    , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.SPIRITUS, 2)));
+		IL.Comb_Amnesic .set(addItem(tLastID = 30104, "Amnesic Comb" , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.LIMUS, 1), TC.stack(TC.STRONTIO, 1)));
+		IL.Comb_Military.set(addItem(tLastID = 30105, "Military Comb", "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.TELUM, 2)));
+		
+		IL.Comb_Pyro    .set(addItem(tLastID = 30200, "Pyro Comb"    , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.IGNIS, 2)));
+		IL.Comb_Cryo    .set(addItem(tLastID = 30201, "Cryo Comb"    , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.GELUM, 2)));
+		IL.Comb_Aero    .set(addItem(tLastID = 30202, "Aero Comb"    , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.AER  , 2)));
+		IL.Comb_Tera    .set(addItem(tLastID = 30203, "Tera Comb"    , "", OD.beeComb, OD.beeCombCrossbred, TC.stack(TC.TERRA, 2)));
+		
+		
+																																										  
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Honey   .get(1), NF   , FL.Honey                                .make( 100), OM.dust(MT.WaxBee)                , IL.FR_Propolis.get(1));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Water   .get(1), NF   , FL.Water                                .make(1000), OM.dust(MT.WaxBee)                );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Magic   .get(1), NF   , FL.Ambrosia                             .make( 100), OM.dust(MT.WaxMagic)              );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Nether  .get(1), NF   , FL.Blaze                                .make(   L), OM.dust(MT.WaxRefractory)         );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000,  1000}           , IL.Comb_End     .get(1), NF   , FL.Dragon_Breath                        .make( 125), OM.dust(MT.Endstone)              , IL.FR_Propolis_Pulsating.get(1), IL.EtFu_Chorus_Fruit.get(1));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Rock    .get(1), NF   , FL.Concrete                             .make(   L), OM.dust(MT.Stone)                 );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Jungle  .get(1), NF   , MT.Chocolate                          .liquid(U, T), OM.dust(MT.Cocoa)                 , IL.FR_Propolis_Silky.get(1, ST.make(Items.string, 1, 0)));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Frozen  .get(1), NF   , FL.Ice                                  .make(1000), OM.dust(MT.Ice)                   );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] { 6000,  6000}                  , IL.Comb_Shroom  .get(1), NF   , FL.Soup_Mushroom                        .make(1000), ST.make(Blocks.red_mushroom_block, 1, 0), ST.make(Blocks.brown_mushroom_block, 1, 0));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Sandy   .get(1), NF   , FL.Juice_Cactus                         .make( 100), ST.make(Blocks.sand, 1, 0)        );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] { 2000,2000,2000,2000,2000,2000}, IL.Comb_Clay    .get(1), NF   , FL.Concrete                             .make(   L), OM.dust(MT.Clay)                  , OM.dust(MT.ClayBrown), OM.dust(MT.ClayRed), OM.dust(MT.Bentonite), OM.dust(MT.Palygorskite), OM.dust(MT.Kaolinite));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  3000}                  , IL.Comb_Sticky  .get(1), NF   , FL.Latex                                .make(   L), OM.dust(MT.WaxBee)                , IL.FR_Propolis_Sticky.get(1, IL.IC2_Resin.get(1, IL.Resin.get(1))));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000}                         , IL.Comb_Royal   .get(1), ZL_FS, FL.array(FL.Honey.make(50), FL.RoyalJelly.make(10)), OM.dust(MT.WaxBee)                );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Soul    .get(1), NF   , FL.Oil_Soulsand                         .make(  50), OM.dust(MT.WaxSoulful)            , OM.dust(MT.SoulSand));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Amnesic .get(1), NF   , FL                                      .lube(1000), OM.dust(MT.WaxAmnesic)            );
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,   500,   500,   250}    , IL.Comb_Military.get(1), NF   , FL.Potion_Harm_1                        .make(  50), OM.dust(MT.Bone)                  , ST.make(Items.bone, 1, 0), ST.make(Items.rotten_flesh, 1, 0), ST.make(Items.spider_eye, 1, 0));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Pyro    .get(1), NF   , FL.Blaze                                .make( L/2), OM.dust(MT.Blaze, U9)             , OP.stick.mat(MT.Blaze, 1));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Cryo    .get(1), NF   , FL.Ice                                  .make( 500), OM.dust(MT.Blizz, U9)             , OP.stick.mat(MT.Blizz, 1));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Aero    .get(1), NF   , FL.Dragon_Breath                        .make(  50), OM.dust(MT.Blitz, U9)             , OP.stick.mat(MT.Blitz, 1));
+		RM.Centrifuge.addRecipe1(T, 16, 64, new long[] {10000,  1000}                  , IL.Comb_Tera    .get(1), NF   , FL.Concrete                             .make(   L), OM.dust(MT.Basalz, U9)            , OP.stick.mat(MT.Basalz, 1));
+		
+		
+		IL.Food_Lemon                          .set(addItem(tLastID =     0, "Lemon"                                    , "Don't make Lemonade"         , "cropLemon"                   , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		IL.Food_Lemon_Sliced                   .set(addItem(tLastID =     1, "Lemon Slice"                              , "Ideal to put on your Drink"                                  , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.replicateOrganic( 3,  4, IL.Food_Lemon.get(1));
 		CR.shaped(IL.Food_Lemon_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropLemon");
 
 
 		IL.Food_Tomato.set(                         addItem(tLastID =    10, "Tomato"                                   , "Solid Ketchup"               , "cropTomato"                  , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Tomato_Sliced.set(                  addItem(tLastID =    11, "Tomato Slice"                             , "Solid Ketchup"                                               , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.replicateOrganic( 4,  5, IL.Food_Tomato.get(1));
 		CR.shaped(IL.Food_Tomato_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropTomato");
 
 
 		IL.Food_MTomato.set(                        addItem(tLastID =    20, "Max Tomato"                               , "Ten Hearts in one Tomato"    , "cropTomato"                  , new FoodStat( 9, 1.000F,  50, C+36,  0.30F,   0,   0,   0,  10,   0, 1, EnumAction.eat, null                                 , F, T, F, T, Potion.regeneration.id, 60, 4, 100), TC.stack(TC.MESSIS, 1), TC.stack(TC.SANO, 3), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 4,  6, IL.Food_MTomato.get(1));
 		RM.food_can(IL.Food_MTomato.get(1),10, "Canned Max Tomato", IL.CANS_VEGGIE);
 
 
 		IL.Food_Onion.set(                          addItem(tLastID =    30, "Onion"                                    , "Taking over the whole Taste" , "cropOnion"                   , new FoodStat( 1, 1.200F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Onion_Sliced.set(                   addItem(tLastID =    31, "Onion Slice"                              , "ONIONS, UNITE!"                                              , new FoodStat( 0, 0.300F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.replicateOrganic( 4,  7, IL.Food_Onion.get(1));
 		CR.shaped(IL.Food_Onion_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropOnion");
 
 
 		IL.Food_Cucumber.set(                       addItem(tLastID =    40, "Cucumber"                                 , "Not a Sea Cucumber!"         , "cropCucumber"                , new FoodStat( 1, 1.200F,   0, C+36,  0.30F,   0,   0,   0,   4,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Cucumber_Sliced.set(                addItem(tLastID =    41, "Cucumber Slice"                           , "QUEWWWCUMMMBURRR!!!"                                         , new FoodStat( 0, 0.300F,   0, C+36,  0.30F,   0,   0,   0,   1,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.replicateOrganic( 4,  8, IL.Food_Cucumber.get(1));
 		CR.shaped(IL.Food_Cucumber_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropCucumber");
 
 
 		IL.Food_Chili_Pepper.set(                   addItem(tLastID =    50, "Chili Pepper"                             , "It is red and hot"           , "cropChilipepper"             , new FoodStat( 1, 1.200F, -10, C+40,  0.50F,   0,   0,  10,   0,   0, 4, EnumAction.eat, null                                 , F, T, F, T, Potion.confusion.id, 200, 1, 40), TC.stack(TC.MESSIS, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.FAMES, 1)));
-
+		RM.replicateOrganic( 4,  9, IL.Food_Chili_Pepper.get(1));
 
 		IL.Food_Grapes_Green.set(                   addItem(tLastID =    60, "Green Grapes"                             , "Source of Wine"              , "cropGrapeGreen"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Raisins_Green.set(                  addItem(tLastID =    61, "Green Raisins"                            , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 3,  5, IL.Food_Grapes_Green.get(1));
 
 		IL.Food_Grapes_White.set(                   addItem(tLastID =    63, "White Grapes"                             , "Source of Wine"              , "cropGrapeWhite"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Raisins_White.set(                  addItem(tLastID =    64, "White Raisins"                            , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 3,  6, IL.Food_Grapes_White.get(1));
 
 		IL.Food_Grapes_Red.set(                     addItem(tLastID =    66, "Red Grapes"                               , "Source of Wine"              , "cropGrapeRed"                , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Raisins_Red.set(                    addItem(tLastID =    67, "Red Raisins"                              , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 3,  7, IL.Food_Grapes_Red.get(1));
 
 		IL.Food_Grapes_Purple.set(                  addItem(tLastID =    70, "Purple Grapes"                            , "Source of Wine"              , "cropGrapePurple"             , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Raisins_Purple.set(                 addItem(tLastID =    71, "Purple Raisins"                           , "Dried Grapes"                , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,  12,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 3,  8, IL.Food_Grapes_Purple.get(1));
 
 		IL.Food_Raisins_Chocolate.set(              addItem(tLastID =    72, "Chocolate Raisins"                        , "Dried Grapes coated in Chocolate", "foodChocolateraisins"    , new FoodStat( 3, 1.200F,   0, C+37,  0.20F,   0,   0,   0,  40,   0, 2, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.SANO, 1)));
 
 
 		IL.Food_Carrot.set(                         ST.make(Items.carrot, 1, 0)); FoodsGT.put(ST.make(Items.carrot, 1, W), 0, 0, 0, 8, 0);//                                            , new FoodStat( 5, 1.200F,   0, C+37,  0.10F,   0,   0,   0,   8,   0, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1), TC.stack(TC.IGNIS, 1), Behavior_FeedPig.INSTANCE));
 		IL.Food_Carrot_Sliced.set(                  addItem(tLastID =    81, "Carrot Slice"                             , "Sliced Goku"                                                 , new FoodStat( 0, 0.300F,   0, C+37,  0.30F,   0,   0,   0,   2,   0, 4, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.replicateOrganic( 4,  9, IL.Food_Carrot.get(1));
 		CR.shaped(IL.Food_Carrot_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropCarrot");
 
 
 		IL.Food_Banana.set(                         addItem(tLastID =    90, "Banana"                                   , "For Scale"                   , "cropBanana"                  , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Banana_Sliced.set(                  addItem(tLastID =    91, "Banana Slice"                             , "Food for Minions"                                            , new FoodStat( 0, 0.150F,   0, C+36,  0.30F,   0,   0,   0,   2,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
+		RM.replicateOrganic( 3,  9, IL.Food_Banana.get(1));
 		CR.shaped(IL.Food_Banana_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropBanana");
 
 
 		IL.Food_Pomegranate.set(                    addItem(tLastID =   100, "Pomegranate"                              , "A seeded Apple"              , "cropPomegranate"             , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.BESTIA, 1)));
 		IL.Food_Pomeraisins.set(                    addItem(tLastID =   101, "Pomeraisins"                              , "Lesser Dogs favourite Food"  , "foodRaisins"                 , new FoodStat( 2, 0.600F,   0, C+37,  0.20F,   0,   0,   0,   2,   0, 2, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.VACUOS, 1), TC.stack(TC.BESTIA, 1), Behavior_FeedDog.INSTANCE));
+		RM.replicateOrganic( 3, 10, IL.Food_Pomegranate.get(1));
 
 
 		IL.Food_Blueberry.set(                      addItem(tLastID =   110, "Blueberry"                                , ""                            , "cropBlueberry"               , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.SENSUS, 1)));
+		RM.replicateOrganic( 5,  6, IL.Food_Blueberry.get(1));
 		BushesGT.put(IL.Food_Blueberry.get(1), 0x22ff22, 0xffcccc, 0x6666dd, 0x0000ff);
 
 		IL.Food_Gooseberry.set(                     addItem(tLastID =   120, "Gooseberry"                               , ""                            , "cropGooseberry"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 5,  7, IL.Food_Gooseberry.get(1));
 		// Grows on Trees
 
 		IL.Food_Candleberry.set(                    addItem(tLastID =   130, "Candleberry"                              , ""                            , "cropCandleberry"             , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.GELUM, 1)));
+		RM.replicateOrganic( 5,  8, IL.Food_Candleberry.get(1));
 		BushesGT.put(IL.Food_Candleberry.get(1), 0x44ff44, 0xccffcc, 0xaaffaa, 0xccffcc);
 
 		IL.Food_Cranberry.set(                      addItem(tLastID =   140, "Cranberry"                                , ""                            , "cropCranberry"               , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 5,  9, IL.Food_Cranberry.get(1));
 		BushesGT.put(IL.Food_Cranberry.get(1), 0x00dd00, 0xffcccc, 0x66ff66, 0xff0000);
 
 		IL.Food_Currants_Black.set(                 addItem(tLastID =   150, "Black Currants"                           , ""                            , "cropCurrantsBlack"           , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   6,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.TENEBRAE, 1)));
+		RM.replicateOrganic( 5, 10, IL.Food_Currants_Black.get(1));
 		BushesGT.put(IL.Food_Currants_Black.get(1), 0x33ff33, 0xaaaaaa, 0x66ff66, 0x111111);
 
 		IL.Food_Currants_White.set(                 addItem(tLastID =   160, "White Currants"                           , ""                            , "cropCurrantsWhite"           , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.ORDO, 1)));
+		RM.replicateOrganic( 5, 11, IL.Food_Currants_White.get(1));
 		BushesGT.put(IL.Food_Currants_White.get(1), 0x33ff33, 0xaaaaaa, 0x66ff66, 0xeeeedd);
 
 		IL.Food_Currants_Red.set(                   addItem(tLastID =   170, "Red Currants"                             , ""                            , "cropCurrantsRed"             , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.SANO, 1)));
+		RM.replicateOrganic( 5, 12, IL.Food_Currants_Red.get(1));
 		BushesGT.put(IL.Food_Currants_Red.get(1), 0x33ff33, 0xaaaaaa, 0x66ff66, 0xee0000);
 
 		IL.Food_Blackberry.set(                     addItem(tLastID =   180, "Blackberry"                               , ""                            , "cropBlackberry"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.TENEBRAE, 1)));
+		RM.replicateOrganic( 5, 13, IL.Food_Blackberry.get(1));
 		BushesGT.put(IL.Food_Blackberry.get(1), 0x11ff11, 0xffcccc, 0x663333, 0x331111);
 
 		IL.Food_Raspberry.set(                      addItem(tLastID =   190, "Raspberry"                                , ""                            , "cropRaspberry"               , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.SANO, 1)));
+		RM.replicateOrganic( 5, 14, IL.Food_Raspberry.get(1));
 		BushesGT.put(IL.Food_Raspberry.get(1), 0x11ff11, 0xffcccc, 0x664444, 0xffaaaa);
 
 		IL.Food_Strawberry.set(                     addItem(tLastID =   200, "Strawberry"                               , ""                            , "cropStrawberry"              , new FoodStat( 1, 0.600F,   0, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.HERBA, 1), TC.stack(TC.SANO, 1)));
+		RM.replicateOrganic( 5, 15, IL.Food_Strawberry.get(1));
 		// Grows on Weeds
 
 
 		IL.Food_Apple_Green.set(                    addItem(tLastID =   210, "Apple"            , ""                                                    , "cropAppleGreen"              , new FoodStat( 4, 0.400F,  10, C+36,  0.30F,   0,   0,   0,   4,   0, 1, EnumAction.eat, ST.make(this, 1, tLastID+2)          , F, T, F, T), TC.stack(TC.MESSIS, 2), TC.stack(TC.FAMES, 1), Behavior_FeedPig.INSTANCE));
 		IL.Food_Apple_Green_Sliced.set(             addItem(tLastID =   211, "Apple Slice"      , ""                                                                                    , new FoodStat( 1, 0.400F,  10, C+36,  0.30F,   0,   0,   0,   1,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		IL.Food_Apple_Green_Core.set(               addItem(tLastID =   212, "Apple Core"       , "Not to be confused with the Mod"                     , "itemPlantRemains"            , TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1), Behavior_FeedPig.INSTANCE));
+		RM.replicateOrganic( 3, 11, IL.Food_Apple_Green.get(1));
 		CR.shaped(IL.Food_Apple_Green_Sliced    .get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropAppleGreen");
 
 
 		IL.Food_Apple_Yellow.set(                   addItem(tLastID =   220, "Apple"            , ""                                                    , "cropAppleYellow"             , new FoodStat( 5, 0.300F,   5, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, ST.make(this, 1, tLastID+2)          , F, T, F, T), TC.stack(TC.MESSIS, 2), TC.stack(TC.FAMES, 1), Behavior_FeedPig.INSTANCE));
 		IL.Food_Apple_Yellow_Sliced.set(            addItem(tLastID =   221, "Apple Slice"      , ""                                                                                    , new FoodStat( 1, 0.300F,   5, C+36,  0.30F,   0,   0,   0,   2,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		IL.Food_Apple_Yellow_Core.set(              addItem(tLastID =   222, "Apple Core"       , "Not to be confused with the Mod"                     , "itemPlantRemains"            , TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1), Behavior_FeedPig.INSTANCE));
+		RM.replicateOrganic( 3, 12, IL.Food_Apple_Yellow.get(1));
 		CR.shaped(IL.Food_Apple_Yellow_Sliced   .get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropAppleYellow");
 
 
 		IL.Food_Apple_Red.set(                      ST.make(Items.apple, 1, 0)); FoodsGT.put(ST.make(Items.apple, 1, W), 0, 0, 0, 8, 0);//              , "cropAppleRed"                , new FoodStat( 4, 0.300F,   0, C+37,  0.30F,   0,   0,   0,   8,   0, EnumAction.eat, ST.make(this, 1, tLastID+2)          , F, T, F, T), TC.stack(TC.MESSIS, 2), TC.stack(TC.FAMES, 1), Behavior_FeedPig.INSTANCE));
 		IL.Food_Apple_Red_Sliced.set(               addItem(tLastID =   231, "Apple Slice"      , ""                                                                                    , new FoodStat( 1, 0.300F,   0, C+37,  0.30F,   0,   0,   0,   2,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.HERBA, 1)));
 		IL.Food_Apple_Red_Core.set(                 addItem(tLastID =   232, "Apple Core"       , "Not to be confused with the Mod"                     , "itemPlantRemains"            , TICKS_PER_SMELT / 4, TC.stack(TC.HERBA, 1), Behavior_FeedPig.INSTANCE));
+		RM.replicateOrganic( 3, 13, IL.Food_Apple_Red.get(1));
 		CR.shaped(IL.Food_Apple_Red_Sliced      .get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropAppleRed");
 
 
@@ -283,41 +400,46 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		CR.shaped(IL.Food_Apple_DarkRed_Sliced  .get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropAppleDarkRed");
 
 
+		RM.replicateOrganic( 3, 15, ST.make(Blocks.melon_block, 1, 0));
+
+		
 		IL.Food_Peanut.set(                         addItem(tLastID =   250, "Peanut"           , "Deez Nutz"                                           , "cropPeanut"                  , new FoodStat( 2, 0.300F,   0, C+37,  0.10F,   0,   0,   0,   0,  16, 3, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.GRANUM, 1), TC.stack(TC.COGNITO, 1)));
 		addItem(251, "", "", new Behavior_Turn_Into(IL.Food_Coconut), TD.Creative.HIDDEN); // Migrating a GT6U Mistake when assigning IDs. There are 10-ID-wide gaps for a reason.
-
+		RM.replicateOrganic( 6,  7, IL.Food_Peanut.get(1));
 
 		IL.Food_Hazelnut.set(                       addItem(tLastID =   260, "Hazelnut"         , ""                                                    , "cropHazelnut"                , new FoodStat( 2, 0.300F,   0, C+37,  0.10F,   0,   0,   0,   0,  16, 3, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.GRANUM, 1), TC.stack(TC.PERFODIO, 1)));
-
+		RM.replicateOrganic( 6,  8, IL.Food_Hazelnut.get(1));
 
 		IL.Food_Ananas.set(                         addItem(tLastID =   270, "Ananas"           , "Who lives in a Pineapple under the the Sea?"         , "cropAnanas"                  , new FoodStat( 4, 0.300F,  10, C+36,  0.30F,   0,   0,   0,   8,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.ARBOR, 1), TC.stack(TC.FAMES, 1)));
 		IL.Food_Ananas_Sliced.set(                  addItem(tLastID =   271, "Ananas Slice"     , "Did Ted ever find out about the Mystery Pineapple?"                                  , new FoodStat( 1, 0.300F,  10, C+36,  0.30F,   0,   0,   0,   2,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.ARBOR, 1)));
+		RM.replicateOrganic( 2,  8, IL.Food_Ananas.get(1));
 		CR.shaped(IL.Food_Ananas_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "cropAnanas");
 
 
 		IL.Food_Cinnamon.set(                       addItem(tLastID =   280, "Cinnamon Bark"    , "Don't let anyone Challenge you!"                     , "cropCinnamon"                , new FoodStat( 2, 0.300F,   0, C+37,  0.10F,   0,   0,   0,   0,   0, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.ARBOR, 1), TC.stack(TC.FAMES, 1)));
+		RM.replicateOrganic( 2,  7, IL.Food_Cinnamon.get(1));
 
 		// Couldn't resist to put Lyrics from the Donkey Kong Rap there.
 		IL.Food_Coconut.set(                        addItem(tLastID =   290, "Coconut"          , "His Coconut Gun can fire in spurts. If he shoots ya, it's gonna hurt!", "cropCoconut", new FoodStat( 2, 0.300F,   0, C+37,  0.10F,   0,   0,   0,   8,   8, 3, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.MESSIS, 1), TC.stack(TC.GRANUM, 1), TC.stack(TC.TUTAMEN, 1)));
-
+		RM.replicateOrganic( 2,  9, IL.Food_Coconut.get(1));
 
 		IL.Food_Cheese.set(                         addItem(tLastID =  1000, "Cheese"           , "Click the Cheese"                                    , "foodCheese"                  , new FoodStat( 2, 1.200F,   0, C+37,  0.10F,   0,   0,   8,   0,   8, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.FAMES, 2)));
 		IL.Food_Cheese_Sliced.set(                  addItem(tLastID =  1001, "Cheese Slice"     , "ALIEN ATTACK!!!, throw the CHEEEEESE!!!"                                             , new FoodStat( 1, 0.600F,   0, C+37,  0.10F,   0,   0,   2,   0,   2, 1, EnumAction.eat, null                                 , F, T, F, T), TC.stack(TC.FAMES, 1), new OreDictItemData(MT.Cheese, U4)));
 		CR.shaped(IL.Food_Cheese_Sliced.get(4), CR.DEF_NAC_NCC, "kX", 'X', "foodCheese");
-
-
+		
+		
 		FoodsGT.put(ST.make(Items.fish              , 1, W), 0, 0, 0, 0,12);
 		FoodsGT.put(ST.make(Items.cooked_fished     , 1, W), 0, 0, 0, 0,12);
-
+		
 		FoodsGT.put(ST.make(Items.beef              , 1, W), 0, 0, 0, 0,16);
 		FoodsGT.put(ST.make(Items.cooked_beef       , 1, W), 0, 0, 0, 0,16);
-
+		
 		FoodsGT.put(ST.make(Items.chicken           , 1, W), 0, 0, 0, 0,12);
 		FoodsGT.put(ST.make(Items.cooked_chicken    , 1, W), 0, 0, 0, 0,12);
-
+		
 		FoodsGT.put(ST.make(Items.porkchop          , 1, W), 0, 0, 0, 0,16);
 		FoodsGT.put(ST.make(Items.cooked_porkchop   , 1, W), 0, 0, 0, 0,16);
-
+		
 		FoodsGT.put(ST.make(Items.rotten_flesh      , 1, W),10, 0, 0, 0, 8);
 
 
@@ -557,12 +679,8 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		CR.shapeless(IL.Food_Large_Sandwich_Bacon.get(1)    , CR.DEF, new Object[] {IL.Food_Baguette_Sliced, IL.Food_Baguette_Sliced, "foodBaconcooked", "foodBaconcooked", "foodBaconcooked", "foodBaconcooked", "foodBaconcooked", "foodBaconcooked"});
 		CR.shapeless(IL.Food_Large_Sandwich_Steak.get(1)    , CR.DEF, new Object[] {IL.Food_Baguettes_Sliced, Items.cooked_beef, Items.cooked_beef});
 		CR.shapeless(IL.Food_Large_Sandwich_Steak.get(1)    , CR.DEF, new Object[] {IL.Food_Baguette_Sliced, IL.Food_Baguette_Sliced, Items.cooked_beef, Items.cooked_beef});
-
-
-		FoodsGT.put(ST.make(Items.poisonous_potato  , 1, W), 0, 0, 0, 4, 0);
-		FoodsGT.put(ST.make(Items.potato            , 1, W), 0, 0, 0, 4, 0);
-		FoodsGT.put(ST.make(Items.baked_potato      , 1, W), 0, 0, 0, 4, 0);
-		FoodsGT.put(ST.make(Items.melon             , 1, W), 0, 0, 0, 8, 0);
+		
+		
 		FoodsGT.put(ST.make(Items.mushroom_stew     , 1, W), 0,10, 0, 5, 0);
 		FoodsGT.put(ST.make(Items.pumpkin_pie       , 1, W), 0, 0, 0,15, 0);
 
@@ -648,7 +766,7 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		RM.CryoMixer.addRecipe1(T, 16, 64, OM.dust(MT.NaCl, U ), FL.array(FL.Water.make(1000), FL.Cream.make(1000)), ZL_FS, IL.Food_Ice_Cream.get(4));
 		RM.CryoMixer.addRecipe1(T, 16, 64, OM.dust(MT.NaCl, U ), FL.array(FL.SpDew.make(1000), FL.Cream.make(1000)), ZL_FS, IL.Food_Ice_Cream.get(4));
 		RM.CryoMixer.addRecipe1(T, 16, 64, OM.dust(MT.NaCl, U ), FL.array(FL.DistW.make(1000), FL.Cream.make(1000)), ZL_FS, IL.Food_Ice_Cream.get(4));
-
+		
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Lemon             .make( 50), NF, IL.Food_Ice_Cream_Lemon.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Banana            .make( 50), NF, IL.Food_Ice_Cream_Banana.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Grape_Red         .make( 50), NF, IL.Food_Ice_Cream_Grape.get(1));
@@ -667,7 +785,7 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Raspberry         .make( 50), NF, IL.Food_Ice_Cream_Raspberry.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Blackberry        .make( 50), NF, IL.Food_Ice_Cream_Blackberry.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Blueberry         .make( 50), NF, IL.Food_Ice_Cream_Blueberry.get(1));
-		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Gooseberry        .make( 50), NF, IL.Food_Ice_Cream_Cherry.get(1));
+		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Juice_Gooseberry        .make( 50), NF, IL.Food_Ice_Cream_Gooseberry.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.RoyalJelly              .make(  5), NF, IL.Food_Ice_Cream_Honey.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.Honey                   .make( 50), NF, IL.Food_Ice_Cream_Honey.get(1));
 		RM.Mixer.addRecipe1(T, 16, 16, IL.Food_Ice_Cream.get(1), FL.HoneyGrC                .make( 50), NF, IL.Food_Ice_Cream_Honey.get(1));
@@ -708,17 +826,17 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 
 
 
-		IL.Pill_Empty.set(                          addItem(tLastID = 31000, "Empty Wax Pill"                           , "Placebo"                                                     , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T), TC.stack(TC.SANO, 1), TC.stack(TC.VACUOS, 1)));
-		IL.Pill_Iodine.set(                         addItem(tLastID = 31001, "Radaway"                                  , "Pill that cures Effects of Radiation"                        , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, CS.PotionsGT.ID_RADIATION, -1, -1, 100), TC.stack(TC.SANO, 3), TD.Creative.HIDDEN));
-		IL.Pill_Mint.set(                           addItem(tLastID = 31002, "Peppermint"                               , "Take a fresh energetic Breath"                               , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.moveSlowdown.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.HERBA, 1)));
-		IL.Pill_Blue.set(                           addItem(tLastID = 31003, "Blue Pill"                                , "Ignore the nauseating Reality"                               , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.confusion.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.CORPUS, 1)));
-		IL.Pill_Red.set(                            addItem(tLastID = 31004, "Red Pill"                                 , "Open your Eyes to the Truth"                                 , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.blindness.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.SENSUS, 1)));
-		IL.Pill_Antidote.set(                       addItem(tLastID = 31005, "Antidote"                                 , "Pill that cures Poison"                                      , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.poison.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.VENENUM, 1)));
+		IL.Pill_Empty                          .set(addItem(tLastID = 31000, "Empty Wax Pill"                           , "Placebo"                                                     , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T), TC.stack(TC.SANO, 1), TC.stack(TC.VACUOS, 1)));
+		IL.Pill_Iodine                         .set(addItem(tLastID = 31001, "Radaway"                                  , "Pill that cures Effects of Radiation"                        , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, CS.PotionsGT.ID_RADIATION, -1, -1, 100), TC.stack(TC.SANO, 3), TD.Creative.HIDDEN));
+		IL.Pill_Mint                           .set(addItem(tLastID = 31002, "Peppermint"                               , "Take a fresh energetic Breath"                               , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.moveSlowdown.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.HERBA, 1)));
+		IL.Pill_Blue                           .set(addItem(tLastID = 31003, "Blue Pill"                                , "Ignore the nauseating Reality"                               , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.confusion.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.CORPUS, 1)));
+		IL.Pill_Red                            .set(addItem(tLastID = 31004, "Red Pill"                                 , "Open your Eyes to the Truth"                                 , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.blindness.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.SENSUS, 1)));
+		IL.Pill_Antidote                       .set(addItem(tLastID = 31005, "Antidote"                                 , "Pill that cures Poison"                                      , new FoodStat( 0, 0.000F,   0, C+37,  0.00F,   0,   0,   0,   0,   0, EnumAction.eat, null                                 , T, F, F, T, Potion.poison.id, -1, -1, 100), TC.stack(TC.SANO, 1), TC.stack(TC.VENENUM, 1)));
 		RM.Boxinator    .addRecipe2(T, 16,   16, OM.dust(MT.I)                          , IL.Pill_Empty.get(1), IL.Pill_Iodine.get(1));
 		RM.Boxinator    .addRecipe2(T, 16,   16, OM.dust(MT.Mint)                       , IL.Pill_Empty.get(1), IL.Pill_Mint.get(1));
 		RM.Boxinator    .addRecipe2(T, 16,   16, ST.make(Blocks.brown_mushroom, 1, W)   , IL.Pill_Empty.get(1), IL.Pill_Antidote.get(1));
 
-		IL.Pill_Cure_All.set(                       addItem(tLastID = 31999, "Cure All"                                 , "Cures everything you could imagine*"                         , new FoodStat( 0, 0.000F,   0, C+37,  1.00F,-999,-999,-999,-999,-999, EnumAction.eat, null                                 , T, F, F, T, CS.PotionsGT.ID_RADIATION, -1, -1, 100, CS.PotionsGT.ID_HYPOTHERMIA, -1, -1, 100, CS.PotionsGT.ID_HEATSTROKE, -1, -1, 100, CS.PotionsGT.ID_FROSTBITE, -1, -1, 100, CS.PotionsGT.ID_DEHYDRATION, -1, -1, 100, CS.PotionsGT.ID_INSANITY, -1, -1, 100, Potion.digSlowdown.id, -1, -1, 100, Potion.moveSlowdown.id, -1, -1, 100, Potion.hunger.id, -1, -1, 100, Potion.harm.id, -1, -1, 100, Potion.confusion.id, -1, -1, 100, Potion.blindness.id, -1, -1, 100, Potion.weakness.id, -1, -1, 100, Potion.poison.id, -1, -1, 100, Potion.wither.id, -1, -1, 100, Potion.regeneration.id, 100, 100, 100, Potion.field_76443_y.id, 100, 100, 100).setMilk().setExtinguish(), new Behavior_CureZombie(500, F), TC.stack(TC.SANO, 10), TD.Creative.HIDDEN));
+		IL.Pill_Cure_All                       .set(addItem(tLastID = 31999, "Cure All"                                 , "Cures everything you could imagine*"                         , new FoodStat( 0, 0.000F,   0, C+37,  1.00F,-999,-999,-999,-999,-999, EnumAction.eat, null                                 , T, F, F, T, CS.PotionsGT.ID_RADIATION, -1, -1, 100, CS.PotionsGT.ID_HYPOTHERMIA, -1, -1, 100, CS.PotionsGT.ID_HEATSTROKE, -1, -1, 100, CS.PotionsGT.ID_FROSTBITE, -1, -1, 100, CS.PotionsGT.ID_DEHYDRATION, -1, -1, 100, CS.PotionsGT.ID_INSANITY, -1, -1, 100, Potion.digSlowdown.id, -1, -1, 100, Potion.moveSlowdown.id, -1, -1, 100, Potion.hunger.id, -1, -1, 100, Potion.harm.id, -1, -1, 100, Potion.confusion.id, -1, -1, 100, Potion.blindness.id, -1, -1, 100, Potion.weakness.id, -1, -1, 100, Potion.poison.id, -1, -1, 100, Potion.wither.id, -1, -1, 100, Potion.regeneration.id, 100, 100, 100, Potion.field_76443_y.id, 100, 100, 100).setMilk().setExtinguish(), new Behavior_CureZombie(500, F), TC.stack(TC.SANO, 10), TD.Creative.HIDDEN));
 
 
 
@@ -743,7 +861,7 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		RM.Boxinator.addRecipe2(T, 16, 16, IL.Food_Potato_Baked.get(1), tStick, IL.Food_Potato_On_Stick_Roasted.get(1));
 		}}
 	}
-
+	
 	@Override
 	public ItemStack getRotten(ItemStack aStack) {
 		short aMeta = ST.meta_(aStack);
@@ -751,7 +869,7 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		if (UT.Code.inside( 1100,  1999, aMeta)) return ST.make(Items.rotten_flesh, aStack.stackSize, 0);
 		if (UT.Code.inside(13000, 13999, aMeta)) return null;
 		if (UT.Code.inside(31000, 31999, aMeta)) return aStack;
-
+		
 		switch(aMeta) {
 		case 12000: return ST.make(this, aStack.stackSize, 12002, aStack.getTagCompound());
 		case 12001: return ST.make(this, aStack.stackSize, 12002, aStack.getTagCompound());
@@ -764,10 +882,10 @@ public class MultiItemFood extends MultiItemRandom implements IItemRottable {
 		case 32701: return (IL.ENVM_Rotten_Food.exists()?IL.ENVM_Rotten_Food:IL.Remains_Plant).get(aStack.stackSize);
 		case 32105: case 32107: return OP.ingot.mat(MT.MeatRotten, aStack.stackSize);
 		case 32113: case 32115: return OP.ingot.mat(MT.FishRotten, aStack.stackSize);
-
+		
 		default: return ST.food(aStack) > 0 ? IL.ENVM_Rotten_Food.exists() ? IL.ENVM_Rotten_Food.get(aStack.stackSize) : null : aStack;
 		}
 	}
-
+	
 	@Override public ItemStack getRotten(ItemStack aStack, World aWorld, int aX, int aY, int aZ) {return getRotten(aStack);}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GT6U-Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -23,7 +23,6 @@ import static gregapi.data.CS.*;
 import static gregapi.util.CR.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -142,7 +141,7 @@ public class GT6_Main extends Abstract_Mod {
 		}
 		
 		gt_proxy.mSkeletonsShootGTArrows = ConfigsGT.GREGTECH.get("general", "SkeletonsShootGTArrows", 16);
-		gt_proxy.mFlintChance            = ConfigsGT.GREGTECH.get("general", "FlintAndSteelChance"   , 30);
+		gt_proxy.mFlintChance            = (int)UT.Code.bind(1, 100, ConfigsGT.GREGTECH.get("general", "FlintAndSteelChance", 30));
 		gt_proxy.mDisableVanillaOres     = ConfigsGT.GREGTECH.get("general", "DisableVanillaOres"    , T);
 		mDisableIC2Ores                  = ConfigsGT.GREGTECH.get("general", "DisableIC2Ores"        , T);
 		BlockOcean.SPREAD_TO_AIR         = ConfigsGT.GREGTECH.get("general", "OceanBlocksSpreadToAir", T);
@@ -226,7 +225,7 @@ public class GT6_Main extends Abstract_Mod {
 		RM.pulverizing(ST.make(Blocks.pumpkin       , 1, W), ST.make(Items.pumpkin_seeds, 4, 0), null, 0, F);
 		RM.pulverizing(ST.make(Items.melon          , 1, W), ST.make(Items.melon_seeds, 1, 0), null, 0, F);
 		RM.pulverizing(ST.make(Blocks.wool          , 1, W), ST.make(Items.string, 2, 0), ST.make(Items.string, 1, 0), 50, F);
-
+		
 		new Loader_Fluids().run();
 		new Loader_Tools().run();
 		new Loader_Items().run();
@@ -237,24 +236,22 @@ public class GT6_Main extends Abstract_Mod {
 		new Loader_Rails().run();
 		new Loader_Ores().run();
 		new Loader_Others().run();
-
+		
 //      new Loader_CircuitBehaviors().run();
 //      new Loader_CoverBehaviors().run();
 //      new Loader_Sonictron().run();
-
+		
 		new CompatMods(MD.MC, this) {@Override public void onPostLoad(FMLPostInitializationEvent aInitEvent) {
 			// Clearing the AE Grindstone Recipe List, so we don't need to worry about pre-existing Recipes.
 			if (MD.AE.mLoaded) AEApi.instance().registries().grinder().getRecipes().clear();
 			// We ain't got Water in that Water Bottle. That would be an infinite Water Exploit.
 			for (FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) if (tData.filledContainer.getItem() == Items.potionitem && ST.meta_(tData.filledContainer) == 0) {tData.fluid.amount = 0; break;}
-
-			achievements = new Loader_Achievements();
-
+			
 			ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
 				new Loader_BlockResistance(),
 				new Loader_Fuels(),
 				new Loader_Loot(),
-
+				
 				new Loader_Recipes_Furnace(), // has to be before everything else!
 				new Loader_Recipes_Woods(), // has to be before Vanilla!
 				new Loader_Recipes_Vanilla(), // has to be after Woods!
@@ -266,13 +263,13 @@ public class GT6_Main extends Abstract_Mod {
 				new Loader_Recipes_Ores(),
 				new Loader_Recipes_Alloys(),
 				new Loader_Recipes_Other(),
-
+				
 				new Loader_Recipes_Extruder()
 			);
-
+			
 			for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace(ERR);}
 		}};
-
+		
 		new Compat_Recipes_Ganys                (MD.GAPI          , this);
 		new Compat_Recipes_Chisel               (MD.CHSL          , this);
 		new Compat_Recipes_FunkyLocomotion      (MD.FUNK          , this);
@@ -328,7 +325,7 @@ public class GT6_Main extends Abstract_Mod {
 		new Compat_Recipes_ActuallyAdditions    (MD.AA            , this);
 		new Compat_Recipes_ExtraUtilities       (MD.ExU           , this);
 		new Compat_Recipes_WRCBE                (MD.WR_CBE_C      , this);
-
+		
 		new CompatMods(MD.GT, this) {@Override public void onPostLoad(FMLPostInitializationEvent aInitEvent) {
 			ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
 				new Loader_Recipes_Replace(),
@@ -343,11 +340,11 @@ public class GT6_Main extends Abstract_Mod {
 	@Override
 	public void onModInit2(FMLInitializationEvent aEvent) {
 		for (FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) if (tData.filledContainer.getItem() == Items.potionitem && ST.meta_(tData.filledContainer) == 0) {tData.fluid.amount = 0; break;}
-
+		
 		new Loader_Late_Items_And_Blocks().run();
-
+		
 		if (MD.IC2C.mLoaded) for (int i = 0; i <= 6; i++) FMLInterModComms.sendMessage(MD.IC2C.mID, "generatorDrop", ST.save(UT.NBT.makeInt("Key", i), "Value", IL.IC2_Machine.get(1)));
-
+		
 		ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
 			new Loader_MultiTileEntities(),
 			new Loader_Books(),
@@ -363,12 +360,14 @@ public class GT6_Main extends Abstract_Mod {
 		if (!MD.RC.mLoaded) {
 			CR.shaped(ST.make(Blocks.rail          ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "RSR", "RSR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed));
 			CR.shaped(ST.make(Blocks.golden_rail   ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "GDG", "RSR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed), 'D', OD.itemRedstone, 'G', OP.railGt.dat(MT.Au));
-			CR.shaped(ST.make(Blocks.detector_rail ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "RPR", "RDR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed), 'D', OD.itemRedstone, 'P', ST.make(Blocks.stone_pressure_plate, 1, W));
+			CR.shaped(ST.make(Blocks.detector_rail ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "RPR", "RDR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed), 'D', OD.itemRedstone, 'P', Blocks.stone_pressure_plate);
 
 			CR.shaped(ST.make(Blocks.activator_rail,  1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Al             ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
+			CR.shaped(ST.make(Blocks.activator_rail,  1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Magnalium      ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Bronze         ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  2, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(ANY.Fe            ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  3, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(ANY.Steel         ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
+			CR.shaped(ST.make(Blocks.activator_rail,  3, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.HSLA           ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  4, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.StainlessSteel ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  6, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Ti             ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  6, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(ANY.W             ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
@@ -454,9 +453,9 @@ public class GT6_Main extends Abstract_Mod {
 		
 											RM.BedrockOreList.addFakeRecipe(F, ST.array(ST.make(Blocks.bedrock, 1, W)), ST.array(ST.make(Blocks.cobblestone, 1, 0, "Various Cobblestone Types"), OP.dustImpure.mat(MT.Bedrock, 1)), null, new long[] {9990, 10}, FL.array(FL.lube(100)), null, 0, 0, 0);
 		if (IL.BTL_Bedrock.exists())        RM.BedrockOreList.addFakeRecipe(F, ST.array(IL.BTL_Bedrock        .get(1)), ST.array(ST.make(Blocks.cobblestone, 1, 0, "Various Cobblestone Types"), OP.dustImpure.mat(MT.Bedrock, 1)), null, new long[] {9990, 10}, FL.array(FL.lube(100)), null, 0, 0, 0);
-
-
-
+		
+		
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 0, "Find a Rubber Tree in a Taiga Biome or similar")
 		, ST.make(BlocksGT.Leaves, 1, 0, "Make sure its natural Leaves stay intact!")
@@ -465,7 +464,7 @@ public class GT6_Main extends Abstract_Mod {
 		, NI
 		, IL.Bag_Sap_Resin.getWithName(1, "Place Resin Bag at the Hole")
 		), ST.array(IL.Resin.get(1), IL.IC2_Resin.get(1)), null, ZL_LONG, ZL_FS, FL.array(FL.Resin_Rubber.make(250)), 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 1, "Find a Maple Tree in a Forest")
 		, ST.make(BlocksGT.Leaves, 1, 1, "Make sure its natural Leaves stay intact!")
@@ -474,7 +473,7 @@ public class GT6_Main extends Abstract_Mod {
 		, ST.make(ToolsGT.sMetaTool, 1, ToolsGT.DRILL_LV  , "Drill only one Hole into the Tree")
 		, IL.Bag_Sap_Resin.getWithName(1, "Place Sap Bag at the drilled Hole")
 		), ZL_IS, null, ZL_LONG, ZL_FS, FL.array(FL.Sap_Maple.make(250)), 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 2, "Find a Willow Tree in the Swamp")
 		, ST.make(BlocksGT.Leaves, 1, 2, "Harvest its Leaves for Sticks")
@@ -483,7 +482,7 @@ public class GT6_Main extends Abstract_Mod {
 		, NI
 		, NI
 		), ST.array(OP.stick.mat(MT.WOODS.Willow, 1), OP.gem.mat(MT.Charcoal, 2), OP.ingot.mat(MT.Charcoal, 2)), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 3, "Find a Blue Mahoe Tree in the Jungle")
 		, ST.make(BlocksGT.Leaves, 1, 3, "Harvest its Leaves for Sticks")
@@ -492,7 +491,7 @@ public class GT6_Main extends Abstract_Mod {
 		, NI
 		, NI
 		), ST.array(OP.stick.mat(MT.WOODS.BlueMahoe, 1)), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 4, "Find a Hazel Tree in the Plains")
 		, ST.make(BlocksGT.Leaves, 1, 4, "Harvest its Leaves for Hazelnuts and Sticks")
@@ -501,7 +500,7 @@ public class GT6_Main extends Abstract_Mod {
 		, NI
 		, NI
 		), ST.array(IL.Food_Hazelnut.get(1), OP.stick.mat(MT.WOODS.Hazel, 1)), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 5, "Find a Cinnamon Tree in the Jungle")
 		, ST.make(BlocksGT.Leaves, 1, 5, "Nothing special about its Leaves")
@@ -510,7 +509,7 @@ public class GT6_Main extends Abstract_Mod {
 		, ST.make(ToolsGT.sMetaTool, 1, ToolsGT.AXE  , "Remove its edible Bark")
 		, ST.make(ToolsGT.sMetaTool, 1, ToolsGT.SAW  , "Remove its edible Bark")
 		), ST.array(OM.dust(MT.Cinnamon), IL.Food_Cinnamon.get(1), IL.HaC_Cinnamon.get(1)), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 6, "Find a Coconut Tree near the Ocean")
 		, ST.make(BlocksGT.Leaves, 1, 6, "Harvest its Leaves for Coconuts")
@@ -519,7 +518,7 @@ public class GT6_Main extends Abstract_Mod {
 		, NI
 		, NI
 		), ST.array(IL.Food_Coconut.get(1)), null, ZL_LONG, ZL_FS, ZL_FS, 0, 0, 0);
-
+		
 		RM.Other.addFakeRecipe(F, ST.array(
 		  ST.make(BlocksGT.Sapling, 1, 7, "Find a super rare Rainbow Tree")
 		, ST.make(BlocksGT.Leaves, 1, 7, "Make sure its natural Leaves stay intact!")
@@ -528,9 +527,9 @@ public class GT6_Main extends Abstract_Mod {
 		, ST.make(ToolsGT.sMetaTool, 1, ToolsGT.DRILL_LV  , "Drill only one Hole into the Tree")
 		, IL.Bag_Sap_Resin.getWithName(1, "Place Sap Bag at the drilled Hole")
 		), ZL_IS, null, ZL_LONG, ZL_FS, FL.array(FL.Sap_Rainbow.make(250)), 0, 0, 0);
-
-
-
+		
+		
+		
 		if (CODE_CLIENT) {
 			for (OreDictMaterial aMaterial : OreDictMaterial.ALLOYS) {
 				for (IOreDictConfigurationComponent tAlloy : aMaterial.mAlloyCreationRecipes) {
@@ -566,8 +565,8 @@ public class GT6_Main extends Abstract_Mod {
 	@Override
 	public void onModServerStarting2(FMLServerStartingEvent aEvent) {
 		for (FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) if (tData.filledContainer.getItem() == Items.potionitem && ST.meta_(tData.filledContainer) == 0) {tData.fluid.amount = 0; break;}
-
-
+		
+		
 		ORD.println("============================");
 		ORD.println("Outputting Unknown Materials");
 		ORD.println("============================");
@@ -631,6 +630,7 @@ public class GT6_Main extends Abstract_Mod {
 	public boolean mDisableIC2Ores = T;
 
 	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void onModServerStopping2(FMLServerStoppingEvent aEvent) {
 		try {
 		if (D1 || ORD != System.out) {
@@ -644,17 +644,17 @@ public class GT6_Main extends Abstract_Mod {
 			ORD.println("ItemRegistry:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
 
-			Object[] tList = Item.itemRegistry.getKeys().toArray();
+			List tList = UT.Code.getWithoutNulls(Item.itemRegistry.getKeys().toArray(ZL_STRING));
 
-			Arrays.sort(tList);
+			Collections.sort(tList);
 			for (Object tItemName : tList) ORD.println(tItemName);
 
 			ORD.println("*");
 			ORD.println("OreDictionary:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
 
-			tList = OreDictionary.getOreNames();
-			Arrays.sort(tList);
+			tList = UT.Code.getWithoutNulls(OreDictionary.getOreNames());
+			Collections.sort(tList);
 			for (Object tOreName : tList) {
 				int tAmount = OreDictionary.getOres(tOreName.toString()).size();
 				if (tAmount > 0) ORD.println((tAmount<10?" ":"") + tAmount + "x " + tOreName);
@@ -683,8 +683,8 @@ public class GT6_Main extends Abstract_Mod {
 			ORD.println("Fluids:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
 
-			tList = FluidRegistry.getRegisteredFluids().keySet().toArray(ZL_STRING);
-			Arrays.sort(tList);
+			tList = UT.Code.getWithoutNulls(FluidRegistry.getRegisteredFluids().keySet().toArray(ZL_STRING));
+			Collections.sort(tList);
 			for (Object tFluidName : tList) ORD.println(tFluidName);
 
 			ORD.println("*"); ORD.println("*"); ORD.println("*");

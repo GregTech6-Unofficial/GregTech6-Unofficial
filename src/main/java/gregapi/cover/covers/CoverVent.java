@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -42,24 +42,24 @@ public class CoverVent extends AbstractCoverAttachment {
 	
 	@Override
 	public void onTickPre(byte aSide, CoverData aData, long aTimer, boolean aIsServerSide, boolean aReceivedBlockUpdate, boolean aReceivedInventoryUpdate) {
-		if (aIsServerSide && !aData.mStopped && aData.mTileEntity instanceof IFluidHandler && SERVER_TIME % 320 == 5) {
+		if (aIsServerSide && !aData.mStopped && aData.mTileEntity instanceof IFluidHandler && SERVER_TIME % 360 == 30+(60*aSide)) {
 			if (WD.collectable_air(aData.mTileEntity.getWorld(), aData.mTileEntity.getOffsetX(aSide), aData.mTileEntity.getOffsetY(aSide), aData.mTileEntity.getOffsetZ(aSide))) {
 				switch(aData.mTileEntity.getWorld().provider.dimensionId) {
-				case  0: FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air       .make(16000), T); return;
-				case -1: FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_Nether.make(16000), T); return;
-				case +1: FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_End   .make(16000), T); return;
+				case DIM_OVERWORLD: FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air       .make(256000), T); return;
+				case DIM_NETHER   : FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_Nether.make(256000), T); return;
+				case DIM_END      : FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_End   .make(256000), T); return;
 				}
 				String tBiome = aData.mTileEntity.getBiome(aData.mTileEntity.getOffsetX(aSide), aData.mTileEntity.getOffsetZ(aSide)).biomeName;
 				if (BIOMES_SPACE.contains(tBiome)) return;
 				if (BIOMES_END.contains(tBiome)) {
-					FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_End.make(16000), T);
+					FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_End.make(256000), T);
 					return;
 				}
 				if (BIOMES_NETHER.contains(tBiome)) {
-					FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_Nether.make(16000), T);
+					FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air_Nether.make(256000), T);
 					return;
 				}
-				FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air.make(16000), T);
+				FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aSide], FL.Air.make(256000), T);
 			}
 		}
 	}

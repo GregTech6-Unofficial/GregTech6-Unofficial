@@ -164,7 +164,7 @@ public class ToolCompat {
 				}
 			}
 			if (rReturn) {
-				if (FAST_LEAF_DECAY) WD.leafdecay(aWorld, aX, aY, aZ, null);
+				if (FAST_LEAF_DECAY) WD.leafdecay(aWorld, aX, aY, aZ, null, F);
 				UT.Inventories.addStackToPlayerInventoryOrDrop(aPlayer instanceof EntityPlayer ? (EntityPlayer)aPlayer : null, tBark, aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide]);
 				return aTool.equals(TOOL_axe) ? 500 : 1000;
 			}
@@ -214,7 +214,7 @@ public class ToolCompat {
 		}
 		if (aTool.equals(TOOL_rotator)) {
 			if (aBlock instanceof BlockRotatedPillar || aBlock.getRenderType() == PILLAR_RENDER) {
-				if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 4) % 12, 3)) return 5000;
+				if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 4) & 15, 3)) return 5000;
 			}
 			if (aBlock instanceof BlockPistonBase || aBlock instanceof BlockDispenser) {
 				if (aMeta < 6 && aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta+1) % 6, 3)) return 2000;
@@ -267,7 +267,7 @@ public class ToolCompat {
 				return tResult?10000:0;
 			}
 			if (aBlock instanceof BlockRotatedPillar || aBlock.getRenderType() == PILLAR_RENDER) {
-				if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 4) % 12, 3)) return 5000;
+				if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 4) & 15, 3)) return 5000;
 			}
 			if (aBlock instanceof BlockPistonBase || aBlock instanceof BlockDispenser) {
 				if (aMeta < 6 && aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta+1) % 6, 3)) return 2000;
@@ -312,7 +312,7 @@ public class ToolCompat {
 			}
 			
 			if (aBlock instanceof BlockRotatedPillar || aBlock.getRenderType() == PILLAR_RENDER) {
-				if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 4) % 12, 3)) return 5000;
+				if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, (aMeta + 4) & 15, 3)) return 5000;
 			}
 			
 			if (aBlock instanceof BlockWorkbench || aBlock instanceof BlockBookshelf) {
@@ -389,7 +389,7 @@ public class ToolCompat {
 				if (aChatReturn != null) aChatReturn.add(LH.get(LH.PROSPECTING_LIQUID));
 				break;
 			}
-			if (tBlock == Blocks.monster_egg || !WD.hasCollide(aWorld, tX, tY, tZ, tBlock)) {
+			if (tBlock instanceof BlockSilverfish || !WD.hasCollide(aWorld, tX, tY, tZ, tBlock)) {
 				if (aChatReturn != null) aChatReturn.add(LH.get(LH.PROSPECTING_AIR));
 				break;
 			}

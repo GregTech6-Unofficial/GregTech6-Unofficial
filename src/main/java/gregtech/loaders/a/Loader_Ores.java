@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -166,7 +166,7 @@ public class Loader_Ores implements Runnable {
 		for (int i = 0; i < 8; i++) rockset(MD.UB, "igneousStone", i, i+8, "igneousCobblestone", i, "ub.igneous."+i, tPrefix[i], tDrops[i]);
 		
 		tPrefix = new OreDictPrefix[] {OP.oreVanillastone, OP.oreVanillastone, OP.oreMarble, OP.oreQuartzite, OP.oreBlueschist, OP.oreGreenschist, OP.oreVanillastone, OP.oreVanillastone};
-		tDrops  = new OreDictMaterial[] {MT.Gneiss, MT.Eclogite, MT.Marble, MT.Quartzite, MT.Blueschist, MT.Greenschist, MT.Soapstone, MT.Migmatite};
+		tDrops  = new OreDictMaterial[] {MT.Gneiss, MT.Eclogite, MT.Marble, MT.Quartzite, MT.Blueschist, MT.Greenschist, MT.Talc, MT.Migmatite};
 		for (int i = 0; i < 8; i++) rockset(MD.UB, "metamorphicStone", i, i+8, "metamorphicCobblestone", i, "ub.metamorphic."+i, tPrefix[i], tDrops[i]);
 		
 		tPrefix = new OreDictPrefix[] {OP.oreLimestone, OP.oreVanillastone, OP.oreShale, OP.oreSiltstone, OP.oreVanillastone, OP.oreVanillastone, OP.oreVanillastone, OP.oreVanillastone};
@@ -189,7 +189,7 @@ public class Loader_Ores implements Runnable {
 		for (int i = 0; i < 5; i++) rockset(MD.PFAA, "weakStone", i, i, "weakRubble", i, "pfaa.weak."+i, tPrefix[i], tDrops[i], 0.5F, 0.5F, 0, F, F, T);
 		
 		tPrefix = new OreDictPrefix[] {OP.oreLimestone, OP.oreVanillastone, OP.oreVanillastone, OP.oreVanillastone, OP.oreVanillastone};
-		tDrops  = new OreDictMaterial[] {MT.Limestone, MT.Stone, MT.Stone, MT.Stone, MT.Stone};
+		tDrops  = new OreDictMaterial[] {MT.Limestone, MT.Stone, MT.Stone, MT.Slate, MT.Stone};
 		for (int i = 0; i < 5; i++) rockset(MD.PFAA, "mediumStone", i, i, "mediumCobble", i, "pfaa.medium."+i, tPrefix[i], tDrops[i], 1.0F, 1.0F, 0, F, F, T);
 		
 		tPrefix = new OreDictPrefix[] {OP.oreAndesite, OP.oreBasalt, OP.oreVanillastone, OP.oreBlackgranite, OP.oreVanillastone, OP.oreMarble, OP.oreVanillastone, OP.oreVanillastone, OP.oreSandstone, OP.oreSandstone};
@@ -207,9 +207,6 @@ public class Loader_Ores implements Runnable {
 		
 		rockset(MD.CHSL, "marble"                       , 0, "chisel.marble"        , OP.oreMarble              , MT.Marble);
 		rockset(MD.CHSL, "limestone"                    , 0, "chisel.limestone"     , OP.oreLimestone           , MT.Limestone);
-		
-		rockset(MD.NePl, "Blackstone"                   , 0, "nepl.blackstone"      , OP.oreBlackstone          , MT.Blackstone);
-		rockset(MD.NePl, "Basalt"                       , 0, "nepl.basalt"          , OP.oreBasalt              , MT.Basalt);
 
 		rockset(MD.EtFu, "stone"                        , 1, "etfu.granite"         , OP.oreVanillagranite      , MT.Granite);
 		rockset(MD.EtFu, "stone"                        , 3, "etfu.diorite"         , OP.oreDiorite             , MT.Diorite);
@@ -240,6 +237,14 @@ public class Loader_Ores implements Runnable {
 		rockset(MD.MIN, "pegmatite"                     , 0, "min.pegmatite"        , OP.oreVanillastone        , MT.Stone);
 		rockset(MD.MIN, "chert"                         , 0, "min.chert"            , OP.oreVanillastone        , MT.Chert);
 		
+		if (MD.NePl.mLoaded) {
+		rockset(MD.NePl, "Blackstone"                   , 0, "nepl.blackstone"      , OP.oreBlackstone          , MT.Blackstone);
+		rockset(MD.NePl, "Basalt"                       , 0, "nepl.basalt"          , OP.oreBasalt              , MT.Basalt);
+		}
+		if (MD.NeLi.mLoaded) {
+		rockset(MD.NeLi, "Blackstone"                   , 0, "neli.blackstone"      , OP.oreBlackstone          , MT.Blackstone);
+		rockset(MD.NeLi, "Basalt"                       , 0, "neli.basalt"          , OP.oreBasalt              , MT.Basalt);
+		}
 		if (MD.BOTA.mLoaded) {
 		rockset(MD.BOTA, ST.block(MD.BOTA, "livingrock"), 0, 0, ST.block(MD.ALF, "LivingCobble"), 0, "botania.livingrock", OP.oreLivingrock, MT.Livingrock, 1.0F, 1.0F, 0, F, F, T);
 		}

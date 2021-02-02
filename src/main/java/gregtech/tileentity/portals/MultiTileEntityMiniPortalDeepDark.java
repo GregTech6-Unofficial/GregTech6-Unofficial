@@ -64,7 +64,7 @@ public class MultiTileEntityMiniPortalDeepDark extends MultiTileEntityMiniPortal
 	@Override
 	public void findTargetPortal() {
 		mTarget = null;
-		if (MD.ExU.mLoaded && worldObj != null && isServerSide()) {
+		if ((MD.ExU.mLoaded || MD.ExS.mLoaded) && worldObj != null && isServerSide()) {
 			if (worldObj.provider.dimensionId == DIM_OVERWORLD) {
 				long tShortestDistance = 128*128;
 				for (MultiTileEntityMiniPortal tTarget : sListDeepDarkSide) if (tTarget != this && !tTarget.isDead()) {
@@ -95,7 +95,7 @@ public class MultiTileEntityMiniPortalDeepDark extends MultiTileEntityMiniPortal
 	
 	@Override
 	public void addThisPortalToLists() {
-		if (MD.ExU.mLoaded && worldObj != null && isServerSide()) {
+		if ((MD.ExU.mLoaded || MD.ExS.mLoaded) && worldObj != null && isServerSide()) {
 			if (worldObj.provider.dimensionId == DIM_OVERWORLD) {
 				if (!sListWorldSide.contains(this)) sListWorldSide.add(this);
 				for (MultiTileEntityMiniPortal tPortal : sListDeepDarkSide) tPortal.findTargetPortal();
@@ -127,7 +127,7 @@ public class MultiTileEntityMiniPortalDeepDark extends MultiTileEntityMiniPortal
 	@Override public float getBlockHardness() {return Blocks.stone.getBlockHardness(worldObj, xCoord, yCoord, zCoord);}
 	@Override public float getExplosionResistance2() {return Blocks.stone.getExplosionResistance(null);}
 	
-	public ITexture sDeepDarkPortal = BlockTextureCopied.get(ST.block(MD.ExU, "dark_portal", Blocks.portal), SIDE_ANY, 0, UNCOLOURED, F, T, T), sDeepDarkPortalFrame = BlockTextureCopied.get(ST.block(MD.ExU, "block_bedrockium", Blocks.stone), SIDE_ANY, 0, UNCOLOURED, F, F, F);
+	public ITexture sDeepDarkPortal = BlockTextureCopied.get(ST.block(MD.ExU, "dark_portal", ST.block(MD.ExS, "deepPortal", Blocks.portal)), SIDE_ANY, 0, UNCOLOURED, F, T, T), sDeepDarkPortalFrame = BlockTextureCopied.get(ST.block(MD.ExU, "block_bedrockium", Blocks.bedrock), SIDE_ANY, 0, UNCOLOURED, F, F, F);
 	@Override public ITexture getPortalTexture() {return sDeepDarkPortal;}
 	@Override public ITexture getFrameTexture() {return sDeepDarkPortalFrame;}
 	

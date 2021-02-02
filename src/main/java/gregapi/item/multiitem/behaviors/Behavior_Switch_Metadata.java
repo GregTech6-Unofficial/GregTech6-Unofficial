@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -21,23 +21,55 @@ package gregapi.item.multiitem.behaviors;
 
 import static gregapi.data.CS.*;
 
+import java.util.List;
+
+import gregapi.item.IItemGT;
 import gregapi.item.multiitem.MultiItem;
 import gregapi.item.multiitem.behaviors.IBehavior.AbstractBehaviorDefault;
 import gregapi.util.ST;
+import gregapi.util.WD;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class Behavior_Switch_Metadata extends AbstractBehaviorDefault {
 	public final int mSwitchIndex;
+	public final boolean mCheckTarget, mShowModeSwitchTooltip;
 	
 	public Behavior_Switch_Metadata(int aSwitchIndex) {
+		this(aSwitchIndex, F);
+	}
+	public Behavior_Switch_Metadata(int aSwitchIndex, boolean aCheckTarget) {
+		this(aSwitchIndex, aCheckTarget, F);
+	}
+	public Behavior_Switch_Metadata(int aSwitchIndex, boolean aCheckTarget, boolean aShowModeSwitchTooltip) {
 		mSwitchIndex = aSwitchIndex;
+		mCheckTarget = aCheckTarget;
+		mShowModeSwitchTooltip = aShowModeSwitchTooltip;
+	}
+	
+	@Override
+	public List<String> getAdditionalToolTips(MultiItem aItem, List<String> aList, ItemStack aStack) {
+		if (mShowModeSwitchTooltip) aList.add("Sneak Rightclick to switch Mode");
+		return aList;
 	}
 	
 	@Override
 	public boolean onItemUseFirst(MultiItem aItem, ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, byte aSide, float aHitX, float aHitY, float aHitZ) {
 		if (aStack != null && (aPlayer == null || aPlayer.isSneaking()) && !aWorld.isRemote) {
+			if (mCheckTarget) {
+				Block aBlock = WD.block(aWorld, aX, aY, aZ, T);
+				if (aBlock instanceof IItemGT) {
+					ST.update_(ST.meta_(aStack, mSwitchIndex), aWorld, aX, aY, aZ);
+					return T;
+				}
+				if (WD.te(aWorld, aX, aY, aZ, T) == null) {
+					ST.update_(ST.meta_(aStack, mSwitchIndex), aWorld, aX, aY, aZ);
+					return T;
+				}
+				return F;
+			}
 			ST.update_(ST.meta_(aStack, mSwitchIndex), aWorld, aX, aY, aZ);
 			return T;
 		}

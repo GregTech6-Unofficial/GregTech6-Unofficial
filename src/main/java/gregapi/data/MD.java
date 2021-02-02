@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -34,6 +34,7 @@ public class MD {
 	, GAPI              = new ModData(ModIDs.GAPI               , "Greg-API")
 	, GAPI_POST         = new ModData(ModIDs.GAPI_POST          , "Greg-API-Post")
 	, GT5U              = new ModData(ModIDs.GT                 , "GregTech 5 Unofficial")
+	, GT6U              = new ModData(ModIDs.GT                 , "GregTech 6 Unofficial")
 	
 	, QT                = new ModData(ModIDs.QT                 , "QwerTech")
 	
@@ -198,6 +199,8 @@ public class MD {
 	, GaEn              = new ModData(ModIDs.GaEn               , "Ganys End")
 	, WdSt              = new ModData(ModIDs.WdSt               , "Ganys Wood Stuff")
 	
+	, HEE               = new ModData(ModIDs.HEE                , "Hardcore Ender Expansion")
+	
 	, LycM              = new ModData(ModIDs.LycM               , "Lycanites Mobs")
 	, LycM_Fresh        = new ModData(ModIDs.LycM_Fresh         , "Lycanites Mobs (Freshwater)")
 	, LycM_Salt         = new ModData(ModIDs.LycM_Salt          , "Lycanites Mobs (Saltwater)")
@@ -241,12 +244,14 @@ public class MD {
 	, COFH_CORE         = new ModData(ModIDs.COFH_CORE          , "CoFH-Core")
 	
 	, OB                = new ModData(ModIDs.OB                 , "Open Blocks")
+	, PA                = new ModData(ModIDs.PA                 , "Progressive Automation")
 	, MNTL              = new ModData(ModIDs.MNTL               , "Mantle")
 	, TiC               = new ModData(ModIDs.TiC                , "Tinkers Construct")
 	, Natura            = new ModData(ModIDs.Natura             , "Natura")
 	, MF2               = new ModData(ModIDs.MF2                , "MineFantasy II")
 	, FZ                = new ModData(ModIDs.FZ                 , "Factorization")
 	, BWM               = new ModData(ModIDs.BWM                , "Balkon's Weapon Mod")
+	, BG2               = new ModData(ModIDs.BG2                , "Battlegear 2")
 	, OMT               = new ModData(ModIDs.OMT                , "Open Modular Turrets")
 	, TG                = new ModData(ModIDs.TG                 , "Tech Guns")
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -48,10 +48,18 @@ public class DungeonChunkRoomPortalNether extends DungeonChunkRoomPortal {
 		tInventory.appendTag(UT.NBT.makeShort(ST.save(ST.make(Items.blaze_rod  ,  4, 0)), "s", (short)33));
 		tInventory.appendTag(UT.NBT.makeShort(ST.save(IL.Tool_MatchBox_Full     .get(1)), "s", (short)40));
 		
+		for (int tX = 1; tX < 15; tX++) for (int tZ = 1; tZ < 15; tZ++) {
+			if ((tX == 3 || tX == 6 || tX == 9 || tX == 12) && (tZ == 3 || tZ == 6 || tZ == 9 || tZ == 12)) {
+				aData.set(tX, 0, tZ, Blocks.glowstone, 0);
+			} else {
+				aData.set(tX, 0, tZ, Blocks.netherrack, 0);
+			}
+		}
+		
 		Block tShroomLight = IL.NeLi_ShroomLight.block(), tWartBlock = ST.block(MD.NeLi, "Wartblock");
 		int tMeta = aData.next(3);
 		
-		if (tShroomLight != NB && tWartBlock != NB) {
+		if (ST.valid(tShroomLight) && ST.valid(tWartBlock)) {
 			for (int tX = 1; tX < 15; tX++) for (int tZ = 1; tZ < 15; tZ++) {
 				if ((tX == 3 || tX == 6 || tX == 9 || tX == 12) && (tZ == 3 || tZ == 6 || tZ == 9 || tZ == 12)) {
 					aData.set  (tX, 7, tZ, tShroomLight);

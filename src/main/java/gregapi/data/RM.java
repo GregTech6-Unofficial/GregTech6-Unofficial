@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -57,15 +57,16 @@ public class RM {
 	public static final RecipeMap
 	  Furnace                   = new RecipeMapFurnace              (null, "mc.recipe.furnace"                      , "Furnace"                         , "smelting", 0, 1, RES_PATH_GUI+"machines/Oven"                ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 0, 1, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, F, T, F, F, F)
 	, Microwave                 = new RecipeMapMicrowave            (null, "gt.recipe.microwave"                    , "Microwave"                       , "smelting", 0, 1, RES_PATH_GUI+"machines/Oven"                ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 0, 1, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, F, T, F, F, F)
-
+	
 	, BedrockOreList            = new RecipeMap                     (null, "gt.recipe.bedrockorelist"               , "Bedrock Drill"                   , null, 0, 1, RES_PATH_GUI+"machines/BedrockOreList"            ,/*IN-OUT-MIN-ITEM=*/ 1,12, 1,/*IN-OUT-MIN-FLUID=*/ 1, 0, 1,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, F, T, F, F, F)
 	, ByProductList             = new RecipeMap                     (null, "gt.recipe.byproductlist"                , "Ore Byproduct List"              , null, 0, 1, RES_PATH_GUI+"machines/OreByproducts"             ,/*IN-OUT-MIN-ITEM=*/ 6,12, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, F, T, F, T, T)
-	, CrucibleSmelting          = new RecipeMap                     (null, "gt.recipe.cruciblesmelting"             , "Crucible Smelting"               , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 6, 6, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, "Temperature: "       ,    1, " K"    , T, T, F, T, F, T, T)
+	, CrucibleSmelting          = new RecipeMapCrucible             (null, "gt.recipe.cruciblesmelting"             , "Crucible Smelting"               , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 6, 6, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, "Temperature: "       ,    1, " K"    , T, T, F, T, F, T, T)
 	, CrucibleAlloying          = new RecipeMap                     (null, "gt.recipe.cruciblealloying"             , "Combination Smelting"            , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 6, 6, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, "Temperature: "       ,    1, " K"    , T, T, F, T, F, T, T)
 	, BumbleQueens              = new RecipeMap                     (null, "gt.recipe.bumblequeen"                  , "Bumblebee Queen"                 , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 2, 6, 0,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , F, T, F, T, F, T, T)
 	, Trees                     = new RecipeMap                     (null, "gt.recipe.trees"                        , "Family Tree"                     , null, 0, 1, RES_PATH_GUI+"machines/FamilyTree"                ,/*IN-OUT-MIN-ITEM=*/ 2,12, 0,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , F, T, F, F, F, T, T)
 	, Other                     = new RecipeMap                     (null, "gt.recipe.other"                        , "Other Relations"                 , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 6, 6, 0,/*IN-OUT-MIN-FLUID=*/ 3, 3, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , F, T, F, F, F, F, F)
-
+	, ToolHeads                 = new RecipeMap                     (null, "gt.recipe.toolhead"                     , "Craft Head on Handle"            , null, 0, 1, RES_PATH_GUI+"machines/Crafting2By2"              ,/*IN-OUT-MIN-ITEM=*/ 4, 1, 0,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 0, ""                    ,    1, ""      , F, T, F, F, F, F, F)
+	
 	, Generifier                = new RecipeMap                     (null, "gt.recipe.generifier"                   , "Generifier"                      , null, 0, 1, RES_PATH_GUI+"machines/Generifier"                ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 0,/*IN-OUT-MIN-FLUID=*/ 1, 1, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, F, F)
 	, Boxinator                 = new RecipeMap                     (null, "gt.recipe.boxinator"                    , "Boxinator"                       , null, 0, 1, RES_PATH_GUI+"machines/Boxinator"                 ,/*IN-OUT-MIN-ITEM=*/ 2, 1, 2,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
 	, Unboxinator               = new RecipeMapUnboxinator          (null, "gt.recipe.unboxinator"                  , "Unboxinator"                     , null, 0, 1, RES_PATH_GUI+"machines/Unboxinator"               ,/*IN-OUT-MIN-ITEM=*/ 1,12, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
@@ -138,7 +139,7 @@ public class RM {
 	, CatalyticCracking         = new RecipeMap                     (null, "gt.recipe.catalyticcracking"            , "Catalytic Cracking"              , null, 0, 1, RES_PATH_GUI+"machines/CatalyticCracking"         ,/*IN-OUT-MIN-ITEM=*/ 1, 3, 0,/*IN-OUT-MIN-FLUID=*/ 2, 9, 1,/*MIN*/ 2,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
 	, Autoclave                 = new RecipeMap                     (null, "gt.recipe.autoclave"                    , "Autoclave"                       , null, 0, 1, RES_PATH_GUI+"machines/Autoclave"                 ,/*IN-OUT-MIN-ITEM=*/ 2, 3, 2,/*IN-OUT-MIN-FLUID=*/ 1, 1, 1,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
 	, Fusion                    = new RecipeMap                     (null, "gt.recipe.fusionreactor"                , "Fusion Reactor"                  , null, 0, 1, RES_PATH_GUI+"machines/Fusion"                    ,/*IN-OUT-MIN-ITEM=*/ 2, 6, 1,/*IN-OUT-MIN-FLUID=*/ 2, 6, 0,/*MIN*/ 2,/*AMP=*/ 1, "Start: "             ,    1, " LU"   , T, T, T, T, F, T, T)
-
+	
 	, BlastFurnace              = new RecipeMap                     (null, "gt.recipe.blastfurnace"                 , "Blast Furnace"                   , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 2, 2, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, "Heat Capacity: "     ,    1, " K"    , F, F/*T*/, F/*T*/, T, F, T, T)
 	, VacuumFreezer             = new RecipeMap                     (null, "gt.recipe.vacuumfreezer"                , "Vacuum Freezer"                  , null, 0, 1, RES_PATH_GUI+"machines/Default"                   ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, F/*T*/, F/*T*/, T, F, T, T)
     , Assembler                 = new RecipeMap                     (null, "gt.recipe.assembler"                    , "Circuit Assembler"               , null, 0, 1, RES_PATH_GUI+"machines/Assembler"                 ,/*IN-OUT-MIN-ITEM=*/ 9, 1, 1,/*IN-OUT-MIN-FLUID=*/ 1, 0, 0,/*MIN*/ 1,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T)
@@ -157,7 +158,7 @@ public class RM {
     , BioLab                    = new RecipeMap                     (null, "gt.recipe.biolab"                       , "Biochemical Research Lab"        , null, 0, 1, RES_PATH_GUI+"machines/BioLab"                    ,/*IN-OUT-MIN-ITEM=*/ 6, 6, 0,/*IN-OUT-MIN-FLUID=*/ 6, 6, 0,/*MIN*/ 1,/*AMP=*/ 1, "Disinfection: "      ,    1, " LU"   , T, T, T, T, F, F, F)
     ;
 	
-	// For Compatibility with old API Stuff.
+	// For Compatibility with old API Stuff. Well mainly for preventing crashes.
 	static {
 		RecipeMap.sFurnaceRecipes=Furnace;RecipeMap.sMicrowaveRecipes=Microwave;RecipeMap.sFurnaceFuel=FM.Furnace;RecipeMap.sByProductList=ByProductList;RecipeMap.sCrucibleSmelting=CrucibleSmelting;RecipeMap.sCrucibleAlloying=CrucibleAlloying;RecipeMap.sGenerifierRecipes=Generifier;RecipeMap.sSharpeningRecipes=Sharpening;RecipeMap.sSifterRecipes=Sifting;
 		RecipeMap.sHammerRecipes=Hammer;RecipeMap.sChiselRecipes=Chisel;RecipeMap.sShredderRecipes=Shredder;RecipeMap.sCrusherRecipes=Crusher;RecipeMap.sLatheRecipes=Lathe;RecipeMap.sCutterRecipes=Cutter;RecipeMap.sCoagulatorRecipes=Coagulator;RecipeMap.sSqueezerRecipes=Squeezer;RecipeMap.sJuicerRecipes=Juicer;RecipeMap.sMortarRecipes=Mortar;
@@ -167,13 +168,19 @@ public class RM {
 		RecipeMap.sSluiceRecipes=Sluice;RecipeMap.sMagneticSeparatorRecipes=MagneticSeparator;RecipeMap.sAutocrafterRecipes=Autocrafter;RecipeMap.sMassfabRecipes=Massfab;RecipeMap.sScannerMolecularRecipes=ScannerMolecular;RecipeMap.sReplicatorRecipes=Replicator;RecipeMap.sSlicerRecipes=Slicer;RecipeMap.sCokeOvenRecipes=CokeOven;
 		RecipeMap.sDistillationTowerRecipes=DistillationTower;RecipeMap.sAutoclaveRecipes=Autoclave;RecipeMap.sBoxinatorRecipes=Boxinator;RecipeMap.sUnboxinatorRecipes=Unboxinator;RecipeMap.sFusionRecipes=Fusion;RecipeMap.sBlastRecipes=BlastFurnace;RecipeMap.sImplosionRecipes=ImplosionCompressor;RecipeMap.sVacuumRecipes=VacuumFreezer;
 		RecipeMap.sAssemblerRecipes=Assembler;RecipeMap.sCNCRecipes=CNC;RecipeMap.sFuelsBurn=FM.Burn;RecipeMap.sFuelsGas=FM.Gas;RecipeMap.sFuelsHot=FM.Hot;RecipeMap.sFuelsPlasma=FM.Plasma;RecipeMap.sFuelsEngine=FM.Engine;RecipeMap.sFuelsTurbine=FM.Turbine;RecipeMap.sFuelsMagic=FM.Magic;
+		
+		Furnace.mRecipeMachineList.add(ST.make(Blocks.furnace, 1, W));
+		Furnace.mRecipeMachineList.add(ST.make(Blocks.lit_furnace, 1, W));
+		ToolHeads.mRecipeMachineList.add(ST.make(Blocks.crafting_table, 1, W));
 	}
 	
 	public static boolean generify(ItemStack aStack1, ItemStack aStack2) {
+		if (ST.invalid(aStack1) || ST.invalid(aStack2)) return F;
 		return RM.Generifier.addRecipe1(F, T, F, F, F, 0, 1, aStack1, aStack2) != null;
 	}
 	
 	public static boolean generify(FluidStack aFluid1, FluidStack aFluid2) {
+		if (aFluid1 == null || aFluid2 == null) return F;
 		return RM.Generifier.addRecipe0(F, T, F, F, F, 0, 1, aFluid1, aFluid2, ZL_IS) != null;
 	}
 	
@@ -184,7 +191,7 @@ public class RM {
 		for (int i = 0; i < aFluidList.size(); i++) RM.Generifier.addRecipe0(F, T, F, F, F, 0, 1, aFluidList.get(i), aFluidList.get((i+1) % aFluidList.size()), ZL_IS);
 		return T;
 	}
-
+	
 	public static boolean box(ItemStack aEmpty, ItemStack aFull, ItemStack aContent) {
 		if (ST.invalid(aEmpty) || ST.invalid(aFull) || ST.invalid(aContent)) return F;
 		Boxinator  .addRecipe2(T, 16, 16, aContent, aEmpty, aFull);
@@ -202,17 +209,30 @@ public class RM {
 		return T;
 	}
 	
+	
 	public static boolean pack(ItemStack aContent, ItemStack aFull) {
 		if (ST.invalid(aFull) || ST.invalid(aContent)) return F;
 		Boxinator.addRecipe2(T, 16, 16, aContent, ST.tag(aContent.stackSize), aFull);
 		return T;
 	}
-	
 	public static boolean pack(ItemStack aContent, long aAmount, ItemStack aFull) {
 		if (ST.invalid(aFull) || ST.invalid(aContent)) return F;
 		Boxinator.addRecipe2(T, 16, 16, ST.amount(aAmount, aContent), ST.tag(aAmount), aFull);
 		return T;
 	}
+	public static boolean unpack(ItemStack aFull, ItemStack aContent) {
+		if (ST.invalid(aFull) || ST.invalid(aContent)) return F;
+		Unboxinator.addRecipe1(T, 16, 16, aFull, aContent);
+		ic2_extractor(aFull, aContent);
+		return T;
+	}
+	public static boolean packunpack(ItemStack aContent, ItemStack aFull) {
+		return pack(aContent, aFull) && unpack(aFull, aContent);
+	}
+	public static boolean packunpack(ItemStack aContent, long aAmount, ItemStack aFull) {
+		return pack(aContent, aAmount, aFull) && unpack(aFull, ST.amount(aAmount, aContent));
+	}
+	
 	
 	public static boolean compact(ItemStack aContent, ItemStack aFull) {
 		if (ST.invalid(aFull) || ST.invalid(aContent)) return F;
@@ -221,7 +241,6 @@ public class RM {
 		ic2_compressor(aContent, aFull);
 		return T;
 	}
-	
 	public static boolean compact(ItemStack aContent, long aAmount, ItemStack aFull) {
 		if (ST.invalid(aFull) || ST.invalid(aContent)) return F;
 		Boxinator .addRecipe2(T, 16, 16, ST.amount(aAmount, aContent), ST.tag(aAmount), aFull);
@@ -229,20 +248,46 @@ public class RM {
 		ic2_compressor(ST.amount(aAmount, aContent), aFull);
 		return T;
 	}
-	
-	public static boolean unpack (ItemStack aFull, ItemStack aContent) {
-		if (ST.invalid(aFull) || ST.invalid(aContent)) return F;
-		Unboxinator.addRecipe1(T, 16, 16, aFull, aContent);
-		ic2_extractor(aFull, aContent);
+	public static boolean smash(ItemStack aObject, ItemStack aOutput) {
+		if (ST.invalid(aObject) || ST.invalid(aOutput)) return F;
+		Hammer .addRecipe1(T, 16, 16, aObject, aOutput);
+		Crusher.addRecipe1(T, 16, 32, aObject, aOutput);
+		return T;
+	}
+	public static boolean smash(ItemStack aObject, ItemStack aOutput, long aAmount) {
+		if (ST.invalid(aObject) || ST.invalid(aOutput)) return F;
+		Hammer .addRecipe1(T, 16, 16, aObject, ST.amount(aAmount, aOutput));
+		Crusher.addRecipe1(T, 16, 32, aObject, ST.amount(aAmount, aOutput));
+		return T;
+	}
+	public static boolean compactsmash(ItemStack aContent, ItemStack aFull) {
+		return compact(aContent, aFull) && smash(aFull, aContent);
+	}
+	public static boolean compactsmash(ItemStack aContent, long aAmount, ItemStack aFull) {
+		return compact(aContent, aAmount, aFull) && smash(aFull, aContent, aAmount);
+	}
+
+
+	public static boolean glowstone(ItemStack aBlock, OreDictMaterial aMaterial) {
+		if (ST.invalid(aBlock)) return F;
+		RM.compactsmash(OP.dust.mat(aMaterial, 4), aBlock);
+		RM.compact     (OP.gem .mat(aMaterial, 4), aBlock);
+		RM.sawing      (16, 64, F, 25, aBlock, OP.plateGem.mat(aMaterial, 4));
+		RM.lathing     (16, 64, aBlock, OP.stickLong.mat(aMaterial, 2), OP.dust.mat(aMaterial, 2));
+		RM.generify    (aBlock, ST.make(Blocks.glowstone, 1, 0));
+		return T;
+	}
+
+
+	public static boolean replicateOrganic(long aTag1, long aTag2, ItemStack aOutput) {
+		if (ST.invalid(aOutput)) return F;
+		RM.Replicator.addRecipe2(T,  16, 256, ST.tag(aTag1), ST.tag(aTag2), FL.array(FL.MatterNeutral.make(1), FL.MatterCharged.make(1), FL.Biomass   .make(1000)), ZL_FS, aOutput);
+		RM.Replicator.addRecipe2(T,  16, 256, ST.tag(aTag1), ST.tag(aTag2), FL.array(FL.MatterNeutral.make(1), FL.MatterCharged.make(1), FL.BiomassIC2.make(1000)), ZL_FS, aOutput);
+		RM.Replicator.addRecipe2(T, 256, 256, ST.tag(aTag1), ST.tag(aTag2), FL.array(FL.UUM.make(10)                                   , FL.Biomass   .make(1000)), ZL_FS, aOutput);
+		RM.Replicator.addRecipe2(T, 256, 256, ST.tag(aTag1), ST.tag(aTag2), FL.array(FL.UUM.make(10)                                   , FL.BiomassIC2.make(1000)), ZL_FS, aOutput);
 		return T;
 	}
 	
-	public static boolean packunpack (ItemStack aContent, ItemStack aFull) {
-		return pack(aContent, aFull) && unpack(aFull, aContent);
-	}
-	public static boolean packunpack (ItemStack aContent, long aAmount, ItemStack aFull) {
-		return pack(aContent, 9, aFull) && unpack(aFull, ST.amount(aAmount, aContent));
-	}
 
 	public static boolean biomass(ItemStack aBiomass) {return biomass(aBiomass, 64);}
 	public static boolean biomass(ItemStack aBiomass, long aSpeed) {

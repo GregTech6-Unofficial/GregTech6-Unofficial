@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -120,20 +120,25 @@ public interface ITileEntityMachineBlockUpdateable {
 			
 			@Override
 			public void run() {
-				try {stepToUpdateMachine(mWorld, mCoords, new HashSetNoNulls<>(F, mCoords));} catch(Throwable e) {/**/}
+				try {stepToUpdateMachine(mWorld, mCoords, new HashSetNoNulls<>(F, mCoords));} catch(Throwable e) {/**/} finally {if (TICK_LOCK.isHeldByCurrentThread()) TICK_LOCK.unlock();}
 			}
 			
 			private void stepToUpdateMachine(World aWorld, ChunkCoordinates aCoords, HashSetNoNulls<ChunkCoordinates> aSet) {
+				// Wait for the updateEntities Thread to be done because fucking Mojang and race conditions in loading Chunks.
+				TICK_LOCK.lock();
 				TileEntity tTileEntity = WD.te(aWorld, aCoords, T);
-				if (tTileEntity != null && tTileEntity instanceof ITileEntityMachineBlockUpdateable) ((ITileEntityMachineBlockUpdateable)tTileEntity).onMachineBlockUpdate(mCoords, mBlock, mMeta, mRemoved);
-				if (aSet.size() < 5 || (tTileEntity != null && tTileEntity instanceof ITileEntityMachineBlockUpdateable) || isMachineBlock(aWorld.getBlock(aCoords.posX, aCoords.posY, aCoords.posZ), aWorld.getBlockMetadata(aCoords.posX, aCoords.posY, aCoords.posZ))) {
+				if (tTileEntity instanceof ITileEntityMachineBlockUpdateable) ((ITileEntityMachineBlockUpdateable)tTileEntity).onMachineBlockUpdate(mCoords, mBlock, mMeta, mRemoved);
+				if (aSet.size() < 5 || tTileEntity instanceof ITileEntityMachineBlockUpdateable || isMachineBlock(aWorld.getBlock(aCoords.posX, aCoords.posY, aCoords.posZ), aWorld.getBlockMetadata(aCoords.posX, aCoords.posY, aCoords.posZ))) {
+					TICK_LOCK.unlock();
 					ChunkCoordinates tCoords;
-					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX + 1, aCoords.posY, aCoords.posZ))) stepToUpdateMachine(aWorld, tCoords, aSet);
-					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX - 1, aCoords.posY, aCoords.posZ))) stepToUpdateMachine(aWorld, tCoords, aSet);
-					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX, aCoords.posY + 1, aCoords.posZ))) stepToUpdateMachine(aWorld, tCoords, aSet);
-					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX, aCoords.posY - 1, aCoords.posZ))) stepToUpdateMachine(aWorld, tCoords, aSet);
-					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX, aCoords.posY, aCoords.posZ + 1))) stepToUpdateMachine(aWorld, tCoords, aSet);
-					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX, aCoords.posY, aCoords.posZ - 1))) stepToUpdateMachine(aWorld, tCoords, aSet);
+					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX+1, aCoords.posY  , aCoords.posZ  ))) stepToUpdateMachine(aWorld, tCoords, aSet);
+					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX-1, aCoords.posY  , aCoords.posZ  ))) stepToUpdateMachine(aWorld, tCoords, aSet);
+					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX  , aCoords.posY+1, aCoords.posZ  ))) stepToUpdateMachine(aWorld, tCoords, aSet);
+					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX  , aCoords.posY-1, aCoords.posZ  ))) stepToUpdateMachine(aWorld, tCoords, aSet);
+					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX  , aCoords.posY  , aCoords.posZ+1))) stepToUpdateMachine(aWorld, tCoords, aSet);
+					if (aSet.add(tCoords = new ChunkCoordinates(aCoords.posX  , aCoords.posY  , aCoords.posZ-1))) stepToUpdateMachine(aWorld, tCoords, aSet);
+				} else {
+					TICK_LOCK.unlock();
 				}
 			}
 		}

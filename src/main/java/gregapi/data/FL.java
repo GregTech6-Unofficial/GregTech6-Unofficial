@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -62,43 +62,26 @@ import net.minecraftforge.fluids.IFluidTank;
 @SuppressWarnings("unchecked")
 public enum FL {
 	  Error                     ("error")
-
+	  
 	, UUM                       ("ic2uumatter"                                              , LIQUID, ENCHANTED_EFFECT)
 	, MatterNeutral             ("neutralmatter"                                            , LIQUID, ENCHANTED_EFFECT)
 	, MatterCharged             ("chargedmatter"                                            , LIQUID, ENCHANTED_EFFECT)
-
+	
 	, XP                        ("xpjuice"                                                  , SIMPLE, LIQUID, VOID_OVERFLOW)
 	, Mob                       ("mobessence"                                               , SIMPLE, LIQUID, VOID_OVERFLOW)
-
+	
 	, Air                       ("air"                                                      , SIMPLE, GAS, AIR)
 	, Air_End                   ("enderair"                                                 , SIMPLE, GAS, AIR)
-    , Air_Nether                ("netherair"                                                , SIMPLE, GAS, AIR)
-
-    , Oxygen                    ("oxygen"                                                   , SIMPLE, GAS, OXYGEN)
-    , Reikygen                  ("rc oxygen"                                                , SIMPLE, GAS, OXYGEN)
-    , Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID, LIQUID_OXYGEN)
-    , Liquid_Reikygen           ("rc liquid oxygen"                                         , SIMPLE, LIQUID, LIQUID_OXYGEN)
-
-    // plasmas
-	, HeliumP                   ("heliumplasma"                                             , PLASMA)
-	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
-    , OxygenP                   ("oxygenplasma"                                             , PLASMA)
-    , IronP                     ("ironplasma"                                               , PLASMA)
-    //, neutronP                  ("neutronplasma"                                            , PLASMA)
-    , protonP                   ("protonplasma"                                             , PLASMA)
-    , antiprotonP               ("antiprotonplasma"                                         , PLASMA)
-    , electronP                 ("electronplasma"                                           , PLASMA)
-    , positronP                 ("positronplasma"                                           , PLASMA)
-    //, neutrinoP                 ("neutrinoplasma"                                           , PLASMA)
-    //, antineutrinoP             ("antineutrinoplasma"                                       , PLASMA)
-
-    // ionized plasmas
-    , HydrogenI("ionizedhydrogen", GAS)
-    , HeliumI("ionizedhelium", GAS)
-
+	, Air_Nether                ("netherair"                                                , SIMPLE, GAS, AIR)
+	
+	, Oxygen                    ("oxygen"                                                   , SIMPLE, GAS, OXYGEN)
+	, Reikygen                  ("rc oxygen"                                                , SIMPLE, GAS, OXYGEN)
+	, Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID, LIQUID_OXYGEN)
+	, Liquid_Reikygen           ("rc liquid oxygen"                                         , SIMPLE, LIQUID, LIQUID_OXYGEN)
+	
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
-    , Liquid_Nitrogen           ("liquidnitrogen"                                           , LIQUID)
-
+	, Liquid_Nitrogen           ("liquidnitrogen"                                           , LIQUID)
+	
 	, Hydrogen                  ("hydrogen"                                                 , GAS)
 	, Deuterium                 ("deuterium"                                                , GAS)
 	, Tritium                   ("tritium"                                                  , GAS)
@@ -126,19 +109,22 @@ public enum FL {
 	, Coolant_IC2               ("ic2coolant"                                               , SIMPLE, LIQUID)
 	, Coolant_IC2_Hot           ("ic2hotcoolant"                                            , SIMPLE, LIQUID, POWER_CONDUCTING)
 	, Freezing_Ooze             ("ooze"                                                     , SIMPLE, LIQUID, BROKEN)
-	, Thorium_Salt              ("thoriumsalt"                                              , SIMPLE, LIQUID)
 
-	, Hot_Molten_Sodium         ("hotmoltensodium"                                          , SIMPLE, LIQUID, POWER_CONDUCTING)
-	, Hot_Molten_Tin            ("hotmoltentin"                                             , SIMPLE, LIQUID, POWER_CONDUCTING)
-	, Hot_Heavy_Water           ("hotheavywater"                                            , SIMPLE, LIQUID, POWER_CONDUCTING)
-	, Hot_Semi_Heavy_Water      ("hotsemiheavywater"                                        , SIMPLE, LIQUID, POWER_CONDUCTING)
-	, Hot_Tritiated_Water       ("hottritiatedwater"                                        , SIMPLE, LIQUID, POWER_CONDUCTING)
-	, Hot_Molten_LiCl           ("hotmoltenlicl"                                            , SIMPLE, LIQUID, POWER_CONDUCTING)
-	, Hot_Carbon_Dioxide        ("hotcarbondioxide"                                         , SIMPLE, GAS, POWER_CONDUCTING)
-	, Hot_Helium                ("hothelium"                                                , SIMPLE, GAS, POWER_CONDUCTING)
+	, Thorium_Salt              ("thoriumsalt"                                              , LIQUID)
+
+	, Hot_Molten_Sodium         ("hotmoltensodium"                                          , LIQUID, POWER_CONDUCTING)
+	, Hot_Molten_Tin            ("hotmoltentin"                                             , LIQUID, POWER_CONDUCTING)
+	, Hot_Heavy_Water           ("hotheavywater"                                            , LIQUID, POWER_CONDUCTING)
+	, Hot_Semi_Heavy_Water      ("hotsemiheavywater"                                        , LIQUID, POWER_CONDUCTING)
+	, Hot_Tritiated_Water       ("hottritiatedwater"                                        , LIQUID, POWER_CONDUCTING)
+	, Hot_Molten_LiCl           ("hotmoltenlicl"                                            , LIQUID, POWER_CONDUCTING)
+	, Hot_Carbon_Dioxide        ("hotcarbondioxide"                                         , GAS, POWER_CONDUCTING)
+	, Hot_Helium                ("hothelium"                                                , GAS, POWER_CONDUCTING)
 	, Lava                      ("lava"                                                     , SIMPLE, LIQUID)
 	, Lava_Pahoehoe             ("ic2pahoehoelava"                                          , SIMPLE, LIQUID)
 	, Lava_Pure                 ("purelava"                                                 , SIMPLE, LIQUID, BROKEN, INFINITE) // Lycanite Lava, Warning: Infinite like vanilla Water!
+
+	, Ender_Goo                 ("endergoo"                                                 , LIQUID)
 
 	, Water                     ("water"                                                    , SIMPLE, LIQUID, FOOD, WATER)
 	, DistW                     ("ic2distilledwater"                                        , SIMPLE, LIQUID, FOOD, WATER)
@@ -158,25 +144,25 @@ public enum FL {
 	, Swampwater                ("swampwater"                                               , SIMPLE, LIQUID)
 	, Saltwater                 ("saltwater"                                                , SIMPLE, LIQUID)
 	, Holywater                 ("holywater"                                                , SIMPLE, LIQUID)
-
+	
 	, Milk                      ("milk"                                                     , SIMPLE, LIQUID, FOOD, MILK)
 	, MilkSoy                   ("soymilk"                  , "potion.soymilk"              , SIMPLE, LIQUID, FOOD, MILK)
 	, MilkGrC                   ("grcmilk.milk"                                             , SIMPLE, LIQUID, FOOD, MILK, NONSTANDARD)
 	, Milk_Spoiled              ("spoiledmilk"                                              , SIMPLE, LIQUID, FOOD, MILK)
-
+	
 	, Honey                     ("for.honey"                                                , SIMPLE, LIQUID, FOOD, HONEY)
 	, HoneyGrC                  ("grc.honey"                                                , SIMPLE, LIQUID, FOOD, HONEY, NONSTANDARD)
 	, HoneyBoP                  ("honey"                                                    , SIMPLE, LIQUID, FOOD, HONEY, NONSTANDARD)
 	, Honeydew                  ("honeydew"                 , "for.honeydew"                , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, Ambrosia                  ("potion.ambrosia"                                          , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, RoyalJelly                ("royaljelly"                                               , SIMPLE, LIQUID, FOOD)
-
+	
 	, Biomass                   ("biomass"                                                  , SIMPLE, LIQUID)
 	, BiomassIC2                ("ic2biomass"                                               , SIMPLE, LIQUID)
-
+	
 	, Lubricant                 ("lubricant"                                                , SIMPLE, LIQUID, LUBRICANT)
 	, LubRoCant                 ("rc lubricant"                                             , SIMPLE, LIQUID, LUBRICANT)
-
+	
 	, Juice                     ("juice"                                                    , SIMPLE, LIQUID, FOOD, JUICE)
 	, Juice_Kiwi                ("kiwijuice"                                                , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE, CITRUS_JUICE)
 	, Juice_Lime                ("binnie.juicelime"                                         , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE, CITRUS_JUICE)
@@ -272,9 +258,9 @@ public enum FL {
 	, Resin                     ("resin"                                                    , SIMPLE, LIQUID)
 	, Resin_Spruce              ("spruceresin"                                              , SIMPLE, LIQUID)
 	, Resin_Rubber              ("fluidrubbertreesap"                                       , SIMPLE, LIQUID)
-
+	
 	, Turpentine                ("turpentine"                                               , SIMPLE, LIQUID)
-
+	
 	, Sap                       ("sap"                                                      , SIMPLE, LIQUID, FOOD)
 	, Sap_Rainbow               ("rainbowsap"                                               , SIMPLE, LIQUID, FOOD)
 	, Sap_Maple                 ("maplesap"                                                 , SIMPLE, LIQUID, FOOD)
@@ -401,31 +387,33 @@ public enum FL {
 
 	, Vodka                     ("binnie.vodka"             , "potion.vodka", "vodka"       , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, Leninade                  ("potion.leninade"                                          , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
-	, Mead                      ("short.mead"               , "mead"                        , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
+	, Mead                      ("mead"                                                     , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
+	, ShortMead                 ("short.mead"                                               , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, Sake                      ("potion.sake"                                              , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, Tequila                   ("binnie.tequila"           , "tequila"                     , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 	, Alcopops                  ("potion.alcopops"                                          , SIMPLE, LIQUID, FOOD, ALCOHOLIC)
 
+	, Oil_Frying                ("hotfryingoil"                                             , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
+	, Oil_Seed                  ("seedoil"                                                  , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
+	, Oil_Plant                 ("plantoil"                                                 , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Sunflower             ("sunfloweroil"                                             , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Olive                 ("binnie.juiceolive"        , "oliveoil"                    , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Nut                   ("nutoil"                                                   , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Lin                   ("linoil"                   , "linseedoil"                  , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Hemp                  ("hempoil"                  , "hempseedoil"                 , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
-	, Oil_Seed                  ("seedoil"                                                  , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Fish                  ("fishoil"                                                  , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
-	, Oil_Frying                ("hotfryingoil"                                             , SIMPLE, LIQUID, FOOD, COOKING_OIL, BATH)
 	, Oil_Canola                ("canolaoil"                                                , SIMPLE, LIQUID)
-	, Oil_Plant                 ("plantoil"                                                 , SIMPLE, LIQUID)
 	, Oil_Creosote              ("creosote"                                                 , SIMPLE, LIQUID, BATH)
 	, Oil_Soulsand              ("soulsandoil"                                              , SIMPLE, LIQUID)
-	, Oil_Normal                ("oil"                      , "oilgc"                       , SIMPLE, LIQUID)
 	, Oil_Light                 ("liquid_light_oil"                                         , SIMPLE, LIQUID)
-	, Oil_Medium                ("liquid_medium_oil"                                        , SIMPLE, LIQUID)
-	, Oil_Heavy                 ("liquid_heavy_oil"                                         , SIMPLE, LIQUID)
-	, Oil_ExtraHeavy            ("liquid_extra_heavy_oil"                                   , SIMPLE, LIQUID)
 	, Oil_Light2                ("lightoil"                                                 , SIMPLE, LIQUID)
-	, Oil_Heavy2                ("heavyoil"                                                 , SIMPLE, LIQUID)
+	, Oil_Normal                ("oil"                      , "oilgc"                       , SIMPLE, LIQUID)
+	, Oil_Medium                ("liquid_medium_oil"                                        , SIMPLE, LIQUID)
 	, Oil_HotCrude              ("hotcrude"                                                 , SIMPLE, LIQUID)
+	, Oil_Heavy                 ("liquid_heavy_oil"                                         , SIMPLE, LIQUID)
+	, Oil_Heavy2                ("heavyoil"                                                 , SIMPLE, LIQUID)
+	, Oil_ExtraHeavy            ("liquid_extra_heavy_oil"                                   , SIMPLE, LIQUID)
+	
 	, Gasoil                    ("gasoil"                                                   , SIMPLE, LIQUID)
 
     // Petrol Final Products
@@ -584,100 +572,100 @@ public enum FL {
 
 	, Dragon_Breath             ("dragonbreath"                                             , SIMPLE, GAS, BATH)
 
-	, Potion_Tainted            ("potion.tainted"                                           , SIMPLE, LIQUID, POTION, BATH)
-	, Potion_Awkward            ("potion.awkward"                                           , SIMPLE, LIQUID, POTION, BATH)
-	, Potion_Thick              ("potion.thick"                                             , SIMPLE, LIQUID, POTION, BATH)
-	, Potion_Mundane            ("potion.mundane"                                           , SIMPLE, LIQUID, POTION, BATH)
+	, Potion_Tainted            ("potion.tainted"                                           , SIMPLE, LIQUID, POTION)
+	, Potion_Awkward            ("potion.awkward"                                           , SIMPLE, LIQUID, POTION)
+	, Potion_Thick              ("potion.thick"                                             , SIMPLE, LIQUID, POTION)
+	, Potion_Mundane            ("potion.mundane"                                           , SIMPLE, LIQUID, POTION)
 	, Potion_Harm_1             ("potion.damage"                                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Harm_2             ("potion.damage.strong"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Harm_1S            ("potion.damage.splash"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Harm_2S            ("potion.damage.strong.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Harm_1D            ("potion.damage.lingering"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Harm_2D            ("potion.damage.strong.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Harm_1S            ("potion.damage.splash"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Harm_2S            ("potion.damage.strong.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Harm_1D            ("potion.damage.lingering"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Harm_2D            ("potion.damage.strong.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Heal_1             ("potion.health"                                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Heal_2             ("potion.health.strong"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Heal_1S            ("potion.health.splash"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Heal_2S            ("potion.health.strong.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Heal_1D            ("potion.health.lingering"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Heal_2D            ("potion.health.strong.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Heal_1S            ("potion.health.splash"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Heal_2S            ("potion.health.strong.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Heal_1D            ("potion.health.lingering"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Heal_2D            ("potion.health.strong.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Jump_1             ("potion.jump"                                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Jump_2             ("potion.jump.strong"                                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Jump_1S            ("potion.jump.splash"                                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Jump_2S            ("potion.jump.strong.splash"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Jump_1D            ("potion.jump.lingering"                                    , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Jump_2D            ("potion.jump.strong.lingering"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Jump_1S            ("potion.jump.splash"                                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Jump_2S            ("potion.jump.strong.splash"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Jump_1D            ("potion.jump.lingering"                                    , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Jump_2D            ("potion.jump.strong.lingering"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Speed_1            ("potion.speed"                                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Speed_2            ("potion.speed.strong"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Speed_1L           ("potion.speed.long"                                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Speed_1S           ("potion.speed.splash"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Speed_2S           ("potion.speed.strong.splash"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Speed_1LS          ("potion.speed.long.splash"                                 , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Speed_1D           ("potion.speed.lingering"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Speed_2D           ("potion.speed.strong.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Speed_1LD          ("potion.speed.long.lingering"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Speed_1S           ("potion.speed.splash"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Speed_2S           ("potion.speed.strong.splash"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Speed_1LS          ("potion.speed.long.splash"                                 , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Speed_1D           ("potion.speed.lingering"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Speed_2D           ("potion.speed.strong.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Speed_1LD          ("potion.speed.long.lingering"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Strength_1         ("potion.strength"                                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Strength_2         ("potion.strength.strong"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Strength_1L        ("potion.strength.long"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Strength_1S        ("potion.strength.splash"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Strength_2S        ("potion.strength.strong.splash"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Strength_1LS       ("potion.strength.long.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Strength_1D        ("potion.strength.lingering"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Strength_2D        ("potion.strength.strong.lingering"                         , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Strength_1LD       ("potion.strength.long.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Strength_1S        ("potion.strength.splash"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Strength_2S        ("potion.strength.strong.splash"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Strength_1LS       ("potion.strength.long.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Strength_1D        ("potion.strength.lingering"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Strength_2D        ("potion.strength.strong.lingering"                         , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Strength_1LD       ("potion.strength.long.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Regen_1            ("potion.regen"                                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Regen_2            ("potion.regen.strong"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Regen_1L           ("potion.regen.long"                                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Regen_1S           ("potion.regen.splash"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Regen_2S           ("potion.regen.strong.splash"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Regen_1LS          ("potion.regen.long.splash"                                 , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Regen_1D           ("potion.regen.lingering"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Regen_2D           ("potion.regen.strong.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Regen_1LD          ("potion.regen.long.lingering"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Regen_1S           ("potion.regen.splash"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Regen_2S           ("potion.regen.strong.splash"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Regen_1LS          ("potion.regen.long.splash"                                 , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Regen_1D           ("potion.regen.lingering"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Regen_2D           ("potion.regen.strong.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Regen_1LD          ("potion.regen.long.lingering"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Poison_1           ("potion.poison"                                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Poison_2           ("potion.poison.strong"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Poison_1L          ("potion.poison.long"                                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Poison_1S          ("potion.poison.splash"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Poison_2S          ("potion.poison.strong.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Poison_1LS         ("potion.poison.long.splash"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Poison_1D          ("potion.poison.lingering"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Poison_2D          ("potion.poison.strong.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Poison_1LD         ("potion.poison.long.lingering"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Poison_1S          ("potion.poison.splash"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Poison_2S          ("potion.poison.strong.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Poison_1LS         ("potion.poison.long.splash"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Poison_1D          ("potion.poison.lingering"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Poison_2D          ("potion.poison.strong.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Poison_1LD         ("potion.poison.long.lingering"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_FireResistance_1   ("potion.fireresistance"                                    , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_FireResistance_1L  ("potion.fireresistance.long"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_FireResistance_1S  ("potion.fireresistance.splash"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_FireResistance_1LS ("potion.fireresistance.long.splash"                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_FireResistance_1D  ("potion.fireresistance.lingering"                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_FireResistance_1LD ("potion.fireresistance.long.lingering"                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_FireResistance_1S  ("potion.fireresistance.splash"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_FireResistance_1LS ("potion.fireresistance.long.splash"                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_FireResistance_1D  ("potion.fireresistance.lingering"                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_FireResistance_1LD ("potion.fireresistance.long.lingering"                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_NightVision_1      ("potion.nightvision"                                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_NightVision_1L     ("potion.nightvision.long"                                  , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_NightVision_1S     ("potion.nightvision.splash"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_NightVision_1LS    ("potion.nightvision.long.splash"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_NightVision_1D     ("potion.nightvision.lingering"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_NightVision_1LD    ("potion.nightvision.long.lingering"                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_NightVision_1S     ("potion.nightvision.splash"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_NightVision_1LS    ("potion.nightvision.long.splash"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_NightVision_1D     ("potion.nightvision.lingering"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_NightVision_1LD    ("potion.nightvision.long.lingering"                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Weakness_1         ("potion.weakness"                                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Weakness_1L        ("potion.weakness.long"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Weakness_1S        ("potion.weakness.splash"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Weakness_1LS       ("potion.weakness.long.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Weakness_1D        ("potion.weakness.lingering"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Weakness_1LD       ("potion.weakness.long.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Weakness_1S        ("potion.weakness.splash"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Weakness_1LS       ("potion.weakness.long.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Weakness_1D        ("potion.weakness.lingering"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Weakness_1LD       ("potion.weakness.long.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Slowness_1         ("potion.slowness"                                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Slowness_1L        ("potion.slowness.long"                                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Slowness_1S        ("potion.slowness.splash"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Slowness_1LS       ("potion.slowness.long.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Slowness_1D        ("potion.slowness.lingering"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Slowness_1LD       ("potion.slowness.long.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Slowness_1S        ("potion.slowness.splash"                                   , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Slowness_1LS       ("potion.slowness.long.splash"                              , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Slowness_1D        ("potion.slowness.lingering"                                , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Slowness_1LD       ("potion.slowness.long.lingering"                           , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_WaterBreathing_1   ("potion.waterbreathing"                                    , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_WaterBreathing_1L  ("potion.waterbreathing.long"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_WaterBreathing_1S  ("potion.waterbreathing.splash"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_WaterBreathing_1LS ("potion.waterbreathing.long.splash"                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_WaterBreathing_1D  ("potion.waterbreathing.lingering"                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_WaterBreathing_1LD ("potion.waterbreathing.long.lingering"                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_WaterBreathing_1S  ("potion.waterbreathing.splash"                             , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_WaterBreathing_1LS ("potion.waterbreathing.long.splash"                        , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_WaterBreathing_1D  ("potion.waterbreathing.lingering"                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_WaterBreathing_1LD ("potion.waterbreathing.long.lingering"                     , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Invisibility_1     ("potion.invisibility"                                      , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
 	, Potion_Invisibility_1L    ("potion.invisibility.long"                                 , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Invisibility_1S    ("potion.invisibility.splash"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Invisibility_1LS   ("potion.invisibility.long.splash"                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Invisibility_1D    ("potion.invisibility.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
-	, Potion_Invisibility_1LD   ("potion.invisibility.long.lingering"                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT, BATH)
+	, Potion_Invisibility_1S    ("potion.invisibility.splash"                               , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Invisibility_1LS   ("potion.invisibility.long.splash"                          , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Invisibility_1D    ("potion.invisibility.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
+	, Potion_Invisibility_1LD   ("potion.invisibility.long.lingering"                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	;
 
 	public final String mName;
@@ -700,20 +688,20 @@ public enum FL {
 		FluidsGT.FLUID_RENAMINGS.put(aOldName2, mName);
 		for (Collection<String> aFluidSet : aFluidSets) {aFluidSet.add(mName); aFluidSet.add(aOldName1); aFluidSet.add(aOldName2);}
 	}
-
-
-
-
+	
+	
+	
+	
 	public static FluidStack lube(long aAmount) {return LubRoCant.make(aAmount, Lubricant);}
-
-
-
+	
+	
+	
 	public int id() {return FluidRegistry.getFluidID(mName);}
 	public Fluid fluid() {return fluid_(mName);}
 	public boolean exists() {return fluid() != null;}
 	public ItemStack display() {return display(make(0), F, F);}
 	public ItemStack display(long aAmount) {return display(make(aAmount), aAmount, F, F);}
-
+	
 	public FluidStack make (long aAmount) {return make (mName, aAmount);}
 	public FluidStack make_(long aAmount) {return make_(mName, aAmount);}
 	public FluidStack make (long aAmount, String aReplacement) {return make (mName, aAmount, aReplacement);}
@@ -724,47 +712,47 @@ public enum FL {
 	public FluidStack make_(long aAmount, String aReplacement, long aReplacementAmount) {return make_(mName, aAmount, aReplacement, aReplacementAmount);}
 	public FluidStack make (long aAmount, FL aReplacement, long aReplacementAmount) {return make (mName, aAmount, aReplacement.mName, aReplacementAmount);}
 	public FluidStack make_(long aAmount, FL aReplacement, long aReplacementAmount) {return make_(mName, aAmount, aReplacement.mName, aReplacementAmount);}
-
+	
 	public boolean is(IFluidTank aTank) {return is(aTank.getFluid());}
 	public boolean is(FluidStack aFluid) {return aFluid != null && is(aFluid.getFluid());}
 	public boolean is(Fluid aFluid) {return aFluid != null && is(aFluid.getName());}
 	public boolean is(String aFluidName) {return mName.equalsIgnoreCase(aFluidName);}
 	public boolean is(Collection<String> aFluidSet) {return aFluidSet.contains(mName);}
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
 	public static FluidStack[] array(FluidStack... aFluids) {return aFluids;}
-
+	
 	public static String regName (IFluidTank aTank) {return aTank == null ? null : regName_(aTank);}
 	public static String regName_(IFluidTank aTank) {return regName(aTank.getFluid());}
 	public static String regName (FluidStack aFluid) {return aFluid == null ? null : regName_(aFluid);}
 	public static String regName_(FluidStack aFluid) {return regName(aFluid.getFluid());}
 	public static String regName (Fluid aFluid) {return aFluid == null ? null : regName_(aFluid);}
 	public static String regName_(Fluid aFluid) {return aFluid.getName();}
-
+	
 	public static short id (IFluidTank aTank) {return aTank == null ? -1 : id_(aTank);}
 	public static short id_(IFluidTank aTank) {return id(aTank.getFluid());}
 	public static short id (FluidStack aFluid) {return aFluid == null ? -1 : id_(aFluid);}
 	public static short id_(FluidStack aFluid) {return id(aFluid.getFluid());}
 	public static short id (Fluid aFluid) {return aFluid == null ? -1 : id_(aFluid);}
 	public static short id_(Fluid aFluid) {return (short)FluidRegistry.getFluidID(aFluid);} // catch(Throwable e) {ERR.println("What the fuck?! Why does the Fluid Registry Crash!? Who is responsible for this?!"); e.printStackTrace(ERR);} return -1;}
-
+	
 	public static Fluid fluid (int aID) {return aID < 0 ? null : FluidRegistry.getFluid(aID);}
 	public static Fluid fluid (String aFluidName) {return Code.stringInvalid(aFluidName) ? null : fluid_(aFluidName);}
 	public static Fluid fluid_(String aFluidName) {return FluidRegistry.getFluid(aFluidName);}
-
+	
 	public static boolean equal(FluidStack aFluid1, FluidStack aFluid2) {return equal(aFluid1, aFluid2, F);}
 	public static boolean equal(FluidStack aFluid1, FluidStack aFluid2, boolean aIgnoreNBT) {return aFluid1 != null && aFluid2 != null && aFluid1.getFluid() == aFluid2.getFluid() && (aIgnoreNBT || ((aFluid1.tag == null) == (aFluid2.tag == null)) && (aFluid1.tag == null || aFluid1.tag.equals(aFluid2.tag)));}
-
+	
 	public static boolean is(IFluidTank aTank, String... aNames) {return is(aTank.getFluid(), aNames);}
 	public static boolean is(FluidStack aFluid, String... aNames) {return aFluid != null && is(aFluid.getFluid(), aNames);}
 	public static boolean is(Fluid aFluid, String... aNames) {if (aFluid != null) for (String aName : aNames) if (aFluid.getName().equalsIgnoreCase(aName)) return T; return F;}
-
+	
 	public static boolean exists(String aFluidName) {return aFluidName != null && fluid_(aFluidName) != null;}
-
+	
 	public static ItemStack display(Fluid aFluid) {return aFluid == null ? null : display(make(aFluid, 0), F, F, T);}
 	public static ItemStack display(FluidStack aFluid, boolean aUseStackSize, boolean aLimitStackSize) {return display(aFluid, aUseStackSize, aLimitStackSize, T);}
 	public static ItemStack display(FluidStack aFluid, boolean aUseStackSize, boolean aLimitStackSize, boolean aUseBucketSize) {return display(aFluid, aFluid == null ? 0 : aFluid.amount, aUseStackSize, aLimitStackSize, aUseBucketSize);}
@@ -781,144 +769,144 @@ public enum FL {
 		NBT.setBoolean(tNBT, "s", gas(aFluid));
 		return NBT.set(rStack, tNBT);
 	}
-
+	
 	/** @return if that Liquid is Water or Distilled Water */
 	public static boolean water(IFluidTank aFluid) {return aFluid != null && water(aFluid.getFluid());}
 	/** @return if that Liquid is Water or Distilled Water */
 	public static boolean water(FluidStack aFluid) {return aFluid != null && water(aFluid.getFluid());}
 	/** @return if that Liquid is Water or Distilled Water */
 	public static boolean water(Fluid aFluid) {return aFluid == FluidRegistry.WATER || FL.DistW.is(aFluid) || FL.SpDew.is(aFluid);}
-
+	
 	/** @return if that Liquid is distilled Water */
 	public static boolean distw(IFluidTank aFluid) {return aFluid != null && distw(aFluid.getFluid());}
 	/** @return if that Liquid is distilled Water */
 	public static boolean distw(FluidStack aFluid) {return aFluid != null && distw(aFluid.getFluid());}
 	/** @return if that Liquid is distilled Water */
 	public static boolean distw(Fluid aFluid) {return FL.DistW.is(aFluid);}
-
+	
 	/** @return if that Liquid is Lava */
 	public static boolean lava(IFluidTank aFluid) {return aFluid != null && lava(aFluid.getFluid());}
 	/** @return if that Liquid is Lava */
 	public static boolean lava(FluidStack aFluid) {return aFluid != null && lava(aFluid.getFluid());}
 	/** @return if that Liquid is Lava */
 	public static boolean lava(Fluid aFluid) {return aFluid == FluidRegistry.LAVA;}
-
+	
 	/** @return if that Liquid is Steam */
 	public static boolean steam(IFluidTank aFluid) {return aFluid != null && steam(aFluid.getFluid());}
 	/** @return if that Liquid is Steam */
 	public static boolean steam(FluidStack aFluid) {return aFluid != null && steam(aFluid.getFluid());}
 	/** @return if that Liquid is Steam */
 	public static boolean steam(Fluid aFluid) {return FL.Steam.is(aFluid);}
-
+	
 	/** @return if that Liquid is Milk */
 	public static boolean milk(IFluidTank aFluid) {return aFluid != null && milk(aFluid.getFluid());}
 	/** @return if that Liquid is Milk */
 	public static boolean milk(FluidStack aFluid) {return aFluid != null && milk(aFluid.getFluid());}
 	/** @return if that Liquid is Milk */
 	public static boolean milk(Fluid aFluid) {return FL.Milk.is(aFluid) || FL.MilkGrC.is(aFluid);}
-
+	
 	/** @return if that Liquid is Soy Milk */
 	public static boolean soym(IFluidTank aFluid) {return aFluid != null && soym(aFluid.getFluid());}
 	/** @return if that Liquid is Soy Milk */
 	public static boolean soym(FluidStack aFluid) {return aFluid != null && soym(aFluid.getFluid());}
 	/** @return if that Liquid is Soy Milk */
 	public static boolean soym(Fluid aFluid) {return FL.MilkSoy.is(aFluid);}
-
+	
 	/** @return if that Liquid is Steam */
 	public static boolean anysteam(IFluidTank aFluid) {return aFluid != null && steam(aFluid.getFluid());}
 	/** @return if that Liquid is Steam */
 	public static boolean anysteam(FluidStack aFluid) {return aFluid != null && steam(aFluid.getFluid());}
 	/** @return if that Liquid is Steam */
 	public static boolean anysteam(Fluid aFluid) {return aFluid != null && FluidsGT.STEAM.contains(aFluid.getName());}
-
+	
 	/** @return if that Liquid is supposed to be conducting Power */
 	public static boolean powerconducting(IFluidTank aFluid) {return aFluid != null && powerconducting(aFluid.getFluid());}
 	/** @return if that Liquid is supposed to be conducting Power */
 	public static boolean powerconducting(FluidStack aFluid) {return aFluid != null && powerconducting(aFluid.getFluid());}
 	/** @return if that Liquid is supposed to be conducting Power */
 	public static boolean powerconducting(Fluid aFluid) {return aFluid != null && FluidsGT.POWER_CONDUCTING.contains(aFluid.getName());}
-
+	
 	/** @return if that Liquid is early-game and easy to handle */
 	public static boolean simple(IFluidTank aFluid) {return aFluid != null && simple(aFluid.getFluid());}
 	/** @return if that Liquid is early-game and easy to handle */
 	public static boolean simple(FluidStack aFluid) {return aFluid != null && simple(aFluid.getFluid());}
 	/** @return if that Liquid is early-game and easy to handle */
 	public static boolean simple(Fluid aFluid) {return aFluid != null && FluidsGT.SIMPLE.contains(aFluid.getName());}
-
+	
 	public static boolean acid(IFluidTank aFluid) {return aFluid != null && acid(aFluid.getFluid());}
 	public static boolean acid(FluidStack aFluid) {return aFluid != null && acid(aFluid.getFluid());}
 	public static boolean acid(Fluid aFluid) {return aFluid != null && FluidsGT.ACID.contains(aFluid.getName());}
-
+	
 	public static boolean plasma(IFluidTank aFluid) {return aFluid != null && plasma(aFluid.getFluid());}
 	public static boolean plasma(FluidStack aFluid) {return aFluid != null && plasma(aFluid.getFluid());}
 	public static boolean plasma(Fluid aFluid) {return aFluid != null && FluidsGT.PLASMA.contains(aFluid.getName());}
-
+	
 	public static boolean gas(IFluidTank aFluid, boolean aDefault) {return gas(aFluid.getFluid(), aDefault);}
 	public static boolean gas(IFluidTank aFluid) {return gas(aFluid.getFluid(), F);}
 	public static boolean gas(FluidStack aFluid, boolean aDefault) {return aFluid == null || aFluid.getFluid() == null ? aDefault : !FluidsGT.LIQUID.contains(aFluid.getFluid().getName()) && (aFluid.getFluid().isGaseous(aFluid) || FluidsGT.GAS.contains(aFluid.getFluid().getName()));}
 	public static boolean gas(FluidStack aFluid) {return gas(aFluid, F);}
 	public static boolean gas(Fluid aFluid, boolean aDefault) {return aFluid == null ? aDefault : !FluidsGT.LIQUID.contains(aFluid.getName()) && (aFluid.isGaseous() || FluidsGT.GAS.contains(aFluid.getName()));}
 	public static boolean gas(Fluid aFluid) {return gas(aFluid, F);}
-
+	
 	public static boolean lighter(BlockFluidBase aFluid) {return aFluid != null && lighter(aFluid.getFluid());}
 	public static boolean lighter(IFluidTank aFluid)     {return aFluid != null && lighter(aFluid.getFluid());}
 	public static boolean lighter(FluidStack aFluid)     {return aFluid != null && aFluid.getFluid() != null && aFluid.getFluid().getDensity(aFluid)<0;}
 	public static boolean lighter(Fluid aFluid)          {return aFluid != null && aFluid.getDensity(make(aFluid, 1000)) < 0;}
-
+	
 	public static int dir(BlockFluidBase aFluid) {return lighter(aFluid) ? +1 : -1;}
 	public static int dir(IFluidTank aFluid)     {return lighter(aFluid) ? +1 : -1;}
 	public static int dir(FluidStack aFluid)     {return lighter(aFluid) ? +1 : -1;}
 	public static int dir(Fluid aFluid)          {return lighter(aFluid) ? +1 : -1;}
-
+	
 	public static long temperature(IFluidTank aFluid) {return temperature(aFluid.getFluid());}
 	public static long temperature(IFluidTank aFluid, long aDefault) {return temperature(aFluid.getFluid(), aDefault);}
-
+	
 	public static long temperature(Fluid aFluid) {return temperature(aFluid, DEF_ENV_TEMP);}
 	public static long temperature(Fluid aFluid, long aDefault) {
 		if (aFluid == null) return aDefault;
 		if (aFluid.getName().equals("steam")) return C+100;
 		return aFluid.getTemperature(make(aFluid, 1));
 	}
-
+	
 	public static long temperature(FluidStack aFluid) {return temperature(aFluid, DEF_ENV_TEMP);}
 	public static long temperature(FluidStack aFluid, long aDefault) {
 		if (aFluid == null || aFluid.getFluid() == null) return aDefault;
 		if (aFluid.getFluid().getName().equals("steam")) return C+100;
 		return aFluid.getFluid().getTemperature(aFluid);
 	}
-
+	
 	public static FluidStack make (int aFluid, long aAmount) {return aFluid < 0 ? null : new FluidStack(fluid(aFluid), Code.bindInt(aAmount));}
 	public static FluidStack make (Fluid aFluid, long aAmount) {return aFluid == null ? null : new FluidStack(aFluid, Code.bindInt(aAmount));}
 	public static FluidStack make (String aFluidName, long aAmount) {return make(fluid(aFluidName), aAmount);}
 	public static FluidStack make (String aFluidName, long aAmount, String aReplacementFluidName) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make(aReplacementFluidName, aAmount) : rFluid;}
 	public static FluidStack make (String aFluidName, long aAmount, String aReplacementFluidName, long aReplacementAmount) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make(aReplacementFluidName, aReplacementAmount) : rFluid;}
 	public static FluidStack make (String aFluidName, long aAmount, FluidStack aReplacementFluid) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? aReplacementFluid : rFluid;}
-
+	
 	public static FluidStack make_(int aFluid, long aAmount) {return aFluid < 0 ? FL.Error.make(0) : new FluidStack(fluid(aFluid), Code.bindInt(aAmount));}
 	public static FluidStack make_(Fluid aFluid, long aAmount) {return aFluid == null ? FL.Error.make(0) : new FluidStack(aFluid, Code.bindInt(aAmount));}
 	public static FluidStack make_(String aFluidName, long aAmount) {return make_(fluid(aFluidName), aAmount);}
 	public static FluidStack make_(String aFluidName, long aAmount, String aReplacementFluidName) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make_(aReplacementFluidName, aAmount) : rFluid;}
 	public static FluidStack make_(String aFluidName, long aAmount, String aReplacementFluidName, long aReplacementAmount) {FluidStack rFluid = make(aFluidName, aAmount); return rFluid == null ? make_(aReplacementFluidName, aReplacementAmount) : rFluid;}
-
+	
 	public static FluidStack amount(FluidStack aFluid, long aAmount) {return aFluid == null ? null : new FluidStack(aFluid, Code.bindInt(aAmount));}
-
+	
 	public static FluidStack mul(FluidStack aFluid, long aMultiplier) {return aFluid == null ? null : amount(aFluid, aFluid.amount * aMultiplier);}
 	public static FluidStack mul(FluidStack aFluid, long aMultiplier, long aDivider, boolean aRoundUp) {return aFluid == null ? null : amount(aFluid, Code.units(aFluid.amount, aDivider, aMultiplier, aRoundUp));}
-
+	
 	public static long fill (@SuppressWarnings("rawtypes") DelegatorTileEntity aDelegator, FluidStack aFluid, boolean aDoFill) {return aDelegator != null && aDelegator.mTileEntity instanceof IFluidHandler && aFluid != null ? fill_(aDelegator, aFluid, aDoFill) : 0;}
 	public static long fill_(@SuppressWarnings("rawtypes") DelegatorTileEntity aDelegator, FluidStack aFluid, boolean aDoFill) {return fill_((IFluidHandler)aDelegator.mTileEntity, aDelegator.mSideOfTileEntity, aFluid, aDoFill);}
 	public static long fill (IFluidHandler aFluidHandler, byte aSide, FluidStack aFluid, boolean aDoFill) {return aFluidHandler != null && aFluid != null ? fill_(aFluidHandler, aSide, aFluid, aDoFill) : 0;}
 	public static long fill_(IFluidHandler aFluidHandler, byte aSide, FluidStack aFluid, boolean aDoFill) {return aFluidHandler.fill(FORGE_DIR[aSide], aFluid, aDoFill);}
 	public static long fill (IFluidHandler aFluidHandler, byte[] aSides, FluidStack aFluid, boolean aDoFill) {return aFluidHandler != null && aFluid != null ? fill_(aFluidHandler, aSides, aFluid, aDoFill) : 0;}
 	public static long fill_(IFluidHandler aFluidHandler, byte[] aSides, FluidStack aFluid, boolean aDoFill) {for (byte tSide : aSides) {long rFilled = aFluidHandler.fill(FORGE_DIR[tSide], aFluid, aDoFill); if (rFilled > 0) return rFilled;} return 0;}
-
+	
 	public static boolean fillAll (@SuppressWarnings("rawtypes") DelegatorTileEntity aDelegator, FluidStack aFluid, boolean aDoFill) {return aDelegator != null && aDelegator.mTileEntity instanceof IFluidHandler && aFluid != null && fillAll_(aDelegator, aFluid, aDoFill);}
 	public static boolean fillAll_(@SuppressWarnings("rawtypes") DelegatorTileEntity aDelegator, FluidStack aFluid, boolean aDoFill) {return fillAll_((IFluidHandler)aDelegator.mTileEntity, aDelegator.mSideOfTileEntity, aFluid, aDoFill);}
 	public static boolean fillAll (IFluidHandler aFluidHandler, byte aSide, FluidStack aFluid, boolean aDoFill) {return aFluidHandler != null && aFluid != null && fillAll_(aFluidHandler, aSide, aFluid, aDoFill);}
 	public static boolean fillAll_(IFluidHandler aFluidHandler, byte aSide, FluidStack aFluid, boolean aDoFill) {return aFluidHandler.fill(FORGE_DIR[aSide], aFluid, F) == aFluid.amount && (!aDoFill || aFluidHandler.fill(FORGE_DIR[aSide], aFluid, T) > 0);}
 	public static boolean fillAll (IFluidHandler aFluidHandler, byte[] aSides, FluidStack aFluid, boolean aDoFill) {return aFluidHandler != null && aFluid != null && fillAll_(aFluidHandler, aSides, aFluid, aDoFill);}
 	public static boolean fillAll_(IFluidHandler aFluidHandler, byte[] aSides, FluidStack aFluid, boolean aDoFill) {for (byte tSide : aSides) if (aFluidHandler.fill(FORGE_DIR[tSide], aFluid, F) == aFluid.amount && (!aDoFill || aFluidHandler.fill(FORGE_DIR[tSide], aFluid, T) > 0)) return T; return F;}
-
+	
 	public static long move (@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Integer.MAX_VALUE);}
 	public static long move_(@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Integer.MAX_VALUE);}
 	public static long move (@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {return aFrom != null && aFrom.mTileEntity instanceof IFluidHandler && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMaxMoved) : 0;}
@@ -997,7 +985,7 @@ public enum FL {
 		set(aData, aOverrideFillingEmpty, aOverrideDrainingFull);
 		FluidContainerRegistry.registerFluidContainer(aData);
 	}
-
+	
 	public static void set(FluidContainerData aData) {
 		set(aData, F, F);
 	}
@@ -1009,7 +997,7 @@ public enum FL {
 		String tFluidName = aData.fluid.getFluid().getName();
 		if (aOverrideFillingEmpty || !tFluidToData.containsKey(tFluidName)) tFluidToData.put(tFluidName, aData);
 	}
-
+	
 	public static ItemStack fill(FluidStack aFluid, ItemStack aStack, boolean aRemoveFluidDirectly, boolean aCheckIFluidContainerItems) {
 		return fill(aFluid, aStack, aRemoveFluidDirectly, aCheckIFluidContainerItems, F, T);
 	}
@@ -1041,7 +1029,7 @@ public enum FL {
 		if (aRemoveFluidDirectly) aFluid.amount -= tData.fluid.amount;
 		return ST.amount(1, tData.filledContainer);
 	}
-
+	
 	public static ItemStack fill(IFluidTank aTank, ItemStack aStack, boolean aRemoveFluidDirectly, boolean aCheckIFluidContainerItems) {
 		return fill(aTank, aStack, aRemoveFluidDirectly, aCheckIFluidContainerItems, F, T);
 	}
@@ -1075,14 +1063,14 @@ public enum FL {
 		if (aRemoveFluidDirectly) aTank.drain(tData.fluid.amount, T);
 		return ST.amount(1, tData.filledContainer);
 	}
-
+	
 	public static boolean contains(ItemStack aStack, FluidStack aFluid, boolean aCheckIFluidContainerItems) {
 		if (ST.invalid(aStack) || aFluid == null) return F;
 		if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem)aStack.getItem()).getCapacity(aStack) > 0) return aFluid.isFluidEqual(((IFluidContainerItem)aStack.getItem()).getFluid(aStack = ST.amount(1, aStack)));
 		FluidContainerData tData = FULL_TO_DATA.get(new ItemStackContainer(aStack));
 		return tData!=null && tData.fluid.isFluidEqual(aFluid);
 	}
-
+	
 	public static FluidStack getFluid(ItemStack aStack, boolean aCheckIFluidContainerItems) {
 		if (ST.invalid(aStack)) return null;
 		if (aCheckIFluidContainerItems && aStack.getItem() instanceof IFluidContainerItem && ((IFluidContainerItem)aStack.getItem()).getCapacity(aStack) > 0) {
@@ -1093,7 +1081,7 @@ public enum FL {
 		FluidContainerData tData = FULL_TO_DATA.get(new ItemStackContainer(aStack));
 		return tData==null?NF:tData.fluid.copy();
 	}
-
+	
 	public static ItemStack getEmpty(ItemStack aStack, boolean aCheckIFluidContainerItems) {
 		if (ST.invalid(aStack)) return NI;
 		FluidContainerData tData = FULL_TO_DATA.get(new ItemStackContainer(aStack));
@@ -1108,8 +1096,8 @@ public enum FL {
 	}
 	
 	
-
-
+	
+	
 	/** Loads a FluidStack properly. */
 	public static FluidStack load (NBTTagCompound aNBT, String aTagName) {return aNBT == null ? null : load(aNBT.getCompoundTag(aTagName));}
 	/** Loads a FluidStack properly. */
@@ -1149,8 +1137,8 @@ public enum FL {
 	public static NBTTagCompound save (FluidStack aFluid) {return aFluid == null || aFluid.getFluid() == null ? null : save_(aFluid);}
 	/** Saves a FluidStack properly. */
 	public static NBTTagCompound save_(FluidStack aFluid) {return aFluid.writeToNBT(NBT.make());}
-
-
+	
+	
 	@SafeVarargs public static Fluid createLiquid(OreDictMaterial aMaterial, Set<String>... aFluidList) {return createLiquid(aMaterial, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_MOLTEN), aFluidList);}
 	@SafeVarargs public static Fluid createLiquid(OreDictMaterial aMaterial, IIconContainer aTexture, Set<String>... aFluidList) {return create(aMaterial.mNameInternal.toLowerCase(), aTexture, aMaterial.mNameLocal, aMaterial, aMaterial.mRGBaLiquid, STATE_LIQUID, 1000, aMaterial.mMeltingPoint <= 0 ? 1000 : aMaterial.mMeltingPoint < 300 ? Math.min(300, aMaterial.mBoilingPoint - 1) : aMaterial.mMeltingPoint, null, null, 0, aFluidList);}
 
@@ -1158,31 +1146,31 @@ public enum FL {
 	@SafeVarargs public static Fluid createMolten(OreDictMaterial aMaterial, IIconContainer aTexture, Set<String>... aFluidList) {return createMolten(aMaterial, L, aTexture, aFluidList);}
 	@SafeVarargs public static Fluid createMolten(OreDictMaterial aMaterial, long aAmount, Set<String>... aFluidList) {return createMolten(aMaterial, aAmount, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_MOLTEN), aFluidList);}
 	@SafeVarargs public static Fluid createMolten(OreDictMaterial aMaterial, long aAmount, IIconContainer aTexture, Set<String>... aFluidList) {return create("molten."+aMaterial.mNameInternal.toLowerCase(), aTexture, "Molten " + aMaterial.mNameLocal, aMaterial, aMaterial.mRGBaLiquid, STATE_LIQUID, aAmount, aMaterial.mMeltingPoint <= 0 ? 1000 : aMaterial.mMeltingPoint < 300 ? Math.min(300, aMaterial.mBoilingPoint - 1) : aMaterial.mMeltingPoint, null, null, 0, aFluidList).setLuminosity(10);}
-
+	
 	@SafeVarargs public static Fluid createGas(OreDictMaterial aMaterial, Set<String>... aFluidList) {return createGas(aMaterial, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_GAS), aFluidList);}
 	@SafeVarargs public static Fluid createGas(OreDictMaterial aMaterial, IIconContainer aTexture, Set<String>... aFluidList) {return create(aMaterial.mNameInternal.toLowerCase(), aTexture, aMaterial.mNameLocal, aMaterial, aMaterial.mRGBaGas, STATE_GASEOUS, 1000, aMaterial.mBoilingPoint <= 0 ? 3000 : aMaterial.mBoilingPoint < 300 ? Math.min(300, aMaterial.mPlasmaPoint - 1) : aMaterial.mBoilingPoint, null, null, 0, aFluidList);}
-
+	
 	@SafeVarargs public static Fluid createVapour(OreDictMaterial aMaterial, Set<String>... aFluidList) {return createVapour(aMaterial, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_GAS), aFluidList);}
 	@SafeVarargs public static Fluid createVapour(OreDictMaterial aMaterial, IIconContainer aTexture, Set<String>... aFluidList) {return create("vapor."+aMaterial.mNameInternal.toLowerCase(), aTexture, "Vaporized " + aMaterial.mNameLocal, aMaterial, aMaterial.mRGBaGas, STATE_GASEOUS, 8*L, aMaterial.mBoilingPoint <= 0 ? 3000 : aMaterial.mBoilingPoint < 300 ? Math.min(300, aMaterial.mPlasmaPoint - 1) : aMaterial.mBoilingPoint, null, null, 0, aFluidList);}
-
+	
 	@SafeVarargs public static Fluid createPlasma(OreDictMaterial aMaterial, Set<String>... aFluidList) {return createPlasma(aMaterial, aMaterial.mTextureSetsBlock.get(IconsGT.INDEX_BLOCK_PLASMA), aFluidList);}
 	@SafeVarargs public static Fluid createPlasma(OreDictMaterial aMaterial, IIconContainer aTexture, Set<String>... aFluidList) {return create("plasma."+aMaterial.mNameInternal.toLowerCase(), aTexture, aMaterial.mNameLocal + " Plasma", aMaterial, aMaterial.mRGBaPlasma, STATE_PLASMA, L*L, aMaterial.mPlasmaPoint <= 0 ? 10000 : Math.max(300, aMaterial.mPlasmaPoint), null, null, 0, aFluidList);}
-
+	
 	@SafeVarargs public static Fluid create(String aName, String aLocalized, OreDictMaterial aMaterial, int aState, Set<String>... aFluidList) {return create(aName, aLocalized, aMaterial, aState, 1000, 300, null, null, 0, aFluidList);}
 	@SafeVarargs public static Fluid create(String aName, String aLocalized, OreDictMaterial aMaterial, int aState, long aAmountPerUnit, long aTemperatureK, Set<String>... aFluidList) {return create(aName, aLocalized, aMaterial, aState, aAmountPerUnit, aTemperatureK, null, null, 0, aFluidList);}
 	@SafeVarargs public static Fluid create(String aName, String aLocalized, OreDictMaterial aMaterial, int aState, long aAmountPerUnit, long aTemperatureK, ItemStack aFullContainer, ItemStack aEmptyContainer, int aFluidAmount, Set<String>... aFluidList) {return create(aName, new Textures.BlockIcons.CustomIcon("fluids/" + aName.toLowerCase()), aLocalized, aMaterial, null, aState, aAmountPerUnit, aTemperatureK, aFullContainer, aEmptyContainer, aFluidAmount, aFluidList);}
-
+	
 	@SafeVarargs
 	public static Fluid create(String aName, IIconContainer aTexture, String aLocalized, OreDictMaterial aMaterial, short[] aRGBa, int aState, long aAmountPerUnit, long aTemperatureK, ItemStack aFullContainer, ItemStack aEmptyContainer, int aFluidAmount, Set<String>... aFluidList) {
 		aName = aName.toLowerCase();
 		aLocalized = (aLocalized==null?aMaterial==null||aMaterial==MT.NULL?UT.Code.capitaliseWords(aName):aMaterial.getLocal():aLocalized);
-
+		
 		Fluid rFluid = new FluidGT(aName, aTexture, aRGBa == null ? UNCOLOURED : aRGBa, aTemperatureK, aState == 2 || aState == 3);
 		LH.add(rFluid.getUnlocalizedName(), aLocalized);
 		LH.add(rFluid.getUnlocalizedName()+".name", aLocalized);
-
+		
 		for (Set<String> tSet : aFluidList) tSet.add(aName);
-
+		
 		switch (aState) {
 		case STATE_SOLID  : rFluid.setViscosity(10000); break;
 		case STATE_LIQUID : rFluid.setViscosity( 1000); FluidsGT.LIQUID.add(aName); break;
@@ -1190,14 +1178,14 @@ public enum FL {
 		case STATE_PLASMA : rFluid.setViscosity(   10); rFluid.setDensity(-100000); rFluid.setLuminosity(15); FluidsGT.PLASMA.add(aName); break;
 		case 4            : rFluid.setViscosity( 1000); break;
 		}
-
+		
 		if (FL.exists(aName) || !FluidRegistry.registerFluid(rFluid)) {
 			rFluid = FluidRegistry.getFluid(aName);
 			LH.add(rFluid.getUnlocalizedName(), aLocalized);
 			if (rFluid.getTemperature() == new Fluid("test").getTemperature() || rFluid.getTemperature() <= 0) rFluid.setTemperature(UT.Code.bindInt(aTemperatureK));
 			rFluid.setGaseous(aState == 2 || aState == 3);
 		}
-
+		
 		if (aMaterial != null) {
 			if (aMaterial.contains(TD.Properties.ACID    )) FluidsGT.ACID.add(aName);
 			if (aMaterial.contains(TD.Properties.GLOWING )) rFluid.setLuminosity(Math.max(rFluid.getLuminosity(), 5));
@@ -1218,7 +1206,7 @@ public enum FL {
 				}
 			}
 		}
-
+		
 		if (aFullContainer != null && aEmptyContainer != null && !FluidContainerRegistry.registerFluidContainer(make(rFluid, aFluidAmount), aFullContainer, aEmptyContainer)) {
 			RM.Canner.addRecipe1(T, 16, Math.max(aFluidAmount / 64, 16), aFullContainer, NF, make(rFluid, aFluidAmount), ST.container(aFullContainer, F));
 		}

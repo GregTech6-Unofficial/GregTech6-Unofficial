@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -29,6 +29,7 @@ import gregapi.data.CS.BlocksGT;
 import gregapi.data.CS.ConfigsGT;
 import gregapi.util.WD;
 import gregapi.worldgen.WorldgenObject;
+import gregtech.blocks.fluids.BlockSwamp;
 import gregtech.blocks.fluids.BlockWaterlike;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -41,7 +42,7 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
  * @author Gregorius Techneticies
  */
 public class WorldgenSwamp extends WorldgenObject {
-	public int mHeight = 62;
+	public int mHeight = WD.waterLevel();
 	
 	@SafeVarargs
 	public WorldgenSwamp(String aName, boolean aDefault, List<WorldgenObject>... aLists) {
@@ -63,16 +64,17 @@ public class WorldgenSwamp extends WorldgenObject {
 				if (tStorage == null) continue;
 				final Block tBlock = tStorage.getBlockByExtId(tX, tY & 15, tZ);
 				if (tBlock.isOpaqueCube()) break;
-				if (tBlock == NB || tBlock == BlocksGT.Swamp || tBlock.isAir(aWorld, aMinX+tX, tY, aMinZ+tZ)) continue;
-				if (tBlock == Blocks.water || tBlock == Blocks.flowing_water || (tBlock instanceof BlockWaterlike && BIOMES_SWAMP.contains(aBiomes[tX][tZ].biomeName))) {
+				if (tBlock != Blocks.water && tBlock != Blocks.flowing_water && !(tBlock instanceof BlockWaterlike && BIOMES_SWAMP.contains(aBiomes[tX][tZ].biomeName))) continue;
+				
+				if (tPlacedNone) {
+					BlockSwamp.PLACEMENT_ALLOWED = T;
+					aWorld.setBlock(aMinX+tX, tY, aMinZ+tZ, BlocksGT.Swamp);
+					BlockSwamp.PLACEMENT_ALLOWED = F;
+					tPlacedNone = F;
+				} else {
 					tStorage.func_150818_a(tX, tY & 15, tZ, BlocksGT.Swamp);
-					tStorage.setExtBlockMetadata(tX, tY & 15, tZ, 0);
-					if (tPlacedNone) {
-						aWorld.scheduleBlockUpdate(aMinX+tX, tY, aMinZ+tZ, BlocksGT.Swamp, 10+RNGSUS.nextInt(90));
-						tPlacedNone = F;
-					}
-					temp = T;
 				}
+				temp = T;
 			}
 		}
 		return temp;
