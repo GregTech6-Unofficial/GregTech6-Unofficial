@@ -1081,7 +1081,7 @@ public class MT {
 	Force                   = create        ( 8343, "Force"                 , SET_REDSTONE          , 255, 255,   0, 255, G_GEM_ORES, G_INGOT_MACHINE_ORES, CRYSTAL, MAGICAL, UNBURNABLE, GLOWING).qual(3, 10.0, 128, 3)                                                                                                                                                                                                        .aspects(TC.POTENTIA, 4),
 	Forcicium               = create        ( 8344, "Forcicium"             , SET_REDSTONE          ,  50,  50,  70, 255, G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL)                                                                                                                                                                                                                                             .aspects(TC.POTENTIA, 2),
 	Forcillium              = create        ( 8345, "Forcillium"            , SET_REDSTONE          ,  50,  50,  70, 255, G_QUARTZ_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, MAGICAL)                                                                                                                                                                                                                                             .aspects(TC.POTENTIA, 2),
-	Monazite                = elec          ( 8338, "Monazite"              , SET_REDSTONE          ,  50,  70,  50, 255, G_GEM_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, BLACKLISTED_SMELTER)                                                                        .setMcfg( 0, RareEarth      , 1*U, PO4              , 1*U)                                                                                                  , // Wikipedia: (Ce, La, Nd, Th, Sm, Gd)PO4 Monazite also smelt-extract to Helium, it is brown like the rare earth Item Monazite sand deposits are inevitably of the monazite-(Ce) composition. Typically, the lanthanides in such monazites contain about 45�48% cerium, about 24% lanthanum, about 17% neodymium, about 5% praseodymium, and minor quantities of samarium, gadolinium, and yttrium. Europium concentrations tend to be low, about 0.05% Thorium content of monazite is variable and sometimes can be up to 20�30%
+	Monazite                = elec          ( 8338, "Monazite"              , SET_REDSTONE          ,  50,  70,  50, 255, G_GEM_ORES, CRYSTAL, BRITTLE, CRYSTALLISABLE, BLACKLISTED_SMELTER)                                                                        .setMcfg( 0, RareEarth      , 1*U, PO4              , 1*U)                                                                                                  , // Wikipedia: (Ce, La, Nd, Th, Sm, Gd)PO4 Monazite also smelt-extract to Helium, it is brown like the rare earth Item Monazite sand deposits are inevitably of the monazite-(Ce) composition. Typically, the lanthanides in such monazites contain about 45锟�48% cerium, about 24% lanthanum, about 17% neodymium, about 5% praseodymium, and minor quantities of samarium, gadolinium, and yttrium. Europium concentrations tend to be low, about 0.05% Thorium content of monazite is variable and sometimes can be up to 20锟�30%
 	
 	
 	Redstone                = redstone      ( 8333, "Redstone"              , SET_REDSTONE          , 200,   0,   0, 255, PULVERIZING_CINNABAR).lens(DYE_INDEX_Red)                                                                                                 .uumMcfg( 0, Pyrite         , 5*U, Hg               , 3*U, SiO2             , 1*U, Ruby             , 1*U)                                                  .aspects(TC.MACHINA, 1, TC.POTENTIA, 2).heat(500, 1500).qual(0),
@@ -2977,8 +2977,32 @@ public class MT {
 			OP.circuit.dat(Quantum),
 			OP.circuit.dat(Quantum),
 			OP.circuit.dat(Quantum)
-		};
-		
+		},
+		FIBERCABLES_04 = {
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor),
+				OP.cableLPGt04.dat(Superconductor)
+	},	
+	
+        FIBERCABLES_01 = {
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor),
+		OP.cableLPGt01.dat(Superconductor)
+	};	
 		
 		
 		public static final OreDictMaterial
