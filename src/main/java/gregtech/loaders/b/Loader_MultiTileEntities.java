@@ -2086,12 +2086,12 @@ public class Loader_MultiTileEntities implements Runnable {
 	
 	//OpticalFiber
 	aClass = MultiTileEntityOpticalFiber.class;
-	MultiTileEntityOpticalFiber.addOpticalFiber(30300, 28366, V[0], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
-	MultiTileEntityOpticalFiber.addOpticalFiber(30320, 28366, V[1], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
-	MultiTileEntityOpticalFiber.addOpticalFiber(30340, 28366, V[2], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
-	MultiTileEntityOpticalFiber.addOpticalFiber(30360, 28366, V[3], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
-	MultiTileEntityOpticalFiber.addOpticalFiber(30380, 28366, V[4], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
-	MultiTileEntityOpticalFiber.addOpticalFiber(30400, 28366, V[5], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30300, 28366, V[0], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Au);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30320, 28366, V[1], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Au);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30340, 28366, V[2], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Au);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30360, 28366, V[3], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Pt);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30380, 28366, V[4], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Pt);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30400, 28366, V[5], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Pt);
 }
 
 	private static void extenders(MultiTileEntityRegistry aRegistry, MultiTileEntityBlock aMetal, MultiTileEntityBlock aMetalChips, MultiTileEntityBlock aMetalWires, MultiTileEntityBlock aMachine, MultiTileEntityBlock aWooden, MultiTileEntityBlock aBush, MultiTileEntityBlock aStone, MultiTileEntityBlock aWool, MultiTileEntityBlock aTNT, MultiTileEntityBlock aHive, MultiTileEntityBlock aUtilMetal, MultiTileEntityBlock aUtilStone, MultiTileEntityBlock aUtilWood, MultiTileEntityBlock aUtilWool, OreDictMaterial aMat, Class<? extends TileEntity> aClass) {
