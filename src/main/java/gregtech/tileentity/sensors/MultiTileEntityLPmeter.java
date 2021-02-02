@@ -66,8 +66,8 @@ public class MultiTileEntityLPmeter extends MultiTileEntitySensorTE {
 		return 0;
 	}
 	
-	@Override public short[] getSymbolColor() {return CA_RED_255;}
-	@Override public IIconContainer getSymbolIcon() {return BI.CHAR_EU;}
+	@Override public short[] getSymbolColor() {return CA_YELLOW_255;}
+	@Override public IIconContainer getSymbolIcon() {return BI.CHAR_LP;}
 	@Override public IIconContainer getTextureFront() {return sTextureFront;}
 	@Override public IIconContainer getTextureBack () {return sTextureBack;}
 	@Override public IIconContainer getTextureSide () {return sTextureSide;}
@@ -76,12 +76,12 @@ public class MultiTileEntityLPmeter extends MultiTileEntitySensorTE {
 	@Override public IIconContainer getOverlaySide () {return sOverlaySide;}
 	
 	public static IIconContainer
-	sTextureFront   = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/electrometer/colored/front"),
-	sTextureBack    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/electrometer/colored/back"),
-	sTextureSide    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/electrometer/colored/side"),
-	sOverlayFront   = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/electrometer/overlay/front"),
-	sOverlayBack    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/electrometer/overlay/back"),
-	sOverlaySide    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/electrometer/overlay/side");
+	sTextureFront   = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/lpmeter/colored/front"),
+	sTextureBack    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/lpmeter/colored/back"),
+	sTextureSide    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/lpmeter/colored/side"),
+	sOverlayFront   = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/lpmeter/overlay/front"),
+	sOverlayBack    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/lpmeter/overlay/back"),
+	sOverlaySide    = new Textures.BlockIcons.CustomIcon("machines/redstone/sensors/lpmeter/overlay/side");
 	
 	@Override public String getTileEntityName() {return "gt.multitileentity.redstone.sensors.lpctrometer";}
 }
