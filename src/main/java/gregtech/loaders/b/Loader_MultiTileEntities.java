@@ -43,6 +43,7 @@ import gregapi.render.BlockTextureCopied;
 import gregapi.render.BlockTextureDefault;
 import gregapi.tileentity.connectors.ITileEntityRedstoneWire;
 import gregapi.tileentity.connectors.MultiTileEntityAxle;
+import gregapi.tileentity.connectors.MultiTileEntityOpticalFiber;
 import gregapi.tileentity.connectors.MultiTileEntityPipeFluid;
 import gregapi.tileentity.connectors.MultiTileEntityPipeItem;
 import gregapi.tileentity.connectors.MultiTileEntityWireElectric;
@@ -80,6 +81,7 @@ import gregtech.tileentity.energy.generators.MultiTileEntityGeneratorLiquid;
 import gregtech.tileentity.energy.generators.MultiTileEntityGeneratorSolid;
 import gregtech.tileentity.energy.generators.MultiTileEntityGasMotor;
 import gregtech.tileentity.energy.generators.MultiTileEntityMotorLiquid;
+import gregtech.tileentity.energy.generators.MultiTileEntitySPP;
 import gregtech.tileentity.energy.generators.MultiTileEntitySolarPanelElectric;
 import gregtech.tileentity.energy.reactors.MultiTileEntityReactorCore1x1;
 import gregtech.tileentity.energy.reactors.MultiTileEntityReactorCore2x2;
@@ -908,12 +910,25 @@ public class Loader_MultiTileEntities implements Runnable {
 			aRegistry.add("Large Battery Box (" +VN[i]+")", "Battery Boxes", 10090+i, 10081, MultiTileEntityBatteryBoxLarge .class, MT.DATA.Electric_T[i].mToolQuality, 16, aMachine, UT.NBT.make(NBT_MATERIAL, MT.DATA.Electric_T[i], NBT_HARDNESS, 4.0F, NBT_RESISTANCE, 4.0F, NBT_INPUT, V[i], NBT_OUTPUT, V[i], NBT_ENERGY_EMITTED, TD.Energy.EU, NBT_INV_SIZE, 16), "WCW", "WCW", "XMX", 'C', MT.DATA.CABLES_04[i], 'X', OD_CIRCUITS[i], 'W', MT.DATA.WIRES_04[i], 'M', aRegistry.getItem(10040+i));
 		}
 		
-		
-		// Solar Panels
+		//SolarPanel
 		aClass = MultiTileEntitySolarPanelElectric.class;
-		aMat = MT.DATA.Electric_T[0];   aRegistry.add("Solar Panel"                                         , "Solar Panels"                        , 10050, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_OUTPUT, 8, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[1], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[0];   aRegistry.add("Solar Panel ("+VN[0]+")"                                         , "Solar Panels"                        , 10050, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_INPUT, V[0], NBT_OUTPUT, V[0]/16, NBT_WASTE_ENERGY, T, NBT_ENERGY_ACCEPTED, TD.Energy.LP, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[0], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[1];   aRegistry.add("Solar Panel ("+VN[1]+")"                                         , "Solar Panels"                        , 10051, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_INPUT, V[1], NBT_OUTPUT, V[1]/16, NBT_WASTE_ENERGY, T, NBT_ENERGY_ACCEPTED, TD.Energy.LP, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[1], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[2];   aRegistry.add("Solar Panel ("+VN[2]+")"                                         , "Solar Panels"                        , 10052, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_INPUT, V[2], NBT_OUTPUT, V[2]/16, NBT_WASTE_ENERGY, T, NBT_ENERGY_ACCEPTED, TD.Energy.LP, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[2], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[3];   aRegistry.add("Solar Panel ("+VN[3]+")"                                         , "Solar Panels"                        , 10053, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_INPUT, V[3], NBT_OUTPUT, V[3]/16, NBT_WASTE_ENERGY, T, NBT_ENERGY_ACCEPTED, TD.Energy.LP, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[3], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[4];   aRegistry.add("Solar Panel ("+VN[4]+")"                                         , "Solar Panels"                        , 10054, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_INPUT, V[4], NBT_OUTPUT, V[4]/16, NBT_WASTE_ENERGY, T, NBT_ENERGY_ACCEPTED, TD.Energy.LP, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[4], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[5];   aRegistry.add("Solar Panel ("+VN[5]+")"                                         , "Solar Panels"                        , 10055, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_INPUT, V[5], NBT_OUTPUT, V[5]/16, NBT_WASTE_ENERGY, T, NBT_ENERGY_ACCEPTED, TD.Energy.LP, NBT_ENERGY_EMITTED, TD.Energy.EU), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[5], 'S', OP.plateGem.dat(ANY.Si));
 		
-		
+		//Solar Photovoltaic Panel
+		aClass = MultiTileEntitySPP.class;
+		aMat = MT.DATA.Electric_T[0];   aRegistry.add("Solar Photovoltaic Panel("+VN[0]+")"                                         , "Solar Panels"                        , 15061, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[0], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[0], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[1];   aRegistry.add("Solar Photovoltaic Panel("+VN[1]+")"                                         , "Solar Panels"                        , 15062, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[1], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[1], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[2];   aRegistry.add("Solar Photovoltaic Panel("+VN[2]+")"                                         , "Solar Panels"                        , 15063, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[2], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[2], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[3];   aRegistry.add("Solar Photovoltaic Panel("+VN[3]+")"                                         , "Solar Panels"                        , 15064, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[3], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[3], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[4];   aRegistry.add("Solar Photovoltaic Panel("+VN[4]+")"                                         , "Solar Panels"                        , 15065, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[4], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[4], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[5];   aRegistry.add("Solar Photovoltaic Panel("+VN[5]+")"                                         , "Solar Panels"                        , 15066, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[5], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[5], 'S', OP.plateGem.dat(ANY.Si));
+		aMat = MT.DATA.Electric_T[6];   aRegistry.add("Solar Photovoltaic Panel("+VN[6]+")"                                         , "Solar Panels"                        , 15067, 10050, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   4.0F, NBT_RESISTANCE,   4.0F, NBT_COLOR, UT.Code.getRGBInt(aMat.fRGBaSolid), NBT_OUTPUT, V[6], NBT_ENERGY_EMITTED, TD.Energy.LP), "SWS", "CMC", "SWS", 'M', OP.casingMachine.dat(aMat), 'W', OP.cableGt01.dat(ANY.Cu), 'C', OD_CIRCUITS[6], 'S', OP.plateGem.dat(ANY.Si));
+
 		
 		// Long Distance Transfer
 		aMat = MT.Pt;                   aRegistry.add("Long Distance Item Pipeline Endpoint"                , "Long Distance Transport"             , 10060, 10060, MultiTileEntityLongDistancePipelineItem.class, aMat.mToolQuality, 16, aMachine      , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,  16.0F, NBT_RESISTANCE,  16.0F), "ZPZ", "PMP", "ZPZ", 'M', OP.casingMachine.dat(aMat), 'P', OP.pipeMedium.dat(aMat), 'Z', OP.plate.dat(MT.Plastic));
@@ -2068,8 +2083,17 @@ public class Loader_MultiTileEntities implements Runnable {
 		MultiTileEntityWireElectric.addElectricWires(29800, 28366, V[6]*2, 1, 2, 2, F, F, F, aRegistry, aMetalWires, aClass, MT.Graphene);
 		
 		MultiTileEntityWireElectric.addElectricWires(29950, 28366, V[15] , 4, 1, 1, F, F, F, aRegistry, aMetalWires, aClass, MT.Superconductor);
-	}
 	
+	//OpticalFiber
+	aClass = MultiTileEntityOpticalFiber.class;
+	MultiTileEntityOpticalFiber.addOpticalFiber(30300, 28366, V[0], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30320, 28366, V[1], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30340, 28366, V[2], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30360, 28366, V[3], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30380, 28366, V[4], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+	MultiTileEntityOpticalFiber.addOpticalFiber(30400, 28366, V[5], 1, 0, 0, T, F, T, aRegistry, aMetalWires, aClass, MT.Superconductor);
+}
+
 	private static void extenders(MultiTileEntityRegistry aRegistry, MultiTileEntityBlock aMetal, MultiTileEntityBlock aMetalChips, MultiTileEntityBlock aMetalWires, MultiTileEntityBlock aMachine, MultiTileEntityBlock aWooden, MultiTileEntityBlock aBush, MultiTileEntityBlock aStone, MultiTileEntityBlock aWool, MultiTileEntityBlock aTNT, MultiTileEntityBlock aHive, MultiTileEntityBlock aUtilMetal, MultiTileEntityBlock aUtilStone, MultiTileEntityBlock aUtilWood, MultiTileEntityBlock aUtilWool, OreDictMaterial aMat, Class<? extends TileEntity> aClass) {
 		aClass = MultiTileEntityExtender.class;
 		aMat = ANY.Steel;           aRegistry.add("Inventory Extender"                                  , "Extenders"                           , 30000, 30000, aClass, aMat.mToolQuality, 16, aMachine     , UT.NBT.make(NBT_MATERIAL, aMat, NBT_HARDNESS,   6.0F, NBT_RESISTANCE,   6.0F, NBT_TEXTURE, "inv"                 , NBT_MODE, MultiTileEntityExtender.MODE_INV                                        ), " hY", " M ", "Yw ", 'M', OP.casingMachine           .dat(aMat), 'X', OP.pipeMedium.dat(aMat), 'Y', OP.pipeMedium.dat(MT.Electrum));
