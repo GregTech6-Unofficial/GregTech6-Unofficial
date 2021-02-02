@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -98,7 +98,8 @@ public final class OreDictManager {
 	private final Set<String> mAutoBlackListedMods = new HashSetNoNulls<>();
 	/** Lists all Names which are definitely not unknown. */
 	private final Set<String> mKnownNames = new HashSetNoNulls<>(F
-	, "slimeballRice", "buttonWood"
+	, "oreHeeInstabilityOrb", "oreHeeEndPowder", "oreHeeIgneousRock", "oreHeeStardust"
+	, "rennetSource", "yeastBrewers", "yeastLager", "yeastBayanus", "yeastEthereal", "yeastOrigin"
 	, "holystone", "darkStone", "whiteStone", "brightStone", "lavastone"
 	, "mycelium", "podzol", "grass", "soulSand", "taintedSoil"
 	, "snowLayer", "ice", "cloud"
@@ -114,7 +115,7 @@ public final class OreDictManager {
 	, "hempBrick", "hempBlock", "savehempBrick", "savehempBlock", "saveplatedHempBrick", "saveplatedHempBlock", "platedHempBrick", "platedHempBlock", "platedHemp", "savehemp", "saveplatedHemp"
 	);
 	/** Lists all Names which should not be processed due to technical Issues. */
-	private final Set<String> mIgnoredNames = new HashSetNoNulls<>(F, "dustRefinedObsidian", "dustRefinedGlowstone", "oreNetherQuartz", "oreBasalticMineralSand", "oreLifeCrystal", "cropMaplesyrup", "oreTritanium", "oreDuranium", "plateLapis", "shardEntropy", "shardAir", "shardWater", "shardEarth", "shardFire", "shardOrder", "greggy_greg_do_please_kindly_stuff_a_sock_in_it", "halfSheetCylinderMetal", "halfSheetMetal", "quarterSheetMetal", "sheetCurvedFourMetal", "sheetCurvedOneMetal", "sheetCurvedThreeMetal", "sheetCurvedTwoMetal", "sheetCylinderMetal", "sheetMediumConeMetal", "sheetMetal", "sheetMicroConeMetal", "sheetMicroFinMetal", "sheetSmallConeMetal", "sheetSmallCylinderMetal", "sheetSmallFinMetal", "shirtSheetMetal", "rivetSheetMetal", "triangleSheetMetal");
+	private final Set<String> mIgnoredNames = new HashSetNoNulls<>(F, "oreBentonite", "oreFullersEarth", "oreKaolinite", "dustRefinedObsidian", "dustRefinedGlowstone", "oreNetherQuartz", "oreBasalticMineralSand", "oreLifeCrystal", "cropMaplesyrup", "oreTritanium", "oreDuranium", "plateLapis", "shardEntropy", "shardAir", "shardWater", "shardEarth", "shardFire", "shardOrder", "greggy_greg_do_please_kindly_stuff_a_sock_in_it", "halfSheetCylinderMetal", "halfSheetMetal", "quarterSheetMetal", "sheetCurvedFourMetal", "sheetCurvedOneMetal", "sheetCurvedThreeMetal", "sheetCurvedTwoMetal", "sheetCylinderMetal", "sheetMediumConeMetal", "sheetMetal", "sheetMicroConeMetal", "sheetMicroFinMetal", "sheetSmallConeMetal", "sheetSmallCylinderMetal", "sheetSmallFinMetal", "shirtSheetMetal", "rivetSheetMetal", "triangleSheetMetal");
 	/** Lists all Names which have already been registered. Used for the OreDict Listeners, so that certain Recipes (such as Crafting) don't get registered twice.*/
 	private final Set<String> mAlreadyRegisteredNames = new HashSetNoNulls<>();
 	/** Used to check if Recipe Outputs accidentally contain uncopied OreDict Items. */

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -23,7 +23,6 @@ import static gregapi.data.CS.*;
 import static gregapi.util.CR.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -141,7 +140,7 @@ public class GT6_Main extends Abstract_Mod {
 		}
 		
 		gt_proxy.mSkeletonsShootGTArrows = ConfigsGT.GREGTECH.get("general", "SkeletonsShootGTArrows", 16);
-		gt_proxy.mFlintChance            = ConfigsGT.GREGTECH.get("general", "FlintAndSteelChance"   , 30);
+		gt_proxy.mFlintChance            = (int)UT.Code.bind(1, 100, ConfigsGT.GREGTECH.get("general", "FlintAndSteelChance", 30));
 		gt_proxy.mDisableVanillaOres     = ConfigsGT.GREGTECH.get("general", "DisableVanillaOres"    , T);
 		mDisableIC2Ores                  = ConfigsGT.GREGTECH.get("general", "DisableIC2Ores"        , T);
 		BlockOcean.SPREAD_TO_AIR         = ConfigsGT.GREGTECH.get("general", "OceanBlocksSpreadToAir", T);
@@ -360,12 +359,14 @@ public class GT6_Main extends Abstract_Mod {
 		if (!MD.RC.mLoaded) {
 			CR.shaped(ST.make(Blocks.rail          ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "RSR", "RSR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed));
 			CR.shaped(ST.make(Blocks.golden_rail   ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "GDG", "RSR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed), 'D', OD.itemRedstone, 'G', OP.railGt.dat(MT.Au));
-			CR.shaped(ST.make(Blocks.detector_rail ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "RPR", "RDR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed), 'D', OD.itemRedstone, 'P', ST.make(Blocks.stone_pressure_plate, 1, W));
-
+			CR.shaped(ST.make(Blocks.detector_rail ,  4, 0), DEF_REV_NCC | DEL_OTHER_SHAPED_RECIPES, "RSR", "RPR", "RDR", 'R', OP.railGt.dat(ANY.Fe), 'S', OP.stick.dat(MT.WoodSealed), 'D', OD.itemRedstone, 'P', Blocks.stone_pressure_plate);
+			
 			CR.shaped(ST.make(Blocks.activator_rail,  1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Al             ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
+			CR.shaped(ST.make(Blocks.activator_rail,  1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Magnalium      ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  1, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Bronze         ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  2, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(ANY.Fe            ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  3, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(ANY.Steel         ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
+			CR.shaped(ST.make(Blocks.activator_rail,  3, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.HSLA           ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  4, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.StainlessSteel ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  6, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(MT.Ti             ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
 			CR.shaped(ST.make(Blocks.activator_rail,  6, 0), DEF | DEL_OTHER_SHAPED_RECIPES, "RSR", "RTR", "RSR", 'R', OP.railGt.dat(ANY.W             ), 'S', OP.stick.dat(MT.WoodSealed), 'T', OD.craftingRedstoneTorch);
@@ -624,43 +625,44 @@ public class GT6_Main extends Abstract_Mod {
 			for (ItemStackContainer tStack : OP.ore.mRegisteredItems) CR.remove(tStack.toStack(), tPyrotheum);
 		}
 	}
-
+	
 	public boolean mDisableIC2Ores = T;
-
+	
 	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void onModServerStopping2(FMLServerStoppingEvent aEvent) {
 		try {
 		if (D1 || ORD != System.out) {
 			ORD.println("*");
 			ORD.println("TagData:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
+			
 			for (TagData tData : TagData.TAGS) ORD.println(tData.mName);
-
+			
 			ORD.println("*");
 			ORD.println("ItemRegistry:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
-			Object[] tList = Item.itemRegistry.getKeys().toArray();
-
-			Arrays.sort(tList);
+			
+			List tList = UT.Code.getWithoutNulls(Item.itemRegistry.getKeys().toArray(ZL_STRING));
+			
+			Collections.sort(tList);
 			for (Object tItemName : tList) ORD.println(tItemName);
-
+			
 			ORD.println("*");
 			ORD.println("OreDictionary:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
-			tList = OreDictionary.getOreNames();
-			Arrays.sort(tList);
+			
+			tList = UT.Code.getWithoutNulls(OreDictionary.getOreNames());
+			Collections.sort(tList);
 			for (Object tOreName : tList) {
 				int tAmount = OreDictionary.getOres(tOreName.toString()).size();
 				if (tAmount > 0) ORD.println((tAmount<10?" ":"") + tAmount + "x " + tOreName);
 			}
-
+			
 			ORD.println("*");
 			ORD.println("Materials:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
+			
 			for (int i = 0; i < OreDictMaterial.MATERIAL_ARRAY.length; i++) {
 				OreDictMaterial tMaterial = OreDictMaterial.MATERIAL_ARRAY[i];
 				if (tMaterial == null) {
@@ -675,31 +677,31 @@ public class GT6_Main extends Abstract_Mod {
 					}
 				}
 			}
-
+			
 			ORD.println("*");
 			ORD.println("Fluids:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
-			tList = FluidRegistry.getRegisteredFluids().keySet().toArray(ZL_STRING);
-			Arrays.sort(tList);
+			
+			tList = UT.Code.getWithoutNulls(FluidRegistry.getRegisteredFluids().keySet().toArray(ZL_STRING));
+			Collections.sort(tList);
 			for (Object tFluidName : tList) ORD.println(tFluidName);
-
+			
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
 			ORD.println("Biomes:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
+			
 			for (int i = 0; i < BiomeGenBase.getBiomeGenArray().length; i++) {
 				if (BiomeGenBase.getBiomeGenArray()[i] != null) ORD.println(BiomeGenBase.getBiomeGenArray()[i].biomeID + " = " + BiomeGenBase.getBiomeGenArray()[i].biomeName);
 			}
-
+			
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
 			ORD.println("Enchantments:");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
-
+			
 			for (int i = 0; i < Enchantment.enchantmentsList.length; i++) {
 				if (Enchantment.enchantmentsList[i] != null) ORD.println(i + " = " + Enchantment.enchantmentsList[i].getName());
 			}
-
+			
 			ORD.println("*"); ORD.println("*"); ORD.println("*");
 			ORD.println("END GregTech-Debug");
 			ORD.println("*"); ORD.println("*"); ORD.println("*");

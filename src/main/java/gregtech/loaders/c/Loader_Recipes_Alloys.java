@@ -21,8 +21,10 @@ package gregtech.loaders.c;
 
 import static gregapi.data.CS.*;
 
+import gregapi.data.ANY;
 import gregapi.data.FL;
 import gregapi.data.RM;
+import gregapi.oredict.OreDictMaterial;
 import gregapi.util.ST;
 
 public class Loader_Recipes_Alloys implements Runnable {
@@ -39,7 +41,7 @@ public class Loader_Recipes_Alloys implements Runnable {
 		mix(tCopper                 ,  1, "molten.redstone"       ,  4                                                            , "molten.redalloy"         ,  1);
 		mix(tCopper                 ,  1, "molten.silver"         ,  1, "molten.redstone"       ,  4, "molten.teslatite"      ,  4, "molten.purplealloy"      ,  2);
 		mix(tCopper                 ,  1, "molten.silver"         ,  1, "molten.redstone"       ,  4, "molten.nikolite"       ,  4, "molten.purplealloy"      ,  2);
-		mix(tCopper                 ,  1, "molten.silver"         ,  1, "molten.redstone"       ,  2                              , "molten.signalum"         ,  4);
+		mix(tCopper                 ,  3, "molten.silver"         ,  1, "molten.redstone"       , 10                              , "molten.signalum"         ,  4);
 		mix(tCopper                 ,  1, "molten.silver"         ,  2, "molten.redalloy"       ,  5                              , "molten.signalum"         ,  8);
 		mix(tCopper                 ,  3, "molten.electrum"       ,  2                                                            , "molten.blackbronze"      ,  5);
 		}
@@ -54,6 +56,9 @@ public class Loader_Recipes_Alloys implements Runnable {
 		}
 		for (String tSteel : new String[] {"molten.steel", "molten.meteoricsteel", "molten hsla", "molten.knightmetal"}) {
 		mix(tSteel                  ,  1, "molten.tungsten"       ,  1                                                            , "molten.tungstensteel"    ,  2);
+		}
+		for (OreDictMaterial tMat : ANY.Glowstone.mToThis) {
+		mix("molten.tin"            ,  3, "molten.silver"         ,  1, "molten."+tMat.mNameInternal.toLowerCase(), 4             , "molten.lumium"           ,  4);
 		}
 		mix("molten.teslatite"      ,  4, "molten.silver"         ,  1                                                            , "molten.bluealloy"        ,  1);
 		mix("molten.nikolite"       ,  4, "molten.silver"         ,  1                                                            , "molten.bluealloy"        ,  1);

@@ -27,7 +27,6 @@ import gregapi.data.CS.FluidsGT;
 import gregapi.data.CS.FoodsGT;
 import gregapi.data.FL;
 import gregapi.data.IL;
-import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.OD;
 import gregapi.data.OP;
@@ -430,6 +429,7 @@ public class Loader_Recipes_Food implements Runnable {
 		RM.Distillery   .addRecipe1(T        , 16,  16, ST.tag(0), FL.Juice_Lime  .make(   4), FL.Alcopops   .make( 2), ZL_IS);
 		RM.Distillery   .addRecipe1(T        , 16,  16, ST.tag(0), FL.Juice_Potato.make(   4), FL.Vodka      .make( 2), ZL_IS);
 		RM.Distillery   .addRecipe1(T        , 16,  16, ST.tag(0), FL.Rum_White   .make(   2), FL.Rum_Dark   .make( 1), ZL_IS);
+		RM.Distillery   .addRecipe1(T        , 16,  16, ST.tag(0), FL.ShortMead   .make(   2), FL.Mead       .make( 1), ZL_IS);
 		RM.Distillery   .addRecipe1(F        , 16,  16, ST.tag(0), FL.Vodka       .make(   2), FL.Vodka      .make( 1), ZL_IS);
 		RM.Distillery   .addRecipe1(F        , 16,  16, ST.tag(0), FL.Rum_Dark    .make(   2), FL.Rum_Dark   .make( 1), ZL_IS);
 		RM.Distillery   .addRecipe1(T,T,F,F,F, 16,  80, ST.tag(0), FL.Sap         .make( 125), FL.DistW      .make(50), OM.dust(MT.Sugar));
@@ -463,7 +463,7 @@ public class Loader_Recipes_Food implements Runnable {
 		
 		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.Milk.make (                                    50), FL.Milk_Spoiled                          .make(50), ZL_IS);
 		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.MilkGrC.make (                                 50), FL.Milk_Spoiled                          .make(50), ZL_IS);
-		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.Honeydew.make (                                50), FL.Mead                                  .make(25), ZL_IS);
+		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.Honeydew.make (                                50), FL.ShortMead                             .make(50), ZL_IS);
 		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.Juice_Pear                               .make(50), FL.Cider_Pear                            .make(25, FL.Cider_Apple), ZL_IS);
 		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.Juice_Peach                              .make(50), FL.Cider_Peach                           .make(25, FL.Cider_Apple), ZL_IS);
 		RM.Fermenter    .addRecipe1(T, 16,   64, ST.tag(0), FL.Juice_Ananas                             .make(50), FL.Cider_Ananas                          .make(25), ZL_IS);
@@ -536,11 +536,11 @@ public class Loader_Recipes_Food implements Runnable {
 		}
 		tOutput = OreDictManager.INSTANCE.getFirstOre("dropHoneydew", 1); if (ST.valid(tOutput))
 		RM.Coagulator       .addRecipe0(T,  0,   16, FL.Honeydew.make(200), NF, tOutput);
-		tOutput = IL.FR_Royal_Jelly.get(1, ST.make(MD.HaC, "royaljellyItem", 1)); if (ST.valid(tOutput))
+		tOutput = IL.FR_Royal_Jelly.get(1, IL.HaC_Royal_Jelly.get(1)); if (ST.valid(tOutput))
 		RM.Coagulator       .addRecipe0(T,  0,   16, FL.RoyalJelly.make(100), NF, tOutput);
 		
-		if (FL.Slime_Pink.exists()) {tOutput = OreDictManager.INSTANCE.getFirstOre("slimeballPink", 1); if (ST.valid(tOutput))
-		RM.Coagulator       .addRecipe0(T,  0,  256, FL.Slime_Pink .make(250), NF, tOutput);}
+		if (FL.Slime_Pink.exists()) {tOutput = OreDictManager.INSTANCE.getFirstOre("slimeballPink", 1);
+		RM.Coagulator       .addRecipe0(T,  0,  256, FL.Slime_Pink .make(250), NF, ST.valid(tOutput) ? tOutput : OP.nugget.mat(MT.MeatRaw, 1));}
 		RM.Coagulator       .addRecipe0(T,  0,  256, FL.Slime_Green.make(250), NF, ST.make(Items.slime_ball, 1, 0));
 		
 		RM.Coagulator       .addRecipe0(T,  0, 1024, FL.Milk   .make(1000), NF, IL.Food_Cheese.get(1));

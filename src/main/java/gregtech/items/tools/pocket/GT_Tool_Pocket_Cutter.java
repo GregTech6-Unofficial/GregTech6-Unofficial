@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -19,6 +19,8 @@
 
 package gregtech.items.tools.pocket;
 
+import static gregapi.data.CS.*;
+
 import gregapi.data.MT;
 import gregapi.item.multiitem.MultiItemTool;
 import gregapi.item.multiitem.behaviors.Behavior_Switch_Metadata;
@@ -28,6 +30,7 @@ import gregtech.items.tools.machine.GT_Tool_WireCutter;
 import net.minecraft.item.ItemStack;
 
 public class GT_Tool_Pocket_Cutter extends GT_Tool_WireCutter {
+	@Override public float getMaxDurabilityMultiplier() {return 4.0F;}
 	public final int mSwitchIndex;
 	
 	public GT_Tool_Pocket_Cutter(int aSwitchIndex) {
@@ -47,6 +50,6 @@ public class GT_Tool_Pocket_Cutter extends GT_Tool_WireCutter {
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
 		super.onStatsAddedToTool(aItem, aID);
-		aItem.addItemBehavior(aID, new Behavior_Switch_Metadata(mSwitchIndex));
+		aItem.addItemBehavior(aID, new Behavior_Switch_Metadata(mSwitchIndex, T, T));
 	}
 }

@@ -53,28 +53,15 @@ public class Compat_Recipes_ThermalExpansion extends CompatMods {
 	public Compat_Recipes_ThermalExpansion(ModData aMod, Abstract_Mod aGTMod) {super(aMod, aGTMod);}
 	
 	@Override public void onPostLoad(FMLPostInitializationEvent aInitEvent) {OUT.println("GT_Mod: Doing Thermal Foundation Recipes.");
-		CR.delate(MD.TE, "wrench", "tool.battleWrenchInvar");
-		
 		CR.remove(IL.TE_Rod_Blizz .get(1));
 		CR.remove(IL.TE_Rod_Blitz .get(1));
 		CR.remove(IL.TE_Rod_Basalz.get(1));
 		
-		CR.shapeless(OP.dust.mat(MT.Blizz , 1), CR.DEF_NAC, new Object[] {IL.TE_Rod_Blizz .get(1)});
-		CR.shapeless(OP.dust.mat(MT.Blitz , 1), CR.DEF_NAC, new Object[] {IL.TE_Rod_Blitz .get(1)});
-		CR.shapeless(OP.dust.mat(MT.Basalz, 1), CR.DEF_NAC, new Object[] {IL.TE_Rod_Basalz.get(1)});
-		
-		RM.Mortar       .addRecipe1(T, 16, 32, IL.TE_Rod_Blizz .get(1), OP.dust.mat(MT.Blizz , 2));
-		RM.Mortar       .addRecipe1(T, 16, 32, IL.TE_Rod_Blitz .get(1), OP.dust.mat(MT.Blitz , 2));
-		RM.Mortar       .addRecipe1(T, 16, 32, IL.TE_Rod_Basalz.get(1), OP.dust.mat(MT.Basalz, 2));
-		
-		RM.Shredder     .addRecipe1(T, 16, 32, IL.TE_Rod_Blizz .get(1), OP.dust.mat(MT.Blizz , 4));
-		RM.Shredder     .addRecipe1(T, 16, 32, IL.TE_Rod_Blitz .get(1), OP.dust.mat(MT.Blitz , 4));
-		RM.Shredder     .addRecipe1(T, 16, 32, IL.TE_Rod_Basalz.get(1), OP.dust.mat(MT.Basalz, 4));
-		
 		RM.Sluice.add(new RecipeMapHandlerPrefix(crushed    , 1, null, 0, MT.Petrotheum.liquid(9*U50, T), 16, 144, 0, NF, crushedPurified    , 1, crushedPurifiedTiny, 9, NI, OM.dust(MT.SluiceSand    ), T, F, T, ANTIMATTER.NOT).chances(10000, 5000, 10000));
 		RM.Sluice.add(new RecipeMapHandlerPrefix(crushedTiny, 1, null, 0, MT.Petrotheum.liquid(  U50, T), 16,  16, 0, NF, crushedPurifiedTiny, 1, crushedPurifiedTiny, 1, NI, OM.dust(MT.SluiceSand, U9), T, F, T, ANTIMATTER.NOT).chances(10000, 5000, 10000));
 		
-		RM.Bath         .addRecipe1(T,  0,  128, OP.crushed.mat(MT.OREMATS.Cinnabar, 1), MT.Cryotheum.liquid(U, T), NF, IL.TE_Cinnabar.get(1));
+		RM.Bath.addRecipe1(T,  0,  128, OP.crushed    .mat(MT.OREMATS.Cinnabar, 1), MT.Cryotheum.liquid(U2, T), NF, OP.gemFlawless.mat(MT.OREMATS.Cinnabar, 1));
+		RM.Bath.addRecipe1(T,  0,  128, OP.crushedTiny.mat(MT.OREMATS.Cinnabar, 9), MT.Cryotheum.liquid(U2, T), NF, OP.gemFlawless.mat(MT.OREMATS.Cinnabar, 1));
 		
 		FluidStack tPyrotheum = MT.Pyrotheum.liquid(U2, T);
 		if (!FL.Error.is(tPyrotheum)) {
@@ -120,18 +107,20 @@ public class Compat_Recipes_ThermalExpansion extends CompatMods {
 		FL.set(new FluidContainerData(FL.Ender     .make( 576), ST.make(MD.TE_FOUNDATION, "bucket", 1, 2), ST.make(Items.bucket, 1, 0), F), F, F);
 		
 		for (FluidStack tRedstone : FL.array(FL.Redstone.make(L), FL.Redstone_TE.make(100))) {
-			RM.Injector     .addRecipe1(T, 16, 16, ST.make(Items.snowball, 1, W)    , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Blizz, 1));
-			RM.Injector     .addRecipe1(T, 16, 16, OP.dustSmall.mat(MT.Snow, 1)     , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Blizz, 1));
-			RM.Injector     .addRecipe1(T, 16, 16, OP.dustSmall.mat(MT.Ice, 1)      , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Blizz, 1));
-			RM.Injector     .addRecipe1(T, 16, 64, ST.make(Blocks.snow, 1, W)       , FL.mul(tRedstone, 8), NF, OP.dust.mat(MT.Blizz, 4));
-			RM.Injector     .addRecipe1(T, 16, 64, OP.dust.mat(MT.Snow, 1)          , FL.mul(tRedstone, 8), NF, OP.dust.mat(MT.Blizz, 4));
-			RM.Injector     .addRecipe1(T, 16, 64, OP.dust.mat(MT.Ice, 1)           , FL.mul(tRedstone, 8), NF, OP.dust.mat(MT.Blizz, 4));
+			RM.Injector     .addRecipe1(T, 16, 16, ST.make(Items.snowball, 1, W), FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blizz, 1));
+			RM.Injector     .addRecipe1(T, 16, 16, OP.dustSmall.mat(MT.Snow, 1) , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blizz, 1));
+			RM.Injector     .addRecipe1(T, 16, 16, OP.dustSmall.mat(MT.Ice, 1)  , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blizz, 1));
+			RM.Injector     .addRecipe1(T, 16, 64, ST.make(Blocks.snow, 1, W)   , FL.mul(tRedstone, 8), NF, OP.dustTiny.mat(MT.Blizz, 4));
+			RM.Injector     .addRecipe1(T, 16, 64, OP.dust.mat(MT.Snow, 1)      , FL.mul(tRedstone, 8), NF, OP.dustTiny.mat(MT.Blizz, 4));
+			RM.Injector     .addRecipe1(T, 16, 64, OP.dust.mat(MT.Ice, 1)       , FL.mul(tRedstone, 8), NF, OP.dustTiny.mat(MT.Blizz, 4));
 			for (OreDictMaterial tMat : ANY.SiO2.mToThis)
-			RM.Injector     .addRecipe1(T, 16, 16, OM.dust(tMat)                    , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Blitz, 1));
-			RM.Injector     .addRecipe1(T, 16, 16, OP.dust.mat(MT.Stone, 1)         , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Blitz, 1));
-			RM.Injector     .addRecipe1(T, 16, 16, ST.make(Blocks.sand, 1, W)       , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Blitz, 1));
+			RM.Injector     .addRecipe1(T, 16, 16, OM.dust(tMat)                , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blitz, 1));
+			RM.Injector     .addRecipe1(T, 16, 16, OP.dust.mat(MT.Stone, 1)     , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blitz, 1));
+			RM.Injector     .addRecipe1(T, 16, 16, ST.make(Blocks.sand, 1, W)   , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blitz, 1));
+			if (IL.AETHER_Sand.exists())
+			RM.Injector     .addRecipe1(T, 16, 16, IL.AETHER_Sand.get(1)        , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Blitz, 1));
 			
-			RM.Injector     .addRecipe1(T, 16, 16, OP.dust.mat(MT.Obsidian, 1)      , FL.mul(tRedstone, 2), NF, OP.dust.mat(MT.Basalz, 1));
+			RM.Injector     .addRecipe1(T, 16, 16, OP.dust.mat(MT.Obsidian, 1)  , FL.mul(tRedstone, 2), NF, OP.dustTiny.mat(MT.Basalz, 1));
 		}
 		
 		if (MD.TE_DYNAMICS.mLoaded) {
@@ -163,6 +152,11 @@ public class Compat_Recipes_ThermalExpansion extends CompatMods {
 		}
 		if (MD.TE.mLoaded) {
 			OUT.println("GT_Mod: Doing Thermal Expansion Recipes.");
+			
+			RM.Mixer            .addRecipe1(T, 16,   16, OP.dust.mat(MT.Obsidian, 2), MT.Pb    .liquid(U2, T), NF, IL.TE_ObsidiGlass.get(1));
+			RM.Mixer            .addRecipe1(T, 16,   16, OP.dust.mat(MT.Obsidian, 2), MT.Pb    .liquid(U2, T), NF, IL.TE_ObsidiGlass.get(1));
+			RM.Mixer            .addRecipe1(T, 16,   16, OP.dust.mat(MT.Obsidian, 2), MT.Lumium.liquid(U2, T), NF, IL.TE_LumiumGlass.get(1));
+			RM.Mixer            .addRecipe1(T, 16,   16, OP.dust.mat(MT.Obsidian, 2), MT.Lumium.liquid(U2, T), NF, IL.TE_LumiumGlass.get(1));
 			
 			for (FluidStack tEnder : FL.array(FL.Ender.make(L), FL.Ender_TE.make(250))) {
 			RM.Injector         .addRecipe1(T, 16,   80, ST.make(MD.TE, "Frame", 1,10)                          , FL.mul(tEnder,  4), NF, ST.make(MD.TE, "Frame", 1,11));

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -176,21 +176,47 @@ public abstract class TileEntityBase04MultiTileEntities extends TileEntityBase03
 		if (tRegistry != null) rList.add(tRegistry.getItem(mMTEID, writeItemNBT(UT.NBT.make())));
 		return rList;
 	}
+	
 	public void popOff() {
+		if (isDead()) return;
 		for (ItemStack tStack : getDrops(0, F)) ST.drop(worldObj, xCoord, yCoord, zCoord, tStack);
 		setToAir();
 	}
 	public void popOff(Entity aEntity) {
+		if (isDead()) return;
 		for (ItemStack tStack : getDrops(0, F)) ST.drop(aEntity.worldObj, aEntity.posX, aEntity.posY, aEntity.posZ, tStack);
 		setToAir();
 	}
 	public void popOff(World aWorld, double aX, double aY, double aZ) {
+		if (isDead()) return;
 		for (ItemStack tStack : getDrops(0, F)) ST.drop(aWorld, aX, aY, aZ, tStack);
 		setToAir();
 	}
 	public void popOff(World aWorld, ChunkCoordinates aCoords) {
+		if (isDead()) return;
 		for (ItemStack tStack : getDrops(0, F)) ST.drop(aWorld, aCoords, tStack);
 		setToAir();
+	}
+	
+	public void burnOff() {
+		if (isDead()) return;
+		for (ItemStack tStack : getDrops(0, F)) ST.drop(worldObj, xCoord, yCoord, zCoord, tStack);
+		setToFire();
+	}
+	public void burnOff(Entity aEntity) {
+		if (isDead()) return;
+		for (ItemStack tStack : getDrops(0, F)) ST.drop(aEntity.worldObj, aEntity.posX, aEntity.posY, aEntity.posZ, tStack);
+		setToFire();
+	}
+	public void burnOff(World aWorld, double aX, double aY, double aZ) {
+		if (isDead()) return;
+		for (ItemStack tStack : getDrops(0, F)) ST.drop(aWorld, aX, aY, aZ, tStack);
+		setToFire();
+	}
+	public void burnOff(World aWorld, ChunkCoordinates aCoords) {
+		if (isDead()) return;
+		for (ItemStack tStack : getDrops(0, F)) ST.drop(aWorld, aCoords, tStack);
+		setToFire();
 	}
 	
 	public ItemStack toStack() {

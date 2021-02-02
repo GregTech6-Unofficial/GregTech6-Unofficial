@@ -21,6 +21,7 @@ package gregapi.worldgen;
 
 import static gregapi.data.CS.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -53,8 +54,7 @@ public class GT6WorldGenerator {
 			mRandom = WD.random(aWorld, aX >> 4, aZ >> 4);
 		}
 		
-		@SuppressWarnings("unchecked")
-		@Override
+		@Override @SuppressWarnings("unchecked")
 		public void run() {
 			if (!mGenNormal.isEmpty()) {
 				Chunk tChunk = mWorld.getChunkFromBlockCoords(mMinX+7, mMinZ+7);
@@ -74,7 +74,7 @@ public class GT6WorldGenerator {
 				for (WorldgenObject tWorldGen : mGenNormal) tWorldGen.reset(mWorld, tChunk, mDimType, mMinX, mMinZ, mMaxX, mMaxZ, mRandom, tBiomes, tBiomeNames);
 				for (WorldgenObject tWorldGen : mGenNormal) try {if (tWorldGen.enabled(mWorld, mDimType)) tWorldGen.generate(mWorld, tChunk, mDimType, mMinX, mMinZ, mMaxX, mMaxZ, mRandom, tBiomes, tBiomeNames);} catch (Throwable e) {e.printStackTrace(ERR);}
 				
-				if (mGenLargeOres != null) {
+				if (mGenLargeOres != null && !mGenLargeOres.isEmpty()) {
 					int tMaxWeight = 0;
 					List<WorldgenOresLarge> tList = new ArrayListNoNulls<>();
 					
@@ -95,7 +95,9 @@ public class GT6WorldGenerator {
 				
 				// Kill off every single Item Entity that may have dropped during Worldgen.
 				for (EntityItem tEntity : (List<EntityItem>)mWorld.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(mMinX-32, 0, mMinZ-32, mMinX+48, 256, mMinZ+48))) tEntity.setDead();
-				
+				// Prevent Snow Layers from killing Treestumps. I really hope this works...
+				Arrays.fill(tChunk.precipitationHeightMap, -999);
+				// Chunk got modified, duh.
 				tChunk.isModified = T;
 			}
 		}
@@ -109,8 +111,8 @@ public class GT6WorldGenerator {
 		switch(aWorld.provider.dimensionId) {
 		case -2147483648  : return;
 		case DIM_OVERWORLD: generate(new WorldGenContainer(TFC ? GEN_TFC : PFAA ? GEN_PFAA : GENERATE_STONE ? GEN_GT : GEN_OVERWORLD, TFC ? ORE_TFC : PFAA ? ORE_PFAA : GENERATE_STONE ? null : ORE_OVERWORLD, DIM_OVERWORLD , aWorld, aX, aZ)); return;
-		case DIM_NETHER   : generate(new WorldGenContainer(GEN_NETHER, ORE_NETHER, DIM_NETHER    , aWorld, aX, aZ)); return;
-		case DIM_END      : generate(new WorldGenContainer(GEN_END   , ORE_END   , DIM_END       , aWorld, aX, aZ)); return;
+		case DIM_NETHER   : generate(new WorldGenContainer(GEN_NETHER, ORE_NETHER, DIM_NETHER, aWorld, aX, aZ)); return;
+		case DIM_END      : generate(new WorldGenContainer(GEN_END   , ORE_END   , DIM_END   , aWorld, aX, aZ)); return;
 		}
 		
 		if (WD.dimMYST  (aWorld.provider)) {generate(new WorldGenContainer(TFC ? GEN_TFC : PFAA ? GEN_PFAA : GENERATE_STONE ? GEN_GT : GEN_OVERWORLD, TFC ? ORE_TFC : PFAA ? ORE_PFAA : GENERATE_STONE ? null : ORE_OVERWORLD, DIM_OVERWORLD , aWorld, aX, aZ)); return;}

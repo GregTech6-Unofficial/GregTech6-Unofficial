@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -43,7 +43,6 @@ public class LoaderItemData implements Runnable {
 	@Override
 	public void run() {
 		OM.reg(OP.glass, MT.UNUSED.Reinforced       , ST.mkic("reinforcedGlass", 1));
-		OM.reg("paperResearchFragment"              , ST.make(MD.TC, "ItemResource", 1, 9));
 		OM.reg(OP.circuit, MT.Basic                 , ST.mkic("electronicCircuit", 1));
 		OM.reg(OP.circuit, MT.Advanced              , ST.mkic("advancedCircuit", 1));
 		OM.reg(OP.battery, MT.Basic                 , ST.mkic("reBattery", 1));
@@ -418,9 +417,9 @@ public class LoaderItemData implements Runnable {
 		OM.reg("bucketMilk"                         , ST.make(Items.milk_bucket, 1, W));
 		OM.reg("bottleMilk"                         , ST.make(MD.MFR, "milkbottle", 1, 0));
 		OM.reg(OD.glowstone                         , ST.make(Blocks.glowstone, 1, W));
-		OM.reg("dirt"                               , ST.make(Blocks.dirt, 1, W));
-		OM.reg("sand"                               , ST.make(Blocks.sand, 1, W));
-		OM.reg("gravel"                             , ST.make(Blocks.gravel, 1, W));
+		OM.reg(OD.dirt                              , ST.make(Blocks.dirt, 1, W));
+		OM.reg(OD.sand                              , ST.make(Blocks.sand, 1, W));
+		OM.reg(OD.gravel                            , ST.make(Blocks.gravel, 1, W));
 		OM.reg(OD.soulsand                          , ST.make(Blocks.soul_sand, 1, W));
 		OM.reg(OD.itemGrassTall                     , ST.make(Blocks.tallgrass, 1, 1));
 		OM.reg(OD.itemGrassTall                     , ST.make(Blocks.tallgrass, 1, 2));
@@ -445,14 +444,30 @@ public class LoaderItemData implements Runnable {
 		OM.reg(OD.itemString                        , ST.make(Items.string, 1, W));
 		OM.reg(OD.itemString                        , ST.make(MD.MaCu, "crafting", 1, 0));
 		OM.reg(OD.itemMoss                          , ST.make(MD.CHSL, "ballomoss", 1, 0));
-		OM.reg("blockGlass"                         , ST.make(MD.CHSL, "glass", 1, W));
-		OM.reg("blockGlassColorless"                , ST.make(MD.CHSL, "glass", 1, W));
-		OM.reg("paneGlass"                          , ST.make(MD.CHSL, "glass_pane", 1, W));
-		OM.reg("paneGlassColorless"                 , ST.make(MD.CHSL, "glass_pane", 1, W));
 		OM.reg(OD.itemMoss                          , ST.make(MD.ERE, "materials", 1, 34));
 		OM.reg(OD.itemMoss                          , ST.make(MD.BTL, "plantDrop", 1, 29));
 		OM.reg(OD.itemMoss                          , ST.make(MD.BTL, "plantDrop", 1, 30));
 		OM.reg(OD.itemMoss                          , ST.make(MD.BoP, "moss", 1, 0));
+		OM.reg(OD.blockGlass                        , ST.make(Blocks.stained_glass, 1, W));
+		OM.reg(OD.blockGlassColorless               , ST.make(Blocks.glass, 1, W));
+		OM.reg(OD.blockGlassColorless               , ST.make(MD.CHSL, "glass", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(Blocks.stained_glass_pane, 1, W));
+		OM.reg(OD.paneGlassColorless                , ST.make(Blocks.glass_pane, 1, W));
+		OM.reg(OD.paneGlassColorless                , ST.make(MD.CHSL, "glass_pane", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_brown", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_red", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_purple", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_magenta", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_yellow", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_white", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_pink", 1, W));
+		OM.reg(OD.paneGlass                         , ST.make(MD.CHSL, "stained_glass_pane_lightgray", 1, W));
+		OM.reg(OD.blockGlass                        , ST.make(MD.CHSL, "stained_glass_brown", 1, W));
+		OM.reg(OD.blockGlass                        , ST.make(MD.CHSL, "stained_glass_white", 1, W));
+		OM.reg(OD.blockGlass                        , ST.make(MD.CHSL, "stained_glass_lightgray", 1, W));
+		OM.reg(OD.blockGlass                        , ST.make(MD.CHSL, "stained_glass_yellow", 1, W));
+		OM.reg(OD.blockGlass                        , ST.make(MD.CHSL, "glass2", 1, W));
+		OM.reg(OD.blockGlass                        , ST.make(MD.CHSL, "stained_glass_forestry", 1, W));
 		OM.reg("gt:autocrafterinfinite"             , ST.make(MD.PE, "item.pe_philosophers_stone", 1, W));
 		OM.reg("gt:autocrafterinfinite"             , ST.make(MD.PE, "item.pe_evertide_amulet", 1, W));
 		OM.reg(OD.container1000water                , ST.make(MD.PE, "item.pe_evertide_amulet", 1, W));
@@ -490,6 +505,16 @@ public class LoaderItemData implements Runnable {
 		OM.reg("foodMuttoncooked"                   , ST.make(MD.WTCH, "ingredient", 1, 159));
 		OM.reg("foodRabbitraw"                      , ST.make(MD.EtFu, "rabbit_raw", 1, 0));
 		OM.reg("foodRabbitcooked"                   , ST.make(MD.EtFu, "rabbit_cooked", 1, 0));
+		OM.reg(OD.sandstone                         , ST.make(MD.EtFu, "red_sandstone", 1, W));
+		OM.reg(OD.container250poison                , ST.make(Items.potionitem, 1,  8196));
+		OM.reg(OD.container250poison                , ST.make(Items.potionitem, 1,  8228));
+		OM.reg(OD.container250poison                , ST.make(Items.potionitem, 1,  8260));
+		OM.reg(OD.container250poison                , ST.make(Items.potionitem, 1, 16388));
+		OM.reg(OD.container250poison                , ST.make(Items.potionitem, 1, 16420));
+		OM.reg(OD.container250poison                , ST.make(Items.potionitem, 1, 16452));
+		OM.reg(OD.container250poison                , ST.make(MD.EtFu, "lingering_potion", 1,  8196));
+		OM.reg(OD.container250poison                , ST.make(MD.EtFu, "lingering_potion", 1,  8228));
+		OM.reg(OD.container250poison                , ST.make(MD.EtFu, "lingering_potion", 1,  8260));
 		OM.reg(OD.container1000rubbertreesap        , ST.make(MD.IHL, "bucket_fluidRubberTreeSap", 1, 0));
 		OM.reg(OD.container1000spruceresin          , ST.make(MD.IHL, "bucket_SpruceResin", 1, 0));
 		OM.reg("foodDough"                          , ST.make(MD.MF2, "MF_UFooddough", 1, 0));
@@ -500,7 +525,7 @@ public class LoaderItemData implements Runnable {
 		OM.reg("foodBaconcooked"                    , ST.make(MD.AA, "itemFood", 1,20));
 		OM.reg("foodDough"                          , ST.make(MD.AA, "itemMisc", 1, 4));
 		OM.reg(OD.slimeballRice                     , ST.make(MD.AA, "itemMisc", 1,12));
-		OM.reg("blockClay"                          , ST.make(Blocks.clay, 1, W));
+		OM.reg(OD.blockClay                         , ST.make(Blocks.clay, 1, W));
 		OM.reg(OD.craftingBook                      , ST.make(Items.book, 1, W));
 		OM.reg(OD.craftingBook                      , ST.make(Items.writable_book, 1, W));
 		OM.reg(OD.craftingBook                      , ST.make(Items.written_book, 1, W));
@@ -512,6 +537,9 @@ public class LoaderItemData implements Runnable {
 		OM.reg(OD.craftingFurnace                   , ST.make(Blocks.lit_furnace, 1, W));
 		OM.reg(OD.craftingWorkBench                 , ST.make(Blocks.crafting_table, 1, W));
 		OM.reg(OD.craftingWorkBench                 , ST.make(MD.BC_FACTORY, "autoWorkbenchBlock", 1, 0));
+		OM.reg(OD.buttonWood                        , ST.make(Blocks.wooden_button, 1, W));
+		OM.reg(OD.buttonStone                       , ST.make(Blocks.stone_button, 1, W));
+		OM.reg(OD.lever                             , ST.make(Blocks.lever, 1, W));
 		OM.reg(OD.craftingRedstoneTorch             , ST.make(Blocks.redstone_torch, 1, W));
 		OM.reg(OD.craftingRedstoneTorch             , ST.make(Blocks.unlit_redstone_torch, 1, W));
 		OM.reg(OD.blockTorch                        , ST.make(Blocks.torch, 1, W));
@@ -619,6 +647,7 @@ public class LoaderItemData implements Runnable {
 		OM.reg(OP.ingot.dat(MT.Butter)              , ST.make(MD.GrC_Milk, "grcmilk.Butter", 1, 0));
 		OM.reg(OP.ingot.dat(MT.ButterSalted)        , ST.make(MD.GrC_Milk, "grcmilk.Butter", 1, 1));
 		OM.reg(OP.ingot.dat(MT.ButterSalted)        , ST.make(MD.HaC, "butterItem", 1, 0));
+		OM.reg(OP.ingot.dat(MT.Cheese)              , ST.make(MD.HaC, "cheeseItem", 1, 0));
 		OM.reg(OP.blockSolid, MT.Obsidian           , ST.make(MD.TC, "blockCosmeticSolid", 1, 0));
 		OM.reg(OP.blockSolid, MT.Obsidian           , ST.make(MD.TC, "blockCosmeticSolid", 1, 1));
 		OM.reg(OP.circuit.dat(MT.Basic)             , ST.mkic("electronicCircuit", 1));
@@ -757,7 +786,6 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.OC, "item"                                       , 1,  98, MT.Paper              , U*3);
 		OM.data(MD.HQM, "quest_book"                                , 1,   W, MT.Paper              , U*3);
 		OM.data(MD.TC, "ItemResearchNotes"                          , 1,   W, MT.Paper              , U);
-		OM.data(MD.TC, "ItemResource"                               , 1,   9, MT.Paper              , U9);
 		OM.data(MD.MoCr, "scrollofsale"                             , 1,   W, MT.Paper              , U);
 		OM.data(MD.MoCr, "scrollofowner"                            , 1,   W, MT.Paper              , U);
 		OM.data(MD.MoCr, "scrolloffreedom"                          , 1,   W, MT.Paper              , U);
@@ -783,7 +811,64 @@ public class LoaderItemData implements Runnable {
 		
 		for (byte i = 0; i < 16; i++) OM.reg(OP.dyeMixable.mNameInternal + DYE_OREDICTS_POST[i], ST.make(Items.dye, 1, i));
 		
-		OM.reg(OP.stone, MT.GraniteBlack                        , ST.make(MD.PFAA, "strongStone", 1,  3)); // actually Gray
+		if (MD.PFAA.mLoaded) {
+			OM.reg(OD.blockClay, ST.make(MD.PFAA, "weakClay"   , 1,  0));
+			OM.reg(OD.blockClay, ST.make(MD.PFAA, "weakOreClay", 1,  1));
+			OM.reg(OD.blockClay, ST.make(MD.PFAA, "weakOreClay", 1,  2));
+			OM.reg(OD.blockClay, ST.make(MD.PFAA, "weakOreClay", 1,  3));
+			OM.data(MD.PFAA, "weakClay"   , 1,  0, MT.ClayBrown             , U*4);
+			OM.data(MD.PFAA, "weakOreClay", 1,  1, MT.Bentonite             , U*4);
+			OM.data(MD.PFAA, "weakOreClay", 1,  2, MT.Palygorskite          , U*4);
+			OM.data(MD.PFAA, "weakOreClay", 1,  3, MT.Kaolinite             , U*4);
+			
+			OM.reg(OD.itemClay , ST.make(MD.PFAA, "earthyClump", 1, 45));
+			OM.reg(OD.itemClay , ST.make(MD.PFAA, "earthyClump", 1, 47));
+			OM.reg(OD.itemClay , ST.make(MD.PFAA, "earthyClump", 1, 48));
+			OM.reg(OD.itemClay , ST.make(MD.PFAA, "earthyClump", 1, 49));
+			OM.data(MD.PFAA, "earthyClump", 1, 37, MT.OREMATS.YellowLimonite, U);
+			OM.data(MD.PFAA, "earthyClump", 1, 45, MT.ClayBrown             , U);
+			OM.data(MD.PFAA, "earthyClump", 1, 46, MT.OREMATS.Bauxite       , U);
+			OM.data(MD.PFAA, "earthyClump", 1, 47, MT.Bentonite             , U);
+			OM.data(MD.PFAA, "earthyClump", 1, 48, MT.Palygorskite          , U);
+			OM.data(MD.PFAA, "earthyClump", 1, 49, MT.Kaolinite             , U);
+			OM.data(MD.PFAA, "earthyClump", 1, 50, MT.OREMATS.BrownLimonite , U);
+			OM.data(MD.PFAA, "earthyClump", 1, 51, MT.OREMATS.YellowLimonite, U);
+			OM.data(MD.PFAA, "earthyClump", 1, 52, MT.OREMATS.Vermiculite   , U);
+			
+			for (String tName : new String [] {"weakStone", "weakRubble"}) {
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  0)); // Breccia
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  1)); // Claystone
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  2)); // Carbonatite
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  3)); // Conglomerate
+				OM.reg(OP.stone, MT.Shale                       , ST.make(MD.PFAA, tName, 1,  4));
+			}
+			for (String tName : new String [] {"mediumStone", "mediumCobble", "mediumStoneBrick"}) {
+				OM.reg(OP.stone, MT.Limestone                   , ST.make(MD.PFAA, tName, 1,  0));
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  1)); // Light Red/Pink Schist
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  2)); // Serpentite
+				OM.reg(OP.stone, MT.Slate                       , ST.make(MD.PFAA, tName, 1,  3));
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  4)); // Skarn
+			}
+			for (String tName : new String [] {"strongStone", "strongCobble", "strongStoneBrick"}) {
+				OM.reg(OP.stone, MT.Andesite                    , ST.make(MD.PFAA, tName, 1,  0));
+				OM.reg(OP.stone, MT.Basalt                      , ST.make(MD.PFAA, tName, 1,  1));
+				OM.reg(OP.stone, MT.Gneiss                      , ST.make(MD.PFAA, tName, 1,  2));
+				OM.reg(OP.stone, MT.GraniteBlack                , ST.make(MD.PFAA, tName, 1,  3)); // actually Gray
+				OM.reg(OP.stone, MT.Greenschist                 , ST.make(MD.PFAA, tName, 1,  4));
+				OM.reg(OP.stone, MT.Marble                      , ST.make(MD.PFAA, tName, 1,  5));
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  6)); // Pegmatite
+				OM.reg(OP.stone, MT.Rhyolite                    , ST.make(MD.PFAA, tName, 1,  7));
+				OM.reg(OP.stone, MT.Sand                        , ST.make(MD.PFAA, tName, 1,  8)); // Normal Sandstone
+				OM.reg(OP.stone, MT.Sand                        , ST.make(MD.PFAA, tName, 1,  9)); // Red Sandstone
+			}
+			for (String tName : new String [] {"veryStrongStone", "veryStrongCobble", "veryStrongStoneBrick"}) {
+				OM.reg(OP.stone, MT.Diorite                     , ST.make(MD.PFAA, tName, 1,  0));
+				OM.reg(OP.stone, MT.Gabbro                      , ST.make(MD.PFAA, tName, 1,  1));
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  2)); // Hornfels
+				OM.reg(OP.stone, MT.Stone                       , ST.make(MD.PFAA, tName, 1,  3)); // Peridotite
+				OM.reg(OP.stone, MT.Quartzite                   , ST.make(MD.PFAA, tName, 1,  4));
+			}
+		}
 		
 		if (MD.UB.mLoaded) {
 			for (String tName : new String [] {"sedimentaryStone"}) {
@@ -831,7 +916,7 @@ public class LoaderItemData implements Runnable {
 				OM.reg(OP.stone, MT.Quartzite                   , ST.make(MD.UB, tName, 1,  3));
 				OM.reg(OP.stone, MT.Blueschist                  , ST.make(MD.UB, tName, 1,  4));
 				OM.reg(OP.stone, MT.Greenschist                 , ST.make(MD.UB, tName, 1,  5));
-				OM.reg(OP.stone, MT.Soapstone                   , ST.make(MD.UB, tName, 1,  6));
+				OM.reg(OP.stone, MT.Talc                        , ST.make(MD.UB, tName, 1,  6));
 				OM.reg(OP.stone, MT.Migmatite                   , ST.make(MD.UB, tName, 1,  7));
 				OM.reg(OP.stone, MT.Gneiss                      , ST.make(MD.UB, tName, 1,  8));
 				OM.reg(OP.stone, MT.Eclogite                    , ST.make(MD.UB, tName, 1,  9));
@@ -839,7 +924,7 @@ public class LoaderItemData implements Runnable {
 				OM.reg(OP.stone, MT.Quartzite                   , ST.make(MD.UB, tName, 1, 11));
 				OM.reg(OP.stone, MT.Blueschist                  , ST.make(MD.UB, tName, 1, 12));
 				OM.reg(OP.stone, MT.Greenschist                 , ST.make(MD.UB, tName, 1, 13));
-				OM.reg(OP.stone, MT.Soapstone                   , ST.make(MD.UB, tName, 1, 14));
+				OM.reg(OP.stone, MT.Talc                        , ST.make(MD.UB, tName, 1, 14));
 				OM.reg(OP.stone, MT.Migmatite                   , ST.make(MD.UB, tName, 1, 15));
 			}
 		}
@@ -905,6 +990,20 @@ public class LoaderItemData implements Runnable {
 			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_PLANETS, "tile.asteroidsBlock"  , 1, 1));
 			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_PLANETS, "tile.asteroidsBlock"  , 1, 2));
 		}
+		if (MD.GC_GALAXYSPACE.mLoaded) {
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "mercuryblocks"    , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "ceresblocks"      , 1, 1));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "deimosblocks"     , 1, 1));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "ioblocks"         , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "oberonblocks"     , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "proteusblocks"    , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "tritonblocks"     , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "mirandablocks"    , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "venusblocks"      , 1, 1));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "phobosblocks"     , 1, 2));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "ganymedeblocks"   , 1, 1));
+			OM.reg(OP.stone, MT.SpaceRock                       , ST.make(MD.GC_GALAXYSPACE, "barnardaEsubgrunt", 1, 0));
+		}
 		
 		OM.reg(OP.stone, MT.Redrock                             , ST.make(MD.EBXL, "terrain_blocks1"    , 1, 0));
 		OM.reg(OP.stone, MT.Redrock                             , ST.make(MD.EBXL, "terrain_blocks1"    , 1, 1));
@@ -929,9 +1028,6 @@ public class LoaderItemData implements Runnable {
 		OM.reg(OP.stone, MT.Netherrack                          , ST.make(Blocks.netherrack             , 1, W));
 		OM.reg(OP.stone, MT.NetherBrick                         , ST.make(Blocks.nether_brick           , 1, W));
 		OM.reg(OP.stone, MT.Endstone                            , ST.make(Blocks.end_stone              , 1, W));
-		OM.reg(OP.stone, MT.Basalt                              , ST.make(MD.NeLi, "Basalt"             , 1, W));
-		OM.reg(OP.stone, MT.Basalt                              , ST.make(MD.NeLi, "BasaltBricks"       , 1, W));
-		OM.reg(OP.stone, MT.Blackstone                          , ST.make(MD.NeLi, "Blackstone"         , 1, W));
 		OM.reg(OP.stone, MT.SoulSand                            , ST.make(MD.NeLi, "SoulSandstone"      , 1, W));
 		
 		
@@ -976,7 +1072,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.RoC, "rotarycraft_item_vacuum"           , 1,   W, MT.HSLA               , 87* U9);
 		OM.data(MD.RoC, "rotarycraft_item_stungun"          , 1,   W, MT.HSLA               ,  U *12, MT.Redstone           , 11* U3, ANY.Wood      ,  U * 8);
 		OM.data(MD.RoC, "rotarycraft_item_gravelgun"        , 1,   W, MT.HSLA               , 57* U9, MT.Redstone           ,  U * 1, ANY.Stone     ,  U * 7, ANY.Wood      ,  U * 8);
-		OM.data(MD.RoC, "rotarycraft_item_fireball"         , 1,   W, MT.HSLA               ,  U *16, MT.Redstone           ,  U * 3, MT.Au                 ,  U * 1, MT.Blaze              ,  U * 1, ANY.Wood      ,  U * 8);
+		OM.data(MD.RoC, "rotarycraft_item_fireball"         , 1,   W, MT.HSLA               ,  U *16, MT.Redstone           ,  U * 3, MT.Au                 ,  U * 1, MT.Blaze              ,  U9, ANY.Wood      ,  U * 8);
 		OM.data(MD.RoC, "rotarycraft_item_nvg"              , 1,   W, MT.HSLA               ,  U * 8, MT.EnderEye           ,  U * 2, MT.Redstone           ,  2* U3, MT.Glass              ,  3* U8);
 		OM.data(MD.RoC, "rotarycraft_item_handcraft"        , 1,   0, MT.HSLA               ,  U * 2, MT.Au                 ,  U * 2, ANY.Wood      ,  U * 4);
 		OM.data(MD.RoC, "rotarycraft_item_railgun"          , 1,   0, MT.HSLA               ,  U * 1);
@@ -1014,7 +1110,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   0, ANY.W                 ,  U * 1, ANY.Glowstone ,  U * 4, MT.Obsidian           ,  U *54); // Heat Ray Barrel
 		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   1, ANY.Diamond           ,  U * 4); // Lens
 		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   2, MT.HSLA               ,  U * 1, MT.Redstone           ,  2* U3, MT.Au                 ,  U * 1); // Power Module
-		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   3, MT.NetherStar         ,  U * 1, MT.Redstone           ,  U * 1,ANY.Glowstone  ,  U *12, MT.Blaze              ,  U * 2); // Heat Ray Core
+		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   3, MT.NetherStar         ,  U * 1, MT.Redstone           ,  U * 1,ANY.Glowstone  ,  U *12, MT.Blaze              ,  U9* 2); // Heat Ray Core
 		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   4, MT.HSLA               ,  U * 5, MT.Au                 ,  U * 8, MT.Redstone           ,  U * 1); // Linear Induction Motor
 		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   5, MT.HSLA               ,  U * 3); // Propeller Blade
 		OM.data(MD.RoC, "rotarycraft_item_misccraft"        , 1,   6, MT.HSLA               , 51* U9); // Hub
@@ -1161,7 +1257,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,   9/* Clutch                       */  , MT.HSLA               ,  U * 2, MT.Redstone           ,  U * 2);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  10/* Dynamometer                  */  , MT.HSLA               ,  7* U4, MT.Redstone           ,  1* U6, MT.Glass              , 3* U32);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  11/* Grinder                      */  , MT.HSLA               ,  U *18);
-		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  12/* Heat Ray                     */  , MT.HSLA               ,  U * 3, MT.NetherStar         ,  U * 1, ANY.W ,  U * 1, ANY.Diamond           ,  U * 4, ANY.Glowstone ,  U *16, MT.Blaze              ,  U * 2, MT.Redstone           ,  5* U3, MT.Au                 ,  U * 1, MT.Obsidian           ,  U *81);
+		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  12/* Heat Ray                     */  , MT.HSLA               ,  U * 3, MT.NetherStar         ,  U * 1, ANY.W ,  U * 1, ANY.Diamond           ,  U * 4, ANY.Glowstone ,  U *16, MT.Blaze              ,  U9* 2, MT.Redstone           ,  5* U3, MT.Au                 ,  U * 1, MT.Obsidian           ,  U *81);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  13/* Lubricant Hose               */  , ANY.Wood      ,  3* U8, MT.Glass              , 3* U16);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  14/* Boring Machine               */  , MT.HSLA               ,174* U9, MT.Redstone           ,  2* U3);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  15/* Light Bridge                 */  , MT.HSLA               ,  U * 4, ANY.Diamond           ,  U * 1, MT.Au                 ,  U * 2, MT.Glass              ,  U * 2);
@@ -1211,7 +1307,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  61/* Containment Field            */  , MT.HSLA               ,  U * 2, MT.NetherStar         ,  U * 1, ANY.Diamond           ,  U * 3, MT.Au                 ,  U * 1);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  62/* CCTV Screen                  */  , MT.HSLA               ,  U *13, MT.Redstone           ,  4* U3, MT.Glass              ,  3* U8);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  63/* Steel Purifier               */  , MT.HSLA               ,  U * 7, MT.Redstone           ,  U * 1, ANY.Fe        ,  3* U8);
-		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  64/* Laser Gun                    */  , MT.HSLA               ,327* U9, MT.NetherStar         ,  U * 1, ANY.W ,  U * 1, ANY.Diamond           ,  U * 5, MT.Redstone           , 21* U3, MT.Au                 ,  U *10, ANY.Glowstone ,  U *16, MT.Blaze              ,  U * 2, MT.Obsidian           ,  U *54);
+		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  64/* Laser Gun                    */  , MT.HSLA               ,327* U9, MT.NetherStar         ,  U * 1, ANY.W ,  U * 1, ANY.Diamond           ,  U * 5, MT.Redstone           , 21* U3, MT.Au                 ,  U *10, ANY.Glowstone ,  U *16, MT.Blaze              ,  U9* 2, MT.Obsidian           ,  U *54);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  65/* Item Cannon                  */  , MT.HSLA               ,219* U9, ANY.Wood      ,  U * 8);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  66/* Landmine                     */  , MT.HSLA               ,  U * 7, MT.Redstone           ,  U * 3, MT.Au                 ,  U * 2);
 		OM.data(MD.RoC, "rotarycraft_item_machine"  , 1,  67/* Friction Heater              */  , MT.HSLA               ,  U * 7);
@@ -1514,7 +1610,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.TF, "tile.TFMazestone"                   , 1,   W, ANY.Stone             ,  U);
 		
 		
-		OM.data(MD.ERE, "fireBloom"                         , 1,   W, MT.Blaze              ,  U9);
+		OM.data(MD.ERE, "fireBloom"                         , 1,   W, MT.Blaze              ,  U72);
 		OM.data(MD.ERE, "redGem"                            , 1,   W, MT.Redstone           ,  U * 8);
 		OM.data(MD.ERE, "glowGemBlock"                      , 1,   W, MT.Redstone           ,  U3* 2);
 		OM.data(MD.ERE, "amber"                             , 1,   W, MT.Amber              ,  U);
@@ -1597,10 +1693,10 @@ public class LoaderItemData implements Runnable {
 		
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  25, ANY.Stone             ,  U * 6);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  27, ANY.Iron              ,  U * 6);
-		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  30, ANY.Iron              ,  U * 1, MT.Flint,  U2);
+		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  30, ANY.Iron              ,  U2   , MT.Flint,  U2);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  33, MT.ObsidianSteel      ,  U * 6);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  34, MT.ObsidianSteel      ,  U * 1, ANY.Quartz,  U * 1);
-		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  37, MT.C                  ,  U2   , MT.Blaze,  U2);
+		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  37, MT.C                  ,  U2   , MT.Blaze,  U18);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  61, MT.C                  ,  U * 1);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  99, ANY.Quartz            ,  U * 3);
 		OM.data(MD.TG, "TechgunsAmmo"                       , 1,  57, ANY.Cu                ,  U4);
@@ -1626,6 +1722,29 @@ public class LoaderItemData implements Runnable {
 		OM.data(MD.AE, "tile.QuartzSlabBlock"               , 1,   W, MT.CertusQuartz       ,  U * 2);
 		OM.data(MD.AE, "tile.QuartzPillarSlabBlock"         , 1,   W, MT.CertusQuartz       ,  U * 2);
 		OM.data(MD.AE, "tile.ChiseledQuartzSlabBlock"       , 1,   W, MT.CertusQuartz       ,  U * 2);
+		
+		
+		OM.data(MD.NeLi, "QuartzWall"                       , 1,   0, MT.NetherQuartz       ,  U * 4);
+		OM.data(MD.NeLi, "QuartzWall"                       , 1,   1, MT.NetherQuartz       ,  U * 4);
+		OM.data(MD.NeLi, "QuartzWall"                       , 1,   2, MT.NetherQuartz       ,  U * 4);
+		OM.data(MD.NeLi, "QuartzWall"                       , 1,   3, MT.VoidQuartz         ,  U * 4);
+		OM.data(MD.NeLi, "QuartzWall"                       , 1,   4, MT.VoidQuartz         ,  U * 4);
+		OM.data(MD.NeLi, "QuartzWall"                       , 1,   5, MT.VoidQuartz         ,  U * 4);
+		OM.data(MD.NeLi, "QuartzSingleSlab"                 , 1,   0, MT.NetherQuartz       ,  U * 2);
+		OM.data(MD.NeLi, "QuartzSingleSlab"                 , 1,   1, MT.NetherQuartz       ,  U * 2);
+		OM.data(MD.NeLi, "QuartzSingleSlab"                 , 1,   2, MT.VoidQuartz         ,  U * 2);
+		OM.data(MD.NeLi, "QuartzSingleSlab"                 , 1,   3, MT.VoidQuartz         ,  U * 2);
+		OM.data(MD.NeLi, "QuartzSingleSlab"                 , 1,   4, MT.VoidQuartz         ,  U * 2);
+		OM.data(MD.NeLi, "QuartzDoubleSlab"                 , 1,   0, MT.NetherQuartz       ,  U * 4);
+		OM.data(MD.NeLi, "QuartzDoubleSlab"                 , 1,   1, MT.NetherQuartz       ,  U * 4);
+		OM.data(MD.NeLi, "QuartzDoubleSlab"                 , 1,   2, MT.VoidQuartz         ,  U * 4);
+		OM.data(MD.NeLi, "QuartzDoubleSlab"                 , 1,   3, MT.VoidQuartz         ,  U * 4);
+		OM.data(MD.NeLi, "QuartzDoubleSlab"                 , 1,   4, MT.VoidQuartz         ,  U * 4);
+		OM.data(MD.NeLi, "QuartzSmoothStairs"               , 1,   W, MT.NetherQuartz       ,  U * 6);
+		OM.data(MD.NeLi, "QuartzBrickStairs"                , 1,   W, MT.NetherQuartz       ,  U * 6);
+		OM.data(MD.NeLi, "QuartzVoidSmoothStairs"           , 1,   W, MT.VoidQuartz         ,  U * 6);
+		OM.data(MD.NeLi, "QuartzVoidBrickStairs"            , 1,   W, MT.VoidQuartz         ,  U * 6);
+		OM.data(MD.NeLi, "QuartzVoidStairs"                 , 1,   W, MT.VoidQuartz         ,  U * 6);
 		
 		
 		OM.data(MD.AA, "blockMisc"                          , 1,   0, MT.BlackQuartz        ,  U * 2);
@@ -1820,22 +1939,6 @@ public class LoaderItemData implements Runnable {
 		
 		
 		OM.data(MD.CHSL, "tallow"                           , 1,   W, MT.Tallow             ,  U * 9);
-		OM.data(MD.CHSL, "glass_pane"                       , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_brown"         , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_red"           , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_purple"        , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_magenta"       , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_yellow"        , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_white"         , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_pink"          , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_pane_lightgray"     , 1,   W, MT.Glass              ,  3* U8);
-		OM.data(MD.CHSL, "stained_glass_brown"              , 1,   W, MT.Glass              ,  U * 1);
-		OM.data(MD.CHSL, "stained_glass_white"              , 1,   W, MT.Glass              ,  U * 1);
-		OM.data(MD.CHSL, "stained_glass_lightgray"          , 1,   W, MT.Glass              ,  U * 1);
-		OM.data(MD.CHSL, "stained_glass_yellow"             , 1,   W, MT.Glass              ,  U * 1);
-		OM.data(MD.CHSL, "glass"                            , 1,   W, MT.Glass              ,  U * 1);
-		OM.data(MD.CHSL, "glass2"                           , 1,   W, MT.Glass              ,  U * 1);
-		OM.data(MD.CHSL, "stained_glass_forestry"           , 1,   W, MT.Glass              ,  U * 1);
 		
 		
 		OM.data(MD.FM, "MeteorChips"                        , 1,   W, MT.Meteorite          ,  U * 1);
@@ -2104,7 +2207,7 @@ public class LoaderItemData implements Runnable {
 		OM.data(ST.make(Items.fish, 1, 3)                           , MT.FishRaw            ,  U * 1, MT.Bone, U3, MT.FishOil, U * 1);
 		if (MD.MaCu.mLoaded && MD.ENCHIRIDION.mLoaded) {
 		OM.data(ST.make(Items.fish, 1, 4)                           , MT.FishRaw            ,  U * 2, MT.Bone, U9, MT.FishOil, U * 2, ANY.Glowstone, U72);
-		OM.data(ST.make(Items.fish, 1, 5)                           , MT.FishRaw            ,  U * 1, MT.Bone, U9, MT.FishOil, U * 1, MT.Blaze, U);
+		OM.data(ST.make(Items.fish, 1, 5)                           , MT.FishRaw            ,  U * 1, MT.Bone, U9, MT.FishOil, U * 1, MT.Blaze, U9);
 		OM.data(ST.make(Items.fish, 1, 6)                           , MT.FishRaw            ,  U2, MT.Bone, U3, MT.FishOil, U3);
 		OM.data(ST.make(Items.fish, 1, 7)                           , MT.FishRaw            ,  U * 1, MT.Bone, U3, MT.FishOil, U2);
 		OM.data(ST.make(Items.fish, 1, 8)                           , MT.FishRaw            ,  U * 4, MT.Bone, U2, MT.FishOil, U * 7);
@@ -2121,8 +2224,8 @@ public class LoaderItemData implements Runnable {
 		OM.data(ST.make(Items.fish, 1,19)                           , MT.FishRaw            ,  U2, MT.Bone, U3, MT.FishOil, U * 1);
 		OM.data(ST.make(Items.fish, 1,20)                           , MT.FishRaw            ,  U2, MT.Bone, U3, MT.FishOil, U2);
 		OM.data(ST.make(Items.fish, 1,21)                           , MT.FishRaw            ,  U * 3, MT.FishOil, U * 5);
-		OM.data(ST.make(Items.fish, 1,22)                           , MT.FishOil, U * 5);
-		OM.data(ST.make(Items.fish, 1,23)                           , MT.FishOil, U * 5);
+		OM.data(ST.make(Items.fish, 1,22)                           , MT.FishOil            ,  U * 5);
+		OM.data(ST.make(Items.fish, 1,23)                           , MT.FishOil            ,  U * 5);
 		OM.data(ST.make(Items.fish, 1,24)                           , MT.FishRaw            ,  U2, MT.Bone, U9, MT.FishOil, U * 1, MT.Au, U72);
 		OM.data(ST.make(Items.fish, 1,25)                           , MT.FishRaw            ,  U2, MT.Bone, U3, MT.FishOil, U100);
 		OM.data(ST.make(Items.fish, 1,26)                           , MT.FishRaw            ,  U * 3, MT.Bone, U3, MT.FishOil, U * 5);
@@ -2134,14 +2237,14 @@ public class LoaderItemData implements Runnable {
 		OM.data(ST.make(Items.fish, 1,32)                           , MT.FishRaw            ,  U * 1, MT.Bone, U3, MT.FishOil, U * 2);
 		OM.data(ST.make(Items.fish, 1,33)                           , MT.FishRaw            ,  U2, MT.Bone, U9, MT.FishOil, U * 1);
 		OM.data(ST.make(Items.fish, 1,34)                           , MT.FishRotten         ,  U * 2, MT.Bone, U3, MT.FishOil, U * 1);
-		OM.data(ST.make(Items.fish, 1,35)                           , MT.Bone, U * 6);
+		OM.data(ST.make(Items.fish, 1,35)                           , MT.Bone               ,  U * 6);
 		OM.data(ST.make(Items.fish, 1,36)                           , MT.FishRaw            ,  U * 2, MT.Bone, U3, MT.FishOil, U * 4);
 		OM.data(ST.make(Items.fish, 1,37)                           , MT.FishRaw            ,  U * 1, MT.Bone, U3, MT.FishOil, U * 3);
 		OM.data(ST.make(Items.fish, 1,38)                           , MT.FishRaw            ,  U * 1, MT.Bone, U9, MT.FishOil, U * 1, MT.Redstone,  U4);
 		OM.data(ST.make(Items.fish, 1,39)                           , MT.FishRaw            ,  U * 2, MT.Bone, U9, MT.FishOil, U * 2);
 		OM.data(ST.make(Items.fish, 1,40)                           , MT.FishRaw            ,  U * 1, MT.Bone, U9, MT.FishOil, U * 1);
 		OM.data(ST.make(Items.fish, 1,41)                           , MT.FishRaw            ,  U * 1, MT.Bone, U9, MT.FishOil, U2);
-		OM.data(ST.make(Items.fish, 1,42)                           , MT.FishRaw            ,  U2, MT.Bone, U3, MT.FishOil, U20);
+		OM.data(ST.make(Items.fish, 1,42)                           , MT.FishRaw            ,  U2   , MT.Bone, U3, MT.FishOil, U20);
 		OM.data(ST.make(Items.fish, 1,43)                           , MT.FishRaw            ,  U * 1, MT.Bone, U3, MT.FishOil, U * 1);
 		OM.data(ST.make(Items.fish, 1,44)                           , MT.FishRaw            ,  U * 1, MT.Bone, U3, MT.FishOil, U * 3);
 		OM.data(ST.make(Items.fish, 1,45)                           , MT.FishRaw            ,  U * 2, MT.Bone, U3, MT.FishOil, U * 4);

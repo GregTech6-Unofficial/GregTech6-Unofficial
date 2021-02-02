@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -1154,28 +1154,24 @@ public class UT {
 			return rData;
 		}
 		
-		/** Converts a Number to a String */
+		/** Converts a Number to a String with Underscores as Decimal Separators. Ignores Numbers with 4 Digits or less. */
 		public static String makeString(long aNumber) {
-			String tString = "";
-			boolean temp = T, negative = F;
-			
-			if (aNumber<0) {
+			if (aNumber > -10000 && aNumber < 10000) return "" + aNumber;
+			StringBuilder rString = new StringBuilder();
+			if (aNumber < 0) {
 				aNumber *= -1;
-				negative = T;
+				rString.append('-');
 			}
-			
+			boolean temp = T;
 			for (long i = 1000000000000000000L; i > 0; i /= 10) {
-				long tDigit = (aNumber/i)%10;
+				long tDigit = (aNumber / i) % 10;
 				if ( temp && tDigit != 0) temp = F;
 				if (!temp) {
-					tString += tDigit;
-					if (i != 1) for (long j = i; j > 0; j /= 1000) if (j == 1) tString += ",";
+					rString.append(tDigit);
+					if (i != 1) for (long j = i; j > 0; j /= 1000) if (j == 1) rString.append('_');
 				}
 			}
-			
-			if (tString.equals("")) tString = "0";
-			
-			return negative?"-"+tString:tString;
+			return rString.toString();
 		}
 		
 		@SafeVarargs
@@ -1901,7 +1897,7 @@ public class UT {
 			NBTTagCompound tList = make();
 			boolean temp = F;
 			for (int i = 0; i < aBlueprint.length; i++) if (ST.valid(aBlueprint[i])) {
-				ST.save(tList, ""+i, aBlueprint[i]);
+				ST.save(tList, ""+i, ST.amount(1, aBlueprint[i]));
 				temp = T;
 			}
 			if (temp) aNBT.setTag("gt.blueprint.craft", tList);
@@ -2216,16 +2212,21 @@ public class UT {
 		}
 		
 		public static Field setField(Object aObject, String aField, Object aValue) {
-			return setField(aObject.getClass(), aObject, aField, aValue);
+			return setField(aObject.getClass(), aObject, aField, aValue, T);
 		}
-		
+		public static Field setField(Object aObject, String aField, Object aValue, boolean aLogErrors) {
+			return setField(aObject.getClass(), aObject, aField, aValue, aLogErrors);
+		}
 		public static Field setField(Class<?> aClass, Object aObject, String aField, Object aValue) {
+			return setField(aClass, aObject, aField, aValue, T);
+		}
+		public static Field setField(Class<?> aClass, Object aObject, String aField, Object aValue, boolean aLogErrors) {
 			Field rField = null;
 			try {
 				rField = aClass.getDeclaredField(aField);
 				rField.setAccessible(T);
 				rField.set(aObject, aValue);
-			} catch (Throwable e) {e.printStackTrace(DEB);}
+			} catch (Throwable e) {if (aLogErrors) e.printStackTrace(DEB);}
 			return rField;
 		}
 		
@@ -3198,13 +3199,13 @@ public class UT {
 			if (aOutput.length == 0) return F;
 			OreDictItemData tOreName = OM.association_(aInput);
 			if (aRecipeManager instanceof IMachineRecipeManagerExt) {
-				if (tOreName != null) {
+				if (tOreName != null && !tOreName.mBlackListed && !OreDictManager.INSTANCE.isBlacklisted(aInput)) {
 					((IMachineRecipeManagerExt)aRecipeManager).addRecipe((IRecipeInput)COMPAT_IC2.makeInput(tOreName.toString(), aInput.stackSize), aNBT, T, OreDictManager.INSTANCE.getStackArray(T, aOutput));
 				} else {
 					((IMachineRecipeManagerExt)aRecipeManager).addRecipe((IRecipeInput)COMPAT_IC2.makeInput(aInput), aNBT, T, OreDictManager.INSTANCE.getStackArray(T, aOutput));
 				}
 			} else {
-				if (tOreName != null) {
+				if (tOreName != null && !tOreName.mBlackListed && !OreDictManager.INSTANCE.isBlacklisted(aInput)) {
 					aRecipeManager.addRecipe((IRecipeInput)COMPAT_IC2.makeInput(tOreName.toString(), aInput.stackSize), aNBT, OreDictManager.INSTANCE.getStackArray(T, aOutput));
 				} else {
 					aRecipeManager.addRecipe((IRecipeInput)COMPAT_IC2.makeInput(aInput), aNBT, OreDictManager.INSTANCE.getStackArray(T, aOutput));

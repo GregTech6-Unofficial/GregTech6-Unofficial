@@ -35,7 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 
 public class PlayerModelRenderer extends RenderPlayer {
-	private final ResourceLocation[] mResources = new ResourceLocation[] {new ResourceLocation(RES_PATH_MODEL + "BrainTech.png"), new ResourceLocation(RES_PATH_MODEL + "Silver.png"), new ResourceLocation(RES_PATH_MODEL + "MrBrain.png"), new ResourceLocation(RES_PATH_MODEL + "Dev.png"), new ResourceLocation(RES_PATH_MODEL + "Gold.png")};
+	private final ResourceLocation[] mResources = new ResourceLocation[] {new ResourceLocation(RES_PATH_MODEL + "BrainTech.png"), new ResourceLocation(RES_PATH_MODEL + "Silver.png"), new ResourceLocation(RES_PATH_MODEL + "MrBrain.png"), new ResourceLocation(RES_PATH_MODEL + "Dev.png"), new ResourceLocation(RES_PATH_MODEL + "Gold.png"), new ResourceLocation(RES_PATH_MODEL + "Crazy.png"), new ResourceLocation(RES_PATH_MODEL + "Fake.png")};
 	private final Collection<String> mSupporterListSilver, mSupporterListGold;
 	
 	public PlayerModelRenderer(Collection<String> aSupporterListSilver, Collection<String> aSupporterListGold) {
@@ -46,6 +46,8 @@ public class PlayerModelRenderer extends RenderPlayer {
 	
 	private ResourceLocation getResource(String aPlayer) {
 		aPlayer = aPlayer.toLowerCase();
+		// To be uncommented once Account Migration gets enforced, because I sure as fuck won't make a Microsoft Account!
+//      if (aPlayer.startswith("gregoriust"))         return mResources[6];
 		// GT6 Team
 		if (aPlayer.equalsIgnoreCase("GregoriusT"))   return mResources[3];
 		if (aPlayer.equalsIgnoreCase("OvermindDL1"))  return mResources[3];
@@ -53,6 +55,8 @@ public class PlayerModelRenderer extends RenderPlayer {
 		if (aPlayer.equalsIgnoreCase("jihuayu123"))   return mResources[3];
 		if (aPlayer.equalsIgnoreCase("Yuesha_Kev14")) return mResources[3];
 		if (aPlayer.equalsIgnoreCase("Evanvenir"))    return mResources[3];
+		// This "special" Cape is totally just to mess with her. XD
+		if (aPlayer.equalsIgnoreCase("CrazyJ1984"))   return mResources[5];
 		// People who helped back in ancient GT Versions.
 		if (aPlayer.equalsIgnoreCase("Mr_Brain"))     return mResources[2];
 		if (aPlayer.equalsIgnoreCase("Friedi4321"))   return mResources[0];

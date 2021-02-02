@@ -202,7 +202,7 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 					OreDictPrefix tPrefix = getMoldRecipe(mShape);
 					if (tPrefix == OP.plate && mContent.mMaterial == MT.Glass) tPrefix = OP.plateGem;
 					if (tPrefix != null) {
-						slot(0, tPrefix.mat(mContent.mMaterial, mContent.mMaterial == MT.Blaze && (tPrefix == OP.stick || tPrefix == OP.stickLong) ? 1 : mContent.mAmount / tPrefix.mAmount));
+						slot(0, tPrefix.mat(mContent.mMaterial, mContent.mAmount / tPrefix.mAmount));
 						mContent.mAmount = 0;
 					}
 				}
@@ -255,7 +255,7 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		if (tPrefix != null && mContent == null && slot(0) == null && isMoldInputSide(aSide) && aMaterial.mAmount > 0) {
 			if (tPrefix == OP.plate && aMaterial.mMaterial == MT.Glass) tPrefix = OP.plateGem;
 			if (tPrefix.mat(aMaterial.mMaterial.mTargetSolidifying.mMaterial, 1) != null) {
-				long tRequiredAmount = (aMaterial.mMaterial == MT.Blaze && (tPrefix == OP.stick || tPrefix == OP.stickLong)) ? getMoldRequiredMaterialUnits() * 16 : getMoldRequiredMaterialUnits(), rAmount = UT.Code.units(tRequiredAmount, U, aMaterial.mMaterial.mTargetSolidifying.mAmount, T);
+				long tRequiredAmount = getMoldRequiredMaterialUnits(), rAmount = UT.Code.units(tRequiredAmount, U, aMaterial.mMaterial.mTargetSolidifying.mAmount, T);
 				if (aMaterial.mAmount >= rAmount) {
 					mContent = OM.stack(aMaterial.mMaterial, tRequiredAmount);
 					mTemperature = aTemperature;
@@ -524,35 +524,35 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		, {PX_P[14], PX_P[ 4], PX_P[ 9], PX_P[16], PX_P[ 6], PX_P[10]}
 		, {PX_P[14], PX_P[ 6], PX_P[ 6], PX_P[16], PX_P[ 7], PX_P[10]}
 		
-		, {PX_P[ 2]                         , PX_P[ 0], PX_P[ 2]                        , PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
-		, {PX_P[ 2]                         , PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F  , PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
-		, {PX_P[ 2]                         , PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F  , PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
-		, {PX_P[ 2]                         , PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F  , PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -   PX_P[12] / 5.0F}
-		, {PX_P[ 2]                         , PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F  , PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                            }
+		, {PX_P[ 2]                      , PX_P[ 0], PX_P[ 2]                      , PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
+		, {PX_P[ 2]                      , PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
+		, {PX_P[ 2]                      , PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
+		, {PX_P[ 2]                      , PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -     PX_P[12] / 5.0F}
+		, {PX_P[ 2]                      , PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] - 4 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                      }
 		
-		, {PX_P[ 2] +    PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                            , PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] +    PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] +    PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] +    PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -     PX_P[12] / 5.0F}
-		, {PX_P[ 2] +    PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                          }
+		, {PX_P[ 2] +     PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                      , PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] +     PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] +     PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] +     PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -     PX_P[12] / 5.0F}
+		, {PX_P[ 2] +     PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] - 3 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                      }
 		
-		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                           , PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                      , PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
 		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
 		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -    PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                         }
+		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -     PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] - 2 * PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                      }
 		
-		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                           , PX_N[ 2] -     PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2] -  PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2] -  PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] -  PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -   PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] -  PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                            }
+		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                      , PX_N[ 2] -     PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2] -     PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2] -     PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2] -     PX_P[12] / 5.0F, PX_N[13], PX_N[ 2] -     PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2] -     PX_P[12] / 5.0F, PX_N[13], PX_N[ 2]                      }
 		
-		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                           , PX_N[ 2]                          , PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2]                           , PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2]                           , PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2]                           , PX_N[13], PX_N[ 2] -   PX_P[12] / 5.0F}
-		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2]                           , PX_N[13], PX_N[ 2]                            }
+		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2]                      , PX_N[ 2]                      , PX_N[13], PX_N[ 2] - 4 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] +     PX_P[12] / 5.0F, PX_N[ 2]                      , PX_N[13], PX_N[ 2] - 3 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 2 * PX_P[12] / 5.0F, PX_N[ 2]                      , PX_N[13], PX_N[ 2] - 2 * PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 3 * PX_P[12] / 5.0F, PX_N[ 2]                      , PX_N[13], PX_N[ 2] -     PX_P[12] / 5.0F}
+		, {PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_P[ 0], PX_P[ 2] + 4 * PX_P[12] / 5.0F, PX_N[ 2]                      , PX_N[13], PX_N[ 2]                      }
 	};
 	
 	protected ITexture mTexture, mTextureMolten;
@@ -583,8 +583,8 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		aRenderPass -= 18;
 		if ((mShape & B[aRenderPass]) != 0 || SIDES_BOTTOM[aSide]) return null;
 		switch (aSide) {
-		case SIDE_X_POS: return aRenderPass  < 20 && (mShape & B[aRenderPass+5]) != 0 ? mTexture : null;
-		case SIDE_X_NEG: return aRenderPass  >= 5 && (mShape & B[aRenderPass-5]) != 0 ? mTexture : null;
+		case SIDE_X_POS: return aRenderPass     < 20 && (mShape & B[aRenderPass+5]) != 0 ? mTexture : null;
+		case SIDE_X_NEG: return aRenderPass     >= 5 && (mShape & B[aRenderPass-5]) != 0 ? mTexture : null;
 		case SIDE_Z_POS: return aRenderPass % 5 != 4 && (mShape & B[aRenderPass+1]) != 0 ? mTexture : null;
 		case SIDE_Z_NEG: return aRenderPass % 5 != 0 && (mShape & B[aRenderPass-1]) != 0 ? mTexture : null;
 		}
@@ -650,7 +650,7 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		OreDictPrefix tPrefix = getMoldRecipe(mShape);
 		if (tPrefix == OP.plate && aMaterial.mMaterial == MT.Glass) tPrefix = OP.plateGem;
 		if (tPrefix == null || tPrefix.mat(aMaterial.mMaterial.mTargetSolidifying.mMaterial, 1) == null) return 0;
-		long tRequiredAmount = (aMaterial.mMaterial == MT.Blaze && (tPrefix == OP.stick || tPrefix == OP.stickLong)) ? getMoldRequiredMaterialUnits() * 16 : getMoldRequiredMaterialUnits();
+		long tRequiredAmount = getMoldRequiredMaterialUnits();
 		long rAmount = UT.Code.units(tRequiredAmount, U, aMaterial.mMaterial.mTargetSolidifying.mAmount, T);
 		if (aMaterial.mAmount >= rAmount) {
 			if (aDoFill) {
@@ -671,6 +671,9 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 	
 	static {
 		Map<Integer, OreDictPrefix> TEMP_MOLD_RECIPES = new HashMap<>();
+		
+		TEMP_MOLD_RECIPES.put(0b0_00100_11111_01110_01010_00000, OP.toolHeadBuilderwand);
+		TEMP_MOLD_RECIPES.put(0b0_00000_00100_11111_01110_01010, OP.toolHeadBuilderwand);
 		
 		TEMP_MOLD_RECIPES.put(
 		B[ 0]|B[ 1]|B[ 2]|B[ 3]|
@@ -700,16 +703,16 @@ public class MultiTileEntityMold extends TileEntityBase07Paintable implements IT
 		B[ 0]|B[ 1]|B[ 2]|    B[ 4]|
 		B[ 5]|B[ 6]|B[ 7]|    B[ 9]|
 		B[10]|B[11]|B[12]|    B[14]|
-								B[19]|
+							  B[19]|
 		B[20]|B[21]|B[22]
 		, OP.casingSmall);
 		
 		TEMP_MOLD_RECIPES.put(
-		B[ 0]|    B[ 2]|      B[ 4]|
+		B[ 0]|      B[ 2]|      B[ 4]|
 			  B[ 6]|B[ 7]|B[ 8]|
 		B[10]|B[11]|      B[13]|B[14]|
 			  B[16]|B[17]|B[18]|
-		B[20]|    B[22]|      B[24]
+		B[20]|      B[22]|      B[24]
 		, OP.gearGt);
 		
 		TEMP_MOLD_RECIPES.put(

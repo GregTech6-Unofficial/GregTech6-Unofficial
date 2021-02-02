@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -94,7 +94,7 @@ public class MultiTileEntityAnvil extends TileEntityBase09FacingSingle implement
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		aList.add(Chat.CYAN     + LH.get(LH.RECIPES) + ": " + Chat.WHITE + LH.get(RM.Anvil.mNameInternal) +Chat.CYAN+" (D: "+Chat.WHITE+UT.Code.divup(mDurability, 10000)+Chat.CYAN+")");
+		aList.add(Chat.CYAN     + LH.get(LH.RECIPES) + ": " + Chat.WHITE + LH.get(RM.Anvil.mNameInternal) +Chat.CYAN+" (D: "+Chat.WHITE+UT.Code.makeString(UT.Code.divup(mDurability, 10000))+Chat.CYAN+")");
 		aList.add(Chat.CYAN     + LH.get(LH.RECIPES_ANVIL_USAGE));
 		aList.add(Chat.ORANGE   + LH.get(LH.NO_GUI_CLICK_TO_INTERACT) + " (" + LH.get(LH.FACE_TOP) + ")");
 	}
@@ -140,7 +140,7 @@ public class MultiTileEntityAnvil extends TileEntityBase09FacingSingle implement
 			return 0;
 		}
 		if (aTool.equals(TOOL_magnifyingglass)) {
-			if (aChatReturn != null) aChatReturn.add("Remaining Durability: " + UT.Code.divup(mDurability, 10000));
+			if (aChatReturn != null) aChatReturn.add("Remaining Durability: " + UT.Code.makeString(UT.Code.divup(mDurability, 10000)));
 		}
 		return 0;
 	}
@@ -308,7 +308,7 @@ public class MultiTileEntityAnvil extends TileEntityBase09FacingSingle implement
 	
 	@Override
 	public int getRenderPasses2(Block aBlock, boolean[] aShouldSideBeRendered) {
-		mTextureAnvil = BlockTextureDefault.get(mMaterial, OP.blockSolid.mIconIndexBlock);
+		mTextureAnvil = BlockTextureDefault.get(mMaterial, OP.blockSolid, UT.Code.getRGBaArray(mRGBa), mMaterial.contains(TD.Properties.GLOWING));
 		mTextureA = (mMaterialA <= 0 ? null : OreDictMaterial.MATERIAL_ARRAY[mMaterialA] == null ? BlockTextureCopied.get(Blocks.iron_block) : BlockTextureMulti.get(mShapeA==7?BlockTextureCopied.get(Blocks.stone):null, BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mMaterialA], mShapeA==6?OP.blockGem:mShapeA==7?OP.ore:OP.blockSolid)));
 		mTextureB = (mMaterialB <= 0 ? null : OreDictMaterial.MATERIAL_ARRAY[mMaterialB] == null ? BlockTextureCopied.get(Blocks.iron_block) : BlockTextureMulti.get(mShapeB==7?BlockTextureCopied.get(Blocks.stone):null, BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mMaterialB], mShapeB==6?OP.blockGem:mShapeB==7?OP.ore:OP.blockSolid)));
 		return mTextureB == null ? mTextureA == null ? 6 : 7 : 8;

@@ -182,20 +182,27 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 					UT.Sounds.send(worldObj, SFX.MC_FIZZ, 1.0F, 1.0F, getCoords());
 				} else {
 					if ((mMode & B[1]) != 0) {
-						if (mMaxSealedTime == 0) {
+						if (mMaxSealedTime <= 0) {
 							mRecipe = RM.Fermenter.findRecipe(this, mRecipe, T, Long.MAX_VALUE, NI, FL.array(mTank.getFluid()), ST.tag(0));
 							if (mRecipe != null && mRecipe.mFluidInputs.length > 0 && mRecipe.mFluidOutputs.length > 0 && !FL.gas(mRecipe.mFluidInputs[0]) && !FL.gas(mRecipe.mFluidOutputs[0])) {
-								mMaxSealedTime = (mRecipe.mDuration * mRecipe.mEUt * mTank.amount()) / mRecipe.mFluidInputs[0].amount;
+								mMaxSealedTime = UT.Code.divup(Math.max(1, mRecipe.mDuration) * Math.max(1, mRecipe.mEUt) * Math.max(1, mTank.amount()), Math.max(1, mRecipe.mFluidInputs[0].amount));
+								mSealedTime = 0;
 							} else {
+								mMaxSealedTime = 0;
+								mSealedTime = 0;
 								mRecipe = null;
 							}
-						}
-						mSealedTime++;
-						if (mRecipe != null && mMaxSealedTime > 0 && mSealedTime >= mMaxSealedTime) {
-							mTank.setFluid(FL.mul(mRecipe.mFluidOutputs[0], mTank.amount(), mRecipe.mFluidInputs[0].amount, F));
-							mMaxSealedTime = 0;
-							mSealedTime = 0;
-							mRecipe = null;
+						} else {
+							if (mSealedTime < mMaxSealedTime) {
+								mSealedTime++;
+							} else {
+								if (mRecipe != null) {
+									mTank.setFluid(FL.mul(mRecipe.mFluidOutputs[0], mTank.amount(), mRecipe.mFluidInputs[0].amount, F));
+									mRecipe = null;
+								}
+								mMaxSealedTime = 0;
+								mSealedTime = 0;
+							}
 						}
 					} else {
 						if ((mMode & B[0]) != 0) {
@@ -238,6 +245,7 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 
 	@Override
 	public int fill(ItemStack aStack, FluidStack aFluid, boolean aDoFill) {
+		if ((mMode & B[1]) != 0) return 0;
 		if (!allowFluid(aFluid)) return 0;
 		if (!mGasProof && FL.gas(aFluid)) return 0;
 		if (!mAcidProof && FL.acid(aFluid)) return 0;
@@ -249,6 +257,7 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 
 	@Override
 	public FluidStack drain(ItemStack aStack, int aMaxDrain, boolean aDoDrain) {
+		if ((mMode & B[1]) != 0) return null;
 		FluidStack tDrained = mTank.drain(aMaxDrain, aDoDrain);
 		if (tDrained != NF && aDoDrain) UT.NBT.set(aStack, writeItemNBT(aStack.hasTagCompound() ? aStack.getTagCompound() : UT.NBT.make()));
 		return tDrained;
@@ -256,12 +265,12 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 	
 	@Override
 	public int funnelFill(byte aSide, FluidStack aFluid, boolean aDoFill) {
-		return mTank.fill(aFluid, aDoFill);
+		return (mMode & B[1]) != 0 ? 0 : mTank.fill(aFluid, aDoFill);
 	}
 	
 	@Override
 	public FluidStack tapDrain(byte aSide, int aMaxDrain, boolean aDoDrain) {
-		return mTank.drain(aMaxDrain, aDoDrain);
+		return (mMode & B[1]) != 0 ? null : mTank.drain(aMaxDrain, aDoDrain);
 	}
 	
 	@Override public long getProgressValue(byte aSide) {return mSealedTime;}
@@ -278,7 +287,7 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 	
 	@Override public byte getMaxStackSize(ItemStack aStack, byte aDefault) {return mTank.has() ? 1 : aDefault;}
 	
-	@Override protected IFluidTank getFluidTankFillable2(byte aSide, FluidStack aFluidToFill) {return (mMode & B[1]) != 0 ? null : mTank;}
+	@Override protected IFluidTank getFluidTankFillable2 (byte aSide, FluidStack aFluidToFill ) {return (mMode & B[1]) != 0 ? null : mTank;}
 	@Override protected IFluidTank getFluidTankDrainable2(byte aSide, FluidStack aFluidToDrain) {return (mMode & B[1]) != 0 ? null : mTank;}
 	@Override protected IFluidTank[] getFluidTanks2(byte aSide) {return mTank.AS_ARRAY;}
 	
@@ -287,18 +296,19 @@ public abstract class TileEntityBase08Barrel extends TileEntityBase07Paintable i
 	
 	@Override
 	public int addFluidToConnectedTank(byte aSide, FluidStack aFluid, boolean aOnlyAddIfItAlreadyHasFluidsOfThatTypeOrIsDedicated) {
+		if ((mMode & B[1]) != 0) return 0;
 		if (aFluid == NF || (mTank.isEmpty() && aOnlyAddIfItAlreadyHasFluidsOfThatTypeOrIsDedicated)) return 0;
 		return mTank.fill(aFluid, T);
 	}
 	
 	@Override
 	public int removeFluidFromConnectedTank(byte aSide, FluidStack aFluid, boolean aOnlyRemoveIfItCanRemoveAllAtOnce) {
-		if (mTank.contains(aFluid) && mTank.has(aOnlyRemoveIfItCanRemoveAllAtOnce ? aFluid.amount : 1)) return (int)mTank.remove(aFluid.amount);
+		if ((mMode & B[1]) == 0 && mTank.contains(aFluid) && mTank.has(aOnlyRemoveIfItCanRemoveAllAtOnce ? aFluid.amount : 1)) return (int)mTank.remove(aFluid.amount);
 		return 0;
 	}
 	
 	@Override
 	public long getAmountOfFluidInConnectedTank(byte aSide, FluidStack aFluid) {
-		return mTank.contains(aFluid) ? mTank.amount() : 0;
+		return (mMode & B[1]) == 0 && mTank.contains(aFluid) ? mTank.amount() : 0;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -39,6 +39,7 @@ import gregapi.api.Abstract_Mod;
 import gregapi.api.Abstract_Proxy;
 import gregapi.data.ANY;
 import gregapi.data.CS.BlocksGT;
+import gregapi.data.CS.ItemsGT;
 import gregapi.data.CS.ModIDs;
 import gregapi.data.IL;
 import gregapi.data.MD;
@@ -69,7 +70,7 @@ import net.minecraft.item.Item;
  *
  * This loads after the compatible Mods. The regular API loads before all compatible Mods.
  */
-@Mod(modid=ModIDs.GAPI_POST, name="Greg-API-Post", version="GT6-MC1710", dependencies="required-after:"+ModIDs.GAPI+"; after:"+ModIDs.MD8+"; after:"+ModIDs.IC2+"; after:"+ModIDs.IC2C+"; after:"+ModIDs.NC+"; after:"+ModIDs.IHL+"; after:"+ModIDs.FUNK+"; after:"+ModIDs.BAUBLES+"; after:"+ModIDs.GaSu+"; after:"+ModIDs.GaNe+"; after:"+ModIDs.GaEn+"; after:"+ModIDs.WdSt+"; after:"+ModIDs.CrGu+"; after:"+ModIDs.COFH_API+"; after:"+ModIDs.COFH_API_ENERGY+"; after:"+ModIDs.COFH_CORE+"; after:"+ModIDs.CC+"; after:"+ModIDs.OC+"; after:"+ModIDs.HEX+"; after:"+ModIDs.DE+"; after:"+ModIDs.AV+"; after:"+ModIDs.FR+"; after:"+ModIDs.FRMB+"; after:"+ModIDs.BINNIE+"; after:"+ModIDs.BINNIE_BEE+"; after:"+ModIDs.BINNIE_TREE+"; after:"+ModIDs.BINNIE_GENETICS+"; after:"+ModIDs.BINNIE_BOTANY+"; after:"+ModIDs.IE+"; after:"+ModIDs.UB+"; after:"+ModIDs.COG+"; after:"+ModIDs.PFAA+"; after:"+ModIDs.MIN+"; after:"+ModIDs.RH+"; after:"+ModIDs.CANDY+"; after:"+ModIDs.ABYSSAL+"; after:"+ModIDs.SOULFOREST+"; after:"+ModIDs.ARS+"; after:"+ModIDs.TC+"; after:"+ModIDs.TCFM+"; after:"+ModIDs.BOTA+"; after:"+ModIDs.ALF+"; after:"+ModIDs.WTCH+"; after:"+ModIDs.HOWL+"; after:"+ModIDs.MoCr+"; after:"+ModIDs.GoG+"; after:"+ModIDs.LycM+"; after:"+ModIDs.LycM_Arctic+"; after:"+ModIDs.LycM_Demon+"; after:"+ModIDs.LycM_Desert+"; after:"+ModIDs.LycM_Forest+"; after:"+ModIDs.LycM_Fresh+"; after:"+ModIDs.LycM_Inferno+"; after:"+ModIDs.LycM_Jungle+"; after:"+ModIDs.LycM_Mountain+"; after:"+ModIDs.LycM_Plains+"; after:"+ModIDs.LycM_Salt+"; after:"+ModIDs.LycM_Shadow+"; after:"+ModIDs.LycM_Swamp+"; after:"+ModIDs.RC+"; after:"+ModIDs.BP+"; after:"+ModIDs.PR+"; after:"+ModIDs.PR_EXPANSION+"; after:"+ModIDs.PR_INTEGRATION+"; after:"+ModIDs.PR_TRANSMISSION+"; after:"+ModIDs.PR_TRANSPORT+"; after:"+ModIDs.PR_EXPLORATION+"; after:"+ModIDs.PR_COMPATIBILITY+"; after:"+ModIDs.PR_FABRICATION+"; after:"+ModIDs.PR_ILLUMINATION+"; after:"+ModIDs.PE+"; after:"+ModIDs.AE+"; after:"+ModIDs.MO+"; after:"+ModIDs.TE_FOUNDATION+"; after:"+ModIDs.TE_DYNAMICS+"; after:"+ModIDs.TE+"; after:"+ModIDs.ZTONES+"; after:"+ModIDs.CHSL+"; after:"+ModIDs.NePl+"; after:"+ModIDs.NeLi+"; after:"+ModIDs.EtFu+"; after:"+ModIDs.BB+"; after:"+ModIDs.DYNAMIC_TREES+"; after:"+ModIDs.BbLC+"; after:"+ModIDs.CARP+"; after:"+ModIDs.BETTER_RECORDS+"; after:"+ModIDs.TF+"; after:"+ModIDs.ERE+"; after:"+ModIDs.MFR+"; after:"+ModIDs.PnC+"; after:"+ModIDs.ExU+"; after:"+ModIDs.ExS+"; after:"+ModIDs.EIO+"; after:"+ModIDs.RT+"; after:"+ModIDs.AA+"; after:"+ModIDs.TreeCap+"; after:"+ModIDs.HaC+"; after:"+ModIDs.CookBook+"; after:"+ModIDs.APC+"; after:"+ModIDs.ENVM+"; after:"+ModIDs.MaCr+"; after:"+ModIDs.BC_TRANSPORT+"; after:"+ModIDs.BC_SILICON+"; after:"+ModIDs.BC_FACTORY+"; after:"+ModIDs.BC_ENERGY+"; after:"+ModIDs.BC_ROBOTICS+"; after:"+ModIDs.BC+"; after:"+ModIDs.BC_BUILDERS+"; after:"+ModIDs.MgC+"; after:"+ModIDs.BR+"; after:"+ModIDs.HBM+"; after:"+ModIDs.ELN+"; after:"+ModIDs.DRGN+"; after:"+ModIDs.ElC+"; after:"+ModIDs.CrC+"; after:"+ModIDs.ReC+"; after:"+ModIDs.RoC+"; after:"+ModIDs.Mek+"; after:"+ModIDs.Mek_Tools+"; after:"+ModIDs.Mek_Generators+"; after:"+ModIDs.GC+"; after:"+ModIDs.GC_PLANETS+"; after:"+ModIDs.GC_GALAXYSPACE+"; after:"+ModIDs.VULPES+"; after:"+ModIDs.GC_ADV_ROCKETRY+"; after:"+ModIDs.BTL+"; after:"+ModIDs.AETHER+"; after:"+ModIDs.TROPIC+"; after:"+ModIDs.ATUM+"; after:"+ModIDs.EB+"; after:"+ModIDs.EBXL+"; after:"+ModIDs.BoP+"; after:"+ModIDs.HiL+"; after:"+ModIDs.ATG+"; after:"+ModIDs.RTG+"; after:"+ModIDs.RWG+"; after:"+ModIDs.MYST+"; after:"+ModIDs.WARPBOOK+"; after:"+ModIDs.LOSTBOOKS+"; after:"+ModIDs.LOOTBAGS+"; after:"+ModIDs.EUREKA+"; after:"+ModIDs.ENCHIRIDION+"; after:"+ModIDs.ENCHIRIDION2+"; after:"+ModIDs.SmAc+"; after:"+ModIDs.HQM+"; after:"+ModIDs.SD+"; after:"+ModIDs.JABBA+"; after:"+ModIDs.MaCu+"; after:"+ModIDs.PdC+"; after:"+ModIDs.Bamboo+"; after:"+ModIDs.PMP+"; after:"+ModIDs.Fossil+"; after:"+ModIDs.GrC+"; after:"+ModIDs.GrC_Apples+"; after:"+ModIDs.GrC_Bamboo+"; after:"+ModIDs.GrC_Bees+"; after:"+ModIDs.GrC_Cellar+"; after:"+ModIDs.GrC_Fish+"; after:"+ModIDs.GrC_Grapes+"; after:"+ModIDs.GrC_Hops+"; after:"+ModIDs.GrC_Milk+"; after:"+ModIDs.GrC_Rice+"; after:"+ModIDs.BWM+"; after:"+ModIDs.OMT+"; after:"+ModIDs.TG+"; after:"+ModIDs.FM+"; after:"+ModIDs.FZ+"; after:"+ModIDs.MNTL+"; after:"+ModIDs.OB+"; after:"+ModIDs.TiC+"; after:"+ModIDs.MF2+"; after:"+ModIDs.WR_CBE_C+"; after:"+ModIDs.WR_CBE_A+"; after:"+ModIDs.WR_CBE_L+"; after:"+ModIDs.VOLTZ+"; after:"+ModIDs.MFFS+"; after:"+ModIDs.ICBM+"; after:"+ModIDs.ATSCI+"; after:inventorytweaks; after:ironbackpacks; after:journeymap; after:LogisticsPipes; after:LunatriusCore; after:NEIAddons; after:NEIAddons|Developer; after:NEIAddons|AppEng; after:NEIAddons|Botany; after:NEIAddons|Forestry; after:NEIAddons|CraftingTables; after:NEIAddons|ExNihilo; after:neiintegration; after:openglasses; after:simplyjetpacks; after:Stackie; after:StevesCarts; after:TiCTooltips; after:worldedit; after:McMultipart")
+@Mod(modid=ModIDs.GAPI_POST, name="Greg-API-Post", version="GT6-MC1710", dependencies="required-after:"+ModIDs.GAPI+"; after:"+ModIDs.MD8+"; after:"+ModIDs.IC2+"; after:"+ModIDs.IC2C+"; after:"+ModIDs.NC+"; after:"+ModIDs.IHL+"; after:"+ModIDs.FUNK+"; after:"+ModIDs.BAUBLES+"; after:"+ModIDs.HEE+"; after:"+ModIDs.GaSu+"; after:"+ModIDs.GaNe+"; after:"+ModIDs.GaEn+"; after:"+ModIDs.WdSt+"; after:"+ModIDs.CrGu+"; after:"+ModIDs.COFH_API+"; after:"+ModIDs.COFH_API_ENERGY+"; after:"+ModIDs.COFH_CORE+"; after:"+ModIDs.CC+"; after:"+ModIDs.OC+"; after:"+ModIDs.HEX+"; after:"+ModIDs.DE+"; after:"+ModIDs.AV+"; after:"+ModIDs.FR+"; after:"+ModIDs.FRMB+"; after:"+ModIDs.BINNIE+"; after:"+ModIDs.BINNIE_BEE+"; after:"+ModIDs.BINNIE_TREE+"; after:"+ModIDs.BINNIE_GENETICS+"; after:"+ModIDs.BINNIE_BOTANY+"; after:"+ModIDs.IE+"; after:"+ModIDs.UB+"; after:"+ModIDs.COG+"; after:"+ModIDs.PFAA+"; after:"+ModIDs.MIN+"; after:"+ModIDs.RH+"; after:"+ModIDs.CANDY+"; after:"+ModIDs.ABYSSAL+"; after:"+ModIDs.SOULFOREST+"; after:"+ModIDs.ARS+"; after:"+ModIDs.TC+"; after:"+ModIDs.TCFM+"; after:"+ModIDs.BOTA+"; after:"+ModIDs.ALF+"; after:"+ModIDs.WTCH+"; after:"+ModIDs.HOWL+"; after:"+ModIDs.MoCr+"; after:"+ModIDs.GoG+"; after:"+ModIDs.LycM+"; after:"+ModIDs.LycM_Arctic+"; after:"+ModIDs.LycM_Demon+"; after:"+ModIDs.LycM_Desert+"; after:"+ModIDs.LycM_Forest+"; after:"+ModIDs.LycM_Fresh+"; after:"+ModIDs.LycM_Inferno+"; after:"+ModIDs.LycM_Jungle+"; after:"+ModIDs.LycM_Mountain+"; after:"+ModIDs.LycM_Plains+"; after:"+ModIDs.LycM_Salt+"; after:"+ModIDs.LycM_Shadow+"; after:"+ModIDs.LycM_Swamp+"; after:"+ModIDs.RC+"; after:"+ModIDs.BP+"; after:"+ModIDs.PR+"; after:"+ModIDs.PR_EXPANSION+"; after:"+ModIDs.PR_INTEGRATION+"; after:"+ModIDs.PR_TRANSMISSION+"; after:"+ModIDs.PR_TRANSPORT+"; after:"+ModIDs.PR_EXPLORATION+"; after:"+ModIDs.PR_COMPATIBILITY+"; after:"+ModIDs.PR_FABRICATION+"; after:"+ModIDs.PR_ILLUMINATION+"; after:"+ModIDs.PE+"; after:"+ModIDs.AE+"; after:"+ModIDs.MO+"; after:"+ModIDs.TE_FOUNDATION+"; after:"+ModIDs.TE_DYNAMICS+"; after:"+ModIDs.TE+"; after:"+ModIDs.ZTONES+"; after:"+ModIDs.CHSL+"; after:"+ModIDs.NePl+"; after:"+ModIDs.NeLi+"; after:"+ModIDs.EtFu+"; after:"+ModIDs.BB+"; after:"+ModIDs.DYNAMIC_TREES+"; after:"+ModIDs.BbLC+"; after:"+ModIDs.CARP+"; after:"+ModIDs.BETTER_RECORDS+"; after:"+ModIDs.TF+"; after:"+ModIDs.ERE+"; after:"+ModIDs.MFR+"; after:"+ModIDs.PnC+"; after:"+ModIDs.ExU+"; after:"+ModIDs.ExS+"; after:"+ModIDs.EIO+"; after:"+ModIDs.RT+"; after:"+ModIDs.AA+"; after:"+ModIDs.TreeCap+"; after:"+ModIDs.HaC+"; after:"+ModIDs.CookBook+"; after:"+ModIDs.APC+"; after:"+ModIDs.ENVM+"; after:"+ModIDs.MaCr+"; after:"+ModIDs.BC_TRANSPORT+"; after:"+ModIDs.BC_SILICON+"; after:"+ModIDs.BC_FACTORY+"; after:"+ModIDs.BC_ENERGY+"; after:"+ModIDs.BC_ROBOTICS+"; after:"+ModIDs.BC+"; after:"+ModIDs.BC_BUILDERS+"; after:"+ModIDs.MgC+"; after:"+ModIDs.BR+"; after:"+ModIDs.HBM+"; after:"+ModIDs.ELN+"; after:"+ModIDs.DRGN+"; after:"+ModIDs.ElC+"; after:"+ModIDs.CrC+"; after:"+ModIDs.ReC+"; after:"+ModIDs.RoC+"; after:"+ModIDs.Mek+"; after:"+ModIDs.Mek_Tools+"; after:"+ModIDs.Mek_Generators+"; after:"+ModIDs.GC+"; after:"+ModIDs.GC_PLANETS+"; after:"+ModIDs.GC_GALAXYSPACE+"; after:"+ModIDs.VULPES+"; after:"+ModIDs.GC_ADV_ROCKETRY+"; after:"+ModIDs.BTL+"; after:"+ModIDs.AETHER+"; after:"+ModIDs.TROPIC+"; after:"+ModIDs.ATUM+"; after:"+ModIDs.EB+"; after:"+ModIDs.EBXL+"; after:"+ModIDs.BoP+"; after:"+ModIDs.HiL+"; after:"+ModIDs.ATG+"; after:"+ModIDs.RTG+"; after:"+ModIDs.RWG+"; after:"+ModIDs.MYST+"; after:"+ModIDs.WARPBOOK+"; after:"+ModIDs.LOSTBOOKS+"; after:"+ModIDs.LOOTBAGS+"; after:"+ModIDs.EUREKA+"; after:"+ModIDs.ENCHIRIDION+"; after:"+ModIDs.ENCHIRIDION2+"; after:"+ModIDs.SmAc+"; after:"+ModIDs.HQM+"; after:"+ModIDs.SD+"; after:"+ModIDs.JABBA+"; after:"+ModIDs.MaCu+"; after:"+ModIDs.PdC+"; after:"+ModIDs.Bamboo+"; after:"+ModIDs.PMP+"; after:"+ModIDs.Fossil+"; after:"+ModIDs.GrC+"; after:"+ModIDs.GrC_Apples+"; after:"+ModIDs.GrC_Bamboo+"; after:"+ModIDs.GrC_Bees+"; after:"+ModIDs.GrC_Cellar+"; after:"+ModIDs.GrC_Fish+"; after:"+ModIDs.GrC_Grapes+"; after:"+ModIDs.GrC_Hops+"; after:"+ModIDs.GrC_Milk+"; after:"+ModIDs.GrC_Rice+"; after:"+ModIDs.BG2+"; after:"+ModIDs.BWM+"; after:"+ModIDs.OMT+"; after:"+ModIDs.TG+"; after:"+ModIDs.FM+"; after:"+ModIDs.FZ+"; after:"+ModIDs.MNTL+"; after:"+ModIDs.OB+"; after:"+ModIDs.PA+"; after:"+ModIDs.TiC+"; after:"+ModIDs.MF2+"; after:"+ModIDs.WR_CBE_C+"; after:"+ModIDs.WR_CBE_A+"; after:"+ModIDs.WR_CBE_L+"; after:"+ModIDs.VOLTZ+"; after:"+ModIDs.MFFS+"; after:"+ModIDs.ICBM+"; after:"+ModIDs.ATSCI+"; after:inventorytweaks; after:ironbackpacks; after:journeymap; after:LogisticsPipes; after:LunatriusCore; after:NEIAddons; after:NEIAddons|Developer; after:NEIAddons|AppEng; after:NEIAddons|Botany; after:NEIAddons|Forestry; after:NEIAddons|CraftingTables; after:NEIAddons|ExNihilo; after:neiintegration; after:openglasses; after:simplyjetpacks; after:Stackie; after:StevesCarts; after:TiCTooltips; after:worldedit; after:McMultipart")
 public class GT_API_Post extends Abstract_Mod {
 	public GT_API_Post() {GAPI_POST = this;}
 	
@@ -123,26 +124,31 @@ public class GT_API_Post extends Abstract_Mod {
 		new LoaderUnificationTargets().run();
 		
 		if (MD.MET.mLoaded) {
-			MT.OREMATS.Bauxite      .addOreByProducts(MT.Alduorite      );
-			MT.OREMATS.Chalcopyrite .addOreByProducts(MT.Infuscolium    );
-			MT.OREMATS.Scheelite    .addOreByProducts(MT.Rubracium      );
-			MT.OREMATS.Pentlandite  .addOreByProducts(MT.Meutoite       );
-			MT.OREMATS.Magnesite    .addOreByProducts(MT.Lemurite       );
-			MT.OREMATS.Stibnite     .addOreByProducts(MT.Ceruclase      );
-			MT.OREMATS.Garnierite   .addOreByProducts(MT.Oureclase      );
-			MT.OREMATS.Cooperite    .addOreByProducts(MT.Kalendrite     );
-			MT.OREMATS.Ilmenite     .addOreByProducts(MT.Orichalcum     );
-			MT.OREMATS.Sphalerite   .addOreByProducts(MT.Carmot         );
-			MT.OREMATS.Cinnabar     .addOreByProducts(MT.Sanguinite     );
-			MT.OREMATS.Malachite    .addOreByProducts(MT.Vyroxeres      );
-			MT.MnO2                 .addOreByProducts(MT.Eximite        );
-			MT.OREMATS.Cobaltite    .addOreByProducts(MT.Prometheum     );
-			MT.OREMATS.Cassiterite  .addOreByProducts(MT.Ignatius       );
-			MT.OREMATS.Wolframite   .addOreByProducts(MT.Vulcanite      );
-			MT.Fe2O3                .addOreByProducts(MT.DeepIron       );
-			MT.OREMATS.Magnetite    .addOreByProducts(MT.ShadowIron     );
+			MT.OREMATS.Bauxite            .addOreByProducts(MT.Alduorite      );
+			MT.OREMATS.Chalcopyrite       .addOreByProducts(MT.Infuscolium    );
+			MT.OREMATS.Scheelite          .addOreByProducts(MT.Rubracium      );
+			MT.OREMATS.Pentlandite        .addOreByProducts(MT.Meutoite       );
+			MT.MgCO3                      .addOreByProducts(MT.Lemurite       );
+			MT.OREMATS.Stibnite           .addOreByProducts(MT.Ceruclase      );
+			MT.OREMATS.Garnierite         .addOreByProducts(MT.Oureclase      );
+			MT.OREMATS.Cooperite          .addOreByProducts(MT.Kalendrite     );
+			MT.OREMATS.Ilmenite           .addOreByProducts(MT.Orichalcum     );
+			MT.OREMATS.Sphalerite         .addOreByProducts(MT.Carmot         );
+			MT.OREMATS.Cinnabar           .addOreByProducts(MT.Sanguinite     );
+			MT.OREMATS.Malachite          .addOreByProducts(MT.Vyroxeres      );
+			MT.MnO2                       .addOreByProducts(MT.Eximite        );
+			MT.OREMATS.Cobaltite          .addOreByProducts(MT.Prometheum     );
+			MT.OREMATS.Cassiterite        .addOreByProducts(MT.Ignatius       );
+			MT.OREMATS.Wolframite         .addOreByProducts(MT.Vulcanite      );
+			MT.Fe2O3                      .addOreByProducts(MT.DeepIron       );
+			MT.OREMATS.BrownLimonite      .addOreByProducts(MT.DeepIron       );
+			MT.OREMATS.YellowLimonite     .addOreByProducts(MT.DeepIron       );
+			MT.OREMATS.Magnetite          .addOreByProducts(MT.ShadowIron     );
+			MT.OREMATS.BasalticMineralSand.addOreByProducts(MT.ShadowIron     );
+			MT.OREMATS.GraniticMineralSand.addOreByProducts(MT.ShadowIron     );
 		}
 		if (MD.Mek.mLoaded) {
+			MT.Pb.addOreByProducts(MT.FakeOsmium);
 			MT.OREMATS.Galena.addOreByProducts(MT.FakeOsmium);
 			MT.OREMATS.Magnetite.addOreByProducts(MT.FakeOsmium);
 			MT.OREMATS.Ferrovanadium.addOreByProducts(MT.FakeOsmium);
@@ -177,13 +183,13 @@ public class GT_API_Post extends Abstract_Mod {
 			MT.Pu.addOreByProducts(MT.Blutonium);
 			MT.Am.addOreByProducts(MT.Blutonium);
 		}
-		if (MD.AE.mLoaded) {
-			OP.gem .disableItemGeneration(MT.CertusQuartz, MT.Fluix);
-			OP.dust.disableItemGeneration(MT.CertusQuartz, MT.Fluix);
-		}
 		if (MD.AA.mLoaded) {
 			MT.OREMATS.Barite.addOreByProducts(MT.BlackQuartz);
 			MT.MilkyQuartz.addOreByProducts(MT.BlackQuartz);
+		}
+		if (MD.AE.mLoaded) {
+			OP.gem .disableItemGeneration(MT.CertusQuartz, MT.Fluix);
+			OP.dust.disableItemGeneration(MT.CertusQuartz, MT.Fluix);
 		}
 	}
 
@@ -377,25 +383,36 @@ public class GT_API_Post extends Abstract_Mod {
 		
 		// Oh look, Matter Overdrive does this shit too...
 		if (MD.MO.mLoaded) {
-			OreDictManager.INSTANCE.setTarget(OP.gem    , MT.Dilithium     , ST.make(MD.MO, "dilithium_crystal", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.TritaniumAlloy, ST.make(MD.MO, "tritanium_dust", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.nugget , MT.TritaniumAlloy, ST.make(MD.MO, "tritanium_nugget", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.TritaniumAlloy, ST.make(MD.MO, "tritanium_ingot", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.plate  , MT.TritaniumAlloy, ST.make(MD.MO, "tritanium_plate", 1, 0));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.MO, "dilithium_ore", null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.MO, "tritanium_ore", null));
+			
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Dolamide                , ST.make(MD.MO, "dilithium_ore"    , 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OREMATS.TritaniumDioxide, ST.make(MD.MO, "tritanium_ore"    , 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.gem            , MT.Dilithium               , ST.make(MD.MO, "dilithium_crystal", 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.dust           , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_dust"   , 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.nugget         , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_nugget" , 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_ingot"  , 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.plate          , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_plate"  , 1, 0));
 		}
 		
 		// ThermalExpansion gets on this ShitList too I guess...
 		if (MD.TE.mLoaded) {
+			ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.TE, "Glass", 1, W));
+			
+			IL.TE_Rockwool   .set(ST.make(MD.TE, "Rockwool", 1, 0));
+			IL.TE_ObsidiGlass.set(ST.make(MD.TE, "Glass"   , 1, 0));
+			IL.TE_LumiumGlass.set(ST.make(MD.TE, "Glass"   , 1, 1));
+			
 			OM.data(MD.TE, "Tank", 1, 1, ANY.Cu     ,  U * 1, MT.Glass,  U * 4);
 			OM.data(MD.TE, "Tank", 1, 2, MT.Invar   ,  U * 4, ANY.Cu  ,  U * 1, MT.Glass,  U * 4);
 			OM.data(MD.TE, "Tank", 1, 3, MT.Invar   ,  U * 4, ANY.Cu  ,  U * 1, MT.Glass,  U * 4);
 			OM.data(MD.TE, "Tank", 1, 4, MT.Enderium,  U * 4, MT.Invar,  U * 4, ANY.Cu  ,  U * 1, MT.Glass,  U * 4);
 		}
-
+		
 		// Wow, Ars Magica too is on this List, at least for its Blocks...
 		IL.ARS_Cerublossom.set(ST.make(MD.ARS, "blueOrchid", 1, 0), null, "flowerCerublossom");
 		IL.ARS_DesertNova .set(ST.make(MD.ARS, "desertNova", 1, 0), null, "flowerDesertNova");
-
+		
 		// Cooking for Blockheads is here too!...
 		if (MD.CookBook.mLoaded) {
 			OM.data(MD.CookBook, "recipebook", 1, W, MT.Paper, U*3);
@@ -428,7 +445,7 @@ public class GT_API_Post extends Abstract_Mod {
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 4), OP.oreVanillastone.dat(MT.Zn));
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 5), OP.oreVanillastone.dat(MT.Ni));
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 6), OP.oreVanillastone.dat(MT.OREMATS.Bauxite));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 7), OP.oreVanillastone.dat(MT.OREMATS.Magnesite));
+			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 7), OP.oreVanillastone.dat(MT.MgCO3));
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 8), OP.oreVanillastone.dat(MT.OREMATS.Uraninite));
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 9), OP.oreVanillastone.dat(MT.Pt));
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 0), OP.oreVanillastone.dat(MT.Amazonite));
@@ -440,79 +457,79 @@ public class GT_API_Post extends Abstract_Mod {
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 6), OP.oreVanillastone.dat(MT.Almandine));
 			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 7), OP.oreVanillastone.dat(MT.Andradite));
 			
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   0, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   1, ANY.Steel             ,  U2);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   2, ANY.Steel             ,  U4);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   3, ANY.Steel             ,  U8);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   4, ANY.Steel             ,  U3);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   5, ANY.Steel             ,  U4);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   6, ANY.Steel             ,  U4);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   7, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   8, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,   9, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  10, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  11, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  12, ANY.Steel             ,  17*U16);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  13, ANY.Steel             ,  33*U16);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  14, ANY.Steel             ,  67*U16);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  15, ANY.Steel             ,  U16);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  16, ANY.Steel             ,  U8);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  17, ANY.Steel             ,  U4);
-			OM.data(MD.VOLTZ, "veSheetMetal"                    , 1,  18, ANY.Steel             ,  3*U2);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   0, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   1, ANY.Steel ,  U2);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   2, ANY.Steel ,  U4);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   3, ANY.Steel ,  U8);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   4, ANY.Steel ,  U3);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   5, ANY.Steel ,  U4);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   6, ANY.Steel ,  U4);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   7, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   8, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,   9, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  10, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  11, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  12, ANY.Steel ,  17*U16);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  13, ANY.Steel ,  33*U16);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  14, ANY.Steel ,  67*U16);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  15, ANY.Steel ,  U16);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  16, ANY.Steel ,  U8);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  17, ANY.Steel ,  U4);
+			OM.data(MD.VOLTZ, "veSheetMetal", 1,  18, ANY.Steel ,  3*U2);
 
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   1, ANY.Cu                ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   2, MT.Sn                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   3, MT.Bronze             ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   4, ANY.Fe                ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   5, ANY.Steel             ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   6, MT.Ag                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   7, MT.Au                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   8, MT.Pb                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,   9, MT.Zn                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  10, MT.Ni                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  11, MT.Al                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  12, MT.Mg                 ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  14, MT.Brass              ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  15, ANY.Stone             ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  16, ANY.Wood              ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  17, MT.Diamond            ,  U);
-			OM.data(MD.VOLTZ, "veGear"                          , 1,  18, MT.Pt                 ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   1, ANY.Cu    ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   2, MT.Sn     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   3, MT.Bronze ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   4, ANY.Fe    ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   5, ANY.Steel ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   6, MT.Ag     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   7, MT.Au     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   8, MT.Pb     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,   9, MT.Zn     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  10, MT.Ni     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  11, MT.Al     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  12, MT.Mg     ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  14, MT.Brass  ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  15, ANY.Stone ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  16, ANY.Wood  ,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  17, MT.Diamond,  U);
+			OM.data(MD.VOLTZ, "veGear"      , 1,  18, MT.Pt     ,  U);
 
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   1, ANY.Cu                ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   2, MT.Sn                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   3, MT.Bronze             ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   4, ANY.Fe                ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   5, ANY.Steel             ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   6, MT.Ag                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   7, MT.Au                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   8, MT.Pb                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,   9, MT.Zn                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  10, MT.Ni                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  11, MT.Al                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  12, MT.Mg                 ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  14, MT.Brass              ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  15, ANY.Stone             ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  16, ANY.Wood              ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  17, MT.Diamond            ,  U2);
-			OM.data(MD.VOLTZ, "veRod"                           , 1,  18, MT.Pt                 ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   1, ANY.Cu    ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   2, MT.Sn     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   3, MT.Bronze ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   4, ANY.Fe    ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   5, ANY.Steel ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   6, MT.Ag     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   7, MT.Au     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   8, MT.Pb     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,   9, MT.Zn     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  10, MT.Ni     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  11, MT.Al     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  12, MT.Mg     ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  14, MT.Brass  ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  15, ANY.Stone ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  16, ANY.Wood  ,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  17, MT.Diamond,  U2);
+			OM.data(MD.VOLTZ, "veRod"       , 1,  18, MT.Pt     ,  U2);
 
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   1, ANY.Cu                ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   2, MT.Sn                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   3, MT.Bronze             ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   4, ANY.Fe                ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   5, ANY.Steel             ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   6, MT.Ag                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   7, MT.Au                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   8, MT.Pb                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,   9, MT.Zn                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  10, MT.Ni                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  11, MT.Al                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  12, MT.Mg                 ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  14, MT.Brass              ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  15, ANY.Stone             ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  16, ANY.Wood              ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  17, MT.Diamond            ,  U9);
-			OM.data(MD.VOLTZ, "veWire"                          , 1,  18, MT.Pt                 ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   1, ANY.Cu    ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   2, MT.Sn     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   3, MT.Bronze ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   4, ANY.Fe    ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   5, ANY.Steel ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   6, MT.Ag     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   7, MT.Au     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   8, MT.Pb     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,   9, MT.Zn     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  10, MT.Ni     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  11, MT.Al     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  12, MT.Mg     ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  14, MT.Brass  ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  15, ANY.Stone ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  16, ANY.Wood  ,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  17, MT.Diamond,  U9);
+			OM.data(MD.VOLTZ, "veWire"      , 1,  18, MT.Pt     ,  U9);
 		}
 	}
 

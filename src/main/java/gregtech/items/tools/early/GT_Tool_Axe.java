@@ -29,11 +29,13 @@ import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.item.multiitem.MultiItemTool;
+import gregapi.item.multiitem.behaviors.Behavior_Place_Workbench;
 import gregapi.item.multiitem.behaviors.Behavior_Tool;
 import gregapi.item.multiitem.tools.ToolStats;
 import gregapi.render.IIconContainer;
 import gregapi.util.ST;
 import gregapi.util.UT;
+import gregapi.util.WD;
 import gregapi.wooddict.WoodDictionary;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -52,7 +54,7 @@ public class GT_Tool_Axe extends ToolStats {
 	
 	@Override
 	public int getToolDamagePerDropConversion() {
-		return 5;
+		return 1;
 	}
 	
 	@Override
@@ -103,9 +105,14 @@ public class GT_Tool_Axe extends ToolStats {
 		int rAmount = 0;
 		if (LOCK && !MD.TreeCap.mLoaded && !aPlayer.worldObj.isRemote && !aPlayer.isSneaking() && !aBlock.getClass().getName().startsWith("com.ferreusveritas.dynamictrees") && (aBlock.isWood(aPlayer.worldObj, aX, aY, aZ) || OP.log.contains(ST.make(aBlock, 1, aMeta)) || WoodDictionary.WOODS.containsKey(aBlock, aMeta, T))) {
 			try {
-				int tIncrement = (int)Math.max(1, (aBlock.getBlockHardness(aPlayer.worldObj, aX, aY, aZ) * getToolDamagePerBlockBreak()) / 10);
+				int tIncrement = UT.Code.roundUp(aBlock.getBlockHardness(aPlayer.worldObj, aX, aY, aZ) * getToolDamagePerBlockBreak());
 				LOCK = F;
-				for (int tY = aY+1, tH = aPlayer.worldObj.getHeight(); tY < tH && rAmount <= aAvailableDurability; tY++) if (aPlayer.worldObj.getBlock(aX, tY, aZ) == aBlock && aPlayer.worldObj.func_147480_a(aX, tY, aZ, T)) {tIncrement++; rAmount+=tIncrement;} else break;
+				for (int tY = aY+1, tH = aPlayer.worldObj.getHeight(); tY < tH && rAmount <= aAvailableDurability; tY++) {
+					if (aPlayer.worldObj.getBlock(aX, tY, aZ) == aBlock && aPlayer.worldObj.func_147480_a(aX, tY, aZ, T)) {
+						if (FAST_LEAF_DECAY) WD.leafdecay(aPlayer.worldObj, aX, tY, aZ, aBlock, T);
+						rAmount+= ++tIncrement;
+					} else break;
+				}
 			} catch(Throwable e) {/**/}
 			LOCK = T;
 		}
@@ -144,7 +151,8 @@ public class GT_Tool_Axe extends ToolStats {
 	
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
-		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_axe, SFX.MC_DIG_WOOD, getToolDamagePerContainerCraft(), T, T));
+		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_axe, SFX.MC_DIG_WOOD, getToolDamagePerContainerCraft(), F, T));
+		aItem.addItemBehavior(aID, Behavior_Place_Workbench.INSTANCE);
 	}
 	
 	@Override
