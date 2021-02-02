@@ -78,7 +78,24 @@ public enum FL {
 	, Reikygen                  ("rc oxygen"                                                , SIMPLE, GAS, OXYGEN)
 	, Liquid_Oxygen             ("liquidoxygen"                                             , SIMPLE, LIQUID, LIQUID_OXYGEN)
 	, Liquid_Reikygen           ("rc liquid oxygen"                                         , SIMPLE, LIQUID, LIQUID_OXYGEN)
-	
+
+	// plasmas
+	, HeliumP                   ("heliumplasma"                                             , PLASMA)
+	, NitrogenP                 ("nitrogenplasma"                                           , PLASMA)
+	, OxygenP                   ("oxygenplasma"                                             , PLASMA)
+	, IronP                     ("ironplasma"                                               , PLASMA)
+	//, neutronP                  ("neutronplasma"                                            , PLASMA)
+	, protonP                   ("protonplasma"                                             , PLASMA)
+	, antiprotonP               ("antiprotonplasma"                                         , PLASMA)
+	, electronP                 ("electronplasma"                                           , PLASMA)
+	, positronP                 ("positronplasma"                                           , PLASMA)
+	//, neutrinoP                 ("neutrinoplasma"                                           , PLASMA)
+	//, antineutrinoP             ("antineutrinoplasma"                                       , PLASMA)
+
+	// ionized plasmas
+	, HydrogenI("ionizedhydrogen", GAS)
+	, HeliumI("ionizedhelium", GAS)
+
 	, Nitrogen                  ("nitrogen"                                                 , GAS)
 	, Liquid_Nitrogen           ("liquidnitrogen"                                           , LIQUID)
 	
