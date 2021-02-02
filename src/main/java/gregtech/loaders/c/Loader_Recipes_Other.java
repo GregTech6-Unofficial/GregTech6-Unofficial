@@ -915,7 +915,7 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Ionizer.addRecipe0(T, 64,   2000, FL.Hydrogen.make(50), FL.HydrogenI.make(50), ZL_IS);
 		RM.Ionizer.addRecipe0(T, 64,   2000, FL.Helium.make(50), FL.HeliumI.make(50), ZL_IS);
 		
-		RM.Well.addRecipe1(T, 16,   1800, new long[] {100}, ST.tag(1), ZL_FS, MT.H2O.liquid(U*2, F), ST.array(IL.Mud_Ball.get(1)));
+		RM.Well.addRecipe1(T, 16,   1800, ST.tag(1), ZL_FS, MT.H2O.liquid(U*2, F), ZL_IS);
 		
 		RM.Extruder.addRecipe2(T, 512,   512, OP.dust.mat(MT.Graphite, 1), IL.Shape_Extruder_Plate.get(0), OP.plate.mat(MT.Graphite, 1));
 		

@@ -2,6 +2,13 @@ This is the Changelog for GregTech-6-Unofficial
 6.15.07-unofficial: (Not released yet).
 
 6.15.06-unofficial: (Not released yet).
+[NOTE] Amethyst Mortar might be missing because I migrated its meta.
+[MERGED] 6.14.08 Official
+[FIXED] Fuel Cleaner does not produce exploding noise now.
+[FIXED] Titanium Niobium Carbide Tanks' local names are wrong.
+[CHANGED] Draining Well does not produce mud balls now.
+[CHANGED] Red Steel and Blue Steel now have correct alloying recipes and compositions.
+[CHANGED] The Amount of Terrasteel in Terra Pick and Axe is changed.
 [ADDED]
 Aquatic Farm. Multiblock structure. It consumes water/aquatic nutrition water and fish fry and cultivates fish for you.
 You need to think about how to deal with the output aquatic waste water.
