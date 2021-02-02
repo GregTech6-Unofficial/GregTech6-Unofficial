@@ -58,8 +58,6 @@ public class MultiTileEntityOilCleaner extends TileEntityBase10MultiBlockMachine
 		return mStructureOkay;
 	}
 	
-	@Override public void onProcessStarted() {UT.Sounds.send(SFX.MC_EXPLODE, this); super.onProcessStarted();}
-	
 	static {
 		LH.add("gt.tooltip.multiblock.oilcleaner.1", "3x3x3 Hollow of 25 Clean StainlessSteel Machine Casing filled with Air");
 		LH.add("gt.tooltip.multiblock.oilcleaner.2", "Can input all thing at all wall.");
