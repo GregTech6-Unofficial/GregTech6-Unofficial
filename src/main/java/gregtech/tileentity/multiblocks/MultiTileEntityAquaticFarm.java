@@ -41,7 +41,7 @@ import static gregapi.data.CS.*;
 /**
  * @author Gregorius Techneticies
  */
-public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
+public class MultiTileEntityAquaticFarm extends TileEntityBase10MultiBlockMachine {
 	@Override
 	public boolean checkStructure2() {
 		int
@@ -93,25 +93,25 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 
 	
 	static {
-		LH.add("gt.tooltip.multiblock.fishery.1", "5(Width)x3(Height)x7(Length) Hollow Cube with top side opened");
-		LH.add("gt.tooltip.multiblock.fishery.2", "Main Block centered on 5x3-Side-Bottom and facing outwards");
-		LH.add("gt.tooltip.multiblock.fishery.3", "The Edges of the Cube are Stainless Steel Walls");
-		LH.add("gt.tooltip.multiblock.fishery.4", "The Faces of the Cube are Fishery Blocks");
-		LH.add("gt.tooltip.multiblock.fishery.5", "Fill the Hollow space with Still Water");
-		LH.add("gt.tooltip.multiblock.fishery.6", "Stuff can go in and out at middle and top layer");
-		LH.add("gt.tooltip.multiblock.fishery.7", "Energy input at the bottom layer");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.1", "5(Width)x3(Height)x7(Length) Hollow Cube with top side opened");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.2", "Main Block centered on 5x3-Side-Bottom and facing outwards");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.3", "The Edges of the Cube are Stainless Steel Walls");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.4", "The Faces of the Cube are Aquatic Farm Blocks");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.5", "Fill the Hollow space with Still Water");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.6", "Stuff can go in and out at middle and top layer");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.7", "Energy input at the bottom layer");
 	}
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		aList.add(Chat.CYAN  + LH.get(LH.STRUCTURE) + ":");
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.1"));
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.2"));
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.3"));
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.4"));
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.5"));
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.6"));
-		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.fishery.7"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.1"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.2"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.3"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.4"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.5"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.6"));
+		aList.add(Chat.WHITE + LH.get("gt.tooltip.multiblock.aquaticfarm.7"));
 		super.addToolTips(aList, aStack, aF3_H);
 	}
 
@@ -140,5 +140,5 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 	@Override public DelegatorTileEntity<IInventory> getItemInputTarget(byte aSide) {return null;}
 	@Override public DelegatorTileEntity<IFluidHandler> getFluidInputTarget(byte aSide) {return null;}
 	
-	@Override public String getTileEntityName() {return "gt.multitileentity.multiblock.fishery";}
+	@Override public String getTileEntityName() {return "gt.multitileentity.multiblock.aquaticfarm";}
 }

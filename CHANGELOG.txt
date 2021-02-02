@@ -1,32 +1,19 @@
 This is the Changelog for GregTech-6-Unofficial
 6.15.07-unofficial: (Not released yet).
-[WIP] Fusion Reactor Mk2 and Mk3 and their component blocks.
-[WIP] New Fusion system.
-The new systems will focus on two aspects of fusion:
-1. New energy generation strategies based on Neutron Capture (NC) Design and Direct Voltage Conversion (DVC) Design.
-NC Design:
-A "Blanket" of neutron capture casings can be place on the fusion reactor's top or bottom to capture the neutrons emitted from the current recipe.
-There are two aspects in Neutron Capture strategy.
-Firstly, neutron capture casings is continued to be heated by the emitting neutrons. Coolants used to cool fission reactors can be filled in to cool the casings and carry the energy out as hot coolants, which can then be used in traditional heat-electricity conversions.
-Secondly, the neutron capture casings can be filled with molten lithium to breed tritium for fusion or molten fission wastes to breed new fission fuels.
-DVC Design:
-The old plasma turbines will be replaced with direct energy conversion machines that converts Electric Energy directly from the charged plasma produced in the fusion reactors.
-2. Maintenance
-The fusion reactors will now also require input of super coolant like Liquid Nitrogen (minimum for Mk1), Liquid Helium (minimum for Mk2), or Liquid Hydrogen (minimum for Mk3) depending on the reactor level.
-It will consume the coolant and output equivalent amount of gaseous coolant through time.
-This means you have to prepare a system of cooling devices to support your fusion reactors.
-To compensate for the increased maintenance cost and complexity, the energy production of fusion reactors will be boosted.
-Building a self-sustaining fusion plant will be one of the final aims in GregTech.
 
 6.15.06-unofficial: (Not released yet).
-[CHANGED]Some Ores can worldgen in Nether now.And copper in stone layer now should in Mountains Biomes  
+[ADDED]
+Aquatic Farm. Multiblock structure. It consumes water/aquatic nutrition water and fish fry and cultivates fish for you.
+You need to think about how to deal with the output aquatic waste water.
+[CHANGED] Some Ores can generate in Nether now. Copper can generate in Vanilla Stone layers only in Mountains Biomes.
 [CHANGED]
-New Solar System.Similar to Steam Boiler System.
-The new solar system likes a multy-structure.Now the Solar Photovoltaic Panel work as Solar Panel like before.But it output LP(Light Power)Then you need Solar Panel to turn LP to EU
+New Solar System. It is similar to Steam Boiler System.
+The new solar system is a multiblock structure. Now the Solar Photovoltaic Panel works as Solar Panel like before, but it output Light Power (LP).
+Then you need Solar Panel to transform LP to EU.
 And you can use Optical Fiber to transport LP from a lot of Solar Photovoltaic Panel.
-Also now have LP sensor like EU sensor.
-COMPAT:
-The Solar system can also work in Twilight Forest or Planet now(Twilight Forest or GalactiCraft should be loaded )
+Also now there is LP sensor like EU sensor.
+[COMPAT]
+The Solar system can also work in Twilight Forest or Planet now (Twilight Forest or GalacticCraft should be loaded)
 
 6.15.05-unofficial:
 [FIXED] MESU Casing requires double plastic plates to craft.
