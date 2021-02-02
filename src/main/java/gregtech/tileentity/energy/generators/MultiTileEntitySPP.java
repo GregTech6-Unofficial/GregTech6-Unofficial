@@ -38,6 +38,7 @@ import gregapi.tileentity.energy.ITileEntityEnergyElectricityEmitter;
 import gregapi.tileentity.machines.ITileEntityRunningActively;
 import gregapi.tileentity.machines.ITileEntitySwitchableOnOff;
 import gregapi.util.UT;
+import gregapi.util.WD;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -124,7 +125,9 @@ public class MultiTileEntitySPP extends TileEntityBase09FacingSingle implements 
 		if ((mCheck || mBlockUpdated || mTimer % 600 == 5)) {
 			mCheck = F;
 			mSky = getSkyAtSide(SIDE_TOP);
-		}
+		}		
+		if (WD.dimTF(worldObj)) {
+			mEnergy = mOutput / 2;
 		if (mSky) {
 			if (worldObj.isThundering()) {
 				mEnergy = 0;
@@ -158,6 +161,7 @@ public class MultiTileEntitySPP extends TileEntityBase09FacingSingle implements 
 				mEmitsEnergy = (ITileEntityEnergy.Util.emitEnergyToNetwork(mEnergyTypeEmitted, mEnergy, 1, this) > 0);
 			}
 		}
+	}
 		if (mEmitsEnergy) mEnergy = 0;
 	}
 
