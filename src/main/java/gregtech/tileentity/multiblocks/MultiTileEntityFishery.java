@@ -25,9 +25,13 @@ import gregapi.tileentity.delegate.DelegatorTileEntity;
 import gregapi.tileentity.multiblocks.ITileEntityMultiBlockController;
 import gregapi.tileentity.multiblocks.MultiTileEntityMultiBlockPart;
 import gregapi.tileentity.multiblocks.TileEntityBase10MultiBlockMachine;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.IFluidHandler;
 
@@ -44,40 +48,42 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 				tMinX = xCoord-(SIDE_X_NEG==mFacing?0:SIDE_X_POS==mFacing?6:1),
 				tMinZ = zCoord-(SIDE_Z_NEG==mFacing?0:SIDE_Z_POS==mFacing?6:1),
 				tMaxX = xCoord+(SIDE_X_POS==mFacing?0:SIDE_X_NEG==mFacing?6:1),
-				tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?6:1),
-				tD = (mActive?mFacing+2:mFacing-2);
+				tMaxZ = zCoord+(SIDE_Z_POS==mFacing?0:SIDE_Z_NEG==mFacing?6:1);
 
 		if (worldObj.blockExists(tMinX, yCoord, tMinZ) && worldObj.blockExists(tMaxX, yCoord+2, tMaxZ)) {
 			boolean tSuccess = T;
 			for (int tX = tMinX; tX <= tMaxX; tX++) for (int tZ = tMinZ; tZ <= tMaxZ; tZ++) {
+
+				// Conditions
+				boolean isSides = tX == tMinX || tX == tMaxX || tZ == tMinZ || tZ == tMaxZ;
+				boolean isCorners = tX == tMinX && tZ == tMinZ || tX == tMinX && tZ == tMaxZ || tX == tMaxX && tZ == tMinZ || tX == tMaxX && tZ == tMaxZ;
+				boolean isNotSides = tX != tMinX && tX != tMaxX && tZ != tMinZ && tZ != tMaxZ;
+
 				// Layer 1
-				boolean isSides = (tX == tMinX || tX == tMaxX || tZ == tMinZ || tZ == tMaxZ);
 				if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord, tZ, isSides ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
 
 				// Layer 2
-				if (tX != tMinX && tX != tMaxX && tZ != tMinZ && tZ != tMaxZ) {
-					if (getAir(tX, yCoord + 1, tZ)) worldObj.setBlockToAir(tX, yCoord + 1, tZ); else tSuccess = F;
+				if (isNotSides) {
+					if (getWater(tX, yCoord + 1, tZ)) worldObj.setBlock(tX, yCoord + 1, tZ, Blocks.water); else tSuccess = F;
 				} else {
-					boolean isCorners = (tX == tMinX && tZ == tMinZ || tX == tMinX && tZ == tMaxZ || tX == tMaxX && tZ == tMinZ || tX == tMaxX && tZ == tMaxZ);
 					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 1, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
 				}
 
 				// Layer 3
-				if (tX != tMinX && tX != tMaxX && tZ != tMinZ && tZ != tMaxZ) {
-					if (getAir(tX, yCoord + 2, tZ)) worldObj.setBlockToAir(tX, yCoord + 2, tZ); else tSuccess = F;
+				if (isNotSides) {
+					if (getAir(tX, yCoord + 2, tZ)) worldObj.setBlock(tX, yCoord + 2, tZ, Blocks.water); else tSuccess = F;
 				} else {
-					boolean isCorners = (tX == tMinX && tZ == tMinZ || tX == tMinX && tZ == tMaxZ || tX == tMaxX && tZ == tMinZ || tX == tMaxX && tZ == tMaxZ);
 					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 2, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
 				}
 
 				// Layer 4
-				if (tX != tMinX && tX != tMaxX && tZ != tMinZ && tZ != tMaxZ) {
-					if (getAir(tX, yCoord + 3, tZ)) worldObj.setBlockToAir(tX, yCoord + 3, tZ); else tSuccess = F;
+				if (isNotSides) {
+					if (getAir(tX, yCoord + 3, tZ)) worldObj.setBlock(tX, yCoord + 3, tZ, Blocks.water); else tSuccess = F;
 				} else {
-					boolean isCorners = (tX == tMinX && tZ == tMinZ || tX == tMinX && tZ == tMaxZ || tX == tMaxX && tZ == tMinZ || tX == tMaxX && tZ == tMaxZ);
 					if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 3, tZ, isCorners ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
 				}
 
+				// Layer 5
 				if (!ITileEntityMultiBlockController.Util.checkAndSetTarget(this, tX, yCoord + 4, tZ, isSides ? 18002 : 18298, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ITEM_FLUID_ENERGY)) tSuccess = F;
 
 			}
@@ -85,6 +91,12 @@ public class MultiTileEntityFishery extends TileEntityBase10MultiBlockMachine {
 		}
 		return mStructureOkay;
 		
+	}
+
+	private boolean getWater(int aX, int aY, int aZ) {
+		if (worldObj == null) return T;
+		if (mIgnoreUnloadedChunks && crossedChunkBorder(aX, aZ) && !worldObj.blockExists(aX, aY, aZ)) return T;
+		return worldObj.getBlock(aX, aY, aZ).getMaterial() == Material.water;
 	}
 
 	

@@ -938,5 +938,8 @@ public class Loader_Recipes_Other implements Runnable {
 			tFluid = tMaterial.gas(U, T);    if (!FL.Error.is(tFluid)) RM.Massfab.addRecipe0(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tFluid,     tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
 			tFluid = tMaterial.plasma(U, T); if (!FL.Error.is(tFluid)) RM.Massfab.addRecipe0(T, 1, (tMaterial.mNeutrons+tMaterial.mProtons)*131072  , tFluid,     tMaterial.mProtons<1?NF:FL.MatterCharged.make(tMaterial.mProtons  ), tMaterial.mNeutrons<1?NF:FL.MatterNeutral.make(tMaterial.mNeutrons  ));
 		}
+
+		RM.Well.addRecipe1(T, 16,1800, new long[] {100}, ST.tag(1), ZL_FS, MT.H2O.liquid(U*2, F), ST.array(IL.Mud_Ball.get(1)));
+
 	}
 }
