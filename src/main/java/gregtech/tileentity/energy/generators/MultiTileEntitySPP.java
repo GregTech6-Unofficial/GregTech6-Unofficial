@@ -126,6 +126,8 @@ public class MultiTileEntitySPP extends TileEntityBase09FacingSingle implements 
 			mCheck = F;
 			mSky = getSkyAtSide(SIDE_TOP);
 		}		
+		if (WD.dimPlanet(worldObj)) {
+			mEnergy = mOutput * 2;
 		if (WD.dimTF(worldObj)) {
 			mEnergy = mOutput / 2;
 		if (mSky) {
@@ -162,6 +164,7 @@ public class MultiTileEntitySPP extends TileEntityBase09FacingSingle implements 
 			}
 		}
 	}
+}		
 		if (mEmitsEnergy) mEnergy = 0;
 	}
 
