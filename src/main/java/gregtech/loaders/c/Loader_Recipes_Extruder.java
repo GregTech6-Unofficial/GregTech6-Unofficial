@@ -236,7 +236,6 @@ public class Loader_Recipes_Extruder implements Runnable {
 			RM.Extruder.addRecipe2(T, F, F, F, T, 16, 64   ,            tStack , IL.Shape_SimpleEx_Bolt        .get(0), OP.bolt.mat(MT.Glass, 8));
 			RM.Extruder.addRecipe2(T, F, F, F, T, 16, 64   ,            tStack , IL.Shape_SimpleEx_Ring        .get(0), OP.ring.mat(MT.Glass, 4));
 			RM.Extruder.addRecipe2(T, F, F, F, F, 16, 64   ,            tStack , IL.Shape_SimpleEx_Wire        .get(0), OP.wireGt01.mat(MT.Glass, 2));
-			RM.Extruder.addRecipe2(T, F, F, F, F, 16, 96   ,            tStack , IL.Shape_SimpleEx_Wire        .get(0), OP.wireLPGt01.mat(MT.Glass, 2));
 			RM.Extruder.addRecipe2(T, F, F, F, T, 16, 64   ,            tStack , IL.Shape_SimpleEx_Casing      .get(0), OP.casingSmall.mat(MT.Glass, 2));
 			RM.Extruder.addRecipe2(T, F, F, F, T, 16, 64   ,            tStack , IL.Shape_SimpleEx_Shovel      .get(0), OP.toolHeadRawShovel.mat(MT.Glass, 1));
 			RM.Extruder.addRecipe2(T, F, F, F, F, 16, 64   ,            tStack , IL.Shape_SimpleEx_Pipe_Tiny   .get(0), OP.pipeTiny.mat(MT.Glass, 2));

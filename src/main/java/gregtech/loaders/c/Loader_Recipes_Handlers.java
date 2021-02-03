@@ -235,7 +235,10 @@ public class Loader_Recipes_Handlers implements Runnable {
 		RM.Wiremill             .add(new RecipeMapHandlerPrefix(stickLong                       , 1, NF,  16, 0,   128, NF, wireFine        , 8, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE)));
 		RM.Wiremill             .add(new RecipeMapHandlerPrefix(ingot                           , 1, NF,  16, 0,   128, NF, wireGt01        , 2, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE)));
 		RM.Wiremill             .add(new RecipeMapHandlerPrefix(compressed                      , 1, NF,  16, 0,   128, NF, wireGt01        , 2, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE)));
-		
+	
+		RM.Wiremill             .add(new RecipeMapHandlerPrefix(ingot                           , 1, NF,  16, 0,  196, NF, wireLPGt01        , 2, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE)));
+		RM.Wiremill             .add(new RecipeMapHandlerPrefix(compressed                      , 1, NF,  16, 0,  196, NF, wireLPGt01        , 2, NI, NI, T, F, F, new And(ANTIMATTER.NOT, COATED.NOT, SMITHABLE)));
+
 		RM.RollBender           .add(new RecipeMapHandlerPrefix(wireFine                        , 2, NF,  16, 0,   256, NF, springSmall     , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, SMITHABLE)));
 		RM.RollBender           .add(new RecipeMapHandlerPrefix(stick                           , 1, NF,  16, 0,   256, NF, ring            , 2, NI, NI, T, F, F, new And(ANTIMATTER.NOT, SMITHABLE)));
 		RM.RollBender           .add(new RecipeMapHandlerPrefix(stickLong                       , 1, NF,  16, 0,   256, NF, spring          , 1, NI, NI, T, F, F, new And(ANTIMATTER.NOT, SMITHABLE)));
@@ -418,6 +421,20 @@ public class Loader_Recipes_Handlers implements Runnable {
 		GameRegistry.addRecipe(new AdvancedCraftingXToY(plate                   ,  9, blockPlate                , 1, F));
 		GameRegistry.addRecipe(new AdvancedCraftingXToY(plateGem                ,  9, blockPlateGem             , 1, F));
 		
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt01                        , 2, NF,  16, 0,    64, NF, wireLPGt02        , 1, ST.tag( 2), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt01                        , 4, NF,  16, 0,    64, NF, wireLPGt04        , 1, ST.tag( 4), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt01                        , 8, NF,  16, 0,    64, NF, wireLPGt08        , 1, ST.tag( 8), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt01                        ,12, NF,  16, 0,    64, NF, wireLPGt12        , 1, ST.tag(12), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt01                        ,16, NF,  16, 0,    64, NF, wireLPGt16        , 1, ST.tag(16), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt02                        , 2, NF,  16, 0,    64, NF, wireLPGt04        , 1, ST.tag( 4), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt02                        , 4, NF,  16, 0,    64, NF, wireLPGt08        , 1, ST.tag( 8), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt02                        , 6, NF,  16, 0,    64, NF, wireLPGt12        , 1, ST.tag(12), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt02                        , 8, NF,  16, 0,    64, NF, wireLPGt16        , 1, ST.tag(16), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt04                        , 2, NF,  16, 0,    64, NF, wireLPGt08        , 1, ST.tag( 8), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt04                        , 3, NF,  16, 0,    64, NF, wireLPGt12        , 1, ST.tag(12), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt04                        , 4, NF,  16, 0,    64, NF, wireLPGt16        , 1, ST.tag(16), NI, F, F, F, ANTIMATTER.NOT));
+		RM.Loom                 .add(new RecipeMapHandlerPrefix(wireLPGt08                        , 2, NF,  16, 0,    64, NF, wireLPGt16        , 1, ST.tag(16), NI, F, F, F, ANTIMATTER.NOT));
+
 		for (int tBig = 1; tBig <= 16; tBig++) for (int tSmall = 1; tSmall < tBig; tSmall++) if (tBig % tSmall == 0) {
 		int tAmount = tBig/tSmall;
 		RM.Loom       .add(new RecipeMapHandlerPrefix(wireGt[tSmall-1], tAmount, NF, 16, 0, 64, NF, wireGt[tBig-1], 1, ST.tag(tBig), NI, F, F, F, ANTIMATTER.NOT));
