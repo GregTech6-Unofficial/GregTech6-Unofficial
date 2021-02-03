@@ -130,7 +130,7 @@ public class Loader_Fluids implements Runnable {
 		// Platinum Family Metal processing related fluids
 		FL.create("solutionrichptpa"         , "Rich Platinum Palladium Solution" , null     , 1);
 		FL.create("solutionrichpa"           , "Rich Palladium Solution" , null              , 1);
-		FL.create("moltensodiumbisulfate"    , "Molten Sodium Bisulfate" , null              , 1);
+		FL.create("moltensodiumbisulfate"    , "Molten Sodium Bisulfate" , MT.NaHSO4                  , 1);
 		FL.create("rhodiumsulfidesolution"   , "Rhodium Sulfide Solution" , null             , 1);
 		FL.create("pregnantsolutionosru"     , "Rich Osmium Ruthenium Pregnant Solution" , null , 1);
 		FL.create("absorptionliquidosru"     , "Rich Osmium Ruthenium Absorption Liquid" , null , 1);

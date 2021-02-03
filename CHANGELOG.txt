@@ -5,6 +5,25 @@ This is the Changelog for GregTech-6-Unofficial
 6.15.06-unofficial: (Not released yet).
 [NOTE] Amethyst Mortar might be missing because I migrated its meta.
 [NOTE] Original Solar Panels are changed into ULV Solar Photovoltaic Panels.
+[FIXED] Molten Sodium Bisulfate not obtainable from crucible.
+[FIXED] Fuel Cleaner does not produce exploding noise now.
+[FIXED] Titanium Niobium Carbide Tanks' local names are wrong.
+[FIXED] Cheese having wrong nutrition in TFC.
+[CHANGED] Draining Well does not produce mud balls now.
+[CHANGED] Red Steel and Blue Steel now have correct alloying recipes and compositions.
+[CHANGED] The Amount of Terrasteel in Terra Pick and Axe is changed.
+[CHANGED] Some Ores can generate in Nether now. Copper can generate in Vanilla Stone layers only in Mountains Biomes.
+[CHANGED]
+New Solar System. It is similar to the Steam Boiler System.
+The new solar system is a multiblock structure. Now the Solar Photovoltaic Panel works as Solar Panel like before, but it output Light Power (LP).
+Then you need Light Power Transformer to transform LP to EU.
+And you can use Optical Fiber to transport LP from a lot of Solar Photovoltaic Panels.
+Also now there is LP sensor like EU sensor.
+[COMPAT]
+The Solar system can also work in Twilight Forest or Planet now (Twilight Forest or GalacticCraft should be loaded)
+[ADDED]
+Aquatic Farm. Multiblock structure. It consumes water/aquatic nutrition water and fish fry and cultivates fish for you.
+You need to think about how to deal with the output aquatic waste water.
 [MERGED] 6.14.02 - 6.14.08 Official
 - 6.14.08:
 - [FIXED] Some Issue where the World somehow doesn't load.
@@ -134,25 +153,6 @@ This is the Changelog for GregTech-6-Unofficial
 - Sneaking ontop of the Scaffold Platform makes it possible to go down the Ladder, as long as you dont stand on the Ladder part itself.
 - Sideways Scaffolds need to be connected to at least one vertical Scaffold on the same Y-Level to stay in place.
 - You should use Steel Bars or similar as a Guard Rail, if you use the Scaffolds as a Catwalk.
-
-[FIXED] Fuel Cleaner does not produce exploding noise now.
-[FIXED] Titanium Niobium Carbide Tanks' local names are wrong.
-[FIXED] Cheese having wrong nutrition in TFC.
-[CHANGED] Draining Well does not produce mud balls now.
-[CHANGED] Red Steel and Blue Steel now have correct alloying recipes and compositions.
-[CHANGED] The Amount of Terrasteel in Terra Pick and Axe is changed.
-[CHANGED] Some Ores can generate in Nether now. Copper can generate in Vanilla Stone layers only in Mountains Biomes.
-[CHANGED]
-New Solar System. It is similar to the Steam Boiler System.
-The new solar system is a multiblock structure. Now the Solar Photovoltaic Panel works as Solar Panel like before, but it output Light Power (LP).
-Then you need Light Power Transformer to transform LP to EU.
-And you can use Optical Fiber to transport LP from a lot of Solar Photovoltaic Panels.
-Also now there is LP sensor like EU sensor.
-[COMPAT]
-The Solar system can also work in Twilight Forest or Planet now (Twilight Forest or GalacticCraft should be loaded)
-[ADDED]
-Aquatic Farm. Multiblock structure. It consumes water/aquatic nutrition water and fish fry and cultivates fish for you.
-You need to think about how to deal with the output aquatic waste water.
 
 
 6.15.05-unofficial:

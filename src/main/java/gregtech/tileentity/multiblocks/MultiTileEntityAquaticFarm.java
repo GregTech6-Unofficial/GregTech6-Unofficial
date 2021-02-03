@@ -93,10 +93,10 @@ public class MultiTileEntityAquaticFarm extends TileEntityBase10MultiBlockMachin
 
 	
 	static {
-		LH.add("gt.tooltip.multiblock.aquaticfarm.1", "5(Width)x3(Height)x7(Length) Hollow Cube with top side opened");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.1", "5(Width)x3(Height)x7(Length) Hollow Cuboid with top side opened");
 		LH.add("gt.tooltip.multiblock.aquaticfarm.2", "Main Block centered on 5x3-Side-Bottom and facing outwards");
-		LH.add("gt.tooltip.multiblock.aquaticfarm.3", "The Edges of the Cube are Stainless Steel Walls");
-		LH.add("gt.tooltip.multiblock.aquaticfarm.4", "The Faces of the Cube are Aquatic Farm Blocks");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.3", "The Edges of the Cuboid are Stainless Steel Walls");
+		LH.add("gt.tooltip.multiblock.aquaticfarm.4", "The Faces of the Cuboid are Aquatic Farm Blocks");
 		LH.add("gt.tooltip.multiblock.aquaticfarm.5", "Fill the Hollow space with Still Water");
 		LH.add("gt.tooltip.multiblock.aquaticfarm.6", "Stuff can go in and out at middle and top layer");
 		LH.add("gt.tooltip.multiblock.aquaticfarm.7", "Energy input at the bottom layer");
