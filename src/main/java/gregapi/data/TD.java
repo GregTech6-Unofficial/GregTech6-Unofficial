@@ -199,7 +199,7 @@ public class TD {
 		public static final List<TagData> VIS                               = new ArrayListNoNulls<>(F, VIS_ORDO, VIS_AER, VIS_AQUA, VIS_TERRA, VIS_IGNIS, VIS_PERDITIO);
 		
 		/** Contains all known Energy Tags. */
-		public static final List<TagData> ALL                               = new ArrayListNoNulls<>(F, VIS_ORDO, VIS_AER, VIS_AQUA, VIS_TERRA, VIS_IGNIS, VIS_PERDITIO, STEAM, MJ, RF, AU, QU, MU, LU, HU, CU, KU, RU, EU, NU, TU);
+		public static final List<TagData> ALL                               = new ArrayListNoNulls<>(F, VIS_ORDO, VIS_AER, VIS_AQUA, VIS_TERRA, VIS_IGNIS, VIS_PERDITIO, STEAM, MJ, RF, AU, QU, MU, LU, LP, HU, CU, KU, RU, EU, NU, TU);
 		/** Contains all known Energy Tags, which can be converted to or from RF. */
 		public static final List<TagData> ALL_RF                            = new ArrayListNoNulls<>(F, MJ, RF, KU);
 		/** Contains all known Energy Tags, which are worth exactly 1 EU. */
