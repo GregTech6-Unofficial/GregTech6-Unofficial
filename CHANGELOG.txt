@@ -1,36 +1,172 @@
 This is the Changelog for GregTech-6-Unofficial
 6.15.07-unofficial: (Not released yet).
 
+
 6.15.06-unofficial: (Not released yet).
 [NOTE] Amethyst Mortar might be missing because I migrated its meta.
-[MERGED] 6.14.08 Official
+[NOTE] Original Solar Panels are changed into ULV Solar Photovoltaic Panels.
+[MERGED] 6.14.02 - 6.14.08 Official
+- 6.14.08:
+- [FIXED] Some Issue where the World somehow doesn't load.
+- [ADDED] HSS-based Recipes for Railcraft Rails.
+-
+-
+- 6.14.07:
+- [BROKEN] You might not be able to actually launch the Game on certain Computers. Nothing corrupting. ^^
+- [NOTE] I've been indirectly asked through bear, to make GT6 Tools compatible with "Progressive Automation", but it only accepts Vanilla alike Tools, meaning that will never really work. But my Wrench can harvest all of its Machines now at the very least.
+- [COMPAT] Per Fabrica Ad Astra (PFAA)
+- If CustomOreGen is not installed, PFAA still works, this means PFAA Blocks exist but they wont generate. Because of this likely intended thing, I will now generate the 25 PFAA Rock Types with my own Stone Layer System alongside the other Stuff, if PFAA is installed without CustomOreGen.
+- The PFAA Sands now have more appropriate Processing, and the PFAA Clay Balls now have fitting Material Data.
+- I made sure all Ores actually work. Realgar (Red Gem Ore made of Arsenic + Sulfur) did not have any Material Data.
+- [IMPROVED] Advanced Crafting Table now consumes Items in a better order. Also fixed a brand new Bug I caused earlier.
+- [FIXED] Magnesite and Magnesium Carbonate are now the same Material, like they should have been.
+- [FIXED] The Collect Sound for autocollecting Tools is now matching the vanilla Sound in Pitch and Volume.
+- [FIXED] Battery Boxes were not able to charge Tools unless a Battery was inside of them to make them able to accept Power. (their internal buffer would eventually reach zero when charging tools only)
+- [FIXED] Aqua Regia Processing Ores emitted too much Water, effectively turning Oxygen into Hydrogen.
+- [CHANGED] Air Vents now do 256000L per 360 ticks at a time, instead of only 16000. They have an Offset for ticking too now, so you can use multiple Vents on one Pipe/Drum/etc now.
+- [CHANGED] There is now more Galena Veins in the World, and visible on the Surface in Mountains.
+- [CHANGED] A bunch of Ores, that I deemed way too useless years ago, has been added back. None of them are required for anything, old Worlds are safe as always.
+- [ADDED] NEI Handler for putting Toolheads on Handles. I used the Machine Recipe Handler and Fake Recipes for that one.
+- [ADDED] Arsenic can now be used to make Poison and Harming Potions.
+- [ADDED] Crushed Purified Biotite can now be heated in the Dryer to make Argon Gas from it. It is mostly a Byproduct of other Ores like Asbestos though,
+- [ADDED] Gypsum, Trona and Mirabilite now have Recipes to create them by mixing some Chemicals with Water (They can be dried back too). Perlite now has a drying Recipe that turns it into Obsidian aswell.
+- [ADDED] Iron and Hydrochloric Acid now have a few more Chemical Reactions. This will improve Hematite extraction from Limonite. Oh and Limonite now smelts into Hematite, like it does in real Life, so it is no longer an easy Shortcut, like it was before.
+- [ADDED] Vanadiumsteel Fluid Pipe that can handle Acids and otherwise has the same Stats as Tungstensteel (which cannot handle Acids).
+- [ADDED] Porcelain Cup Recipe. Now you dont need to rely on Loot anymore to get those small Cups.
+- [ADDED] Two more variants of Black Sand. They are essentially identical in function when it comes to getting Iron, Vanadium and Gold, so it is not much of a change. They also came from PFAA and were dormant and only somewhat compatible until now.
+- [ADDED]
+- Bentonite Clay, Kaolinite Clay and Palygorskite Clay (try to say that 3 times fast), which are Yellow, White and Blue Clay.
+- The only reason I did this, is because I noticed PFAA added those, and they were long dormant in my Ore Materials Section (I did not think of them as Clays back then), so now I gave them Life!
+- Please take note that I changed the Electrolyzation Output of Clay, and that Vanilla Clay does no longer give Lithium. Only Brown Clay does.
+-
+-
+- 6.14.06:
+- [NOTE] Hindsight is 2020, and I did fuckup my fix for the Water Generation Bug last year, so here we go with the first Release of 2021. XD
+- [FIXED] Rivers, Oceans and Swamps generated partially at XZ 0,0 to XZ 15,15 because I forgot an Offset. This also caused the first layer of those Waters to be at the wrong height.
+-
+-
+- 6.14.05:
+- [BROKEN] DO NOT USE!
+- [FIXED] The Explosion Sound does no longer spam for Machines in the Rain and similar if you turned off those Explosions. Instead it waits a bit before it sends that Sound again.
+- [FIXED] Buildcraft Wrench Stuff can now be Sneak Rightclicked with an Electric GT6 Wrench without switching Modes, as long as the target is a TileEntity.
+- [FIXED] You know how you can open Pipes to Air Blocks? Well I added that functionality for Liquid and Gas Blocks too, so that is now fixed.
+- [CHANGED] All Fluorite Byproducts to use the more colorful Versions of Fluorite.
+- [CHANGED] Also changed the Byproducts of Naquadah, Trinium, Duranium, Tritanium and Dilithium containing Ores. Desh has related Byproducts to those three now.
+- [ADDED] A few more Recipes for Wooden Stuff like Rings, Item Casings and Stuff.
+- [ADDED] One more Icon to the Warning Sign Cover. It's that Checkerboard-ish Circle that is usually on Crashtest Dummies.
+- [ADDED] Builders Wand. Pretty much is doing what the ones of other Mods do too. It places Blocks! It can also destroy Thaumcraft Nodes like the Crowbar does. Why? Because it's a neat Easter Egg, and if a Node happens to be in the way while building, you can just go smack it with the Wand.
+- [ADDED] Clay Molds for everything that is mentioned in the Molds Book, that way you can actually craft them without having to magically know all the Chiseling Shapes for Molds.
+-
+-
+- 6.14.04:
+- [BROKEN] DO NOT USE!
+- [NOTE] Released a tiny bit early due to testing GitHub Actions to Release GT6 instead of using a Solution on our own Server.
+- [NOTE] The URL leading to the Supporter Lists links to something that runs on a different Subdomain, so that it is easier to distinguish the traffic when using something like Pi-Hole as your DNS and Adblocker, as I happen to do since last Release. This probably doesn't matter to you though. The old Link is ofcourse still usable.
+- [IMPROVED] Ores that generate between two Stone Layers are now no longer stopped by other Mods equal Blocks (like comparing GT Marble with Chisel Marble, both should obviously count as Marble, which they did not before)
+- [IMPROVED] Basic Machine Input Tanks now have Capacities based off the actual Recipe Inputs. That way a single huge Recipe wont mess up automation of the many smaller ones.
+- [FIXED] Some minor Inconsistencies.
+- [FIXED] Insanely large Capacity Pipes had Integer Overflow Issues.
+- [FIXED] 1 Liter of Fluid sometimes remaining in Pipes.
+- [FIXED] Quadruple and Nonuple Pipes had flow direction Issues, because flow direction was per Block and not per Sub-Pipe.
+- [FIXED] Miniature Portals for the ExtraSimple fork of ExtraUtilities.
+- [FIXED] Durability Loss when Treecapitating using the GT6 Axe, which was using way wrong calculations.
+- [CHANGED] Wrenches from Buildcraft and similar Mods can now be crafted again, but if you use them for anything GT related they will instantly break without refunds.
+- [CHANGED] Flint and Tinder now has a higher chance of success in certain cases, where there is a specific Material used to craft it.
+-
+-
+- 6.14.03:
+- [COMPAT] Some Hardcore Ender Expansion Stuff has Material Data now.
+- [FIXED] An Issue with Rendering on some peoples Worlds/Computers.
+- [FIXED] Colorless Sapphire Boule Recipe was producing at a wrong rate.
+- [CHANGED] Some End Worldgen.
+- [ADDED] Magic Research Papers to Library Loot. So far only useful for Thaumcraft. Getting all 9 of them and scanning them with the Thaumometer in order will unlock all Vanilla and GT Aspects. They can be turned into Knowledge Fragments too.
+-
+-
+- 6.14.02:
+- [NOTE] The Default Config Pack updated to disable Netherlicious Quartz Generation and some other random things.
+- [NOTE] I would recommend updating Netherlicious to 2.2.0 or later, if you have it, by the way.
+- [FIXED] An Problem where GT-Fast-Leaf-Decay caused GT6 Trees to lose most of their Leaves when Non-GT6-Logs were harvested closeby.
+- [FIXED] An Issue with Trees generating in Snowy Biomes. Only affected the Bottom-most Log of Rubber Trees being misplaced by Snow Layers.
+- [FIXED] A lot about the Custom Gearbox was not always working like intended, especially not the internal Axle.
+- [FIXED] An Issue where some Machines did not output all Items at once somehow.
+- [FIXED] A few Fluid Containers like Et Futurum Glass Bottles (Lingering Potions), Railcraft Creosote Cells and several broken Buckets.
+- [FIXED] Charge Speed of GT6 Tools in Battery Boxes.
+- [FIXED] Battery Boxes now no longer accept Energy in large bursts. Small bursts may still happen, because I cant set the Energy-Consumption-per-Tick Limiter to a Value lower than what it can actually charge.
+- [FIXED] Recipe Replacer did not always know what a vanilla wooden Stick is, since I added a ton of different Wood Materials.
+- [FIXED] Sealed Barrels and Drums were still able to be filled or drained through Tap, Funnel and Item-Use.
+- [REMOVED] Some of the Tools that did not make proper sense like the Flint Club, Sword and Hoe.
+- [CHANGED] The Durability of Bronze Tools got buffed to be more than Wrought Iron, but less than Steel.
+- [CHANGED] Many GT6 Wood Tools are now properly craftable. Wooden Clubs are made by putting a Log or Beam on a Stick in a 2x2.
+- [CHANGED] Rotating Pillar like Blocks such as Logs or Beams, using a Soft Hammer or Wrench, can now also make them enter their "all sides covered" State. Useful for making custom Trees.
+- [CHANGED] The Ceramic Bowl (formerly known as Mixing Bowl) is now made with a Clay Bowl in a Furnace. I also removed the Red Dye requirement. This should fix the Chisel not really being available if you don't have Bronze (even though you likely need to make Bronze to make the Bowl in the first place). Wait was there a Lead Chisel? Well anyways this Recipe makes more sense regardless.
+- [CHANGED] The Recipes for Mortars, Juicers, Crucible Stuff, Taps and Funnels are now more similar to the Ceramic Bowl Recipe too. Mortars also only need one Ingot/Gem to craft the Pestle part now.
+- [CHANGED] Nozzles and Cap Nozzles made of Ceramic have now been replaced with Steel ones instead.
+- [CHANGED] HSLA Steel from Rotarycraft can now no longer be used to make "regular Steel" things (dedicated HSLA things still exist ofcourse), because HSLA is only worth half as much Iron as regular Steel. Yes I found out about the additional Output of that one Reika Blast Furnace Recipe.
+- [CHANGED] Stone Bumblebees now ALSO accept Cobblestone, Mossy Cobble and Mossy Bricks, and state so in the Tooltip.
+- [CHANGED] Hard and Soft Hammers aswell as Files, can no longer be direct crafted, and now require the typical Toolhead+Handle Recipe to be used. This is to reduce Crafting Recipe Count and because the direct Recipes dont take Handles into account.
+- [CHANGED] The Autocollect Effect of Magnetic Materials for Tools also applies for the Handles now. This is only really useful with a Basalz Rod as Tool Handle though, which now counts as Magnetic. Note, that this currently only works with the Toolhead + Rod Recipes, not the hardcoded ones.
+- [CHANGED] Blaze Powder can no longer be turned into Sulfur and Ashes using the Centrifuge. However, many Recipes that require Sulfur now also allow Blaze Powder directly. (The Pyrotheum Recipes still require Sulfur seperately!)
+- [CHANGED] Blaze Powder and its Thermal Expansion equivalents are now considered a Tiny Pile of Dust instead of a full Pile of Dust. All Recipes should have been adjusted to take this into account.
+- [ADDED] Basalz, Blizz and Blitz Powder can now be used for different ways to obtain some Potions in the Distillery.
+- [ADDED] Blaze/Blizz/Blitz/Basalz Bumblebees that produce Combs that yield their respective Rods and Dust, this makes it possible to obtain those Mob Drops in Peaceful (or in general since those TE Mobs are way too rare, and yes I know Blaze is already doable with regular Nether Bumbles). Spoiler alert do not continue reading if you wanna find out the combo yourself, it is the combination of the highest Tiers of YRATILIM&YTSORFXDNEXREHTENXDENOTS (you have to read those in reverse, and replace the X-es with Slashes).
+- [ADDED] Slimeballs made with Borax and Glue. Borax now also generates as small Ores and is byproduct of regular Salt (NaCl).
+- [ADDED] Certain Materials prevent Items from burning in Lava/Fire. Netherite, Blaze, Fiery Steel and Efrine being an example of Materials like that. It is enough to have even the tiniest Amount of such a Material in the Item to prevent it from burning in Lava. You could for example slap a Refactory Wax Cover on a GT6 Block and its fully Lava Proof whenever you drop it.
+- [ADDED] Basalt and Blackstone Generator Module since those two Rock Types are just as infinite as Stone.
+- [ADDED] Wooden Bucket Recipe with Gold Plate, to make it easier to get from the Nuggets in the Nether.
+- [ADDED] Soulsandstone and Red Sandstone can be used in the Grindstone now.
+- [ADDED] Efrine Drums, Cells, Pipes, Wires, Anvils and the typical Shelf Stuff. Also Netherite Wires at Aluminium Tier.
+- [ADDED] All Wires for 1x to 16x exist now, and not only 5 of the bundles. Does not include Cables!
+- [ADDED] Lumium can now be made in a Mixer with all variants of molten Glowstone. Same goes for Lumium Glass and Hardened Glass from Thermal Expansion.
+- [ADDED] Lumium Shelves and Stuff. Now there actually is a proper Glow in the Dark Material available. (remember it can be painted)
+- [ADDED] Gloomstone from Netherlicious as a Material, which can do pretty much anything Glowstone can do. Similar to GalaxySpace Glowstone Variants.
+- [ADDED] Netherquartz now generates in large flat Layers in the Nether. The old GT5 Veins and the Small Ores for Netherquartz wont generate anymore.
+- [ADDED] Sulfide Ore Crystals now generate on the Nether ceiling so that it is now possible to actually live in the Nether with most of GT6s Features.
+- [ADDED] Netherite Version of the Mortar, because most usable Mortar Materials, including Iron, are too hard to come by in the Nether.
+- [ADDED] Magnalium Rail Set. Same Cart Speed and Explosion Resistance as the Steel Rail Set. Big Upgrade from Aluminium, which is basically garbage Tier.
+- [ADDED] Mining Tools which can place Torches, now can plug leaking Liquids like Lava with mostly non-valuable mined Blocks from your Inventory. Just rightclick either next to or into the Liquid Block that is coming at you.
+- [ADDED] Axes and Saws can now place Workbenches, when you click on something that isn't Wood or a Plant. Why Workbenches? Because Greg wants to free that one Hotbar Slot he always uses for Workbenches, that's why!
+- [ADDED] Nametagged Mobs that die, will drop their Nametags (the Tag will still have the Name on it). Note about named Mobs from certain Mods: If the Mob can still despawn, it will NOT drop a Nametag.
+- [ADDED] Replicator Recipes for some Food and other Organic Items, using Biomass + Charged/Neutral Matter (or Liquid IC2 UUM). Mostly for making GT6 and Vanilla things, which might otherwise be unobtainable in some cases. This should likely fix the unobtainable Ultimate Stew from Avaritia.
+- [ADDED]
+- Metal Scaffolds made of each of the Metal Shelf Set Materials.
+- These Scaffolds are NOT intended to be identical to any other Scaffolds you might know! They are NOT supposed to be exactly like IC2, Vanilla or any other Scaffolds!
+- Vertical Scaffolds contain a Ladder on the inside, which you can use to climb up through the Scaffolds Platform.
+- Sneaking ontop of the Scaffold Platform makes it possible to go down the Ladder, as long as you dont stand on the Ladder part itself.
+- Sideways Scaffolds need to be connected to at least one vertical Scaffold on the same Y-Level to stay in place.
+- You should use Steel Bars or similar as a Guard Rail, if you use the Scaffolds as a Catwalk.
+
 [FIXED] Fuel Cleaner does not produce exploding noise now.
 [FIXED] Titanium Niobium Carbide Tanks' local names are wrong.
+[FIXED] Cheese having wrong nutrition in TFC.
 [CHANGED] Draining Well does not produce mud balls now.
 [CHANGED] Red Steel and Blue Steel now have correct alloying recipes and compositions.
 [CHANGED] The Amount of Terrasteel in Terra Pick and Axe is changed.
-[ADDED]
-Aquatic Farm. Multiblock structure. It consumes water/aquatic nutrition water and fish fry and cultivates fish for you.
-You need to think about how to deal with the output aquatic waste water.
 [CHANGED] Some Ores can generate in Nether now. Copper can generate in Vanilla Stone layers only in Mountains Biomes.
 [CHANGED]
-New Solar System. It is similar to Steam Boiler System.
+New Solar System. It is similar to the Steam Boiler System.
 The new solar system is a multiblock structure. Now the Solar Photovoltaic Panel works as Solar Panel like before, but it output Light Power (LP).
-Then you need Solar Panel to transform LP to EU.
-And you can use Optical Fiber to transport LP from a lot of Solar Photovoltaic Panel.
+Then you need Light Power Transformer to transform LP to EU.
+And you can use Optical Fiber to transport LP from a lot of Solar Photovoltaic Panels.
 Also now there is LP sensor like EU sensor.
 [COMPAT]
 The Solar system can also work in Twilight Forest or Planet now (Twilight Forest or GalacticCraft should be loaded)
+[ADDED]
+Aquatic Farm. Multiblock structure. It consumes water/aquatic nutrition water and fish fry and cultivates fish for you.
+You need to think about how to deal with the output aquatic waste water.
+
 
 6.15.05-unofficial:
 [FIXED] MESU Casing requires double plastic plates to craft.
 [FIXED] Copper and Magic Circuit Plates can be recycled to dupe Plastic since they can now be produced with Phenolic Circuit Plates.
 
+
 6.15.04-unofficial:
 [FIXED] When NetheritePlus and Netherlicous are installed at same time, the game will crash.
 
+
 6.15.03-unofficial:.
 [FIXED] MESU requries quadruple rubber plate which cannot be crafted.
+
 
 6.15.02-unofficial:
 [NOTE] Future GT6U version will have a "-unofficial" at the end.
@@ -40,9 +176,11 @@ The Solar system can also work in Twilight Forest or Planet now (Twilight Forest
 [FIXED] Recipes for superconducter wires are gone.
 [FIXED] Biomass recipes in fermenter are gone.
 
+
 6.15.01-unofficial:
 [NOTE] This is a Hotfix (Minor change).
 [FIXED] Empty Laser Emitter requiring Circuit (T2) to craft, which makes it impossible to craft.
+
 
 6.15.00:
 [NOTE] Here I am back, merging Greg's big update :D .
@@ -184,12 +322,15 @@ Use a screwdriver to alter its current output, up to 32 Amps.
 [ADDED] Six battery cores for MESU. Each has different capacity.
 [ADDED] Two battery electrode parts for MESU. Each allows different length-voltage multiplier of the battery.
 
+
 6.14.05:
 Broken, do not use!
+
 
 6.14.04:
 [NOTE] This is not a really important update, just for the hotfix. I will not merge GT6 until the Asmization is tested with some time.
 [FIXED] MacOs File System causes some config files to reset during launch.
+
 
 6.14.03:
 [COMPAT] When TerraFirmaCraft or TerraFirmaCraft Plus is loaded, the heat, electric, and chemical damage is accommodated.
@@ -197,6 +338,7 @@ Broken, do not use!
 [FIXED] Biochemical Research Lab cannot form in some direction of facing.
 [FIXED] Fermenting recipe conflicts.
 [CHANGED] Less time is now required to incubate the biomass-origin bacterias.
+
 
 6.14.02:
 [NOTE] This is a quite major update, read the changelog before update is recommended...
@@ -247,6 +389,7 @@ Broken, do not use!
 [ADDED] 4 Kinds of Bacterias and Biomass Flora Bacteria cluster. These bacterias are helpful to increase efficiency in fermenting and producing organic gases.
 [ADDED] Ethanol, Methane, and Hydrogen can now be produced by different bacteris with biomass and required nutrition or environment fluids in the Incubator.
 [ADDED] Phenolic Circuit Plate, Epoxid Circuit Plate, Multilayer Epoxid Circuit Plate, Aluminium Printed Circuit Plate, Perforated Bushing, and Fibreglass.
+
 
 6.14.01:
 [NOTE] Do not use 6.14.00, it will crash the game.
@@ -326,7 +469,9 @@ Broken, do not use!
 [ADDED] Aluminium chloride.
 [ADDED] Bunch of fluids that are related to Platinum family metal production
 
+
 6.14.00: (Broken, Do not use!)
+
 
 6.13.08:
 [FIXED]Producing too many gem plates from gems in the laser cutter.
@@ -334,6 +479,7 @@ Broken, do not use!
 [FIXED]Polytetrafluoroethylene Pipes not able to handle acids.
 [ADDED]Sea Water Spring. Same generation stats as Water Spring.
 [ADDED]Water Well.
+
 
 6.13.07:
 [FIXED]Now Titanium Niobium Carbide Steam Turbine Main Housing has the correct crafting recipe.
@@ -362,6 +508,7 @@ To compensate the early-game loss of Chromium, small amount of Chromium can now 
 [ADDED]Incubator
 [ADDED]Neutronium, Americium, and lots of molten metal now is available.
 
+
 6.13.06:
 [CHANGED]You can no longer Put dust into Extruder
 [CHANGED]Assembler-Circuit Assembler.It should be different from Welder
@@ -381,9 +528,11 @@ Mask Aligner. A more powerful and precise machine to align nano-scale patterns o
 Built from Stainless Steel Walls and Aligner Units, its purpose will be added in the future.
 [ADDED]Aligner Units used to build Mask Aligner
 
+
 6.13.05:
 [FIXED]Some Recipe conflict
 [ADDED]Process of Isoprene, which produces Rubber chemically.
+
 
 6.13.04: 
 [FIXED]DistillationTower does not output lubricant.
@@ -399,6 +548,7 @@ Built from Stainless Steel Walls and Aligner Units, its purpose will be added in
 [ADDED]
 Multiblock Ionizer.
 3x3x3 Hollow of Electrical Proof Machine Casing, with the Main at the center of any bottom side.
+
 
 6.13.03: 
 [FIXED]molten metal in tank system are forbidden now.
@@ -472,19 +622,24 @@ MultyBlock version for Matter Replicator.It has 64 Parallel.
 MultyBlock Industry Coke Oven.
 Do recipes as Coke Oven.Use energy to over clocking!
 
+
 6.13.02: 
 [BROKEN]Not To Use!
+
 
 6.13.01:
 [BROKEN]Not To Use!
 
+
 6.13.00:
 [BROKEN]Not To Use!
+
 
 6.12.021:
 [CHANGED]Now Large Autoclave can accept energy.It can do 32 process at the same time too.
 [CHANGED]Now Engines output more, but they no longer have 100% Efficiency.
 [ADDED]Tungsten Engine
 [ADDED]Autoclaves (LV-IV) That use energy to work.
+
 
 *NOTE:For Original GT6 Version changelogs.You can see in this https://gregtech.overminddl1.com/changelog 
