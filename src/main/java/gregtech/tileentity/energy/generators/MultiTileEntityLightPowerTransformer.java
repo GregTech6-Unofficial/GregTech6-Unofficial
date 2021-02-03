@@ -38,7 +38,7 @@ import gregapi.tileentity.machines.ITileEntitySwitchableOnOff;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class MultiTileEntitySolarPanelElectric extends TileEntityBase10EnergyConverter implements ITileEntityEnergyElectricityAcceptor, ITileEntityRunningActively, ITileEntitySwitchableOnOff {
+public class MultiTileEntityLightPowerTransformer extends TileEntityBase10EnergyConverter implements ITileEntityEnergyElectricityAcceptor, ITileEntityRunningActively, ITileEntitySwitchableOnOff {
 	
 	@Override
 	public void readEnergyBehavior(NBTTagCompound aNBT) {
@@ -90,5 +90,5 @@ public class MultiTileEntitySolarPanelElectric extends TileEntityBase10EnergyCon
 		new Textures.BlockIcons.CustomIcon("machines/transformers/transformer_electric/overlay_blinking/side"),
 	}};
 
-	@Override public String getTileEntityName() {return "gt.multitileentity.SolarPanel";}
+	@Override public String getTileEntityName() {return "gt.multitileentity.lightpowertransformer";}
 }
