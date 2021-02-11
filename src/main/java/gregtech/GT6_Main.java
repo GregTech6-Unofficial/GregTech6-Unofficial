@@ -246,7 +246,9 @@ public class GT6_Main extends Abstract_Mod {
 			if (MD.AE.mLoaded) AEApi.instance().registries().grinder().getRecipes().clear();
 			// We ain't got Water in that Water Bottle. That would be an infinite Water Exploit.
 			for (FluidContainerData tData : FluidContainerRegistry.getRegisteredFluidContainerData()) if (tData.filledContainer.getItem() == Items.potionitem && ST.meta_(tData.filledContainer) == 0) {tData.fluid.amount = 0; break;}
-			
+
+			achievements = new Loader_Achievements();
+
 			ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
 				new Loader_BlockResistance(),
 				new Loader_Fuels(),

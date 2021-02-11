@@ -1,6 +1,14 @@
 This is the Changelog for GregTech-6-Unofficial
-6.15.07-unofficial: (Not released yet).
+6.15.10-unofficial: (Not released yet).
 
+6.15.09-unofficial: (Not released yet).
+
+6.15.08-unofficial: (Not released yet).
+
+6.15.07-unofficial:
+[FIXED] GregTech's Achievement Page not loading.
+[FIXED] I accidentally made Chromite's original smelting recipe available and reverted the ore washing recipe of Chromite. Now it should be back.
+[CHANGED] Revert the new solar system change temporarily. It will be improved and released later. The old solar panels should remain the original design.
 
 6.15.06-unofficial:
 [NOTE] Original Solar Panels are changed into ULV Solar Photovoltaic Panels.
