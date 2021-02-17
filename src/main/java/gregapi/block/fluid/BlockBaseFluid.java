@@ -103,7 +103,7 @@ public class BlockBaseFluid extends BlockFluidFinite implements IBlock, IItemGT,
 	public void updateTick(World aWorld, int aX, int aY, int aZ, Random aRandom) {
 		// Flammability checks.
 		if (mFlammability > 0) for (byte tSide : ALL_SIDES_VALID) {
-			Block tBlock = WD.block(aWorld, aX, aY, aZ, tSide);
+			Block tBlock = WD.block(aWorld, aX, aY, aZ, tSide, F);
 			if (tBlock.getMaterial() == Material.lava || tBlock.getMaterial() == Material.fire) {
 				WD.burn(aWorld, aX, aY, aZ, T, F);
 				return;
