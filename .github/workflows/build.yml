@@ -24,8 +24,12 @@ jobs:
       run: |
         chmod 777 ./gradlew
         ./gradlew build
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v2.0.1
+    - name: Build container image
+      uses: docker/build-push-action@v1
       with:
-        name: gt6u
-        path: build/libs
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: ${{ github.repository }}/gregtech6unofficial
+        tag_with_sha: true
+        tag_with_ref: true
