@@ -30,6 +30,6 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
-        repository: GregTech6-Unofficial/GregTech6-Unofficial/gregtech6unofficial
+        repository: GregTech6-Unofficial/GregTech6-Unofficial/gregtech-6-unofficial
         tag_with_sha: true
         tag_with_ref: true
