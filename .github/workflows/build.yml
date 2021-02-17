@@ -25,11 +25,11 @@ jobs:
         chmod 777 ./gradlew
         ./gradlew build
     - name: Build container image
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v2
       with:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com
-        repository: ${{ github.repository }}/gregtech6unofficial
+        repository: GregTech6-Unofficial/GregTech6-Unofficial/gregtech6unofficial
         tag_with_sha: true
         tag_with_ref: true
