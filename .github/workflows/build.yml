@@ -24,6 +24,11 @@ jobs:
       run: |
         chmod 777 ./gradlew
         ./gradlew build
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.0.1
+      with:
+        name: gt6u-snapshot
+        path: build/libs
     - name: Build container image
       uses: docker/build-push-action@v2
       with:
