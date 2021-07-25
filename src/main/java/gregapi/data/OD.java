@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -94,12 +94,17 @@ public enum OD {
 	, materialPressedwax
 	, materialWaxcomb
 	, materialHoneycomb
+	, materialWax
 	, plankSkyroot
 	, plankWeedwood
 	, plankAnyWood
 	, plankWood
 	, stickAnyWood
 	, stickWood
+	, pressurePlateWood
+	, pressurePlateStone
+	, pressurePlateIron
+	, pressurePlateGold
 	, paperMap
 	, paperEmpty
 	, paperWritten
@@ -117,6 +122,7 @@ public enum OD {
 	, woodLog
 	, woodRubber
 	, flower
+	, flowerWither
 	, bamboo
 	, record
 	, beeComb
@@ -156,12 +162,14 @@ public enum OD {
 	, itemString
 	, itemCompass
 	, itemRedstone
+	, itemQuicksilver
 	, itemCompressedCarbon
 	, itemClay
 	, itemFeather
 	, itemLeather
 	, itemLeatherTreated
 	, itemLeatherHardened
+	, itemLeatherImpregnated
 	, itemSkin
 	, itemFur
 	, itemPelt

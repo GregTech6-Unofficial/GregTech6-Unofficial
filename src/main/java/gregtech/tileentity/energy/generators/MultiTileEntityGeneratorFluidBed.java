@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -27,6 +27,7 @@ import java.util.List;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetCollisionBoundingBoxFromPool;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnEntityCollidedWithBlock;
 import gregapi.code.TagData;
+import gregapi.data.CS.GarbageGT;
 import gregapi.data.FM;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
@@ -123,7 +124,7 @@ public class MultiTileEntityGeneratorFluidBed extends TileEntityBase09FacingSing
 					}
 				}
 				if (mEnergy < mRate * 2) {
-					WD.fire(worldObj, getOffset(mFacing, 1), T);
+					WD.burn(worldObj, getOffset(mFacing, 1), T, T);
 					if (addStackToSlot(1, mOutput1)) mOutput1 = null;
 					if (mOutput1 == null && !WD.hasCollide(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing)) && !getBlockAtSide(mFacing).getMaterial().isLiquid() && WD.oxygen(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
 						Recipe tRecipe = mRecipes.findRecipe(this, mLastRecipe, T, Long.MAX_VALUE, NI, mTank.AS_ARRAY, slot(0));
@@ -131,16 +132,21 @@ public class MultiTileEntityGeneratorFluidBed extends TileEntityBase09FacingSing
 							mLastRecipe = tRecipe;
 							ItemStack[] tOutputs = tRecipe.getOutputs();
 							if (tOutputs.length > 0) mOutput1 = ST.copy(tOutputs[0]);
-							mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+							mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 							removeAllDroppableNullStacks();
 						}
 					}
+				}
+			} else {
+				// Something burning in front of it? Lets ignite!
+				if (rng(200) == 0 && WD.burning(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
+					mBurning = T;
 				}
 			}
 			if (mEnergy <     0) mEnergy = 0;
 			if (mEnergy < mRate) mBurning = F;
 		} else {
-			if (mBurning && rng(4) == 0) spawnBurningParticles(xCoord+0.5+OFFSETS_X[mFacing]*0.55+(SIDES_AXIS_X[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F), yCoord+RNGSUS.nextFloat()*0.375F, zCoord+0.5+OFFSETS_Z[mFacing]*0.55+(SIDES_AXIS_Z[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F));
+			if (mBurning && rng(4) == 0) spawnBurningParticles(xCoord+0.5+OFFX[mFacing]*0.55+(SIDES_AXIS_X[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F), yCoord+RNGSUS.nextFloat()*0.375F, zCoord+0.5+OFFZ[mFacing]*0.55+(SIDES_AXIS_Z[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F));
 		}
 	}
 	
@@ -194,6 +200,8 @@ public class MultiTileEntityGeneratorFluidBed extends TileEntityBase09FacingSing
 		if (aTool.equals(TOOL_igniter       ) && (aSide == mFacing || aPlayer == null)) {mBurning = T; return 10000;}
 		if (aTool.equals(TOOL_extinguisher  ) && (aSide == mFacing || aPlayer == null)) {mBurning = F; return 10000;}
 		
+		if (aTool.equals(TOOL_plunger)) return GarbageGT.trash(mTank);
+		
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) aChatReturn.add(mTank.content());
 			return 1;
@@ -207,7 +215,7 @@ public class MultiTileEntityGeneratorFluidBed extends TileEntityBase09FacingSing
 	
 	@Override public byte getVisualData() {return (byte)(mBurning?1:0);}
 	@Override public byte getDefaultSide() {return SIDE_FRONT;}
-	@Override public boolean[] getValidSides() {return SIDES_HORIZONTAL;}
+	@Override public boolean[] getValidSides() {return mBurning ? SIDES_THIS[mFacing] : SIDES_HORIZONTAL;}
 	
 	@Override
 	protected IFluidTank getFluidTankFillable2(byte aSide, FluidStack aFluidToFill) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -36,7 +36,9 @@ import gregapi.render.ITexture;
 import gregapi.tileentity.energy.TileEntityBase11Motor;
 import gregapi.util.UT;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -44,7 +46,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
 public class MultiTileEntityTurbineSteam extends TileEntityBase11Motor implements IFluidHandler {
-	public FluidTankGT mTank = new FluidTankGT(Integer.MAX_VALUE);
+	public FluidTankGT mTank = new FluidTankGT();
 	public long mSteamCounter = 0, mEnergyProducedNextTick = 0;
 	public static final int STEAM_PER_WATER = 200;
 	
@@ -69,6 +71,17 @@ public class MultiTileEntityTurbineSteam extends TileEntityBase11Motor implement
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		super.addToolTips(aList, aStack, aF3_H);
 		aList.add(Chat.ORANGE + LH.get(LH.EMITS_USED_STEAM) + " ("+LH.get(LH.FACE_SIDES)+", 80%)");
+	}
+	
+	@Override
+	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
+		long rReturn = super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
+		if (rReturn > 0) return rReturn;
+		
+		if (isClientSide()) return 0;
+		
+		if (aTool.equals(TOOL_plunger)) return GarbageGT.trash(mTank);
+		return 0;
 	}
 	
 	@Override
@@ -109,11 +122,11 @@ public class MultiTileEntityTurbineSteam extends TileEntityBase11Motor implement
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (!aShouldSideBeRendered[aSide]) return null;
-		int aIndex = aSide==mFacing?0:aSide==OPPOSITES[mFacing]?1:2;
+		int aIndex = aSide==mFacing?0:aSide==OPOS[mFacing]?1:2;
 		return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[aIndex], mRGBa), BlockTextureDefault.get((mActivity.mState>0?mCounterClockwise?(mConverter.mFast?sOverlaysActiveLF:sOverlaysActiveLS):(mConverter.mFast?sOverlaysActiveRF:sOverlaysActiveRS):sOverlays)[aIndex]));
 	}
 	
-	@Override public boolean isInput (byte aSide) {return aSide == OPPOSITES[mFacing];}
+	@Override public boolean isInput (byte aSide) {return aSide == OPOS[mFacing];}
 	@Override public boolean isOutput(byte aSide) {return aSide == mFacing;}
 	@Override public String getLocalisedInputSide () {return LH.get(LH.FACE_BACK);}
 	@Override public String getLocalisedOutputSide() {return LH.get(LH.FACE_FRONT);}

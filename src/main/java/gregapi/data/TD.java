@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021 GregTech6-Unofficial Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -453,6 +453,8 @@ public class TD {
 		public static final TagData HAS_COLOR                               = TagData.createTagData("PROPERTIES.HAS_COLOR", "Has Color");
 		/** If this Material is typically used by Mods or Vanilla Minecraft, and where the "ore" Prefix is important. */
 		public static final TagData COMMON_ORE                              = TagData.createTagData("PROPERTIES.COMMON_ORE", "Common Ore");
+		/** If this Material is generated among the random small Gem Ores. */
+		public static final TagData RANDOM_SMALL_GEM_ORE                    = TagData.createTagData("PROPERTIES.RANDOM_SMALL_GEM_ORE", "Random Small Gem Ore");
 		/** If this Material is only Unificatable in Recipes (for example Wood, which has many variations depending on from which Tree it comes from) */
 		public static final TagData AUTO_BLACKLIST                          = TagData.createTagData("PROPERTIES.AUTO_BLACKLIST", "Auto Blacklist");
 		/** If this Material is not a valid Material Name and therefore doesn't get unificated at all. This mainly gets used for technical Materials. */
@@ -539,7 +541,7 @@ public class TD {
 		public static final TagData
 		LIQUID                                                              = TagData.createTagData("ITEMGENERATOR.LIQUID"),
 		MOLTEN                                                              = TagData.createTagData("ITEMGENERATOR.MOLTEN"),
-		GASSES                                                              = TagData.createTagData("ITEMGENERATOR.GASSES"),
+		GASES                                                               = TagData.createTagData("ITEMGENERATOR.GASES"), GASSES = GASES,
 		VAPORS                                                              = TagData.createTagData("ITEMGENERATOR.VAPORS"),
 		PLASMA                                                              = TagData.createTagData("ITEMGENERATOR.PLASMA"),
 		
@@ -575,7 +577,7 @@ public class TD {
 		
 		/** Item Generator Presets as Shortcut */
 		public static final TagData[]
-		G_ALL                       = new TagData[] {GEMS, ORES, EMPTY, DUSTS, PARTS, PIPES, WIRES, FOILS, RAILS, LENSES, STICKS, ARMORS, INGOTS, INGOTS_HOT, PLATES, PLANTS, PROJECTILES, CONTAINERS, DIRTY_DUSTS, MULTIINGOTS, MULTIPLATES, DENSEPLATES, CONTAINERS_GAS, CONTAINERS_SOLID, CONTAINERS_FLUID, CONTAINERS_PLASMA},
+		G_ALL                       = new TagData[] {GEMS, ORES, EMPTY, DUSTS, PARTS, PIPES, WIRES, FOILS, RAILS, LENSES, STICKS, ARMORS, INGOTS, INGOTS_HOT, PLATES, PLANTS, PROJECTILES, CONTAINERS, MULTIINGOTS, MULTIPLATES, DENSEPLATES, CONTAINERS_GAS, CONTAINERS_SOLID, CONTAINERS_FLUID, CONTAINERS_PLASMA},
 		G_CONTAINERS                = new TagData[] {CONTAINERS, PLANTS},
 		G_DUST                      = new TagData[] {DUSTS, PLANTS},
 		G_DUST_ORES                 = new TagData[] {DUSTS, PLANTS, ORES},
@@ -592,7 +594,7 @@ public class TD {
 		G_GEM_TRANSPARENT           = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, GEMS, ARMORS, LENSES, TD.Properties.TRANSPARENT},
 		G_GEM_ORES_TRANSPARENT      = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, GEMS, ARMORS, LENSES, TD.Properties.TRANSPARENT, ORES},
 		G_WOOD                      = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, FOILS},
-		G_STONE                     = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, DIRTY_DUSTS},
+		G_STONE                     = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS},
 		G_BRICK                     = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, INGOTS},
 		G_INGOT                     = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, ARMORS, INGOTS, INGOTS_HOT, MULTIINGOTS, DENSEPLATES, MULTIPLATES, FOILS},
 		G_INGOT_ORES                = new TagData[] {PROJECTILES, DUSTS, PLANTS, PLATES, STICKS, ARMORS, INGOTS, INGOTS_HOT, MULTIINGOTS, DENSEPLATES, MULTIPLATES, FOILS, ORES},

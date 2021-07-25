@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -30,7 +30,6 @@ import gregapi.block.multitileentity.IMultiTileEntity.IMTE_SetBlockBoundsBasedOn
 import gregapi.code.ArrayListNoNulls;
 import gregapi.data.CS.SFX;
 import gregapi.data.LH;
-import gregapi.data.LH.Chat;
 import gregapi.old.Textures;
 import gregapi.render.BlockTextureDefault;
 import gregapi.render.BlockTextureMulti;
@@ -79,12 +78,12 @@ public class MultiTileEntityDynamite extends TileEntityBase09FacingSingle implem
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		aList.add(Chat.CYAN     + LH.get(LH.TOOLTIP_BLASTPOWER) + Chat.WHITE + mMaxExplosionResistance);
-		aList.add(Chat.CYAN     + LH.get(LH.TOOLTIP_BLASTRANGE) + Chat.WHITE + "3x3x3");
+		aList.add(LH.Chat.CYAN     + LH.get(LH.TOOLTIP_BLASTPOWER) + LH.Chat.WHITE + mMaxExplosionResistance);
+		aList.add(LH.Chat.CYAN     + LH.get(LH.TOOLTIP_BLASTRANGE) + LH.Chat.WHITE + "3x3x3");
 		if (mFortune > 0)
-		aList.add(Chat.CYAN     + LH.get(LH.TOOLTIP_BLASTFORTUNE) + Chat.WHITE + mFortune);
-		aList.add(Chat.ORANGE   + LH.get(LH.REQUIREMENT_IGNITE_FIRE) + " (" + LH.get(LH.FACE_FRONT) + ")");
-		aList.add(Chat.RED      + LH.get(LH.TOOLTIP_EXPLOSIVE));
+		aList.add(LH.Chat.PINK     + LH.get(LH.TOOLTIP_BLASTFORTUNE) + LH.Chat.WHITE + mFortune);
+		aList.add(LH.Chat.ORANGE   + LH.get(LH.REQUIREMENT_IGNITE_FIRE));
+		aList.add(LH.Chat.RED      + LH.get(LH.TOOLTIP_EXPLOSIVE));
 		super.addToolTips(aList, aStack, aF3_H);
 	}
 	
@@ -105,9 +104,9 @@ public class MultiTileEntityDynamite extends TileEntityBase09FacingSingle implem
 		if (aIsServerSide) {
 			if (mBlockUpdated || aTimer == 2) {
 				if (hasRedstoneIncoming() || WD.burning(worldObj, xCoord, yCoord, zCoord)) remoteActivate();
-				if (mSunk && !WD.ore_stone(getBlockAtSide(OPPOSITES[mFacing]), getMetaDataAtSide(OPPOSITES[mFacing]))) {mSunk = F; updateClientData();}
+				if (mSunk && !WD.ore_stone(getBlockAtSide(OPOS[mFacing]), getMetaDataAtSide(OPOS[mFacing]))) {mSunk = F; updateClientData();}
 			}
-			if (mCountDown > 0 && --mCountDown <= 0) explode();
+			if (mCountDown > 0 && --mCountDown <= 0) explode(F);
 		}
 	}
 	
@@ -122,7 +121,7 @@ public class MultiTileEntityDynamite extends TileEntityBase09FacingSingle implem
 	private boolean mDontDrop = F;
 	
 	@Override
-	public void explode() {
+	public void explode(boolean aInstant) {
 		mDontDrop = T;
 		worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 		Explosion tExplosion = mSunk ? new DynamiteExplosion(worldObj, getOffsetXN(mFacing)+0.5, getOffsetYN(mFacing)+0.5, getOffsetZN(mFacing)+0.5, mMaxExplosionResistance, mFortune) : new DynamiteExplosion(worldObj, xCoord+0.5, yCoord+0.5, zCoord+0.5, mMaxExplosionResistance, mFortune);
@@ -158,7 +157,7 @@ public class MultiTileEntityDynamite extends TileEntityBase09FacingSingle implem
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (aSide == mFacing) return BlockTextureMulti.get(BlockTextureDefault.get(mCountDown != 0 ? sTextureFrontActive : sTextureFront, mRGBa, F, F, F, F), BlockTextureDefault.get(mCountDown != 0 ? sOverlayFrontActive : sOverlayFront));
-		if (aSide == OPPOSITES[mFacing]) return BlockTextureMulti.get(BlockTextureDefault.get(mCountDown != 0 ? sTextureBackActive : sTextureBack, mRGBa, F, F, F, F), BlockTextureDefault.get(mCountDown != 0 ? sOverlayBackActive : sOverlayBack));
+		if (aSide == OPOS[mFacing]) return BlockTextureMulti.get(BlockTextureDefault.get(mCountDown != 0 ? sTextureBackActive : sTextureBack, mRGBa, F, F, F, F), BlockTextureDefault.get(mCountDown != 0 ? sOverlayBackActive : sOverlayBack));
 		return BlockTextureMulti.get(BlockTextureDefault.get(mCountDown != 0 ? sTextureSideActive : sTextureSide, mRGBa, F, F, F, F), BlockTextureDefault.get(mCountDown != 0 ? sOverlaySideActive : sOverlaySide));
 	}
 	
@@ -166,9 +165,9 @@ public class MultiTileEntityDynamite extends TileEntityBase09FacingSingle implem
 	
 	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool() {return box(PX_P[SIDE_X_NEG==mFacing?mSunk?14:0:SIDE_X_POS==mFacing?0:5], PX_P[SIDE_Y_NEG==mFacing?mSunk?14:0:SIDE_Y_POS==mFacing?0:5], PX_P[SIDE_Z_NEG==mFacing?mSunk?14:0:SIDE_Z_POS==mFacing?0:5], PX_N[SIDE_X_POS==mFacing?mSunk?14:0:SIDE_X_NEG==mFacing?0:5], PX_N[SIDE_Y_POS==mFacing?mSunk?14:0:SIDE_Y_NEG==mFacing?0:5], PX_N[SIDE_Z_POS==mFacing?mSunk?14:0:SIDE_Z_NEG==mFacing?0:5]);}
 	@Override public AxisAlignedBB getSelectedBoundingBoxFromPool () {return box(PX_P[SIDE_X_NEG==mFacing?mSunk?14:0:SIDE_X_POS==mFacing?0:5], PX_P[SIDE_Y_NEG==mFacing?mSunk?14:0:SIDE_Y_POS==mFacing?0:5], PX_P[SIDE_Z_NEG==mFacing?mSunk?14:0:SIDE_Z_POS==mFacing?0:5], PX_N[SIDE_X_POS==mFacing?mSunk?14:0:SIDE_X_NEG==mFacing?0:5], PX_N[SIDE_Y_POS==mFacing?mSunk?14:0:SIDE_Y_NEG==mFacing?0:5], PX_N[SIDE_Z_POS==mFacing?mSunk?14:0:SIDE_Z_NEG==mFacing?0:5]);}
-	@Override public void setBlockBoundsBasedOnState(Block aBlock) {box(aBlock, PX_P[SIDE_X_NEG==mFacing?mSunk?14:0:SIDE_X_POS==mFacing?0:5], PX_P[SIDE_Y_NEG==mFacing?mSunk?14:0:SIDE_Y_POS==mFacing?0:5], PX_P[SIDE_Z_NEG==mFacing?mSunk?14:0:SIDE_Z_POS==mFacing?0:5], PX_N[SIDE_X_POS==mFacing?mSunk?14:0:SIDE_X_NEG==mFacing?0:5], PX_N[SIDE_Y_POS==mFacing?mSunk?14:0:SIDE_Y_NEG==mFacing?0:5], PX_N[SIDE_Z_POS==mFacing?mSunk?14:0:SIDE_Z_NEG==mFacing?0:5]);}
+	@Override public void setBlockBoundsBasedOnState(Block aBlock)  {box(aBlock, PX_P[SIDE_X_NEG==mFacing?mSunk?14:0:SIDE_X_POS==mFacing?0:5], PX_P[SIDE_Y_NEG==mFacing?mSunk?14:0:SIDE_Y_POS==mFacing?0:5], PX_P[SIDE_Z_NEG==mFacing?mSunk?14:0:SIDE_Z_POS==mFacing?0:5], PX_N[SIDE_X_POS==mFacing?mSunk?14:0:SIDE_X_NEG==mFacing?0:5], PX_N[SIDE_Y_POS==mFacing?mSunk?14:0:SIDE_Y_NEG==mFacing?0:5], PX_N[SIDE_Z_POS==mFacing?mSunk?14:0:SIDE_Z_NEG==mFacing?0:5]);}
 	
-	@Override public void onExploded(Explosion aExplosion) {mDontDrop = T; super.onExploded(aExplosion); explode();}
+	@Override public void onExploded(Explosion aExplosion) {mDontDrop = T; super.onExploded(aExplosion); explode(T);}
 	@Override public boolean remoteActivate() {if (mCountDown > 20 || mCountDown == 0) {mCountDown = 20; updateClientData();} return F;}
 	
 	@Override public float getSurfaceSize           (byte aSide) {return 0.0F;}

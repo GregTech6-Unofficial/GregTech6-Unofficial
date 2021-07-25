@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -34,6 +34,7 @@ import gregapi.data.MD;
 import gregapi.data.OP;
 import gregapi.lang.LanguageHandler;
 import gregapi.util.CR;
+import gregapi.util.OM;
 import gregapi.util.ST;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -50,7 +51,9 @@ public class ItemIntegratedCircuit extends ItemBase {
 		setHasSubtypes(T);
 		setMaxDamage(0);
 		
-		CR.shaped(ST.make(this, 1, 0), CR.DEF_REV_NCC, "GhG", "SSS", "GwG", 'G', OP.gearGtSmall.dat(ANY.Iron), 'S', OP.stick.dat(ANY.Iron));
+		OM.data(ST.make(this, 1, W), ANY.Iron, U2*11);
+		
+		CR.shaped(ST.make(this, 1, 0), CR.DEF_NCC, "GhG", "SSS", "GwG", 'G', OP.gearGtSmall.dat(ANY.Iron), 'S', OP.stick.dat(ANY.Iron));
 		CR.shapeless(ST.make(this, 1, 0), CR.DEF, new Object[] {this});
 		
 		CR.shaped(ST.make(this, 1, 1), CR.DEF, "d  ", " P ", "   ", 'P', ST.make(this, 1, W));
@@ -113,7 +116,7 @@ public class ItemIntegratedCircuit extends ItemBase {
 		for (int i = 0; i < 25/*TODO mIcons.length*/; i++) mIcons[i] = aIconRegister.registerIcon(mModID + ":" + mName + "/" + (byte)(i&255));
 		// Useful hack to register Item Icons. That is why the Selector Tag Item has to always exist.
 		if (Abstract_Mod.sFinalized >= Abstract_Mod.sModCountUsingGTAPI) {
-			OUT.println("GT_Client: Setting up and loading Icon Register for Items");
+			// Setting up and loading Icon Register for Items
 			GT_API.sItemIcons = aIconRegister;
 			for (Runnable tRunnable : GT_API.sItemIconload) {
 				try {

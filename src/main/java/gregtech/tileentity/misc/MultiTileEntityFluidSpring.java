@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -39,6 +39,7 @@ import gregapi.render.ITexture;
 import gregapi.tileentity.base.TileEntityBase04MultiTileEntities;
 import gregapi.tileentity.data.ITileEntitySurface;
 import gregapi.util.UT;
+import gregapi.util.WD;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
@@ -104,28 +105,28 @@ public class MultiTileEntityFluidSpring extends TileEntityBase04MultiTileEntitie
 				if (tBlock instanceof BlockFluidFinite) {
 					if (tAbove == tBlock) {
 						worldObj.setBlock(xCoord, yCoord+1, zCoord, tBlock, UT.Code.bind4(getMetaDataAtSide(SIDE_UP)+8), 3);
-					} else if (tAbove.isAir(worldObj, xCoord, yCoord+1, zCoord)) {
+					} else if (WD.anywater(tAbove) || tAbove.isAir(worldObj, xCoord, yCoord+1, zCoord)) {
 						worldObj.setBlock(xCoord, yCoord+1, zCoord, tBlock, 7, 3);
 					}
 				} else {
 					if (tAbove == tBlock) {
 						if (getMetaDataAtSide(SIDE_UP) == 0) {
 							for (byte tSide : ALL_SIDES_HORIZONTAL) {
-								tAbove = getBlock(xCoord+OFFSETS_X[tSide], yCoord+1, zCoord+OFFSETS_Z[tSide]);
+								tAbove = getBlock(xCoord+OFFX[tSide], yCoord+1, zCoord+OFFZ[tSide]);
 								if (tAbove == tBlock) {
-									if (0 != getMetaData(xCoord+OFFSETS_X[tSide], yCoord+1, zCoord+OFFSETS_Z[tSide])) {
-										worldObj.setBlock(xCoord+OFFSETS_X[tSide], yCoord+1, zCoord+OFFSETS_Z[tSide], tBlock, 0, 3);
+									if (0 != getMetaData(xCoord+OFFX[tSide], yCoord+1, zCoord+OFFZ[tSide])) {
+										worldObj.setBlock(xCoord+OFFX[tSide], yCoord+1, zCoord+OFFZ[tSide], tBlock, 0, 3);
 										break;
 									}
-								} else if (tAbove.isAir(worldObj, xCoord+OFFSETS_X[tSide], yCoord+1, zCoord+OFFSETS_Z[tSide])) {
-									worldObj.setBlock(xCoord+OFFSETS_X[tSide], yCoord+1, zCoord+OFFSETS_Z[tSide], tBlock, 0, 3);
+								} else if (tAbove.isAir(worldObj, xCoord+OFFX[tSide], yCoord+1, zCoord+OFFZ[tSide])) {
+									worldObj.setBlock(xCoord+OFFX[tSide], yCoord+1, zCoord+OFFZ[tSide], tBlock, 0, 3);
 									break;
 								}
 							}
 						} else {
 							worldObj.setBlock(xCoord, yCoord+1, zCoord, tBlock, 0, 3);
 						}
-					} else if (tAbove.isAir(worldObj, xCoord, yCoord+1, zCoord)) {
+					} else if (WD.anywater(tAbove) || tAbove.isAir(worldObj, xCoord, yCoord+1, zCoord)) {
 						worldObj.setBlock(xCoord, yCoord+1, zCoord, tBlock, 0, 3);
 					}
 				}

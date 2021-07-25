@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -19,6 +19,8 @@
 
 package gregtech.asm.transformers.minecraft;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
@@ -26,12 +28,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Random;
-
-/* This is a separate file so it class loads *while* minecraft loads, if we accessed world in the main transformer then
-   we can miss out on the transformations.  Not an issue when accessing MC classes while transforming other mods though.
+/* This is a separate file so it class loads *while* minecraft loads,
+   if we accessed world in the main transformer then we can miss out
+   on the transformations.  Not an issue when accessing MC classes
+   while transforming other mods though.
  */
 public class Replacements {
+	
 	public static void BlockStaticLiquid_updateTick(BlockStaticLiquid self, World world, int x, int y, int z, Random rand) {
 		if (self.getMaterial() == Material.lava)
 		{

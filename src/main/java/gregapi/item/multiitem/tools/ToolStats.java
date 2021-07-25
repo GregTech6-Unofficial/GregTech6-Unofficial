@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -206,7 +206,7 @@ public abstract class ToolStats implements IToolStats {
 	
 	@Override
 	public ItemStack getBrokenItem(ItemStack aStack) {
-		return mMaterialAmount < U4 ? null : OP.scrapGt.mat(MultiItemTool.getPrimaryMaterial(aStack, MT.NULL), 1+RNGSUS.nextInt(1+(int)(4*mMaterialAmount/U)));
+		return mMaterialAmount < U4 ? null : OP.scrapGt.mat(MultiItemTool.getPrimaryMaterial(aStack), 1+RNGSUS.nextInt(1+(int)(4*mMaterialAmount/U)));
 	}
 	
 	@Override
@@ -215,6 +215,10 @@ public abstract class ToolStats implements IToolStats {
 	}
 	
 	@Override
+	public int[] getEnchantmentLevels(ItemStack aStack, OreDictMaterial aMaterial) {
+		return getEnchantmentLevels(aStack);
+	}
+	@Deprecated
 	public int[] getEnchantmentLevels(ItemStack aStack) {
 		return ZL_INTEGER;
 	}

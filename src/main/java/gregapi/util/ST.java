@@ -47,6 +47,7 @@ import gregapi.item.multiitem.food.IFoodStat;
 import gregapi.oredict.OreDictItemData;
 import gregapi.oredict.OreDictManager;
 import gregapi.tileentity.delegate.DelegatorTileEntity;
+import gregapi.tileentity.delegate.ITileEntityCanDelegate;
 import ic2.api.item.IC2Items;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFire;
@@ -272,33 +273,36 @@ public class ST {
 		return update_(aStack, aEntity.worldObj, UT.Code.roundDown(aEntity.posX), UT.Code.roundDown(aEntity.posY), UT.Code.roundDown(aEntity.posZ));
 	}
 	
+	public static boolean update(Entity aPlayer) {
+		if (aPlayer instanceof EntityPlayer && !aPlayer.worldObj.isRemote && ((EntityPlayer)aPlayer).openContainer != null) ((EntityPlayer)aPlayer).openContainer.detectAndSendChanges();
+		return T;
+	}
+	
 	public static boolean use(Entity aPlayer, ItemStack aStack) {
-		return use(aPlayer, -1, aStack, 1);
+		return use(aPlayer, F, aStack, 1);
 	}
 	public static boolean use(Entity aPlayer, ItemStack aStack, long aAmount) {
-		return use(aPlayer, -1, aStack, aAmount);
+		return use(aPlayer, F, aStack, aAmount);
 	}
-	public static boolean use(Entity aPlayer, int aIndex, ItemStack aStack) {
-		return use(aPlayer, aIndex, aStack, 1);
+	public static boolean use(Entity aPlayer, boolean aRemove, ItemStack aStack) {
+		return use(aPlayer, aRemove, aStack, 1);
 	}
-	public static boolean use(Entity aPlayer, int aIndex, ItemStack aStack, long aAmount) {
+	public static boolean use(Entity aPlayer, boolean aRemove, ItemStack aStack, long aAmount) {
 		if (UT.Entities.hasInfiniteItems(aPlayer)) return T;
-		if (aStack.stackSize >= aAmount) {
-			aStack.stackSize -= aAmount;
-			if (aPlayer instanceof EntityPlayer) {
-				if (aStack.stackSize <= 0) {
-					ForgeEventFactory.onPlayerDestroyItem((EntityPlayer)aPlayer, aStack);
-					if (aIndex >= 0 && aIndex < ((EntityPlayer)aPlayer).inventory.mainInventory.length) {
-						((EntityPlayer)aPlayer).inventory.mainInventory[aIndex] = null;
-					}
-				}
-				if (!aPlayer.worldObj.isRemote && ((EntityPlayer)aPlayer).openContainer != null) {
-					((EntityPlayer)aPlayer).openContainer.detectAndSendChanges();
+		if (aStack.stackSize < aAmount) return F;
+		aStack.stackSize -= aAmount;
+		if (!(aPlayer instanceof EntityPlayer)) return T;
+		if (aStack.stackSize <= 0) {
+			ForgeEventFactory.onPlayerDestroyItem((EntityPlayer)aPlayer, aStack);
+			if (aRemove) for (int i = 0; i < ((EntityPlayer)aPlayer).inventory.mainInventory.length; i++) {
+				if (((EntityPlayer)aPlayer).inventory.mainInventory[i] == aStack) {
+					((EntityPlayer)aPlayer).inventory.mainInventory[i] = null;
+					break;
 				}
 			}
-			return T;
 		}
-		return F;
+		ST.update(aPlayer);
+		return T;
 	}
 	
 	public static ItemStack[] copyArray(ItemStack... aStacks) {
@@ -578,11 +582,13 @@ public class ST {
 		return aStackFrom != null && (aStackTo == null || equal_(aStackFrom, aStackTo, F)) ? move_(aInventory, aStackFrom, aStackTo, aSlotFrom, aSlotTo, aCount) : 0;
 	}
 	public static int move_(IInventory aInventory, ItemStack aStackFrom, ItemStack aStackTo, int aSlotFrom, int aSlotTo, int aCount) {
+		aCount = Math.min(aCount, aStackFrom.stackSize);
 		ItemStack tStack = aInventory.decrStackSize(aSlotFrom, aCount);
 		if (tStack == null || tStack.stackSize <= 0) return 0;
 		aCount = Math.min(aCount, tStack.stackSize);
 		if (aStackTo == null) aInventory.setInventorySlotContents(aSlotTo, amount(aCount, aStackFrom)); else aStackTo.stackSize += aCount;
 		aInventory.markDirty();
+		WD.mark(aInventory);
 		return aCount;
 	}
 	public static int move(IInventory aFrom, IInventory aTo, int aSlotFrom, int aSlotTo) {
@@ -598,12 +604,15 @@ public class ST {
 	public static int move_(IInventory aFrom, IInventory aTo, ItemStack aStackFrom, ItemStack aStackTo, int aSlotFrom, int aSlotTo, int aCount) {
 		if (aStackFrom == aStackTo) return 0;
 		if (aFrom == aTo && aSlotFrom == aSlotTo) return 0;
+		aCount = Math.min(aCount, aStackFrom.stackSize);
 		ItemStack tStack = aFrom.decrStackSize(aSlotFrom, aCount);
 		if (tStack == null || tStack.stackSize <= 0) return 0;
 		aCount = Math.min(aCount, tStack.stackSize);
 		if (aStackTo == null) aTo.setInventorySlotContents(aSlotTo, amount(aCount, aStackFrom)); else aStackTo.stackSize += aCount;
 		aFrom.markDirty();
-		aTo.markDirty();
+		aTo  .markDirty();
+		WD.mark(aFrom);
+		WD.mark(aTo);
 		return aCount;
 	}
 	
@@ -635,11 +644,11 @@ public class ST {
 		if (aDelegator.mTileEntity == null) return F;
 		if (TE_PIPES && aDelegator.mTileEntity instanceof cofh.api.transport.IItemDuct) return T;
 		if (BC_PIPES && aDelegator.mTileEntity instanceof buildcraft.api.transport.IInjectable) return ((buildcraft.api.transport.IInjectable)aDelegator.mTileEntity).canInjectItems(aDelegator.getForgeSideOfTileEntity());
+		if (aDelegator.mTileEntity instanceof ITileEntityCanDelegate && ((ITileEntityCanDelegate)aDelegator.mTileEntity).isExtender(aDelegator.mSideOfTileEntity)) return T;
 		if (aDelegator.mTileEntity instanceof IInventory && ((IInventory)aDelegator.mTileEntity).getSizeInventory() > 0) return T;
 		return F;
 	}
 	
-
 	@Deprecated public static boolean canTake (IInventory      aFrom, byte aSideFrom, int aSlotFrom, ItemStack aStackFrom) {return canTake(aFrom, aSideFrom, aSideFrom, aSlotFrom, aStackFrom);}
 	@Deprecated public static boolean canTake_(ISidedInventory aFrom, byte aSideFrom, int aSlotFrom, ItemStack aStackFrom) {return canTake(aFrom, aSideFrom, aSideFrom, aSlotFrom, aStackFrom);}
 	
@@ -691,6 +700,8 @@ public class ST {
 						if (rMoved > 0) {
 							aFrom.mTileEntity.decrStackSize(aSlotFrom, rMoved);
 							aFrom.mTileEntity.markDirty();
+							WD.mark(aFrom);
+							WD.mark(aTo);
 							return rMoved;
 						}
 					}
@@ -708,6 +719,8 @@ public class ST {
 							rMoved = (((buildcraft.api.transport.IInjectable)aTo.mTileEntity).injectItem(amount(rMoved, tStackMoved), T, aTo.getForgeSideOfTileEntity(), null));
 							aFrom.mTileEntity.decrStackSize(aSlotFrom, rMoved);
 							aFrom.mTileEntity.markDirty();
+							WD.mark(aFrom);
+							WD.mark(aTo);
 							return rMoved;
 						}
 					}
@@ -727,6 +740,7 @@ public class ST {
 					int rMoved = GarbageGT.trash(amount(Math.min(aStackFrom.stackSize, aMaxMove), aStackFrom));
 					aFrom.mTileEntity.decrStackSize(aSlotFrom, rMoved);
 					aFrom.mTileEntity.markDirty();
+					WD.mark(aFrom);
 					return rMoved;
 				}
 			}
@@ -739,6 +753,7 @@ public class ST {
 					place(aTo.mWorld, aTo.mX+0.5, aTo.mY+0.5, aTo.mZ+0.5, tStack);
 					aFrom.mTileEntity.decrStackSize(aSlotFrom, tStack.stackSize);
 					aFrom.mTileEntity.markDirty();
+					WD.mark(aFrom);
 					return tStack.stackSize;
 				}
 			}
@@ -807,13 +822,15 @@ public class ST {
 	
 	public static ItemStack container(ItemStack aStack, boolean aCheckIFluidContainerItems) {
 		if (invalid(aStack)) return NI;
+		// Decrease Durability by 1 for these Items.
+		if (ItemsGT.CONTAINER_DURABILITY.contains(aStack, T)) return copyMeta(meta_(aStack) + 1, aStack);
+		// Use normal Container Item Mechanics.
 		if (item_(aStack).hasContainerItem(aStack)) return copy(item_(aStack).getContainerItem(aStack));
-		/** These are all special Cases, in which it is intended to have only GT Blocks outputting those Container Items */
+		// These are all special Cases, in which it is intended to have only GT Blocks outputting those Container Items.
 		if (IL.Cell_Empty.exists()) {
 			if (IL.Cell_Empty.equal(aStack, F, T)) return NI;
 			if (IL.Cell_Empty.equal(aStack, T, T)) return IL.Cell_Empty.get(1);
 		}
-		
 		if (aCheckIFluidContainerItems && item_(aStack) instanceof IFluidContainerItem && ((IFluidContainerItem)item_(aStack)).getCapacity(aStack) > 0) {
 			ItemStack tStack = amount(1, aStack);
 			((IFluidContainerItem)item_(aStack)).drain(tStack, Integer.MAX_VALUE, T);
@@ -822,8 +839,6 @@ public class ST {
 			if (tStack.getTagCompound().hasNoTags()) tStack.setTagCompound(null);
 			return tStack;
 		}
-		
-		if (IL.IC2_ForgeHammer.equal(aStack, T, T) || IL.IC2_WireCutter.equal(aStack, T, T)) return copyMeta(meta_(aStack) + 1, aStack);
 		return NI;
 	}
 	

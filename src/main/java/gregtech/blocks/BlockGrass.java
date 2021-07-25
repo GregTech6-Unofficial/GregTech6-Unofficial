@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -77,15 +77,19 @@ public class BlockGrass extends BlockBaseMeta {
 		CR.shapeless(ST.make(this, 8, 1), new Object[] {Blocks.grass, Blocks.grass, Blocks.grass, DYE_OREDICTS[DYE_INDEX_Lime     ], Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass});
 		CR.shapeless(ST.make(this, 8, 2), new Object[] {Blocks.grass, Blocks.grass, Blocks.grass, DYE_OREDICTS[DYE_INDEX_Black    ], Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass});
 		CR.shapeless(ST.make(this, 8, 3), new Object[] {Blocks.grass, Blocks.grass, Blocks.grass, DYE_OREDICTS[DYE_INDEX_LightGray], Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass, Blocks.grass});
+		
+		if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("digger", ST.make(this, 1, W));
 	}
 	
 	static {
-		LH.add("gt.grass.tooltip", "Does not spread, get eaten, change color or need light");
+		LH.add("gt.grass.tooltip", "Does not spread, get eaten, change color nor need light");
+		LH.add("gt.grass.tooltip.spray", "Spray Paint can also be used to dye Grass!");
 	}
 	
 	@Override
 	public void addInformation(ItemStack aStack, byte aMeta, EntityPlayer aPlayer, List<String> aList, boolean aF3_H) {
 		aList.add(LH.Chat.CYAN + LH.get("gt.grass.tooltip"));
+		aList.add(LH.Chat.GRAY + LH.get("gt.grass.tooltip.spray"));
 	}
 	
 	@Override

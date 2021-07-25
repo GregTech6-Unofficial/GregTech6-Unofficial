@@ -66,7 +66,7 @@ public class PrefixBlockItem extends ItemBlock implements IItemUpdatable, IPrefi
 		mBlock = (PrefixBlock)aBlock;
 		mBlock.mPrefix.mRegisteredPrefixItems.add(this);
 		
-		if ((SHOW_HIDDEN_PREFIXES || !mBlock.mPrefix.contains(TD.Creative.HIDDEN)) && (SHOW_ORE_BLOCK_PREFIXES || "gt.meta.ore.normal.default".equalsIgnoreCase(mBlock.mNameInternal) || !mBlock.mPrefix.contains(TD.Prefix.ORE))) {
+		if ((SHOW_HIDDEN_PREFIXES || !mBlock.mPrefix.contains(TD.Creative.HIDDEN)) && (SHOW_ORE_BLOCK_PREFIXES || "gt.meta.ore.normal.default".equalsIgnoreCase(mBlock.mNameInternal) || !mBlock.mPrefix.contains(TD.Prefix.ORE) || mBlock.mPrefix.contains(TD.Prefix.STORAGE_BASED))) {
 			if (mBlock.mPrefix.mCreativeTab == null) mBlock.mPrefix.mCreativeTab = new CreativeTab(mBlock.mPrefix.mNameInternal, mBlock.mPrefix.mNameCategory, this, W);
 			mBlock.setCreativeTab(mBlock.mPrefix.mCreativeTab);
 			setCreativeTab(mBlock.mPrefix.mCreativeTab);
@@ -79,7 +79,7 @@ public class PrefixBlockItem extends ItemBlock implements IItemUpdatable, IPrefi
 	@Override
 	@SuppressWarnings("unchecked")
 	public void getSubItems(Item var1, CreativeTabs aCreativeTab, @SuppressWarnings("rawtypes") List aList) {
-		if (!mBlock.mHidden && (SHOW_HIDDEN_PREFIXES || !mBlock.mPrefix.contains(TD.Creative.HIDDEN)) && (SHOW_ORE_BLOCK_PREFIXES || mBlock == BlocksGT.ore || !mBlock.mPrefix.contains(TD.Prefix.ORE))) for (int i = 0; i < mBlock.mMaterialList.length; i++) if (mBlock.mPrefix.isGeneratingItem(mBlock.mMaterialList[i])) if (SHOW_HIDDEN_MATERIALS || !mBlock.mMaterialList[i].mHidden) {
+		if (!mBlock.mHidden && (SHOW_HIDDEN_PREFIXES || !mBlock.mPrefix.contains(TD.Creative.HIDDEN)) && (SHOW_ORE_BLOCK_PREFIXES || mBlock == BlocksGT.ore || !mBlock.mPrefix.contains(TD.Prefix.ORE) || mBlock.mPrefix.contains(TD.Prefix.STORAGE_BASED))) for (int i = 0; i < mBlock.mMaterialList.length; i++) if (mBlock.mPrefix.isGeneratingItem(mBlock.mMaterialList[i])) if (SHOW_HIDDEN_MATERIALS || !mBlock.mMaterialList[i].mHidden) {
 			ItemStack tStack = ST.make(this, 1, i);
 			updateItemStack(tStack);
 			if (ST.meta_(tStack) == i) aList.add(tStack);
@@ -134,12 +134,23 @@ public class PrefixBlockItem extends ItemBlock implements IItemUpdatable, IPrefi
 		if (mBlock.mGravity) aList.add(LH.Chat.ORANGE + LH.get(LH.TOOLTIP_GRAVITY));
 		OreDictMaterial aMaterial = mBlock.getMetaMaterial(getDamage(aStack));
 		aList.add(LH.getToolTipBlastResistance(field_150939_a, mBlock.mBaseResistance * (1+mBlock.getHarvestLevel(aMaterial==null?0:aMaterial.mToolQuality))));
+		while (aList.remove(null));
 	}
 	
 	@Override
 	public OreDictItemData getOreDictItemData(ItemStack aStack) {
 		if (mBlock.mPrefix != null && UT.Code.exists(ST.meta_(aStack), mBlock.mMaterialList)) return new OreDictItemData(mBlock.mPrefix, mBlock.mMaterialList[ST.meta_(aStack)]);
 		return null;
+	}
+	
+	@Override public void updateItemStack(ItemStack aStack, World aWorld, int aX, int aY, int aZ) {updateItemStack(aStack);}
+	@Override public void updateItemStack(ItemStack aStack) {
+		if (mBlock.mMaterialList != OreDictMaterial.MATERIAL_ARRAY) return;
+		int aMeta = ST.meta_(aStack);
+		if (UT.Code.exists(aMeta, mBlock.mMaterialList)) {
+			OreDictMaterial aMaterial = mBlock.mMaterialList[aMeta];
+			if (aMeta != aMaterial.mTargetRegistration.mID) ST.meta_(aStack, aMaterial.mTargetRegistration.mID);
+		}
 	}
 	
 	@Optional.Method(modid = ModIDs.BOTA) @Override public Block getBlockToPlaceByFlower(ItemStack aStack, SubTileEntity aFlower, int aX, int aY, int aZ) {return null;}
@@ -149,8 +160,6 @@ public class PrefixBlockItem extends ItemBlock implements IItemUpdatable, IPrefi
 	@Override public final boolean hasContainerItem(ItemStack aStack) {return getContainerItem(aStack) != null;}
 	@Override public ItemStack getContainerItem(ItemStack aStack) {return null;}
 	@Override public boolean doesContainerItemLeaveCraftingGrid(ItemStack aStack) {return F;}
-	@Override public void updateItemStack(ItemStack aStack) {if (mBlock.mMaterialList != OreDictMaterial.MATERIAL_ARRAY) return; int aMeta = ST.meta_(aStack); if (UT.Code.exists(aMeta, mBlock.mMaterialList)) {OreDictMaterial aMaterial = mBlock.mMaterialList[aMeta]; if (aMeta != aMaterial.mTargetRegistration.mID) ST.meta_(aStack, aMaterial.mTargetRegistration.mID);}}
-	@Override public void updateItemStack(ItemStack aStack, World aWorld, int aX, int aY, int aZ) {updateItemStack(aStack);}
 	@Override public void onCreated(ItemStack aStack, World aWorld, EntityPlayer aPlayer) {updateItemStack(aStack);}
 	@Override public boolean isBookEnchantable(ItemStack aStack, ItemStack aBook) {return F;}
 	@Override public boolean getIsRepairable(ItemStack aStack, ItemStack aMaterial) {return F;}

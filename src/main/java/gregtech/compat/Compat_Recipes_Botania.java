@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -45,7 +45,7 @@ public class Compat_Recipes_Botania extends CompatMods {
 	
 	@Override public void onPostLoad(FMLPostInitializationEvent aInitEvent) {
 		OUT.println("GT_Mod: Doing Botania Recipes.");
-		for (int i = 0; i < 16; i++) if ((i & 3) != 1) CR.delate(ST.make(MD.BOTA, "stone", 1, i));
+		CR.delate(MD.BOTA, "stone", 0, 2, 3, 4, 6, 7, 8, 10, 11, 12, 14, 15);
 		
 		CR.shaped(ST.make(MD.BOTA, "openBucket", 1, 0), DEF_REV | DEL_OTHER_SHAPED_RECIPES, "XhX", " Y ", 'Y', OP.plate.dat(MT.ElvenElementium), 'X', OP.plateCurved.dat(MT.ElvenElementium));
 		
@@ -102,21 +102,21 @@ public class Compat_Recipes_Botania extends CompatMods {
 		RM.smash(ST.make(MD.BOTA, "quartzTypeSunny"       , 1, W), OP.gem.mat(MT.SunnyQuartz, 4));
 		RM.smash(ST.make(MD.BOTA, "quartzStairsSunny"     , 1, W), OP.gem.mat(MT.SunnyQuartz, 6));
 		
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock"         , 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0SlabFull", 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock1SlabFull", 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0Wall"    , 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0Stairs"  , 1, W), OP.rockGt.mat(MT.Livingrock, 6));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock1Stairs"  , 1, W), OP.rockGt.mat(MT.Livingrock, 6));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0Slab"    , 1, W), OP.rockGt.mat(MT.Livingrock, 2));
-		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock1Slab"    , 1, W), OP.rockGt.mat(MT.Livingrock, 2));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock"         , 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0SlabFull", 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock1SlabFull", 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0Wall"    , 1, W), OP.rockGt.mat(MT.Livingrock, 4));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0Stairs"  , 1, W), OP.rockGt.mat(MT.Livingrock, 6));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock1Stairs"  , 1, W), OP.rockGt.mat(MT.Livingrock, 6));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0Slab"    , 1, W), OP.rockGt.mat(MT.Livingrock, 2));
-		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock1Slab"    , 1, W), OP.rockGt.mat(MT.Livingrock, 2));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock"         , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0SlabFull", 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock1SlabFull", 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0Wall"    , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0Stairs"  , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 6));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock1Stairs"  , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 6));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock0Slab"    , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 2));
+		RM.Hammer.addRecipe1(T, 16, 48, 8000, ST.make(MD.BOTA, "livingrock1Slab"    , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 2));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock"         , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0SlabFull", 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock1SlabFull", 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0Wall"    , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 4));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0Stairs"  , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 6));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock1Stairs"  , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 6));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock0Slab"    , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 2));
+		RM.Crusher.addRecipe1(T, 16, 48, ST.make(MD.BOTA, "livingrock1Slab"    , 1, W), OP.rockGt.mat(MT.STONES.Livingrock, 2));
 	}
 }

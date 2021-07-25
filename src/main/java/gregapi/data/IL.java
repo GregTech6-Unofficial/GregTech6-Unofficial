@@ -48,8 +48,7 @@ public enum IL implements IItemContainer {
 	TE_Rod_Blizz, TE_Rod_Blitz, TE_Rod_Basalz,
 	TE_Rockwool, TE_ObsidiGlass, TE_LumiumGlass,
 	TE_Wrench, TE_Wrench_Battle,
-	BC_Wrench,
-	AE_Wrench_Certus, AE_Wrench_Quartz,
+	BC_Wrench, AE_Wrench_Certus, AE_Wrench_Quartz, AE_Cutter_Certus, AE_Cutter_Quartz, EIO_Wrench,
 	FR_Wrench,
 	FR_Planks_Fireproof, FR_Planks, FR_Slabs_Fireproof, FR_Slabs, FR_Logs_Fireproof, FR_Logs,
 	FR_Ice_Shard,
@@ -86,22 +85,34 @@ public enum IL implements IItemContainer {
 	ENVM_Spoiled_Milk_Bucket, ENVM_Rotten_Food, ENVM_Bottle_Water_Dirty, ENVM_Bottle_Water_Cold, ENVM_Bottle_Water_Salty,
 	NePl_Torch, NePl_Ancient_Debris, NePl_Obsidian, NePl_SoulSoil, NePl_Quartz_Bricks,
 	NePl_Blackstone, NePl_Blackstone_Bricks, NePl_Blackstone_Chiseled, NePl_Blackstone_Cracked, NePl_Blackstone_Polished, NePl_Basalt, NePl_Basalt_Polished,
-	NeLi_Blackstone, NeLi_Blackstone_Bricks, NeLi_Blackstone_Chiseled, NeLi_Blackstone_Cracked, NeLi_Blackstone_Polished, NeLi_Basalt, NeLi_Basalt_Polished,
+	NeLi_Blackstone, NeLi_Blackstone_Bricks, NeLi_Blackstone_Chiseled, NeLi_Blackstone_Cracked, NeLi_Blackstone_Polished, NeLi_Blackstone_Tiles, NeLi_Blackstone_Cross, NeLi_Blackstone_Path, NeLi_Basalt, NeLi_Basalt_Polished,
 	NeLi_Crystal_White, NeLi_Crystal_Blue, NeLi_Crystal_Green, NeLi_Crystal_Yellow, NeLi_Crystal_Magenta,
-	NeLi_Torch_Soul, NeLi_Torch_Fox, NeLi_Torch_Shadow, NeLi_Fire_Soul, NeLi_Fire_Shadow, NeLi_Fire_Fox, NeLi_Obsidian, NeLi_Blackstone_Crying, NeLi_Bowl_DevilishMaize, NeLi_Bowl_DevilishPopcorn, NeLi_Bowl_CrimsonStew, NeLi_Bowl_WarpedStew, NeLi_Bowl_FoxfireStew, NeLi_Bottle_Hellderberryjuice, NeLi_Bucket_Spectral_Dew, NeLi_ShroomLight, NeLi_Gloomstone, NeLi_Reed, NeLi_Wither_Rose, NeLi_Foxfire_Lily, NeLi_Foxfire_Powder, NeLi_Wart_Crimson, NeLi_Wart_Warped, NeLi_Wart_Soggy, NeLi_Bread, NeLi_Cookie, NeLi_SoulSoil, NeLi_SoulFarm, NeLi_Gravel, NeLi_Magmatic_Netherrack, NeLi_Magmatic_Blackstone, NeLi_Strider_Flank_Raw, NeLi_Strider_Flank_Cooked,
+	NeLi_Budding_White, NeLi_Budding_Blue, NeLi_Budding_Green, NeLi_Budding_Yellow, NeLi_Budding_Magenta,
+	NeLi_Glass_White, NeLi_Glass_Blue, NeLi_Glass_Green, NeLi_Glass_Yellow, NeLi_Glass_Magenta,
+	NeLi_Lamp_White, NeLi_Lamp_Blue, NeLi_Lamp_Green, NeLi_Lamp_Yellow, NeLi_Lamp_Magenta,
+	NeLi_Redstone_Lamp_White, NeLi_Redstone_Lamp_Blue, NeLi_Redstone_Lamp_Green, NeLi_Redstone_Lamp_Yellow, NeLi_Redstone_Lamp_Magenta,
+	NeLi_Torch_Soul, NeLi_Torch_Fox, NeLi_Torch_Shadow, NeLi_Bonetorch, NeLi_Bonetorch_Soul, NeLi_Bonetorch_Fox, NeLi_Bonetorch_Shadow, NeLi_Fire_Soul, NeLi_Fire_Shadow, NeLi_Fire_Fox, NeLi_Obsidian, NeLi_Blackstone_Crying, NeLi_Bowl_DevilishMaize, NeLi_Bowl_DevilishPopcorn, NeLi_Bowl_CrimsonStew, NeLi_Bowl_WarpedStew, NeLi_Bowl_FoxfireStew, NeLi_Bottle_Hellderberryjuice, NeLi_Bucket_Spectral_Dew, NeLi_ShroomLight, NeLi_Gloomstone, NeLi_Reed, NeLi_Gloom_Hibiscus, NeLi_Wither_Rose, NeLi_Bone_Rose, NeLi_Soul_Rose, NeLi_Foxfire_Lily, NeLi_Foxfire_Powder, NeLi_Wart_Crimson, NeLi_Wart_Warped, NeLi_Wart_Soggy, NeLi_Wart_Block_Nether, NeLi_Wart_Block_Crimson, NeLi_Wart_Block_Warped, NeLi_Wart_Block_Soggy, NeLi_Bread, NeLi_Cookie, NeLi_Ash, NeLi_SoulSoil, NeLi_SoulFarm, NeLi_Gravel, NeLi_Magmatic_Netherrack, NeLi_Magmatic_Blackstone, NeLi_Strider_Flank_Raw, NeLi_Strider_Flank_Cooked,
 	NeLi_Quartz_Bricks, NeLi_Quartz_Smooth, NeLi_Quartz_Chiseled_Pillar, NeLi_Void_Block, NeLi_Void_Bricks, NeLi_Void_Smooth, NeLi_Void_Chiseled, NeLi_Void_Pillar, NeLi_Void_Chiseled_Pillar,
 	NeLi_Stem_Crimson, NeLi_Stem_Warped, NeLi_Stem_FoxFire, NeLi_Beam1_Crimson, NeLi_Beam1_Warped, NeLi_Beam1_FoxFire, NeLi_Hyphae_Crimson, NeLi_Hyphae_Warped, NeLi_Hyphae_FoxFire, NeLi_Beam2_Crimson, NeLi_Beam2_Warped, NeLi_Beam2_FoxFire,
-	EtFu_Chorus_Fruit, EtFu_Chorus_Popped, EtFu_Rabbit_Foot, EtFu_Beet_Seeds, EtFu_Dragon_Breath, EtFu_Lingering_Potion, EtFu_Path, EtFu_Dirt, EtFu_Gravel, EtFu_Sandstone, EtFu_Obsidian,
-	EtFu_Granite, EtFu_Diorite, EtFu_Andesite, EtFu_Granite_Smooth, EtFu_Diorite_Smooth, EtFu_Andesite_Smooth,
+	EtFu_Chorus_Fruit, EtFu_Chorus_Popped, EtFu_Rabbit_Foot, EtFu_Beet_Seeds, EtFu_Dragon_Breath, EtFu_Lingering_Potion, EtFu_Path, EtFu_Dirt, EtFu_Gravel, EtFu_Sandstone, EtFu_Obsidian, EtFu_Ancient_Debris, EtFu_Quartz_Bricks, EtFu_Magmatic_Netherrack, EtFu_Wart_Block_Nether, EtFu_Barrel, EtFu_Wither_Rose,
+	EtFu_Bark_Oak, EtFu_Bark_Spruce, EtFu_Bark_Birch, EtFu_Bark_Jungle, EtFu_Bark_Acacia, EtFu_Bark_DarkOak, EtFu_Beam1_Oak, EtFu_Beam1_Spruce, EtFu_Beam1_Birch, EtFu_Beam1_Jungle, EtFu_Beam1_Acacia, EtFu_Beam1_DarkOak, EtFu_Beam2_Oak, EtFu_Beam2_Spruce, EtFu_Beam2_Birch, EtFu_Beam2_Jungle, EtFu_Beam2_Acacia, EtFu_Beam2_DarkOak,
+	EtFu_Block_Copper, EtFu_Block_Copper_Exposed, EtFu_Block_Copper_Weathered, EtFu_Block_Copper_Oxidized, EtFu_Block_Copper_Waxed, EtFu_Block_Copper_Exposed_Waxed, EtFu_Block_Copper_Weathered_Waxed, EtFu_Block_Copper_Oxidized_Waxed,
+	EtFu_Block_Copper_Cut, EtFu_Block_Copper_Cut_Exposed, EtFu_Block_Copper_Cut_Weathered, EtFu_Block_Copper_Cut_Oxidized, EtFu_Block_Copper_Cut_Waxed, EtFu_Block_Copper_Cut_Exposed_Waxed, EtFu_Block_Copper_Cut_Weathered_Waxed, EtFu_Block_Copper_Cut_Oxidized_Waxed,
+	EtFu_Slabs_Copper_Cut, EtFu_Slabs_Copper_Cut_Exposed, EtFu_Slabs_Copper_Cut_Weathered, EtFu_Slabs_Copper_Cut_Oxidized, EtFu_Slabs_Copper_Cut_Waxed, EtFu_Slabs_Copper_Cut_Exposed_Waxed, EtFu_Slabs_Copper_Cut_Weathered_Waxed, EtFu_Slabs_Copper_Cut_Oxidized_Waxed,
+	EtFu_Stair_Copper_Cut, EtFu_Stair_Copper_Cut_Exposed, EtFu_Stair_Copper_Cut_Weathered, EtFu_Stair_Copper_Cut_Oxidized, EtFu_Stair_Copper_Cut_Waxed, EtFu_Stair_Copper_Cut_Exposed_Waxed, EtFu_Stair_Copper_Cut_Weathered_Waxed, EtFu_Stair_Copper_Cut_Oxidized_Waxed,
+	EtFu_Granite, EtFu_Diorite, EtFu_Andesite, EtFu_Granite_Smooth, EtFu_Diorite_Smooth, EtFu_Andesite_Smooth, EtFu_Deepslate, EtFu_Deepslate_Cobble, EtFu_Deepslate_Smooth, EtFu_Tuff,
 	GaSu_Granite, GaSu_Diorite, GaSu_Andesite, GaSu_Granite_Smooth, GaSu_Diorite_Smooth, GaSu_Andesite_Smooth, GaSu_Basalt, GaSu_Basalt_Smooth, GaSu_Beet_Seeds,
 	CHSL_Granite, CHSL_Diorite, CHSL_Andesite, CHSL_Granite_Smooth, CHSL_Diorite_Smooth, CHSL_Andesite_Smooth,
 	CHSL_Present,
 	TG_Ore_Cluster_1, TG_Ore_Cluster_2, TG_Spawner_Zombie, TG_Spawner_Bug,
+	A97_Hammer,
+	MFR_Hammer,
 	MFR_Fertilizer,
 	MFR_Log_Rubber, MFR_Leaves_Rubber, MFR_Leaves_Rubber_Dry, MFR_Sapling_Rubber, MFR_Sapling_Rubber_Sacred, MFR_Sapling_Rubber_Mega, MFR_Sapling_Rubber_Sacred_Mega,
 	RoC_Propolis_Slippery,
 	RoC_Comb_Slippery,
 	RoC_Ethanol_Extract, RoC_Ethanol_Crystal,
+	BTRS_Backpack, BTRS_Enderpack, BTRS_Thaumpack,
 	JABBA_Dolly, JABBA_Dolly_Diamond,
 	LOOTBAGS_Bag_0, LOOTBAGS_Bag_1, LOOTBAGS_Bag_2, LOOTBAGS_Bag_3, LOOTBAGS_Bag_4,
 	Myst_Desk_Block, Myst_Desk_Item, Myst_Bookstand, Myst_Lectern, Myst_Crystal, Myst_Receptacle, Myst_Ink_Mixer, Myst_Book_Binder, Myst_Ink_Vial,
@@ -165,7 +176,7 @@ public enum IL implements IItemContainer {
 	RC_ShuntingWire, RC_ShuntingWireFrame,
 	RC_Rail_Reinforced, RC_Rail_Electric, RC_Rail_Standard, RC_Rail_Wooden, RC_Rail_Adv, RC_Rail_HS,
 	RC_Tie_Wood, RC_Tie_Stone, RC_Bed_Wood, RC_Bed_Stone,
-	RC_Rebar, RC_Firestone_Cut,
+	RC_Rebar, RC_Firestone_Cut, RC_Firestone_Cracked, RC_Firestone_Refined,
 	RC_Post_Metal, RC_Creosote_Wood, RC_Crushed_Obsidian, RC_Concrete, RC_Stone_Abyssal, RC_Stone_Quarried,
 	RC_Crowbar_Iron, RC_Crowbar_Steel, RC_Crowbar_Thaumium, RC_Crowbar_Voidmetal,
 	RC_Creosote_Bottle, RC_Creosote_Bucket, RC_Creosote_Cell, RC_Creosote_Can, RC_Creosote_Capsule, RC_Creosote_RefractoryCapsule,
@@ -198,7 +209,7 @@ public enum IL implements IItemContainer {
 	GC_Torch_Glowstone, GC_Canister, GC_OxyTank_1, GC_OxyTank_2, GC_OxyTank_3, GC_OxyTank_4, GC_OxyTank_5, GC_OxyTank_6, GC_OxyTank_7, GC_OxyTank_Env,
 	GC_Schematic_1, GC_Schematic_2, GC_Schematic_3,
 	TFC_Torch, TFC_Stick,
-	Torch, Stick,
+	Torch, Stick, Ancient_Debris,
 	Arrow_Head_Glass_Empty, Arrow_Head_Glass_Poison, Arrow_Head_Glass_Poison_Long, Arrow_Head_Glass_Poison_Strong, Arrow_Head_Glass_Slowness, Arrow_Head_Glass_Slowness_Long, Arrow_Head_Glass_Weakness, Arrow_Head_Glass_Weakness_Long, Arrow_Head_Glass_Holy_Water,
 	Arrow_Wooden_Glass_Empty, Arrow_Wooden_Glass_Poison, Arrow_Wooden_Glass_Poison_Long, Arrow_Wooden_Glass_Poison_Strong, Arrow_Wooden_Glass_Slowness, Arrow_Wooden_Glass_Slowness_Long, Arrow_Wooden_Glass_Weakness, Arrow_Wooden_Glass_Weakness_Long, Arrow_Wooden_Glass_Holy_Water,
 	Arrow_Plastic_Glass_Empty, Arrow_Plastic_Glass_Poison, Arrow_Plastic_Glass_Poison_Long, Arrow_Plastic_Glass_Poison_Strong, Arrow_Plastic_Glass_Slowness, Arrow_Plastic_Glass_Slowness_Long, Arrow_Plastic_Glass_Weakness, Arrow_Plastic_Glass_Weakness_Long, Arrow_Plastic_Glass_Holy_Water,
@@ -261,7 +272,7 @@ public enum IL implements IItemContainer {
 	Food_Can_Chum_1, Food_Can_Chum_2, Food_Can_Chum_3, Food_Can_Chum_4, Food_Can_Chum_5, Food_Can_Chum_6,
 	Food_PotatoChips_Raw, Food_PotatoChips, Food_PotatoChips_Packaged, Food_ChiliChips, Food_ChiliChips_Packaged,
 	Food_Cheese, Food_Cheese_Bar, Food_Cheese_Sliced,
-	Food_Rib_Raw, Food_Rib_Cooked,
+	Food_Rib_Raw, Food_Rib_Cooked, Food_Rib_BBQ,
 	Food_RibEyeSteak_Raw, Food_RibEyeSteak_Cooked,
 	Food_DogMeat_Raw, Food_DogMeat_Cooked,
 	Food_Horse_Raw, Food_Horse_Cooked,
@@ -425,7 +436,7 @@ public enum IL implements IItemContainer {
 	Ingot_IridiumAlloy,
 	Dye_SquidInk, Dye_Bonemeal, Dye_Cactus, Dye_Cocoa,
 	Tape,Tape_Used, Duct_Tape, Duct_Tape_Used, Brain_Tape, Brain_Tape_Used,
-	Dynamite, Dynamite_Strong,
+	Boomstick, Dynamite, Dynamite_Strong,
 	Paper_Blueprint_Empty, Paper_Blueprint_Used,
 	Paper_Printed_Pages, Paper_Printed_Pages_Many,
 	Paper_Magic_Empty, Paper_Magic_Page, Paper_Magic_Pages,
@@ -557,7 +568,7 @@ public enum IL implements IItemContainer {
 	
 	@Override
 	public Item item() {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return null;
 		return mStack.getItem();
 	}
@@ -589,7 +600,7 @@ public enum IL implements IItemContainer {
 	
 	@Override
 	public ItemStack get(long aAmount, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.amount(aAmount, OM.get_(mStack));
 	}
@@ -597,28 +608,28 @@ public enum IL implements IItemContainer {
 	@Override
 	@SuppressWarnings("deprecation")
 	public ItemStack getWildcard(long aAmount, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.copyAmountAndMeta(aAmount, W, OM.get_(mStack));
 	}
 	
 	@Override
 	public ItemStack wild(long aAmount, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.copyAmountAndMeta(aAmount, W, OM.get_(mStack));
 	}
 	
 	@Override
 	public ItemStack getUndamaged(long aAmount, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.copyAmountAndMeta(aAmount, 0, OM.get_(mStack));
 	}
 	
 	@Override
 	public ItemStack getAlmostBroken(long aAmount, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.copyAmountAndMeta(aAmount, mStack.getMaxDamage()-1, OM.get_(mStack));
 	}
@@ -650,21 +661,21 @@ public enum IL implements IItemContainer {
 	
 	@Override
 	public ItemStack getWithMeta(long aAmount, long aMetaValue, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.copyAmountAndMeta(aAmount, aMetaValue, OM.get_(mStack));
 	}
 	
 	@Override
 	public ItemStack getWithDamage(long aAmount, long aMetaValue, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		return ST.copyAmountAndMeta(aAmount, aMetaValue, OM.get_(mStack));
 	}
 	
 	@Override
 	public ItemStack getWithNBT(long aAmount, NBTTagCompound aNBT, Object... aReplacements) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		if (ST.invalid(mStack)) return ST.copyFirst(aReplacements);
 		ItemStack rStack = ST.amount(aAmount, OM.get_(mStack));
 		UT.NBT.set(rStack, aNBT);
@@ -673,14 +684,14 @@ public enum IL implements IItemContainer {
 	
 	@Override
 	public IItemContainer registerOre(Object... aOreNames) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		for (Object tOreName : aOreNames) OM.reg(tOreName, get(1));
 		return this;
 	}
 	
 	@Override
 	public IItemContainer registerWildcardAsOre(Object... aOreNames) {
-		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) OUT.println("The Enum '" + name() + "' has not been set to an Item at this time!");
+		if (mHasNotBeenSet && Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) ERR.println("The Enum '" + name() + "' has not been set to an Item at this time!");
 		for (Object tOreName : aOreNames) OM.reg(tOreName, wild(1));
 		return this;
 	}

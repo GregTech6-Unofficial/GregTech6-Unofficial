@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -52,23 +52,25 @@ public class BlockPath extends BlockBaseMeta implements IBlockOnWalkOver, IRende
 	public BlockPath(String aUnlocalised) {
 		super(null, aUnlocalised, Material.grass, soundTypeGrass, 12, Textures.BlockIcons.DIRTS);
 		setCreativeTab(CreativeTabs.tabTransport);
-		LH.add(getUnlocalizedName()+  ".0.name", "Grass Path");
-		LH.add(getUnlocalizedName()+  ".1.name", "Aether Grass Path");
-		LH.add(getUnlocalizedName()+  ".2.name", "Loamy Grass Path");
-		LH.add(getUnlocalizedName()+  ".3.name", "Sandy Grass Path");
-		LH.add(getUnlocalizedName()+  ".4.name", "Silty Grass Path");
-		LH.add(getUnlocalizedName()+  ".5.name", "Alfisol Grass Path");
-		LH.add(getUnlocalizedName()+  ".6.name", "Andisol Grass Path");
-		LH.add(getUnlocalizedName()+  ".7.name", "Gelisol Grass Path");
-		LH.add(getUnlocalizedName()+  ".8.name", "Histosol Grass Path");
-		LH.add(getUnlocalizedName()+  ".9.name", "Inceptisol Grass Path");
-		LH.add(getUnlocalizedName()+ ".10.name", "Mollisol Grass Path");
-		LH.add(getUnlocalizedName()+ ".11.name", "Oxisol Grass Path");
-		LH.add(getUnlocalizedName()+ ".12.name", "Grass Path");
-		LH.add(getUnlocalizedName()+ ".13.name", "Grass Path");
-		LH.add(getUnlocalizedName()+ ".14.name", "Grass Path");
-		LH.add(getUnlocalizedName()+ ".15.name", "Grass Path");
+		LH.add(getUnlocalizedName()+  ".0.name", "Path");
+		LH.add(getUnlocalizedName()+  ".1.name", "Aether Path");
+		LH.add(getUnlocalizedName()+  ".2.name", "Loamy Path");
+		LH.add(getUnlocalizedName()+  ".3.name", "Sandy Path");
+		LH.add(getUnlocalizedName()+  ".4.name", "Silty Path");
+		LH.add(getUnlocalizedName()+  ".5.name", "Alfisol Path");
+		LH.add(getUnlocalizedName()+  ".6.name", "Andisol Path");
+		LH.add(getUnlocalizedName()+  ".7.name", "Gelisol Path");
+		LH.add(getUnlocalizedName()+  ".8.name", "Histosol Path");
+		LH.add(getUnlocalizedName()+  ".9.name", "Inceptisol Path");
+		LH.add(getUnlocalizedName()+ ".10.name", "Mollisol Path");
+		LH.add(getUnlocalizedName()+ ".11.name", "Oxisol Path");
+		LH.add(getUnlocalizedName()+ ".12.name", "Path");
+		LH.add(getUnlocalizedName()+ ".13.name", "Path");
+		LH.add(getUnlocalizedName()+ ".14.name", "Path");
+		LH.add(getUnlocalizedName()+ ".15.name", "Path");
 		setBlockBounds(0, 0, 0, 1, PIXELS_NEG[1], 1);
+		
+		if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("digger", ST.make(this, 1, W));
 	}
 	
 	@Override
@@ -93,7 +95,7 @@ public class BlockPath extends BlockBaseMeta implements IBlockOnWalkOver, IRende
 	public boolean shouldSideBeRendered(IBlockAccess aWorld, int aX, int aY, int aZ, int aSide) {
 		if (SIDES_TOP[aSide]) return T;
 		Block tBlock = aWorld.getBlock(aX, aY, aZ);
-		return tBlock != this && tBlock != Blocks.farmland && !WD.visOpq(tBlock);
+		return tBlock != Blocks.farmland && !WD.visOpq(tBlock);
 	}
 	
 	@Override public int getRenderType() {return RendererBlockTextured.INSTANCE==null?0:RendererBlockTextured.INSTANCE.mRenderID;}
@@ -107,15 +109,19 @@ public class BlockPath extends BlockBaseMeta implements IBlockOnWalkOver, IRende
 	
 	@Override
 	public ITexture getTexture(int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered, IBlockAccess aWorld, int aX, int aY, int aZ) {
-		if (SIDES_TOP[aSide]) return BlockTextureDefault.get(Textures.BlockIcons.PATH_TOP);
-		ITexture tDirt = BlockTextureDefault.get(mIcons[WD.meta(aWorld, aX, aY, aZ) % 16]);
-		return SIDES_BOTTOM[aSide]?tDirt:BlockTextureMulti.get(tDirt, BlockTextureDefault.get(Textures.BlockIcons.PATH_SIDE));
+		if (SIDES_BOTTOM[aSide]) return BlockTextureDefault.get(mIcons[WD.meta(aWorld, aX, aY, aZ) % 16]);
+		if (SIDES_TOP   [aSide]) return BlockTextureDefault.get(Textures.BlockIcons.PATH_TOP);
+		return BlockTextureMulti.get(   BlockTextureDefault.get(mIcons[WD.meta(aWorld, aX, aY, aZ) % 16]), BlockTextureDefault.get(isHalfBlock(aWorld, aX, aY, aZ) ? Textures.BlockIcons.PATH_SLAB : Textures.BlockIcons.PATH_SIDE));
+	}
+	
+	public boolean isHalfBlock(IBlockAccess aWorld, int aX, int aY, int aZ) {
+		return aWorld.getBlock(aX+1, aY-1, aZ) == this || aWorld.getBlock(aX, aY-1, aZ+1) == this || aWorld.getBlock(aX-1, aY-1, aZ) == this || aWorld.getBlock(aX, aY-1, aZ-1) == this;
 	}
 	
 	@Override public boolean usesRenderPass(int aRenderPass, ItemStack aStack                                                                     ) {return T;}
 	@Override public boolean usesRenderPass(int aRenderPass, IBlockAccess aWorld, int aX, int aY, int aZ, boolean[] aShouldSideBeRendered         ) {return T;}
-	@Override public boolean setBlockBounds(int aRenderPass, ItemStack aStack                                                                     ) {setBlockBounds(0, 0, 0, 1, PIXELS_NEG[1], 1); return T;}
-	@Override public boolean setBlockBounds(int aRenderPass, IBlockAccess aWorld, int aX, int aY, int aZ, boolean[] aShouldSideBeRendered         ) {setBlockBounds(0, 0, 0, 1, PIXELS_NEG[1], 1); return T;}
+	@Override public boolean setBlockBounds(int aRenderPass, ItemStack aStack                                                                     ) {setBlockBounds(0, 0, 0, 1,                                                PIXELS_NEG[1] , 1); return T;}
+	@Override public boolean setBlockBounds(int aRenderPass, IBlockAccess aWorld, int aX, int aY, int aZ, boolean[] aShouldSideBeRendered         ) {setBlockBounds(0, 0, 0, 1, (isHalfBlock(aWorld, aX, aY, aZ)?PIXELS_NEG[9]:PIXELS_NEG[1]), 1); return T;}
 	@Override public int getRenderPasses(ItemStack aStack                                                                                         ) {return 1;}
 	@Override public int getRenderPasses(IBlockAccess aWorld, int aX, int aY, int aZ, boolean[] aShouldSideBeRendered                             ) {return 1;}
 	@Override public IRenderedBlockObject passRenderingToObject(ItemStack aStack                                                                  ) {return null;}
@@ -123,13 +129,15 @@ public class BlockPath extends BlockBaseMeta implements IBlockOnWalkOver, IRende
 	
 	@Override public void onWalkOver(EntityLivingBase aEntity, World aWorld, int aX, int aY, int aZ) {aEntity.motionX *= 1.1; aEntity.motionZ *= 1.1;}
 	@Override public IIcon getIcon(int aSide, int aMeta) {return (SIDES_TOP[aSide]?Textures.BlockIcons.PATH_TOP:Textures.BlockIcons.DIRTS[aMeta % 16]).getIcon(0);}
-	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World aWorld, int aX, int aY, int aZ) {return AxisAlignedBB.getBoundingBox(aX, aY, aZ, aX+1, aY+1, aZ+1);}
-	@Override public AxisAlignedBB getSelectedBoundingBoxFromPool (World aWorld, int aX, int aY, int aZ) {return AxisAlignedBB.getBoundingBox(aX, aY, aZ, aX+1, aY+1, aZ+1);}
+	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World aWorld, int aX, int aY, int aZ) {return AxisAlignedBB.getBoundingBox(aX, aY, aZ, aX+1, aY+(isHalfBlock(aWorld, aX, aY, aZ)?0.5:1), aZ+1);}
+	@Override public AxisAlignedBB getSelectedBoundingBoxFromPool (World aWorld, int aX, int aY, int aZ) {return AxisAlignedBB.getBoundingBox(aX, aY, aZ, aX+1, aY+(isHalfBlock(aWorld, aX, aY, aZ)?0.5:1), aZ+1);}
+	@Override public void setBlockBoundsBasedOnState(IBlockAccess aWorld, int aX, int aY, int aZ) {setBlockBounds(0, 0, 0, 1, (isHalfBlock(aWorld, aX, aY, aZ)?0.5F:1), 1);}
 	@Override public boolean doesWalkSpeed(byte aMeta) {return T;}
 	@Override public boolean doesPistonPush(byte aMeta) {return T;}
 	@Override public boolean canCreatureSpawn(byte aMeta) {return F;}
 	@Override public boolean canSilkHarvest() {return F;}
 	@Override public boolean isSealable(byte aMeta, byte aSide) {return F;}
+	@Override public int getLightOpacity() {return LIGHT_OPACITY_WATER;}
 	@Override public String getHarvestTool(int aMeta) {return TOOL_shovel;}
 	@Override public int getHarvestLevel(int aMeta) {return 0;}
 	@Override public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {return Blocks.grass.getBlockHardness(aWorld, aX, aY, aZ) * 2;}

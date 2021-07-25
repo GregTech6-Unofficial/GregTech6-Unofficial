@@ -47,7 +47,6 @@ import gregapi.recipes.Recipe;
 import gregapi.recipes.Recipe.RecipeMap;
 import gregapi.render.BlockTextureCopied;
 import gregapi.render.BlockTextureDefault;
-import gregapi.render.BlockTextureMulti;
 import gregapi.render.ITexture;
 import gregapi.tileentity.base.TileEntityBase09FacingSingle;
 import gregapi.tileentity.machines.ITileEntityAnvil;
@@ -127,7 +126,7 @@ public class MultiTileEntityAnvil extends TileEntityBase09FacingSingle implement
 				ItemStack[] tOutputItems = tRecipe.getOutputs();
 				for (int i = 0; i < tOutputItems.length; i++) if (ST.valid(tOutputItems[i]) && !UT.Inventories.addStackToPlayerInventory(aPlayer instanceof EntityPlayer ? (EntityPlayer)aPlayer : null, aPlayerInventory, tOutputItems[i], F)) ST.place(worldObj, xCoord+0.5, yCoord+1.2, zCoord+0.5, tOutputItems[i]);
 				removeAllDroppableNullStacks();
-				long tDurability = Math.max(10000, UT.Code.divup(Math.max(1, tRecipe.mEUt) * Math.max(1, tRecipe.mDuration), 4));
+				long tDurability = Math.max(10000, UT.Code.divup(Math.max(1, tRecipe.getAbsoluteTotalPower()), 4));
 				mDurability -= tDurability;
 				if (mDurability <= 0) {
 					UT.Sounds.send(SFX.MC_BREAK, this);
@@ -141,6 +140,7 @@ public class MultiTileEntityAnvil extends TileEntityBase09FacingSingle implement
 		}
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) aChatReturn.add("Remaining Durability: " + UT.Code.makeString(UT.Code.divup(mDurability, 10000)));
+			return 1;
 		}
 		return 0;
 	}
@@ -308,9 +308,20 @@ public class MultiTileEntityAnvil extends TileEntityBase09FacingSingle implement
 	
 	@Override
 	public int getRenderPasses2(Block aBlock, boolean[] aShouldSideBeRendered) {
-		mTextureAnvil = BlockTextureDefault.get(mMaterial, OP.blockSolid, UT.Code.getRGBaArray(mRGBa), mMaterial.contains(TD.Properties.GLOWING));
-		mTextureA = (mMaterialA <= 0 ? null : OreDictMaterial.MATERIAL_ARRAY[mMaterialA] == null ? BlockTextureCopied.get(Blocks.iron_block) : BlockTextureMulti.get(mShapeA==7?BlockTextureCopied.get(Blocks.stone):null, BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mMaterialA], mShapeA==6?OP.blockGem:mShapeA==7?OP.ore:OP.blockSolid)));
-		mTextureB = (mMaterialB <= 0 ? null : OreDictMaterial.MATERIAL_ARRAY[mMaterialB] == null ? BlockTextureCopied.get(Blocks.iron_block) : BlockTextureMulti.get(mShapeB==7?BlockTextureCopied.get(Blocks.stone):null, BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mMaterialB], mShapeB==6?OP.blockGem:mShapeB==7?OP.ore:OP.blockSolid)));
+		mTextureAnvil = mMaterial.getTextureSmooth(mRGBa, T);
+		
+		if (mMaterialA <= 0) mTextureA = null; else if (UT.Code.exists(mMaterialA, OreDictMaterial.MATERIAL_ARRAY)) switch(mShapeA) {
+		case  6: mTextureA = OreDictMaterial.MATERIAL_ARRAY[mMaterialA].getTextureGem(); break;
+		case  7: mTextureA = BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mMaterialA], OP.blockRaw); break;
+		default: mTextureA = OreDictMaterial.MATERIAL_ARRAY[mMaterialA].getTextureSolid(); break;
+		} else mTextureA = BlockTextureCopied.get(Blocks.iron_block);
+		
+		if (mMaterialB <= 0) mTextureB = null; else if (UT.Code.exists(mMaterialB, OreDictMaterial.MATERIAL_ARRAY)) switch(mShapeB) {
+		case  6: mTextureB = OreDictMaterial.MATERIAL_ARRAY[mMaterialB].getTextureGem(); break;
+		case  7: mTextureB = BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mMaterialB], OP.blockRaw); break;
+		default: mTextureB = OreDictMaterial.MATERIAL_ARRAY[mMaterialB].getTextureSolid(); break;
+		} else mTextureB = BlockTextureCopied.get(Blocks.iron_block);
+		
 		return mTextureB == null ? mTextureA == null ? 6 : 7 : 8;
 	}
 	

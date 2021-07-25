@@ -39,7 +39,6 @@ import gregapi.util.ST;
 import gregapi.util.UT;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -124,6 +123,8 @@ public class DungeonData extends WorldAndCoords {
 	public boolean next8in9() {return next(9)<8;}
 	
 	public boolean bricks     (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, 3+next(3), 2);}
+	public boolean cobbles    (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, 1+next(2), 2);}
+	public boolean cobble     (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, BlockStones.COBBL, 2);}
 	public boolean brick      (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, BlockStones.BRICK, 2);}
 	public boolean redstoned  (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, BlockStones.RSTBR, 3);}
 	public boolean cracked    (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, BlockStones.CRACK, 2);}
@@ -135,6 +136,8 @@ public class DungeonData extends WorldAndCoords {
 	public boolean smooth     (int aX, int aY, int aZ, Block aPrimary, Block aSecondary) {return set(aX, aY, aZ, aY == 2 ? aSecondary : aPrimary, BlockStones.SMOTH, 2);}
 	
 	public boolean bricks     (int aX, int aY, int aZ) {return set(aX, aY, aZ, aY == 2 ? mSecondary : mPrimary, 3+next(3), 2);}
+	public boolean cobbles    (int aX, int aY, int aZ) {return set(aX, aY, aZ, aY == 2 ? mSecondary : mPrimary, 1+next(2), 2);}
+	public boolean cobble     (int aX, int aY, int aZ) {return set(aX, aY, aZ, aY == 2 ? mSecondary : mPrimary, BlockStones.COBBL, 2);}
 	public boolean brick      (int aX, int aY, int aZ) {return set(aX, aY, aZ, aY == 2 ? mSecondary : mPrimary, BlockStones.BRICK, 2);}
 	public boolean redstoned  (int aX, int aY, int aZ) {return set(aX, aY, aZ, aY == 2 ? mSecondary : mPrimary, BlockStones.RSTBR, 3);}
 	public boolean cracked    (int aX, int aY, int aZ) {return set(aX, aY, aZ, aY == 2 ? mSecondary : mPrimary, BlockStones.CRACK, 2);}
@@ -325,7 +328,17 @@ public class DungeonData extends WorldAndCoords {
 		int tIndex = next(BlocksGT.POT_FLOWER_TILES.length);
 		set(aX, aY, aZ, Blocks.flower_pot, 0, 2);
 		TileEntity tTileEntity = mWorld.getTileEntity(mX+aX, mY+aY, mZ+aZ);
-		if (tTileEntity instanceof TileEntityFlowerPot) ((TileEntityFlowerPot)tTileEntity).func_145964_a(Item.getItemFromBlock(BlocksGT.POT_FLOWER_TILES[tIndex]), BlocksGT.POT_FLOWER_METAS[tIndex]);
+		if (tTileEntity instanceof TileEntityFlowerPot) {
+			if (next1in2()) {
+				((TileEntityFlowerPot)tTileEntity).func_145964_a(ST.item(BlocksGT.POT_FLOWER_TILES[tIndex]), BlocksGT.POT_FLOWER_METAS[tIndex]);
+			} else {
+				if (next1in2()) {
+					((TileEntityFlowerPot)tTileEntity).func_145964_a(ST.item((Block)BlocksGT.FlowersA), next(BlocksGT.FlowersA.maxMeta()));
+				} else {
+					((TileEntityFlowerPot)tTileEntity).func_145964_a(ST.item((Block)BlocksGT.FlowersB), next(BlocksGT.FlowersB.maxMeta()));
+				}
+			}
+		}
 		return T;
 	}
 	public boolean pot(int aX, int aY, int aZ, Block aBlock, int aMeta) {
@@ -333,42 +346,6 @@ public class DungeonData extends WorldAndCoords {
 		return pot(aX, aY, aZ);
 	}
 	
-	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2) {
-		return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, 2);
-	}
-	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, int aFlags) {
-		if (aBlock1 != NB && aBlock1 != null) return aBlock2 != NB && aBlock2 != null && next1in2() ? set(aX, aY, aZ, aBlock1, aMeta1, aFlags) : set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
-		if (aBlock2 != NB && aBlock2 != null) return set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
-		return F;
-	}
-	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3) {
-		return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, aBlock3, aMeta3, 2);
-	}
-	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3, int aFlags) {
-		if (aBlock1 == NB && aBlock1 == null) return set(aX, aY, aZ                 , aBlock2, aMeta2, aBlock3, aMeta3, aFlags);
-		if (aBlock2 == NB && aBlock2 == null) return set(aX, aY, aZ, aBlock1, aMeta1                 , aBlock3, aMeta3, aFlags);
-		if (aBlock3 == NB && aBlock3 == null) return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2                 , aFlags);
-		switch(next(3)) {
-		case  0: return set(aX, aY, aZ, aBlock1, aMeta1, aFlags);
-		case  1: return set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
-		default: return set(aX, aY, aZ, aBlock3, aMeta3, aFlags);
-		}
-	}
-	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3, Block aBlock4, int aMeta4) {
-		return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, aBlock3, aMeta3, aBlock4, aMeta4, 2);
-	}
-	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3, Block aBlock4, int aMeta4, int aFlags) {
-		if (aBlock1 == NB && aBlock1 == null) return set(aX, aY, aZ                 , aBlock2, aMeta2, aBlock3, aMeta3, aBlock4, aMeta4, aFlags);
-		if (aBlock2 == NB && aBlock2 == null) return set(aX, aY, aZ, aBlock1, aMeta1                 , aBlock3, aMeta3, aBlock4, aMeta4, aFlags);
-		if (aBlock3 == NB && aBlock3 == null) return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2                 , aBlock4, aMeta4, aFlags);
-		if (aBlock4 == NB && aBlock4 == null) return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, aBlock3, aMeta3                 , aFlags);
-		switch(next(4)) {
-		case  0: return set(aX, aY, aZ, aBlock1, aMeta1, aFlags);
-		case  1: return set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
-		case  2: return set(aX, aY, aZ, aBlock3, aMeta3, aFlags);
-		default: return set(aX, aY, aZ, aBlock4, aMeta4, aFlags);
-		}
-	}
 	public boolean set(int aX, int aY, int aZ, Block aBlock) {
 		return mWorld.setBlock(mX+aX, mY+aY, mZ+aZ, aBlock, 0, 2);
 	}
@@ -382,5 +359,44 @@ public class DungeonData extends WorldAndCoords {
 		if (!set(aX, aY, aZ, aBlock, aMeta, aFlags)) return F;
 		while (aRotationCount-->0) aBlock.rotateBlock(mWorld, mX+aX, mY+aY, mZ+aZ, FORGE_DIR[SIDE_Y_POS]);
 		return T;
+	}
+	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2) {
+		return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, 2);
+	}
+	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, int aFlags) {
+		if (aBlock1 == NB || aBlock1 == null) return set(aX, aY, aZ                 , aBlock2, aMeta2, aFlags);
+		if (aBlock2 == NB || aBlock2 == null) return set(aX, aY, aZ, aBlock1, aMeta1                 , aFlags);
+		switch(next(2)) {
+		case  0: return set(aX, aY, aZ, aBlock1, aMeta1, aFlags);
+		default: return set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
+		}
+	}
+	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3) {
+		return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, aBlock3, aMeta3, 2);
+	}
+	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3, int aFlags) {
+		if (aBlock1 == NB || aBlock1 == null) return set(aX, aY, aZ                 , aBlock2, aMeta2, aBlock3, aMeta3, aFlags);
+		if (aBlock2 == NB || aBlock2 == null) return set(aX, aY, aZ, aBlock1, aMeta1                 , aBlock3, aMeta3, aFlags);
+		if (aBlock3 == NB || aBlock3 == null) return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2                 , aFlags);
+		switch(next(3)) {
+		case  0: return set(aX, aY, aZ, aBlock1, aMeta1, aFlags);
+		case  1: return set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
+		default: return set(aX, aY, aZ, aBlock3, aMeta3, aFlags);
+		}
+	}
+	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3, Block aBlock4, int aMeta4) {
+		return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, aBlock3, aMeta3, aBlock4, aMeta4, 2);
+	}
+	public boolean set(int aX, int aY, int aZ, Block aBlock1, int aMeta1, Block aBlock2, int aMeta2, Block aBlock3, int aMeta3, Block aBlock4, int aMeta4, int aFlags) {
+		if (aBlock1 == NB || aBlock1 == null) return set(aX, aY, aZ                 , aBlock2, aMeta2, aBlock3, aMeta3, aBlock4, aMeta4, aFlags);
+		if (aBlock2 == NB || aBlock2 == null) return set(aX, aY, aZ, aBlock1, aMeta1                 , aBlock3, aMeta3, aBlock4, aMeta4, aFlags);
+		if (aBlock3 == NB || aBlock3 == null) return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2                 , aBlock4, aMeta4, aFlags);
+		if (aBlock4 == NB || aBlock4 == null) return set(aX, aY, aZ, aBlock1, aMeta1, aBlock2, aMeta2, aBlock3, aMeta3                 , aFlags);
+		switch(next(4)) {
+		case  0: return set(aX, aY, aZ, aBlock1, aMeta1, aFlags);
+		case  1: return set(aX, aY, aZ, aBlock2, aMeta2, aFlags);
+		case  2: return set(aX, aY, aZ, aBlock3, aMeta3, aFlags);
+		default: return set(aX, aY, aZ, aBlock4, aMeta4, aFlags);
+		}
 	}
 }

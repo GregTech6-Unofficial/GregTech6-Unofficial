@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -26,6 +26,7 @@ import java.util.List;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetPlayerRelativeBlockHardness;
 import gregapi.block.multitileentity.MultiTileEntityBlockInternal;
 import gregapi.block.multitileentity.MultiTileEntityContainer;
+import gregapi.data.LH;
 import gregapi.gui.ContainerClientDefault;
 import gregapi.gui.ContainerCommonDefault;
 import gregapi.tileentity.base.TileEntityBase09FacingSingle;
@@ -60,7 +61,7 @@ public abstract class MultiTileEntitySafe extends TileEntityBase09FacingSingle i
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		if (aStack.getTagCompound() != null && aStack.getTagCompound().hasKey("gt.dungeonloot")) aList.add("Dungeon Loot: "+aStack.getTagCompound().getString("gt.dungeonloot"));
+		if (UT.Code.stringValid(mDungeonLootName)) aList.add(LH.Chat.BLINKING_CYAN + "Contains Loot of " + LH.Chat.WHITE + LH.get("loot." + mDungeonLootName));
 		super.addToolTips(aList, aStack, aF3_H);
 	}
 	

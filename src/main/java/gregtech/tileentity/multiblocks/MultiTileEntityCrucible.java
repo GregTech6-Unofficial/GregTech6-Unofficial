@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -32,7 +32,6 @@ import gregapi.code.ArrayListNoNulls;
 import gregapi.code.HashSetNoNulls;
 import gregapi.code.TagData;
 import gregapi.data.CS.GarbageGT;
-import gregapi.data.CS.IconsGT;
 import gregapi.data.CS.SFX;
 import gregapi.data.FL;
 import gregapi.data.LH;
@@ -46,7 +45,6 @@ import gregapi.oredict.OreDictItemData;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictMaterialStack;
 import gregapi.oredict.configurations.IOreDictConfigurationComponent;
-import gregapi.render.BlockTextureCopied;
 import gregapi.render.BlockTextureDefault;
 import gregapi.render.BlockTextureMulti;
 import gregapi.render.ITexture;
@@ -214,8 +212,24 @@ public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase impl
 		if (ST.valid(tStack)) {
 			OreDictItemData tData = OM.anydata_(tStack);
 			if (tData == null) {
-				GarbageGT.trash(decrStackSize(0, 1));
+				slotTrash(0);
 				UT.Sounds.send(SFX.MC_FIZZ, this);
+			} else if (tData.mPrefix == null) {
+				List<OreDictMaterialStack> tList = new ArrayListNoNulls<>();
+				for (OreDictMaterialStack tMaterial : tData.getAllMaterialStacks()) if (tMaterial.mAmount > 0) tList.add(tMaterial.clone());
+				if (addMaterialStacks(tList, tTemperature)) decrStackSize(0, 1);
+			} else if (tData.mPrefix == OP.oreRaw) {
+				if (addMaterialStacks(Arrays.asList(OM.stack(tData.mMaterial.mMaterial.mTargetCrushing.mMaterial, tData.mMaterial.mMaterial.mTargetCrushing.mAmount * tData.mMaterial.mMaterial.mOreMultiplier     )), tTemperature)) decrStackSize(0, 1);
+			} else if (tData.mPrefix == OP.blockRaw) {
+				if (addMaterialStacks(Arrays.asList(OM.stack(tData.mMaterial.mMaterial.mTargetCrushing.mMaterial, tData.mMaterial.mMaterial.mTargetCrushing.mAmount * tData.mMaterial.mMaterial.mOreMultiplier *  9)), tTemperature)) decrStackSize(0, 1);
+			} else if (tData.mPrefix == OP.crateGtRaw) {
+				if (addMaterialStacks(Arrays.asList(OM.stack(tData.mMaterial.mMaterial.mTargetCrushing.mMaterial, tData.mMaterial.mMaterial.mTargetCrushing.mAmount * tData.mMaterial.mMaterial.mOreMultiplier * 16)), tTemperature)) decrStackSize(0, 1);
+			} else if (tData.mPrefix == OP.crateGt64Raw) {
+				if (addMaterialStacks(Arrays.asList(OM.stack(tData.mMaterial.mMaterial.mTargetCrushing.mMaterial, tData.mMaterial.mMaterial.mTargetCrushing.mAmount * tData.mMaterial.mMaterial.mOreMultiplier * 64)), tTemperature)) decrStackSize(0, 1);
+			} else if (tData.mPrefix.contains(TD.Prefix.STANDARD_ORE)) {
+				if (addMaterialStacks(Arrays.asList(OM.stack(tData.mMaterial.mMaterial.mTargetCrushing.mMaterial, tData.mMaterial.mMaterial.mTargetCrushing.mAmount * tData.mMaterial.mMaterial.mOreMultiplier     )), tTemperature)) decrStackSize(0, 1);
+			} else if (tData.mPrefix.contains(TD.Prefix.DENSE_ORE)) {
+				if (addMaterialStacks(Arrays.asList(OM.stack(tData.mMaterial.mMaterial.mTargetCrushing.mMaterial, tData.mMaterial.mMaterial.mTargetCrushing.mAmount * tData.mMaterial.mMaterial.mOreMultiplier *  2)), tTemperature)) decrStackSize(0, 1);
 			} else {
 				List<OreDictMaterialStack> tList = new ArrayListNoNulls<>();
 				for (OreDictMaterialStack tMaterial : tData.getAllMaterialStacks()) if (tMaterial.mAmount > 0) tList.add(tMaterial.clone());
@@ -352,6 +366,7 @@ public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase impl
 		
 		if (mTemperature > getTemperatureMax(SIDE_INSIDE)) {
 			UT.Sounds.send(SFX.MC_FIZZ, this);
+			GarbageGT.trash(mContent);
 			if (mTemperature >=  320) try {for (EntityLivingBase tLiving : (List<EntityLivingBase>)worldObj.getEntitiesWithinAABB(EntityLivingBase.class, box(-GAS_RANGE, -1, -GAS_RANGE, GAS_RANGE+1, GAS_RANGE+1, GAS_RANGE+1))) UT.Entities.applyHeatDamage(tLiving, (mTemperature - 300) / 25.0F);} catch(Throwable e) {e.printStackTrace(ERR);}
 			for (int j = 0, k = UT.Code.bindInt(mTemperature / 25); j < k; j++) WD.fire(worldObj, xCoord-FLAME_RANGE+rng(2*FLAME_RANGE+1), yCoord-1+rng(2+FLAME_RANGE), zCoord-FLAME_RANGE+rng(2*FLAME_RANGE+1), rng(3) != 0);
 			for (int i = -1; i < 2; i++) for (int j = -1; j < 2; j++) {
@@ -430,7 +445,7 @@ public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase impl
 	
 	@Override
 	public boolean breakBlock() {
-		while (!mContent.isEmpty()) GarbageGT.trash(mContent.remove(0));
+		GarbageGT.trash(mContent);
 		for (int i = -1; i < 2; i++) for (int j = -1; j < 2; j++) if (i != 0 || j != 0) {
 			ITileEntityMultiBlockController.Util.checkAndSetTargetOffset(this, i, 0, j, mWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_ENERGY_IN);
 			ITileEntityMultiBlockController.Util.checkAndSetTargetOffset(this, i, 1, j, mWalls, getMultiTileEntityRegistryID(), 0, MultiTileEntityMultiBlockPart.ONLY_CRUCIBLE);
@@ -602,18 +617,9 @@ public class MultiTileEntityCrucible extends TileEntityBase10MultiBlockBase impl
 		mRenderedRGBA = UT.Code.getRGBaInt(tRGBaArray);
 		
 		if (UT.Code.exists(mDisplayedFluid, OreDictMaterial.MATERIAL_ARRAY)) {
-			OreDictMaterial tMaterial = OreDictMaterial.MATERIAL_ARRAY[mDisplayedFluid];
-			if (tMaterial == MT.Lava) {
-				mTextureMolten = BlockTextureCopied.get(Blocks.lava);
-			} else if (tMaterial == MT.H2O) {
-				mTextureMolten = BlockTextureCopied.get(Blocks.water);
-			} else if (tMaterial == MT.Glowstone) {
-				mTextureMolten = BlockTextureCopied.get(Blocks.glowstone);
-			} else {
-				mTextureMolten = BlockTextureDefault.get(tMaterial, IconsGT.INDEX_BLOCK_MOLTEN, STATE_LIQUID, T, F);
-			}
+			mTextureMolten = OreDictMaterial.MATERIAL_ARRAY[mDisplayedFluid].getTextureMolten();
 		} else {
-			mTextureMolten = BlockTextureDefault.get(MT.NULL, OP.blockDust, CA_GRAY_64, F);
+			mTextureMolten = BlockTextureDefault.get(MT.NULL, OP.blockRaw, CA_GRAY_64, F);
 		}
 		return 6;
 	}

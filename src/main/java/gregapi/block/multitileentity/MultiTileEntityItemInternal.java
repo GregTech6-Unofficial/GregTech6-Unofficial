@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -123,8 +123,9 @@ public class MultiTileEntityItemInternal extends ItemBlock implements squeek.app
 			if (tResistance >= 4) aList.add(LH.getToolTipBlastResistance(mBlock, tResistance));
 		}
 		aList.add(LH.getToolTipHarvest(tTileEntityContainer.mBlock.getMaterial(), tTileEntityContainer.mBlock.getHarvestTool(tTileEntityContainer.mBlockMetaData), tTileEntityContainer.mBlock.getHarvestLevel(tTileEntityContainer.mBlockMetaData)));
-		// Remove all Nulls and fix eventual Formatting mistakes.
-		for (int i = 0, j = aList.size(); i < j; i++) if (aList.get(i) == null) {aList.remove(i--); j--;} else aList.set(i, LH.Chat.GRAY + aList.get(i) + LH.Chat.RESET);
+		while (aList.remove(null));
+		// Remove all Nulls and fix eventual Formatting mistakes. No longer needed because the Tooltip Event fixes it
+		//for (int i = 0, j = aList.size(); i < j; i++) if (aList.get(i) == null) {aList.remove(i--); j--;} else aList.set(i, LH.Chat.GRAY + aList.get(i) + LH.Chat.RESET_TOOLTIP);
 	}
 	
 	public int onDespawn(EntityItem aEntity, ItemStack aStack) {
@@ -165,7 +166,7 @@ public class MultiTileEntityItemInternal extends ItemBlock implements squeek.app
 			if (tClickedBlock instanceof BlockSnow && (aWorld.getBlockMetadata(aX, aY, aZ) & 7) < 1) {
 				aSide = SIDE_TOP;
 			} else if (tClickedBlock != Blocks.vine && tClickedBlock != Blocks.tallgrass && tClickedBlock != Blocks.deadbush && !tClickedBlock.isReplaceable(aWorld, aX, aY, aZ)) {
-				aX += OFFSETS_X[aSide]; aY += OFFSETS_Y[aSide]; aZ += OFFSETS_Z[aSide];
+				aX += OFFX[aSide]; aY += OFFY[aSide]; aZ += OFFZ[aSide];
 			}
 			Block tReplacedBlock = aWorld.getBlock(aX, aY, aZ);
 			
@@ -463,6 +464,13 @@ public class MultiTileEntityItemInternal extends ItemBlock implements squeek.app
 	}
 
 	@Override
+	public void updateModeration(MultiTileEntityReactorCore aReactor, int aSlot, ItemStack aStack) {
+		MultiTileEntityContainer tTileEntityContainer = mBlock.mMultiTileEntityRegistry.getNewTileEntityContainer(aStack);
+		if (tTileEntityContainer != null && tTileEntityContainer.mTileEntity instanceof IItemReactorRod)
+			((IItemReactorRod)tTileEntityContainer.mTileEntity).updateModeration(aReactor, aSlot, aStack);
+	}
+
+	@Override
 	public int getReactorRodNeutronEmission(MultiTileEntityReactorCore aReactor, int aSlot, ItemStack aStack) {
 		MultiTileEntityContainer tTileEntityContainer = mBlock.mMultiTileEntityRegistry.getNewTileEntityContainer(aStack);
 		if (tTileEntityContainer != null && tTileEntityContainer.mTileEntity instanceof IItemReactorRod) return ((IItemReactorRod)tTileEntityContainer.mTileEntity).getReactorRodNeutronEmission(aReactor, aSlot, aStack);
@@ -598,16 +606,14 @@ public class MultiTileEntityItemInternal extends ItemBlock implements squeek.app
 	}
 	
 	@Override
-	public double charge(ItemStack aStack, double aCharge, int aTier, boolean aIgnoreTransferLimit, boolean aSimulate) {
-		aTier = UT.Code.bind4(aTier);
-		if (aCharge < V[aTier]) return 0;
-		return V[aTier] * doEnergyInjection(TD.Energy.EU, aStack, V[aTier], (long)(aCharge / V[aTier]), null, null, 0, 0, 0, !aSimulate);
+	public double charge   (ItemStack aStack, double aCharge, int aTier, boolean aIgnoreTransferLimit, boolean aSimulate) {
+		if (aCharge < V[aTier = UT.Code.bind4(aTier)]) return 0;
+		return V[aTier] * doEnergyInjection (TD.Energy.EU, aStack, V[aTier], (long)(aCharge / V[aTier]), null, null, 0, 0, 0, !aSimulate);
 	}
 	
 	@Override
 	public double discharge(ItemStack aStack, double aCharge, int aTier, boolean aIgnoreTransferLimit, boolean aBatteryAlike, boolean aSimulate) {
-		aTier = UT.Code.bind4(aTier);
-		if (aCharge < V[aTier]) return 0;
+		if (aCharge < V[aTier = UT.Code.bind4(aTier)]) return 0;
 		return V[aTier] * doEnergyExtraction(TD.Energy.EU, aStack, V[aTier], (long)(aCharge / V[aTier]), null, null, 0, 0, 0, !aSimulate);
 	}
 	

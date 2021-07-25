@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -43,7 +43,7 @@ public class CoverSelectorButtonPanel extends AbstractCoverAttachmentSelector {
 	@Override
 	public void onCoverPlaced(byte aSide, CoverData aData, Entity aPlayer, ItemStack aCover) {
 		super.onCoverPlaced(aSide, aData, aPlayer, aCover);
-		if (aData.mTileEntity instanceof ITileEntitySwitchableMode) aData.visual(aSide, UT.Code.bind4(((ITileEntitySwitchableMode)aData.mTileEntity).getStateMode()));
+		if (aData.mTileEntity instanceof ITileEntitySwitchableMode) aData.visual(aSide, (short)((aData.mVisuals[aSide] & ~15) | UT.Code.bind4(((ITileEntitySwitchableMode)aData.mTileEntity).getStateMode())));
 	}
 	@Override
 	public void onCoverLoaded(byte aSide, CoverData aData) {
@@ -52,7 +52,7 @@ public class CoverSelectorButtonPanel extends AbstractCoverAttachmentSelector {
 	}
 	@Override
 	public void onBlockUpdate(byte aSide, CoverData aData) {
-		if (!aData.mStopped && aData.mTileEntity instanceof ITileEntitySwitchableMode) aData.visual(aSide, UT.Code.bind4(((ITileEntitySwitchableMode)aData.mTileEntity).getStateMode()));
+		if (!aData.mStopped && aData.mTileEntity instanceof ITileEntitySwitchableMode) aData.visual(aSide, (short)((aData.mVisuals[aSide] & ~15) | UT.Code.bind4(((ITileEntitySwitchableMode)aData.mTileEntity).getStateMode())));
 	}
 	
 	@Override
@@ -60,7 +60,7 @@ public class CoverSelectorButtonPanel extends AbstractCoverAttachmentSelector {
 		if (!aData.mStopped && aSide == aSideClicked && aData.mTileEntity instanceof ITileEntitySwitchableMode) {
 			float[] tCoords = UT.Code.getFacingCoordsClicked(aSideClicked, aHitX, aHitY, aHitZ);
 			byte tMode = UT.Code.bind4(((int)(tCoords[0] * 4) % 4) + ((int)(tCoords[1] * 4) % 4) * 4);
-			if (aData.mTileEntity.isServerSide()) aData.visual(aSide, (short)((aData.mVisuals[aSide] & ~15) | ((ITileEntitySwitchableMode)aData.mTileEntity).setStateMode(tMode)));
+			if (aData.mTileEntity.isServerSide()) aData.visual(aSide, (short)((aData.mVisuals[aSide] & ~15) | UT.Code.bind4(((ITileEntitySwitchableMode)aData.mTileEntity).setStateMode(tMode))));
 			if (aData.mValues[aSide] > 0) aData.value(aSide, (short)10);
 			return T;
 		}
@@ -95,8 +95,9 @@ public class CoverSelectorButtonPanel extends AbstractCoverAttachmentSelector {
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		super.addToolTips(aList, aStack, aF3_H);
-		aList.add(LH.get(LH.TOOL_TO_CHANGE_DESIGN_CHISEL));
-		aList.add(LH.get(LH.TOOL_TO_TOGGLE_SCREWDRIVER));
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_CHANGE_DESIGN_CHISEL));
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_CONTROLLER_COVER));
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_SCREWDRIVER));
 	}
 	
 	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return BlockTextureMulti.get(sTexturesBase[(aData.mVisuals[aSide] >> 4) & 7], sTextures[UT.Code.bind4(aData.mVisuals[aSide] & 15)]);}

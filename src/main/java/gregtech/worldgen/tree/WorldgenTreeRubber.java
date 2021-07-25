@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -47,7 +47,7 @@ public class WorldgenTreeRubber extends WorldgenOnSurface {
 	@Override
 	public int canGenerate(World aWorld, Chunk aChunk, int aDimType, int aMinX, int aMinZ, int aMaxX, int aMaxZ, Random aRandom, BiomeGenBase[][] aBiomes, Set<String> aBiomeNames) {
 		if (checkForMajorWorldgen(aWorld, aMinX, aMinZ, aMaxX, aMaxZ)) return 0;
-		for (String tName : aBiomeNames) if (BIOMES_TAIGA.contains(tName)) return mAmount;
+		for (String tName : aBiomeNames) if (BIOMES_RUBBER.contains(tName)) return mAmount;
 		return 0;
 	}
 	
@@ -55,6 +55,6 @@ public class WorldgenTreeRubber extends WorldgenOnSurface {
 	public boolean tryPlaceStuff(World aWorld, int aX, int aY, int aZ, Random aRandom, Block aContact) {
 		if (!BlocksGT.plantableTrees.contains(aContact)) return F;
 		if (!WD.easyRep(aWorld, aX, aY+1, aZ)) return F;
-		return ((BlockBaseSapling)BlocksGT.Sapling).grow(aWorld, aX, aY+1, aZ, (byte)0, aRandom);
+		return ((BlockBaseSapling)BlocksGT.Saplings_AB).grow(aWorld, aX, aY+1, aZ, (byte)0, aRandom);
 	}
 }

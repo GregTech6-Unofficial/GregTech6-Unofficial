@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -125,7 +125,9 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 					for (int i = 0; i < mRecipes.mOutputItemsCount && i < tOutputItems.length; i++) addStackToSlot(i+6, tOutputItems[i]);
 					for (int i = 0; i < mTanksOutput.length && i < tOutputFluids.length; i++) mTanksOutput[i].fill(tOutputFluids[i], T);
 					removeAllDroppableNullStacks();
-					return Math.max(1, UT.Code.divup(Math.max(1, tRecipe.mEUt) * Math.max(1, tRecipe.mDuration), 4));
+					updateInventory();
+					updateAdjacentInventories();
+					return Math.max(1, UT.Code.divup(Math.max(1, tRecipe.getAbsoluteTotalPower()), 4));
 				}
 				return 0;
 			}
@@ -134,6 +136,7 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 			updateInventory();
 			for (FluidTankGT tTank : mTanksOutput) {long rAmount = GarbageGT.trash(tTank, 1000); if (rAmount > 0) return rAmount;}
 			for (FluidTankGT tTank : mTanksInput ) {long rAmount = GarbageGT.trash(tTank, 1000); if (rAmount > 0) return rAmount;}
+			updateAdjacentInventories();
 		}
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) {
@@ -234,7 +237,7 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 						FluidStack[] tOutputFluids = tRecipe.getFluidOutputs();
 						for (int i = 0; i < mRecipes.mOutputItemsCount && i < tOutputItems.length; i++) addStackToSlot(i+6, tOutputItems[i]);
 						for (int i = 0; i < mTanksOutput.length && i < tOutputFluids.length; i++) mTanksOutput[i].fill(tOutputFluids[i], T);
-						aPlayer.addExhaustion((tRecipe.mEUt * tRecipe.mDuration) / 250.0F);
+						aPlayer.addExhaustion(tRecipe.getAbsoluteTotalPower() / 250.0F);
 						removeAllDroppableNullStacks();
 						return T;
 					}
@@ -251,6 +254,8 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 			if (aStack != null && tFluid != null && FL.fillAll_(this, SIDE_ANY, tFluid, T)) {
 				aStack.stackSize--;
 				UT.Inventories.addStackToPlayerInventoryOrDrop(aPlayer, tStack, T);
+				updateInventory();
+				updateAdjacentInventories();
 				return T;
 			}
 			if (SIDES_TOP[aSide] && aHitX > PX_P[2] && aHitX < PX_N[2] && aHitZ > PX_P[2] && aHitZ < PX_N[2]) {
@@ -332,7 +337,7 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 	@Override
 	protected IFluidTank getFluidTankFillable2(byte aSide, FluidStack aFluidToFill) {
 		for (int i = 0; i < mTanksInput.length; i++) if (mTanksInput[i].contains(aFluidToFill)) return mTanksInput[i];
-		if (FL.temperature(aFluidToFill) >= mMaterial.mMeltingPoint - 100 || FL.lighter(aFluidToFill) || !FL.simple(aFluidToFill)) return null;
+		if (FL.temperature(aFluidToFill) >= mMaterial.mMeltingPoint - 100 || !FL.heavier(aFluidToFill) || !FL.simple(aFluidToFill)) return null;
 		for (int i = 0; i < mTanksInput.length; i++) if (mTanksInput[i].isEmpty()) return mTanksInput[i];
 		return null;
 	}
@@ -394,7 +399,7 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 	sOverlayBottom      = new Textures.BlockIcons.CustomIcon("machines/tools/mixing_bowl/overlay/bottom"),
 	sOverlayTableBottom = new Textures.BlockIcons.CustomIcon("machines/tools/mixing_bowl/overlay/tablebottom"),
 	sOverlayTableSide   = new Textures.BlockIcons.CustomIcon("machines/tools/mixing_bowl/overlay/tableside");
-
+	
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		switch(aRenderPass) {
@@ -409,14 +414,14 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 				Fluid tFluid = FluidRegistry.getFluid(-mDisplay-2);
 				return tFluid == null ? BlockTextureCopied.get(Blocks.water, SIDE_ANY, 0, UNCOLOURED, F, F, F) : BlockTextureFluid.get(FL.make(tFluid, 1000));
 			}
-			if (UT.Code.exists(mDisplay, OreDictMaterial.MATERIAL_ARRAY)) return BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mDisplay], OP.blockDust);
+			if (UT.Code.exists(mDisplay, OreDictMaterial.MATERIAL_ARRAY)) return OreDictMaterial.MATERIAL_ARRAY[mDisplay].getTextureDust();
 			return BlockTextureDefault.get(MT.NULL, OP.blockDust, CA_GRAY_128, F);
 		case  6: return SIDE_TOP    == aSide?BI.nei():null;
 		case  7: return SIDE_TOP    != aSide?SIDE_BOTTOM == aSide?BlockTextureMulti.get(BlockTextureDefault.get(sTextureTableBottom, mRGBa), BlockTextureDefault.get(sOverlayTableBottom)):BlockTextureMulti.get(BlockTextureDefault.get(sTextureTableSide, mRGBa), BlockTextureDefault.get(sOverlayTableSide)):null;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public void addCollisionBoxesToList2(AxisAlignedBB aAABB, List<AxisAlignedBB> aList, Entity aEntity) {
 		box(aAABB, aList, PX_P[14], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);
@@ -425,14 +430,14 @@ public class MultiTileEntityMixingBowl extends TileEntityBase07Paintable impleme
 		box(aAABB, aList, PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[14]);
 		box(aAABB, aList, PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[14], PX_N[ 0]);
 	}
-
+	
 	@Override public int getLightOpacity() {return LIGHT_OPACITY_WATER;}
-
+	
 	@Override public boolean addDefaultCollisionBoxToList() {return F;}
 	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool() {return box(PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);}
 	@Override public AxisAlignedBB getSelectedBoundingBoxFromPool () {return box(PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);}
 	@Override public void setBlockBoundsBasedOnState(Block aBlock) {box(aBlock, PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);}
-
+	
 	@Override public float getSurfaceSize           (byte aSide) {return SIDES_VERTICAL[aSide]?1.0F:0.0F;}
 	@Override public float getSurfaceSizeAttachable (byte aSide) {return SIDES_VERTICAL[aSide]?1.0F:0.0F;}
 	@Override public float getSurfaceDistance       (byte aSide) {return SIDES_TOP[aSide]?PX_N[ 8]:0.0F;}

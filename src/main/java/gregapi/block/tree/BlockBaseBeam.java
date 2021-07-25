@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -22,6 +22,7 @@ package gregapi.block.tree;
 import static gregapi.data.CS.*;
 
 import gregapi.block.BlockBaseMeta;
+import gregapi.data.MD;
 import gregapi.data.OD;
 import gregapi.data.OP;
 import gregapi.render.IIconContainer;
@@ -29,6 +30,7 @@ import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
+import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -44,8 +46,11 @@ public abstract class BlockBaseBeam extends BlockBaseMeta {
 	public BlockBaseBeam(Class<? extends ItemBlock> aItemClass, String aNameInternal, Material aMaterial, SoundType aSoundType, long aMaxMeta, IIconContainer[] aIcons) {
 		super(aItemClass, aNameInternal, aMaterial, aSoundType, Math.min(4, aMaxMeta), aIcons);
 		for (int i = 0; i < 16; i++) OM.reg(ST.make(this, 1, i), OD.beamWood);
+		if (MD.RC.mLoaded) try {EntityTunnelBore.addMineableBlock(this);} catch(Throwable e) {e.printStackTrace(ERR);}
+		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("forester", ST.make(this, 1, W));
+		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("builder", ST.make(this, 1, W));
 	}
-
+	
 	@Override public String getHarvestTool(int aMeta) {return TOOL_axe;}
 	@Override public int damageDropped(int aMeta) {return aMeta & PILLAR_DATA;}
 	@Override public int getDamageValue(World aWorld, int aX, int aY, int aZ) {return WD.meta(aWorld, aX, aY, aZ) & PILLAR_DATA;}

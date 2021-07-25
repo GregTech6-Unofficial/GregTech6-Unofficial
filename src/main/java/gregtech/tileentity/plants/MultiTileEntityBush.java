@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -25,7 +25,6 @@ import java.util.List;
 
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_CanPlace;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetSelectedBoundingBoxFromPool;
-import gregapi.block.multitileentity.IMultiTileEntity.IMTE_IsLeaves;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnOxygenRemoved;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_SetBlockBoundsBasedOnState;
 import gregapi.block.multitileentity.MultiTileEntityContainer;
@@ -62,7 +61,7 @@ import net.minecraft.world.World;
 /**
  * @author Gregorius Techneticies
  */
-public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements ITileEntityQuickObstructionCheck, IMTE_IsLeaves, IMTE_OnOxygenRemoved, IMTE_CanPlace, IMTE_GetSelectedBoundingBoxFromPool, IMTE_SetBlockBoundsBasedOnState {
+public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements ITileEntityQuickObstructionCheck, IMTE_OnOxygenRemoved, IMTE_CanPlace, IMTE_GetSelectedBoundingBoxFromPool, IMTE_SetBlockBoundsBasedOnState {
 	public ItemStack mBerry;
 	public byte oStage = 0, mStage = 0, mGrowth = 0, mSpeed = 0;
 	
@@ -84,14 +83,13 @@ public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements
 	
 	@Override
 	public NBTTagCompound writeItemNBT2(NBTTagCompound aNBT) {
-		super.writeItemNBT2(aNBT);
 		ST.save(aNBT, NBT_VALUE, mBerry);
-		return aNBT;
+		return super.writeItemNBT2(aNBT);
 	}
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		aList.add(LH.Chat.CYAN + (ST.valid(mBerry)?mBerry.getDisplayName():"Rightclick with a Berry to set Output"));
+		aList.add(LH.Chat.CYAN + (ST.valid(mBerry)?LH.get(mBerry.getUnlocalizedName(), mBerry.getDisplayName()):"Rightclick with a Berry to set Output"));
 	}
 	
 	@Override
@@ -109,34 +107,40 @@ public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements
 	public void onTick2(long aTimer, boolean aIsServerSide) {
 		super.onTick2(aTimer, aIsServerSide);
 		if (aIsServerSide) {
-			if (SERVER_TIME % 128 == 0) {
-				if (WD.oxygen(worldObj, xCoord, yCoord, zCoord)) {
-					if (SIDES_VALID[mFacing]) {
-						TileEntity tTileEntity = getTileEntityAtSideAndDistance(mFacing, 1);
-						if (tTileEntity instanceof MultiTileEntityBush) {
-							if (!ST.equal(((MultiTileEntityBush)tTileEntity).mBerry, mBerry, F)) {
-								mBerry = ((MultiTileEntityBush)tTileEntity).mBerry;
-								updateClientData();
-							}
-							mSpeed = ((MultiTileEntityBush)tTileEntity).mSpeed;
-						} else {
-							mSpeed = 0;
+			if (mBlockUpdated || SERVER_TIME % 128 == 0) {
+				if (!WD.oxygen(worldObj, xCoord, yCoord, zCoord)) {
+					setToAir();
+					return;
+				}
+				
+				if (getBlockAtSide(SIDE_UP) == Blocks.snow_layer) worldObj.setBlockToAir(xCoord, yCoord+1, zCoord);
+				
+				if (SIDES_VALID[mFacing]) {
+					TileEntity tTileEntity = getTileEntityAtSideAndDistance(mFacing, 1);
+					if (tTileEntity instanceof MultiTileEntityBush) {
+						if (!ST.equal(((MultiTileEntityBush)tTileEntity).mBerry, mBerry, F)) {
+							mBerry = ((MultiTileEntityBush)tTileEntity).mBerry;
+							updateClientData();
 						}
+						mSpeed = ((MultiTileEntityBush)tTileEntity).mSpeed;
 					} else {
-						Block tBlock = getBlockAtSide(SIDE_BOTTOM);
-						mSpeed = (byte)(IL.AETHER_Grass_Enchanted.equal(tBlock) || IL.AETHER_Grass_Enchanted_Vanilla.equal(tBlock) ? 2 : BlocksGT.plantableGreens.contains(tBlock) || tBlock.canSustainPlant(worldObj, xCoord, yCoord-1, zCoord, FORGE_DIR[SIDE_UP], Blocks.yellow_flower) ? 1 : 0);
-					}
-					if (mSpeed > 0 && mStage < 3 && ST.valid(mBerry)) {
-						// Yes I know I should have chosen a better type of Timer than a byte overflow Timer.
-						if (getSkyOffset(0, 1, 0)) {
-							for (int i = 0; i < mSpeed; i++) if (++mGrowth == 0) mStage++;
-							if (worldObj.isRaining() && getRainOffset(OFFSETS_X[mFacing], SIDES_TOP[mFacing]?1:2, OFFSETS_Z[mFacing])) for (int i = 0; i < mSpeed; i++) if (++mGrowth == 0) mStage++;
-						} else {
-							if (getLightLevelOffset(OFFSETS_X[mFacing], SIDES_TOP[mFacing]?1:2, OFFSETS_Z[mFacing]) > 9) for (int i = 0; i < mSpeed; i++) if (++mGrowth == 0) mStage++;
-						}
+						mSpeed = 0;
+						popOff();
+						return;
 					}
 				} else {
-					setToAir();
+					Block tBlock = getBlockAtSide(SIDE_BOTTOM);
+					mSpeed = (byte)(IL.AETHER_Grass_Enchanted.equal(tBlock) || IL.AETHER_Grass_Enchanted_Vanilla.equal(tBlock) ? 2 : BlocksGT.plantableGreens.contains(tBlock) || tBlock.canSustainPlant(worldObj, xCoord, yCoord-1, zCoord, FORGE_DIR[SIDE_UP], Blocks.yellow_flower) ? 1 : 0);
+				}
+			}
+			
+			if (mStage < 3 && mSpeed > 0 && SERVER_TIME % 128 == 0 && ST.valid(mBerry)) {
+				// Yes I know I should have chosen a better type of Timer than a byte overflow Timer.
+				if (getSkyOffset(0, 1, 0)) {
+					for (int i = 0; i < mSpeed; i++) if (++mGrowth == 0) mStage++;
+					if (worldObj.isRaining() && getRainOffset(OFFX[mFacing], SIDES_TOP[mFacing]?1:2, OFFZ[mFacing])) for (int i = 0; i < mSpeed; i++) if (++mGrowth == 0) mStage++;
+				} else {
+					if (getLightLevelOffset(OFFX[mFacing], SIDES_TOP[mFacing]?1:2, OFFZ[mFacing]) > 9) for (int i = 0; i < mSpeed; i++) if (++mGrowth == 0) mStage++;
 				}
 			}
 		}
@@ -157,7 +161,7 @@ public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements
 	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
 		if (isClientSide()) return super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
 		if (aTool.equals(TOOL_magnifyingglass)) {
-			if (aChatReturn != null && ST.valid(mBerry)) aChatReturn.add("Grows " + mBerry.getDisplayName());
+			if (aChatReturn != null && ST.valid(mBerry)) aChatReturn.add("Grows " + (CODE_CLIENT ? mBerry.getDisplayName() : LH.get(mBerry.getDisplayName())));
 			return 1;
 		}
 		return super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
@@ -183,9 +187,9 @@ public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements
 	
 	@Override
 	public boolean canPlace(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, byte aSide, float aHitX, float aHitY, float aHitZ) {
-		TileEntity tTileEntity = aWorld.getTileEntity(aX-OFFSETS_X[aSide], aY-OFFSETS_Y[aSide], aZ-OFFSETS_Z[aSide]);
+		TileEntity tTileEntity = aWorld.getTileEntity(aX-OFFX[aSide], aY-OFFY[aSide], aZ-OFFZ[aSide]);
 		if (tTileEntity instanceof MultiTileEntityBush && SIDES_INVALID[((MultiTileEntityBush)tTileEntity).mFacing] && (ST.invalid(mBerry) || ST.equal(((MultiTileEntityBush)tTileEntity).mBerry, mBerry, F))) {
-			mFacing = OPPOSITES[aSide];
+			mFacing = OPOS[aSide];
 			mBerry = ((MultiTileEntityBush)tTileEntity).mBerry;
 			updateClientData();
 			return T;
@@ -328,7 +332,6 @@ public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements
 	@Override public boolean attachCoversFirst      (byte aSide) {return F;}
 	@Override public boolean isObstructingBlockAt   (byte aSide) {return SIDES_INVALID[mFacing];}
 	@Override public boolean checkObstruction(EntityPlayer aPlayer, byte aSide, float aHitX, float aHitY, float aHitZ) {return F;}
-	@Override public boolean isLeaves() {return T;}
 	
 	@Override public int getLightOpacity() {return SIDES_INVALID[mFacing] ? LIGHT_OPACITY_LEAVES : LIGHT_OPACITY_NONE;}
 	@Override public byte getVisualData() {return mStage;}
@@ -344,6 +347,7 @@ public class MultiTileEntityBush extends TileEntityBase09FacingSingle implements
 	@Override public String getFacingTool() {return null;}
 	@Override public byte getDefaultSide() {return SIDE_UNDEFINED;}
 	@Override public boolean[] getValidSides() {return SIDES_ALL;}
+	@Override public boolean isUsingWrenchingOverlay(ItemStack aStack, byte aSide) {return F;}
 	@Override public float getExplosionResistance2() {return 0.2F;}
 	@Override public int getFireSpreadSpeed(byte aSide, boolean aDefault) {return 300;}
 	@Override public int getFlammability(byte aSide, boolean aDefault) {return 300;}

@@ -29,14 +29,17 @@ import gregapi.code.ArrayListNoNulls;
 import gregapi.data.CS.BlocksGT;
 import gregapi.data.IL;
 import gregapi.data.LH;
+import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.OD;
 import gregapi.data.OP;
 import gregapi.data.RM;
 import gregapi.old.Textures;
+import gregapi.render.BlockTextureCopied;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.WD;
+import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -61,17 +64,25 @@ public class BlockDiggable extends BlockBaseMeta implements IBlockOnWalkOver {
 		LH.add(getUnlocalizedName()+ ".5.name", "Blue Clay");
 		LH.add(getUnlocalizedName()+ ".6.name", "White Clay");
 		
+		MT.UNUSED.Mud  .mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 0);
+		MT.ClayBrown   .mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 1);
+		MT.Peat        .mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 2);
+		MT.ClayRed     .mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 3);
+		MT.Bentonite   .mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 4);
+		MT.Palygorskite.mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 5);
+		MT.Kaolinite   .mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, 6);
+		
 		RM.generify(ST.make(this, 1, 1), ST.make(Blocks.clay, 1, 0));
 		RM.generify(ST.make(this, 1, 3), ST.make(Blocks.clay, 1, 0));
 		RM.generify(ST.make(this, 1, 4), ST.make(Blocks.clay, 1, 0));
 		RM.generify(ST.make(this, 1, 5), ST.make(Blocks.clay, 1, 0));
 		RM.generify(ST.make(this, 1, 6), ST.make(Blocks.clay, 1, 0));
-		RM.add_smelting(ST.make(this, 1, 0), ST.make(Blocks.dirt, 1, 1));
-		RM.add_smelting(ST.make(this, 1, 1), ST.make(Blocks.hardened_clay, 1, 0));
-		RM.add_smelting(ST.make(this, 1, 3), ST.make(Blocks.hardened_clay, 1, 0));
-		RM.add_smelting(ST.make(this, 1, 4), ST.make(Blocks.hardened_clay, 1, 0));
-		RM.add_smelting(ST.make(this, 1, 5), ST.make(Blocks.hardened_clay, 1, 0));
-		RM.add_smelting(ST.make(this, 1, 6), ST.make(Blocks.hardened_clay, 1, 0));
+		RM.add_smelting(ST.make(this, 1, 0), ST.make(Blocks.dirt         , 1, 1), F, F, F);
+		RM.add_smelting(ST.make(this, 1, 1), ST.make(Blocks.hardened_clay, 1, 0), F, F, T);
+		RM.add_smelting(ST.make(this, 1, 3), ST.make(Blocks.hardened_clay, 1, 0), F, F, T);
+		RM.add_smelting(ST.make(this, 1, 4), ST.make(Blocks.hardened_clay, 1, 0), F, F, T);
+		RM.add_smelting(ST.make(this, 1, 5), ST.make(Blocks.hardened_clay, 1, 0), F, F, T);
+		RM.add_smelting(ST.make(this, 1, 6), ST.make(Blocks.hardened_clay, 1, 0), F, F, T);
 		OM.data(ST.make(this, 1, 1), MT.ClayBrown, U*4);
 		OM.data(ST.make(this, 1, 2), MT.Peat, U*4);
 		OM.data(ST.make(this, 1, 3), MT.ClayRed, U*4);
@@ -85,6 +96,9 @@ public class BlockDiggable extends BlockBaseMeta implements IBlockOnWalkOver {
 		OM.reg(ST.make(this, 1, 6), OD.blockClay);
 		
 		BlocksGT.harvestableSpade.add(this);
+		
+		if (MD.RC.mLoaded) try {EntityTunnelBore.addMineableBlock(this);} catch(Throwable e) {e.printStackTrace(ERR);}
+		if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("digger", ST.make(this, 1, W));
 	}
 	
 	@Override

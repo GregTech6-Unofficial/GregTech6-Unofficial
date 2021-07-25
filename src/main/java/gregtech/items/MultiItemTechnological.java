@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -88,7 +88,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Cover_Filter_Item                     .set(addItem(tLastID =  1023, "Item Filter"                           , "Filters for an Item"                             , new CoverFilterItem()                                      , TC.stack(TC.MACHINA, 1), TC.stack(TC.ORDO, 1), TC.stack(TC.ITER, 1)));
 		IL.Cover_Filter_Fluid                    .set(addItem(tLastID =  1024, "Fluid Filter"                          , "Filters for a Fluid"                             , new CoverFilterFluid()                                     , TC.stack(TC.MACHINA, 1), TC.stack(TC.ORDO, 1), TC.stack(TC.AQUA, 1)));
 		IL.Cover_Controller                      .set(addItem(tLastID =  1025, "Cover Controller"                      , "Turns Redstone into ON/OFF State for Covers"     , new CoverControllerCovers()                                , TC.stack(TC.MACHINA, 1), TC.stack(TC.PERMUTATIO, 2)));
-		IL.Cover_Shutter                         .set(addItem(tLastID =  1026, "Shutter Cover"                         , "Connects and Disconnects Pipes"                  , new CoverShutter()                                         , TC.stack(TC.MACHINA, 2), TC.stack(TC.PERMUTATIO, 1)));
+		IL.Cover_Shutter                         .set(addItem(tLastID =  1026, "Shutter Cover"                         , "Connects and Disconnects Pipes and Wires"        , new CoverShutter()                                         , TC.stack(TC.MACHINA, 2), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Cover_Button_Selector                 .set(addItem(tLastID =  1027, "Button Panel Selector"                 , "Selector Cover that is controlled by Buttons"    , new CoverSelectorButtonPanel()                             , TC.stack(TC.MACHINA, 1), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Cover_Warning                         .set(addItem(tLastID =  1028, "Warning Cover"                         , "Warns about certain Types of Danger"             , new CoverTextureMulti(T, T, "machines/covers/warning/", 20), TC.stack(TC.MACHINA, 1), TC.stack(TC.SENSUS, 1), TC.stack(TC.VINCULUM, 1)));
 		IL.Cover_Redstone_Conductor_IN           .set(addItem(tLastID =  1029, "Redstone Conductor Cover (Accept)"     , "Redstone will transfer to emitting Conductors"   , new CoverRedstoneConductorIN()                             , TC.stack(TC.MACHINA, 2), TC.stack(TC.SENSUS, 1)));
@@ -165,7 +165,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		CR.shaped(IL.Cover_Controller               .get(1), CR.DEF_REV, "BW" , "CQ"        , 'Q', IL.Cover_Blank, 'C', OD_CIRCUITS[2], 'W', MT.DATA.CABLES_01[1], 'B', Items.comparator);
 		CR.shaped(IL.Cover_Shutter                  .get(1), CR.DEF_REV, "TwT", "PQP", "TdT", 'Q', IL.Cover_Blank, 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
 		CR.shaped(IL.Cover_Button_Selector          .get(1), CR.DEF_REV, "BXB", "BQB", "BCB", 'Q', IL.Cover_Blank, 'C', OD_CIRCUITS[1], 'B', OD.button, 'X', IL.Circuit_Selector.wild(1));
-		CR.shaped(IL.Cover_Warning                  .get(1), CR.DEF_REV, "GB" , "YQ"        , 'Q', IL.Cover_Blank, 'C', OD.craftingWorkBench, 'G', OD.itemGlue);
+		CR.shaped(IL.Cover_Warning                  .get(1), CR.DEF_REV, "GB" , "YQ"        , 'Q', IL.Cover_Blank, 'Y', DYE_OREDICTS[DYE_INDEX_Yellow], 'G', OD.itemGlue);
 		CR.shaped(IL.Cover_Redstone_Conductor_IN    .get(1), CR.DEF_REV,  "R" ,  "Q"        , 'Q', IL.Cover_Blank, 'R', OP.wireGt01.dat(MT.RedAlloy));
 		CR.shaped(IL.Cover_Redstone_Conductor_OUT   .get(1), CR.DEF_REV,  "Q" ,  "R"        , 'Q', IL.Cover_Blank, 'R', OP.wireGt01.dat(MT.RedAlloy));
 		CR.shaped(IL.Cover_Retriever_Item           .get(1), CR.DEF_REV, "RPR", "CQC"       , 'Q', IL.Cover_Filter_Item, 'P', IL.PISTONS[1], 'C', OD_CIRCUITS[3], 'R', OP.plateCurved.dat(MT.Electrum));
@@ -212,7 +212,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Shape_Extruder_Gear_Small       .set(addItem(tLastID = 10026, "Extruder Shape (Small Gear)"              , "Extruder Shape for making small Gears"               , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_Extruder_Rod              .set(addItem(tLastID = 10027, "Extruder Shape (Rod)"                     , "Extruder Shape for making Rods"                      , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_Extruder_CCC              .set(addItem(tLastID = 10028, "Extruder Shape (Capsule-Cell-Container)"  , "Extruder Shape for making Capsule-Cell-Containers"   , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
-		IL.Shape_Extruder_Foil             .set(addItem(tLastID = 10029, "Extruder Shape (Foil)"                    , "Extruder Shape for making Foils"                     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
+		IL.Shape_Extruder_Foil             .set(addItem(tLastID = 10029, "Extruder Shape (Foil)"                    , "Extruder Shape for making Foils from Non-Metals"     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_Extruder_Plate_Tiny       .set(addItem(tLastID = 10030, "Extruder Shape (Tiny Plate)"              , "Extruder Shape for making Tiny Plates"               , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 
 		CR.shaped(IL.Shape_Extruder_Ingot           .get(1), CR.DEF_REV, "x  ", " P ", "   ", 'P', IL.Shape_Extruder_Empty);
@@ -318,7 +318,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Shape_SimpleEx_Gear_Small       .set(addItem(tLastID = 10226, "Low Heat Extruder Shape (Small Gear)"             , "Extruder Shape for making small Gears"               , TC.stack(TC.FABRICO, 1), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_SimpleEx_Rod              .set(addItem(tLastID = 10227, "Low Heat Extruder Shape (Rod)"                    , "Extruder Shape for making Rods"                      , TC.stack(TC.FABRICO, 1), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_SimpleEx_CCC              .set(addItem(tLastID = 10228, "Low Heat Extruder Shape (Capsule-Cell-Container)" , "Extruder Shape for making Capsule-Cell-Containers"   , TC.stack(TC.FABRICO, 1), TC.stack(TC.METALLUM, 2)));
-		IL.Shape_SimpleEx_Foil             .set(addItem(tLastID = 10229, "Low Heat Extruder Shape (Foil)"                   , "Extruder Shape for making Foils"                     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
+		IL.Shape_SimpleEx_Foil             .set(addItem(tLastID = 10229, "Low Heat Extruder Shape (Foil)"                   , "Extruder Shape for making Foils from Non-Metals"     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_SimpleEx_Plate_Tiny       .set(addItem(tLastID = 10230, "Low Heat Extruder Shape (Tiny Plate)"             , "Extruder Shape for making Tiny Plates"               , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 
 		CR.shaped(IL.Shape_SimpleEx_Ingot           .get(1), CR.DEF_REV, "x  ", " P ", "   ", 'P', IL.Shape_SimpleEx_Empty);
@@ -410,10 +410,10 @@ public class MultiItemTechnological extends MultiItemRandom {
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Shape_Foodmold_Bread.get(1)), (byte)45);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Shape_Foodmold_Baguette.get(1)), (byte)45);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Shape_Foodmold_Cylinder.get(1)), (byte)45);
-
-
-
-
+		
+		
+		
+		
 		IL.Shape_Press_Bullet_Casing_Small .set(addItem(tLastID = 10896, "Bullet Casing Mold (Small)"       , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.TELUM, 2)));
 		IL.Shape_Press_Bullet_Casing_Medium.set(addItem(tLastID = 10897, "Bullet Casing Mold (Medium)"      , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.TELUM, 3)));
 		IL.Shape_Press_Bullet_Casing_Large .set(addItem(tLastID = 10898, "Bullet Casing Mold (Large)"       , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.TELUM, 4)));
@@ -425,13 +425,13 @@ public class MultiItemTechnological extends MultiItemRandom {
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Shape_Press_Bullet_Casing_Small .get(1)), (byte)45);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Shape_Press_Bullet_Casing_Medium.get(1)), (byte)45);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.Shape_Press_Bullet_Casing_Large .get(1)), (byte)45);
-
-
-
+		
+		
+		
 		IL.Shape_Slicer_Empty              .set(addItem(tLastID = 10900, "Slicer Blade Frame"               , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 1)));
-
+		
 		CR.shaped(IL.Shape_Slicer_Empty.get(1), CR.DEF_REV, " R ", "RhR", " R ", 'R', OP.stick.dat(MT.StainlessSteel));
-
+		
 		IL.Shape_Slicer_Flat               .set(addItem(tLastID = 10901, "Slicer Blades (Flat)"             , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 1), TC.stack(TC.TELUM, 1)));
 		IL.Shape_Slicer_Grid               .set(addItem(tLastID = 10902, "Slicer Blades (Grid)"             , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 1), TC.stack(TC.TELUM, 1)));
 		IL.Shape_Slicer_Eigths             .set(addItem(tLastID = 10903, "Slicer Blades (Eigths)"           , "", TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 1), TC.stack(TC.TELUM, 1)));
@@ -478,7 +478,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		RM.Canner.addRecipe1(T, 16, 128, IL.Comp_Laser_Gas_Empty.get(1), MT.HeNe    .gas(U, T), NF, IL.Comp_Laser_Gas_HeNe.get(1));
 		RM.Canner.addRecipe1(T, 16, 128, IL.Comp_Laser_Gas_Empty.get(1), MT.CO      .gas(U, T), NF, IL.Comp_Laser_Gas_CO.get(1));
 		RM.Canner.addRecipe1(T, 16, 128, IL.Comp_Laser_Gas_Empty.get(1), MT.CO2     .gas(U, T), NF, IL.Comp_Laser_Gas_CO2.get(1));
-
+		
 		CR.shaped(IL.MOTORS[0].get(1), CR.DEF_REV   , "CWR", "WIW", "PWC", 'I', OP.bolt     .dat(MT.IronMagnetic)       , 'P', OP.plateCurved.dat(MT.DATA.Electric_T[0]), 'R', OP.stick.dat(MT.DATA.Electric_T[0]), 'W', OP.wireFine.dat(ANY.Cu), 'C', MT.DATA.CABLES_01[0]);
 		CR.shaped(IL.MOTORS[0].get(1), CR.DEF       , "CWR", "WIW", "PWC", 'I', OP.bolt     .dat(MT.SteelMagnetic)      , 'P', OP.plateCurved.dat(MT.DATA.Electric_T[0]), 'R', OP.stick.dat(MT.DATA.Electric_T[0]), 'W', OP.wireFine.dat(ANY.Cu), 'C', MT.DATA.CABLES_01[0]);
 		CR.shaped(IL.MOTORS[1].get(1), CR.DEF_REV   , "CWR", "WIW", "PWC", 'I', OP.stick    .dat(MT.IronMagnetic)       , 'P', OP.plateCurved.dat(MT.DATA.Electric_T[1]), 'R', OP.stick.dat(MT.DATA.Electric_T[1]), 'W', OP.wireGt01.dat(ANY.Cu), 'C', MT.DATA.CABLES_01[1]);
@@ -491,14 +491,14 @@ public class MultiItemTechnological extends MultiItemRandom {
 		CR.shaped(IL.MOTORS[7].get(1), CR.DEF_REV   , "CWR", "WIW", "PWC", 'I', OP.stickLong.dat(MT.NeodymiumMagnetic)  , 'P', OP.plateCurved.dat(MT.DATA.Electric_T[7]), 'R', OP.stick.dat(MT.DATA.Electric_T[7]), 'W', OP.wireGt07.dat(MT.AnnealedCopper), 'C', MT.DATA.CABLES_01[7]);
 		CR.shaped(IL.MOTORS[8].get(1), CR.DEF_REV   , "CWR", "WIW", "PWC", 'I', OP.stickLong.dat(MT.NeodymiumMagnetic)  , 'P', OP.plateCurved.dat(MT.DATA.Electric_T[8]), 'R', OP.stick.dat(MT.DATA.Electric_T[8]), 'W', OP.wireGt08.dat(MT.AnnealedCopper), 'C', MT.DATA.CABLES_01[8]);
 		CR.shaped(IL.MOTORS[9].get(1), CR.DEF_REV   , "CWR", "WIW", "PWC", 'I', OP.stickLong.dat(MT.NeodymiumMagnetic)  , 'P', OP.plateCurved.dat(MT.DATA.Electric_T[9]), 'R', OP.stick.dat(MT.DATA.Electric_T[9]), 'W', OP.wireGt09.dat(MT.AnnealedCopper), 'C', MT.DATA.CABLES_01[9]);
-
+		
 		for (int i = 0; i < 10; i++) {
 		CR.shaped(IL.PUMPS      [i].get(1), CR.DEF_REV, "TXO", "dPw", "OMT", 'M', IL.MOTORS[i], 'O', OP.ring.dat(MT.Rubber), 'X', OP.rotor.dat(MT.DATA.Electric_T[i]), 'T', OP.screw.dat(MT.DATA.Electric_T[i]), 'P', OP.plateCurved.dat(MT.DATA.Electric_T[i]));
 		CR.shaped(IL.CONVEYERS  [i].get(1), CR.DEF_REV, "RRR", "MCM", "RRR", 'M', IL.MOTORS[i], 'C', MT.DATA.CABLES_01[i], 'R', OP.plate.dat(MT.Rubber));
 		CR.shaped(IL.PISTONS    [i].get(1), CR.DEF_REV, "TPP", "dSS", "TMG", 'M', IL.MOTORS[i], 'P', OP.plate.dat(MT.DATA.Electric_T[i]), 'S', OP.stick.dat(MT.DATA.Electric_T[i]), 'G', OP.gearGtSmall.dat(MT.DATA.Electric_T[i]), 'T', OP.screw.dat(MT.DATA.Electric_T[i]));
 		CR.shaped(IL.ROBOT_ARMS [i].get(1), CR.DEF_REV, "CCC", "MSM", "PES", 'M', IL.MOTORS[i], 'C', MT.DATA.CABLES_01[i], 'E', OD_CIRCUITS[i], 'S', OP.stick.dat(MT.DATA.Electric_T[i]), 'P', IL.PISTONS[i]);
 		}
-
+		
 		CR.shaped(IL.FIELD_GENERATORS[0].get(1), CR.DEF_REV, "WPW", "CGC", "WPW", 'G', OP.gem.dat(MT.EnderPearl ), 'C', OD_CIRCUITS[0], 'P', OP.plateDouble.dat(MT.DATA.Electric_T[0]), 'W', OP.wireFine.dat(MT.Os));
 		CR.shaped(IL.FIELD_GENERATORS[1].get(1), CR.DEF_REV, "WPW", "CGC", "WPW", 'G', OP.gem.dat(MT.EnderPearl ), 'C', OD_CIRCUITS[1], 'P', OP.plateDouble.dat(MT.DATA.Electric_T[1]), 'W', OP.wireGt01.dat(MT.Os));
 		CR.shaped(IL.FIELD_GENERATORS[2].get(1), CR.DEF_REV, "WPW", "CGC", "WPW", 'G', OP.gem.dat(MT.EnderEye   ), 'C', OD_CIRCUITS[2], 'P', OP.plateDouble.dat(MT.DATA.Electric_T[2]), 'W', OP.wireGt02.dat(MT.Os));
@@ -509,7 +509,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		CR.shaped(IL.FIELD_GENERATORS[7].get(1), CR.DEF_REV, "WPW", "CGC", "WPW", 'G', OP.gem.dat(MT.NetherStar ), 'C', OD_CIRCUITS[7], 'P', OP.plateDouble.dat(MT.DATA.Electric_T[7]), 'W', OP.wireGt12.dat(MT.Os));
 		CR.shaped(IL.FIELD_GENERATORS[8].get(1), CR.DEF_REV, "WPW", "CGC", "WPW", 'G', OP.gem.dat(MT.NetherStar ), 'C', OD_CIRCUITS[8], 'P', OP.plateDouble.dat(MT.DATA.Electric_T[8]), 'W', OP.wireGt14.dat(MT.Os));
 		CR.shaped(IL.FIELD_GENERATORS[9].get(1), CR.DEF_REV, "WPW", "CGC", "WPW", 'G', OP.gem.dat(MT.NetherStar ), 'C', OD_CIRCUITS[9], 'P', OP.plateDouble.dat(MT.DATA.Electric_T[9]), 'W', OP.wireGt16.dat(MT.Os));
-
+		
 		CR.shaped(IL.EMITTERS[0].get(1), CR.DEF_REV, "SPC", "WQP", "CWS", 'Q', OP.gem.dat(ANY.SiO2)         , 'S', MT.DATA.WIRES_04[0], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[0]), 'C', OD_CIRCUITS[0], 'W', MT.DATA.CABLES_01[0]);
 		CR.shaped(IL.EMITTERS[1].get(1), CR.DEF_REV, "SPC", "WQP", "CWS", 'Q', OP.gem.dat(ANY.SiO2)         , 'S', MT.DATA.WIRES_04[1], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[1]), 'C', OD_CIRCUITS[1], 'W', MT.DATA.CABLES_01[1]);
 		CR.shaped(IL.EMITTERS[2].get(1), CR.DEF_REV, "SPC", "WQP", "CWS", 'Q', OP.gem.dat(ANY.SiO2)         , 'S', MT.DATA.WIRES_04[2], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[2]), 'C', OD_CIRCUITS[2], 'W', MT.DATA.CABLES_01[2]);
@@ -520,7 +520,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		CR.shaped(IL.EMITTERS[7].get(1), CR.DEF_REV, "SPC", "WQP", "CWS", 'Q', OP.gem.dat(MT.NetherStar)    , 'S', MT.DATA.WIRES_04[7], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[7]), 'C', OD_CIRCUITS[7], 'W', MT.DATA.CABLES_01[7]);
 		CR.shaped(IL.EMITTERS[8].get(1), CR.DEF_REV, "SPC", "WQP", "CWS", 'Q', OP.gem.dat(MT.NetherStar)    , 'S', MT.DATA.WIRES_04[8], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[8]), 'C', OD_CIRCUITS[8], 'W', MT.DATA.CABLES_01[8]);
 		CR.shaped(IL.EMITTERS[9].get(1), CR.DEF_REV, "SPC", "WQP", "CWS", 'Q', OP.gem.dat(MT.NetherStar)    , 'S', MT.DATA.WIRES_04[9], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[9]), 'C', OD_CIRCUITS[9], 'W', MT.DATA.CABLES_01[9]);
-
+		
 		CR.shaped(IL.SENSORS[0].get(1), CR.DEF_REV, "P Q", "PS ", "CPP", 'Q', OP.gem.dat(ANY.SiO2)          , 'S', MT.DATA.WIRES_01[0], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[0]), 'C', OD_CIRCUITS[0]);
 		CR.shaped(IL.SENSORS[1].get(1), CR.DEF_REV, "P Q", "PS ", "CPP", 'Q', OP.gem.dat(ANY.SiO2)          , 'S', MT.DATA.WIRES_01[1], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[1]), 'C', OD_CIRCUITS[1]);
 		CR.shaped(IL.SENSORS[2].get(1), CR.DEF_REV, "P Q", "PS ", "CPP", 'Q', OP.gem.dat(ANY.SiO2)          , 'S', MT.DATA.WIRES_01[2], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[2]), 'C', OD_CIRCUITS[2]);
@@ -531,12 +531,12 @@ public class MultiItemTechnological extends MultiItemRandom {
 		CR.shaped(IL.SENSORS[7].get(1), CR.DEF_REV, "P Q", "PS ", "CPP", 'Q', OP.gem.dat(MT.NetherStar)     , 'S', MT.DATA.WIRES_01[7], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[7]), 'C', OD_CIRCUITS[7]);
 		CR.shaped(IL.SENSORS[8].get(1), CR.DEF_REV, "P Q", "PS ", "CPP", 'Q', OP.gem.dat(MT.NetherStar)     , 'S', MT.DATA.WIRES_01[8], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[8]), 'C', OD_CIRCUITS[8]);
 		CR.shaped(IL.SENSORS[9].get(1), CR.DEF_REV, "P Q", "PS ", "CPP", 'Q', OP.gem.dat(MT.NetherStar)     , 'S', MT.DATA.WIRES_01[9], 'P', OP.plateCurved.dat(MT.DATA.Electric_T[9]), 'C', OD_CIRCUITS[9]);
-
-
-
-
-		IL.Battery_Lead_Acid_Cell_Empty    .set(addItem(tLastID = 20000, "Lead Acid Cell (Empty)"           , "Battery Part (doesn't require Canning Machine!)" , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.METALLUM, 2), TC.stack(TC.VACUOS , 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U)));
-		IL.Battery_Lead_Acid_Cell_Filled   .set(addItem(tLastID = 20001, "Lead Acid Cell (Filled)"          , "Battery Part"                                    , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.ELECTRUM, 2), TC.stack(TC.VENENUM, 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U, MT.H2SO4, 2*U), new FluidContainerData(MT.H2SO4.liquid(2*U, T), ST.make(this, 1, 20001), ST.make(this, 1, 20000), F)));
+		
+		
+		
+		
+		IL.Battery_Lead_Acid_Cell_Empty    .set(addItem(tLastID = 20000, "Lead-Acid Cell (Empty)"           , "Battery Part (doesn't require Canning Machine!)" , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.METALLUM, 2), TC.stack(TC.VACUOS , 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U)));
+		IL.Battery_Lead_Acid_Cell_Filled   .set(addItem(tLastID = 20001, "Lead-Acid Cell (Filled)"          , "Battery Part"                                    , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.ELECTRUM, 2), TC.stack(TC.VENENUM, 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U, MT.H2SO4, 2*U), new FluidContainerData(MT.H2SO4.liquid(2*U, T), ST.make(this, 1, 20001), ST.make(this, 1, 20000), F)));
 		ItemsGT.addNEIRedirects(IL.Battery_Lead_Acid_Cell_Empty.get(1), IL.Battery_Lead_Acid_Cell_Filled.get(1));
 		CR.shaped(IL.Battery_Lead_Acid_Cell_Empty.get(1), CR.DEF_NCC, " Fh", "FPF", "xF ", 'P', OP.plateCurved.dat(MT.BatteryAlloy), 'F', OP.foil.dat(MT.Pb));
 
@@ -929,10 +929,15 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.USB_Stick_3                     .set(addItem(tLastID = 32003, "USB 3.0 Stick"                    , "Stores Data"                                     , OD_USB_STICKS[3], Behavior_DataStorage.INSTANCE, TC.stack(TC.COGNITIO, 5), TC.stack(TC.ELECTRUM, 3), TC.stack(TC.MOTUS, 2)));
 		IL.USB_Stick_4                     .set(addItem(tLastID = 32004, "USB 4.0 Stick"                    , "Stores Data"                                     , OD_USB_STICKS[4], Behavior_DataStorage.INSTANCE, TC.stack(TC.COGNITIO, 6), TC.stack(TC.ELECTRUM, 4), TC.stack(TC.MOTUS, 3)));
 
-		CR.shaped(IL.USB_Stick_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al                ), 'T', OP.screw.dat(MT.Al              ));
-		CR.shaped(IL.USB_Stick_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel    ), 'T', OP.screw.dat(MT.StainlessSteel  ));
-		CR.shaped(IL.USB_Stick_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr                ), 'T', OP.screw.dat(MT.Cr              ));
-		CR.shaped(IL.USB_Stick_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti                ), 'T', OP.screw.dat(MT.Ti              ));
+		CR.shaped(IL.USB_Stick_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al            ), 'T', OP.screw.dat(MT.Al            ));
+		CR.shaped(IL.USB_Stick_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
+		CR.shaped(IL.USB_Stick_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr            ), 'T', OP.screw.dat(MT.Cr            ));
+		CR.shaped(IL.USB_Stick_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti            ), 'T', OP.screw.dat(MT.Ti            ));
+
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_1.get(1)), (byte)54);
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_2.get(1)), (byte)54);
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_3.get(1)), (byte)54);
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_4.get(1)), (byte)54);
 
 
 		IL.USB_Cable_1                     .set(addItem(tLastID = 32011, "USB 1.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[1], TC.stack(TC.COGNITIO, 2), TC.stack(TC.ELECTRUM, 1)));
@@ -940,10 +945,10 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.USB_Cable_3                     .set(addItem(tLastID = 32013, "USB 3.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[3], TC.stack(TC.COGNITIO, 4), TC.stack(TC.ELECTRUM, 3), TC.stack(TC.ITER, 2)));
 		IL.USB_Cable_4                     .set(addItem(tLastID = 32014, "USB 4.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[4], TC.stack(TC.COGNITIO, 5), TC.stack(TC.ELECTRUM, 4), TC.stack(TC.ITER, 3)));
 
-		CR.shaped(IL.USB_Cable_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al              ), 'T', OP.screw.dat(MT.Al              ));
-		CR.shaped(IL.USB_Cable_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel  ), 'T', OP.screw.dat(MT.StainlessSteel  ));
-		CR.shaped(IL.USB_Cable_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr              ), 'T', OP.screw.dat(MT.Cr              ));
-		CR.shaped(IL.USB_Cable_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti              ), 'T', OP.screw.dat(MT.Ti              ));
+		CR.shaped(IL.USB_Cable_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al            ), 'T', OP.screw.dat(MT.Al            ));
+		CR.shaped(IL.USB_Cable_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
+		CR.shaped(IL.USB_Cable_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr            ), 'T', OP.screw.dat(MT.Cr            ));
+		CR.shaped(IL.USB_Cable_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti            ), 'T', OP.screw.dat(MT.Ti            ));
 
 
 		IL.USB_HDD_1                       .set(addItem(tLastID = 32021, "USB 1.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[1], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 3), TC.stack(TC.ELECTRUM, 2), TC.stack(TC.MOTUS, 1)));
@@ -951,10 +956,10 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.USB_HDD_3                       .set(addItem(tLastID = 32023, "USB 3.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[3], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 5), TC.stack(TC.ELECTRUM, 4), TC.stack(TC.MOTUS, 3)));
 		IL.USB_HDD_4                       .set(addItem(tLastID = 32024, "USB 4.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[4], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 6), TC.stack(TC.ELECTRUM, 5), TC.stack(TC.MOTUS, 4)));
 
-		CR.shaped(IL.USB_HDD_1.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[3], 'W', IL.USB_Cable_1, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Al             ), 'T', OP.screw.dat(MT.Al              )); // TODO: Replace record with a CD (made of aluminium foils and plastic plates in a Press)
-		CR.shaped(IL.USB_HDD_2.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[4], 'W', IL.USB_Cable_2, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.StainlessSteel ), 'T', OP.screw.dat(MT.StainlessSteel  ));
-		CR.shaped(IL.USB_HDD_3.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[5], 'W', IL.USB_Cable_3, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Cr             ), 'T', OP.screw.dat(MT.Cr              ));
-		CR.shaped(IL.USB_HDD_4.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[6], 'W', IL.USB_Cable_4, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Ti             ), 'T', OP.screw.dat(MT.Ti              ));
+		CR.shaped(IL.USB_HDD_1.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[3], 'W', IL.USB_Cable_1, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Al            ), 'T', OP.screw.dat(MT.Al            )); // TODO: Replace record with a CD (made of aluminium foils and plastic plates in a Press)
+		CR.shaped(IL.USB_HDD_2.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[4], 'W', IL.USB_Cable_2, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
+		CR.shaped(IL.USB_HDD_3.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[5], 'W', IL.USB_Cable_3, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Cr            ), 'T', OP.screw.dat(MT.Cr            ));
+		CR.shaped(IL.USB_HDD_4.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[6], 'W', IL.USB_Cable_4, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Ti            ), 'T', OP.screw.dat(MT.Ti            ));
 
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_1.get(1)), (byte)54);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_2.get(1)), (byte)54);

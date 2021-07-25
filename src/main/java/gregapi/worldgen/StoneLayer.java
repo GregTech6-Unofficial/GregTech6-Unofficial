@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -35,6 +35,7 @@ import gregapi.code.ArrayListNoNulls;
 import gregapi.code.HashSetNoNulls;
 import gregapi.code.ItemStackContainer;
 import gregapi.data.CS.BlocksGT;
+import gregapi.data.CS.ConfigsGT;
 import gregapi.data.MT;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.util.UT;
@@ -49,39 +50,44 @@ public class StoneLayer {
 	public final List<StoneLayerOres> mOres;
 	public IBlockPlacable mOre, mOreSmall, mOreBroken;
 	
-	public StoneLayer(BlockBase aStone, StoneLayerOres... aOres) {
-		this(aStone, 0, aStone, 1, aStone, 2, ((BlockStones)aStone).mMaterial, aOres);
+	public StoneLayer(BlockBase aStone, StoneLayerOres... aOreChances) {
+		this(aStone, 0, aStone, 1, aStone, 2, ((BlockStones)aStone).mMaterial, aOreChances);
 	}
-	public StoneLayer(Block aStone, OreDictMaterial aMaterial, StoneLayerOres... aOres) {
-		this(aStone, 0, Blocks.cobblestone, 0, Blocks.mossy_cobblestone, 0, aMaterial, aOres);
+	public StoneLayer(Block aStone, OreDictMaterial aMaterial, StoneLayerOres... aOreChances) {
+		this(aStone, 0, Blocks.cobblestone, 0, Blocks.mossy_cobblestone, 0, aMaterial, aOreChances);
 	}
-	public StoneLayer(Block aStone, long aMetaStone, OreDictMaterial aMaterial, StoneLayerOres... aOres) {
-		this(aStone, aMetaStone, Blocks.cobblestone, 0, Blocks.mossy_cobblestone, 0, aMaterial, aOres);
+	public StoneLayer(Block aStone, long aMetaStone, OreDictMaterial aMaterial, StoneLayerOres... aOreChances) {
+		this(aStone, aMetaStone, Blocks.cobblestone, 0, Blocks.mossy_cobblestone, 0, aMaterial, aOreChances);
 	}
-	public StoneLayer(Block aStone, long aMetaStone, Block aCobble, long aMetaCobble, OreDictMaterial aMaterial, StoneLayerOres... aOres) {
-		this(aStone, aMetaStone, aCobble, aMetaCobble, aCobble, aMetaCobble, aMaterial, aOres);
+	public StoneLayer(Block aStone, long aMetaStone, Block aCobble, long aMetaCobble, OreDictMaterial aMaterial, StoneLayerOres... aOreChances) {
+		this(aStone, aMetaStone, aCobble, aMetaCobble, aCobble, aMetaCobble, aMaterial, aOreChances);
 	}
-	public StoneLayer(Block aStone, long aMetaStone, Block aCobble, long aMetaCobble, Block aMossy, long aMetaMossy, OreDictMaterial aMaterial, StoneLayerOres... aOres) {
-		mStone  = (aStone  == null || aStone  == NB ? Blocks.stone : aStone);
-		mMossy  = (aMossy  == null || aMossy  == NB ? mStone : aMossy);
-		mCobble = (aCobble == null || aCobble == NB ? mStone : aCobble);
-		mMetaStone = UT.Code.bind4(aMetaStone);
-		mMetaMossy = UT.Code.bind4(aMetaMossy);
-		mMetaCobble = UT.Code.bind4(aMetaCobble);
-		mMaterial = (aMaterial == null ? MT.Stone : aMaterial);
-		mStack = new ItemStackContainer(mStone, 1, mMetaStone);
-		mOre = BlocksGT.stoneToNormalOres.get(mStack);
-		mOreSmall = BlocksGT.stoneToSmallOres.get(mStack);
-		mOreBroken = BlocksGT.stoneToBrokenOres.get(mStack);
-		mOres = new ArrayListNoNulls<>(F, aOres);
+	public StoneLayer(Block aStone, long aMetaStone, Block aCobble, long aMetaCobble, Block aMossy, long aMetaMossy, OreDictMaterial aMaterial, StoneLayerOres... aOreChances) {
+		mStone      = (aStone  == null || aStone  == NB ?                                 Blocks.stone                       : aStone );
+		mCobble     = (aCobble == null || aCobble == NB ? Blocks.stone       == mStone  ? Blocks.cobblestone       : mStone  : aCobble);
+		mMossy      = (aMossy  == null || aMossy  == NB ? Blocks.cobblestone == mCobble ? Blocks.mossy_cobblestone : mCobble : aMossy );
+		mMetaStone  = (Blocks.stone             == mStone  ? 0 : UT.Code.bind4(aMetaStone ));
+		mMetaCobble = (Blocks.cobblestone       == mCobble ? 0 : UT.Code.bind4(aMetaCobble));
+		mMetaMossy  = (Blocks.mossy_cobblestone == mMossy  ? 0 : UT.Code.bind4(aMetaMossy ));
+		mMaterial   = (aMaterial == null ? MT.Stone : aMaterial);
+		mStack      = new ItemStackContainer(mStone, 1, mMetaStone);
+		mOre        = BlocksGT.stoneToNormalOres.get(mStack);
+		mOreBroken  = BlocksGT.stoneToBrokenOres.get(mStack);
+		mOreSmall   = BlocksGT.stoneToSmallOres .get(mStack);
+		mOres       = new ArrayListNoNulls<>(8);
+		for (StoneLayerOres tOre : aOreChances) if (tOre != null && tOre.mMaterial != MT.Empty && ConfigsGT.WORLDGEN.get("stonelayers."+mMaterial.mNameInternal, tOre.mMaterial.mNameInternal, T)) mOres.add(tOre);
 	}
 	
 	/** List of Stone and Ore Blocks, that can simply be replaced by the Stone Layers. */
 	public static final Set<Block> REPLACEABLE_BLOCKS = new HashSetNoNulls<>(F, Blocks.stone, Blocks.coal_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lapis_ore, Blocks.redstone_ore, Blocks.lit_redstone_ore);
 	/** List of generateable Stone Layers, via ItemStack of the Stone Block, so that MetaData is usable. */
-	public static final List<StoneLayer> LAYERS = new ArrayList<>();
+	public static final List<StoneLayer> LAYERS = new ArrayListNoNulls<>();
+	/** Deepslate Special Case. */
+	public static StoneLayer DEEPSLATE = null;
 	/** Whenever two Rock Types hit each other in WorldGen an Ore from the returned List will spawn. The first ones mentioned inside the List can override the chances for others by spawning before, so insert the lowest chances first and then the high chances. */
 	public static final Map<OreDictMaterial, Map<OreDictMaterial, List<StoneLayerOres>>> MAP = new HashMap<>();
+	/** List of random Small Ore Materials that can generate between Layers. */
+	public static final List<OreDictMaterial> RANDOM_SMALL_GEM_ORES = new ArrayListNoNulls<>();
 	
 	public static boolean bothsides(OreDictMaterial aMaterialA, OreDictMaterial aMaterialB, StoneLayerOres... aOreChances) {
 		return topbottom(aMaterialA, aMaterialB, aOreChances) && topbottom(aMaterialB, aMaterialA, aOreChances);
@@ -92,7 +98,7 @@ public class StoneLayer {
 		if (tMap == null) MAP.put(aTop, tMap = new HashMap<>());
 		List<StoneLayerOres> tList = tMap.get(aBottom);
 		if (tList == null) tMap.put(aBottom, tList = new ArrayList<>(aOreChances.length));
-		for (StoneLayerOres tMat : aOreChances) if (tMat != null) tList.add(tMat);
+		for (StoneLayerOres tOre : aOreChances) if (tOre != null && tOre.mMaterial != MT.Empty && ConfigsGT.WORLDGEN.get("doublelayers."+aTop.mNameInternal+"."+aBottom.mNameInternal, tOre.mMaterial.mNameInternal, T)) tList.add(tOre);
 		return T;
 	}
 	

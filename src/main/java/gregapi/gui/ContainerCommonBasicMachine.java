@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -43,9 +43,10 @@ public class ContainerCommonBasicMachine extends ContainerCommon {
 	
 	@Override
 	public int addSlots(InventoryPlayer aPlayerInventory) {
+		mRecipes = ((MultiTileEntityBasicMachine)mTileEntity).mRecipes;
 		int tIndex = 0;
 		
-		mRecipes = ((MultiTileEntityBasicMachine)mTileEntity).mRecipes;
+		addSlotToContainer(mRecipes.getSpecialSlot(mTileEntity, mRecipes.mInputItemsCount + mRecipes.mOutputItemsCount, 80, 43));
 		
 		switch (mRecipes.mInputItemsCount) {
 		case  0:
@@ -261,7 +262,7 @@ public class ContainerCommonBasicMachine extends ContainerCommon {
 			break;
 		}
 		
-		addSlotToContainer(mRecipes.getSpecialSlot(mTileEntity, tIndex++, 80, 43));
+		tIndex++;
 		
 		for (int i = 0; i < mRecipes.mInputFluidCount ; i++) addSlotToContainer(new Slot_Render(mTileEntity, tIndex++,  53 - (i%3)*18, 63 - (i/3)*18).setTooltip("Extract using a Tap or Nozzle", LH.Chat.WHITE));
 		for (int i = 0; i < mRecipes.mOutputFluidCount; i++) addSlotToContainer(new Slot_Render(mTileEntity, tIndex++, 107 + (i%3)*18, 63 - (i/3)*18).setTooltip("Extract using a Tap or Nozzle", LH.Chat.WHITE));
@@ -298,5 +299,5 @@ public class ContainerCommonBasicMachine extends ContainerCommon {
 	@Override public int getStartIndex() {return 0;}
 	@Override public int getSlotCount() {return mRecipes.mInputItemsCount + mRecipes.mOutputItemsCount + (mRecipes.getSpecialSlot(mTileEntity, 0, 80, 43)!=null?1:0);}
 	@Override public int getShiftClickStartIndex() {return 0;}
-	@Override public int getShiftClickSlotCount() {return mRecipes.mInputItemsCount;}
+	@Override public int getShiftClickSlotCount() {return mRecipes.mInputItemsCount + (mRecipes.getSpecialSlot(mTileEntity, 0, 80, 43)!=null?1:0);}
 }

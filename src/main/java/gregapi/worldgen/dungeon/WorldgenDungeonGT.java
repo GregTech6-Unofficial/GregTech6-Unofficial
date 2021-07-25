@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -61,6 +61,8 @@ public class WorldgenDungeonGT extends WorldgenObject {
 	, ROOM_EMPTY      = new DungeonChunkRoomEmpty()
 	, DOOR_PISTON     = new DungeonChunkDoorPiston()
 	, CORRIDOR        = new DungeonChunkCorridor()
+	, CORRIDOR3       = new DungeonChunkCorridor3()
+	, CORRIDOR4       = new DungeonChunkCorridor4()
 	, ENTRANCE        = new DungeonChunkEntrance()
 	, BARRACKS        = new DungeonChunkBarracks()
 	;
@@ -70,15 +72,26 @@ public class WorldgenDungeonGT extends WorldgenObject {
 	, TAG_PORTAL_END      = TagData.createTagData("gt.dungeon.portal.end")
 	, TAG_PORTAL_TWILIGHT = TagData.createTagData("gt.dungeon.portal.twilight")
 	, TAG_PORTAL_MYST     = TagData.createTagData("gt.dungeon.portal.myst")
+	, TAG_FARM_MOBS       = TagData.createTagData("gt.dungeon.farm.mobs")
+	, TAG_FARM_CROP       = TagData.createTagData("gt.dungeon.farm.crop")
+	, TAG_FARM_FISH       = TagData.createTagData("gt.dungeon.farm.fish")
+	, TAG_MINING_BEDROCK  = TagData.createTagData("gt.dungeon.mining.bedrock")
+	, TAG_LIBRARY         = TagData.createTagData("gt.dungeon.library")
+	, TAG_LIBRARY_NORMAL  = TagData.createTagData("gt.dungeon.library.normal")
+	, TAG_LIBRARY_THAUM   = TagData.createTagData("gt.dungeon.library.thaumcraft")
+	, TAG_LIBRARY_MYST    = TagData.createTagData("gt.dungeon.library.mystcraft")
+	, TAG_WORKSHOP        = TagData.createTagData("gt.dungeon.workshop")
 	;
 	
-	public static final List<IDungeonChunk> ROOMS = new ArrayListNoNulls<>(F
-	, ROOM_EMPTY
+	public static final List<IDungeonChunk> ROOMS = new ArrayListNoNulls<IDungeonChunk>(F
 	, new DungeonChunkRoomWorkshop()
-	, new DungeonChunkRoomLibrary()
-	, new DungeonChunkRoomPool()
-	, new DungeonChunkRoomFarm()
-	, new DungeonChunkRoomStorage()
+	, new DungeonChunkRoomMiningBedrock()
+	, new DungeonChunkRoomLibraryNormal()
+	, new DungeonChunkRoomLibraryMystcraft()
+	, new DungeonChunkRoomLibraryThaumcraft()
+	, new DungeonChunkRoomFarmFish()
+	, new DungeonChunkRoomFarmCrop()
+	, new DungeonChunkRoomFarmMobs()
 	);
 	
 	public static final List<IDungeonChunk> DEAD_END = new ArrayListNoNulls<IDungeonChunk>(F
@@ -89,8 +102,8 @@ public class WorldgenDungeonGT extends WorldgenObject {
 	, new DungeonChunkRoomPortalMyst()
 	);
 	
-	public final int mProbability, mMinSize, mMaxSize, mMinY, mMaxY, mRoomChance;
-	public final boolean mPortalNether, mPortalEnd, mPortalTwilight, mPortalMyst, mZPM;
+	public int mProbability, mMinSize, mMaxSize, mMinY, mMaxY, mRoomChance;
+	public boolean mPortalNether, mPortalEnd, mPortalTwilight, mPortalMyst, mMiningBedrock, mZPM;
 	
 	@SafeVarargs
 	public WorldgenDungeonGT(String aName, boolean aDefault, int aProbability, int aMinSize, int aMaxSize, int aMinY, int aMaxY, int aRoomChance, boolean aOverworld, boolean aNether, boolean aEnd, boolean aPortalNether, boolean aPortalEnd, boolean aPortalTwilight, boolean aPortalMyst, List<WorldgenObject>... aLists) {
@@ -105,6 +118,7 @@ public class WorldgenDungeonGT extends WorldgenObject {
 		mPortalEnd          =                       ConfigsGT.WORLDGEN.get(mCategory, "PortalEnd"       , aPortalEnd);
 		mPortalTwilight     =                       ConfigsGT.WORLDGEN.get(mCategory, "PortalTwilight"  , aPortalTwilight);
 		mPortalMyst         =                       ConfigsGT.WORLDGEN.get(mCategory, "PortalMyst"      , aPortalMyst);
+		mMiningBedrock      =                       ConfigsGT.WORLDGEN.get(mCategory, "MiningBedrock"   , T);
 		mZPM                =                       ConfigsGT.WORLDGEN.get(mCategory, "ZPMs"            , T);
 	}
 	
@@ -141,8 +155,10 @@ public class WorldgenDungeonGT extends WorldgenObject {
 		if (!(mPortalTwilight && MD.TF  .mLoaded && (aWorld.provider.dimensionId == DIM_OVERWORLD || WD.dimTF(aWorld)                         ))) tTags.add(TAG_PORTAL_TWILIGHT);
 		if (!(mPortalMyst     && MD.MYST.mLoaded )) tTags.add(TAG_PORTAL_MYST);
 		
+		if (!mMiningBedrock) tTags.add(TAG_MINING_BEDROCK);
+		
 		long[] tKeyIDs = new long[tGeneratedKeys.length];
-		tKeyIDs[0] = System.nanoTime();
+		tKeyIDs[0] = 1+Math.max(RNGSUS.nextInt(1000000), System.nanoTime());
 		for (int i = 1; i < tKeyIDs.length; i++) tKeyIDs[i] = tKeyIDs[i-1]-1;
 		ItemStack[] tKeyStacks = new ItemStack[tKeyIDs.length];
 		for (int i = 0; i < tKeyIDs.length; i++) tKeyStacks[i] = IL.KEYS[aRandom.nextInt(IL.KEYS.length)].getWithNameAndNBT(1, "Key #"+(i+1), UT.NBT.makeLong(NBT_KEY, tKeyIDs[i]));
@@ -158,21 +174,8 @@ public class WorldgenDungeonGT extends WorldgenObject {
 			if (tRoomLayout[i][j] == 0) {tRoomLayout[i][j] = (byte)k--;}
 		}
 		
-		boolean tMadeNoRoom = T;
-		for (int i = 1; i < tRoomLayout.length-1; i++) for (int j = 1; j < tRoomLayout[i].length-1; j++) if (tRoomLayout[i][j] == 0) if (aRandom.nextInt(mRoomChance) == 0) {tRoomLayout[i][j] = (byte)(1+aRandom.nextInt(ROOM_ID_COUNT)); tMadeNoRoom = F;}
-		
-		if (tMadeNoRoom)
-		for (int i = 1; i < tRoomLayout.length-1; i++) for (int j = 1; j < tRoomLayout[i].length-1; j++) if (tRoomLayout[i][j] ==-1) while (tMadeNoRoom) {
-			// Rooms at the Corners should be more likely, so that more Corridors generate.
-			if (tRoomLayout[i+1][j+1] == 0 && aRandom.nextInt(4) == 0) {tRoomLayout[i+1][j+1] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i+1][j  ] == 0 && aRandom.nextInt(6) == 0) {tRoomLayout[i+1][j  ] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i+1][j-1] == 0 && aRandom.nextInt(4) == 0) {tRoomLayout[i+1][j-1] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i  ][j+1] == 0 && aRandom.nextInt(6) == 0) {tRoomLayout[i  ][j+1] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i  ][j-1] == 0 && aRandom.nextInt(6) == 0) {tRoomLayout[i  ][j-1] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i-1][j+1] == 0 && aRandom.nextInt(4) == 0) {tRoomLayout[i-1][j+1] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i-1][j  ] == 0 && aRandom.nextInt(6) == 0) {tRoomLayout[i-1][j  ] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-			if (tRoomLayout[i-1][j-1] == 0 && aRandom.nextInt(4) == 0) {tRoomLayout[i-1][j-1] = ROOM_ID_COUNT; tMadeNoRoom = F;}
-		}
+		int tRoomCount = 0;
+		while (tRoomCount < 2) for (int i = 1; i < tRoomLayout.length-1; i++) for (int j = 1; j < tRoomLayout[i].length-1; j++) if (tRoomLayout[i][j] == 0) if (aRandom.nextInt(mRoomChance) == 0) {tRoomLayout[i][j] = (byte)(1+aRandom.nextInt(ROOM_ID_COUNT)); tRoomCount++;}
 		
 		for (int i = 1; i < tRoomLayout.length-1; i++) for (int j = 1; j < tRoomLayout[i].length-1; j++) if (tRoomLayout[i][j] != 0) {
 			int a = i, b = j;
@@ -191,7 +194,7 @@ public class WorldgenDungeonGT extends WorldgenObject {
 				if (tRoomLayout[i+1][j  ] == 0 && tRoomLayout[i-1][j  ] == 0 && tRoomLayout[i  ][j-1] != 0 && tRoomLayout[i  ][j+1] != 0) continue;
 				
 				int tConnectionCount = 0;
-				for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFSETS_X[tSide]][j+OFFSETS_Z[tSide]] != 0) tConnectionCount++;
+				for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFX[tSide]][j+OFFZ[tSide]] != 0) tConnectionCount++;
 				
 				if (tConnectionCount <= 1) {tRoomLayout[i][j] = 0; temp = T; continue;}
 				
@@ -209,7 +212,7 @@ public class WorldgenDungeonGT extends WorldgenObject {
 				if (tRoomLayout[i+1][j  ] == 0 && tRoomLayout[i-1][j  ] == 0 && tRoomLayout[i  ][j-1] != 0 && tRoomLayout[i  ][j+1] != 0) continue;
 				
 				int tConnectionCount = 0;
-				for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFSETS_X[tSide]][j+OFFSETS_Z[tSide]] != 0) tConnectionCount++;
+				for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFX[tSide]][j+OFFZ[tSide]] != 0) tConnectionCount++;
 				
 				if (tConnectionCount <= 1) {tRoomLayout[i][j] = 0; temp = T; continue;}
 				
@@ -238,7 +241,7 @@ public class WorldgenDungeonGT extends WorldgenObject {
 			aWorld.getChunkFromChunkCoords((aMinX >> 4) + i, (aMinZ >> 4) + j).setChunkModified();
 			
 			int tConnectionCount = 0;
-			for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFSETS_X[tSide]][j+OFFSETS_Z[tSide]] != 0) tConnectionCount++;
+			for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFX[tSide]][j+OFFZ[tSide]] != 0) tConnectionCount++;
 			
 			DungeonData aData = new DungeonData(aWorld, aMinX+i*16, tOffsetY, aMinZ+j*16, this, tPrimaryBlock, tSecondaryBlock, tRegistry, tLightUpdateCoords, tTags, tKeyIDs, tKeyStacks, tGeneratedKeys, tRoomLayout, i, j, tConnectionCount, tColor, aRandom, tCoin);
 			
@@ -268,12 +271,12 @@ public class WorldgenDungeonGT extends WorldgenObject {
 			aWorld.getChunkFromChunkCoords((aMinX >> 4) + i, (aMinZ >> 4) + j).setChunkModified();
 			
 			int tConnectionCount = 0;
-			for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFSETS_X[tSide]][j+OFFSETS_Z[tSide]] != 0) tConnectionCount++;
+			for (byte tSide : ALL_SIDES_HORIZONTAL) if (tRoomLayout[i+OFFX[tSide]][j+OFFZ[tSide]] != 0) tConnectionCount++;
 			
 			DungeonData aData = new DungeonData(aWorld, aMinX+i*16, tOffsetY, aMinZ+j*16, this, tPrimaryBlock, tSecondaryBlock, tRegistry, tLightUpdateCoords, tTags, tKeyIDs, tKeyStacks, tGeneratedKeys, tRoomLayout, i, j, tConnectionCount, tColor, aRandom, tCoin);
 			
 			switch(tRoomLayout[i][j]) {
-			case -128: try {CORRIDOR.generate(aData);} catch(Throwable e) {e.printStackTrace(ERR);} break;
+			case -128: try {if (tConnectionCount == 4) CORRIDOR4.generate(aData); else if (tConnectionCount == 3) CORRIDOR3.generate(aData); else CORRIDOR.generate(aData);} catch(Throwable e) {e.printStackTrace(ERR);} break;
 			case   -2: try {ENTRANCE.generate(aData);} catch(Throwable e) {e.printStackTrace(ERR);} break;
 			case   -1: try {BARRACKS.generate(aData);} catch(Throwable e) {e.printStackTrace(ERR);} break;
 			}
@@ -283,8 +286,8 @@ public class WorldgenDungeonGT extends WorldgenObject {
 		for (ChunkCoordinates tCoords : tLightUpdateCoords) {
 			aWorld.setLightValue(EnumSkyBlock.Block, tCoords.posX, tCoords.posY, tCoords.posZ, 15);
 			for (byte tSide : ALL_SIDES_MIDDLE) {
-				aWorld.func_147451_t(tCoords.posX+OFFSETS_X[tSide], tCoords.posY+OFFSETS_Y[tSide], tCoords.posZ+OFFSETS_Z[tSide]);
-				WD.update(   aWorld, tCoords.posX+OFFSETS_X[tSide], tCoords.posY+OFFSETS_Y[tSide], tCoords.posZ+OFFSETS_Z[tSide]);
+				aWorld.func_147451_t(tCoords.posX+OFFX[tSide], tCoords.posY+OFFY[tSide], tCoords.posZ+OFFZ[tSide]);
+				WD.update(   aWorld, tCoords.posX+OFFX[tSide], tCoords.posY+OFFY[tSide], tCoords.posZ+OFFZ[tSide]);
 			}
 		}
 		return T;

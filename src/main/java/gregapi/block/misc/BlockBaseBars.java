@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -28,7 +28,6 @@ import gregapi.block.BlockBaseSealable;
 import gregapi.block.ItemBlockBase;
 import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
-import gregapi.render.BlockTextureDefault;
 import gregapi.render.IRenderedBlock;
 import gregapi.render.IRenderedBlockObject;
 import gregapi.render.ITexture;
@@ -61,9 +60,10 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 	public BlockBaseBars(String aNameInternal, OreDictMaterial aMat, Material aVanillaMaterial, SoundType aSoundType) {
 		super(null, aNameInternal, aVanillaMaterial, aSoundType);
 		setCreativeTab(CreativeTabs.tabRedstone);
+		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("builder", ST.make(this, 1, W));
 		mMat = aMat;
 		
-		CR.shaped(ST.make(this, 1, 0), CR.DEF_REV_NCC_MIR, "BBB", aVanillaMaterial == Material.wood ? "r v" : "h w", "BBB", 'B', OP.stick.dat(mMat));
+		CR.shaped(ST.make(this, 3, 0), CR.DEF_REV_NCC_MIR, "BBB", aVanillaMaterial == Material.wood ? "r v" : "h w", "BBB", 'B', OP.stick.dat(mMat));
 		
 		if (CODE_CLIENT) {
 			mRenderers[ 0] = new BarRendererItem(aMat);
@@ -90,7 +90,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 		if (aStack.stackSize == 0 || aWorld.isRemote) return F;
 		if (!aPlayer.isSneaking()) {
 			for (int i = 0; i < 2; i++) {
-				if (i == 1) {aX += OFFSETS_X[aSide]; aY += OFFSETS_Y[aSide]; aZ += OFFSETS_Z[aSide];}
+				if (i == 1) {aX += OFFX[aSide]; aY += OFFY[aSide]; aZ += OFFZ[aSide];}
 				if (!aPlayer.canPlayerEdit(aX, aY, aZ, aSide, aStack)) return F;
 				Block aBlock = WD.block(aWorld, aX, aY, aZ);
 				byte  aMeta  = WD.meta (aWorld, aX, aY, aZ);
@@ -108,7 +108,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 					if (aMeta != 15) return F;
 				}
 			}
-			aX -= OFFSETS_X[aSide]; aY -= OFFSETS_Y[aSide]; aZ -= OFFSETS_Z[aSide];
+			aX -= OFFX[aSide]; aY -= OFFY[aSide]; aZ -= OFFZ[aSide];
 		}
 		
 		Block aBlock = WD.block(aWorld, aX, aY, aZ);
@@ -116,7 +116,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 		if (aBlock == Blocks.snow_layer && (WD.meta(aWorld, aX, aY, aZ) & 7) < 1) {
 			aSide = SIDE_UP;
 		} else if (aBlock != Blocks.vine && aBlock != Blocks.tallgrass && aBlock != Blocks.deadbush && !aBlock.isReplaceable(aWorld, aX, aY, aZ)) {
-			aX += OFFSETS_X[aSide]; aY += OFFSETS_Y[aSide]; aZ += OFFSETS_Z[aSide];
+			aX += OFFX[aSide]; aY += OFFY[aSide]; aZ += OFFZ[aSide];
 			aBlock = WD.block(aWorld, aX, aY, aZ);
 		}
 		
@@ -217,7 +217,7 @@ public abstract class BlockBaseBars extends BlockBaseSealable implements IRender
 	
 	public static abstract class BarRendererBase implements IRenderedBlockObject {
 		public ITexture mTexture;
-		public BarRendererBase(OreDictMaterial aMat) {mTexture = BlockTextureDefault.get(aMat, OP.blockSolid);}
+		public BarRendererBase(OreDictMaterial aMat) {mTexture = aMat.getTextureSmooth();}
 		
 		@Override public int getRenderPasses(Block aBlock, boolean[] aShouldSideBeRendered) {return 20;}
 		@Override public ITexture getTexture(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {return mTexture;}

@@ -113,6 +113,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 	
 	@Override
 	public boolean onBlockActivated3(EntityPlayer aPlayer, byte aSide, float aHitX, float aHitY, float aHitZ) {
+		mUpdatedGrid = T; // Just in case someone like Greg used NEI or something to delete all Slots or so.
 		if (aPlayer != null) {
 			aPlayer.triggerAchievement(AchievementList.openInventory);
 			aPlayer.triggerAchievement(AchievementList.mineWood);
@@ -125,6 +126,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 	
 	@Override
 	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
+		mUpdatedGrid = T; // Just in case someone like Greg used NEI or something to delete all Slots or so.
 		if (isClientSide()) return super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
 		if (aTool.equals(TOOL_monkeywrench)) {
 			if (SIDES_TOP[aSide]) {
@@ -157,7 +159,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 		
 		if (aIsServerSide) {
 			if (mUpdatedGrid) {
-				getCraftingOutput();
+				getCraftingOutput(F);
 				mUpdatedGrid = F;
 			}
 			if (mInventoryChanged) {
@@ -192,9 +194,9 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 		//
 	}
 	
-	public void setBluePrint(ItemStack aStack) {
+	public boolean setBluePrint(ItemStack aStack) {
 		if (aStack == null) aStack = slot(30);
-		if (!IL.Paper_Blueprint_Empty.equal(aStack, F, T)) return;
+		if (!IL.Paper_Blueprint_Empty.equal(aStack, F, T)) return F;
 		UT.NBT.setBlueprintCrafting(aStack,
 		  slotHas(21) ? slot(21).getItem() instanceof IItemGTContainerTool ? ST.make(slot(21), (NBTTagCompound)null) : slot(21) : null
 		, slotHas(22) ? slot(22).getItem() instanceof IItemGTContainerTool ? ST.make(slot(22), (NBTTagCompound)null) : slot(22) : null
@@ -208,14 +210,15 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 		);
 		if (slotHas(31)) aStack.setStackDisplayName(slot(31).getDisplayName());
 		ST.set(aStack, IL.Paper_Blueprint_Used.get(1), F, F);
+		return T;
 	}
 	
-	public ItemStack getCraftingOutput() {
+	public ItemStack getCraftingOutput(boolean aAllowCache) {
 		if (IL.Paper_Blueprint_Used.equal(slot(30), F, T)) {
 			ItemStack[] tRecipe = UT.NBT.getBlueprintCrafting(slot(30));
 			if (tRecipe != ZL_IS) for (int i = 0; i < tRecipe.length; i++) if (!slotHas(i+21)) slot(i+21, ST.amount(0, tRecipe[i]));
 		}
-		return slot(31, CR.getany(worldObj, slot(21), slot(22), slot(23), slot(24), slot(25), slot(26), slot(27), slot(28), slot(29)));
+		return slot(31, CR.getany(worldObj, aAllowCache, slot(21), slot(22), slot(23), slot(24), slot(25), slot(26), slot(27), slot(28), slot(29)));
 	}
 	
 	public boolean canDoCraftingOutput() {
@@ -524,14 +527,14 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 	public boolean interceptClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
 		if (aGUIID != 0) return F;
 		slotNull(aInvSlot);
-		if (aInvSlot == 30 && !aRightclick && aShiftclick) {setBluePrint(null); return T;}
+		if (aInvSlot == 30 && !aRightclick && aShiftclick && setBluePrint(null)) return T;
 		return aInvSlot == 31 || aInvSlot == 32;
 	}
 	
 	@Override
 	public ItemStack slotClick(int aGUIID, Slot_Base aSlot, int aSlotIndex, int aInvSlot, EntityPlayer aPlayer, boolean aShiftclick, boolean aRightclick, int aMouse, int aShift) {
 		if (aInvSlot == 31) {
-			ItemStack tCraftedStack = getCraftingOutput(), tStack;
+			ItemStack tCraftedStack = getCraftingOutput(T), tStack;
 			if (tCraftedStack != null) {
 				if (aShiftclick) {
 					if (aRightclick) {
@@ -539,7 +542,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 						for (int i = 0; i < aPlayer.inventory.mainInventory.length; i++) {
 							if (aPlayer.inventory.mainInventory[i] == null || (ST.equal(tCraftedStack, aPlayer.inventory.mainInventory[i]) && tCraftedStack.stackSize + aPlayer.inventory.mainInventory[i].stackSize <= aPlayer.inventory.mainInventory[i].getMaxStackSize())) {
 								for (int j = 0; j < tCraftedStack.getMaxStackSize() / tCraftedStack.stackSize && canDoCraftingOutput(); j++) {
-									if (!ST.equal(tStack = getCraftingOutput(), tCraftedStack) || tStack.stackSize != tCraftedStack.stackSize) {
+									if (!ST.equal(tStack = getCraftingOutput(T), tCraftedStack) || tStack.stackSize != tCraftedStack.stackSize) {
 										return aPlayer.inventory.getItemStack();
 									}
 									aPlayer.inventory.mainInventory[i] = (consumeMaterials(aPlayer, aPlayer.inventory.mainInventory[i], i != 0 || j != 0));
@@ -553,7 +556,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 						if (aPlayer.inventory.mainInventory[i] == null || (ST.equal(tCraftedStack, aPlayer.inventory.mainInventory[i]) && tCraftedStack.stackSize + aPlayer.inventory.mainInventory[i].stackSize <= aPlayer.inventory.mainInventory[i].getMaxStackSize())) {
 							boolean temp = F;
 							for (int j = 0; j < tCraftedStack.getMaxStackSize() / tCraftedStack.stackSize && canDoCraftingOutput(); j++) {
-								if (!ST.equal(tStack = getCraftingOutput(), tCraftedStack) || tStack.stackSize != tCraftedStack.stackSize) {
+								if (!ST.equal(tStack = getCraftingOutput(T), tCraftedStack) || tStack.stackSize != tCraftedStack.stackSize) {
 									return aPlayer.inventory.getItemStack();
 								}
 								aPlayer.inventory.mainInventory[i] = (consumeMaterials(aPlayer, aPlayer.inventory.mainInventory[i], i != 0 || j != 0));
@@ -567,7 +570,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 				if (aRightclick) {
 					// RIGHTCLICK
 					for (int i = 0; i < tCraftedStack.getMaxStackSize() / tCraftedStack.stackSize && canDoCraftingOutput(); i++) {
-						if (!ST.equal(tStack = getCraftingOutput(), tCraftedStack) || tStack.stackSize != tCraftedStack.stackSize) {
+						if (!ST.equal(tStack = getCraftingOutput(T), tCraftedStack) || tStack.stackSize != tCraftedStack.stackSize) {
 							return aPlayer.inventory.getItemStack();
 						}
 						aPlayer.inventory.setItemStack(consumeMaterials(aPlayer, aPlayer.inventory.getItemStack(), i != 0));
@@ -591,7 +594,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (!aShouldSideBeRendered[aSide]) return null;
-		int aIndex = aSide<2?aSide:aSide==mFacing?2:aSide==OPPOSITES[mFacing]?3:4;
+		int aIndex = aSide<2?aSide:aSide==mFacing?2:aSide==OPOS[mFacing]?3:4;
 		return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[aIndex], mRGBa, mMaterial.contains(TD.Properties.GLOWING)), BlockTextureDefault.get(sOverlays[aIndex]));
 	}
 	
@@ -621,6 +624,8 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 		
 		@Override
 		public int addSlots(InventoryPlayer aInventoryPlayer) {
+			addSlotToContainer(new Slot_Normal(mTileEntity, 30, 135, 28).setTooltip(LH.ADVCRAFTING_INSERT_BLUEPRINT, LH.Chat.WHITE));
+			
 			addSlotToContainer(new Slot_Normal(mTileEntity,  0,   7,  8));
 			addSlotToContainer(new Slot_Normal(mTileEntity,  1,  25,  8));
 			addSlotToContainer(new Slot_Normal(mTileEntity,  2,  43,  8));
@@ -657,8 +662,6 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 			addSlotToContainer(new Slot_Normal(mTileEntity, 33, 153, 28).setTooltip(LH.ADVCRAFTING_DROP_SLOT, LH.Chat.WHITE));
 			addSlotToContainer(new Slot_Normal(mTileEntity, 34, 153, 64).setTooltip(LH.ADVCRAFTING_NEUTRAL_SLOT, LH.Chat.WHITE));
 			
-			addSlotToContainer(new Slot_Normal(mTileEntity, 30, 135, 28).setTooltip(LH.ADVCRAFTING_INSERT_BLUEPRINT, LH.Chat.WHITE));
-			
 			addSlotToContainer(new Slot_Holo(mTileEntity, 31, 135, 64, F, F, 1));
 			addSlotToContainer(new Slot_Holo(mTileEntity, 32, 153, 46, F, F, 1).setTooltip(LH.ADVCRAFTING_AUTOMATION_ACCESS, LH.Chat.WHITE));
 			addSlotToContainer(new Slot_Holo(mTileEntity, 32, 135, 46, F, F, 1).setTooltip(LH.ADVCRAFTING_PUT_TO_STORAGE, LH.Chat.WHITE));
@@ -673,7 +676,7 @@ public class MultiTileEntityAdvancedCraftingTable extends TileEntityBase09Facing
 		
 		@Override
 		public int getShiftClickSlotCount() {
-			return 21;
+			return 22;
 		}
 	}
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -27,6 +27,7 @@ import java.util.List;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetCollisionBoundingBoxFromPool;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnEntityCollidedWithBlock;
 import gregapi.code.TagData;
+import gregapi.data.CS.GarbageGT;
 import gregapi.data.FL;
 import gregapi.data.FM;
 import gregapi.data.LH;
@@ -127,7 +128,7 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 					// Will be set back to true if the Recipe finds enough Fuel.
 					mBurning = F;
 					// Burn whatever Block is in front of the Burning Box, if it is flammable.
-					WD.fire(worldObj, getOffset(mFacing, 1), T);
+					WD.burn(worldObj, getOffset(mFacing, 1), T, T);
 					// Check for Air, because Fire needs Oxygen.
 					if (!WD.hasCollide(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing)) && !getBlockAtSide(mFacing).getMaterial().isLiquid() && WD.oxygen(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
 						// Find and apply fitting Recipe.
@@ -136,10 +137,10 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 							mBurning = T;
 							mCooldown = 100;
 							mLastRecipe = tRecipe;
-							mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+							mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 							// Burn as much as needed to keep up the Power per Tick.
 							while (mEnergy < mRate * 2 && tRecipe.isRecipeInputEqual(T, F, mTank.AS_ARRAY, ZL_IS)) {
-								mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+								mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 								if (mTank.isEmpty()) break;
 							}
 						} else {
@@ -151,6 +152,11 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 						mCooldown = 0;
 					}
 				}
+			} else {
+				// Something burning in front of it? Lets ignite!
+				if (rng(200) == 0 && WD.burning(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
+					mBurning = T;
+				}
 			}
 			// Out of Fuel I guess.
 			if (mEnergy <     0) mEnergy = 0;
@@ -159,7 +165,7 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 			if (mCooldown > 0) mCooldown--;
 		} else {
 			// Client Burning Particles.
-			if (mBurning && rng(5) == 0) spawnBurningParticles(xCoord+0.5+OFFSETS_X[mFacing]*0.55+(SIDES_AXIS_X[mFacing]?0:RNGSUS.nextFloat()*0.6-0.3), yCoord+RNGSUS.nextFloat()*0.375, zCoord+0.5+OFFSETS_Z[mFacing]*0.55+(SIDES_AXIS_Z[mFacing]?0:RNGSUS.nextFloat()*0.6-0.3));
+			if (mBurning && rng(5) == 0) spawnBurningParticles(xCoord+0.5+OFFX[mFacing]*0.55+(SIDES_AXIS_X[mFacing]?0:RNGSUS.nextFloat()*0.6-0.3), yCoord+RNGSUS.nextFloat()*0.375, zCoord+0.5+OFFZ[mFacing]*0.55+(SIDES_AXIS_Z[mFacing]?0:RNGSUS.nextFloat()*0.6-0.3));
 		}
 	}
 	
@@ -172,6 +178,8 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 		
 		if (aTool.equals(TOOL_igniter       ) && (aSide == mFacing || aPlayer == null)) {mBurning = T; mCooldown = 100; return 10000;}
 		if (aTool.equals(TOOL_extinguisher  ) && (aSide == mFacing || aPlayer == null)) {mBurning = F; mCooldown =   0; return 10000;}
+		
+		if (aTool.equals(TOOL_plunger)) return GarbageGT.trash(mTank);
 		
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) aChatReturn.add(mTank.content());
@@ -198,7 +206,7 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 	
 	@Override public byte getVisualData() {return (byte)(mBurning?1:0);}
 	@Override public byte getDefaultSide() {return SIDE_FRONT;}
-	@Override public boolean[] getValidSides() {return SIDES_HORIZONTAL;}
+	@Override public boolean[] getValidSides() {return mBurning ? SIDES_THIS[mFacing] : SIDES_HORIZONTAL;}
 	
 	@Override
 	protected IFluidTank getFluidTankFillable2(byte aSide, FluidStack aFluidToFill) {
@@ -240,6 +248,8 @@ public class MultiTileEntityGeneratorLiquid extends TileEntityBase09FacingSingle
 	@Override public boolean getStateRunningPassively() {return mBurning;}
 	@Override public boolean getStateRunningPossible() {return mBurning;}
 	@Override public boolean getStateRunningActively() {return mBurning;}
+	
+	@Override public float getBlockHardness() {return mBurning ? super.getBlockHardness() * 16 : super.getBlockHardness();}
 	
 	protected void spawnBurningParticles(double aX, double aY, double aZ) {
 		worldObj.spawnParticle("smoke", aX, aY, aZ, 0, 0, 0);

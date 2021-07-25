@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -117,8 +117,8 @@ public class MultiTileEntityPipeItem extends TileEntityBase10ConnectorRendered i
 	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
-		aList.add(Chat.CYAN + LH.get(LH.PIPE_STATS_STEPSIZE) + mStepSize);
-		aList.add(Chat.CYAN + LH.get(LH.PIPE_STATS_BANDWIDTH) + getPipeCapacity());
+		aList.add(Chat.CYAN + LH.get(LH.PIPE_STATS_STEPSIZE) + UT.Code.makeString(mStepSize));
+		aList.add(Chat.CYAN + LH.get(LH.PIPE_STATS_BANDWIDTH) + Chat.WHITE + UT.Code.makeString(getPipeCapacity()) + "/s");
 		super.addToolTips(aList, aStack, aF3_H);
 		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_SET_INPUT_MONKEY_WRENCH));
 		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_SET_OUTPUT_MONKEY_WRENCH));
@@ -224,13 +224,13 @@ public class MultiTileEntityPipeItem extends TileEntityBase10ConnectorRendered i
 	public boolean insertItemStackIntoTileEntity(Object aSender, byte aSide) {
 		if (!FACE_CONNECTED[aSide][mDisabledOutputs] && canEmitItemsTo(aSide, aSender)) {
 			DelegatorTileEntity<TileEntity> tDelegator = getAdjacentTileEntity(aSide);
-			if (tDelegator.mTileEntity != null && !(tDelegator.mTileEntity instanceof TileEntityBase09Connector)) {
-				if ((!(tDelegator.mTileEntity instanceof TileEntityHopper) && !(tDelegator.mTileEntity instanceof TileEntityDispenser)) || getMetaDataAtSide(aSide) != tDelegator.mSideOfTileEntity) {
+			if (ST.canConnect(tDelegator) && !(tDelegator.mTileEntity instanceof TileEntityBase09Connector)) {
+				if (!(tDelegator.mTileEntity instanceof TileEntityHopper || tDelegator.mTileEntity instanceof TileEntityDispenser) || getMetaDataAtSide(aSide) != tDelegator.mSideOfTileEntity) {
 					// special cases for the win...
 					CoverData tCovers = getCoverData();
 					if (tCovers != null && tCovers.mBehaviours[aSide] instanceof CoverFilterItem && tCovers.mNBTs[aSide] != null) {
 						ItemStack tStack = ST.load(tCovers.mNBTs[aSide], "gt.filter.item");
-						if (ST.valid(tStack)) return ST.move(new DelegatorTileEntity<>((TileEntity)aSender, SIDE_ANY), tDelegator, new ItemStackSet<>(tStack), F, F, tCovers.mVisuals[aSide] != 0, T, 64, 1, 64, 1) > 0;
+						return ST.valid(tStack) && ST.move(new DelegatorTileEntity<>((TileEntity)aSender, SIDE_ANY), tDelegator, new ItemStackSet<>(tStack), F, F, tCovers.mVisuals[aSide] != 0, T, 64, 1, 64, 1) > 0;
 					}
 					// well normal case is this.
 					return ST.move(new DelegatorTileEntity<>((TileEntity)aSender, SIDE_ANY), tDelegator) > 0;
@@ -264,7 +264,7 @@ public class MultiTileEntityPipeItem extends TileEntityBase10ConnectorRendered i
 	@Override public int[] getAccessibleSlotsFromSide2(byte aSide) {return ACCESSIBLE_SLOTS;}
 	@Override public boolean canDrop(int aInventorySlot) {return T;}
 	@Override public boolean isObstructingBlockAt(byte aSide) {return mBlocking;} // Btw, Wires have this but Pipes don't. This is because Wires are flexible, while Pipes aren't.
-	@Override public boolean canInsertItem2(int aSlot, ItemStack aStack, byte aSide) {if (!connected(aSide) || FACE_CONNECTED[aSide][mDisabledInputs]) return F; if (!UT.Code.containsSomething(getInventory())) mLastReceivedFrom = aSide; return mLastReceivedFrom == aSide && slot(aSlot) == null;}
+	@Override public boolean canInsertItem2(int aSlot, ItemStack aStack, byte aSide) {if (!connected(aSide) || FACE_CONNECTED[aSide][mDisabledInputs]) return F; if (!UT.Code.containsSomething(getInventory())) mLastReceivedFrom = aSide; return mLastReceivedFrom == aSide && !slotHas(aSlot);}
 	@Override public boolean canExtractItem2(int aSlot, ItemStack aStack, byte aSide) {return SIDES_INVALID[aSide] || connected(aSide);}
 	@Override public ItemStack[] getDefaultInventory(NBTTagCompound aNBT) {ItemStack[] rStack = super.getDefaultInventory(aNBT); ACCESSIBLE_SLOTS = new int[rStack.length]; for (int i = 0; i < ACCESSIBLE_SLOTS.length; i++) ACCESSIBLE_SLOTS[i] = i; return rStack;}
 	

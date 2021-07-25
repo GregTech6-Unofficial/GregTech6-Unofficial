@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -29,6 +29,7 @@ import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.item.multiitem.MultiItemTool;
+import gregapi.item.multiitem.behaviors.Behavior_Place_Sapling;
 import gregapi.item.multiitem.behaviors.Behavior_Place_Workbench;
 import gregapi.item.multiitem.behaviors.Behavior_Tool;
 import gregapi.old.Textures;
@@ -49,25 +50,13 @@ import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.world.BlockEvent;
 
 public class GT_Tool_Chainsaw_LV extends GT_Tool_Axe {
-	@Override
-	public int getToolDamagePerBlockBreak() {
-		return 50;
-	}
-	
-	@Override
-	public int getToolDamagePerDropConversion() {
-		return 5;
-	}
-	
-	@Override
-	public int getToolDamagePerContainerCraft() {
-		return 200;
-	}
-	
-	@Override
-	public int getToolDamagePerEntityAttack() {
-		return 200;
-	}
+	@Override public int getBaseQuality                () {return 1;}
+	@Override public int getToolDamagePerContainerCraft() {return 200;}
+	@Override public int getToolDamagePerEntityAttack  () {return super.getToolDamagePerEntityAttack() * 4;}
+	@Override public float getSpeedMultiplier          () {return 2.0F;}
+	@Override public String getCraftingSound           () {return SFX.IC_CHAINSAW_01;}
+	@Override public String getEntityHitSound          () {return SFX.IC_CHAINSAW_02;}
+	@Override public String getMiningSound             () {return SFX.IC_CHAINSAW_01;}
 	
 	@Override
 	public int getHurtResistanceTime(int aOriginalHurtResistance, Entity aEntity) {
@@ -91,41 +80,6 @@ public class GT_Tool_Chainsaw_LV extends GT_Tool_Axe {
 		ic2.core.IC2.achievements.issueAchievement((EntityPlayer)aPlayer, "killCreeperChainsaw");
 		} catch(Throwable e) {e.printStackTrace(ERR);}
 		return super.getDamageSource(aPlayer, aEntity);
-	}
-	
-	@Override
-	public int getBaseQuality() {
-		return 0;
-	}
-	
-	@Override
-	public float getBaseDamage() {
-		return 3.0F;
-	}
-	
-	@Override
-	public float getSpeedMultiplier() {
-		return 2.0F;
-	}
-	
-	@Override
-	public float getMaxDurabilityMultiplier() {
-		return 1.0F;
-	}
-	
-	@Override
-	public String getCraftingSound() {
-		return SFX.IC_CHAINSAW_01;
-	}
-	
-	@Override
-	public String getEntityHitSound() {
-		return SFX.IC_CHAINSAW_02;
-	}
-	
-	@Override
-	public String getMiningSound() {
-		return SFX.IC_CHAINSAW_01;
 	}
 	
 	@Override
@@ -188,6 +142,7 @@ public class GT_Tool_Chainsaw_LV extends GT_Tool_Axe {
 	@Override
 	public void onStatsAddedToTool(MultiItemTool aItem, int aID) {
 		aItem.addItemBehavior(aID, new Behavior_Tool(TOOL_saw, SFX.MC_DIG_WOOD, getToolDamagePerContainerCraft(), F, T));
+		aItem.addItemBehavior(aID, Behavior_Place_Sapling.INSTANCE);
 		aItem.addItemBehavior(aID, Behavior_Place_Workbench.INSTANCE);
 	}
 	

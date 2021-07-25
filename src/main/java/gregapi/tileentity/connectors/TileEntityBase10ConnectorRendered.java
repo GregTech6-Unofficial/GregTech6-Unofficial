@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -82,11 +82,10 @@ public abstract class TileEntityBase10ConnectorRendered extends TileEntityBase09
 	
 	@Override
 	public NBTTagCompound writeItemNBT2(NBTTagCompound aNBT) {
-		super.writeItemNBT2(aNBT);
 		UT.NBT.setBoolean(aNBT, NBT_FOAMED, mFoam);
 		UT.NBT.setBoolean(aNBT, NBT_FOAMDRIED, mFoamDried);
 		UT.NBT.setBoolean(aNBT, NBT_OWNABLE, mOwnable);
-		return aNBT;
+		return super.writeItemNBT2(aNBT);
 	}
 	
 	@Override
@@ -139,7 +138,7 @@ public abstract class TileEntityBase10ConnectorRendered extends TileEntityBase09
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (aRenderPass == 7) return aShouldSideBeRendered[aSide] ? getTextureCFoam(aSide, mConnections, mDiameter, aRenderPass) : null;
 		if (aRenderPass == 0) return mFoamDried ? aShouldSideBeRendered[aSide] ? getTextureCFoamDry(aSide, mConnections, mDiameter, aRenderPass) : null : mConnections == 0 || (mDiameter >= 1.0F && connected(aSide)) ? getTextureConnected(aSide, mConnections, mDiameter, aRenderPass) : getTextureSide(aSide, mConnections, mDiameter, aRenderPass);
-		return aSide == OPPOSITES[aRenderPass-1] ? null : aSide == aRenderPass-1 ? aShouldSideBeRendered[aSide] ? getTextureConnected(aSide, mConnections, mDiameter, aRenderPass) : null : getTextureSide(aSide, mConnections, mDiameter, aRenderPass);
+		return aSide == OPOS[aRenderPass-1] ? null : aSide == aRenderPass-1 ? aShouldSideBeRendered[aSide] ? getTextureConnected(aSide, mConnections, mDiameter, aRenderPass) : null : getTextureSide(aSide, mConnections, mDiameter, aRenderPass);
 	}
 	
 	@Override public boolean usesRenderPass2(int aRenderPass, boolean[] aShouldSideBeRendered) {return aRenderPass == 0 || aRenderPass == 7 || connected((byte)(aRenderPass-1));}

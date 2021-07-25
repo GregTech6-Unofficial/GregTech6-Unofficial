@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -34,6 +34,7 @@ import gregapi.block.multitileentity.IMultiTileEntity.*;
 import gregapi.block.multitileentity.MultiTileEntityBlockInternal;
 import gregapi.block.multitileentity.MultiTileEntityContainer;
 import gregapi.block.multitileentity.MultiTileEntityRegistry;
+import gregapi.data.LH;
 import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.gui.ContainerClientChest;
@@ -110,6 +111,13 @@ public class MultiTileEntityChest extends TileEntityBase05Inventories implements
 	}
 	
 	@Override
+	public NBTTagCompound writeItemNBT(NBTTagCompound aNBT) {
+		aNBT = super.writeItemNBT(aNBT);
+		if (UT.Code.stringValid(mDungeonLootName)) aNBT.setString("gt.dungeonloot", mDungeonLootName);
+		return aNBT;
+	}
+	
+	@Override
 	public boolean onTickCheck(long aTimer) {
 		return mUsingPlayers != oUsingPlayers || super.onTickCheck(aTimer);
 	}
@@ -170,13 +178,13 @@ public class MultiTileEntityChest extends TileEntityBase05Inventories implements
 		}
 		return T;
 	}
-	
-	@Override
-	public boolean breakBlock() {
-		// Only auto-generate Loot if a second has passed since its original placement. Prevents Item spillage during Worldgen in most cases.
-		if (mTimer > 20) generateDungeonLoot();
-		return super.breakBlock();
-	}
+	// No longer generate Loot when harvested, instead pick up the Chest including the Loot it contains!
+	//@Override
+	//public boolean breakBlock() {
+	//  // Only auto-generate Loot if a second has passed since its original placement. Prevents Item spillage during Worldgen in most cases.
+	//  if (mTimer > 20) generateDungeonLoot();
+	//  return super.breakBlock();
+	//}
 	
 	@Override public boolean canDrop(int aInventorySlot) {return T;}
 	@Override public String getTileEntityName() {return "gt.multitileentity.chest";}
@@ -197,17 +205,15 @@ public class MultiTileEntityChest extends TileEntityBase05Inventories implements
 	}
 	
 	@Override
-	@SuppressWarnings("unchecked")
-	public boolean getSubItems(MultiTileEntityBlockInternal aBlock, Item aItem, CreativeTabs aTab, @SuppressWarnings("rawtypes") List aList, short aID) {
+	public boolean getSubItems(MultiTileEntityBlockInternal aBlock, Item aItem, CreativeTabs aTab, List<ItemStack> aList, short aID) {
 		if (!SHOW_HIDDEN_MATERIALS && mMaterial.mHidden) return F;
 		if (D1 || "lootchest".equalsIgnoreCase(mTextureName)) for (String tLoot : new String[] {"mineshaftCorridor", "pyramidDesertyChest", "pyramidJungleChest", "pyramidJungleDispenser", "strongholdCorridor", "strongholdLibrary", "strongholdCrossing", "villageBlacksmith", "bonusChest", "dungeonChest"}) aList.add(aBlock.mMultiTileEntityRegistry.getItem(aID, UT.NBT.makeString("gt.dungeonloot", tLoot)));
 		return T;
 	}
 	
 	@Override
-	@SuppressWarnings("unchecked")
-	public void addToolTips(@SuppressWarnings("rawtypes") List aList, ItemStack aStack, boolean aF3_H) {
-		if (aStack.getTagCompound() != null && aStack.getTagCompound().hasKey("gt.dungeonloot")) aList.add("Dungeon Loot: "+aStack.getTagCompound().getString("gt.dungeonloot"));
+	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
+		if (UT.Code.stringValid(mDungeonLootName)) aList.add(LH.Chat.BLINKING_CYAN + "Contains Loot of " + LH.Chat.WHITE + LH.get("loot." + mDungeonLootName));
 	}
 	
 	@Override public boolean receiveDataByte(byte aData, INetworkHandler aNetworkHandler) {mUsingPlayers = aData; return T;}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -27,6 +27,7 @@ import java.util.List;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetCollisionBoundingBoxFromPool;
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnEntityCollidedWithBlock;
 import gregapi.code.TagData;
+import gregapi.data.CS.GarbageGT;
 import gregapi.data.FL;
 import gregapi.data.FM;
 import gregapi.data.LH;
@@ -69,7 +70,7 @@ public class MultiTileEntityGeneratorHotFluid extends TileEntityBase09FacingSing
 	public TagData mEnergyTypeEmitted = TD.Energy.HU;
 	public RecipeMap mRecipes = FM.Hot;
 	public Recipe mLastRecipe = null;
-	public FluidTankGT[] mTanks = {new FluidTankGT(1000), new FluidTankGT(Long.MAX_VALUE)};
+	public FluidTankGT[] mTanks = {new FluidTankGT(1000), new FluidTankGT()};
 	public TE_Behavior_Active_Trinary mActivity = null;
 	
 	@Override
@@ -132,11 +133,11 @@ public class MultiTileEntityGeneratorHotFluid extends TileEntityBase09FacingSing
 							if (tRecipe.isRecipeInputEqual(T, F, mTanks[0].AS_ARRAY, ZL_IS)) {
 								mActivity.mActive = T;
 								mLastRecipe = tRecipe;
-								mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+								mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 								if (tRecipe.mFluidOutputs.length > 0) mTanks[1].fill(tRecipe.mFluidOutputs[0]);
 								// Use as much as needed to keep up the Power per Tick.
 								while (mEnergy < mRate * 2 && (tRecipe.mFluidOutputs.length <= 0 || mTanks[1].canFillAll(tRecipe.mFluidOutputs[0])) && tRecipe.isRecipeInputEqual(T, F, mTanks[0].AS_ARRAY, ZL_IS)) {
-									mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+									mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 									if (tRecipe.mFluidOutputs.length > 0) mTanks[1].fill(tRecipe.mFluidOutputs[0]);
 									if (mTanks[0].isEmpty()) break;
 								}
@@ -164,6 +165,11 @@ public class MultiTileEntityGeneratorHotFluid extends TileEntityBase09FacingSing
 		if (rReturn > 0) return rReturn;
 		
 		if (isClientSide()) return 0;
+		
+		if (aTool.equals(TOOL_plunger)) {
+			if (mTanks[1].has()) return GarbageGT.trash(mTanks[1]);
+			return GarbageGT.trash(mTanks[0]);
+		}
 		
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) {
@@ -217,9 +223,9 @@ public class MultiTileEntityGeneratorHotFluid extends TileEntityBase09FacingSing
 		return mTanks[mTanks[1].has() ? 1 : 0].drain(aMaxDrain, aDoDrain);
 	}
 	
-	@Override public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {return aShouldSideBeRendered[aSide] ? SIDES_TOP[aSide] ? BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[1], mRGBa), BlockTextureDefault.get((mActivity.mState > 0?sOverlaysActive:sOverlays)[1])) : aSide == mFacing ? BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[3], mRGBa), BlockTextureDefault.get((mActivity.mState > 0?sOverlaysActive:sOverlays)[3])) : BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[2], mRGBa), BlockTextureDefault.get((mActivity.mState > 0?sOverlaysActive:sOverlays)[2])) : null;}
+	@Override public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {return aShouldSideBeRendered[aSide] ? SIDES_TOP[aSide] ? BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[1], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[1])) : aSide == mFacing ? BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[3], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[3])) : BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[2], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[2])) : null;}
 	
-	@Override public void onEntityCollidedWithBlock(Entity aEntity) {if (mActivity.mState > 0) UT.Entities.applyHeatDamage(aEntity, Math.min(10.0F, mRate / 10.0F));}
+	@Override public void onEntityCollidedWithBlock(Entity aEntity) {if (mActivity.mState>0) UT.Entities.applyHeatDamage(aEntity, Math.min(10.0F, mRate / 10.0F));}
 	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool() {return box(0, 0, 0, 1, 0.875, 1);}
 	
 	@Override public ItemStack[] getDefaultInventory(NBTTagCompound aNBT) {return ZL_IS;}

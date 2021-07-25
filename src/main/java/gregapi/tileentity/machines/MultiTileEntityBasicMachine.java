@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -170,7 +170,7 @@ public class MultiTileEntityBasicMachine extends TileEntityBase09FacingSingle im
 		mTanksInput = new FluidTankGT[mRecipes.mInputFluidCount];
 		for (int i = 0; i < mTanksInput.length; i++) mTanksInput[i] = new FluidTankGT(tCapacity).setCapacity(mRecipes, mParallel * 2L).readFromNBT(aNBT, NBT_TANK+".in."+i);
 		mTanksOutput = new FluidTankGT[mRecipes.mOutputFluidCount];
-		for (int i = 0; i < mTanksOutput.length; i++) mTanksOutput[i] = new FluidTankGT(Long.MAX_VALUE).readFromNBT(aNBT, NBT_TANK+".out."+i);
+		for (int i = 0; i < mTanksOutput.length; i++) mTanksOutput[i] = new FluidTankGT().readFromNBT(aNBT, NBT_TANK+".out."+i);
 		
 		mOutputFluids = new FluidStack[mRecipes.mOutputFluidCount];
 		for (int i = 0; i < mOutputFluids.length; i++) mOutputFluids[i] = FL.load(aNBT, NBT_TANK_OUT+"."+i);
@@ -213,12 +213,12 @@ public class MultiTileEntityBasicMachine extends TileEntityBase09FacingSingle im
 				new Textures.BlockIcons.CustomIcon("machines/basicmachines/"+tTextureName+"/overlay_running/right"),
 				new Textures.BlockIcons.CustomIcon("machines/basicmachines/"+tTextureName+"/overlay_running/back")};
 			} else {
-				if (getMultiTileEntityRegistryID() != W && getMultiTileEntityID() != W) {
-					MultiTileEntityBasicMachine tCanonicalTileEntity = (MultiTileEntityBasicMachine)MultiTileEntityRegistry.getRegistry(getMultiTileEntityRegistryID()).getClassContainer(getMultiTileEntityID()).mCanonicalTileEntity;
-					mTexturesMaterial = tCanonicalTileEntity.mTexturesMaterial;
-					mTexturesInactive = tCanonicalTileEntity.mTexturesInactive;
-					mTexturesRunning  = tCanonicalTileEntity.mTexturesRunning;
-					mTexturesActive   = tCanonicalTileEntity.mTexturesActive;
+				TileEntity tCanonicalTileEntity = MultiTileEntityRegistry.getCanonicalTileEntity(getMultiTileEntityRegistryID(), getMultiTileEntityID());
+				if (tCanonicalTileEntity instanceof MultiTileEntityBasicMachine) {
+					mTexturesMaterial = ((MultiTileEntityBasicMachine)tCanonicalTileEntity).mTexturesMaterial;
+					mTexturesInactive = ((MultiTileEntityBasicMachine)tCanonicalTileEntity).mTexturesInactive;
+					mTexturesRunning  = ((MultiTileEntityBasicMachine)tCanonicalTileEntity).mTexturesRunning;
+					mTexturesActive   = ((MultiTileEntityBasicMachine)tCanonicalTileEntity).mTexturesActive;
 				} else {
 					mTexturesMaterial = mTexturesInactive = mTexturesRunning = mTexturesActive = L6_IICONCONTAINER;
 				}
@@ -259,13 +259,12 @@ public class MultiTileEntityBasicMachine extends TileEntityBase09FacingSingle im
 	
 	@Override
 	public NBTTagCompound writeItemNBT2(NBTTagCompound aNBT) {
-		super.writeItemNBT2(aNBT);
 		UT.NBT.setNumber(aNBT, NBT_MODE, mMode);
 		UT.NBT.setBoolean(aNBT, NBT_INV_DISABLED_IN, mDisabledItemInput);
 		UT.NBT.setBoolean(aNBT, NBT_INV_DISABLED_OUT, mDisabledItemOutput);
 		UT.NBT.setBoolean(aNBT, NBT_TANK_DISABLED_IN, mDisabledFluidInput);
 		UT.NBT.setBoolean(aNBT, NBT_TANK_DISABLED_OUT, mDisabledFluidOutput);
-		return aNBT;
+		return super.writeItemNBT2(aNBT);
 	}
 	
 	@Override
@@ -629,7 +628,10 @@ public class MultiTileEntityBasicMachine extends TileEntityBase09FacingSingle im
 		int rMaxTimes = mParallel;
 		
 		// Don't do more than 1-4 Minutes worth of Input at a time, when doing the Chain Processing.
-		if (mParallelDuration) rMaxTimes = (int)Math.max(1, rMaxTimes-Math.abs((aRecipe.mEUt * aRecipe.mDuration * rMaxTimes) / (mInputMax * 1200)));
+		if (mParallelDuration) {
+			// Ugh, I do not feel like Maths right now, but the previous incarnation of this seemed a tiny bit wrong, so I will make sure it works properly.
+			while (rMaxTimes > 1 && aRecipe.getAbsoluteTotalPower() * rMaxTimes > mInputMax * 1200) rMaxTimes--;
+		}
 		
 		for (int i = 0, j = mRecipes.mInputItemsCount; i < mRecipes.mOutputItemsCount && i < aRecipe.mOutputs.length; i++, j++) if (ST.valid(aRecipe.mOutputs[i])) {
 			if (slotHas(j)) {
@@ -1002,7 +1004,7 @@ public class MultiTileEntityBasicMachine extends TileEntityBase09FacingSingle im
 	
 	@Override public void setVisualData(byte aData) {mRunning=((aData&2)!=0); mActive=((aData&1)!=0);}
 	@Override public byte getDefaultSide() {return SIDE_FRONT;}
-	@Override public boolean[] getValidSides() {return SIDES_HORIZONTAL;}
+	@Override public boolean[] getValidSides() {return mActive ? SIDES_THIS[mFacing] : SIDES_HORIZONTAL;}
 	@Override public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {return aShouldSideBeRendered[aSide] ? BlockTextureMulti.get(BlockTextureDefault.get(mTexturesMaterial[FACING_ROTATIONS[mFacing][aSide]], mRGBa), BlockTextureDefault.get((mActive||worldObj==null?mTexturesActive:mRunning?mTexturesRunning:mTexturesInactive)[FACING_ROTATIONS[mFacing][aSide]])) : null;}
 	
 	@Override public boolean canSave(int aSlot) {return !IL.Display_Fluid.equal(slot(aSlot), T, T);}

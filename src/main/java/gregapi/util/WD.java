@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -39,6 +39,7 @@ import gregapi.data.CS.BlocksGT;
 import gregapi.data.CS.SFX;
 import gregapi.data.FL;
 import gregapi.data.IL;
+import gregapi.data.LH;
 import gregapi.data.MD;
 import gregapi.data.TD;
 import gregapi.event.BlockScanningEvent;
@@ -46,6 +47,7 @@ import gregapi.oredict.OreDictMaterial;
 import gregapi.random.IHasWorldAndCoords;
 import gregapi.tileentity.ITileEntity;
 import gregapi.tileentity.ITileEntityQuickObstructionCheck;
+import gregapi.tileentity.ITileEntityUnloadable;
 import gregapi.tileentity.data.ITileEntityGibbl;
 import gregapi.tileentity.data.ITileEntityProgress;
 import gregapi.tileentity.data.ITileEntityTemperature;
@@ -123,10 +125,10 @@ public class WD {
 	
 	public static boolean obstructed(World aWorld, int aX, int aY, int aZ, byte aSide) {
 		if (!OBSTRUCTION_CHECKS) return F;
-		aX += OFFSETS_X[aSide]; aY += OFFSETS_Y[aSide]; aZ += OFFSETS_Z[aSide];
+		aX += OFFX[aSide]; aY += OFFY[aSide]; aZ += OFFZ[aSide];
 		TileEntity tTileEntity = te(aWorld, aX, aY, aZ, T);
 		if (tTileEntity != null) {
-			if (tTileEntity instanceof ITileEntityQuickObstructionCheck) return ((ITileEntityQuickObstructionCheck)tTileEntity).isObstructingBlockAt(OPPOSITES[aSide]);
+			if (tTileEntity instanceof ITileEntityQuickObstructionCheck) return ((ITileEntityQuickObstructionCheck)tTileEntity).isObstructingBlockAt(OPOS[aSide]);
 			if (MD.TC.mLoaded && tTileEntity instanceof INode) return F;
 		}
 		Block tBlock = aWorld.getBlock(aX, aY, aZ);
@@ -160,44 +162,93 @@ public class WD {
 		return aWorld.func_147447_a(vec3, vec3.addVector(tX * tW * tReach, tY * tReach, tZ * tW * tReach), aFlag, !aFlag, F);
 	}
 	
+	public static boolean dimOverworldLike(World aWorld) {return aWorld != null && dimOverworldLike(aWorld.provider);}
+	public static boolean dimOverworldLike(WorldProvider aProvider) {return aProvider.dimensionId == 0 || dimOverworldLike(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimOverworldLike(WorldProvider aProvider, String aProviderClassName) {return aProvider.dimensionId == 0 || dimENVM(aProvider, aProviderClassName) || dimA97(aProvider, aProviderClassName) || dimWTCH(aProvider, aProviderClassName) || dimMYST(aProvider, aProviderClassName) || dimCW2(aProvider, aProviderClassName);}
+	
 	public static boolean dimPlanet(World aWorld) {return aWorld != null && dimPlanet(aWorld.provider);}
-	public static boolean dimPlanet(WorldProvider aProvider) {return !(Math.abs(aProvider.dimensionId) <= 1 || dimMYST(aProvider) || dimTF(aProvider) || dimERE(aProvider) || dimBTL(aProvider) || dimENVM(aProvider) || dimDD(aProvider) || dimLM(aProvider) || dimAETHER(aProvider) || dimALF(aProvider) || dimTROPIC(aProvider) || dimCANDY(aProvider));}
+	public static boolean dimPlanet(WorldProvider aProvider) {return Math.abs(aProvider.dimensionId) > 1 && dimPlanet(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimPlanet(WorldProvider aProvider, String aProviderClassName) {return !(Math.abs(aProvider.dimensionId) <= 1 || dimMYST(aProvider, aProviderClassName) || dimATUM(aProvider, aProviderClassName) || dimWTCH(aProvider, aProviderClassName) || dimA97(aProvider, aProviderClassName) || dimCW2(aProvider, aProviderClassName) || dimTF(aProvider, aProviderClassName) || dimERE(aProvider, aProviderClassName) || dimBTL(aProvider, aProviderClassName) || dimENVM(aProvider, aProviderClassName) || dimDD(aProvider, aProviderClassName) || dimLM(aProvider, aProviderClassName) || dimAETHER(aProvider, aProviderClassName) || dimALF(aProvider, aProviderClassName) || dimTROPIC(aProvider, aProviderClassName) || dimCANDY(aProvider, aProviderClassName));}
 	
 	public static boolean dimMYST(World aWorld) {return aWorld != null && dimMYST(aWorld.provider);}
 	public static boolean dimMYST(WorldProvider aProvider) {return MD.MYST.mLoaded && aProvider.getClass().getName().toLowerCase().contains("com.xcompwiz.mystcraft");}
+	public static boolean dimMYST(WorldProvider aProvider, String aProviderClassName) {return MD.MYST.mLoaded && aProvider.getClass().getName().toLowerCase().contains("com.xcompwiz.mystcraft");}
 	
 	public static boolean dimCANDY(World aWorld) {return aWorld != null && dimCANDY(aWorld.provider);}
-	public static boolean dimCANDY(WorldProvider aProvider) {return MD.CANDY.mLoaded && "WorldProviderCandy".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCANDY(WorldProvider aProvider) {return MD.CANDY.mLoaded && dimCANDY(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCANDY(WorldProvider aProvider, String aProviderClassName) {return MD.CANDY.mLoaded && "WorldProviderCandy".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
 	
 	public static boolean dimTROPIC(World aWorld) {return aWorld != null && dimTROPIC(aWorld.provider);}
-	public static boolean dimTROPIC(WorldProvider aProvider) {return MD.TROPIC.mLoaded && "WorldProviderTropicraft".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimTROPIC(WorldProvider aProvider) {return MD.TROPIC.mLoaded && dimTROPIC(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimTROPIC(WorldProvider aProvider, String aProviderClassName) {return MD.TROPIC.mLoaded && "WorldProviderTropicraft".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimATUM(World aWorld) {return aWorld != null && dimATUM(aWorld.provider);}
-	public static boolean dimATUM(WorldProvider aProvider) {return MD.ATUM.mLoaded && "AtumWorldProvider".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimATUM(WorldProvider aProvider) {return MD.ATUM.mLoaded && dimATUM(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimATUM(WorldProvider aProvider, String aProviderClassName) {return MD.ATUM.mLoaded && "AtumWorldProvider".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimTF(World aWorld) {return aWorld != null && dimTF(aWorld.provider);}
 	public static boolean dimTF(WorldProvider aProvider) {return MD.TF.mLoaded && aProvider.dimensionId == TwilightForestMod.dimensionID;}
+	public static boolean dimTF(WorldProvider aProvider, String aProviderClassName) {return MD.TF.mLoaded && aProvider.dimensionId == TwilightForestMod.dimensionID;}
 	
 	public static boolean dimBTL(World aWorld) {return aWorld != null && dimBTL(aWorld.provider);}
-	public static boolean dimBTL(WorldProvider aProvider) {return MD.BTL.mLoaded && "WorldProviderBetweenlands".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimBTL(WorldProvider aProvider) {return MD.BTL.mLoaded && dimBTL(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimBTL(WorldProvider aProvider, String aProviderClassName) {return MD.BTL.mLoaded && "WorldProviderBetweenlands".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimERE(World aWorld) {return aWorld != null && dimERE(aWorld.provider);}
-	public static boolean dimERE(WorldProvider aProvider) {return MD.ERE.mLoaded && "WorldProviderErebus".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimERE(WorldProvider aProvider) {return MD.ERE.mLoaded && dimERE(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimERE(WorldProvider aProvider, String aProviderClassName) {return MD.ERE.mLoaded && "WorldProviderErebus".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimALF(World aWorld) {return aWorld != null && dimALF(aWorld.provider);}
-	public static boolean dimALF(WorldProvider aProvider) {return MD.ALF.mLoaded && "WorldProviderAlfheim".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimALF(WorldProvider aProvider) {return MD.ALF.mLoaded && dimALF(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimALF(WorldProvider aProvider, String aProviderClassName) {return MD.ALF.mLoaded && "WorldProviderAlfheim".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimDD(World aWorld) {return aWorld != null && dimDD(aWorld.provider);}
-	public static boolean dimDD(WorldProvider aProvider) {return (MD.ExU.mLoaded || MD.ExS.mLoaded) && "WorldProviderUnderdark".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimDD(WorldProvider aProvider) {return (MD.ExU.mLoaded || MD.ExS.mLoaded) && dimDD(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimDD(WorldProvider aProvider, String aProviderClassName) {return (MD.ExU.mLoaded || MD.ExS.mLoaded) && "WorldProviderUnderdark".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimLM(World aWorld) {return aWorld != null && dimLM(aWorld.provider);}
-	public static boolean dimLM(WorldProvider aProvider) {return (MD.ExU.mLoaded || MD.ExS.mLoaded) && "WorldProviderEndOfTime".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimLM(WorldProvider aProvider) {return (MD.ExU.mLoaded || MD.ExS.mLoaded) && dimLM(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimLM(WorldProvider aProvider, String aProviderClassName) {return (MD.ExU.mLoaded || MD.ExS.mLoaded) && "WorldProviderEndOfTime".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimENVM(World aWorld) {return aWorld != null && dimENVM(aWorld.provider);}
-	public static boolean dimENVM(WorldProvider aProvider) {return MD.ENVM.mLoaded && "WorldProviderCaves".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimENVM(WorldProvider aProvider) {return MD.ENVM.mLoaded && dimENVM(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimENVM(WorldProvider aProvider, String aProviderClassName) {return MD.ENVM.mLoaded && "WorldProviderCaves".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimA97(World aWorld) {return aWorld != null && dimA97(aWorld.provider);}
+	public static boolean dimA97(WorldProvider aProvider) {return MD.A97_MINING.mLoaded && dimA97(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimA97(WorldProvider aProvider, String aProviderClassName) {return MD.A97_MINING.mLoaded && "WorldProviderMiner".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimCW2(World aWorld) {return aWorld != null && dimCW2(aWorld.provider);}
+	public static boolean dimCW2(WorldProvider aProvider) {return MD.CW2.mLoaded && dimCW2(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCW2(WorldProvider aProvider, String aProviderClassName) {return dimCW2AquaCavern(aProvider, aProviderClassName) || dimCW2Caveland(aProvider, aProviderClassName) || dimCW2Cavenia(aProvider, aProviderClassName) || dimCW2Cavern(aProvider, aProviderClassName) || dimCW2Caveworld(aProvider, aProviderClassName);}
+	
+	public static boolean dimCW2AquaCavern(World aWorld) {return aWorld != null && dimCW2AquaCavern(aWorld.provider);}
+	public static boolean dimCW2AquaCavern(WorldProvider aProvider) {return MD.CW2.mLoaded && dimCW2AquaCavern(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCW2AquaCavern(WorldProvider aProvider, String aProviderClassName) {return MD.CW2.mLoaded && "WorldProviderAquaCavern".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimCW2Caveland(World aWorld) {return aWorld != null && dimCW2Caveland(aWorld.provider);}
+	public static boolean dimCW2Caveland(WorldProvider aProvider) {return MD.CW2.mLoaded && dimCW2Caveland(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCW2Caveland(WorldProvider aProvider, String aProviderClassName) {return MD.CW2.mLoaded && "WorldProviderCaveland".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimCW2Cavenia(World aWorld) {return aWorld != null && dimCW2Cavenia(aWorld.provider);}
+	public static boolean dimCW2Cavenia(WorldProvider aProvider) {return MD.CW2.mLoaded && dimCW2Cavenia(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCW2Cavenia(WorldProvider aProvider, String aProviderClassName) {return MD.CW2.mLoaded && "WorldProviderCavenia".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimCW2Cavern(World aWorld) {return aWorld != null && dimCW2Cavern(aWorld.provider);}
+	public static boolean dimCW2Cavern(WorldProvider aProvider) {return MD.CW2.mLoaded && dimCW2Cavern(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCW2Cavern(WorldProvider aProvider, String aProviderClassName) {return MD.CW2.mLoaded && "WorldProviderCavern".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimCW2Caveworld(World aWorld) {return aWorld != null && dimCW2Caveworld(aWorld.provider);}
+	public static boolean dimCW2Caveworld(WorldProvider aProvider) {return MD.CW2.mLoaded && dimCW2Caveworld(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimCW2Caveworld(WorldProvider aProvider, String aProviderClassName) {return MD.CW2.mLoaded && "WorldProviderCaveworld".equalsIgnoreCase(aProviderClassName);}
+	
+	public static boolean dimWTCH(World aWorld) {return aWorld != null && dimWTCH(aWorld.provider);}
+	public static boolean dimWTCH(WorldProvider aProvider) {return MD.WTCH.mLoaded && dimWTCH(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimWTCH(WorldProvider aProvider, String aProviderClassName) {return MD.WTCH.mLoaded && "WorldProviderDreamWorld".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean dimAETHER(World aWorld) {return aWorld != null && dimAETHER(aWorld.provider);}
-	public static boolean dimAETHER(WorldProvider aProvider) {return MD.AETHER.mLoaded && "WorldProviderAether".equalsIgnoreCase(UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimAETHER(WorldProvider aProvider) {return MD.AETHER.mLoaded && dimAETHER(aProvider, UT.Reflection.getLowercaseClass(aProvider));}
+	public static boolean dimAETHER(WorldProvider aProvider, String aProviderClassName) {return MD.AETHER.mLoaded && "WorldProviderAether".equalsIgnoreCase(aProviderClassName);}
 	
 	public static boolean move(Entity aEntity, int aDimension, double aX, double aY, double aZ) {
 		WorldServer tTargetWorld = DimensionManager.getWorld(aDimension), tOriginalWorld = DimensionManager.getWorld(aEntity.worldObj.provider.dimensionId);
@@ -257,35 +308,46 @@ public class WD {
 		return F;
 	}
 	
-	/** to get a TileEntity properly, according to my additional Interfaces. Normally you should set aLoadUnloadedChunks to false, unless you have already checked these Coordinates, or you want to load Chunks */
-	public static DelegatorTileEntity<TileEntity> te(World aWorld, ChunkCoordinates aCoords, byte aSide, boolean aLoadUnloadedChunks) {
-		TileEntity aTileEntity = te(aWorld, aCoords, aLoadUnloadedChunks);
-		return aTileEntity instanceof ITileEntityDelegating ? ((ITileEntityDelegating)aTileEntity).getDelegateTileEntity(aSide) : new DelegatorTileEntity<>(aTileEntity, aWorld, aCoords, aSide);
+	
+	/** Marks a Chunk dirty so it is saved */
+	public static boolean mark(World aWorld, int aX, int aZ) {
+		if (aWorld == null || aWorld.isRemote) return F;
+		Chunk aChunk = aWorld.getChunkFromBlockCoords(aX, aZ);
+		if (aChunk == null) {
+			aWorld.getBlockMetadata(aX, 0, aZ);
+			aChunk = aWorld.getChunkFromBlockCoords(aX, aZ);
+			if (aChunk == null) {
+				ERR.println("Some important Chunk does not exist for some reason at Coordinates X: " + aX + " and Z: " + aZ);
+				return F;
+			}
+		}
+		aChunk.setChunkModified();
+		return T;
+	}
+	/** Marks a Chunk dirty so it is saved */
+	public static boolean mark(Object aTileEntity) {
+		return aTileEntity instanceof TileEntity && mark(((TileEntity)aTileEntity).getWorldObj(), ((TileEntity)aTileEntity).xCoord, ((TileEntity)aTileEntity).zCoord);
 	}
 	
+	
+	/** to get a TileEntity properly, according to my additional Interfaces. Normally you should set aLoadUnloadedChunks to false, unless you have already checked these Coordinates, or you want to load Chunks */
+	public static DelegatorTileEntity<TileEntity> te(World aWorld, ChunkCoordinates aCoords, byte aSide, boolean aLoadUnloadedChunks) {
+		return te(aWorld, aCoords.posX, aCoords.posY, aCoords.posZ, aSide, aLoadUnloadedChunks);
+	}
 	/** to get a TileEntity properly, according to my additional Interfaces. Normally you should set aLoadUnloadedChunks to false, unless you have already checked these Coordinates, or you want to load Chunks */
 	public static DelegatorTileEntity<TileEntity> te(World aWorld, int aX, int aY, int aZ, byte aSide, boolean aLoadUnloadedChunks) {
 		TileEntity aTileEntity = te(aWorld, aX, aY, aZ, aLoadUnloadedChunks);
 		return aTileEntity instanceof ITileEntityDelegating ? ((ITileEntityDelegating)aTileEntity).getDelegateTileEntity(aSide) : new DelegatorTileEntity<>(aTileEntity, aWorld, aX, aY, aZ, aSide);
 	}
-	
 	/** to get a TileEntity properly, according to my additional Interfaces. Normally you should set aLoadUnloadedChunks to false, unless you have already checked these Coordinates, or you want to load Chunks */
 	public static TileEntity te(World aWorld, ChunkCoordinates aCoords, boolean aLoadUnloadedChunks) {
-		if (aLoadUnloadedChunks || aWorld.blockExists(aCoords.posX, aCoords.posY, aCoords.posZ)) {
-			TileEntity rTileEntity = aWorld.getTileEntity(aCoords.posX, aCoords.posY, aCoords.posZ);
-			if (rTileEntity != null) return rTileEntity;
-			rTileEntity = LAST_BROKEN_TILEENTITY.get();
-			if (rTileEntity != null && rTileEntity.xCoord == aCoords.posX && rTileEntity.yCoord == aCoords.posY && rTileEntity.zCoord == aCoords.posZ) return rTileEntity;
-			Block tBlock = aWorld.getBlock(aCoords.posX, aCoords.posY, aCoords.posZ);
-			return tBlock instanceof IBlockTileEntity ? ((IBlockTileEntity)tBlock).getTileEntity(aWorld, aCoords.posX, aCoords.posY, aCoords.posZ) : null;
-		}
-		return null;
+		return te(aWorld, aCoords.posX, aCoords.posY, aCoords.posZ, aLoadUnloadedChunks);
 	}
-	
 	/** to get a TileEntity properly, according to my additional Interfaces. Normally you should set aLoadUnloadedChunks to false, unless you have already checked these Coordinates, or you want to load Chunks */
 	public static TileEntity te(World aWorld, int aX, int aY, int aZ, boolean aLoadUnloadedChunks) {
 		if (aLoadUnloadedChunks || aWorld.blockExists(aX, aY, aZ)) {
 			TileEntity rTileEntity = aWorld.getTileEntity(aX, aY, aZ);
+			if (rTileEntity instanceof ITileEntityUnloadable && ((ITileEntityUnloadable)rTileEntity).isDead()) return null;
 			if (rTileEntity != null) return rTileEntity;
 			rTileEntity = LAST_BROKEN_TILEENTITY.get();
 			if (rTileEntity != null && rTileEntity.xCoord == aX && rTileEntity.yCoord == aY && rTileEntity.zCoord == aZ) return rTileEntity;
@@ -294,6 +356,7 @@ public class WD {
 		}
 		return null;
 	}
+	
 	
 	/** Sets the TileEntity at the passed position, with the option of turning adjacent TileEntity updates off. */
 	public static TileEntity te(World aWorld, int aX, int aY, int aZ, TileEntity aTileEntity, boolean aCauseTileEntityUpdates) {
@@ -307,6 +370,7 @@ public class WD {
 		}
 		return aTileEntity;
 	}
+	
 	
 	public static boolean oxygen(World aWorld, int aX, int aY, int aZ) {
 		return  !MD.GC.mLoaded || !(aWorld.provider instanceof IGalacticraftWorldProvider) || OxygenUtil.checkTorchHasOxygen(aWorld, NB, aX, aY, aZ);
@@ -382,12 +446,12 @@ public class WD {
 	
 	public static Block block(IBlockAccess aWorld, int aX, int aY, int aZ) {return aWorld.getBlock(aX, aY, aZ);}
 	public static Block block(World        aWorld, int aX, int aY, int aZ, boolean aLoadUnloadedChunks) {return aLoadUnloadedChunks || aWorld.blockExists(aX, aY, aZ) ? aWorld.getBlock(aX, aY, aZ) : NB;}
-	public static Block block(World        aWorld, int aX, int aY, int aZ, byte aSide, boolean aLoadUnloadedChunks) {return block(aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide], aLoadUnloadedChunks);}
-	public static Block block(World        aWorld, int aX, int aY, int aZ, byte aSide) {return block(aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide]);}
+	public static Block block(World        aWorld, int aX, int aY, int aZ, byte aSide, boolean aLoadUnloadedChunks) {return block(aWorld, aX+OFFX[aSide], aY+OFFY[aSide], aZ+OFFZ[aSide], aLoadUnloadedChunks);}
+	public static Block block(World        aWorld, int aX, int aY, int aZ, byte aSide) {return block(aWorld, aX+OFFX[aSide], aY+OFFY[aSide], aZ+OFFZ[aSide]);}
 	public static byte  meta (IBlockAccess aWorld, int aX, int aY, int aZ) {return UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ));}
 	public static byte  meta (World        aWorld, int aX, int aY, int aZ, boolean aLoadUnloadedChunks) {return aLoadUnloadedChunks || aWorld.blockExists(aX, aY, aZ) ? UT.Code.bind4(aWorld.getBlockMetadata(aX, aY, aZ)) : 0;}
-	public static byte  meta (World        aWorld, int aX, int aY, int aZ, byte aSide, boolean aLoadUnloadedChunks) {return meta(aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide], aLoadUnloadedChunks);}
-	public static byte  meta (World        aWorld, int aX, int aY, int aZ, byte aSide) {return meta(aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide]);}
+	public static byte  meta (World        aWorld, int aX, int aY, int aZ, byte aSide, boolean aLoadUnloadedChunks) {return meta(aWorld, aX+OFFX[aSide], aY+OFFY[aSide], aZ+OFFZ[aSide], aLoadUnloadedChunks);}
+	public static byte  meta (World        aWorld, int aX, int aY, int aZ, byte aSide) {return meta(aWorld, aX+OFFX[aSide], aY+OFFY[aSide], aZ+OFFZ[aSide]);}
 	
 	public static boolean set(World aWorld, int aX, int aY, int aZ, Block aBlock, long aMeta, long aFlags) {
 		return set(aWorld, aX, aY, aZ, aBlock, Code.bind4(aMeta), (byte)aFlags, aBlock.isOpaqueCube());
@@ -423,7 +487,7 @@ public class WD {
 		return T;
 	}
 	
-	public static Random random(World aWorld, long aChunkX, long aChunkZ) {return random(aChunkX, aChunkZ, aWorld.getSeed());}
+	public static Random random(World aWorld, long aChunkX, long aChunkZ) {return random(aChunkX >> 4, aChunkZ >> 4, aWorld.getSeed() ^ aWorld.provider.dimensionId);}
 	public static Random random(long aSeed, long aChunkX, long aChunkZ) {
 		Random rRandom = new Random(aSeed);
 		for (int i = 0; i < 50; i++) rRandom.nextInt(0x00ffffff);
@@ -432,9 +496,9 @@ public class WD {
 		return rRandom;
 	}
 	
-	public static int random(World aWorld, int aX, int aY, int aZ, int aBound) {return random(aWorld.getSeed(), aX, aY, aZ, aBound);}
+	public static int random(World aWorld, int aX, int aY, int aZ, int aBound) {return random(aWorld.getSeed() ^ aWorld.provider.dimensionId, aX, aY, aZ, aBound);}
 	public static int random(long aSeed, int aX, int aY, int aZ, int aBound) {
-		Random rRandom = new Random(aSeed);
+		Random rRandom = new Random(aSeed ^ aY);
 		for (int i = 0; i < 10; i++) rRandom.nextInt(0x00ffffff);
 		rRandom = new Random(aSeed ^ ((rRandom.nextLong() >> 2 + 1L) * aX + (rRandom.nextLong() >> 2 + 1L) * aZ));
 		for (int i = 0; i < 10; i++) rRandom.nextInt(0x00ffffff);
@@ -461,12 +525,21 @@ public class WD {
 		return F;
 	}
 	
-	public static boolean leafdecay(World aWorld, int aX, int aY, int aZ, Block aBlock) {return leafdecay(aWorld, aX, aY, aZ, aBlock, F);}
-	public static boolean leafdecay(World aWorld, int aX, int aY, int aZ, Block aBlock, boolean aOnlyTopArea) {
+	public static boolean leafdecay(World aWorld, int aX, int aY, int aZ, Block aBlock) {return leafdecay(aWorld, aX, aY, aZ, aBlock, F, F);}
+	public static boolean leafdecay(World aWorld, int aX, int aY, int aZ, Block aBlock, boolean aOnlyTopArea) {return leafdecay(aWorld, aX, aY, aZ, aBlock, aOnlyTopArea, F);}
+	public static boolean leafdecay(World aWorld, int aX, int aY, int aZ, Block aBlock, boolean aOnlyTopArea, boolean aTreeCapitator) {
 		if (aBlock == null || aBlock.canSustainLeaves(aWorld, aX, aY, aZ)) {
-			for (int j = (aOnlyTopArea ? 7 : -7); j <= 7; ++j) for (int i = -7; i <= 7; ++i) for (int k = -7; k <= 7; ++k) {
+			for (int j = (aOnlyTopArea ? 0 : -7); j <= 7; ++j) for (int i = -7; i <= 7; ++i) for (int k = -7; k <= 7; ++k) {
 				Block tBlock = aWorld.getBlock(aX+i, aY+j, aZ+k);
-				if (tBlock.isLeaves(aWorld, aX+i, aY+j, aZ+k)) aWorld.scheduleBlockUpdate(aX+i, aY+j, aZ+k, tBlock, 1+RNGSUS.nextInt(100));
+				if (tBlock != NB) {
+					if (tBlock == Blocks.brown_mushroom_block || tBlock == Blocks.red_mushroom_block) {
+						if (aTreeCapitator && Math.abs(i) <= 4 && Math.abs(k) <= 4 && j <= 0 && j >= -2) aWorld.func_147480_a(aX+i, aY+j, aZ+k, T);
+					} else if (IL.NeLi_Wart_Block_Crimson.equal(tBlock) || IL.NeLi_ShroomLight.equal(tBlock)) {
+						if (aTreeCapitator && Math.abs(i) <= 4 && Math.abs(k) <= 4) aWorld.func_147480_a(aX+i, aY+j, aZ+k, T);
+					} else {
+						if (tBlock.isLeaves(aWorld, aX+i, aY+j, aZ+k)) aWorld.scheduleBlockUpdate(aX+i, aY+j, aZ+k, tBlock, 1+RNGSUS.nextInt(100));
+					}
+				}
 			}
 			return T;
 		}
@@ -518,7 +591,7 @@ public class WD {
 	public static boolean anywater(Block aBlock) {return aBlock instanceof BlockWaterlike || water(aBlock) || waterstream(aBlock);}
 	
 	public static boolean bedrock(World aWorld, int aX, int aY, int aZ) {return bedrock(aWorld, aX, aY, aZ, aWorld.getBlock(aX, aY, aZ));}
-	public static boolean bedrock(World aWorld, int aX, int aY, int aZ, Block aBlock) {return aBlock == Blocks.bedrock || IL.BTL_Bedrock.equal(aBlock);}
+	public static boolean bedrock(World aWorld, int aX, int aY, int aZ, Block aBlock) {return bedrock(aBlock);}
 	public static boolean bedrock(Block aBlock) {return aBlock == Blocks.bedrock || IL.BTL_Bedrock.equal(aBlock);}
 	
 	public static boolean grass(World aWorld, int aX, int aY, int aZ, boolean aLoadUnloadedChunks) {return grass(block(aWorld, aX, aY, aZ, aLoadUnloadedChunks), meta(aWorld, aX, aY, aZ, aLoadUnloadedChunks));}
@@ -545,8 +618,8 @@ public class WD {
 	
 	public static boolean burning(World aWorld, int aX, int aY, int aZ) {return block(aWorld, aX, aY, aZ, F) instanceof BlockFire || block(aWorld, aX+1, aY, aZ, F) instanceof BlockFire || block(aWorld, aX-1, aY, aZ, F) instanceof BlockFire || block(aWorld, aX, aY+1, aZ, F) instanceof BlockFire || block(aWorld, aX, aY-1, aZ, F) instanceof BlockFire || block(aWorld, aX, aY, aZ+1, F) instanceof BlockFire || block(aWorld, aX, aY, aZ-1, F) instanceof BlockFire;}
 	
-	public static void burn(World aWorld, ChunkCoordinates aCoords, boolean aReplaceCenter, boolean aCheckFlammability) {for (byte tSide : aReplaceCenter?ALL_SIDES:ALL_SIDES_VALID) fire(aWorld, aCoords.posX+OFFSETS_X[tSide], aCoords.posY+OFFSETS_Y[tSide], aCoords.posZ+OFFSETS_Z[tSide], aCheckFlammability);}
-	public static void burn(World aWorld, int aX, int aY, int aZ  , boolean aReplaceCenter, boolean aCheckFlammability) {for (byte tSide : aReplaceCenter?ALL_SIDES:ALL_SIDES_VALID) fire(aWorld, aX+OFFSETS_X[tSide], aY+OFFSETS_Y[tSide], aZ+OFFSETS_Z[tSide], aCheckFlammability);}
+	public static void burn(World aWorld, ChunkCoordinates aCoords, boolean aReplaceCenter, boolean aCheckFlammability) {for (byte tSide : aReplaceCenter?ALL_SIDES_MIDDLE_UP:ALL_SIDES_VALID) fire(aWorld, aCoords.posX+OFFX[tSide], aCoords.posY+OFFY[tSide], aCoords.posZ+OFFZ[tSide], aCheckFlammability);}
+	public static void burn(World aWorld, int aX, int aY, int aZ  , boolean aReplaceCenter, boolean aCheckFlammability) {for (byte tSide : aReplaceCenter?ALL_SIDES_MIDDLE_UP:ALL_SIDES_VALID) fire(aWorld, aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide], aCheckFlammability);}
 	
 	public static boolean fire(World aWorld, ChunkCoordinates aCoords, boolean aCheckFlammability) {return fire(aWorld, aCoords.posX, aCoords.posY, aCoords.posZ, aCheckFlammability);}
 	public static boolean fire(World aWorld, int aX, int aY, int aZ, boolean aCheckFlammability) {
@@ -556,7 +629,11 @@ public class WD {
 			if (MD.TC.mLoaded && te(aWorld, aX, aY, aZ, T) instanceof INode) return F;
 			if (tBlock.getFlammability(aWorld, aX, aY, aZ, FORGE_DIR[SIDE_ANY]) > 0) return aWorld.setBlock(aX, aY, aZ, Blocks.fire, 0, 3);
 			if (aCheckFlammability) {
-				for (byte tSide : ALL_SIDES_VALID) if (block(aWorld, aX, aY, aZ, tSide).getFlammability(aWorld, aX+OFFSETS_X[tSide], aY+OFFSETS_Y[tSide], aZ+OFFSETS_Z[tSide], FORGE_DIR_OPPOSITES[tSide]) > 0) return aWorld.setBlock(aX, aY, aZ, Blocks.fire);
+				for (byte tSide : ALL_SIDES_VALID) {
+					Block tAdjacent = block(aWorld, aX, aY, aZ, tSide);
+					if (tAdjacent == Blocks.chest || tAdjacent == Blocks.trapped_chest) return aWorld.setBlock(aX, aY, aZ, Blocks.fire);
+					if (tAdjacent.getFlammability(aWorld, aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide], FORGE_DIR_OPPOSITES[tSide]) > 0) return aWorld.setBlock(aX, aY, aZ, Blocks.fire);
+				}
 			} else {
 				return aWorld.setBlock(aX, aY, aZ, Blocks.fire, 0, 3);
 			}
@@ -625,10 +702,10 @@ public class WD {
 		Block tBlock = aWorld.getBlock(aX, aY, aZ), tStone = (aWorld.provider.dimensionId == DIM_NETHER ? Blocks.netherrack : Blocks.stone);
 		
 		if (tBlock == NB || bedrock(tBlock)) {
-			for (int i = 1; i < 7; i++) for (byte tSide : ALL_SIDES_BUT_BOTTOM) {
-				tBlock = aWorld.getBlock(aX+OFFSETS_X[tSide]*i, aY+OFFSETS_Y[tSide]*i, aZ+OFFSETS_Z[tSide]*i);
+			for (byte tSide : ALL_SIDES_BUT_BOTTOM) for (int i = 1; i < 7; i++) {
+				tBlock = aWorld.getBlock(aX+OFFX[tSide]*i, aY+OFFY[tSide]*i, aZ+OFFZ[tSide]*i);
 				if (tBlock != NB && tBlock != tStone && !bedrock(tBlock)) {
-					int tMetaData = aWorld.getBlockMetadata(aX+OFFSETS_X[tSide]*i, aY+OFFSETS_Y[tSide]*i, aZ+OFFSETS_Z[tSide]*i);
+					int tMetaData = aWorld.getBlockMetadata(aX+OFFX[tSide]*i, aY+OFFY[tSide]*i, aZ+OFFZ[tSide]*i);
 					if (BlocksGT.stoneToNormalOres.containsKey(new ItemStackContainer(tBlock, 1, tMetaData))) {
 						return aWorld.setBlock(aX, aY, aZ, tBlock, tMetaData, 0);
 					}
@@ -658,30 +735,30 @@ public class WD {
 				if (aTileEntity != null) rList.add("TileEntity Class: " + aTileEntity.getClass());
 			}
 			float tResistance = aBlock.getExplosionResistance(aPlayer, aWorld, aX, aY, aZ, aPlayer.posX, aPlayer.posY, aPlayer.posZ);
-			rList.add("Hardness: " + aBlock.getBlockHardness(aWorld, aX, aY, aZ) + "  Blast Resistance: " + tResistance + (tResistance < 16 ? " (TNT Blastable)" : " (TNT Proof)"));
+			rList.add("Hardness: " + aBlock.getBlockHardness(aWorld, aX, aY, aZ) + " - " + LH.getToolTipBlastResistance(aBlock, tResistance));
 			int tHarvestLevel = aBlock.getHarvestLevel(aMeta);
 			String tHarvestTool = aBlock.getHarvestTool(aMeta);
 			rList.add(tHarvestLevel == 0 && aBlock.getMaterial().isAdventureModeExempt() ? "Hand-Harvestable, but " + (Code.stringValid(tHarvestTool)?Code.capitalise(tHarvestTool):"None") + " is faster" : "Tool to Harvest: " + (Code.stringValid(tHarvestTool)?Code.capitalise(tHarvestTool):"None") + " (" + tHarvestLevel + ")");
 			if (aBlock.isBeaconBase(aWorld, aX, aY, aZ, aX, aY+1, aZ)) rList.add("Is usable for Beacon Pyramids");
 			if (MD.GC.mLoaded && aBlock instanceof IPartialSealableBlock) rList.add(((IPartialSealableBlock)aBlock).isSealed(aWorld, aX, aY, aZ, FORGE_DIR[aSide ^ 1]) ? "Is Sealable on this Side" : "Is not Sealable on this Side");
-		} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+		} catch(Throwable e) {e.printStackTrace(ERR);}
 		if (aTileEntity != null) {
 			try {if (aTileEntity instanceof ITileEntityWeight && ((ITileEntityWeight)aTileEntity).getWeightValue(aSide) > 0) {
 				rEUAmount+=V[3];
 				rList.add("Weight: " + ((ITileEntityWeight)aTileEntity).getWeightValue(aSide) + " kg");
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			try {if (aTileEntity instanceof ITileEntityTemperature && ((ITileEntityTemperature)aTileEntity).getTemperatureMax(aSide) > 0) {
 				rEUAmount+=V[3];
 				rList.add("Temperature: " + ((ITileEntityTemperature)aTileEntity).getTemperatureValue(aSide) + " / " + ((ITileEntityTemperature)aTileEntity).getTemperatureMax(aSide) + " K");
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			try {if (aTileEntity instanceof ITileEntityGibbl && ((ITileEntityGibbl)aTileEntity).getGibblMax(aSide) > 0) {
 				rEUAmount+=V[3];
 				rList.add("Pressure: " + ((ITileEntityGibbl)aTileEntity).getGibblValue(aSide) + " / " + ((ITileEntityGibbl)aTileEntity).getGibblMax(aSide) + " Gibbl");
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			try {if (aTileEntity instanceof ITileEntityProgress && ((ITileEntityProgress)aTileEntity).getProgressMax(aSide) > 0) {
 				rEUAmount+=V[3];
 				rList.add("Progress: " + ((ITileEntityProgress)aTileEntity).getProgressValue(aSide) + " / " + ((ITileEntityProgress)aTileEntity).getProgressMax(aSide));
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			
 			
 			String rState = "";
@@ -689,12 +766,12 @@ public class WD {
 				if (Code.stringValid(rState)) rState += " --- ";
 				rEUAmount+=V[3];
 				rState += ("State: " + (((ITileEntitySwitchableOnOff)aTileEntity).getStateOnOff()?"ON":"OFF"));
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			try {if (aTileEntity instanceof ITileEntitySwitchableMode) {
 				if (Code.stringValid(rState)) rState += " --- ";
 				rEUAmount+=V[3];
 				rState += ("Mode: " + (((ITileEntitySwitchableMode)aTileEntity).getStateMode()));
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			try {if (aTileEntity instanceof ITileEntityRunningSuccessfully) {
 				if (Code.stringValid(rState)) rState += " --- ";
 				rEUAmount+=V[3];
@@ -711,7 +788,7 @@ public class WD {
 				if (Code.stringValid(rState)) rState += " --- ";
 				rEUAmount+=V[3];
 				rState += ("Running: " + (((ITileEntityRunningPossible)aTileEntity).getStateRunningPossible()?"Possible":"Not Possible"));
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			if (Code.stringValid(rState)) rList.add(rState);
 			
 			
@@ -721,13 +798,13 @@ public class WD {
 					rList.add("Input: " + ((ITileEntityEnergy)aTileEntity).getEnergySizeInputMin(tEnergyType, aSide) + " to " + ((ITileEntityEnergy)aTileEntity).getEnergySizeInputMax(tEnergyType, aSide) + tEnergyType.getLocalisedNameShort());
 					rList.add("Output: " + ((ITileEntityEnergy)aTileEntity).getEnergySizeOutputMin(tEnergyType, aSide) + " to " + ((ITileEntityEnergy)aTileEntity).getEnergySizeOutputMax(tEnergyType, aSide) + tEnergyType.getLocalisedNameShort());
 				}
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			try {if (aTileEntity instanceof ITileEntityEnergyDataCapacitor) {
 				rEUAmount+=V[3];
 				for (TagData tEnergyType : ((ITileEntityEnergyDataCapacitor)aTileEntity).getEnergyCapacitorTypes(aSide)) {
 					rList.add("Stored: " + ((ITileEntityEnergyDataCapacitor)aTileEntity).getEnergyStored(tEnergyType, aSide) + " of " + ((ITileEntityEnergyDataCapacitor)aTileEntity).getEnergyCapacity(tEnergyType, aSide) + tEnergyType.getLocalisedNameShort());
 				}
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			
 			
 			try {if (aTileEntity instanceof IFluidHandler) {
@@ -736,47 +813,47 @@ public class WD {
 				if (tTanks != null) for (byte i = 0; i < tTanks.length; i++) {
 					rList.add("Tank " + i + ": " + (tTanks[i].fluid==null?0:tTanks[i].fluid.amount) + " / " + tTanks[i].capacity + " " + FL.name(tTanks[i].fluid, T));
 				}
-			}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+			}} catch(Throwable e) {e.printStackTrace(ERR);}
 			
 			if (!(aTileEntity instanceof ITileEntity)) {
 				try {if (aTileEntity instanceof ic2.api.reactor.IReactorChamber) {
 					rEUAmount+=V[4];
 					aTileEntity = (TileEntity)(((ic2.api.reactor.IReactorChamber)aTileEntity).getReactor());
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 				try {if (aTileEntity instanceof ic2.api.reactor.IReactor) {
 					rEUAmount+=V[4];
 					rList.add( "Heat: " + ((ic2.api.reactor.IReactor)aTileEntity).getHeat() + "/" + ((ic2.api.reactor.IReactor)aTileEntity).getMaxHeat()
 							+ "  HEM: " + ((ic2.api.reactor.IReactor)aTileEntity).getHeatEffectModifier() + "  Base IC2-EU Output: " + ((ic2.api.reactor.IReactor)aTileEntity).getReactorEUEnergyOutput());
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 				try {if (aTileEntity instanceof ic2.api.tile.IWrenchable) {
 					rEUAmount+=V[3];
 					rList.add("Facing: " + ((ic2.api.tile.IWrenchable)aTileEntity).getFacing() + " / IC2 Wrench Drop Chance: " + (((ic2.api.tile.IWrenchable)aTileEntity).wrenchCanRemove(aPlayer)?(((ic2.api.tile.IWrenchable)aTileEntity).getWrenchDropRate()*100):0) + "%");
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 				try {if (aTileEntity instanceof ic2.api.energy.tile.IEnergySink) {
 					rEUAmount+=V[3];
 					rList.add("Demanded Energy: " + ((ic2.api.energy.tile.IEnergySink)aTileEntity).getDemandedEnergy() + " IC2-EU");
 					rList.add("Max Safe Input: " + V[((ic2.api.energy.tile.IEnergySink)aTileEntity).getSinkTier()] + " IC2-EU/t");
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 				try {if (aTileEntity instanceof ic2.api.energy.tile.IEnergySource) {
 					rEUAmount+=V[3];
 					rList.add("Max Energy Output: " + V[((ic2.api.energy.tile.IEnergySource)aTileEntity).getSourceTier()] + " IC2-EU/t");
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 				try {if (aTileEntity instanceof ic2.api.energy.tile.IEnergyConductor) {
 					rEUAmount+=V[3];
 					rList.add("Conduction Loss: " + ((ic2.api.energy.tile.IEnergyConductor)aTileEntity).getConductionLoss() + " IC2-EU/m");
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 				try {if (aTileEntity instanceof ic2.api.tile.IEnergyStorage) {
 					rEUAmount+=V[3];
 					rList.add("Contained Energy: " + ((ic2.api.tile.IEnergyStorage)aTileEntity).getStored() + " of " + ((ic2.api.tile.IEnergyStorage)aTileEntity).getCapacity() + " IC2-EU");
 					rList.add(((ic2.api.tile.IEnergyStorage)aTileEntity).isTeleporterCompatible(FORGE_DIR[aSide])?"Teleporter Compatible":"Not Teleporter Compatible");
-				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+				}} catch(NoClassDefFoundError e) {/* ignore */} catch(Throwable e) {e.printStackTrace(ERR);}
 			}
 		}
 		try {if (aBlock instanceof IBlockDebugable) {
 			rEUAmount+=V[3];
 			ArrayList<String> temp = ((IBlockDebugable)aBlock).getDebugInfo(aPlayer, aX, aY, aZ, aScanLevel);
 			if (temp != null) rList.addAll(temp);
-		}} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+		}} catch(Throwable e) {e.printStackTrace(ERR);}
 		
 		BlockScanningEvent tEvent = new BlockScanningEvent(aWorld, aPlayer, aX, aY, aZ, aSide, aScanLevel, aBlock, aTileEntity, rList, aClickX, aClickY, aClickZ);
 		tEvent.mEUCost = rEUAmount;

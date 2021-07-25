@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -37,9 +37,11 @@ import gregapi.code.ItemStackSet;
 import gregapi.code.ModData;
 import gregapi.code.ObjectStack;
 import gregapi.code.TagData;
+import gregapi.data.CS.IconsGT;
 import gregapi.data.FL;
 import gregapi.data.MD;
 import gregapi.data.MT;
+import gregapi.data.OP;
 import gregapi.data.TC;
 import gregapi.data.TC.TC_AspectStack;
 import gregapi.data.TD;
@@ -47,7 +49,9 @@ import gregapi.lang.LanguageHandler;
 import gregapi.oredict.configurations.IOreDictConfigurationComponent;
 import gregapi.oredict.configurations.OreDictConfigurationComponent;
 import gregapi.oredict.listeners.IOreDictListenerItem;
+import gregapi.render.BlockTextureDefault;
 import gregapi.render.IIconContainer;
+import gregapi.render.ITexture;
 import gregapi.render.TextureSet;
 import gregapi.util.OM;
 import gregapi.util.UT;
@@ -99,8 +103,8 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 	 * 
 	 * <BR>[20000:20499] BloodAsp
 	 * <BR>[20500:20999] Axelandre42
-	 * <BR>[21000:21499] the next one who asks me (do not use unless I personally tell you to use this medium Range)
-	 * <BR>[21500:21999] Free
+	 * <BR>[21000:21499] IceFrezze
+	 * <BR>[21500:21999] the next one who asks me (do not use unless I personally tell you to use this medium Range)
 	 * <BR>[22000:22499] Free
 	 * <BR>[22500:22999] Free
 	 * <BR>[23000:23499] Free
@@ -181,7 +185,7 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 		if (rMaterial1 == null) return new OreDictMaterial((short)aID, aNameOreDict, aLocalName);
 		if (aID < 0) return rMaterial1;
 		if (rMaterial1.mID == aID) {
-			DEB.println("NOTICE: Two Materials used the same ID: " + aID + " - Names: " + aNameOreDict + " and " + rMaterial1.mNameInternal);
+			ERR.println("NOTICE: Two Materials used the same ID: " + aID + " - Names: " + aNameOreDict + " and " + rMaterial1.mNameInternal);
 			return rMaterial1;
 		}
 		OreDictMaterial rMaterial2 = new OreDictMaterial((short)aID, aNameOreDict, aLocalName);
@@ -193,6 +197,26 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 		OreDictMaterial rMaterial = createMaterial(-1, aNameOreDict, aNameOreDict);
 		if (rMaterial.mID < 0) rMaterial.put(TD.Properties.INVALID_MATERIAL, TD.Properties.UNUSED_MATERIAL, TD.Properties.AUTO_BLACKLIST, TD.Properties.AUTO_MATERIAL);
 		return rMaterial;
+	}
+	
+	public static OreDictMaterial get(String aMaterialName, OreDictMaterial aDefault) {
+		OreDictMaterial rMaterial = MATERIAL_MAP.get(aMaterialName);
+		return rMaterial == null ? aDefault : get(rMaterial);
+	}
+	public static OreDictMaterial get(String aMaterialName) {
+		return get(aMaterialName, MT.NULL);
+	}
+	public static OreDictMaterial get(long aMaterialID, OreDictMaterial aDefault) {
+		if (aMaterialID < 0 || aMaterialID >= MATERIAL_ARRAY.length || aMaterialID == W) return aDefault;
+		OreDictMaterial rMaterial = MATERIAL_ARRAY[(int)aMaterialID];
+		return rMaterial == null ? aDefault : get(rMaterial);
+	}
+	public static OreDictMaterial get(long aMaterialID) {
+		return get(aMaterialID, MT.NULL);
+	}
+	public static OreDictMaterial get(OreDictMaterial aMaterial) {
+		while (aMaterial != aMaterial.mTargetRegistration) aMaterial = aMaterial.mTargetRegistration;
+		return aMaterial;
 	}
 	
 	/** The Index of this Material inside the Array. Negative for "Not in the Array" and therefore also for "Not Unificatable", 0 is the NULL Material so a > 0 check could be useful for you. */
@@ -240,6 +264,8 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 	public long mNeutrons = 55, mProtons = 43, mElectrons = 43, mMass = mNeutrons + mProtons;
 	/** The Texture Sets for the Materials. */
 	public List<IIconContainer> mTextureSetsBlock = TextureSet.SET_NONE[0].mList, mTextureSetsItems = TextureSet.SET_NONE[1].mList;
+	/** The Texture used for placing in Molds, Basins and Anvils. Overridden by Stone, Lava, Glass and the likes. */
+	public ITexture mTextureSolid = null, mTextureSmooth = null, mTextureMolten = null, mTextureDust = null, mTextureGem = null;
 	/** List of ThaumCraft Aspects. */
 	public final List<TC_AspectStack> mAspects = new ArrayListNoNulls<>(1);
 	/** The List of Components this Material is made of */
@@ -263,8 +289,7 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 	/** The Material which is the target for selecting the preferred Tool Handle. */
 	public OreDictMaterial mHandleMaterial = this;
 	
-	
-	/** The Targets for certain kinds of Processing for this Material */
+	/** The Targets for certain kinds of Processing for this Material. */
 	public OreDictMaterialStack
 	mTargetCrushing     = OM.stack(this, U),
 	mTargetPulver       = OM.stack(this, U),
@@ -277,6 +302,21 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 	mTargetBurning      = OM.stack(this, 0), // The remaining Material when being burned. Used for getting the Ashes.
 	mTargetBending      = OM.stack(this, U),
 	mTargetCompressing  = OM.stack(this, U);
+	
+	/** The Materials targetting this for certain kinds of Processing. */
+	public final Set<OreDictMaterial>
+	mTargetedCrushing     = new HashSetNoNulls<>(F, this),
+	mTargetedPulver       = new HashSetNoNulls<>(F, this),
+	mTargetedSmelting     = new HashSetNoNulls<>(F, this),
+	mTargetedSolidifying  = new HashSetNoNulls<>(F, this),
+	mTargetedSmashing     = new HashSetNoNulls<>(F, this),
+	mTargetedCutting      = new HashSetNoNulls<>(F, this),
+	mTargetedWorking      = new HashSetNoNulls<>(F, this),
+	mTargetedForging      = new HashSetNoNulls<>(F, this),
+	mTargetedBurning      = new HashSetNoNulls<>(F, this),
+	mTargetedBending      = new HashSetNoNulls<>(F, this),
+	mTargetedCompressing  = new HashSetNoNulls<>(F, this);
+	
 	/**  */
 	public long mLiquidUnit = U, mGasUnit = U, mPlasmaUnit = U;
 	/** References to this Materials Fluid States. The amount of the FluidStack equals one Material Unit. It is usually either 144 or 1000, but other amounts are possible. Use "Util.translateUnits" for easy Math. */
@@ -661,99 +701,132 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 	
 	public OreDictMaterial setAllToTheOutputOf(OreDictMaterial aMaterial) {
 		if (aMaterial == null) aMaterial = this;
-		setPulver       (aMaterial.mTargetPulver        .mMaterial, aMaterial.mTargetPulver         .mAmount);
-		setSmelting     (aMaterial.mTargetSmelting      .mMaterial, aMaterial.mTargetSmelting       .mAmount);
-		setSolidifying  (aMaterial.mTargetSolidifying   .mMaterial, aMaterial.mTargetSolidifying    .mAmount);
-		setSmashing     (aMaterial.mTargetSmashing      .mMaterial, aMaterial.mTargetSmashing       .mAmount);
-		setCutting      (aMaterial.mTargetCutting       .mMaterial, aMaterial.mTargetCutting        .mAmount);
-		setWorking      (aMaterial.mTargetWorking       .mMaterial, aMaterial.mTargetWorking        .mAmount);
-		setForging      (aMaterial.mTargetForging       .mMaterial, aMaterial.mTargetForging        .mAmount);
-		setBurning      (aMaterial.mTargetBurning       .mMaterial, aMaterial.mTargetBurning        .mAmount);
-		setBending      (aMaterial.mTargetBending       .mMaterial, aMaterial.mTargetBending        .mAmount);
-		setCompressing  (aMaterial.mTargetCompressing   .mMaterial, aMaterial.mTargetCompressing    .mAmount);
+		setPulver     (aMaterial.mTargetPulver     .mMaterial, aMaterial.mTargetPulver     .mAmount);
+		setSmelting   (aMaterial.mTargetSmelting   .mMaterial, aMaterial.mTargetSmelting   .mAmount);
+		setSolidifying(aMaterial.mTargetSolidifying.mMaterial, aMaterial.mTargetSolidifying.mAmount);
+		setSmashing   (aMaterial.mTargetSmashing   .mMaterial, aMaterial.mTargetSmashing   .mAmount);
+		setCutting    (aMaterial.mTargetCutting    .mMaterial, aMaterial.mTargetCutting    .mAmount);
+		setWorking    (aMaterial.mTargetWorking    .mMaterial, aMaterial.mTargetWorking    .mAmount);
+		setForging    (aMaterial.mTargetForging    .mMaterial, aMaterial.mTargetForging    .mAmount);
+		setBurning    (aMaterial.mTargetBurning    .mMaterial, aMaterial.mTargetBurning    .mAmount);
+		setBending    (aMaterial.mTargetBending    .mMaterial, aMaterial.mTargetBending    .mAmount);
+		setCompressing(aMaterial.mTargetCompressing.mMaterial, aMaterial.mTargetCompressing.mAmount);
 		return this;
 	}
 	
 	public OreDictMaterial setAllToTheOutputOf(OreDictMaterial aMaterial, long aMultiplier, long aDivider) {
 		if (aMaterial == null) aMaterial = this;
-		setPulver       (aMaterial.mTargetPulver        .mMaterial, (aMaterial.mTargetPulver        .mAmount * aMultiplier) / aDivider);
-		setSmelting     (aMaterial.mTargetSmelting      .mMaterial, (aMaterial.mTargetSmelting      .mAmount * aMultiplier) / aDivider);
-		setSolidifying  (aMaterial.mTargetSolidifying   .mMaterial, (aMaterial.mTargetSolidifying   .mAmount * aMultiplier) / aDivider);
-		setSmashing     (aMaterial.mTargetSmashing      .mMaterial, (aMaterial.mTargetSmashing      .mAmount * aMultiplier) / aDivider);
-		setCutting      (aMaterial.mTargetCutting       .mMaterial, (aMaterial.mTargetCutting       .mAmount * aMultiplier) / aDivider);
-		setWorking      (aMaterial.mTargetWorking       .mMaterial, (aMaterial.mTargetWorking       .mAmount * aMultiplier) / aDivider);
-		setForging      (aMaterial.mTargetForging       .mMaterial, (aMaterial.mTargetForging       .mAmount * aMultiplier) / aDivider);
-		setBurning      (aMaterial.mTargetBurning       .mMaterial, (aMaterial.mTargetBurning       .mAmount * aMultiplier) / aDivider);
-		setBending      (aMaterial.mTargetBending       .mMaterial, (aMaterial.mTargetBending       .mAmount * aMultiplier) / aDivider);
-		setCompressing  (aMaterial.mTargetCompressing   .mMaterial, (aMaterial.mTargetCompressing   .mAmount * aMultiplier) / aDivider);
-		setCrushing     (aMaterial.mTargetCrushing      .mMaterial, (aMaterial.mTargetCrushing      .mAmount * aMultiplier) / aDivider);
+		setPulver     (aMaterial.mTargetPulver     .mMaterial,(aMaterial.mTargetPulver     .mAmount * aMultiplier) / aDivider);
+		setSmelting   (aMaterial.mTargetSmelting   .mMaterial,(aMaterial.mTargetSmelting   .mAmount * aMultiplier) / aDivider);
+		setSolidifying(aMaterial.mTargetSolidifying.mMaterial,(aMaterial.mTargetSolidifying.mAmount * aMultiplier) / aDivider);
+		setSmashing   (aMaterial.mTargetSmashing   .mMaterial,(aMaterial.mTargetSmashing   .mAmount * aMultiplier) / aDivider);
+		setCutting    (aMaterial.mTargetCutting    .mMaterial,(aMaterial.mTargetCutting    .mAmount * aMultiplier) / aDivider);
+		setWorking    (aMaterial.mTargetWorking    .mMaterial,(aMaterial.mTargetWorking    .mAmount * aMultiplier) / aDivider);
+		setForging    (aMaterial.mTargetForging    .mMaterial,(aMaterial.mTargetForging    .mAmount * aMultiplier) / aDivider);
+		setBurning    (aMaterial.mTargetBurning    .mMaterial,(aMaterial.mTargetBurning    .mAmount * aMultiplier) / aDivider);
+		setBending    (aMaterial.mTargetBending    .mMaterial,(aMaterial.mTargetBending    .mAmount * aMultiplier) / aDivider);
+		setCompressing(aMaterial.mTargetCompressing.mMaterial,(aMaterial.mTargetCompressing.mAmount * aMultiplier) / aDivider);
+		setCrushing   (aMaterial.mTargetCrushing   .mMaterial,(aMaterial.mTargetCrushing   .mAmount * aMultiplier) / aDivider);
 		return this;
 	}
 	
 	/** The result of trying to ore process it, if you want to disable ore processing, then set the Amount to 0. If aMaterial == null it will choose the previous Material instead, which is usually "this". */
 	public OreDictMaterial setCrushing(OreDictMaterial aMaterial, long aAmount) {
-		mTargetCrushing = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetCrushing.mMaterial.mTargetedCrushing.remove(this);
+		mTargetCrushing = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedCrushing.add(this);
 		return this;
 	}
 	
 	/** The result of trying to pulverise it, if you want to disable pulverising, then set the Amount to 0. If aMaterial == null it will choose the previous Material instead, which is usually "this". */
 	public OreDictMaterial setPulver(OreDictMaterial aMaterial, long aAmount) {
-		mTargetPulver = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetPulver.mMaterial.mTargetedPulver.remove(this);
+		mTargetPulver = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedPulver.add(this);
 		return this;
 	}
 	
 	/** The result of trying to smelt it, if you want to disable smelting, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setSmelting(OreDictMaterial aMaterial, long aAmount) {
-		mTargetSmelting = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetSmelting.mMaterial.mTargetedSmelting.remove(this);
+		mTargetSmelting = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedSmelting.add(this);
 		if (aAmount > 0) put(TD.Processing.MELTING);
 		return this;
 	}
 	
 	/** The result of cooling it down, if you want to disable cooling down, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setSolidifying(OreDictMaterial aMaterial, long aAmount) {
-		mTargetSolidifying = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetSolidifying.mMaterial.mTargetedSolidifying.remove(this);
+		mTargetSolidifying = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedSolidifying.add(this);
 		return this;
 	}
 	
 	/** The result of trying to smash it, if you want to disable smashing, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setSmashing(OreDictMaterial aMaterial, long aAmount) {
-		mTargetSmashing = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetSmashing.mMaterial.mTargetedSmashing.remove(this);
+		mTargetSmashing = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedSmashing.add(this);
 		return this;
 	}
 	
 	/** The result of trying to cut it, if you want to disable cutting, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setCutting(OreDictMaterial aMaterial, long aAmount) {
-		mTargetCutting = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
-		return this;
-	}
-	
-	/** The result of trying to forge it, if you want to disable forging, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
-	public OreDictMaterial setForging(OreDictMaterial aMaterial, long aAmount) {
-		mTargetForging = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetCutting.mMaterial.mTargetedCutting.remove(this);
+		mTargetCutting = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedCutting.add(this);
 		return this;
 	}
 	
 	/** The result of trying to craft with it, if you want to disable working, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setWorking(OreDictMaterial aMaterial, long aAmount) {
-		mTargetWorking = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetWorking.mMaterial.mTargetedWorking.remove(this);
+		mTargetWorking = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedWorking.add(this);
+		return this;
+	}
+	
+	/** The result of trying to forge it, if you want to disable forging, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
+	public OreDictMaterial setForging(OreDictMaterial aMaterial, long aAmount) {
+		if (aMaterial == null) aMaterial = this;
+		mTargetForging.mMaterial.mTargetedForging.remove(this);
+		mTargetForging = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedForging.add(this);
 		return this;
 	}
 	
 	/** The result of trying to burn it (Ashes for example), if you want to disable burning, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setBurning(OreDictMaterial aMaterial, long aAmount) {
-		mTargetBurning = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetBurning.mMaterial.mTargetedBurning.remove(this);
+		mTargetBurning = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedBurning.add(this);
 		return this;
 	}
 	
 	/** The result of trying to bend it, if you want to disable bending, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setBending(OreDictMaterial aMaterial, long aAmount) {
-		mTargetBending = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetBending.mMaterial.mTargetedBending.remove(this);
+		mTargetBending = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedBending.add(this);
 		return this;
 	}
 	
 	/** The result of trying to compress it, if you want to disable compressing, then set the Amount to 0. If aMaterial == null it will choose previous Material instead, which is usually "this". */
 	public OreDictMaterial setCompressing(OreDictMaterial aMaterial, long aAmount) {
-		mTargetCompressing = OM.stack(aMaterial == null ? this : aMaterial, aAmount);
+		if (aMaterial == null) aMaterial = this;
+		mTargetCompressing.mMaterial.mTargetedCompressing.remove(this);
+		mTargetCompressing = OM.stack(aMaterial, aAmount);
+		aMaterial.mTargetedCompressing.add(this);
 		return this;
 	}
 	
@@ -821,6 +894,62 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 		mMass = aProtons + aNeutrons + aAdditionalMass;
 		mGramPerCubicCentimeter = aGramPerCubicCentimeter;
 		return this;
+	}
+	
+	public ITexture getTextureSolid() {
+		if (mTextureSolid == null) mTextureSolid = getTextureSolid(mRGBaSolid, F);;
+		return mTextureSolid;
+	}
+	public ITexture getTextureSolid(int aRGBA, boolean aEnableAO) {
+		return getTextureSolid(UT.Code.getRGBaArray(aRGBA), aEnableAO);
+	}
+	public ITexture getTextureSolid(short[] aRGBA, boolean aEnableAO) {
+		return BlockTextureDefault.get(this, OP.blockSolid, aRGBA, contains(TD.Properties.GLOWING), aEnableAO);
+	}
+	
+	public ITexture getTextureSmooth() {
+		if (mTextureSmooth == null) mTextureSmooth = mTextureSolid;
+		if (mTextureSmooth == null) mTextureSmooth = getTextureSmooth(mRGBaSolid, F);
+		return mTextureSmooth;
+	}
+	public ITexture getTextureSmooth(int aRGBA, boolean aEnableAO) {
+		return getTextureSmooth(UT.Code.getRGBaArray(aRGBA), aEnableAO);
+	}
+	public ITexture getTextureSmooth(short[] aRGBA, boolean aEnableAO) {
+		return getTextureSolid(aRGBA, aEnableAO);
+	}
+	
+	public ITexture getTextureMolten() {
+		if (mTextureMolten == null) mTextureMolten = getTextureMolten(mRGBaLiquid, F);;
+		return mTextureMolten;
+	}
+	public ITexture getTextureMolten(int aRGBA, boolean aEnableAO) {
+		return getTextureMolten(UT.Code.getRGBaArray(aRGBA), aEnableAO);
+	}
+	public ITexture getTextureMolten(short[] aRGBA, boolean aEnableAO) {
+		return BlockTextureDefault.get(this, IconsGT.INDEX_BLOCK_MOLTEN, aRGBA, T, aEnableAO);
+	}
+	
+	public ITexture getTextureDust() {
+		if (mTextureDust == null) mTextureDust = getTextureDust(mRGBaSolid, F);;
+		return mTextureDust;
+	}
+	public ITexture getTextureDust(int aRGBA, boolean aEnableAO) {
+		return getTextureDust(UT.Code.getRGBaArray(aRGBA), aEnableAO);
+	}
+	public ITexture getTextureDust(short[] aRGBA, boolean aEnableAO) {
+		return BlockTextureDefault.get(this, OP.blockDust, aRGBA, contains(TD.Properties.GLOWING), aEnableAO);
+	}
+	
+	public ITexture getTextureGem() {
+		if (mTextureGem == null) mTextureGem = getTextureGem(mRGBaSolid, F);
+		return mTextureGem;
+	}
+	public ITexture getTextureGem(int aRGBA, boolean aEnableAO) {
+		return getTextureGem(UT.Code.getRGBaArray(aRGBA), aEnableAO);
+	}
+	public ITexture getTextureGem(short[] aRGBA, boolean aEnableAO) {
+		return BlockTextureDefault.get(this, OP.blockGem, aRGBA, contains(TD.Properties.GLOWING), aEnableAO);
 	}
 	
 	/** Sets the TextureSets for this Material, first Parameter = Block Icons, second Parameter = Item Icons. */
@@ -1170,13 +1299,6 @@ public final class OreDictMaterial implements ITagDataContainer<OreDictMaterial>
 		// (kg/ m^3 * aAmount              ) / (Material-Unit * 9       )
 		// (kg/ m^3 * aAmount * 0.111111111) /  Material-Unit
 		return (mGramPerCubicCentimeter * 111.111111 * aAmount) / U;
-	}
-	
-	public static OreDictMaterial get(String aMaterial) {
-		OreDictMaterial tMaterial = MATERIAL_MAP.get(aMaterial);
-		if (tMaterial == null) return MT.NULL;
-		while (tMaterial != tMaterial.mTargetRegistration) tMaterial = tMaterial.mTargetRegistration;
-		return tMaterial;
 	}
 	
 	@Override

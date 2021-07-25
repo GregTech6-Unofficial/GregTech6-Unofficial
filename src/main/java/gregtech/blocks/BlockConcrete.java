@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -34,6 +34,7 @@ import gregapi.data.OP;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictItemData;
 import gregapi.oredict.OreDictMaterial;
+import gregapi.render.BlockTextureCopied;
 import gregapi.render.IIconContainer;
 import gregapi.util.OM;
 import gregapi.util.ST;
@@ -50,6 +51,7 @@ public class BlockConcrete extends BlockColored implements IBlockToolable {
 	public BlockConcrete(String aUnlocalised) {
 		super(ItemBlockMetaType.class, Material.rock, soundTypeStone, aUnlocalised, "Concrete", null, 2.0F, 1.0F, 1, Textures.BlockIcons.CONCRETES);
 		for (int i = 0; i < 16; i++) OM.reg(ST.make(this, 1, i), OP.stone, MT.Concrete);
+		MT.Concrete.mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, DYE_INDEX_LightGray);
 	}
 	
 	@Override
@@ -67,11 +69,10 @@ public class BlockConcrete extends BlockColored implements IBlockToolable {
 		if (aTool.equals(TOOL_drill)) {
 			if (mBlock == this && aPlayer instanceof EntityPlayer) {
 				for (int i = 0; i < ((EntityPlayer)aPlayer).inventory.mainInventory.length; i++) {
-					int tIndex = ((EntityPlayer)aPlayer).inventory.mainInventory.length-i-1;
-					ItemStack tStack = ((EntityPlayer)aPlayer).inventory.mainInventory[tIndex];
+					ItemStack tStack = ((EntityPlayer)aPlayer).inventory.mainInventory[((EntityPlayer)aPlayer).inventory.mainInventory.length-i-1];
 					if (OM.is("stickAnyIronOrSteel", tStack)) {
 						if (WD.set(aWorld, aX, aY, aZ, BlocksGT.ConcreteReinforced, WD.meta(aWorld, aX, aY, aZ), 3)) {
-							ST.use(aPlayer, tIndex, tStack);
+							ST.use(aPlayer, T, tStack);
 							return 10000;
 						}
 						break;

@@ -101,7 +101,7 @@ public class BlockSwamp extends BlockWaterlike {
 				} else if (tBlock instanceof BlockWaterlike) {
 					if (tMeta == 0 || tBlock instanceof BlockOcean) tSwampCounter++;
 				} else if (tBlock == Blocks.water || tBlock == Blocks.flowing_water) {
-					tList.add(new ChunkCoordinates(aX+OFFSETS_X[tSide], aY+OFFSETS_Y[tSide], aZ+OFFSETS_Z[tSide]));
+					tList.add(new ChunkCoordinates(aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide]));
 					if (tMeta == 0) tSwampCounter++;
 				} else if (tBlock == Blocks.sand || tBlock == Blocks.dirt || tBlock == Blocks.grass || tBlock == Blocks.mycelium || tBlock == BlocksGT.Grass || tBlock == BlocksGT.Diggables || tBlock == BlocksGT.Sands || tBlock == BlocksGT.oreSand || tBlock == BlocksGT.oreRedSand || tBlock == BlocksGT.oreMud || tBlock == BlocksGT.oreSmallSand || tBlock == BlocksGT.oreSmallRedSand || tBlock == BlocksGT.oreSmallMud || IL.EtFu_Dirt.equal(tBlock)) {
 					tDirt = T;
@@ -156,7 +156,7 @@ public class BlockSwamp extends BlockWaterlike {
 		return;
 	}
 	
-	@Override public int getLightOpacity(IBlockAccess aWorld, int aX, int aY, int aZ) {return LIGHT_OPACITY_MAX;}
+	@Override public int getLightOpacity(IBlockAccess aWorld, int aX, int aY, int aZ) {if (aWorld.getBlock(aX, aY+1, aZ) != this || aWorld.getBlockMetadata(aX, aY, aZ) > 0) return LIGHT_OPACITY_WATER; return LIGHT_OPACITY_MAX;}
 	@Override public IIcon getIcon(int aSide, int aMeta) {return Blocks.water.getIcon(aSide, aMeta);}
 	@Override public int getRenderColor(int aMeta) {return 0x0000ff00;}
 	

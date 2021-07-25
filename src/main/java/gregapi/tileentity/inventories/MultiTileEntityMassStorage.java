@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -42,6 +42,7 @@ import gregapi.network.INetworkHandler;
 import gregapi.network.IPacket;
 import gregapi.oredict.OreDictItemData;
 import gregapi.oredict.OreDictManager;
+import gregapi.oredict.OreDictPrefix;
 import gregapi.render.RenderHelper;
 import gregapi.tileentity.ITileEntityAdjacentInventoryUpdatable;
 import gregapi.tileentity.ITileEntityConnectedInventory;
@@ -107,7 +108,7 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		if (slotHas(1)) aList.add(Chat.YELLOW + slot(1).getDisplayName() + Chat.GRAY + ": " + Chat.WHITE + slot(1).stackSize);
-		aList.add(Chat.CYAN + LH.get("gt.multitileentity.massstorage.tooltip.1") + mMaxStorage);
+		aList.add(Chat.CYAN + LH.get("gt.multitileentity.massstorage.tooltip.1") + UT.Code.makeString(mMaxStorage));
 		aList.add(Chat.CYAN + LH.get("gt.multitileentity.massstorage.tooltip.2"));
 		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_CUTTER));
 		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_SCREWDRIVER));
@@ -130,24 +131,23 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 		if (aTool.equals(TOOL_softhammer)) {
 			if ((mMode & B[3]) != 0) return 0;
 			if (slotHas(0)) {
-				ST.place(worldObj, xCoord+OFFSETS_X[mFacing]+0.5, yCoord+OFFSETS_Y[mFacing]+0.5, zCoord+OFFSETS_Z[mFacing]+0.5, ST.copy(slot(0)));
+				ST.place(worldObj, xCoord+OFFX[mFacing]+0.5, yCoord+OFFY[mFacing]+0.5, zCoord+OFFZ[mFacing]+0.5, ST.copy(slot(0)));
 				slotKill(0);
 				updateInventory();
 				return 10000;
 			}
 			if (slotHas(1)) {
 				for (int i = 0; i < 128 && slot(1).stackSize > Math.max(1, slot(1).getMaxStackSize()); i++) {
-					ST.place(worldObj, xCoord+OFFSETS_X[mFacing]+0.5, yCoord+OFFSETS_Y[mFacing]+0.5, zCoord+OFFSETS_Z[mFacing]+0.5, ST.amount(Math.max(1, slot(1).getMaxStackSize()), slot(1)));
+					ST.place(worldObj, xCoord+OFFX[mFacing]+0.5, yCoord+OFFY[mFacing]+0.5, zCoord+OFFZ[mFacing]+0.5, ST.amount(Math.max(1, slot(1).getMaxStackSize()), slot(1)));
 					slot(1).stackSize -= Math.max(1, slot(1).getMaxStackSize());
 				}
 				if (mPartialUnits > 0) {
-					OreDictItemData tData = OM.data(slot(1));
-					if (tData != null && tData.hasValidPrefixData()) ST.drop(worldObj, getCoords(), tData.mPrefix.contains(TD.Prefix.INGOT_BASED) ? OM.ingot(tData.mMaterial.mMaterial, mPartialUnits) : OM.dust(tData.mMaterial.mMaterial, mPartialUnits));
+					ST.drop(worldObj, getCoords(), getPartialStack());
 					mPartialUnits = 0;
 				}
 				if (slot(1).stackSize > 0) {
 					if (slot(1).stackSize <= Math.max(1, slot(1).getMaxStackSize())) {
-						ST.place(worldObj, xCoord+OFFSETS_X[mFacing]+0.5, yCoord+OFFSETS_Y[mFacing]+0.5, zCoord+OFFSETS_Z[mFacing]+0.5, ST.copy(slot(1)));
+						ST.place(worldObj, xCoord+OFFX[mFacing]+0.5, yCoord+OFFY[mFacing]+0.5, zCoord+OFFZ[mFacing]+0.5, ST.copy(slot(1)));
 						slotKill(1);
 						updateClientData();
 					}
@@ -280,7 +280,7 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 								break;
 							}
 							if (temp) {
-								if (aPlayer.inventoryContainer != null) aPlayer.inventoryContainer.detectAndSendChanges();
+								ST.update(aPlayer);
 								playCollect();
 							}
 						}
@@ -394,34 +394,11 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 			return rStack;
 		}
 		
-		OreDictItemData tData = OM.data_(tContent), aData = OM.data_(aStack);
-		if (tData != null && aData != null && tData.hasValidPrefixData() && aData.hasValidPrefixData() && tData.mMaterial.mMaterial == aData.mMaterial.mMaterial && mPartialUnits < tData.mPrefix.mAmount) {
-			if ((tData.mPrefix.contains(TD.Prefix.DUST_BASED) && aData.mPrefix.contains(TD.Prefix.DUST_BASED)) || (tData.mPrefix.contains(TD.Prefix.INGOT_BASED) && aData.mPrefix.contains(TD.Prefix.INGOT_BASED))) {
-				updatePartialContent(aData.mPrefix.mAmount * aStack.stackSize);
-				if ((mMode & B[2]) != 0 && tContent.stackSize > mMaxStorage) emitOverflow();
-				return null;
-			}
+		if (updatePartialContent(getUnitAmount(aStack) * aStack.stackSize)) {
+			if ((mMode & B[2]) != 0 && tContent.stackSize > mMaxStorage) emitOverflow();
+			return null;
 		}
-		
 		return aStack;
-	}
-	
-	public void updatePartialContent(long aAmountAdded) {
-		mPartialUnits += aAmountAdded;
-		int tMaxStorage = getMaxContent();
-		ItemStack tContent = slot(1);
-		if (mPartialUnits > 0 && slotHas(1) && tContent.stackSize < tMaxStorage) {
-			OreDictItemData tData = OM.data_(tContent);
-			if (tData != null && tData.hasValidPrefixData() && mPartialUnits >= tData.mPrefix.mAmount) {
-				ItemStack tStack = ST.amount(mPartialUnits / tData.mPrefix.mAmount, tContent);
-				if (tStack.stackSize > 0) {
-					mPartialUnits -= tData.mPrefix.mAmount * tStack.stackSize;
-					if (tStack.stackSize + tContent.stackSize > tMaxStorage) mPartialUnits += tData.mPrefix.mAmount * (tStack.stackSize + tContent.stackSize - tMaxStorage);
-					tContent.stackSize = Math.min(tMaxStorage, tContent.stackSize + tStack.stackSize);
-					updateInventory();
-				}
-			}
-		}
 	}
 	
 	public void emitOverflow() {
@@ -430,16 +407,6 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 			int tToBeMoved = UT.Code.bindStack(slot(1).stackSize - mMaxStorage);
 			if (ST.move(delegator(SIDE_BOTTOM), tTileEntity, null, F, F, F, T, tToBeMoved, 1, tToBeMoved, 1) <= 0) break;
 		}
-	}
-	
-	public boolean allowInsertion(ItemStack aStack) {
-		if ((mMode & B[3]) != 0) return F;
-		if (ST.equal(slot(1), aStack)) return T;
-		OreDictItemData tData = OM.data_(slot(1)), aData = OM.data_(aStack);
-		if (tData != null && aData != null && tData.hasValidPrefixData() && aData.hasValidPrefixData() && tData.mMaterial.mMaterial == aData.mMaterial.mMaterial && mPartialUnits < tData.mPrefix.mAmount) {
-			return (tData.mPrefix.contains(TD.Prefix.DUST_BASED) && aData.mPrefix.contains(TD.Prefix.DUST_BASED)) || (tData.mPrefix.contains(TD.Prefix.INGOT_BASED) && aData.mPrefix.contains(TD.Prefix.INGOT_BASED));
-		}
-		return F;
 	}
 	
 	private ItemStackSet<ItemStackContainer> mLogisticsCache = null;
@@ -528,8 +495,7 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 	@Override
 	public boolean breakBlock() {
 		if (isServerSide() && mPartialUnits > 0) {
-			OreDictItemData tData = OM.data(slot(1));
-			if (tData != null && tData.hasValidPrefixData()) ST.drop(worldObj, getCoords(), tData.mPrefix.contains(TD.Prefix.INGOT_BASED) ? OM.ingot(tData.mMaterial.mMaterial, mPartialUnits) : OM.dust(tData.mMaterial.mMaterial, mPartialUnits));
+			ST.drop(worldObj, getCoords(), getPartialStack());
 			mPartialUnits = 0;
 		}
 		return super.breakBlock();
@@ -560,6 +526,105 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 		return 0;
 	}
 	
+	public ItemStack getPartialStack() {
+		if (mPartialUnits <= 0) return NI;
+		OreDictItemData mData = OM.anydata(slot(1));
+		if (mData == null || !mData.hasValidPrefixData()) return NI;
+		
+		if (mData.mPrefix.contains(TD.Prefix.DUST_BASED)) return OM.dust(mData.mMaterial.mMaterial, mPartialUnits);
+		if (mData.mPrefix.contains(TD.Prefix.INGOT_BASED)) return OM.ingot(mData.mMaterial.mMaterial, mPartialUnits);
+		
+		if (mData.mPrefix == OP.gem || mData.mPrefix == OP.blockGem) {
+			return OP.gem.mat(mData.mMaterial.mMaterial, mPartialUnits / OP.gem.mAmount);
+		}
+		if (mData.mPrefix == OP.plate || mData.mPrefix == OP.blockPlate) {
+			return OP.plate.mat(mData.mMaterial.mMaterial, mPartialUnits / OP.plate.mAmount);
+		}
+		if (mData.mPrefix == OP.plateGem || mData.mPrefix == OP.blockPlateGem) {
+			return OP.plateGem.mat(mData.mMaterial.mMaterial, mPartialUnits / OP.plateGem.mAmount);
+		}
+		if (mData.mPrefix == OP.crushed || mData.mPrefix == OP.crushedTiny) {
+			return OP.crushedTiny.mat(mData.mMaterial.mMaterial, mPartialUnits / OP.crushedTiny.mAmount);
+		}
+		if (mData.mPrefix == OP.crushedPurified || mData.mPrefix == OP.crushedPurifiedTiny) {
+			return OP.crushedPurifiedTiny.mat(mData.mMaterial.mMaterial, mPartialUnits / OP.crushedPurifiedTiny.mAmount);
+		}
+		if (mData.mPrefix == OP.crushedCentrifuged || mData.mPrefix == OP.crushedCentrifugedTiny) {
+			return OP.crushedCentrifugedTiny.mat(mData.mMaterial.mMaterial, mPartialUnits / OP.crushedCentrifugedTiny.mAmount);
+		}
+		if (mData.mPrefix == OP.oreRaw || mData.mPrefix == OP.blockRaw) {
+			return OP.oreRaw.mat(mData.mMaterial.mMaterial, mPartialUnits / U);
+		}
+		return NI;
+	}
+
+	public long getUnitAmount(OreDictPrefix aPrefix) {
+		return aPrefix == OP.oreRaw ? U : aPrefix == OP.blockRaw ? U * 9 : aPrefix.mAmount;
+	}
+	
+	public long getUnitAmount(ItemStack aStack) {
+		OreDictItemData mData = OM.anydata_(slot(1)), aData = OM.anydata_(aStack);
+		if (mData != null && aData != null && mData.hasValidPrefixData() && aData.hasValidPrefixData() && mData.mMaterial.mMaterial == aData.mMaterial.mMaterial && mPartialUnits < getUnitAmount(mData.mPrefix)) {
+			if (mData.mPrefix.contains(TD.Prefix.DUST_BASED)) {
+				return aData.mPrefix.contains(TD.Prefix.DUST_BASED) ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix.contains(TD.Prefix.INGOT_BASED)) {
+				return aData.mPrefix.contains(TD.Prefix.INGOT_BASED) ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.gem || mData.mPrefix == OP.blockGem) {
+				return aData.mPrefix == OP.gem || aData.mPrefix == OP.blockGem ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.plate || mData.mPrefix == OP.blockPlate) {
+				return aData.mPrefix == OP.plate || aData.mPrefix == OP.blockPlate ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.plateGem || mData.mPrefix == OP.blockPlateGem) {
+				return aData.mPrefix == OP.plateGem || aData.mPrefix == OP.blockPlateGem ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.crushed || mData.mPrefix == OP.crushedTiny) {
+				return aData.mPrefix == OP.crushed || aData.mPrefix == OP.crushedTiny ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.crushedPurified || mData.mPrefix == OP.crushedPurifiedTiny) {
+				return aData.mPrefix == OP.crushedPurified || aData.mPrefix == OP.crushedPurifiedTiny ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.crushedCentrifuged || mData.mPrefix == OP.crushedCentrifugedTiny) {
+				return aData.mPrefix == OP.crushedCentrifuged || aData.mPrefix == OP.crushedCentrifugedTiny ? aData.mPrefix.mAmount : 0;
+			}
+			if (mData.mPrefix == OP.oreRaw || mData.mPrefix == OP.blockRaw) {
+				return aData.mPrefix == OP.oreRaw ? U : aData.mPrefix == OP.blockRaw ? U * 9 : 0;
+			}
+		}
+		return 0;
+	}
+	
+	public boolean allowInsertion(ItemStack aStack) {
+		if ((mMode & B[3]) != 0) return F;
+		if (ST.equal(slot(1), aStack)) return T;
+		return getUnitAmount(aStack) > 0;
+	}
+	
+	public boolean updatePartialContent(long aAmountAdded) {
+		if (aAmountAdded <= 0) return F;
+		mPartialUnits += aAmountAdded;
+		int tMaxStorage = getMaxContent();
+		ItemStack tContent = slot(1);
+		if (mPartialUnits > 0 && slotHas(1) && tContent.stackSize < tMaxStorage) {
+			OreDictItemData mData = OM.anydata_(tContent);
+			if (mData != null && mData.hasValidPrefixData()) {
+				long tTargetAmount = getUnitAmount(mData.mPrefix);
+				if (mPartialUnits >= tTargetAmount) {
+					ItemStack tStack = ST.amount(mPartialUnits / tTargetAmount, tContent);
+					if (tStack.stackSize > 0) {
+						mPartialUnits -= tTargetAmount * tStack.stackSize;
+						if (tStack.stackSize + tContent.stackSize > tMaxStorage) mPartialUnits += tTargetAmount * (tStack.stackSize + tContent.stackSize - tMaxStorage);
+						tContent.stackSize = Math.min(tMaxStorage, tContent.stackSize + tStack.stackSize);
+						updateInventory();
+					}
+				}
+			}
+		}
+		return T;
+	}
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void onRegistrationFirstClient(MultiTileEntityRegistry aRegistry, short aID) {
@@ -584,7 +649,7 @@ public abstract class MultiTileEntityMassStorage extends TileEntityBase09FacingS
 				
 				glPushMatrix();
 				
-				glTranslated(aX+0.5+OFFSETS_X[tTileEntity.mFacing]*0.502-OFFSETS_Z[tTileEntity.mFacing]*0.25, aY+0.625, aZ+0.5+OFFSETS_Z[tTileEntity.mFacing]*0.502+OFFSETS_X[tTileEntity.mFacing]*0.25);
+				glTranslated(aX+0.5+OFFX[tTileEntity.mFacing]*0.502-OFFZ[tTileEntity.mFacing]*0.25, aY+0.625, aZ+0.5+OFFZ[tTileEntity.mFacing]*0.502+OFFX[tTileEntity.mFacing]*0.25);
 				glRotatef(180, 0, 0, 1);
 				glRotatef(COMPASS_FROM_SIDE[tTileEntity.mFacing] * 90, 0, 1, 0);
 				

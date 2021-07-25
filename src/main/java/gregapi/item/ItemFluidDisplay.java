@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -38,6 +38,7 @@ import gregapi.data.FL;
 import gregapi.data.FM;
 import gregapi.data.LH;
 import gregapi.data.MD;
+import gregapi.data.OP;
 import gregapi.fluid.FluidGT;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.OreDictMaterialStack;
@@ -79,7 +80,7 @@ public class ItemFluidDisplay extends Item implements IFluidContainerItem, IItem
 	
 	@Override
 	public boolean onItemUseFirst(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int aSide, float hitX, float hitY, float hitZ) {
-		if (!aWorld.isRemote) for (byte tSide : ALL_SIDES_VALID) if (FL.fill(WD.te(aWorld, aX, aY, aZ, tSide, T), FL.make(FL.fluid(ST.meta_(aStack)), Integer.MAX_VALUE), T) > 0) return T;
+		if (!aWorld.isRemote && UT.Entities.hasInfiniteItems(aPlayer)) for (byte tSide : ALL_SIDES_VALID) if (FL.fill(WD.te(aWorld, aX, aY, aZ, tSide, T), FL.make(FL.fluid(ST.meta_(aStack)), Integer.MAX_VALUE), T) > 0) return T;
 		return !aWorld.isRemote;
 	}
 	
@@ -89,13 +90,13 @@ public class ItemFluidDisplay extends Item implements IFluidContainerItem, IItem
 		NBTTagCompound aNBT = aStack.getTagCompound();
 		Fluid aFluid = FL.fluid(ST.meta_(aStack));
 		if (aFluid == null) {
-			aList.add(LH.Chat.BLINKING_RED + "CLIENTSIDE FLUID IS NULL!!!" + LH.Chat.GRAY);
+			aList.add(LH.Chat.BLINKING_RED + "CLIENTSIDE FLUID IS NULL!!!");
 		} else if (FL.Error.is(aFluid)) {
 			aList.add(LH.Chat.BLINKING_RED + "THIS IS AN ERROR AND SHOULD NEVER BE OBTAINABLE!!!");
 		} else {
 			String aName = aFluid.getName();
 			
-			if (D1) aList.add("Registry: " + aName);
+			if (SHOW_INTERNAL_NAMES) aList.add("Registry: " + aName);
 			if (FluidsGT.FLUID_RENAMINGS.containsKey(aName) || FluidsGT.NONSTANDARD.contains(aName)) aList.add(LH.Chat.BLINKING_RED + "NON-STANDARD FLUID!");
 			
 			long tAmount = 0, tTemperature = DEF_ENV_TEMP;
@@ -115,7 +116,7 @@ public class ItemFluidDisplay extends Item implements IFluidContainerItem, IItem
 			}
 			
 			if (tAmount > 0) {
-				aList.add(LH.Chat.BLUE + "Amount: " + tAmount + " L" + LH.Chat.GRAY);
+				aList.add(LH.Chat.BLUE + "Amount: " + UT.Code.makeString(tAmount) + " L");
 			}
 			OreDictMaterialStack tMaterial = OreDictMaterial.FLUID_MAP.get(aName);
 			if (tMaterial != null) {
@@ -123,106 +124,113 @@ public class ItemFluidDisplay extends Item implements IFluidContainerItem, IItem
 					long tMatAmount = UT.Code.units(tAmount, tMaterial.mAmount, U, F);
 					if (tMatAmount > 0) {
 						int tDigits = (int)(((tMatAmount % U) / UD) * 1000);
-						aList.add(LH.Chat.BLUE + "Worth: " + (tMatAmount / U) + "." + (tDigits<1?"000":tDigits<10?"00"+tDigits:tDigits<100?"0"+tDigits:tDigits) + " Units of " + tMaterial.mMaterial.getLocal() + LH.Chat.GRAY);
+						aList.add(LH.Chat.BLUE + "Worth: " + (tMatAmount / U) + "." + (tDigits<1?"000":tDigits<10?"00"+tDigits:tDigits<100?"0"+tDigits:tDigits) + " Units of " + tMaterial.mMaterial.getLocal());
 					}
 				}
 				if (UT.Code.stringValid(tMaterial.mMaterial.mTooltipChemical)) aList.add(LH.Chat.YELLOW + tMaterial.mMaterial.mTooltipChemical);
 			}
 			
-			aList.add(LH.Chat.RED + "Temperature: " + tTemperature + " K (" + (tTemperature-C) + "°C)" + LH.Chat.GRAY);
+			aList.add(LH.Chat.RED + "Temperature: " + tTemperature + " K (" + (tTemperature-C) + "°C)");
 			
 			if (FL.plasma(tFluid)) {
-				aList.add(LH.Chat.GREEN + "State: " + LH.Chat.YELLOW + "Plasma" + (!aFluid.isGaseous(tFluid) ? LH.Chat.RED + " (Warning: Considered a Liquid by Mods other than GT!)" : LH.Chat.ORANGE + " (Note: Considered a Gas by Mods other than GT!)") + LH.Chat.GRAY);
+				aList.add(LH.Chat.GREEN + "State: " + LH.Chat.YELLOW + "Plasma" + (!aFluid.isGaseous(tFluid) ? LH.Chat.RED + " (Warning: Considered a Liquid by Mods other than GT!)" : LH.Chat.ORANGE + " (Note: Considered a Gas by Mods other than GT!)"));
 			} else if (tGas) {
-				aList.add(LH.Chat.GREEN + "State: " + LH.Chat.CYAN + "Gas" + (!aFluid.isGaseous(tFluid) ? LH.Chat.RED + " (Warning: Considered a Liquid by Mods other than GT!)" : "") + LH.Chat.GRAY);
+				aList.add(LH.Chat.GREEN + "State: " + LH.Chat.CYAN + "Gas" + (!aFluid.isGaseous(tFluid) ? LH.Chat.RED + " (Warning: Considered a Liquid by Mods other than GT!)" : ""));
 			} else {
-				aList.add(LH.Chat.GREEN + "State: " + LH.Chat.BLUE + "Liquid" + (aFluid.isGaseous(tFluid) ? LH.Chat.RED + " (Warning: Considered a Gas by Mods other than GT!)" : "") + LH.Chat.GRAY);
+				aList.add(LH.Chat.GREEN + "State: " + LH.Chat.BLUE + "Liquid" + (tMaterial != null && ST.valid(OP.ingot.mat(tMaterial.mMaterial, 1)) ? LH.Chat.CYAN + " (Might able to cast into Molds)" : ""));
+				if (aFluid.isGaseous(tFluid)) aList.add(LH.Chat.BLINKING_RED + " (Warning: Considered a Gas by Mods other than GT!)");
 			}
 			
 			float tDensity = aFluid.getDensity(tFluid);
 			if (tDensity > 0) {
-				aList.add(LH.Chat.GREEN + "Heavier than Air (typically moves down)" + LH.Chat.GRAY);
+				aList.add(LH.Chat.GREEN + "Heavier than Air (typically moves down)");
 			} else if (tDensity < 0) {
-				aList.add(LH.Chat.GREEN + "Lighter than Air (typically moves up)" + LH.Chat.GRAY);
+				aList.add(LH.Chat.GREEN + "Lighter than Air (typically moves up)");
 			} else {
-				aList.add(LH.Chat.GREEN + "As dense as Air (typically still moves down)" + LH.Chat.GRAY);
+				aList.add(LH.Chat.GREEN + "As dense as Air (typically still moves down)");
 			}
 			
 			if (FL.powerconducting(aFluid)) {
-				aList.add(LH.Chat.DGREEN + "This is a Power Conducting Fluid" + LH.Chat.GRAY);
-				aList.add(LH.Chat.ORANGE + "Cannot be stored in any normal GT6 Storage Tanks!" + LH.Chat.GRAY);
+				aList.add(LH.Chat.DGREEN + "This is a Power Conducting Fluid");
+				aList.add(LH.Chat.ORANGE + "Cannot be stored in any normal GT6 Storage Tanks!");
 			}
 			if (FL.simple(aFluid)) {
-				aList.add(LH.Chat.DGREEN + "This is a simple Fluid" + LH.Chat.GRAY);
+				aList.add(LH.Chat.DGREEN + "This is a simple Fluid");
 			}
 			if (FL.acid(aFluid)) {
-				aList.add(LH.Chat.ORANGE + "Acidic! Handle with Care!" + LH.Chat.GRAY);
+				aList.add(LH.Chat.ORANGE + "Acidic! Handle with Care!");
 			}
 			if (FL.Lubricant.is(aFluid) || FL.LubRoCant.is(aFluid)) {
-				aList.add(LH.Chat.ORANGE + "Industrial Use ONLY!" + LH.Chat.GRAY);
-				aList.add(LH.Chat.RED + "Not Motherf***ing Flammable!" + LH.Chat.GRAY);
+				aList.add(LH.Chat.ORANGE + "Industrial Use ONLY!");
+				aList.add(LH.Chat.RED + "Not Motherf***ing Flammable!");
 			} else {
 				Collection<Recipe>
 				tRecipes = FM.Burn.mRecipeFluidMap.get(aName);
 				if (tRecipes != null && !tRecipes.isEmpty()) {
 					long tFuelValue = 0;
-					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.mDuration * -tRecipe.mEUt * U) / tRecipe.mFluidInputs[0].amount);
+					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.getAbsoluteTotalPower() * U) / tRecipe.mFluidInputs[0].amount);
 					if (tFuelValue > 0) {
-						if (tAmount > 0) {
-							aList.add(LH.Chat.RED + "Burning: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + ((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total" + LH.Chat.GRAY);
+						if (tAmount > 1) {
+							aList.add(LH.Chat.RED + "Burning: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + UT.Code.makeString((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total");
 						} else {
-							aList.add(LH.Chat.RED + "Burning: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L " + LH.Chat.GRAY);
+							aList.add(LH.Chat.RED + "Burning: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L ");
 						}
 					}
 				}
 				tRecipes = FM.Engine.mRecipeFluidMap.get(aName);
 				if (tRecipes != null && !tRecipes.isEmpty()) {
 					long tFuelValue = 0;
-					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.mDuration * -tRecipe.mEUt * U) / tRecipe.mFluidInputs[0].amount);
+					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.getAbsoluteTotalPower() * U) / tRecipe.mFluidInputs[0].amount);
 					if (tFuelValue > 0) {
-						if (tAmount > 0) {
-							aList.add(LH.Chat.RED + "Engine: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + ((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total" + LH.Chat.GRAY);
+						if (tAmount > 1) {
+							aList.add(LH.Chat.RED + "Engine: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + UT.Code.makeString((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total");
 						} else {
-							aList.add(LH.Chat.RED + "Engine: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L " + LH.Chat.GRAY);
+							aList.add(LH.Chat.RED + "Engine: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L ");
 						}
 					}
 				}
 				tRecipes = FM.Gas.mRecipeFluidMap.get(aName);
 				if (tRecipes != null && !tRecipes.isEmpty()) {
 					long tFuelValue = 0;
-					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.mDuration * -tRecipe.mEUt * U) / tRecipe.mFluidInputs[0].amount);
+					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.getAbsoluteTotalPower() * U) / tRecipe.mFluidInputs[0].amount);
 					if (tFuelValue > 0) {
-						if (tAmount > 0) {
-							aList.add(LH.Chat.RED + "Turbine: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + ((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total" + LH.Chat.GRAY);
+						if (tAmount > 1) {
+							aList.add(LH.Chat.RED + "Turbine: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + UT.Code.makeString((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total");
 						} else {
-							aList.add(LH.Chat.RED + "Turbine: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L " + LH.Chat.GRAY);
+							aList.add(LH.Chat.RED + "Turbine: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L ");
 						}
 					}
 				}
 				tRecipes = FM.Hot.mRecipeFluidMap.get(aName);
 				if (tRecipes != null && !tRecipes.isEmpty()) {
 					long tFuelValue = 0;
-					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.mDuration * -tRecipe.mEUt * U) / tRecipe.mFluidInputs[0].amount);
+					for (Recipe tRecipe : tRecipes) if (tRecipe.mEnabled && tRecipe.mFluidInputs[0] != null) tFuelValue = Math.max(tFuelValue, (tRecipe.getAbsoluteTotalPower() * U) / tRecipe.mFluidInputs[0].amount);
 					if (tFuelValue > 0) {
-						if (tAmount > 0) {
-							aList.add(LH.Chat.RED + "Heat Exchanger: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + ((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total" + LH.Chat.GRAY);
+						if (tAmount > 1) {
+							aList.add(LH.Chat.RED + "Heat Exchanger: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L; " + LH.Chat.WHITE + UT.Code.makeString((tFuelValue * tAmount) / U) + LH.Chat.YELLOW + " GU total");
 						} else {
-							aList.add(LH.Chat.RED + "Heat Exchanger: " + LH.Chat.WHITE + (tFuelValue / U) + LH.Chat.YELLOW + " GU/L " + LH.Chat.GRAY);
+							aList.add(LH.Chat.RED + "Heat Exchanger: " + LH.Chat.WHITE + UT.Code.makeString(tFuelValue / U) + LH.Chat.YELLOW + " GU/L ");
 						}
 					}
 				}
 			}
 			
 			if (aFluid instanceof FluidGT) {
-				aList.add(LH.Chat.DGRAY + "Fluid owned by GT6" + LH.Chat.GRAY);
+				aList.add(LH.Chat.DGRAY + "Fluid owned by GT6");
 			} else {
 				if (FL.Water.is(aFluid) || FL.Lava.is(aFluid)) {
-					aList.add(LH.Chat.DGRAY + "Fluid owned by vanilla Minecraft" + LH.Chat.GRAY);
+					aList.add(LH.Chat.DGRAY + "Fluid owned by vanilla Minecraft");
 				} else {
-					aList.add(LH.Chat.DGRAY + "Fluid NOT owned by GT6" + LH.Chat.GRAY);
+					aList.add(LH.Chat.DGRAY + "Fluid NOT owned by GT6");
 				}
 			}
 		}
+		
+		if (UT.Entities.hasInfiniteItems(aPlayer)) {
+			aList.add(LH.Chat.RAINBOW_SLOW + "Rightclick Blocks to fill their Tanks with this Fluid!");
+		}
+		
+		while (aList.remove(null));
 	}
 	
 	@Override
@@ -230,7 +238,7 @@ public class ItemFluidDisplay extends Item implements IFluidContainerItem, IItem
 	public void registerIcons(IIconRegister aIconRegister) {
 		// Useful hack to register Block Icons. That is why the Fluid Display Item has to always exist.
 		if (Abstract_Mod.sFinalized >= Abstract_Mod.sModCountUsingGTAPI) {
-			OUT.println("GT_Client: Setting up and loading Icon Register for Blocks");
+			// Setting up and loading Icon Register for Blocks
 			GT_API.sBlockIcons = aIconRegister;
 			for (Runnable tRunnable : GT_API.sBlockIconload) {
 				try {
@@ -298,7 +306,7 @@ public class ItemFluidDisplay extends Item implements IFluidContainerItem, IItem
 	public void getSubItems(Item aItem, CreativeTabs aTab, @SuppressWarnings("rawtypes") List aList) {
 		for (int i = 0, j = FluidRegistry.getMaxID(); i <= j; i++) {
 			Fluid tFluid = FL.fluid(i);
-			if (tFluid != null && !FluidsGT.FLUID_RENAMINGS.containsKey(tFluid.getName()) && !FL.Error.is(tFluid)) {
+			if (tFluid != null && !FluidsGT.HIDDEN.contains(tFluid.getName())) {
 				ItemStack tStack = FL.display(tFluid);
 				if (tStack != null) aList.add(tStack);
 			}

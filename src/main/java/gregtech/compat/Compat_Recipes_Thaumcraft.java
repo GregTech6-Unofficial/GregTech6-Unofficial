@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -61,7 +61,6 @@ public class Compat_Recipes_Thaumcraft extends CompatMods {
 		FoodsGT.put(IL.TC_Nugget_Fish       .wild(1), 0, 0, 0, 0, 1);
 		FoodsGT.put(IL.TC_Triple_Meat_Treat .wild(1), 0, 0, 0,30,10);
 		
-		CR.delate(IL.TC_Phial.get(1));
 		CR.shaped(IL.TC_Phial.get(8), CR.DEF_NCC, " C ", "G G", " G ", 'C', OD.itemClay, 'G', OD.blockGlassColorless);
 		
 		RM.Bath.addRecipe1(T, 0, 128, ST.make(Items.string, 1, W), MT.Tallow.liquid(U*2, T), NF, ST.make(MD.TC, "blockCandle", 1, 0), ST.make(MD.TC, "blockCandle", 1, 0), ST.make(MD.TC, "blockCandle", 1, 0));
@@ -175,6 +174,8 @@ public class Compat_Recipes_Thaumcraft extends CompatMods {
 			, null
 			, LH.add("gt.research.page.1." + tKey, "You have discovered a way of making "+MT.Fe.mNameLocal+" harder by just re-ordering its components.<BR><BR>This Method can be used to create a Material called "+tMat.mNameLocal+", which is used in many non-Thaumaturgic applications.")
 			, COMPAT_TC.addCrucibleRecipe(tKey, OP.nugget.dat(MT.Fe), OP.nugget.mat(tMat, 1), TC.stack(TC.ORDO, 1))
+			, COMPAT_TC.addCrucibleRecipe(tKey, OP.nugget.dat(MT.WroughtIron), OP.nugget.mat(tMat, 1), TC.stack(TC.ORDO, 1))
+			, COMPAT_TC.addCrucibleRecipe(tKey, OP.nugget.dat(MT.MeteoricIron), OP.nugget.mat(MT.MeteoricSteel, 1), TC.stack(TC.ORDO, 1))
 		);
 		tMat = MT.Bronze;
 		COMPAT_TC.addResearch(tKey = TRANSBRONZE
@@ -232,12 +233,13 @@ public class Compat_Recipes_Thaumcraft extends CompatMods {
 			, LH.add("gt.research.page.1." + tKey, "Your discovery of "+MT.Bronze.mNameLocal+" Transmutation has lead you to the conclusion it works with other Alloys such as "+tMat.mNameLocal+" as well.")
 			, COMPAT_TC.addCrucibleRecipe(tKey, OP.nugget.dat(tMat), OP.nugget.mat(tMat, 3), TC.stack(TC.METALLUM, 2), TC.stack(TC.AQUA, 1), TC.stack(TC.VITREUS, 1))
 		);
-		//
+		tMat = MT.DamascusSteel;
 		COMPAT_TC.addResearch(tKey = ADVANCEDMETALLURGY
-			, "Advanced Metallurgic Transmutation", "Mastering the basic Metals", new String[] {TRANSBISMUTH, IRON_TO_STEEL, TRANSSOLDERINGALLOY, TRANSBATTERYALLOY, TRANSBRASS, TRANSELECTRUM, TRANSCONSTANTAN, TRANSINVAR}, CATEGORY_ALCHEMY, OP.ingot.mat(MT.Fe, 1), 4, RESEARCH_TYPE_HIDDEN, 16, 14
+			, "Advanced Metallurgic Transmutation", "Mastering the basic Metals", new String[] {TRANSBISMUTH, IRON_TO_STEEL, TRANSSOLDERINGALLOY, TRANSBATTERYALLOY, TRANSBRASS, TRANSELECTRUM, TRANSCONSTANTAN, TRANSINVAR}, CATEGORY_ALCHEMY, OP.ingot.mat(tMat, 1), 4, RESEARCH_TYPE_HIDDEN, 16, 14
 			, Arrays.asList(TC.stack(TC.METALLUM, 50), TC.stack(TC.PERMUTATIO, 20), TC.stack(TC.COGNITIO, 20), TC.stack(TC.PRAECANTIO, 20), TC.stack(TC.NEBRISUM, 20), TC.stack(TC.MAGNETO, 20))
-			, null
-			, LH.add("gt.research.page.1." + tKey, "Now that you have discovered all the basic Metals, you can finally move on to the next Level of Magic Metallurgy and create more advanced Metals")
+			, ST.array(OP.dust.mat(tMat, 1), OP.ingot.mat(tMat, 1), OP.plate.mat(tMat, 1))
+			, LH.add("gt.research.page.1." + tKey, "Now that you have discovered all basic Metals and found out about "+tMat.mNameLocal+", you can finally move on to the next Level of Magic Metallurgy and create more advanced Metals!")
+			, COMPAT_TC.addCrucibleRecipe(tKey, OP.nugget.dat(MT.Steel), OP.nugget.mat(tMat, 1), TC.stack(TC.ORDO, 1), TC.stack(TC.INSTRUMENTUM, 1), TC.stack(TC.TELUM, 1))
 		);
 		tMat = MT.Al;
 		COMPAT_TC.addResearch(tKey = TRANSALUMINIUM

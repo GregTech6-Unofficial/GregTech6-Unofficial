@@ -68,9 +68,9 @@ import net.minecraft.item.Item;
 /**
  * @author Gregorius Techneticies
  *
- * This loads after the compatible Mods. The regular API loads before all compatible Mods.
+ * This loads after compatible Mods. The regular API loads before all compatible Mods.
  */
-@Mod(modid=ModIDs.GAPI_POST, name="Greg-API-Post", version="GT6-MC1710", dependencies="required-after:"+ModIDs.GAPI+"; after:"+ModIDs.MD8+"; after:"+ModIDs.IC2+"; after:"+ModIDs.IC2C+"; after:"+ModIDs.NC+"; after:"+ModIDs.IHL+"; after:"+ModIDs.FUNK+"; after:"+ModIDs.BAUBLES+"; after:"+ModIDs.HEE+"; after:"+ModIDs.GaSu+"; after:"+ModIDs.GaNe+"; after:"+ModIDs.GaEn+"; after:"+ModIDs.WdSt+"; after:"+ModIDs.CrGu+"; after:"+ModIDs.COFH_API+"; after:"+ModIDs.COFH_API_ENERGY+"; after:"+ModIDs.COFH_CORE+"; after:"+ModIDs.CC+"; after:"+ModIDs.OC+"; after:"+ModIDs.HEX+"; after:"+ModIDs.DE+"; after:"+ModIDs.AV+"; after:"+ModIDs.FR+"; after:"+ModIDs.FRMB+"; after:"+ModIDs.BINNIE+"; after:"+ModIDs.BINNIE_BEE+"; after:"+ModIDs.BINNIE_TREE+"; after:"+ModIDs.BINNIE_GENETICS+"; after:"+ModIDs.BINNIE_BOTANY+"; after:"+ModIDs.IE+"; after:"+ModIDs.UB+"; after:"+ModIDs.COG+"; after:"+ModIDs.PFAA+"; after:"+ModIDs.MIN+"; after:"+ModIDs.RH+"; after:"+ModIDs.CANDY+"; after:"+ModIDs.ABYSSAL+"; after:"+ModIDs.SOULFOREST+"; after:"+ModIDs.ARS+"; after:"+ModIDs.TC+"; after:"+ModIDs.TCFM+"; after:"+ModIDs.BOTA+"; after:"+ModIDs.ALF+"; after:"+ModIDs.WTCH+"; after:"+ModIDs.HOWL+"; after:"+ModIDs.MoCr+"; after:"+ModIDs.GoG+"; after:"+ModIDs.LycM+"; after:"+ModIDs.LycM_Arctic+"; after:"+ModIDs.LycM_Demon+"; after:"+ModIDs.LycM_Desert+"; after:"+ModIDs.LycM_Forest+"; after:"+ModIDs.LycM_Fresh+"; after:"+ModIDs.LycM_Inferno+"; after:"+ModIDs.LycM_Jungle+"; after:"+ModIDs.LycM_Mountain+"; after:"+ModIDs.LycM_Plains+"; after:"+ModIDs.LycM_Salt+"; after:"+ModIDs.LycM_Shadow+"; after:"+ModIDs.LycM_Swamp+"; after:"+ModIDs.RC+"; after:"+ModIDs.BP+"; after:"+ModIDs.PR+"; after:"+ModIDs.PR_EXPANSION+"; after:"+ModIDs.PR_INTEGRATION+"; after:"+ModIDs.PR_TRANSMISSION+"; after:"+ModIDs.PR_TRANSPORT+"; after:"+ModIDs.PR_EXPLORATION+"; after:"+ModIDs.PR_COMPATIBILITY+"; after:"+ModIDs.PR_FABRICATION+"; after:"+ModIDs.PR_ILLUMINATION+"; after:"+ModIDs.PE+"; after:"+ModIDs.AE+"; after:"+ModIDs.MO+"; after:"+ModIDs.TE_FOUNDATION+"; after:"+ModIDs.TE_DYNAMICS+"; after:"+ModIDs.TE+"; after:"+ModIDs.ZTONES+"; after:"+ModIDs.CHSL+"; after:"+ModIDs.NePl+"; after:"+ModIDs.NeLi+"; after:"+ModIDs.EtFu+"; after:"+ModIDs.BB+"; after:"+ModIDs.DYNAMIC_TREES+"; after:"+ModIDs.BbLC+"; after:"+ModIDs.CARP+"; after:"+ModIDs.BETTER_RECORDS+"; after:"+ModIDs.TF+"; after:"+ModIDs.ERE+"; after:"+ModIDs.MFR+"; after:"+ModIDs.PnC+"; after:"+ModIDs.ExU+"; after:"+ModIDs.ExS+"; after:"+ModIDs.EIO+"; after:"+ModIDs.RT+"; after:"+ModIDs.AA+"; after:"+ModIDs.TreeCap+"; after:"+ModIDs.HaC+"; after:"+ModIDs.CookBook+"; after:"+ModIDs.APC+"; after:"+ModIDs.ENVM+"; after:"+ModIDs.MaCr+"; after:"+ModIDs.BC_TRANSPORT+"; after:"+ModIDs.BC_SILICON+"; after:"+ModIDs.BC_FACTORY+"; after:"+ModIDs.BC_ENERGY+"; after:"+ModIDs.BC_ROBOTICS+"; after:"+ModIDs.BC+"; after:"+ModIDs.BC_BUILDERS+"; after:"+ModIDs.MgC+"; after:"+ModIDs.BR+"; after:"+ModIDs.HBM+"; after:"+ModIDs.ELN+"; after:"+ModIDs.DRGN+"; after:"+ModIDs.ElC+"; after:"+ModIDs.CrC+"; after:"+ModIDs.ReC+"; after:"+ModIDs.RoC+"; after:"+ModIDs.Mek+"; after:"+ModIDs.Mek_Tools+"; after:"+ModIDs.Mek_Generators+"; after:"+ModIDs.GC+"; after:"+ModIDs.GC_PLANETS+"; after:"+ModIDs.GC_GALAXYSPACE+"; after:"+ModIDs.VULPES+"; after:"+ModIDs.GC_ADV_ROCKETRY+"; after:"+ModIDs.BTL+"; after:"+ModIDs.AETHER+"; after:"+ModIDs.TROPIC+"; after:"+ModIDs.ATUM+"; after:"+ModIDs.EB+"; after:"+ModIDs.EBXL+"; after:"+ModIDs.BoP+"; after:"+ModIDs.HiL+"; after:"+ModIDs.ATG+"; after:"+ModIDs.RTG+"; after:"+ModIDs.RWG+"; after:"+ModIDs.MYST+"; after:"+ModIDs.WARPBOOK+"; after:"+ModIDs.LOSTBOOKS+"; after:"+ModIDs.LOOTBAGS+"; after:"+ModIDs.EUREKA+"; after:"+ModIDs.ENCHIRIDION+"; after:"+ModIDs.ENCHIRIDION2+"; after:"+ModIDs.SmAc+"; after:"+ModIDs.HQM+"; after:"+ModIDs.SD+"; after:"+ModIDs.JABBA+"; after:"+ModIDs.MaCu+"; after:"+ModIDs.PdC+"; after:"+ModIDs.Bamboo+"; after:"+ModIDs.PMP+"; after:"+ModIDs.Fossil+"; after:"+ModIDs.GrC+"; after:"+ModIDs.GrC_Apples+"; after:"+ModIDs.GrC_Bamboo+"; after:"+ModIDs.GrC_Bees+"; after:"+ModIDs.GrC_Cellar+"; after:"+ModIDs.GrC_Fish+"; after:"+ModIDs.GrC_Grapes+"; after:"+ModIDs.GrC_Hops+"; after:"+ModIDs.GrC_Milk+"; after:"+ModIDs.GrC_Rice+"; after:"+ModIDs.BG2+"; after:"+ModIDs.BWM+"; after:"+ModIDs.OMT+"; after:"+ModIDs.TG+"; after:"+ModIDs.FM+"; after:"+ModIDs.FZ+"; after:"+ModIDs.MNTL+"; after:"+ModIDs.OB+"; after:"+ModIDs.PA+"; after:"+ModIDs.TiC+"; after:"+ModIDs.MF2+"; after:"+ModIDs.WR_CBE_C+"; after:"+ModIDs.WR_CBE_A+"; after:"+ModIDs.WR_CBE_L+"; after:"+ModIDs.VOLTZ+"; after:"+ModIDs.MFFS+"; after:"+ModIDs.ICBM+"; after:"+ModIDs.ATSCI+"; after:inventorytweaks; after:ironbackpacks; after:journeymap; after:LogisticsPipes; after:LunatriusCore; after:NEIAddons; after:NEIAddons|Developer; after:NEIAddons|AppEng; after:NEIAddons|Botany; after:NEIAddons|Forestry; after:NEIAddons|CraftingTables; after:NEIAddons|ExNihilo; after:neiintegration; after:openglasses; after:simplyjetpacks; after:Stackie; after:StevesCarts; after:TiCTooltips; after:worldedit; after:McMultipart")
+@Mod(modid=ModIDs.GAPI_POST, name="Greg-API-Post", version="GT6-MC1710", dependencies="required-after:"+ModIDs.GAPI+"; after:"+ModIDs.MD8+"; after:"+ModIDs.IC2+"; after:"+ModIDs.IC2C+"; after:"+ModIDs.NC+"; after:"+ModIDs.IHL+"; after:"+ModIDs.FUNK+"; after:"+ModIDs.BAUBLES+"; after:"+ModIDs.HEE+"; after:"+ModIDs.GaSu+"; after:"+ModIDs.GaNe+"; after:"+ModIDs.GaEn+"; after:"+ModIDs.WdSt+"; after:"+ModIDs.CrGu+"; after:"+ModIDs.COFH_API+"; after:"+ModIDs.COFH_API_ENERGY+"; after:"+ModIDs.COFH_CORE+"; after:"+ModIDs.CC+"; after:"+ModIDs.OC+"; after:"+ModIDs.HEX+"; after:"+ModIDs.DE+"; after:"+ModIDs.AV+"; after:"+ModIDs.FR+"; after:"+ModIDs.FRMB+"; after:"+ModIDs.BINNIE+"; after:"+ModIDs.BINNIE_BEE+"; after:"+ModIDs.BINNIE_TREE+"; after:"+ModIDs.BINNIE_GENETICS+"; after:"+ModIDs.BINNIE_BOTANY+"; after:"+ModIDs.IE+"; after:"+ModIDs.UB+"; after:"+ModIDs.COG+"; after:"+ModIDs.PFAA+"; after:"+ModIDs.MIN+"; after:"+ModIDs.RH+"; after:"+ModIDs.CANDY+"; after:"+ModIDs.ABYSSAL+"; after:"+ModIDs.SOULFOREST+"; after:"+ModIDs.ARS+"; after:"+ModIDs.TC+"; after:"+ModIDs.TCFM+"; after:"+ModIDs.BOTA+"; after:"+ModIDs.ALF+"; after:"+ModIDs.WTCH+"; after:"+ModIDs.HOWL+"; after:"+ModIDs.MoCr+"; after:"+ModIDs.GoG+"; after:"+ModIDs.LycM+"; after:"+ModIDs.LycM_Arctic+"; after:"+ModIDs.LycM_Demon+"; after:"+ModIDs.LycM_Desert+"; after:"+ModIDs.LycM_Forest+"; after:"+ModIDs.LycM_Fresh+"; after:"+ModIDs.LycM_Inferno+"; after:"+ModIDs.LycM_Jungle+"; after:"+ModIDs.LycM_Mountain+"; after:"+ModIDs.LycM_Plains+"; after:"+ModIDs.LycM_Salt+"; after:"+ModIDs.LycM_Shadow+"; after:"+ModIDs.LycM_Swamp+"; after:"+ModIDs.RC+"; after:"+ModIDs.BP+"; after:"+ModIDs.PR+"; after:"+ModIDs.PR_EXPANSION+"; after:"+ModIDs.PR_INTEGRATION+"; after:"+ModIDs.PR_TRANSMISSION+"; after:"+ModIDs.PR_TRANSPORT+"; after:"+ModIDs.PR_EXPLORATION+"; after:"+ModIDs.PR_COMPATIBILITY+"; after:"+ModIDs.PR_FABRICATION+"; after:"+ModIDs.PR_ILLUMINATION+"; after:"+ModIDs.PE+"; after:"+ModIDs.AE+"; after:"+ModIDs.MO+"; after:"+ModIDs.TE_FOUNDATION+"; after:"+ModIDs.TE_DYNAMICS+"; after:"+ModIDs.TE+"; after:"+ModIDs.ZTONES+"; after:"+ModIDs.CHSL+"; after:"+ModIDs.NePl+"; after:"+ModIDs.NeLi+"; after:"+ModIDs.EtFu+"; after:"+ModIDs.BB+"; after:"+ModIDs.DYNAMIC_TREES+"; after:"+ModIDs.BbLC+"; after:"+ModIDs.CARP+"; after:"+ModIDs.BETTER_RECORDS+"; after:"+ModIDs.TF+"; after:"+ModIDs.ERE+"; after:"+ModIDs.MFR+"; after:"+ModIDs.PnC+"; after:"+ModIDs.ExU+"; after:"+ModIDs.ExS+"; after:"+ModIDs.EIO+"; after:"+ModIDs.RT+"; after:"+ModIDs.AA+"; after:"+ModIDs.TreeCap+"; after:"+ModIDs.HaC+"; after:"+ModIDs.CookBook+"; after:"+ModIDs.APC+"; after:"+ModIDs.ENVM+"; after:"+ModIDs.MaCr+"; after:"+ModIDs.BC_TRANSPORT+"; after:"+ModIDs.BC_SILICON+"; after:"+ModIDs.BC_FACTORY+"; after:"+ModIDs.BC_ENERGY+"; after:"+ModIDs.BC_ROBOTICS+"; after:"+ModIDs.BC+"; after:"+ModIDs.BC_BUILDERS+"; after:"+ModIDs.MgC+"; after:"+ModIDs.BR+"; after:"+ModIDs.HBM+"; after:"+ModIDs.ELN+"; after:"+ModIDs.DRGN+"; after:"+ModIDs.ElC+"; after:"+ModIDs.CrC+"; after:"+ModIDs.ReC+"; after:"+ModIDs.RoC+"; after:"+ModIDs.Mek+"; after:"+ModIDs.Mek_Tools+"; after:"+ModIDs.Mek_Generators+"; after:"+ModIDs.GC+"; after:"+ModIDs.GC_PLANETS+"; after:"+ModIDs.GC_GALAXYSPACE+"; after:"+ModIDs.VULPES+"; after:"+ModIDs.GC_ADV_ROCKETRY+"; after:"+ModIDs.BTL+"; after:"+ModIDs.AETHER+"; after:"+ModIDs.TROPIC+"; after:"+ModIDs.ATUM+"; after:"+ModIDs.EB+"; after:"+ModIDs.EBXL+"; after:"+ModIDs.BoP+"; after:"+ModIDs.HiL+"; after:"+ModIDs.ATG+"; after:"+ModIDs.RTG+"; after:"+ModIDs.RWG+"; after:"+ModIDs.CW2+"; after:"+ModIDs.A97+"; after:"+ModIDs.A97_MINING+"; after:"+ModIDs.MYST+"; after:"+ModIDs.WARPBOOK+"; after:"+ModIDs.LOSTBOOKS+"; after:"+ModIDs.LOOTBAGS+"; after:"+ModIDs.EUREKA+"; after:"+ModIDs.ENCHIRIDION+"; after:"+ModIDs.ENCHIRIDION2+"; after:"+ModIDs.SmAc+"; after:"+ModIDs.HQM+"; after:"+ModIDs.SD+"; after:"+ModIDs.BTRS+"; after:"+ModIDs.JABBA+"; after:"+ModIDs.MaCu+"; after:"+ModIDs.PdC+"; after:"+ModIDs.Bamboo+"; after:"+ModIDs.PMP+"; after:"+ModIDs.Fossil+"; after:"+ModIDs.GrC+"; after:"+ModIDs.GrC_Apples+"; after:"+ModIDs.GrC_Bamboo+"; after:"+ModIDs.GrC_Bees+"; after:"+ModIDs.GrC_Cellar+"; after:"+ModIDs.GrC_Fish+"; after:"+ModIDs.GrC_Grapes+"; after:"+ModIDs.GrC_Hops+"; after:"+ModIDs.GrC_Milk+"; after:"+ModIDs.GrC_Rice+"; after:"+ModIDs.BG2+"; after:"+ModIDs.BWM+"; after:"+ModIDs.OMT+"; after:"+ModIDs.TG+"; after:"+ModIDs.FM+"; after:"+ModIDs.FZ+"; after:"+ModIDs.MNTL+"; after:"+ModIDs.OB+"; after:"+ModIDs.PA+"; after:"+ModIDs.TiC+"; after:"+ModIDs.MF2+"; after:"+ModIDs.TRANSLOCATOR+"; after:"+ModIDs.WR_CBE_C+"; after:"+ModIDs.WR_CBE_A+"; after:"+ModIDs.WR_CBE_L+"; after:"+ModIDs.VOLTZ+"; after:"+ModIDs.MFFS+"; after:"+ModIDs.ICBM+"; after:"+ModIDs.ATSCI+"; after:inventorytweaks; after:ironbackpacks; after:journeymap; after:LogisticsPipes; after:LunatriusCore; after:NEIAddons; after:NEIAddons|Developer; after:NEIAddons|AppEng; after:NEIAddons|Botany; after:NEIAddons|Forestry; after:NEIAddons|CraftingTables; after:NEIAddons|ExNihilo; after:neiintegration; after:openglasses; after:simplyjetpacks; after:Stackie; after:StevesCarts; after:TiCTooltips; after:worldedit; after:McMultipart")
 public class GT_API_Post extends Abstract_Mod {
 	public GT_API_Post() {GAPI_POST = this;}
 	
@@ -90,7 +90,6 @@ public class GT_API_Post extends Abstract_Mod {
 	@Override
 	public void onModPreInit2(FMLPreInitializationEvent aEvent) {
 		try {
-			OUT.println(getModNameForLog() + ": Sorting Greg-API-Post to the end of the Mod List for further processing.");
 			LoadController tLoadController = ((LoadController)UT.Reflection.getFieldContent(Loader.instance(), "modController", T, T));
 			List<ModContainer> tModList = tLoadController.getActiveModList(), tNewModsList = new ArrayList<>(tModList.size());
 			ModContainer tGregTech = null;
@@ -99,9 +98,9 @@ public class GT_API_Post extends Abstract_Mod {
 				if (tMod.getModId().equalsIgnoreCase(MD.GAPI_POST.mID)) tGregTech = tMod; else tNewModsList.add(tMod);
 			}
 			if (tGregTech != null) tNewModsList.add(tGregTech);
-			UT.Reflection.getField(tLoadController, "activeModList", T, T).set(tLoadController, tNewModsList);
+			UT.Reflection.setFieldContent(tLoadController, "activeModList", tNewModsList);
 		} catch(Throwable e) {
-			if (D1) e.printStackTrace(ERR);
+			e.printStackTrace(ERR);
 		}
 		
 		// Fixing Items of certain Mods.
@@ -129,6 +128,9 @@ public class GT_API_Post extends Abstract_Mod {
 			MT.OREMATS.Scheelite          .addOreByProducts(MT.Rubracium      );
 			MT.OREMATS.Pentlandite        .addOreByProducts(MT.Meutoite       );
 			MT.MgCO3                      .addOreByProducts(MT.Lemurite       );
+			MT.Ardite                     .addOreByProducts(MT.Aredrite       );
+			MT.Co                         .addOreByProducts(MT.Aredrite       );
+			MT.OREMATS.Cobaltite          .addOreByProducts(MT.Aredrite       );
 			MT.OREMATS.Stibnite           .addOreByProducts(MT.Ceruclase      );
 			MT.OREMATS.Garnierite         .addOreByProducts(MT.Oureclase      );
 			MT.OREMATS.Cooperite          .addOreByProducts(MT.Kalendrite     );
@@ -140,37 +142,33 @@ public class GT_API_Post extends Abstract_Mod {
 			MT.OREMATS.Cobaltite          .addOreByProducts(MT.Prometheum     );
 			MT.OREMATS.Cassiterite        .addOreByProducts(MT.Ignatius       );
 			MT.OREMATS.Wolframite         .addOreByProducts(MT.Vulcanite      );
-			MT.Fe2O3                      .addOreByProducts(MT.DeepIron       );
+			MT.FakeOsmium                 .addOreByProducts(MT.DeepIron       );
 			MT.OREMATS.BrownLimonite      .addOreByProducts(MT.DeepIron       );
 			MT.OREMATS.YellowLimonite     .addOreByProducts(MT.DeepIron       );
-			MT.OREMATS.Magnetite          .addOreByProducts(MT.ShadowIron     );
-			MT.OREMATS.BasalticMineralSand.addOreByProducts(MT.ShadowIron     );
-			MT.OREMATS.GraniticMineralSand.addOreByProducts(MT.ShadowIron     );
+			MT.Fe2O3                      .addOreByProducts(MT.DeepIron       );
+			MT.AncientDebris              .addOreByProducts(MT.ShadowIron     );
+			MT.Netherite                  .addOreByProducts(MT.ShadowIron     );
+			MT.Efrine                     .addOreByProducts(MT.ShadowIron     );
 		}
 		if (MD.Mek.mLoaded) {
 			MT.Pb.addOreByProducts(MT.FakeOsmium);
+			MT.Os.addOreByProducts(MT.FakeOsmium);
+			MT.DeepIron.addOreByProducts(MT.FakeOsmium);
 			MT.OREMATS.Galena.addOreByProducts(MT.FakeOsmium);
-			MT.OREMATS.Magnetite.addOreByProducts(MT.FakeOsmium);
-			MT.OREMATS.Ferrovanadium.addOreByProducts(MT.FakeOsmium);
-			MT.OREMATS.BasalticMineralSand.addOreByProducts(MT.FakeOsmium);
-			MT.OREMATS.GraniticMineralSand.addOreByProducts(MT.FakeOsmium);
+			MT.OREMATS.BrownLimonite.addOreByProducts(MT.FakeOsmium);
+			MT.OREMATS.YellowLimonite.addOreByProducts(MT.FakeOsmium);
+			MT.Fe2O3.addOreByProducts(MT.FakeOsmium);
 		}
 		if (MD.TiC.mLoaded) {
 			MT.Co.addOreByProducts(MT.Ardite);
 			MT.OREMATS.Cobaltite.addOreByProducts(MT.Ardite);
 			MT.FakeOsmium.addOreByProducts(MT.Ardite);
+			MT.Aredrite.addOreByProducts(MT.Ardite);
 		}
-		if (MD.RP.mLoaded) {
+		if (MD.RP.mLoaded || MD.PR.mLoaded || MD.BP.mLoaded) {
+			MT.Azurite.addOreByProducts(MT.Nikolite);
 			MT.Monazite.addOreByProducts(MT.Nikolite);
 			MT.OREMATS.Bastnasite.addOreByProducts(MT.Nikolite);
-		}
-		if (MD.PR.mLoaded) {
-			MT.Monazite.addOreByProducts(MT.Electrotine);
-			MT.OREMATS.Bastnasite.addOreByProducts(MT.Electrotine);
-		}
-		if (MD.BP.mLoaded) {
-			MT.Monazite.addOreByProducts(MT.Teslatite);
-			MT.OREMATS.Bastnasite.addOreByProducts(MT.Teslatite);
 		}
 		if (MD.BR.mLoaded) {
 			MT.Th.addOreByProducts(MT.Cyanite);
@@ -188,6 +186,7 @@ public class GT_API_Post extends Abstract_Mod {
 			MT.MilkyQuartz.addOreByProducts(MT.BlackQuartz);
 		}
 		if (MD.AE.mLoaded) {
+			// Because Applied Energistics would not create its own Items if I also added them, which leads to it getting Issues with its own shit.
 			OP.gem .disableItemGeneration(MT.CertusQuartz, MT.Fluix);
 			OP.dust.disableItemGeneration(MT.CertusQuartz, MT.Fluix);
 		}
@@ -200,8 +199,8 @@ public class GT_API_Post extends Abstract_Mod {
 		// Atum violates the "Items have to be created in preInit" Rule...
 		if (MD.ATUM.mLoaded) {
 			IL.ATUM_Scarab      .set(ST.make(MD.ATUM, "item.scarab" , 1, 0), new OreDictItemData(MT.Au, 4*U, MT.Diamond, U));
-			IL.ATUM_Limestone   .set(ST.make(MD.ATUM, "tile.stone"  , 1, 0), OP.stone.dat(MT.Limestone));
-			IL.ATUM_Limecobble  .set(ST.make(MD.ATUM, "tile.cobble" , 1, 0), OP.stone.dat(MT.Limestone));
+			IL.ATUM_Limestone   .set(ST.make(MD.ATUM, "tile.stone"  , 1, 0), OP.stone.dat(MT.STONES.Limestone));
+			IL.ATUM_Limecobble  .set(ST.make(MD.ATUM, "tile.cobble" , 1, 0), OP.stone.dat(MT.STONES.Limestone));
 
 			OM.reg("cropDate"               , ST.make(MD.ATUM, "item.date", 1, 0));
 			OM.reg("cropFlax"               , ST.make(MD.ATUM, "item.flax", 1, 0));
@@ -209,23 +208,23 @@ public class GT_API_Post extends Abstract_Mod {
 			OM.reg("itemPelt"               , ST.make(MD.ATUM, "item.wolfPelt", 1, 0));
 			OM.reg(OP.dust, MT.Ectoplasm    , ST.make(MD.ATUM, "item.ectoplasm", 1, 0));
 
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.ATUM, "tile.ironOre"        , 1, 0), OP.oreLimestone.dat(MT.Fe          ));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.ATUM, "tile.goldOre"        , 1, 0), OP.oreLimestone.dat(MT.Au          ));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.ATUM, "tile.redstoneOre"    , 1, 0), OP.oreLimestone.dat(MT.Redstone    ));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.ATUM, "tile.lapisOre"       , 1, 0), OP.oreLimestone.dat(MT.Lapis       ));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.ATUM, "tile.coalOre"        , 1, 0), OP.oreLimestone.dat(MT.Coal        ));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.ATUM, "tile.diamondOre"     , 1, 0), OP.oreLimestone.dat(MT.Diamond     ));
+			OreDictManager.INSTANCE.setTarget(OP.oreLimestone, MT.Fe2O3   , MD.ATUM, "tile.ironOre"    , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreLimestone, MT.Au      , MD.ATUM, "tile.goldOre"    , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreLimestone, MT.Redstone, MD.ATUM, "tile.redstoneOre", 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreLimestone, MT.Lapis   , MD.ATUM, "tile.lapisOre"   , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreLimestone, MT.Coal    , MD.ATUM, "tile.coalOre"    , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreLimestone, MT.Diamond , MD.ATUM, "tile.diamondOre" , 0);
 
-			OM.data(MD.ATUM, "item.stoneChunk", 1, 0, MT.Limestone, U);
-			OM.data(MD.ATUM, "tile.sand", 1, W, MT.Sand, U);
-			OM.data(MD.ATUM, "tile.framedGlass", 1, W, MT.Glass, U);
-			OM.data(MD.ATUM, "tile.crystalGlass", 1, W, MT.Glass, U);
-			OM.data(MD.ATUM, "tile.framedStainedGlass", 1, W, MT.Glass, U);
-			OM.data(MD.ATUM, "tile.crystalStainedGlass", 1, W, MT.Glass, U);
-			OM.data(MD.ATUM, "tile.thinFramedGlass", 1, W, MT.Glass, 3*U8);
-			OM.data(MD.ATUM, "tile.thinCrystalGlass", 1, W, MT.Glass, 3*U8);
-			OM.data(MD.ATUM, "tile.thinFramedStainedGlass", 1, W, MT.Glass, 3*U8);
-			OM.data(MD.ATUM, "tile.thinCrystalStainedGlass", 1, W, MT.Glass, 3*U8);
+			OM.data(MD.ATUM, "item.stoneChunk", 1, 0, MT.STONES.Limestone, U);
+			OM.data(MD.ATUM, "tile.sand", 1, W, MT.Sand, U*9);
+			OM.data(MD.ATUM, "tile.framedGlass", 1, W, MT.Glass, U*9);
+			OM.data(MD.ATUM, "tile.crystalGlass", 1, W, MT.Glass, U*9);
+			OM.data(MD.ATUM, "tile.framedStainedGlass", 1, W, MT.Glass, U*9);
+			OM.data(MD.ATUM, "tile.crystalStainedGlass", 1, W, MT.Glass, U*9);
+			OM.data(MD.ATUM, "tile.thinFramedGlass", 1, W, MT.Glass, U);
+			OM.data(MD.ATUM, "tile.thinCrystalGlass", 1, W, MT.Glass, U);
+			OM.data(MD.ATUM, "tile.thinFramedStainedGlass", 1, W, MT.Glass, U);
+			OM.data(MD.ATUM, "tile.thinCrystalStainedGlass", 1, W, MT.Glass, U);
 
 			OM.data(MD.ATUM, "item.loot", 1,  2, MT.Ag  , 2*U);
 			OM.data(MD.ATUM, "item.loot", 1,  3, MT.Ag  , 2*U);
@@ -289,17 +288,75 @@ public class GT_API_Post extends Abstract_Mod {
 			OM.data(MD.ATUM, "item.loot", 1,141, MT.Au  , 2*U, MT.Diamond       , 2*U);
 		}
 
+		// Okay I should not have wondered about Blue Power doing the same garbage considering Project Red...
+		if (MD.BP.mLoaded) {
+			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.RedAlloy                   , MD.BP, "red_alloy_ingot", 0);
+			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.BlueAlloy                  , MD.BP, "blue_alloy_ingot", 0);
+			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.PurpleAlloy                , MD.BP, "purple_alloy_ingot", 0);
+			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.Nikolite                   , MD.BP, "teslatite_dust", 0);
+			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.UNUSED.InfusedTeslatite    , MD.BP, "infused_teslatite_dust", 0);
+
+			OM.reg(OD.craftingWorkBench                  , ST.make(MD.BP, "project_table", 1, 0));
+			OM.reg("seedFlax"                            , ST.make(MD.BP, "flax_seeds", 1, 0));
+			OM.reg(DYE_OREDICTS_MIXABLE[DYE_INDEX_Purple], ST.make(MD.BP, "indigo_dye", 1, 0));
+			OM.reg("cropIndigo"                          , ST.make(MD.BP, "indigo_flower", 1, 0));
+			OM.reg(OP.dustTiny.dat(MT.Zn)                , ST.make(MD.BP, "zinc_tiny_dust", 1, 0));
+			OM.reg(OP.crushed.dat(MT.Zn)                 , ST.make(MD.BP, "zinc_ore_crushed", 1, 0));
+			OM.reg(OP.crushedPurified.dat(MT.Zn)         , ST.make(MD.BP, "zinc_ore_purified", 1, 0));
+			OM.reg(OP.boule.dat(MT.Si)                   , ST.make(MD.BP, "silicon_boule", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basalt", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basalt_cobble", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basalt_brick", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "fancy_basalt", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basalt_brick_small", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basaltbrick_cracked", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basalt_paver", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt)        , ST.make(MD.BP, "basalt_tile", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble)        , ST.make(MD.BP, "marble", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble)        , ST.make(MD.BP, "marble_brick", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble)        , ST.make(MD.BP, "fancy_marble", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble)        , ST.make(MD.BP, "marble_brick_small", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble)        , ST.make(MD.BP, "marble_paver", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble)        , ST.make(MD.BP, "marble_tile", 1, 0));
+
+			OM.data(MD.BP, "zincplate", 1, 0, ANY.Fe,   U2, MT.Zn,   U4);
+			OM.data(MD.BP, "paint_can", 1, W, ANY.Fe, 7*U2, MT.Zn, 7*U4);
+			OM.data(MD.BP, "lumar", 1, W, ANY.Glowstone, U2, MT.Redstone, U2);
+			OM.data(MD.BP, "tiles", 1, 0, MT.STONES.Marble, U2, MT.STONES.Basalt, U2);
+
+			ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.BP, "sapphire_glass", 1, 0));
+			ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.BP, "reinforced_sapphire_glass", 1, 0));
+
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "ruby_ore"      , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "sapphire_ore"  , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "amethyst_ore"  , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "silver_ore"    , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "teslatite_ore" , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "tungsten_ore"  , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "zinc_ore"      , null));
+			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "copper_ore"    , null));
+
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Ruby             , MD.BP, "ruby_ore"     , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.BlueSapphire     , MD.BP, "sapphire_ore" , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Amethyst         , MD.BP, "amethyst_ore" , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Ag               , MD.BP, "silver_ore"   , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Nikolite         , MD.BP, "teslatite_ore", 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OREMATS.Tungstate, MD.BP, "tungsten_ore" , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Zn               , MD.BP, "zinc_ore"     , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Cu               , MD.BP, "copper_ore"   , 0);
+		}
+
 		// And Project Red violates that Rule aswell...
 		if (MD.PR.mLoaded) {
-			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.RedAlloy                   , ST.make(MD.PR, "projectred.core.part", 1, 10));
-			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.ElectrotineAlloy           , ST.make(MD.PR, "projectred.core.part", 1, 55));
-			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.Electrotine                , ST.make(MD.PR, "projectred.core.part", 1, 56));
+			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.RedAlloy                   , MD.PR, "projectred.core.part", 10);
+			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.ElectrotineAlloy           , MD.PR, "projectred.core.part", 55);
+			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.Nikolite                   , MD.PR, "projectred.core.part", 56);
 
-			OM.reg(OP.stone.dat(MT.Marble), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 1));
-			OM.reg(OP.stone.dat(MT.Basalt), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 2));
-			OM.reg(OP.stone.dat(MT.Basalt), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 3));
-			OM.reg(OP.stone.dat(MT.Basalt), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 4));
+			OM.reg(OP.stone.dat(MT.STONES.Marble), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 0));
+			OM.reg(OP.stone.dat(MT.STONES.Marble), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 1));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 2));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 3));
+			OM.reg(OP.stone.dat(MT.STONES.Basalt), ST.make(MD.PR_EXPLORATION, "projectred.exploration.stone", 1, 4));
 			for (int i = 0; i < 16; i++) {
 			OM.reg(DYE_OREDICTS_MIXABLE[i], ST.make(MD.PR_EXPLORATION, "projectred.exploration.lilyseed", 1, 15-i));
 			OM.data(MD.PR, "projectred.core.part", 1, i+19, ANY.Glowstone, 2*U);
@@ -310,109 +367,58 @@ public class GT_API_Post extends Abstract_Mod {
 
 			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.PR_EXPLORATION, "projectred.exploration.ore", null));
 
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 0), OP.oreVanillastone.dat(MT.Ruby));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 1), OP.oreVanillastone.dat(MT.BlueSapphire));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 2), OP.oreVanillastone.dat(MT.Olivine));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 3), OP.oreVanillastone.dat(MT.Cu));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 4), OP.oreVanillastone.dat(MT.Sn));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 5), OP.oreVanillastone.dat(MT.Ag));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.PR_EXPLORATION, "projectred.exploration.ore", 1, 6), OP.oreVanillastone.dat(MT.Electrotine));
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Ruby        , MD.PR_EXPLORATION, "projectred.exploration.ore", 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.BlueSapphire, MD.PR_EXPLORATION, "projectred.exploration.ore", 1);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Olivine     , MD.PR_EXPLORATION, "projectred.exploration.ore", 2);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Cu          , MD.PR_EXPLORATION, "projectred.exploration.ore", 3);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Sn          , MD.PR_EXPLORATION, "projectred.exploration.ore", 4);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Ag          , MD.PR_EXPLORATION, "projectred.exploration.ore", 5);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Nikolite    , MD.PR_EXPLORATION, "projectred.exploration.ore", 6);
 		}
 
-		// Okay I should not have wondered about Blue Power doing the same garbage considering Project Red...
-		if (MD.BP.mLoaded) {
-			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.RedAlloy                   , ST.make(MD.BP, "red_alloy_ingot", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.BlueAlloy                  , ST.make(MD.BP, "blue_alloy_ingot", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.ingot  , MT.PurpleAlloy                , ST.make(MD.BP, "purple_alloy_ingot", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.Teslatite                  , ST.make(MD.BP, "teslatite_dust", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.dust   , MT.UNUSED.InfusedTeslatite    , ST.make(MD.BP, "infused_teslatite_dust", 1, 0));
-
-			OM.reg("seedFlax"                            , ST.make(MD.BP, "flax_seeds", 1, 0));
-			OM.reg(DYE_OREDICTS_MIXABLE[DYE_INDEX_Purple], ST.make(MD.BP, "indigo_dye", 1, 0));
-			OM.reg("cropIndigo"                          , ST.make(MD.BP, "indigo_flower", 1, 0));
-			OM.reg(OP.dustTiny.dat(MT.Zn)                , ST.make(MD.BP, "zinc_tiny_dust", 1, 0));
-			OM.reg(OP.crushed.dat(MT.Zn)                 , ST.make(MD.BP, "zinc_ore_crushed", 1, 0));
-			OM.reg(OP.crushedPurified.dat(MT.Zn)         , ST.make(MD.BP, "zinc_ore_purified", 1, 0));
-			OM.reg(OP.boule.dat(MT.Si)                   , ST.make(MD.BP, "silicon_boule", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basalt", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basalt_cobble", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basalt_brick", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "fancy_basalt", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basalt_brick_small", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basaltbrick_cracked", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basalt_paver", 1, 0));
-			OM.reg(OP.stone.dat(MT.Basalt)               , ST.make(MD.BP, "basalt_tile", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble)               , ST.make(MD.BP, "marble", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble)               , ST.make(MD.BP, "marble_brick", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble)               , ST.make(MD.BP, "fancy_marble", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble)               , ST.make(MD.BP, "marble_brick_small", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble)               , ST.make(MD.BP, "marble_paver", 1, 0));
-			OM.reg(OP.stone.dat(MT.Marble)               , ST.make(MD.BP, "marble_tile", 1, 0));
-
-			OM.data(MD.BP, "zincplate", 1, 0, ANY.Fe,   U2, MT.Zn,   U4);
-			OM.data(MD.BP, "paint_can", 1, W, ANY.Fe, 7*U2, MT.Zn, 7*U4);
-			OM.data(MD.BP, "lumar", 1, W, ANY.Glowstone, U2, MT.Redstone, U2);
-			OM.data(MD.BP, "tiles", 1, 0, MT.Marble, U2, MT.Basalt, U2);
-
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "ruby_ore"     , null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "sapphire_ore" , null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "amethyst_ore" , null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "silver_ore"   , null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "teslatite_ore", null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "tungsten_ore" , null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "zinc_ore"     , null));
-			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BP, "copper_ore"   , null));
-
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "ruby_ore"     , 1, 0), OP.oreVanillastone.dat(MT.Ruby));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "sapphire_ore" , 1, 0), OP.oreVanillastone.dat(MT.BlueSapphire));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "amethyst_ore" , 1, 0), OP.oreVanillastone.dat(MT.Amethyst));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "silver_ore"   , 1, 0), OP.oreVanillastone.dat(MT.Ag));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "teslatite_ore", 1, 0), OP.oreVanillastone.dat(MT.Teslatite));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "tungsten_ore" , 1, 0), OP.oreVanillastone.dat(MT.OREMATS.Tungstate));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "zinc_ore"     , 1, 0), OP.oreVanillastone.dat(MT.Zn));
-			OreDictManager.INSTANCE.setItemData_(ST.make(MD.BP, "copper_ore"   , 1, 0), OP.oreVanillastone.dat(MT.Cu));
-		}
-
-		// Yay for Chickenbones doing it wrong, I guess...
+		// Yay for ChickenBones ALWAYS doing it wrong...
 		if (MD.WR_CBE_C.mLoaded) {
-			OreDictManager.INSTANCE.setTarget(OP.stick  , MT.Obsidian      , ST.make(MD.WR_CBE_C, "obsidianStick", 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.stick, MT.Obsidian, MD.WR_CBE_C, "obsidianStick", 0);
 		}
 		if (MD.FMB.mLoaded) {
-			OreDictManager.INSTANCE.setTarget(OP.stick  , MT.Stone         , ST.make(MD.FMB, "stoneRod", 1, 0));
+			OreDictManager.INSTANCE.setTarget(OP.stick, MT.Stone, MD.FMB, "stoneRod", 0);
+		}
+		if (MD.TRANSLOCATOR.mLoaded) {
+			OreDictManager.INSTANCE.setTarget(OP.nugget, MT.Diamond, MD.TRANSLOCATOR, "diamondNugget", 0);
 		}
 		
 		// Oh look, Matter Overdrive does this shit too...
 		if (MD.MO.mLoaded) {
 			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.MO, "dilithium_ore", null));
 			StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.MO, "tritanium_ore", null));
-
-			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Dolamide                , ST.make(MD.MO, "dilithium_ore"    , 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OREMATS.TritaniumDioxide, ST.make(MD.MO, "tritanium_ore"    , 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.gem            , MT.Dilithium               , ST.make(MD.MO, "dilithium_crystal", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.dust           , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_dust"   , 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.nugget         , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_nugget" , 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_ingot"  , 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.plate          , MT.TritaniumAlloy          , ST.make(MD.MO, "tritanium_plate"  , 1, 0));
+			
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Dolamide                , MD.MO, "dilithium_ore"    , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OREMATS.TritaniumDioxide, MD.MO, "tritanium_ore"    , 0);
+			OreDictManager.INSTANCE.setTarget(OP.gem            , MT.Dilithium               , MD.MO, "dilithium_crystal", 0);
+			OreDictManager.INSTANCE.setTarget(OP.dust           , MT.TritaniumAlloy          , MD.MO, "tritanium_dust"   , 0);
+			OreDictManager.INSTANCE.setTarget(OP.nugget         , MT.TritaniumAlloy          , MD.MO, "tritanium_nugget" , 0);
+			OreDictManager.INSTANCE.setTarget(OP.ingot          , MT.TritaniumAlloy          , MD.MO, "tritanium_ingot"  , 0);
+			OreDictManager.INSTANCE.setTarget(OP.plate          , MT.TritaniumAlloy          , MD.MO, "tritanium_plate"  , 0);
 		}
 		
 		// ThermalExpansion gets on this ShitList too I guess...
 		if (MD.TE.mLoaded) {
 			ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.TE, "Glass", 1, W));
-
+			
 			IL.TE_Rockwool   .set(ST.make(MD.TE, "Rockwool", 1, 0));
 			IL.TE_ObsidiGlass.set(ST.make(MD.TE, "Glass"   , 1, 0));
 			IL.TE_LumiumGlass.set(ST.make(MD.TE, "Glass"   , 1, 1));
-
+			
 			OM.data(MD.TE, "Tank", 1, 1, ANY.Cu     ,  U * 1, MT.Glass,  U * 4);
 			OM.data(MD.TE, "Tank", 1, 2, MT.Invar   ,  U * 4, ANY.Cu  ,  U * 1, MT.Glass,  U * 4);
 			OM.data(MD.TE, "Tank", 1, 3, MT.Invar   ,  U * 4, ANY.Cu  ,  U * 1, MT.Glass,  U * 4);
 			OM.data(MD.TE, "Tank", 1, 4, MT.Enderium,  U * 4, MT.Invar,  U * 4, ANY.Cu  ,  U * 1, MT.Glass,  U * 4);
 		}
-
+		
 		// Wow, Ars Magica too is on this List, at least for its Blocks...
 		IL.ARS_Cerublossom.set(ST.make(MD.ARS, "blueOrchid", 1, 0), null, "flowerCerublossom");
 		IL.ARS_DesertNova .set(ST.make(MD.ARS, "desertNova", 1, 0), null, "flowerDesertNova");
-
+		
 		// Cooking for Blockheads is here too!...
 		if (MD.CookBook.mLoaded) {
 			OM.data(MD.CookBook, "recipebook", 1, W, MT.Paper, U*3);
@@ -420,8 +426,8 @@ public class GT_API_Post extends Abstract_Mod {
 
 		// Grimoire of Gaia... though I did not expect them to have done a good job with that...
 		if (MD.GoG.mLoaded) {
-			OreDictManager.INSTANCE.setTarget(OP.chunkGt, MT.Fe, ST.make(MD.GoG, "item.GrimoireOfGaia.Shard", 1, 0));
-			OreDictManager.INSTANCE.setTarget(OP.chunkGt, MT.Au, ST.make(MD.GoG, "item.GrimoireOfGaia.Shard", 1, 1));
+			OreDictManager.INSTANCE.setTarget(OP.chunkGt, MT.Fe, MD.GoG, "item.GrimoireOfGaia.Shard", 0);
+			OreDictManager.INSTANCE.setTarget(OP.chunkGt, MT.Au, MD.GoG, "item.GrimoireOfGaia.Shard", 1);
 			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 2, MT.Diamond   , U4);
 			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 3, MT.Emerald   , U4);
 			OM.data(MD.GoG, "item.GrimoireOfGaia.Shard"   , 1, 4, MT.NetherStar, U4);
@@ -438,24 +444,24 @@ public class GT_API_Post extends Abstract_Mod {
 
 		// Those "On-Demand" Materials of VoltzEngine are registered late...
 		if (MD.VOLTZ.mLoaded) {
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 0), OP.oreVanillastone.dat(MT.Sn));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 1), OP.oreVanillastone.dat(MT.Cu));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 2), OP.oreVanillastone.dat(MT.Ag));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 3), OP.oreVanillastone.dat(MT.Pb));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 4), OP.oreVanillastone.dat(MT.Zn));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 5), OP.oreVanillastone.dat(MT.Ni));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 6), OP.oreVanillastone.dat(MT.OREMATS.Bauxite));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 7), OP.oreVanillastone.dat(MT.MgCO3));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 8), OP.oreVanillastone.dat(MT.OREMATS.Uraninite));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veStoneOre", 1, 9), OP.oreVanillastone.dat(MT.Pt));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 0), OP.oreVanillastone.dat(MT.Amazonite));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 1), OP.oreVanillastone.dat(MT.SmokeyQuartz));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 2), OP.oreVanillastone.dat(MT.OnyxBlack));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 3), OP.oreVanillastone.dat(MT.OnyxRed));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 4), OP.oreVanillastone.dat(MT.Uvarovite));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 5), OP.oreVanillastone.dat(MT.Grossular));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 6), OP.oreVanillastone.dat(MT.Almandine));
-			OreDictManager.INSTANCE.setItemData(ST.make(MD.VOLTZ, "veGemOre"  , 1, 7), OP.oreVanillastone.dat(MT.Andradite));
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Sn               , MD.VOLTZ, "veStoneOre", 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Cu               , MD.VOLTZ, "veStoneOre", 1);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Ag               , MD.VOLTZ, "veStoneOre", 2);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Pb               , MD.VOLTZ, "veStoneOre", 3);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Zn               , MD.VOLTZ, "veStoneOre", 4);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Ni               , MD.VOLTZ, "veStoneOre", 5);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OREMATS.Bauxite  , MD.VOLTZ, "veStoneOre", 6);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.MgCO3            , MD.VOLTZ, "veStoneOre", 7);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OREMATS.Uraninite, MD.VOLTZ, "veStoneOre", 8);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Pt               , MD.VOLTZ, "veStoneOre", 9);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Amazonite        , MD.VOLTZ, "veGemOre"  , 0);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.SmokeyQuartz     , MD.VOLTZ, "veGemOre"  , 1);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OnyxBlack        , MD.VOLTZ, "veGemOre"  , 2);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.OnyxRed          , MD.VOLTZ, "veGemOre"  , 3);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Uvarovite        , MD.VOLTZ, "veGemOre"  , 4);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Grossular        , MD.VOLTZ, "veGemOre"  , 5);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Almandine        , MD.VOLTZ, "veGemOre"  , 6);
+			OreDictManager.INSTANCE.setTarget(OP.oreVanillastone, MT.Andradite        , MD.VOLTZ, "veGemOre"  , 7);
 			
 			OM.data(MD.VOLTZ, "veSheetMetal", 1,   0, ANY.Steel ,  U);
 			OM.data(MD.VOLTZ, "veSheetMetal", 1,   1, ANY.Steel ,  U2);
@@ -531,6 +537,11 @@ public class GT_API_Post extends Abstract_Mod {
 			OM.data(MD.VOLTZ, "veWire"      , 1,  17, MT.Diamond,  U9);
 			OM.data(MD.VOLTZ, "veWire"      , 1,  18, MT.Pt     ,  U9);
 		}
+
+		// Bugfix just in case that one broken Version of Et Futurum Requiem is used.
+		if (MD.EtFu.mLoaded) {
+			OreDictManager.INSTANCE.setTarget(OP.ingot, MT.Cu, MD.EtFu, "copper_ingot", 0);
+		}
 	}
 
 	@Override
@@ -550,28 +561,33 @@ public class GT_API_Post extends Abstract_Mod {
 			OreDictManager.INSTANCE.setTarget(OP.compressed, MT.Netherite     , ST.make(MD.NePl, "CompressedNetherite", 1, 0), T, T, T);
 		}
 		
+		if (MD.EtFu.mLoaded) {
+			BlocksGT.FLOWERS.add(ST.block(MD.EtFu, "rose"              ));
+			BlocksGT.FLOWERS.add(ST.block(MD.EtFu, "cornflower"        ));
+			BlocksGT.FLOWERS.add(ST.block(MD.EtFu, "lily_of_the_valley"));
+		}
 		if (MD.BoP.mLoaded) {
-			BlocksGT.FLOWERS.add(ST.block(MD.BoP, "flowers"));
-			BlocksGT.FLOWERS.add(ST.block(MD.BoP, "flowers2"));
+			BlocksGT.FLOWERS.add(ST.block(MD.BoP , "flowers"           ));
+			BlocksGT.FLOWERS.add(ST.block(MD.BoP , "flowers2"          ));
 		}
 		if (MD.EBXL.mLoaded) {
-			BlocksGT.FLOWERS.add(ST.block(MD.EBXL, "flower1"));
-			BlocksGT.FLOWERS.add(ST.block(MD.EBXL, "flower2"));
-			BlocksGT.FLOWERS.add(ST.block(MD.EBXL, "flower3"));
+			BlocksGT.FLOWERS.add(ST.block(MD.EBXL, "flower1"           ));
+			BlocksGT.FLOWERS.add(ST.block(MD.EBXL, "flower2"           ));
+			BlocksGT.FLOWERS.add(ST.block(MD.EBXL, "flower3"           ));
 		}
 		if (MD.TCFM.mLoaded) {
-			BlocksGT.FLOWERS.add(ST.block(MD.TCFM, "InkFlower"));
-			BlocksGT.FLOWERS.add(ST.block(MD.TCFM, "UmbralBush"));
+			BlocksGT.FLOWERS.add(ST.block(MD.TCFM, "InkFlower"         ));
+			BlocksGT.FLOWERS.add(ST.block(MD.TCFM, "UmbralBush"        ));
 		}
 		if (MD.BP.mLoaded) {
-			BlocksGT.FLOWERS.add(ST.block(MD.BP, "indigo_flower"));
+			BlocksGT.FLOWERS.add(ST.block(MD.BP  , "indigo_flower"     ));
 		}
 		if (MD.ARS.mLoaded) {
-			BlocksGT.FLOWERS.add(ST.block(MD.ARS, "blueOrchid"));
+			BlocksGT.FLOWERS.add(ST.block(MD.ARS , "blueOrchid"        ));
 		}
 		if (MD.BOTA.mLoaded) {
-			BlocksGT.FLOWERS.add(ST.block(MD.BOTA, "flower"));
-			BlocksGT.FLOWERS.add(ST.block(MD.BOTA, "shinyFlower"));
+			BlocksGT.FLOWERS.add(ST.block(MD.BOTA, "flower"            ));
+			BlocksGT.FLOWERS.add(ST.block(MD.BOTA, "shinyFlower"       ));
 		}
 		
 		for (Enchantment tEnchant : Enchantment.enchantmentsList) if (tEnchant != null) {
@@ -621,10 +637,10 @@ public class GT_API_Post extends Abstract_Mod {
 				MT.Alexandrite          .addEnchantmentForTools(tEnchant, 5);
 				MT.Opal                 .addEnchantmentForTools(tEnchant, 4);
 				MT.Olivine              .addEnchantmentForTools(tEnchant, 2);
-				MT.Amethyst             .addEnchantmentForTools(tEnchant, 3);
 				MT.Dioptase             .addEnchantmentForTools(tEnchant, 3);
-				MT.Jade                 .addEnchantmentForTools(tEnchant, 7);
+				MT.Jade                 .addEnchantmentForTools(tEnchant, 3);
 				MT.Craponite            .addEnchantmentForTools(tEnchant, 1);
+				MT.Amethyst             .addEnchantmentForTools(tEnchant, 3);
 				MT.EnderAmethyst        .addEnchantmentForTools(tEnchant, 5);
 			}
 		}

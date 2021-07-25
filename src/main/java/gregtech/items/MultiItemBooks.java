@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -41,7 +41,6 @@ import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -57,18 +56,16 @@ public class MultiItemBooks extends MultiItemRandom {
 	
 	@Override
 	public void addItems() {
-		@SuppressWarnings("unused")
-		int tLastID = 0;
 		for (int i = 0; i < 8; i++) {
-			BooksGT.BOOK_REGISTER.put(new ItemStackContainer(addItem(tLastID =      i, "Book"       , "", OD.bookWritten, TC.stack(TC.COGNITIO, 2), TICKS_PER_SMELT  , new OreDictItemData(MT.Paper, U * 3))), (byte)(3+i));
-			BooksGT.BOOK_REGISTER.put(new ItemStackContainer(addItem(tLastID = 1000+i, "Large Book" , "", OD.bookWritten, TC.stack(TC.COGNITIO, 4), TICKS_PER_SMELT*2, new OreDictItemData(MT.Paper, U * 6))), (byte)(3+i));
+			BooksGT.BOOK_REGISTER.put(addItem(     i, "Book"       , "", OD.bookWritten, TC.stack(TC.COGNITIO, 2), TICKS_PER_SMELT  , new OreDictItemData(MT.Paper, U * 3)), (byte)(3+i)); BooksGT.BOOKS_NORMAL.add(last());
+			BooksGT.BOOK_REGISTER.put(addItem(1000+i, "Large Book" , "", OD.bookWritten, TC.stack(TC.COGNITIO, 4), TICKS_PER_SMELT*2, new OreDictItemData(MT.Paper, U * 6)), (byte)(3+i)); BooksGT.BOOKS_NORMAL.add(last());
 		}
 		
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(addItem(tLastID = 32000, "Book"                    , "With a Bronze Emblem on it"      , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 2), TICKS_PER_SMELT  , new OreDictItemData(MT.Paper, U * 3, MT.Bronze, U9))), (byte)12);
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(addItem(tLastID = 32001, "Large Book"              , "With a Bronze Emblem on it"      , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 4), TICKS_PER_SMELT*2, new OreDictItemData(MT.Paper, U * 6, MT.Bronze, U9))), (byte)12);
+		BooksGT.BOOK_REGISTER.put(addItem(32000, "Book"                    , "With a Bronze Emblem on it"      , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 2), TICKS_PER_SMELT  , new OreDictItemData(MT.Paper, U * 3, MT.Bronze, U9)), (byte)12); BooksGT.BOOKS_NORMAL.add(last());
+		BooksGT.BOOK_REGISTER.put(addItem(32001, "Large Book"              , "With a Bronze Emblem on it"      , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 4), TICKS_PER_SMELT*2, new OreDictItemData(MT.Paper, U * 6, MT.Bronze, U9)), (byte)12); BooksGT.BOOKS_NORMAL.add(last());
 		
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(addItem(tLastID = 32002, "Material Dictionary"     , "Contains Data about a Material"  , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 2), TICKS_PER_SMELT  , new OreDictItemData(MT.Paper, U * 3))), (byte)11);
-		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(addItem(tLastID = 32003, "Material Dictionary"     , "Contains Data about a Material"  , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 4), TICKS_PER_SMELT*2, new OreDictItemData(MT.Paper, U * 6))), (byte)11);
+		BooksGT.BOOK_REGISTER.put(addItem(32002, "Material Dictionary"     , "Contains Data about a Material"  , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 2), TICKS_PER_SMELT  , new OreDictItemData(MT.Paper, U * 3)), (byte)11); BooksGT.BOOKS_NORMAL.add(last());
+		BooksGT.BOOK_REGISTER.put(addItem(32003, "Material Dictionary"     , "Contains Data about a Material"  , OD.bookWritten, TD.Creative.HIDDEN, TC.stack(TC.COGNITIO, 4), TICKS_PER_SMELT*2, new OreDictItemData(MT.Paper, U * 6)), (byte)11); BooksGT.BOOKS_NORMAL.add(last());
 		
 		CR.shapeless(ST.make(this, 1,     0), CR.DEF_NCC | CR.KEEPNBT, new Object[] {IL.Paper_Printed_Pages.get(1), OD.craftingLeather, DYE_OREDICTS[DYE_INDEX_Black]});
 		CR.shapeless(ST.make(this, 1,     1), CR.DEF_NCC | CR.KEEPNBT, new Object[] {IL.Paper_Printed_Pages.get(1), OD.craftingLeather, DYE_OREDICTS[DYE_INDEX_White]});
@@ -116,12 +113,7 @@ public class MultiItemBooks extends MultiItemRandom {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack aStack, World aWorld, EntityPlayer aPlayer) {
-		String aMapping = UT.NBT.getBookMapping(aStack);
-		if (UT.Code.stringValid(aMapping)) {
-			aPlayer.displayGUIBook(UT.Books.getWrittenBook(aMapping, ST.make(Items.written_book, 1, 0)));
-		} else {
-			if (UT.Code.stringValid(UT.NBT.getBookTitle(aStack))) aPlayer.displayGUIBook(ST.make(Items.written_book, 1, 0, aStack.getTagCompound()));
-		}
+		UT.Books.display(aPlayer, aStack);
 		return super.onItemRightClick(aStack, aWorld, aPlayer);
 	}
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -80,7 +80,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 	protected RecipeMap mRecipes = RM.Bath;
 	protected Recipe mLastRecipe = null;
 	protected FluidTankGT[] mTanksInput = ZL_FT, mTanksOutput = ZL_FT;
-
+	
 	@Override
 	public void readFromNBT2(NBTTagCompound aNBT) {
 		super.readFromNBT2(aNBT);
@@ -93,14 +93,14 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 		mTanksOutput = new FluidTankGT[mRecipes.mOutputFluidCount];
 		for (int i = 0; i < mTanksOutput.length; i++) mTanksOutput[i] = new FluidTankGT(tCapacity).readFromNBT(aNBT, NBT_TANK+".out."+i);
 	}
-
+	
 	@Override
 	public void writeToNBT2(NBTTagCompound aNBT) {
 		super.writeToNBT2(aNBT);
 		for (int i = 0; i < mTanksInput .length; i++) mTanksInput [i].writeToNBT(aNBT, NBT_TANK+".in." +i);
 		for (int i = 0; i < mTanksOutput.length; i++) mTanksOutput[i].writeToNBT(aNBT, NBT_TANK+".out."+i);
 	}
-
+	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		aList.add(Chat.CYAN     + LH.get(LH.RECIPES) + ": " + Chat.WHITE + LH.get(mRecipes.mNameInternal));
@@ -108,7 +108,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 		aList.add(Chat.ORANGE   + LH.get(LH.NO_GUI_CLICK_TO_INTERACT)   + " (" + LH.get(LH.FACE_TOP) + ")");
 		aList.add(Chat.DGRAY    + LH.get(LH.TOOL_TO_DETAIL_MAGNIFYINGGLASS));
 	}
-
+	
 	@Override
 	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
 		long rReturn = super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
@@ -117,6 +117,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 			updateInventory();
 			for (FluidTankGT tTank : mTanksOutput) {long rAmount = GarbageGT.trash(tTank, 1000); if (rAmount > 0) return rAmount;}
 			for (FluidTankGT tTank : mTanksInput ) {long rAmount = GarbageGT.trash(tTank, 1000); if (rAmount > 0) return rAmount;}
+			updateAdjacentInventories();
 		}
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) {
@@ -135,7 +136,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 		}
 		return 0;
 	}
-
+	
 	@Override
 	public void onTick2(long aTimer, boolean aIsServerSide) {
 		if (aIsServerSide) {
@@ -152,7 +153,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 					}
 				}
 			}
-
+			
 			boolean tBreak = F;
 			mDisplay = 0;
 			for (FluidTankGT tTank : mTanksOutput) if (tTank.has()) {
@@ -214,8 +215,10 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 						FluidStack[] tOutputFluids = tRecipe.getFluidOutputs();
 						for (int i = 0; i < mRecipes.mOutputItemsCount && i < tOutputItems .length; i++) addStackToSlot(i+6, tOutputItems[i]);
 						for (int i = 0; i < mTanksOutput.length && i < tOutputFluids.length; i++) mTanksOutput[i].fill(tOutputFluids[i], T);
-						aPlayer.addExhaustion((Math.max(1, tRecipe.mEUt) * tRecipe.mDuration) / 1000.0F);
+						aPlayer.addExhaustion(Math.max(1, tRecipe.getAbsoluteTotalPower()) / 1000.0F);
 						removeAllDroppableNullStacks();
+						updateInventory();
+						updateAdjacentInventories();
 						return T;
 					}
 				}
@@ -312,7 +315,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 	@Override
 	protected IFluidTank getFluidTankFillable2(byte aSide, FluidStack aFluidToFill) {
 		for (int i = 0; i < mTanksInput.length; i++) if (mTanksInput[i].contains(aFluidToFill)) return mTanksInput[i];
-		if (FL.temperature(aFluidToFill) >= mMaterial.mMeltingPoint - 100 || FL.lighter(aFluidToFill)) return null;
+		if (FL.temperature(aFluidToFill) >= mMaterial.mMeltingPoint - 100 || !FL.heavier(aFluidToFill)) return null;
 		for (int i = 0; i < mTanksInput.length; i++) if (mTanksInput[i].isEmpty()) return mTanksInput[i];
 		return null;
 	}
@@ -374,7 +377,7 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 	sOverlayBottom      = new Textures.BlockIcons.CustomIcon("machines/tools/bathing_pot/overlay/bottom"),
 	sOverlayTableBottom = new Textures.BlockIcons.CustomIcon("machines/tools/bathing_pot/overlay/tablebottom"),
 	sOverlayTableSide   = new Textures.BlockIcons.CustomIcon("machines/tools/bathing_pot/overlay/tableside");
-
+	
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		switch(aRenderPass) {
@@ -389,14 +392,14 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 				Fluid tFluid = FluidRegistry.getFluid(-mDisplay-2);
 				return tFluid == null ? BlockTextureCopied.get(Blocks.water, SIDE_ANY, 0, UNCOLOURED, F, F, F) : BlockTextureFluid.get(FL.make(tFluid, 1000));
 			}
-			if (UT.Code.exists(mDisplay, OreDictMaterial.MATERIAL_ARRAY)) return BlockTextureDefault.get(OreDictMaterial.MATERIAL_ARRAY[mDisplay], OP.blockDust);
+			if (UT.Code.exists(mDisplay, OreDictMaterial.MATERIAL_ARRAY)) return OreDictMaterial.MATERIAL_ARRAY[mDisplay].getTextureDust();
 			return BlockTextureDefault.get(MT.NULL, OP.blockDust, CA_GRAY_128, F);
 		case  6: return SIDE_TOP    == aSide?BI.nei():null;
 		case  7: return SIDE_TOP    != aSide?SIDE_BOTTOM == aSide?BlockTextureMulti.get(BlockTextureDefault.get(sTextureTableBottom, mRGBa), BlockTextureDefault.get(sOverlayTableBottom)):BlockTextureMulti.get(BlockTextureDefault.get(sTextureTableSide, mRGBa), BlockTextureDefault.get(sOverlayTableSide)):null;
 		}
 		return null;
 	}
-
+	
 	@Override
 	public void addCollisionBoxesToList2(AxisAlignedBB aAABB, List<AxisAlignedBB> aList, Entity aEntity) {
 		box(aAABB, aList, PX_P[14], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);
@@ -405,14 +408,14 @@ public class MultiTileEntityBathingPot extends TileEntityBase07Paintable impleme
 		box(aAABB, aList, PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[14]);
 		box(aAABB, aList, PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[14], PX_N[ 0]);
 	}
-
+	
 	@Override public int getLightOpacity() {return LIGHT_OPACITY_WATER;}
-
+	
 	@Override public boolean addDefaultCollisionBoxToList() {return F;}
 	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool() {return box(PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);}
 	@Override public AxisAlignedBB getSelectedBoundingBoxFromPool () {return box(PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);}
 	@Override public void setBlockBoundsBasedOnState(Block aBlock) {box(aBlock, PX_P[ 0], PX_P[ 0], PX_P[ 0], PX_N[ 0], PX_N[ 8], PX_N[ 0]);}
-
+	
 	@Override public float getSurfaceSize           (byte aSide) {return SIDES_VERTICAL[aSide]?1.0F:0.0F;}
 	@Override public float getSurfaceSizeAttachable (byte aSide) {return SIDES_VERTICAL[aSide]?1.0F:0.0F;}
 	@Override public float getSurfaceDistance       (byte aSide) {return SIDES_TOP[aSide]?PX_N[ 8]:0.0F;}

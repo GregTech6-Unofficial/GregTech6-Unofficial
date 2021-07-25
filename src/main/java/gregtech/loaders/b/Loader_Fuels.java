@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -200,10 +200,11 @@ public class Loader_Fuels implements Runnable {
 		FM.Burn         .addRecipe0(T, - 64,  3, FL.make("propylene", 1)                     , FL.Water.make(1), FL.CarbonDioxide.make(1));
 		FM.Gas          .addRecipe0(T, - 64,  4, FL.make("propylene", 1)                     , FL.Water.make(1), FL.CarbonDioxide.make(1));
 
+		FM.Hot          .addRecipe0(T, - 16,  6, FL.Blaze.make(1)                            , NF, ZL_IS);
 		FM.Hot          .addRecipe0(T, - 16, EU_PER_LAVA/16, FL.Lava.make(1)                 , FL.Lava_Pahoehoe.make(1), ZL_IS);
 		if (FL.Water_Hot.exists())
 		FM.Hot          .addRecipe0(T, -  2,  1, FL.Water_Hot.make(1)                        , FL.Water.make(1), ZL_IS);
-
+		
 		FM.Hot          .addRecipe0(T, -  1, EU_PER_COOLANT         , FL.Coolant_IC2_Hot.make(1)     , FL.Coolant_IC2.make(1)       , ZL_IS);
 		FM.Hot          .addRecipe0(T, -  1, EU_PER_SODIUM          , FL.Hot_Molten_Sodium.make(1)   , FL.amount(MT.Na.mLiquid, 1)  , ZL_IS);
 		FM.Hot          .addRecipe0(T, -  1, EU_PER_TIN             , FL.Hot_Molten_Tin.make(1)      , FL.amount(MT.Sn.mLiquid, 1)  , ZL_IS);
@@ -220,7 +221,7 @@ public class Loader_Fuels implements Runnable {
 
 
 
-		FM.Magic        .addRecipe0(T, - 64, 64, FL.make("mercury", 1));
+//      FM.Magic        .addRecipe0(T, - 64, 64, FL.make("mercury", 1));
 
 
 //      new Recipe(new ItemStack(Items.lava_bucket), new ItemStack(Blocks.obsidian), OM.get(OP.ingot, MT.Copper, 1), OM.get(OP.ingot, MT.Tin, 1), OM.get(OP.ingot, MT.Electrum, 1), 30, 2);

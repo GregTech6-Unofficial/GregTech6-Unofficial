@@ -282,6 +282,7 @@ public class Recipe {
 		public Recipe addRecipeX(boolean aOptimize, boolean aCheckForCollisions, boolean aFakeRecipe, boolean aHidden, boolean aLogErrors, long aEUt, long aDuration, long[] aChances, ItemStack[] aInputs                 , FluidStack[] aFluidInputs, FluidStack[]  aFluidOutputs, ItemStack... aOutputs) {return addRecipe(new Recipe(aOptimize, T, T, aInputs                   , aOutputs         , NI, aChances            , aFluidInputs         , aFluidOutputs         , aDuration, aEUt, 0), aCheckForCollisions, aFakeRecipe, aHidden, aLogErrors);}
 		
 		public Recipe addRecipe(Recipe aRecipe, boolean aCheckForCollisions, boolean aFakeRecipe, boolean aHidden, boolean aLogErrors) {
+			if (aRecipe == null) return null;
 			aRecipe.mHidden = aHidden;
 			aRecipe.mFakeRecipe = aFakeRecipe;
 			if (aCheckForCollisions && findRecipeInternal(null, null, F, F, Long.MAX_VALUE, null, aRecipe.mFluidInputs, aRecipe.mInputs) != null) return null;
@@ -322,24 +323,24 @@ public class Recipe {
 					if (aLogErrors) ERR.println("ERROR: Recipe has no Inputs!");
 					tFailed = T;
 				} else {
-					if (mNeedsOutputs && aRecipe.mOutputs.length + aRecipe.mFluidOutputs.length <= 0) {if (aLogErrors) ERR.println("ERROR: Recipe has no Outputs!"                                              ); tFailed = T;}
-					if (aRecipe.mInputs         .length < mMinimalInputItems                        ) {if (aLogErrors) ERR.println("ERROR: Recipe has less than the minimal amount of Input ItemStacks!"        ); tFailed = T;}
-					if (aRecipe.mFluidInputs    .length < mMinimalInputFluids                       ) {if (aLogErrors) ERR.println("ERROR: Recipe has less than the minimal amount of Input FluidStacks!"       ); tFailed = T;}
-					if (aRecipe.mFluidInputs.length + aRecipe.mInputs.length < mMinimalInputs       ) {if (aLogErrors) ERR.println("ERROR: Recipe has less than the minimal amount of general Inputs!"          ); tFailed = T;}
-					if (aRecipe.mInputs         .length > mInputItemsCount                          ) {if (aLogErrors) ERR.println("ERROR: Recipe has more than the maximum amount of Input ItemStacks!"        ); tFailed = T;}
-					if (aRecipe.mFluidInputs    .length > mInputFluidCount                          ) {if (aLogErrors) ERR.println("ERROR: Recipe has more than the maximum amount of Input FluidStacks!"       ); tFailed = T;}
+					if (mNeedsOutputs && aRecipe.mOutputs.length + aRecipe.mFluidOutputs.length <= 0) {if (aLogErrors) ERR.println("ERROR: Recipe has no Outputs!"                                          ); tFailed = T;}
+					if (aRecipe.mInputs         .length < mMinimalInputItems                        ) {if (aLogErrors) ERR.println("ERROR: Recipe has less than the minimal amount of Input ItemStacks!"    ); tFailed = T;}
+					if (aRecipe.mFluidInputs    .length < mMinimalInputFluids                       ) {if (aLogErrors) ERR.println("ERROR: Recipe has less than the minimal amount of Input FluidStacks!"   ); tFailed = T;}
+					if (aRecipe.mFluidInputs.length + aRecipe.mInputs.length < mMinimalInputs       ) {if (aLogErrors) ERR.println("ERROR: Recipe has less than the minimal amount of general Inputs!"      ); tFailed = T;}
+					if (aRecipe.mInputs         .length > mInputItemsCount                          ) {if (aLogErrors) ERR.println("ERROR: Recipe has more than the maximum amount of Input ItemStacks!"    ); tFailed = T;}
+					if (aRecipe.mFluidInputs    .length > mInputFluidCount                          ) {if (aLogErrors) ERR.println("ERROR: Recipe has more than the maximum amount of Input FluidStacks!"   ); tFailed = T;}
 				}
-				if (aRecipe.mOutputs            .length > mOutputItemsCount                         ) {if (aLogErrors) ERR.println("WARNING: Recipe has more than the maximum amount of Output ItemStacks!"     ); tErrored = T;}
-				if (aRecipe.mFluidOutputs       .length > mOutputFluidCount                         ) {if (aLogErrors) ERR.println("WARNING: Recipe has more than the maximum amount of Output FluidStacks!"    ); tErrored = T;}
-				if (aRecipe.mDuration                                                           == 0) {if (aLogErrors) ERR.println("WARNING: Recipe has no Duration Value!"                                     ); tErrored = T;}
+				if (aRecipe.mOutputs            .length > mOutputItemsCount                         ) {if (aLogErrors) ERR.println("WARNING: Recipe has more than the maximum amount of Output ItemStacks!" ); tErrored = T;}
+				if (aRecipe.mFluidOutputs       .length > mOutputFluidCount                         ) {if (aLogErrors) ERR.println("WARNING: Recipe has more than the maximum amount of Output FluidStacks!"); tErrored = T;}
+				if (aRecipe.mDuration                                                           == 0) {if (aLogErrors) ERR.println("WARNING: Recipe has no Duration Value!"                                 ); tErrored = T;}
 				
 				if (tErrored || tFailed) {
 					if (aLogErrors) {
-						DEB.println("Recipe Map: " + mNameInternal);
-						DEB.println("Input Items:  " + ST.names(aRecipe.mInputs));
-						DEB.println("Input Fluid:  " + FL.configNames(aRecipe.mFluidInputs));
-						DEB.println("Output Items: " + ST.names(aRecipe.mOutputs));
-						DEB.println("Output Fluid: " + FL.configNames(aRecipe.mFluidOutputs));
+						ERR.println("Recipe Map: " + mNameInternal);
+						ERR.println("Input Items:  " + ST.names(aRecipe.mInputs));
+						ERR.println("Input Fluid:  " + FL.configNames(aRecipe.mFluidInputs));
+						ERR.println("Output Items: " + ST.names(aRecipe.mOutputs));
+						ERR.println("Output Fluid: " + FL.configNames(aRecipe.mFluidOutputs));
 						int i = 0; for (StackTraceElement tElement : new Exception().getStackTrace()) if (!tElement.getClassName().equals(RecipeMap.class.getName())) if (i++<5 && !tElement.getClassName().startsWith("sun")) ERR.println("\tat " + tElement); else break;
 					}
 					if (tFailed) return null;
@@ -347,14 +348,12 @@ public class Recipe {
 			}
 			
 			for (FluidStack tFluid : aRecipe.mFluidInputs) if (FL.Error.is(tFluid)) {
-				if (D1) {
-					DEB.println("Compat: The Fluid for a Recipe has not been found! This might just be for a Mod that is not installed!");
-					DEB.println("Input Items:  " + ST.names(aRecipe.mInputs));
-					DEB.println("Input Fluid:  " + FL.configNames(aRecipe.mFluidInputs));
-					DEB.println("Output Items: " + ST.names(aRecipe.mOutputs));
-					DEB.println("Output Fluid: " + FL.configNames(aRecipe.mFluidOutputs));
-					int i = 0; for (StackTraceElement tElement : new Exception().getStackTrace()) if (!tElement.getClassName().equals(RecipeMap.class.getName())) if (i++<5 && !tElement.getClassName().startsWith("sun")) DEB.println("\tat " + tElement); else break;
-				}
+				ERR.println("Compat: The Fluid for a Recipe has not been found! This might just be for a Mod that is not installed or updated enough!");
+				ERR.println("Input Items:  " + ST.names(aRecipe.mInputs));
+				ERR.println("Input Fluid:  " + FL.configNames(aRecipe.mFluidInputs));
+				ERR.println("Output Items: " + ST.names(aRecipe.mOutputs));
+				ERR.println("Output Fluid: " + FL.configNames(aRecipe.mFluidOutputs));
+				int i = 0; for (StackTraceElement tElement : new Exception().getStackTrace()) if (!tElement.getClassName().equals(RecipeMap.class.getName())) if (i++<5 && !tElement.getClassName().startsWith("sun")) ERR.println("\tat " + tElement); else break;
 				return null;
 			}
 			
@@ -708,6 +707,10 @@ public class Recipe {
 	
 	public boolean blockINblockOUT() {
 		return mInputs.length == 1 && mOutputs.length == 1 && mFluidInputs.length == 0 && mFluidOutputs.length == 0 && ST.block(mInputs[0]) != NB && ST.block(mOutputs[0]) != NB && mInputs[0].stackSize == 1 && mOutputs[0].stackSize == 1;
+	}
+	
+	public long getAbsoluteTotalPower() {
+		return Math.abs(mEUt * mDuration);
 	}
 	
 	public FluidStack[] getFluidOutputs() {
