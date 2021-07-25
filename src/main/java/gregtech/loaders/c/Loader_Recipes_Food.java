@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -103,19 +103,19 @@ public class Loader_Recipes_Food implements Runnable {
 		addListener(dustSmall.dat(MT.Wheat)     , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.rem_smelting(aEvent.mStack);}});
 		addListener(dustTiny.dat(MT.Wheat)      , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.rem_smelting(aEvent.mStack);}});
 		
-		addListener(ingot.dat(MT.MeatRaw)       , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.MeatCooked));}});
-		addListener(chunkGt.dat(MT.MeatRaw)     , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.MeatCooked, U4));}});
-		addListener(nugget.dat(MT.MeatRaw)      , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.MeatCooked, U9));}});
-		addListener(dust.dat(MT.MeatRaw)        , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.MeatCooked));}});
-		addListener(dustSmall.dat(MT.MeatRaw)   , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.MeatCooked, U4));}});
-		addListener(dustTiny.dat(MT.MeatRaw)    , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.MeatCooked, U9));}});
+		addListener(ingot.dat(MT.MeatRaw)       , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.MeatCooked    ), F, T, F);}});
+		addListener(chunkGt.dat(MT.MeatRaw)     , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.MeatCooked, U4), F, T, F);}});
+		addListener(nugget.dat(MT.MeatRaw)      , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.MeatCooked, U9), F, T, F);}});
+		addListener(dust.dat(MT.MeatRaw)        , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust (MT.MeatCooked    ), F, T, F);}});
+		addListener(dustSmall.dat(MT.MeatRaw)   , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust (MT.MeatCooked, U4), F, T, F);}});
+		addListener(dustTiny.dat(MT.MeatRaw)    , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust (MT.MeatCooked, U9), F, T, F);}});
 		
-		addListener(ingot.dat(MT.FishRaw)       , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.FishCooked));}});
-		addListener(chunkGt.dat(MT.FishRaw)     , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.FishCooked, U4));}});
-		addListener(nugget.dat(MT.FishRaw)      , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.FishCooked, U9));}});
-		addListener(dust.dat(MT.FishRaw)        , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.FishCooked));}});
-		addListener(dustSmall.dat(MT.FishRaw)   , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.FishCooked, U4));}});
-		addListener(dustTiny.dat(MT.FishRaw)    , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.FishCooked, U9));}});
+		addListener(ingot.dat(MT.FishRaw)       , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.FishCooked    ), F, T, F);}});
+		addListener(chunkGt.dat(MT.FishRaw)     , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.FishCooked, U4), F, T, F);}});
+		addListener(nugget.dat(MT.FishRaw)      , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.ingot(MT.FishCooked, U9), F, T, F);}});
+		addListener(dust.dat(MT.FishRaw)        , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust (MT.FishCooked    ), F, T, F);}});
+		addListener(dustSmall.dat(MT.FishRaw)   , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust (MT.FishCooked, U4), F, T, F);}});
+		addListener(dustTiny.dat(MT.FishRaw)    , new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust (MT.FishCooked, U9), F, T, F);}});
 		
 		addListener("foodVanilla", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			if (!OM.prefixcontains(aEvent.mStack, TD.Prefix.DUST_BASED)) {
@@ -290,6 +290,17 @@ public class Loader_Recipes_Food implements Runnable {
 			RM.food_can(aEvent.mStack, Math.max(1, ST.food(aEvent.mStack)), "Canned Fish", ST.rotten(aEvent.mStack)?IL.CANS_ROTTEN:IL.CANS_FISH);
 			if (!(aEvent.mStack.getItem() instanceof MultiItemRandom)) FoodsGT.put(aEvent.mStack, 0, 0, 0, 0,12);
 		}});
+		addListener("listAllribraw", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			if (!OD.listAllmeatsubstitute.is_(aEvent.mStack))
+			RM.food_can(aEvent.mStack, Math.max(1, ST.food(aEvent.mStack)), "Canned Ribs", ST.rotten(aEvent.mStack)?IL.CANS_ROTTEN:IL.CANS_MEAT);
+			if (!(aEvent.mStack.getItem() instanceof MultiItemRandom)) FoodsGT.put(aEvent.mStack, 0, 0, 0, 0,24);
+		}});
+		addListener("listAllribcooked", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			if (!OD.listAllmeatsubstitute.is_(aEvent.mStack))
+			RM.food_can(aEvent.mStack, Math.max(1, ST.food(aEvent.mStack)), "Canned Ribs", ST.rotten(aEvent.mStack)?IL.CANS_ROTTEN:IL.CANS_MEAT);
+			if (!(aEvent.mStack.getItem() instanceof MultiItemRandom)) FoodsGT.put(aEvent.mStack, 0, 0, 0, 0,24);
+			RM.Bath     .addRecipe1(T,  0,   16, aEvent.mStack, FL.Sauce_BBQ.make(250), NF, IL.Food_Rib_BBQ.get(1));
+		}});
 		addListener("listAllbeefraw", "listAllbeefcooked", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			if (!OD.listAllmeatsubstitute.is_(aEvent.mStack))
 			RM.food_can(aEvent.mStack, Math.max(1, ST.food(aEvent.mStack)), "Canned Beef", ST.rotten(aEvent.mStack)?IL.CANS_ROTTEN:IL.CANS_MEAT);
@@ -353,11 +364,6 @@ public class Loader_Recipes_Food implements Runnable {
 		addListener("listAllhamraw", "listAllhamcooked", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			if (!OD.listAllmeatsubstitute.is_(aEvent.mStack))
 			RM.food_can(aEvent.mStack, Math.max(1, ST.food(aEvent.mStack)), "Canned Ham", ST.rotten(aEvent.mStack)?IL.CANS_ROTTEN:IL.CANS_MEAT);
-			if (!(aEvent.mStack.getItem() instanceof MultiItemRandom)) FoodsGT.put(aEvent.mStack, 0, 0, 0, 0,24);
-		}});
-		addListener("listAllribraw", "listAllribcooked", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			if (!OD.listAllmeatsubstitute.is_(aEvent.mStack))
-			RM.food_can(aEvent.mStack, Math.max(1, ST.food(aEvent.mStack)), "Canned Ribs", ST.rotten(aEvent.mStack)?IL.CANS_ROTTEN:IL.CANS_MEAT);
 			if (!(aEvent.mStack.getItem() instanceof MultiItemRandom)) FoodsGT.put(aEvent.mStack, 0, 0, 0, 0,24);
 		}});
 		addListener("listAllhorseraw", "listAllhorsecooked", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
@@ -522,11 +528,11 @@ public class Loader_Recipes_Food implements Runnable {
 		RM.Centrifuge       .addRecipe0(T, 16,   16, FL.Juice_Coconut.make(50), FL.Cream_Coconut.make(50), ZL_IS);
 		RM.Centrifuge       .addRecipe0(T, 16,   64, FL.Cream.make(250), NF, IL.Food_Butter.get(1));
 		
-		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodSealed, 0), FL.MilkSoy.make(50), FL.Cream.make(50), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodSealed, 0), FL.Milk.make(50), FL.Cream.make(50), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodSealed, 0), FL.MilkGrC.make(50), FL.Cream.make(50), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodSealed, 0), FL.Juice_Coconut.make(50), FL.Cream_Coconut.make(50), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   64, OP.stick.mat(MT.WoodSealed, 0), FL.Cream.make(250), NF, IL.Food_Butter.get(1));
+		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodTreated, 0), FL.MilkSoy.make(50), FL.Cream.make(50), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodTreated, 0), FL.Milk.make(50), FL.Cream.make(50), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodTreated, 0), FL.MilkGrC.make(50), FL.Cream.make(50), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   16, OP.stick.mat(MT.WoodTreated, 0), FL.Juice_Coconut.make(50), FL.Cream_Coconut.make(50), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   64, OP.stick.mat(MT.WoodTreated, 0), FL.Cream.make(250), NF, IL.Food_Butter.get(1));
 		
 		ItemStack
 		tOutput = OreDictManager.INSTANCE.getFirstOre("dropHoney", 1); if (ST.valid(tOutput)) {
@@ -587,84 +593,85 @@ public class Loader_Recipes_Food implements Runnable {
 		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.make("potion.darkcoffee"         , 750), FL.make("potion.coffee"              , 750), ZL_IS);
 		}
 		for (ItemStack tStack : ST.array(dust.mat(MT.Peanut, 1), dustSmall.mat(MT.Peanut, 4), dustTiny.mat(MT.Peanut,  9))) {
-		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream                               .make(250), FL.Nutbutter_Peanut                     .make(250), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream                        .make(250), FL.Nutbutter_Peanut              .make(250), ZL_IS);
 		}
 		for (ItemStack tStack : ST.array(dust.mat(MT.Hazelnut, 1), dustSmall.mat(MT.Hazelnut, 4), dustTiny.mat(MT.Hazelnut,  9))) {
-		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream_Chocolate                     .make(250), FL.Cream_Nutella                        .make(250), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream_Chocolate              .make(250), FL.Cream_Nutella                 .make(250), ZL_IS);
 		}
 		for (ItemStack tStack : ST.array(dust.mat(MT.Chocolate, 1), dustSmall.mat(MT.Chocolate, 4), dustTiny.mat(MT.Chocolate,  9))) {
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Milk                                .make(750), FL.make("potion.darkchocolatemilk"   , 750), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.MilkGrC                             .make(750), FL.make("potion.darkchocolatemilk"   , 750), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.MilkSoy                             .make(750), FL.make("potion.darkchocolatemilk"   , 750), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream                               .make(250), FL.Cream_Chocolate                      .make(250), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Milk                         .make(750), FL.make("potion.darkchocolatemilk"   , 750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.MilkGrC                      .make(750), FL.make("potion.darkchocolatemilk"   , 750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.MilkSoy                      .make(750), FL.make("potion.darkchocolatemilk"   , 750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   64, tStack, FL.Cream                        .make(250), FL.Cream_Chocolate               .make(250), ZL_IS);
 		}
 		for (ItemStack tStack : ST.array(gemChipped.mat(MT.Sugar, 4), dust.mat(MT.Sugar, 1), dustSmall.mat(MT.Sugar, 4), dustTiny.mat(MT.Sugar, 9))) {
 		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.make("potion.coffee"             , 750), FL.make("potion.cafeaulait"          , 750), ZL_IS);
 		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.make("potion.cafeaulait"         , 750), FL.make("potion.laitaucafe"          , 750), ZL_IS);
 		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.make("potion.darkcoffee"         , 750), FL.make("potion.darkcafeaulait"      , 750), ZL_IS);
 		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.make("potion.darkchocolatemilk"  , 750), FL.make("chocolatemilk"              , 750), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Juice_Lemon                         .make(750), FL.Lemonade                             .make(750), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Juice_Tomato                        .make(750), FL.make("ketchup"                    , 750), ZL_IS);
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Tea                                 .make(750), FL.Tea_Sweet                            .make(750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Juice_Lemon                  .make(750), FL.Lemonade                      .make(750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Juice_Tomato                 .make(750), FL.Ketchup                       .make(750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Tea                          .make(750), FL.Tea_Sweet                     .make(750), ZL_IS);
 		}
 		for (ItemStack tStack : ST.array(dust.mat(MT.Chili, 1), dustSmall.mat(MT.Chili, 4), dustTiny.mat(MT.Chili,  9))) {
 		RM.Mixer            .addRecipe2(T, 16,   16, tStack, IL.Food_PotatoChips.get(1), IL.Food_ChiliChips.get(1));
-		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Sauce_Chili                         .make(750), FL.make("potion.hotsauce"            , 750), ZL_IS);
+		RM.Mixer            .addRecipe1(T, 16,   48, tStack, FL.Sauce_Chili                  .make(750), FL.make("potion.hotsauce"            , 750), ZL_IS);
 		}
-		for (String tCookingOil : FluidsGT.COOKING_OIL) if (FL.exists(tCookingOil)) for (String tVinegar : FluidsGT.VINEGAR) if (FL.exists(tVinegar))
+		for (String tCookingOil : FluidsGT.COOKING_OIL) if (FL.exists(tCookingOil)) for (String tVinegar : FluidsGT.VINEGAR) if (FL.exists(tVinegar)) {
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(MT.NaCl), FL.array(FL.make(tCookingOil, 100), FL.make(tVinegar, 100)), FL.Dressing.make(250), ZL_IS);
+		RM.Mixer            .addRecipe2(T, 16,   32, OM.dust(MT.NaCl), OM.dust(MT.PepperBlack), FL.array(FL.Ketchup.make(250), FL.make(tVinegar, 125)), FL.Sauce_BBQ.make(500), ZL_IS);
+		}
+		
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Plum        .make(125), FL.Juice_Apple.make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_White .make(125), FL.Juice_Apple.make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Green .make(125), FL.Juice_Apple.make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Red   .make(125), FL.Juice_Apple.make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Purple.make(125), FL.Juice_Apple.make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_White .make(125), FL.Juice_Plum .make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Green .make(125), FL.Juice_Plum .make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Red   .make(125), FL.Juice_Plum .make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Purple.make(125), FL.Juice_Plum .make(125)), FL.Med_Laxative.make(250), ZL_IS);
+		
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Sap_Rainbow       .make(125), FL.Ambrosia   .make(125)), FL.Med_Heal    .make(250), ZL_IS);
 		
 		
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Plum        .make(125), FL.Juice_Apple  .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_White .make(125), FL.Juice_Apple  .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Green .make(125), FL.Juice_Apple  .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Red   .make(125), FL.Juice_Apple  .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Purple.make(125), FL.Juice_Apple  .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_White .make(125), FL.Juice_Plum   .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Green .make(125), FL.Juice_Plum   .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Red   .make(125), FL.Juice_Plum   .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Juice_Grape_Purple.make(125), FL.Juice_Plum   .make(125)), FL.Med_Laxative    .make(250), ZL_IS);
-		
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Sap_Rainbow       .make(125), FL.Ambrosia     .make(125)), FL.Med_Heal        .make(250), ZL_IS);
-		
-		
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice               .make(125)), FL.Smoothie_Fruit          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Ananas        .make(125)), FL.Smoothie_Ananas         .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Apple         .make(125)), FL.Smoothie_Apple          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_AppleGrC      .make(125)), FL.Smoothie_Apple          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Apricot       .make(125)), FL.Smoothie_Apricot        .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Banana        .make(125)), FL.Smoothie_Banana         .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Blackberry    .make(125)), FL.Smoothie_Blackberry     .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Blueberry     .make(125)), FL.Smoothie_Blueberry      .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Cherry        .make(125)), FL.Smoothie_Cherry         .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Cranberry     .make(125)), FL.Smoothie_Cranberry      .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Currant       .make(125)), FL.Smoothie_Currant        .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Elderberry    .make(125)), FL.Smoothie_Elderberry     .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Gooseberry    .make(125)), FL.Smoothie_Gooseberry     .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_Red     .make(125)), FL.Smoothie_Grape_Red      .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_White   .make(125)), FL.Smoothie_Grape_White    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_Green   .make(125)), FL.Smoothie_Grape_Green    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_Purple  .make(125)), FL.Smoothie_Grape_Purple   .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grapefruit    .make(125)), FL.Smoothie_Grapefruit     .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Kiwi          .make(125)), FL.Smoothie_Kiwi           .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Lemon         .make(125)), FL.Smoothie_Lemon          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Lime          .make(125)), FL.Smoothie_Lime           .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Melon         .make(125)), FL.Smoothie_Melon          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Orange        .make(125)), FL.Smoothie_Orange         .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Persimmon     .make(125)), FL.Smoothie_Persimmon      .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Peach         .make(125)), FL.Smoothie_Peach          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Pear          .make(125)), FL.Smoothie_Pear           .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Plum          .make(125)), FL.Smoothie_Plum           .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Raspberry     .make(125)), FL.Smoothie_Raspberry      .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Strawberry    .make(125)), FL.Smoothie_Strawberry     .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Mango         .make(125)), FL.Smoothie_Mango          .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Starfruit     .make(125)), FL.Smoothie_Starfruit      .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Fig           .make(125)), FL.Smoothie_Fig            .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Pomegranate   .make(125)), FL.Smoothie_Pomegranate    .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Papaya        .make(125)), FL.Smoothie_Papaya         .make(250), ZL_IS);
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Coconut       .make(125)), FL.Smoothie_Coconut        .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice             .make(125)), FL.Smoothie_Fruit       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Ananas      .make(125)), FL.Smoothie_Ananas      .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Apple       .make(125)), FL.Smoothie_Apple       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_AppleGrC    .make(125)), FL.Smoothie_Apple       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Apricot     .make(125)), FL.Smoothie_Apricot     .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Banana      .make(125)), FL.Smoothie_Banana      .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Blackberry  .make(125)), FL.Smoothie_Blackberry  .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Blueberry   .make(125)), FL.Smoothie_Blueberry   .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Cherry      .make(125)), FL.Smoothie_Cherry      .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Cranberry   .make(125)), FL.Smoothie_Cranberry   .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Currant     .make(125)), FL.Smoothie_Currant     .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Elderberry  .make(125)), FL.Smoothie_Elderberry  .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Gooseberry  .make(125)), FL.Smoothie_Gooseberry  .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_Red   .make(125)), FL.Smoothie_Grape_Red   .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_White .make(125)), FL.Smoothie_Grape_White .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_Green .make(125)), FL.Smoothie_Grape_Green .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grape_Purple.make(125)), FL.Smoothie_Grape_Purple.make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Grapefruit  .make(125)), FL.Smoothie_Grapefruit  .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Kiwi        .make(125)), FL.Smoothie_Kiwi        .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Lemon       .make(125)), FL.Smoothie_Lemon       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Lime        .make(125)), FL.Smoothie_Lime        .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Melon       .make(125)), FL.Smoothie_Melon       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Orange      .make(125)), FL.Smoothie_Orange      .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Persimmon   .make(125)), FL.Smoothie_Persimmon   .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Peach       .make(125)), FL.Smoothie_Peach       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Pear        .make(125)), FL.Smoothie_Pear        .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Plum        .make(125)), FL.Smoothie_Plum        .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Raspberry   .make(125)), FL.Smoothie_Raspberry   .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Strawberry  .make(125)), FL.Smoothie_Strawberry  .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Mango       .make(125)), FL.Smoothie_Mango       .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Starfruit   .make(125)), FL.Smoothie_Starfruit   .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Fig         .make(125)), FL.Smoothie_Fig         .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Pomegranate .make(125)), FL.Smoothie_Pomegranate .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Papaya      .make(125)), FL.Smoothie_Papaya      .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.Juice_Coconut     .make(125)), FL.Smoothie_Coconut     .make(250), ZL_IS);
 		for (String tJuice : FluidsGT.FRUIT_JUICE) if (FL.exists(tJuice)) {
-		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.make(tJuice      , 125)), FL.Smoothie_Fruit          .make(250), ZL_IS);
+		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Ice.make(125), FL.make(tJuice           , 125)), FL.Smoothie_Fruit       .make(250), ZL_IS);
 		RM.CryoMixer        .addRecipe0(T, 16,   16, FL.array(FL.make(tJuice, 125), FL.Tea_Sweet.make(125)), FL.Tea_Ice.make(250), ZL_IS);
 		}
 	}

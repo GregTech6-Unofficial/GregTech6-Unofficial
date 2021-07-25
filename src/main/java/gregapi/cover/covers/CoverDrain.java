@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -42,6 +42,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -72,9 +75,9 @@ public class CoverDrain extends AbstractCoverAttachment {
 					if (!(tInFront instanceof BlockLiquid) && !(tInFront instanceof IFluidBlock) && !tInFront.isSideSolid(aData.mTileEntity.getWorld(), aData.mTileEntity.getOffsetX(aCoverSide), aData.mTileEntity.getOffsetY(aCoverSide), aData.mTileEntity.getOffsetZ(aCoverSide), FORGE_DIR_OPPOSITES[aCoverSide]) && !tInFront.isSideSolid(aData.mTileEntity.getWorld(), aData.mTileEntity.getOffsetX(aCoverSide), aData.mTileEntity.getOffsetY(aCoverSide), aData.mTileEntity.getOffsetZ(aCoverSide), FORGE_DIR[SIDE_TOP])) {
 						boolean temp = F;
 						if (tInFront instanceof BlockMetaType || tInFront instanceof BlockSlab || tInFront instanceof BlockStairs) {
-							temp = aData.mTileEntity.getRainOffset(OFFSETS_X[aCoverSide], OFFSETS_Y[aCoverSide]+1, OFFSETS_Z[aCoverSide]);
+							temp = aData.mTileEntity.getRainOffset(OFFX[aCoverSide], OFFY[aCoverSide]+1, OFFZ[aCoverSide]);
 						} else {
-							temp = aData.mTileEntity.getRainOffset(OFFSETS_X[aCoverSide], OFFSETS_Y[aCoverSide]  , OFFSETS_Z[aCoverSide]) && (SIDES_TOP[aCoverSide] || aData.mTileEntity.getBlockOffset(OFFSETS_X[aCoverSide], -1, OFFSETS_Z[aCoverSide]).isSideSolid(aData.mTileEntity.getWorld(), aData.mTileEntity.getOffsetX(aCoverSide), aData.mTileEntity.getY()-1, aData.mTileEntity.getOffsetZ(aCoverSide), FORGE_DIR[SIDE_TOP]));
+							temp = aData.mTileEntity.getRainOffset(OFFX[aCoverSide], OFFY[aCoverSide]  , OFFZ[aCoverSide]) && (SIDES_TOP[aCoverSide] || aData.mTileEntity.getBlockOffset(OFFX[aCoverSide], -1, OFFZ[aCoverSide]).isSideSolid(aData.mTileEntity.getWorld(), aData.mTileEntity.getOffsetX(aCoverSide), aData.mTileEntity.getY()-1, aData.mTileEntity.getOffsetZ(aCoverSide), FORGE_DIR[SIDE_TOP]));
 						}
 						if (temp) FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Water.make((long)Math.max(1, tBiome.rainfall*10000) * (aData.mTileEntity.getWorld().isThundering()?2:1)), T);
 					}
@@ -160,12 +163,41 @@ public class CoverDrain extends AbstractCoverAttachment {
 				} catch(Throwable e) {e.printStackTrace(ERR);}
 				return T;
 			}
-			if (SERVER_TIME % 20 == 5 && aEntity instanceof IAnimals && !(aEntity instanceof EntityGolem) && FL.Sewage.exists()) {
-				if (!(aEntity instanceof EntityAgeable) || !((EntityAgeable)aEntity).isChild()) {
-					FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Sewage.make(Math.max(1, (long)(20 * aEntity.width * aEntity.width * aEntity.height))), T);
+			if (SERVER_TIME % 20 == 5) {
+				if (aEntity instanceof EntityGolem) {
+					return F;
+				}
+				if (aEntity.getClass() == EntitySquid.class) {
+					FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.InkSquid.make(1), T);
+					return T;
+				}
+				if (aEntity instanceof EntitySlime) {
+					if (aEntity.getClass() == EntitySlime.class) {
+						FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Slime_Green.make(Math.max(1, ((EntitySlime)aEntity).getSlimeSize())), T);
+						return T;
+					}
+					if (aEntity.getClass() == EntityMagmaCube.class) {
+						FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Blaze.make(Math.max(1, ((EntitySlime)aEntity).getSlimeSize())), T);
+						return T;
+					}
+					String tClass = UT.Reflection.getLowercaseClass(aEntity);
+					if (tClass.equalsIgnoreCase("EntityTFMazeSlime")) {
+						FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Slime_Green.make(Math.max(1, ((EntitySlime)aEntity).getSlimeSize())), T);
+						return T;
+					}
+					if (tClass.equalsIgnoreCase("EntityPinkSlime")) {
+						FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Slime_Pink.make(1), T);
+						return T;
+					}
+					return F;
+				}
+				if (aEntity instanceof IAnimals && FL.Sewage.exists()) {
+					if (!(aEntity instanceof EntityAgeable) || !((EntityAgeable)aEntity).isChild()) {
+						FL.fill_((IFluidHandler)aData.mTileEntity, ALL_SIDES_THIS_AND_ANY[aCoverSide], FL.Sewage.make(Math.max(1, (long)(20 * aEntity.width * aEntity.width * aEntity.height))), T);
+						return T;
+					}
 				}
 			}
-			// TODO Slime Liquid from Slimes? Do Slimes even count as Walking on those Drains?
 			return T;
 		}
 		return F;
@@ -185,13 +217,14 @@ public class CoverDrain extends AbstractCoverAttachment {
 		aList.add(LH.Chat.DGREEN + "Will collect XP Orbs to make Mob Essence");
 		if (MD.OB.mLoaded)
 		aList.add(LH.Chat.GREEN + "Stand on this and Sneak to drain your XP");
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_CONTROLLER_COVER));
 	}
 	
 	@Override public boolean isOpaque(byte aSide, CoverData aData) {return T;}
 	@Override public boolean showsConnectorFront(byte aCoverSide, CoverData aData) {return F;}
 	
 	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return sTextureFront;}
-	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide == aTextureSide ? sTextureFront : aSide == OPPOSITES[aTextureSide] ? sTextureBack : sTextureSides;}
+	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide == aTextureSide ? sTextureFront : aSide == OPOS[aTextureSide] ? sTextureBack : sTextureSides;}
 	@Override public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {return sTextureSides;}
 	
 	public static final ITexture

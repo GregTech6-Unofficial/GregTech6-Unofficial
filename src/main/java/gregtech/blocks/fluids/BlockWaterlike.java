@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -48,6 +48,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -68,7 +69,6 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 		LH.add(getUnlocalizedName()+".name", getLocalizedName());
 		LH.add(getUnlocalizedName(), getLocalizedName());
 		setFluidStack(FL.make(aFluid, 1000));
-		setTickRandomly(F);
 		ST.hide(this);
 	}
 	
@@ -88,12 +88,11 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 		int expQuanta = -101;
 		// check adjacent block levels if non-source
 		if (quantaRemaining < quantaPerBlock) {
-			int y2 = aY - densityDir;
-			if (aWorld.getBlock(aX  , y2, aZ  ) instanceof BlockWaterlike ||
-				aWorld.getBlock(aX-1, y2, aZ  ) instanceof BlockWaterlike ||
-				aWorld.getBlock(aX+1, y2, aZ  ) instanceof BlockWaterlike ||
-				aWorld.getBlock(aX  , y2, aZ-1) instanceof BlockWaterlike ||
-				aWorld.getBlock(aX  , y2, aZ+1) instanceof BlockWaterlike) {
+			if (aWorld.getBlock(aX  , aY-densityDir, aZ  ) instanceof BlockWaterlike ||
+				aWorld.getBlock(aX-1, aY-densityDir, aZ  ) instanceof BlockWaterlike ||
+				aWorld.getBlock(aX+1, aY-densityDir, aZ  ) instanceof BlockWaterlike ||
+				aWorld.getBlock(aX  , aY-densityDir, aZ-1) instanceof BlockWaterlike ||
+				aWorld.getBlock(aX  , aY-densityDir, aZ+1) instanceof BlockWaterlike) {
 				expQuanta = quantaPerBlock - 1;
 			} else {
 				int maxQuanta = -100;
@@ -118,21 +117,17 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 		
 		
 		if (canDisplace(aWorld, aX, aY+densityDir, aZ)) {
-			flowIntoBlock(aWorld, aX, aY+densityDir, aZ, 1);
+			if (displaceIfPossible(aWorld, aX, aY+densityDir, aZ)) aWorld.setBlock(aX, aY+densityDir, aZ, this, 1, 3);
 			return;
 		}
 		
-		int flowMeta = quantaPerBlock - quantaRemaining + 1;
-		if (flowMeta >= quantaPerBlock) return;
+		int tFlowMeta  = (aWorld.getBlock(aX, aY-densityDir, aZ) instanceof BlockWaterlike ? 1 : quantaPerBlock - quantaRemaining + 1);
+		if (tFlowMeta >= quantaPerBlock) return;
 		
-		if (isSourceBlock(aWorld, aX, aY, aZ) || !isFlowingVertically(aWorld, aX, aY, aZ)) {
-			if (aWorld.getBlock(aX, aY-densityDir, aZ) instanceof BlockWaterlike) flowMeta = 1;
-			boolean flowTo[] = getOptimalFlowDirections(aWorld, aX, aY, aZ);
-			if (flowTo[0]) flowIntoBlock(aWorld, aX-1, aY, aZ  , flowMeta);
-			if (flowTo[1]) flowIntoBlock(aWorld, aX+1, aY, aZ  , flowMeta);
-			if (flowTo[2]) flowIntoBlock(aWorld, aX  , aY, aZ-1, flowMeta);
-			if (flowTo[3]) flowIntoBlock(aWorld, aX  , aY, aZ+1, flowMeta);
-		}
+		if (aWorld.blockExists(aX  , aY, aZ-1) && displaceIfPossible(aWorld, aX  , aY, aZ-1)) aWorld.setBlock(aX  , aY, aZ-1, this, tFlowMeta, 3);
+		if (aWorld.blockExists(aX  , aY, aZ+1) && displaceIfPossible(aWorld, aX  , aY, aZ+1)) aWorld.setBlock(aX  , aY, aZ+1, this, tFlowMeta, 3);
+		if (aWorld.blockExists(aX-1, aY, aZ  ) && displaceIfPossible(aWorld, aX-1, aY, aZ  )) aWorld.setBlock(aX-1, aY, aZ  , this, tFlowMeta, 3);
+		if (aWorld.blockExists(aX+1, aY, aZ  ) && displaceIfPossible(aWorld, aX+1, aY, aZ  )) aWorld.setBlock(aX+1, aY, aZ  , this, tFlowMeta, 3);
 	}
 	
 	@Override
@@ -140,7 +135,7 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 		Vec3 rVector = Vec3.createVectorHelper(0, 0, 0);
 		int tDecay = quantaPerBlock - getQuantaValue(aWorld, aX, aY, aZ);
 		for (byte tSide : ALL_SIDES_HORIZONTAL) {
-			int tX = aX+OFFSETS_X[tSide], tZ = aZ+OFFSETS_Z[tSide];
+			int tX = aX+OFFX[tSide], tZ = aZ+OFFZ[tSide];
 			int tOtherDecay = quantaPerBlock - getQuantaValue(aWorld, tX, aY, tZ);
 			if (tOtherDecay >= quantaPerBlock) {
 				if (!aWorld.getBlock(tX, aY, tZ).getMaterial().blocksMovement()) {
@@ -185,7 +180,8 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 		if (aBlock.getMaterial() == Material.water || WD.visOpq(aBlock)) return F;
 		if (aBlock.isAir(aWorld, aX, aY, aZ)) return T;
 		TileEntity tTileEntity = aWorld.getTileEntity(aX, aY, aZ);
-		return !(tTileEntity instanceof ITileEntitySurface && !((ITileEntitySurface)tTileEntity).isSurfaceOpaque(OPPOSITES[aSide]));
+		if (tTileEntity instanceof ITileEntitySurface) return !((ITileEntitySurface)tTileEntity).isSurfaceOpaque(OPOS[aSide]);
+		return T;
 	}
 	
 	@Override public boolean isSourceBlock(IBlockAccess aWorld, int aX, int aY, int aZ) {return aWorld.getBlock(aX, aY, aZ) instanceof BlockWaterlike && aWorld.getBlockMetadata(aX, aY, aZ) == 0;}
@@ -193,14 +189,24 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 	@Override public final String getUnlocalizedName() {return FL.name(mFluid, F);}
 	@Override public String getLocalizedName() {return FL.name(mFluid, T);}
 	@Override public void registerBlockIcons(IIconRegister aIconRegister) {/**/}
-	@Override public int getLightOpacity() {return 16;}
 	@Override public IIcon getIcon(int aSide, int aMeta) {return Blocks.water.getIcon(aSide, aMeta);}
-	@Override public boolean getTickRandomly() {return F;}
+	@Override public int getRenderType() {return RendererBlockFluid.RENDER_ID;}
+	@Override public int getRenderBlockPass() {return 1;}
+	@Override public int getLightOpacity() {return LIGHT_OPACITY_WATER;}
+	
+	@Override public int getFireSpreadSpeed(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aDirection) {return 0;}
+	@Override public int getFlammability(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aDirection) {return 0;}
 	@Override public boolean canDisplace(IBlockAccess aWorld, int aX, int aY, int aZ) {return !aWorld.getBlock(aX, aY, aZ).getMaterial().isLiquid() && super.canDisplace(aWorld, aX, aY, aZ);}
 	@Override public boolean displaceIfPossible(World aWorld, int aX, int aY, int aZ) {return !aWorld.getBlock(aX, aY, aZ).getMaterial().isLiquid() && super.displaceIfPossible(aWorld, aX, aY, aZ);}
+	@Override public boolean canCollideCheck(int aMeta, boolean aFullHit) {return aFullHit && aMeta == 0;}
+	@Override public boolean getBlocksMovement(IBlockAccess aWorld, int aX, int aY, int aZ) {return !mEffects.isEmpty();}
+	@Override public boolean isNormalCube() {return F;}
 	@Override public boolean isOpaqueCube() {return F;}
 	@Override public boolean func_149730_j() {return F;}
-	@Override public int getRenderType() {return RendererBlockFluid.RENDER_ID;}
+	@Override public boolean getTickRandomly() {return F;}
+	@Override public boolean renderAsNormalBlock() {return F;}
+	@Override public boolean isAir(IBlockAccess aWorld, int aX, int aY, int aZ) {return F;}
+	@Override public boolean isSideSolid(IBlockAccess aWorld, int aX, int aY, int aZ, ForgeDirection aSide) {return F;}
 	
 	public BlockWaterlike addEffect(int aEffectID, int aEffectDuration, int aEffectLevel) {
 		mEffects.add(new int[] {aEffectID, aEffectDuration, aEffectLevel});
@@ -211,7 +217,7 @@ public abstract class BlockWaterlike extends BlockFluidClassic implements IBlock
 	
 	@Override
 	public void onHeadInside(EntityLivingBase aEntity, World aWorld, int aX, int aY, int aZ) {
-		if (!mEffects.isEmpty() && (FL.gas(mFluid) ? !UT.Entities.isImmuneToBreathingGasses(aEntity) : !UT.Entities.isWearingFullChemHazmat(aEntity))) {
+		if (!mEffects.isEmpty() && (FL.gas(mFluid) ? !UT.Entities.isImmuneToBreathingGases(aEntity) : !UT.Entities.isWearingFullChemHazmat(aEntity))) {
 			for (int[] tEffects : mEffects) aEntity.addPotionEffect(new PotionEffect(tEffects[0], tEffects[1], tEffects[2], F));
 			if (getMaterial() != Material.water && SERVER_TIME % 20 == 0) aEntity.attackEntityFrom(DamageSource.drown, 2.0F);
 		}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -27,6 +27,8 @@ import java.util.Random;
 
 import gregapi.block.BlockBaseMeta;
 import gregapi.block.ItemBlockBase;
+import gregapi.data.MD;
+import gregapi.data.RM;
 import gregapi.render.BlockTextureDefault;
 import gregapi.render.IIconContainer;
 import gregapi.render.IRenderedBlock;
@@ -36,6 +38,7 @@ import gregapi.render.RendererBlockTextured;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
+import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -58,6 +61,9 @@ public class BlockBaseLilyPad extends BlockBaseMeta implements IPlantable, IRend
 		super(ItemBlockBase.class, aNameInternal, Material.plants, soundTypeGrass, aMaxMeta, aIcons);
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.015625F, 1.0F);
 		setCreativeTab(CreativeTabs.tabDecorations);
+		RM.chisel(aNameInternal, ST.make(this, 1, W));
+		if (MD.RC.mLoaded) try {EntityTunnelBore.addMineableBlock(this);} catch(Throwable e) {e.printStackTrace(ERR);}
+		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("forester", ST.make(this, 1, W));
 	}
 	
 	@Override public String getHarvestTool(int aMeta) {return TOOL_sword;}

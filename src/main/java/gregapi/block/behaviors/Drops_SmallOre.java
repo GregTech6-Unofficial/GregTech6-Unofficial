@@ -30,7 +30,6 @@ import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.util.ST;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -42,7 +41,7 @@ public class Drops_SmallOre extends Drops {
 	private final OreDictMaterial mSecondaryDrop;
 	
 	public Drops_SmallOre(OreDictMaterial aSecondaryDrop) {
-		super((Item)null);
+		super(1, 2);
 		mSecondaryDrop = aSecondaryDrop;
 	}
 	
@@ -57,7 +56,7 @@ public class Drops_SmallOre extends Drops {
 		} else if (aMaterial != null) {
 			Random tRandom = new Random(aX ^ aY ^ aZ);
 			for (int i = 0; i < 16; i++) tRandom.nextInt(10000);
-			if (aMaterial == MT.Gneiss || aMaterial == MT.PetrifiedWood) {
+			if (aMaterial == MT.STONES.Gneiss || aMaterial == MT.PetrifiedWood) {
 				ItemStack tStack = OP.rockGt.mat(aMaterial, 1);
 				for (int i = 0, j = Math.max(1, aMaterial.mOreMultiplier*aMaterial.mOreProcessingMultiplier+(aFortune>0?(tRandom.nextInt((1+aFortune)*aMaterial.mOreMultiplier*aMaterial.mOreProcessingMultiplier)):0)/2+tRandom.nextInt(2)); i < j; i++) {
 					rList.add(ST.update(ST.copy(tStack)));
@@ -68,9 +67,9 @@ public class Drops_SmallOre extends Drops {
 					rList.add(ST.update(tStack));
 				} else {
 					ArrayList<ItemStack> tSelector = new ArrayListNoNulls<>();
-					tStack = OP.gemExquisite.mat(aMaterial, OP.gem.mat(aMaterial, 1), 1);
+					tStack = OP.gemExquisite.mat(aMaterial, OP.gem.mat(aMaterial, 4), 1);
 					if (tStack != null) for (int i = 0, j = (aSilkTouch? 3: 1); i < j; i++) tSelector.add(tStack);
-					tStack = OP.gemFlawless.mat(aMaterial, OP.gem.mat(aMaterial, 1), 1);
+					tStack = OP.gemFlawless.mat(aMaterial, OP.gem.mat(aMaterial, 2), 1);
 					if (tStack != null) for (int i = 0, j = (aSilkTouch? 6: 2); i < j; i++) tSelector.add(tStack);
 					tStack = OP.gem.mat(aMaterial, 1);
 					if (tStack != null) for (int i = 0, j = (aSilkTouch? 6:12); i < j; i++) tSelector.add(tStack);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -183,7 +183,7 @@ public class MultiTileEntityLargeBoiler extends TileEntityBase10MultiBlockBase i
 			long tConversions = Math.min(mTanks[1].capacity() / 2560, Math.min(mEnergy / 80, mTanks[0].amount()));
 			if (tConversions > 0) {
 				mTanks[0].remove(tConversions);
-				if (rng(10) == 0 && mEfficiency > 5000 && !FL.distw(mTanks[0])) {
+				if (rng(10) == 0 && mEfficiency > 5000 && mTanks[0].has() && !FL.distw(mTanks[0])) {
 					mEfficiency -= tConversions;
 					if (mEfficiency < 5000) mEfficiency = 5000;
 				}
@@ -195,8 +195,8 @@ public class MultiTileEntityLargeBoiler extends TileEntityBase10MultiBlockBase i
 			// Remove Steam and Heat during the process of cooling down.
 			if (mCoolDownResetTimer-- <= 0) {
 				mCoolDownResetTimer = 0;
-				mEnergy -= (mOutput * 4) / STEAM_PER_EU;
-				GarbageGT.trash(mTanks[1], mOutput * 4);
+				mEnergy -= (mOutput * 64) / STEAM_PER_EU;
+				GarbageGT.trash(mTanks[1], mOutput * 64);
 				if (mEnergy <= 0) {
 					mEnergy = 0;
 					mCoolDownResetTimer = 128;
@@ -263,7 +263,7 @@ public class MultiTileEntityLargeBoiler extends TileEntityBase10MultiBlockBase i
 			
 			// Well the Boiler gets structural Damage when being too hot, or when being too full of Steam.
 			if ((mBarometer > 4 && !checkStructure(F)) || mEnergy > mCapacity || mTanks[1].isFull()) {
-				explode();
+				explode(F);
 			}
 		}
 	}
@@ -275,11 +275,15 @@ public class MultiTileEntityLargeBoiler extends TileEntityBase10MultiBlockBase i
 		
 		if (isClientSide()) return 0;
 		
+		if (aTool.equals(TOOL_plunger)) {
+			if (mTanks[0].has()) return GarbageGT.trash(mTanks[0]);
+			return GarbageGT.trash(mTanks[1]);
+		}
 		if (aTool.equals(TOOL_chisel)) {
 			int rResult = 10000 - mEfficiency;
 			if (rResult > 0) {
 				if (mBarometer > 15) {
-					explode();
+					explode(F);
 				} else {
 					if (mEnergy+mTanks[1].amount()/STEAM_PER_EU > 2000) UT.Entities.applyHeatDamage(aPlayer, (mEnergy+mTanks[1].amount()/2) / 2000.0F);
 					mTanks[1].setEmpty();
@@ -310,18 +314,18 @@ public class MultiTileEntityLargeBoiler extends TileEntityBase10MultiBlockBase i
 	
 	@Override
 	public boolean removedByPlayer(World aWorld, EntityPlayer aPlayer, boolean aWillHarvest) {
-		if (isServerSide() && !UT.Entities.isCreative(aPlayer) && mBarometer > 4) explode();
+		if (isServerSide() && !UT.Entities.isCreative(aPlayer) && mBarometer > 4) explode(T);
 		return worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 	}
 	
 	@Override
 	public void onExploded(Explosion aExplosion) {
 		super.onExploded(aExplosion);
-		if (isServerSide() && mBarometer > 4) explode();
+		if (isServerSide() && mBarometer > 4) explode(T);
 	}
 	
 	@Override
-	public void explode() {
+	public void explode(boolean aInstant) {
 		explode(2+Math.max(1, Math.sqrt(mTanks[1].amount()) / 1000.0));
 	}
 	

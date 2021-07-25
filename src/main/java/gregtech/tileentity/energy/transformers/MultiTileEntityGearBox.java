@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -81,9 +81,8 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 	
 	@Override
 	public NBTTagCompound writeItemNBT2(NBTTagCompound aNBT) {
-		super.writeItemNBT2(aNBT);
 		aNBT.setByte(NBT_CONNECTION, (byte)mAxleGear);
-		return aNBT;
+		return super.writeItemNBT2(aNBT);
 	}
 	
 	static {
@@ -130,7 +129,7 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 			if (aPlayerInventory != null) for (int i = 0, j = aPlayerInventory.getSizeInventory(); i < j; i++) {
 				OreDictItemData tData = OM.data(aPlayerInventory.getStackInSlot(i));
 				if (tData != null && tData.mPrefix == OP.gearGt && (tData.mMaterial.mMaterial == mMaterial || mMaterial.mToThis.contains(tData.mMaterial.mMaterial))) {
-					aPlayerInventory.decrStackSize(i, 1);
+					if (aPlayer == null) aPlayerInventory.decrStackSize(i, 1); else ST.use(aPlayer, T, aPlayerInventory.getStackInSlot(i));
 					mAxleGear |= B[tSide];
 					mJammed = F;
 					mGearsWork = checkGears();
@@ -172,7 +171,10 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 	@Override
 	public void onTick2(long aTimer, boolean aIsServerSide) {
 		if (aIsServerSide) {
+			if (mJammed || !mGearsWork) mCurrentPower = 0;
+			
 			mTransferredLast = Math.abs(mCurrentPower * mCurrentSpeed);
+			
 			if (mUsedGear && mCurrentPower > 0) {
 				boolean temp = T;
 				while (temp) {
@@ -189,8 +191,8 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 									if (mCurrentPower <= 0) {temp = F; break;}
 									temp = T;
 								}
-							} else if (AXIS_XYZ[(mAxleGear >>> 6) & 3][tSide] && FACE_CONNECTED[OPPOSITES[tSide]][mAxleGear & 63]) {
-								long tUsed = ITileEntityEnergy.Util.insertEnergyInto(TD.Energy.RU, (mRotationData & B[OPPOSITES[tSide]]) == 0 ? +mCurrentSpeed : -mCurrentSpeed, tUsable, this, getAdjacentTileEntity(tSide));
+							} else if (AXIS_XYZ[(mAxleGear >>> 6) & 3][tSide] && FACE_CONNECTED[OPOS[tSide]][mAxleGear & 63]) {
+								long tUsed = ITileEntityEnergy.Util.insertEnergyInto(TD.Energy.RU, (mRotationData & B[OPOS[tSide]]) == 0 ? +mCurrentSpeed : -mCurrentSpeed, tUsable, this, getAdjacentTileEntity(tSide));
 								if (tUsed > 0) {
 									mCurrentPower -= tUsed;
 									if (mCurrentPower <= 0) {temp = F; break;}
@@ -217,7 +219,7 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 		// There is an Axle along this Axis.
 		if (AXIS_XYZ[(mAxleGear >>> 6) & 3][aSide]) {
 			// Make whatever is on the other side of the Axle rotate the same direction the Axle does.
-			if (!aNegative) rRotationData |= B[OPPOSITES[aSide]];
+			if (!aNegative) rRotationData |= B[OPOS[aSide]];
 			// Gear on Input Side.
 			if (FACE_CONNECTED[          aSide ][mAxleGear & 63]) {
 				// All adjacent Gears need to rotate the opposite direction of this Gear.
@@ -226,7 +228,7 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 				return (byte)((rRotationData & mAxleGear & 63) | B[6]);
 			}
 			// Gear on Throughput Side.
-			if (FACE_CONNECTED[OPPOSITES[aSide]][mAxleGear & 63]) {
+			if (FACE_CONNECTED[OPOS[aSide]][mAxleGear & 63]) {
 				// Make adjacent Gears rotate according to the Gear on the opposite Side.
 				if ( aNegative) for (byte tSide : ALL_SIDES_VALID_BUT_AXIS[aSide]) if (FACE_CONNECTED[tSide][mAxleGear & 63]) rRotationData |= B[tSide];
 				// Clear unused Values to make sure that it can be compared properly.
@@ -240,7 +242,7 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 		// Axle not involved.
 		if (FACE_CONNECTED[aSide][mAxleGear & 63]) {
 			// The Gear on opposite Sides of the Gearbox rotates the opposite direction.
-			if ( aNegative) rRotationData |= B[OPPOSITES[aSide]];
+			if ( aNegative) rRotationData |= B[OPOS[aSide]];
 			// All adjacent Gears need to rotate the opposite direction of this Gear.
 			if (!aNegative) for (byte tSide : ALL_SIDES_VALID_BUT_AXIS[aSide]) if (FACE_CONNECTED[tSide][mAxleGear & 63]) rRotationData |= B[tSide];
 			// Clear unused Values to make sure that it can be compared properly.
@@ -334,6 +336,9 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 		if (!AXIS_XYZ[(mAxleGear >>> 6) & 3][aSide] && !FACE_CONNECTED[aSide][mAxleGear & 63]) return 0;
 		if (!aDoInject) return mIgnorePower == 0 ? aPower : 0;
 		
+		// Received Input from this Side.
+		mInputtedSides |= B[aSide];
+		
 		long tSpeed = Math.abs(aSpeed);
 		
 		if (tSpeed > mMaxThroughPut) {
@@ -352,8 +357,8 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 		}
 		
 		// Free Axle means it is always a Passthrough.
-		if (AXIS_XYZ[(mAxleGear >>> 6) & 3][aSide] && !FACE_CONNECTED[aSide][mAxleGear & 63] && !FACE_CONNECTED[OPPOSITES[aSide]][mAxleGear & 63]) {
-			return ITileEntityEnergy.Util.insertEnergyInto(TD.Energy.RU, aSpeed, aPower, this, getAdjacentTileEntity(OPPOSITES[aSide]));
+		if (AXIS_XYZ[(mAxleGear >>> 6) & 3][aSide] && !FACE_CONNECTED[aSide][mAxleGear & 63] && !FACE_CONNECTED[OPOS[aSide]][mAxleGear & 63]) {
+			return ITileEntityEnergy.Util.insertEnergyInto(TD.Energy.RU, aSpeed, aPower, this, getAdjacentTileEntity(OPOS[aSide]));
 		}
 		
 		// Just void all power if the Gearbox is not set up properly.
@@ -374,8 +379,6 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 			// Just take the lowest Speed available. Gives a different Type of Loss Mechanic that somewhat makes sense.
 			mCurrentSpeed = Math.min(tSpeed, mCurrentSpeed);
 			mCurrentPower += aPower;
-			// Received Input from this Side successfully.
-			mInputtedSides |= B[aSide];
 			return aPower;
 		}
 		// There was no Input during this Tick yet.
@@ -388,8 +391,6 @@ public class MultiTileEntityGearBox extends TileEntityBase07Paintable implements
 			// Set Maximum Speed and current Power.
 			mCurrentSpeed = tSpeed;
 			mCurrentPower = aPower;
-			// Received Input from this Side successfully.
-			mInputtedSides |= B[aSide];
 			return aPower;
 		}
 		return 0;

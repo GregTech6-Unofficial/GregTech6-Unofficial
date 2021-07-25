@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import gregapi.code.BiomeNameSet;
 import gregapi.data.MT;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.util.UT;
@@ -36,40 +37,46 @@ public class StoneLayerOres {
 	public OreDictMaterial mMaterial;
 	/** The Material Amount will determine the chance in the form of an X of U Chance. */
 	public long mChance;
-	public ArrayList<String> mBiomes = new ArrayList<>();
+	public BiomeNameSet mTargetBiomes = new BiomeNameSet();
+	/** No longer in use, did not work before anyways. */
+	@Deprecated public ArrayList<String> mBiomes = new ArrayList<>();
 	
 	public StoneLayerOres(OreDictMaterial aMaterial, long aChance, int aMinY, int aMaxY) {
-		mMaterial = (aMaterial == null || aMaterial.mID < 0 ? MT.Empty : aMaterial);
+		mMaterial = (aMaterial != null && aMaterial.mID > 0 ? aMaterial : MT.Empty);
 		mChance = UT.Code.bind(1, U, aChance);
 		if (aMinY > aMaxY) {mMinY = aMaxY; mMaxY = aMinY;} else {mMinY = aMinY; mMaxY = aMaxY;}
 	}
 	public StoneLayerOres(OreDictMaterial aMaterial, long aChance, int aMinY, int aMaxY, Collection<String> aBiomes) {
 		this(aMaterial, aChance, aMinY, aMaxY);
-		mBiomes.addAll(aBiomes);
+		mTargetBiomes.addAll(aBiomes);
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean check(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome, int aRandomNumber) {
-		return aY >= mMinY && aY <= mMaxY && aRandomNumber < mChance && (mBiomes.isEmpty() || mBiomes.contains(aBiome.biomeName));
+		return aY >= mMinY && aY <= mMaxY && aRandomNumber           < mChance && (mTargetBiomes.isEmpty() || mTargetBiomes.contains(aBiome));
 	}
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean check(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome, Random aRandom) {
-		return aY >= mMinY && aY <= mMaxY && aRandom.nextInt((int)U) < mChance && (mBiomes.isEmpty() || mBiomes.contains(aBiome.biomeName));
+		return aY >= mMinY && aY <= mMaxY && aRandom.nextInt((int)U) < mChance && (mTargetBiomes.isEmpty() || mTargetBiomes.contains(aBiome));
 	}
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean check(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome) {
-		return aY >= mMinY && aY <= mMaxY && RNGSUS.nextInt((int)U) < mChance && (mBiomes.isEmpty() || mBiomes.contains(aBiome.biomeName));
+		return aY >= mMinY && aY <= mMaxY && RNGSUS .nextInt((int)U) < mChance && (mTargetBiomes.isEmpty() || mTargetBiomes.contains(aBiome));
 	}
+	
 	public boolean set(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome, Random aRandom) {
 		return aY == mMinY || aY == mMaxY || aRandom.nextBoolean() ? small(aLayer, aWorld, aX, aY, aZ, aBiome) : normal(aLayer, aWorld, aX, aY, aZ, aBiome);
 	}
 	public boolean set(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome) {
-		return aY == mMinY || aY == mMaxY || RNGSUS.nextBoolean() ? small(aLayer, aWorld, aX, aY, aZ, aBiome) : normal(aLayer, aWorld, aX, aY, aZ, aBiome);
+		return aY == mMinY || aY == mMaxY || RNGSUS .nextBoolean() ? small(aLayer, aWorld, aX, aY, aZ, aBiome) : normal(aLayer, aWorld, aX, aY, aZ, aBiome);
 	}
 	public boolean normal(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome) {
-		return aLayer.mOre != null && aLayer.mOre.placeBlock(aWorld, aX, aY, aZ, (byte)6, mMaterial.mID, null, F, T);
+		return aLayer.mOre       != null && aLayer.mOre      .placeBlock(aWorld, aX, aY, aZ, SIDE_UNKNOWN, mMaterial.mID, null, F, T);
 	}
 	public boolean small(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome) {
-		return aLayer.mOreSmall != null && aLayer.mOreSmall.placeBlock(aWorld, aX, aY, aZ, (byte)6, mMaterial.mID, null, F, T);
+		return aLayer.mOreSmall  != null && aLayer.mOreSmall .placeBlock(aWorld, aX, aY, aZ, SIDE_UNKNOWN, mMaterial.mID, null, F, T);
 	}
 	public boolean broken(StoneLayer aLayer, World aWorld, int aX, int aY, int aZ, BiomeGenBase aBiome) {
-		return aLayer.mOreBroken != null && aLayer.mOreBroken.placeBlock(aWorld, aX, aY, aZ, (byte)6, mMaterial.mID, null, F, T);
+		return aLayer.mOreBroken != null && aLayer.mOreBroken.placeBlock(aWorld, aX, aY, aZ, SIDE_UNKNOWN, mMaterial.mID, null, F, T);
 	}
 }

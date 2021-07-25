@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -57,8 +57,8 @@ public abstract class TileEntityBase10FacingDouble extends TileEntityBase09Facin
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		if (getFacingTool() != null)
-		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_SET_FACING_PRE) + LH.get(TOOL_LOCALISER_PREFIX + getFacingTool()  , "Unknown"      ) + LH.get(LH.TOOL_TO_SET_FACING_POST));
-		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_SET_FACING_PRE) + LH.get(TOOL_LOCALISER_PREFIX + TOOL_monkeywrench, "Monkey Wrench") + LH.get(LH.TOOL_TO_SET_FACING_POST));
+		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_SET_FACING_PRE ) + LH.get(TOOL_LOCALISER_PREFIX + getFacingTool()  , "Unknown"      ) + LH.get(LH.TOOL_TO_SET_FACING_POST ));
+		aList.add(Chat.DGRAY + LH.get(LH.TOOL_TO_SET_FACING2_PRE) + LH.get(TOOL_LOCALISER_PREFIX + TOOL_monkeywrench, "Monkey Wrench") + LH.get(LH.TOOL_TO_SET_FACING2_POST));
 	}
 	
 	@Override
@@ -70,7 +70,7 @@ public abstract class TileEntityBase10FacingDouble extends TileEntityBase09Facin
 				byte oFacing = mFacing, oSecondFacing = mSecondFacing;
 				mFacing = aTargetSide;
 				if (!getValidSecondSides()[mSecondFacing]) {
-					mSecondFacing = OPPOSITES[mFacing];
+					mSecondFacing = OPOS[mFacing];
 					if (!getValidSecondSides()[mSecondFacing]) for (byte tSide : ALL_SIDES_VALID) {
 						mSecondFacing = tSide;
 						if (getValidSecondSides()[mSecondFacing]) break;
@@ -120,6 +120,6 @@ public abstract class TileEntityBase10FacingDouble extends TileEntityBase09Facin
 	@Override public boolean isConnectedWrenchingOverlay(ItemStack aStack, byte aSide) {return aSide == mFacing || aSide == mSecondFacing;}
 	
 	// Stuff to Override
-	public byte getDefaultSecondSide() {return OPPOSITES[getDefaultSide()];}
+	public byte getDefaultSecondSide() {return OPOS[getDefaultSide()];}
 	public boolean[] getValidSecondSides() {return getValidSides();}
 }

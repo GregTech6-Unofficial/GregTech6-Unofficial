@@ -75,9 +75,9 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		IL.Compound_Brass        .set(addItem(  1, "Brass Compound"         , "Put in Furnace to smelt it" , new OreDictItemData(MT.Brass        , U9), TC.stack(TC.METALLUM, 1)));
 		IL.Compound_BismuthBronze.set(addItem(  2, "Bismuth Bronze Compound", "Put in Furnace to smelt it" , new OreDictItemData(MT.BismuthBronze, U9), TC.stack(TC.METALLUM, 1)));
 		
-		RM.add_smelting(IL.Compound_Bronze       .get(1), OP.nugget.mat(MT.Bronze       , 1));
-		RM.add_smelting(IL.Compound_Brass        .get(1), OP.nugget.mat(MT.Brass        , 1));
-		RM.add_smelting(IL.Compound_BismuthBronze.get(1), OP.nugget.mat(MT.BismuthBronze, 1));
+		RM.add_smelting(IL.Compound_Bronze       .get(1), OP.nugget.mat(MT.Bronze       , 1), F, F, T);
+		RM.add_smelting(IL.Compound_Brass        .get(1), OP.nugget.mat(MT.Brass        , 1), F, F, T);
+		RM.add_smelting(IL.Compound_BismuthBronze.get(1), OP.nugget.mat(MT.BismuthBronze, 1), F, F, T);
 		
 		IL.Porcelain_Cup_Raw               .set(addItem(899, "Modeled Porcelain Cup"    , "Put in Furnace to harden", new OreDictItemData(MT.Porcelain, U), TC.stack(TC.TERRA, 2), TC.stack(TC.VACUOS, 1))); CR.shapeless(OP.dust.mat(MT.Porcelain, 1), CR.DEF_NCC, new Object[] {last()});
 		
@@ -137,7 +137,10 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		CR.shaped(IL.Ceramic_Jug_Raw     .get(1), CR.DEF_NCC, "kCR", "C C", "CCC", 'C', OD.itemClay, 'R', OreDictToolNames.rollingpin);
 		CR.shaped(IL.Measuring_Pot_Raw   .get(1), CR.DEF_NCC, "CkC", "CCR"       , 'C', OD.itemClay, 'R', OreDictToolNames.rollingpin);
 		
-		CR.shapeless(IL.Ceramic_Ingot_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.ingot.dat(MT.TECH.Brick)});
+		CR.shapeless(IL.Ceramic_Ingot_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, IL.BoP_Mud_Brick});
+		CR.shapeless(IL.Ceramic_Ingot_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, IL.ERE_Mud_Brick});
+		CR.shapeless(IL.Ceramic_Ingot_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.ingot.dat(MT.UNUSED.Mud)});
+		CR.shapeless(IL.Ceramic_Ingot_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.ingot.dat(MT.Brick)});
 		CR.shapeless(IL.Ceramic_Plate_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OD.paneGlass});
 		CR.shapeless(IL.Ceramic_Plate_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OD.plankAnyWood});
 		CR.shapeless(IL.Ceramic_Arrow_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OD.itemFlint});
@@ -167,10 +170,9 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		CR.shapeless(IL.Ceramic_Plow_Mold_Raw           .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, ToolsGT.sMetaTool.make(ToolsGT.PLOW)});
 		CR.shapeless(IL.Ceramic_Builderwand_Mold_Raw    .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, ToolsGT.sMetaTool.make(ToolsGT.BUILDERWAND)});
 		
-		for (OreDictMaterial tMat : new OreDictMaterial[] {ANY.WoodPlastic, ANY.Stone, ANY.Iron, ANY.Cu, MT.Sn, MT.Zn, MT.Pb, MT.Bi, MT.Brass, MT.Bronze, MT.BismuthBronze, MT.Au}) {
+		for (OreDictMaterial tMat : new OreDictMaterial[] {ANY.WoodPlastic, ANY.Stone, MT.Glass, ANY.Wax, ANY.Iron, ANY.Cu, MT.Sn, MT.Zn, MT.Pb, MT.Bi, MT.Brass, MT.Bronze, MT.BismuthBronze, MT.Au}) {
 		CR.shapeless(IL.Ceramic_Ingot_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.ingot.dat(tMat)});
 		CR.shapeless(IL.Ceramic_Chunk_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.chunkGt.dat(tMat)});
-		CR.shapeless(IL.Ceramic_Chunk_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.rockGt.dat(tMat)});
 		CR.shapeless(IL.Ceramic_Nugget_Mold_Raw         .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.nugget.dat(tMat)});
 		CR.shapeless(IL.Ceramic_Plate_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.plate.dat(tMat)});
 		CR.shapeless(IL.Ceramic_Plate_Mold_Raw          .get(1), CR.DEF_NCC, new Object[] {IL.Ceramic_Mold_Raw, OP.plateGem.dat(tMat)});
@@ -223,8 +225,8 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		RM.RollBender.addRecipe1(T, 16, 64, OP.plateCurved.mat(MT.TinAlloy, 1), IL.Food_Can_Empty.get(1));
 // TODO RA.addAssemblerRecipe(OP.dust.mat(MT.Redstone, 1), OP.cell.mat(MT.Empty, 1), IL.Spray_Empty.get(1), 800, 1);
-		CR.shaped(IL.Food_Can_Empty      .get(1), CR.DEF_NAC_NCC, "fh" , "oP"        , 'P', OP.plateCurved.dat(MT.TinAlloy));
-		CR.shaped(IL.Spray_Empty         .get(1), CR.DEF_NCC    , "Rf" , "Cs"        , 'R', OD.itemRedstone, 'C', OP.plateCurved.dat(MT.Sn));
+		CR.shaped(IL.Food_Can_Empty      .get(1), CR.DEF_NCC, "fh" , "oP"        , 'P', OP.plateCurved.dat(MT.TinAlloy));
+		CR.shaped(IL.Spray_Empty         .get(1), CR.DEF_NCC, "Rf" , "Cs"        , 'R', OD.itemRedstone, 'C', OP.plateCurved.dat(MT.Sn));
 		
 		for (byte i = 0; i < 16; i++) {
 		IL.SPRAY_CAN_DYES[i]               .set(addItem( 1000+2*i, "Spray Paint ("+DYE_NAMES[i]+")", "Full", TC.stack(TC.SENSUS, 4)));
@@ -353,7 +355,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		
-		IL.Tool_Lighter_Invar_Empty        .set(addItem(5004, "Lighter (Empty)"                  , ""                                            , new OreDictItemData(MT.Invar, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 1), TC.stack(TC.VACUOS, 1)));
+		IL.Tool_Lighter_Invar_Empty        .set(addItem(5004, "Lighter (Empty)"                  , "Requires Canning Machine to be filled"       , new OreDictItemData(MT.Invar, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 1), TC.stack(TC.VACUOS, 1)));
 		IL.Tool_Lighter_Invar_Used         .set(addItem(5005, "Lighter"                          , ""                                            , new OreDictItemData(MT.Invar, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 2), TC.stack(TC.POTENTIA, 1), OD.craftingFirestarter, TD.Creative.HIDDEN));
 		IL.Tool_Lighter_Invar_Full         .set(addItem(5006, "Lighter (Full)"                   , ""                                            , new OreDictItemData(MT.Invar, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 1), TC.stack(TC.POTENTIA, 2), OD.craftingFirestarter));
 		tBehaviour = new Behavior_Lighter(IL.Tool_Lighter_Invar_Empty.get(1), IL.Tool_Lighter_Invar_Used.get(1), IL.Tool_Lighter_Invar_Full.get(1), 100, 10000);
@@ -364,7 +366,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		
-		IL.Tool_Lighter_Platinum_Empty     .set(addItem(5007, "Shiny Lighter (Empty)"            , "A known Master of Pranks is engraved on it"  , new OreDictItemData(MT.Pt, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 1), TC.stack(TC.NEBRISUM, 1), TC.stack(TC.VACUOS, 1)));
+		IL.Tool_Lighter_Platinum_Empty     .set(addItem(5007, "Shiny Lighter (Empty)"            , "Requires Canning Machine to be filled"       , new OreDictItemData(MT.Pt, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 1), TC.stack(TC.NEBRISUM, 1), TC.stack(TC.VACUOS, 1)));
 		IL.Tool_Lighter_Platinum_Used      .set(addItem(5008, "Shiny Lighter"                    , "A known Master of Pranks is engraved on it"  , new OreDictItemData(MT.Pt, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 2), TC.stack(TC.NEBRISUM, 1), TC.stack(TC.POTENTIA, 1), OD.craftingFirestarter, TD.Creative.HIDDEN));
 		IL.Tool_Lighter_Platinum_Full      .set(addItem(5009, "Shiny Lighter (Full)"             , "A known Master of Pranks is engraved on it"  , new OreDictItemData(MT.Pt, OP.plateCurved.mAmount * 2), TC.stack(TC.IGNIS, 1), TC.stack(TC.NEBRISUM, 1), TC.stack(TC.POTENTIA, 2), OD.craftingFirestarter));
 		tBehaviour = new Behavior_Lighter(IL.Tool_Lighter_Platinum_Empty.get(1), IL.Tool_Lighter_Platinum_Used.get(1), IL.Tool_Lighter_Platinum_Full.get(1), 1000, 10000);
@@ -375,10 +377,10 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		
-		IL.Tool_Lighter_Plastic_Empty      .set(addItem(5010, "BIC (Empty)"                      , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 1), TC.stack(TC.VACUOS, 1)));
-		IL.Tool_Lighter_Plastic_Used       .set(addItem(5011, "BIC"                              , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 2), TC.stack(TC.POTENTIA, 1), OD.craftingFirestarter, TD.Creative.HIDDEN));
-		IL.Tool_Lighter_Plastic_Full       .set(addItem(5012, "BIC (Full)"                       , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 1), TC.stack(TC.POTENTIA, 2), OD.craftingFirestarter));
-		IL.Tool_Lighter_Plastic_Broken     .set(addItem(5013, "BIC (Broken)"                     , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 1), TC.stack(TC.PERDITIO, 1), TD.Creative.HIDDEN));
+		IL.Tool_Lighter_Plastic_Empty      .set(addItem(5010, "Plastic Lighter (Empty)"          , "Requires Canning Machine to be filled"       , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 1), TC.stack(TC.VACUOS, 1)));
+		IL.Tool_Lighter_Plastic_Used       .set(addItem(5011, "Plastic Lighter"                  , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 2), TC.stack(TC.POTENTIA, 1), OD.craftingFirestarter, TD.Creative.HIDDEN));
+		IL.Tool_Lighter_Plastic_Full       .set(addItem(5012, "Plastic Lighter (Full)"           , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 1), TC.stack(TC.POTENTIA, 2), OD.craftingFirestarter));
+		IL.Tool_Lighter_Plastic_Broken     .set(addItem(5013, "Plastic Lighter (Broken)"         , ""                                            , new OreDictItemData(MT.Plastic, OP.plateCurved.mAmount * 2, ANY.Fe, OP.screw.mAmount), TC.stack(TC.IGNIS, 1), TC.stack(TC.PERDITIO, 1), TD.Creative.HIDDEN));
 		tBehaviour = new Behavior_Lighter(IL.Tool_Lighter_Plastic_Broken.get(1), IL.Tool_Lighter_Plastic_Used.get(1), IL.Tool_Lighter_Plastic_Full.get(1), 100, 9000);
 		addItemBehavior(5011, tBehaviour); addItemBehavior(5012, tBehaviour);
 		CR.shaped(IL.Tool_Lighter_Plastic_Empty.get(1), CR.DEF_NCC, "IF", "dP", "xP", 'F', OD.itemFlint, 'P', OP.plateCurved.dat(MT.Plastic), 'I', OP.screw.dat(ANY.Iron));
@@ -389,10 +391,10 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		
 		IL.Tool_Fire_Starter               .set(addItem(5014, "Fire Starter"                     , "(Made with Dry Grass)"                       , new OreDictItemData(ANY.Wood, U), new Behavior_Lighter(5000), TC.stack(TC.IGNIS, 1), TC.stack(TC.ARBOR, 1), TC.stack(TC.HERBA, 1), OD.craftingFirestarter));
-		CR.shaped(IL.Tool_Fire_Starter.get(1)       , CR.DEF_NAC_NCC_MIR, "S ", "GS", 'S', OP.stick.dat(ANY.Wood), 'G', OD.itemGrassDry);
+		CR.shaped(IL.Tool_Fire_Starter.get(1)       , CR.DEF_NCC_MIR, "S ", "GS", 'S', OP.stick.dat(ANY.Wood), 'G', OD.itemGrassDry);
 		
 		IL.Tool_Fire_Starter_Bark          .set(addItem(5015, "Fire Starter"                     , "(Made with Dry Tree Bark)"                   , new OreDictItemData(ANY.Wood, U), new Behavior_Lighter(5500), TC.stack(TC.IGNIS, 1), TC.stack(TC.ARBOR, 2), OD.craftingFirestarter));
-		CR.shaped(IL.Tool_Fire_Starter_Bark.get(1)  , CR.DEF_NAC_NCC_MIR, "S ", "GS", 'S', OP.stick.dat(ANY.Wood), 'G', OD.itemBarkDry);
+		CR.shaped(IL.Tool_Fire_Starter_Bark.get(1)  , CR.DEF_NCC_MIR, "S ", "GS", 'S', OP.stick.dat(ANY.Wood), 'G', OD.itemBarkDry);
 		
 		
 		IL.Pellet_Wood                     .set(addItem(5999, "Wood Pellet"                      , ""                                            , new OreDictItemData(ANY.Wood, U), TICKS_PER_SMELT, TC.stack(TC.POTENTIA, 1)));
@@ -415,9 +417,9 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		RM.CokeOven.addRecipe1(T, 0, 900, IL.Pellet_Wood.get(1), NF, FL.Oil_Creosote.make(25), chunkGt.mat(MT.Charcoal, 1));
 		
 		
-		IL.Module_Stone_Generator          .set(addItem(6000, "Stone Generator Module"           , "Generates Stone for Recipes"                 , TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
-		IL.Module_Basalt_Generator         .set(addItem(6001, "Basalt Generator Module"          , "Generates Basalt for Recipes"                , TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
-		IL.Module_Blackstone_Generator     .set(addItem(6002, "Blackstone Generator Module"      , "Generates Blackstone for Recipes"            , TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
+		IL.Module_Stone_Generator          .set(addItem(6000, "Stone Generator Module"           , "Generates Stone for Recipes, also known as a Cobble Generator", TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
+		IL.Module_Basalt_Generator         .set(addItem(6001, "Basalt Generator Module"          , "Generates Basalt for Recipes"                                 , TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
+		IL.Module_Blackstone_Generator     .set(addItem(6002, "Blackstone Generator Module"      , "Generates Blackstone for Recipes"                             , TC.stack(TC.MACHINA, 1), TC.stack(TC.FABRICO, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.TERRA, 1), TC.stack(TC.AQUA, 1)));
 		CR.shaped(IL.Module_Stone_Generator     .get(1), CR.DEF_REV_NCC, "CPC", "LMW", "COC", 'M', OP.casingMachine.dat(MT.SteelGalvanized), 'O', IL.Shape_Extruder_Block, 'C', OD_CIRCUITS[4], 'P', OD.craftingPiston, 'L', OD.container1000lava, 'W', OD.container1000water);
 		CR.shaped(IL.Module_Basalt_Generator    .get(1), CR.DEF_REV_NCC, "S", "M", "I", 'M', IL.Module_Stone_Generator, 'S', OD.soulsand, 'I', Blocks.packed_ice);
 		CR.shaped(IL.Module_Blackstone_Generator.get(1), CR.DEF_REV_NCC, "S", "M", "O", 'M', IL.Module_Stone_Generator, 'S', OD.soulsand, 'O', OD.obsidian);
@@ -464,16 +466,16 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 			}
 		}
 		
-		IL.Robot_Tip_Wrench                .set(addItem(8000, "Robot Arm Wrench Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.wrench                                , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Screwdriver           .set(addItem(8001, "Robot Arm Screwdriver Tip"    , "Infinitely usable inside an Autocrafter", OreDictToolNames.screwdriver                           , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Saw                   .set(addItem(8002, "Robot Arm Saw Tip"            , "Infinitely usable inside an Autocrafter", OreDictToolNames.saw                                   , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Hammer                .set(addItem(8003, "Robot Arm Hammer Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.hammer                                , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Cutter                .set(addItem(8004, "Robot Arm Cutter Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.wirecutter, OreDictToolNames.scissors , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Chisel                .set(addItem(8005, "Robot Arm Chisel Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.chisel                                , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Rubber                .set(addItem(8006, "Robot Arm Rubber Hammer Tip"  , "Infinitely usable inside an Autocrafter", OreDictToolNames.softhammer                            , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Blade                 .set(addItem(8007, "Robot Arm Blade Tip"          , "Infinitely usable inside an Autocrafter", OreDictToolNames.sword, OreDictToolNames.blade         , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_Drill                 .set(addItem(8008, "Robot Arm Drill Tip"          , "Infinitely usable inside an Autocrafter", OreDictToolNames.drill                                 , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
-		IL.Robot_Tip_File                  .set(addItem(8009, "Robot Arm File Tip"           , "Infinitely usable inside an Autocrafter", OreDictToolNames.file                                  , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Wrench                .set(addItem(8000, "Robot Arm Wrench Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.wrench                                                          , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Screwdriver           .set(addItem(8001, "Robot Arm Screwdriver Tip"    , "Infinitely usable inside an Autocrafter", OreDictToolNames.screwdriver                                                     , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Saw                   .set(addItem(8002, "Robot Arm Saw Tip"            , "Infinitely usable inside an Autocrafter", OreDictToolNames.saw                                                             , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Hammer                .set(addItem(8003, "Robot Arm Hammer Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.hammer, OreDictToolNames.hac_mortar                             , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Cutter                .set(addItem(8004, "Robot Arm Cutter Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.wirecutter, OreDictToolNames.scissors                           , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Chisel                .set(addItem(8005, "Robot Arm Chisel Tip"         , "Infinitely usable inside an Autocrafter", OreDictToolNames.chisel                                                          , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Rubber                .set(addItem(8006, "Robot Arm Rubber Hammer Tip"  , "Infinitely usable inside an Autocrafter", OreDictToolNames.softhammer                                                      , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Blade                 .set(addItem(8007, "Robot Arm Blade Tip"          , "Infinitely usable inside an Autocrafter", OreDictToolNames.sword, OreDictToolNames.blade, OreDictToolNames.hac_cuttingboard, "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_Drill                 .set(addItem(8008, "Robot Arm Drill Tip"          , "Infinitely usable inside an Autocrafter", OreDictToolNames.drill, OreDictToolNames.handdrill                               , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
+		IL.Robot_Tip_File                  .set(addItem(8009, "Robot Arm File Tip"           , "Infinitely usable inside an Autocrafter", OreDictToolNames.file                                                            , "gt:autocrafterinfinite", TC.stack(TC.INSTRUMENTUM, 4)));
 		
 		CR.shaped(IL.Robot_Tip_Wrench       .get(1), CR.DEF_REV, "wPh", "CMC", " X ", 'P', OP.plateCurved.dat(MT.SteelGalvanized), 'C', OD_CIRCUITS[3], 'M', IL.MOTORS      [3], 'X', OP.toolHeadWrench.dat(MT.Cr));
 		CR.shaped(IL.Robot_Tip_Screwdriver  .get(1), CR.DEF_REV, "wPh", "CMC", " X ", 'P', OP.plateCurved.dat(MT.SteelGalvanized), 'C', OD_CIRCUITS[3], 'M', IL.MOTORS      [3], 'X', OP.toolHeadScrewdriver.dat(MT.StainlessSteel));
@@ -506,7 +508,7 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		RM.Canner.addRecipe1(T, 16, 64, IL.Geiger_Counter_Empty.get(1), FL.Neon  .make(1000), NF, IL.Geiger_Counter.get(1));
 		RM.Canner.addRecipe1(T, 16, 64, IL.Geiger_Counter_Empty.get(1), FL.Argon .make(1000), NF, IL.Geiger_Counter.get(1));
 		
-		CR.shaped(IL.Thermometer_Quicksilver    .get(1), CR.DEF_REV, " GD", "GQG", "PG ", 'P', OP.plate.dat(ANY.Cu), 'G', OD.blockGlassColorless, 'D', DYE_OREDICTS[DYE_INDEX_Red], 'Q', OP.bottle.dat(MT.Hg));
+		CR.shaped(IL.Thermometer_Quicksilver    .get(1), CR.DEF_REV, " GD", "GQG", "PG ", 'P', OP.plate.dat(ANY.Cu), 'G', OP.plate.dat(MT.Glass), 'D', DYE_OREDICTS[DYE_INDEX_Red], 'Q', OD.itemQuicksilver);
 		CR.shaped(IL.Geiger_Counter_Empty       .get(1), CR.DEF_REV, "TUT", "PCP", "TdT", 'U', OP.capcellcon.dat(MT.Al), 'P', OP.plate.dat(MT.Al), 'T', OP.screw.dat(MT.Al), 'C', OD_CIRCUITS[1]);
 		OM.data(IL.Geiger_Counter.get(1), OM.data(IL.Geiger_Counter_Empty.get(1)));
 		
@@ -522,7 +524,8 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		IL.Tape                            .set(addItem(12000, "Tape", "Full Roll", TC.stack(TC.PANNUS, 1), TC.stack(TC.LIMUS, 1)));
 		IL.Tape_Used                       .set(addItem(12001, "Tape", "Used Roll", TC.stack(TC.PANNUS, 1), TC.stack(TC.LIMUS, 1)));
-		CR.shaped(IL.Tape.get(1), CR.DEF, "PPP", " G ", 'P', OD.paperEmpty, 'G', OD.itemGlue);
+		CR.shaped   (IL.Tape.get(1), CR.DEF, "PPP", " G ", 'P', OD.paperEmpty, 'G', OD.itemGlue);
+		CR.shapeless(IL.Tape.get(1), CR.DEF, new Object[] {IL.Tape_Used, IL.Tape_Used, IL.Tape_Used, IL.Tape_Used});
 		tBehaviour = new Behavior_Duct_Tape(null, IL.Tape_Used.get(1), IL.Tape.get(1), 0, 10000);
 		ItemsGT.addNEIRedirects(IL.Tape.get(1), IL.Tape_Used.get(1));
 		BooksGT.BOOK_REGISTER.put(IL.Tape           , (byte)57);
@@ -532,7 +535,8 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		IL.Duct_Tape                       .set(addItem(12002, "Duct Tape", "Full Roll", TC.stack(TC.FABRICO, 1), TC.stack(TC.LIMUS, 1), OD.craftingDuctTape));
 		IL.Duct_Tape_Used                  .set(addItem(12003, "Duct Tape", "Used Roll", TC.stack(TC.FABRICO, 1), TC.stack(TC.LIMUS, 1)));
-		CR.shaped(IL.Duct_Tape.get(1), CR.DEF, "PPP", " G ", 'P', OP.foil.dat(MT.Plastic), 'G', OD.itemGlue);
+		CR.shaped   (IL.Duct_Tape.get(1), CR.DEF, "PPP", " G ", 'P', OP.foil.dat(MT.Plastic), 'G', OD.itemGlue);
+		CR.shapeless(IL.Duct_Tape.get(1), CR.DEF, new Object[] {IL.Duct_Tape_Used, IL.Duct_Tape_Used, IL.Duct_Tape_Used, IL.Duct_Tape_Used});
 		tBehaviour = new Behavior_Duct_Tape(null, IL.Duct_Tape_Used.get(1), IL.Duct_Tape.get(1), 1, 100000);
 		ItemsGT.addNEIRedirects(IL.Duct_Tape.get(1), IL.Duct_Tape_Used.get(1));
 		BooksGT.BOOK_REGISTER.put(IL.Duct_Tape      , (byte)58);
@@ -542,7 +546,8 @@ public class MultiItemRandomTools extends MultiItemRandom implements IItemRottab
 		
 		IL.Brain_Tape                      .set(addItem(12008, "BrainTech Aerospace Advanced Reinforced Duct Tape FAL-84", "Full Roll", TC.stack(TC.TUTAMEN, 1), TC.stack(TC.LIMUS, 1), OD.craftingDuctTape));
 		IL.Brain_Tape_Used                 .set(addItem(12009, "BrainTech Aerospace Advanced Reinforced Duct Tape FAL-84", "Used Roll", TC.stack(TC.TUTAMEN, 1), TC.stack(TC.LIMUS, 1), OD.craftingDuctTape));
-		CR.shaped(IL.Brain_Tape.get(1), CR.DEF, "PPP", " G ", 'P', OP.foil.dat(ANY.W), 'G', OD.itemGlue);
+		CR.shaped   (IL.Brain_Tape.get(1), CR.DEF, "PPP", " G ", 'P', OP.foil.dat(ANY.W), 'G', OD.itemGlue);
+		CR.shapeless(IL.Brain_Tape.get(1), CR.DEF, new Object[] {IL.Brain_Tape_Used, IL.Brain_Tape_Used, IL.Brain_Tape_Used, IL.Brain_Tape_Used});
 		tBehaviour = new Behavior_Duct_Tape(null, IL.Brain_Tape_Used.get(1), IL.Brain_Tape.get(1), 2, 10000000);
 		ItemsGT.addNEIRedirects(IL.Brain_Tape.get(1), IL.Brain_Tape_Used.get(1));
 		BooksGT.BOOK_REGISTER.put(IL.Brain_Tape     , (byte)59);

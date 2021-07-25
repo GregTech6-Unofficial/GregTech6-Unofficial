@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -19,8 +19,6 @@
 
 package gregtech.asm.transformers;
 
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnNode;
@@ -28,6 +26,7 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
 
+import gregtech.asm.GT_ASM;
 import net.minecraft.launchwrapper.IClassTransformer;
 
 /**
@@ -36,14 +35,12 @@ import net.minecraft.launchwrapper.IClassTransformer;
 public class Minecraft_LavaFlammableFix implements IClassTransformer  {
 	@Override
 	public byte[] transform(String name, String transformedName, byte[] basicClass) {
-		if (!name.equals("ant") && !name.equals("net.minecraft.block.BlockStaticLiquid")) return basicClass;
-
-		ClassNode classNode = new ClassNode();
-		ClassReader classReader = new ClassReader(basicClass);
-		classReader.accept(classNode, 0);
-
+		if (!transformedName.equals("net.minecraft.block.BlockStaticLiquid")) return basicClass;
+		ClassNode classNode = GT_ASM.makeNodes(basicClass);
+		
 		for (MethodNode m: classNode.methods) {
-			if (m.name.equals("isFlammable")) {
+			if (m.name.equals("isFlammable") || m.name.equals("o")) {
+				GT_ASM.logger.info("Transforming net.minecraft.block.BlockStaticLiquid.isFlammable");
 				m.instructions.clear();
 				m.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1)); // Load world
 				m.instructions.add(new VarInsnNode(Opcodes.ILOAD, 2)); // Load x
@@ -51,7 +48,8 @@ public class Minecraft_LavaFlammableFix implements IClassTransformer  {
 				m.instructions.add(new VarInsnNode(Opcodes.ILOAD, 4)); // Load z
 				m.instructions.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "gregtech/asm/transformers/minecraft/Replacements", "BlockStaticLiquid_isFlammable", "(Lnet/minecraft/world/World;III)Z", false));
 				m.instructions.add(new InsnNode(Opcodes.IRETURN));
-			} else if (m.name.equals("updateTick")) {
+			} else if (m.name.equals("updateTick") || (m.name.equals("a") && m.desc.equals("(Lahb;IIILjava/util/Random;)V"))) {
+				GT_ASM.logger.info("Transforming net.minecraft.block.BlockStaticLiquid.updateTick");
 				m.instructions.clear();
 				m.instructions.add(new VarInsnNode(Opcodes.ALOAD, 0)); // Load this
 				m.instructions.add(new VarInsnNode(Opcodes.ALOAD, 1)); // Load world
@@ -63,9 +61,7 @@ public class Minecraft_LavaFlammableFix implements IClassTransformer  {
 				m.instructions.add(new InsnNode(Opcodes.RETURN));
 			}
 		}
-
-		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS | ClassWriter.COMPUTE_FRAMES);
-		classNode.accept(writer);
-		return writer.toByteArray();
+		
+		return GT_ASM.writeByteArray(classNode);
 	}
 }

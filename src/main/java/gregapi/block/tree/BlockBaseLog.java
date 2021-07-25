@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -21,12 +21,20 @@ package gregapi.block.tree;
 
 import static gregapi.data.CS.*;
 
+import java.util.List;
+
+import gregapi.data.MT;
 import gregapi.data.OP;
+import gregapi.data.RM;
 import gregapi.render.IIconContainer;
+import gregapi.util.CR;
+import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -40,6 +48,17 @@ import net.minecraftforge.common.util.ForgeDirection;
 public abstract class BlockBaseLog extends BlockBaseTree {
 	public BlockBaseLog(Class<? extends ItemBlock> aItemClass, String aNameInternal, Material aMaterial, SoundType aSoundType, long aMaxMeta, IIconContainer[] aIcons) {
 		super(aItemClass, aNameInternal, aMaterial, aSoundType, Math.min(4, aMaxMeta), aIcons);
+		
+		// To make All-Bark Logs.
+		for (byte tMeta = 0; tMeta < maxMeta(); tMeta++) {
+			RM.chisel(aNameInternal+"."+tMeta, ST.make(this, 1, tMeta), ST.make(this, 1, tMeta|12));
+			
+			CR.shapeless(ST.make(this, 4, tMeta|12), CR.DEF_NCC, new Object[] {OP.dust.dat(MT.Bark), ST.make(this, 1, tMeta), ST.make(this, 1, tMeta), ST.make(this, 1, tMeta), ST.make(this, 1, tMeta)});
+			CR.shapeless(ST.make(this, 3, tMeta|12), CR.DEF_NCC, new Object[] {OP.dust.dat(MT.Bark), ST.make(this, 1, tMeta), ST.make(this, 1, tMeta), ST.make(this, 1, tMeta)});
+			CR.shapeless(ST.make(this, 2, tMeta|12), CR.DEF_NCC, new Object[] {OP.dust.dat(MT.Bark), ST.make(this, 1, tMeta), ST.make(this, 1, tMeta)});
+			CR.shapeless(ST.make(this, 1, tMeta|12), CR.DEF_NCC, new Object[] {OP.dust.dat(MT.Bark), ST.make(this, 1, tMeta)});
+			CR.shapeless(ST.make(this, 1, tMeta|12), CR.DEF_NCC, new Object[] {OP.dustSmall.dat(MT.Bark), ST.make(this, 1, tMeta)});
+		}
 	}
 	
 	@Override public String getHarvestTool(int aMeta) {return TOOL_axe;}
@@ -57,4 +76,5 @@ public abstract class BlockBaseLog extends BlockBaseTree {
 	@Override public int onBlockPlaced(World aWorld, int aX, int aY, int aZ, int aSide, float aHitX, float aHitY, float aHitZ, int aMeta) {return PILLAR_DATA_SIDE[aMeta][aSide];}
 	@Override public IIcon getIcon(int aSide, int aMeta) {return mIcons[2*(aMeta&PILLAR_DATA)+(PILLAR_TO_AXIS[aMeta][aSide]?0:1)].getIcon(0);}
 	@Override public boolean isWood(IBlockAccess aWorld, int aX, int aY, int aZ) {return T;}
+	@SuppressWarnings("unchecked") @Override public void getSubBlocks(Item aItem, CreativeTabs aTab, @SuppressWarnings("rawtypes") List aList) {for (int i = 0; i < maxMeta(); i++) {aList.add(ST.make(aItem, 1, i)); aList.add(ST.make(aItem, 1, i|12));}}
 }

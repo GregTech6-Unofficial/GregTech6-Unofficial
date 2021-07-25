@@ -61,7 +61,7 @@ import net.minecraftforge.fluids.IFluidTank;
  */
 @SuppressWarnings("unchecked")
 public enum FL {
-	  Error                     ("error")
+	  Error                     ("error"                                                    , HIDDEN)
 	  
 	, UUM                       ("ic2uumatter"                                              , LIQUID, ENCHANTED_EFFECT)
 	, MatterNeutral             ("neutralmatter"                                            , LIQUID, ENCHANTED_EFFECT)
@@ -190,7 +190,7 @@ public enum FL {
 	, Juice_Fig                 ("figjuice"                                                 , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Coconut             ("coconutmilk"                                              , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
 	, Juice_Date                ("datejuice"                                                , SIMPLE, LIQUID, FOOD, JUICE, FRUIT_JUICE)
-
+	
 	, Smoothie_Fruit            ("fruitsmoothie"                                            , SIMPLE, LIQUID, FOOD, THERMOS)
 	, Smoothie_Melon            ("melonsmoothie"                                            , SIMPLE, LIQUID, FOOD, THERMOS)
 	, Smoothie_Kiwi             ("kiwismoothie"                                             , SIMPLE, LIQUID, FOOD, THERMOS)
@@ -225,7 +225,7 @@ public enum FL {
 	, Smoothie_Papaya           ("papayasmoothie"                                           , SIMPLE, LIQUID, FOOD, THERMOS)
 	, Smoothie_Fig              ("figsmoothie"                                              , SIMPLE, LIQUID, FOOD, THERMOS)
 	, Smoothie_Coconut          ("coconutsmoothie"                                          , SIMPLE, LIQUID, FOOD, THERMOS)
-
+	
 	, Juice_Carrot              ("binnie.juicecarrot"       , "carrotjuice"                 , SIMPLE, LIQUID, FOOD, JUICE)
 	, Juice_Tomato              ("binnie.juicetomato"       , "tomatojuice"                 , SIMPLE, LIQUID, FOOD, JUICE)
 	, Juice_Beet                ("beetjuice"                                                , SIMPLE, LIQUID, FOOD, JUICE)
@@ -235,7 +235,7 @@ public enum FL {
 	, Juice_Potato              ("potatojuice"              , "potion.potatojuice"          , SIMPLE, LIQUID, FOOD, JUICE)
 	, Juice_Reed                ("reedwater"                , "potion.reedwater"            , SIMPLE, LIQUID, FOOD, JUICE)
 	, Juice_Cactus              ("cactuswater"                                              , SIMPLE, LIQUID, FOOD, JUICE)
-
+	
 	, Mash_Rice                 ("ricewater"                , "potion.ricewater"            , SIMPLE, LIQUID, FOOD)
 	, Mash_Hops                 ("hopsmash"                 , "potion.hopsjuice"            , SIMPLE, LIQUID, FOOD)
 	, Mash_WheatHops            ("wheathopsmash"            , "potion.wheatyhopsjuice"      , SIMPLE, LIQUID, FOOD)
@@ -243,7 +243,7 @@ public enum FL {
 	, Mash_Corn                 ("binnie.mashcorn"                                          , SIMPLE, LIQUID, FOOD)
 	, Mash_Rye                  ("binnie.mashrye"                                           , SIMPLE, LIQUID, FOOD)
 	, Mash_Grain                ("binnie.mashgrain"                                         , SIMPLE, LIQUID, FOOD)
-
+	
 	, Resin                     ("resin"                                                    , SIMPLE, LIQUID)
 	, Resin_Spruce              ("spruceresin"                                              , SIMPLE, LIQUID)
 	, Resin_Rubber              ("fluidrubbertreesap"                                       , SIMPLE, LIQUID)
@@ -253,44 +253,47 @@ public enum FL {
 	, Sap                       ("sap"                                                      , SIMPLE, LIQUID, FOOD)
 	, Sap_Rainbow               ("rainbowsap"                                               , SIMPLE, LIQUID, FOOD)
 	, Sap_Maple                 ("maplesap"                                                 , SIMPLE, LIQUID, FOOD)
-
+	
 	, Syrup_Maple               ("maplesyrup"                                               , SIMPLE, LIQUID, FOOD)
-
+	
 	, Nutbutter_Peanut          ("peanutbutter"                                             , SIMPLE, LIQUID, FOOD)
-
+	
 	, Cream                     ("grcmilk.cream"            , "cream"                       , SIMPLE, LIQUID, FOOD)
 	, Cream_Chocolate           ("chocolatecream"                                           , SIMPLE, LIQUID, FOOD)
 	, Cream_Coconut             ("coconutcream"                                             , SIMPLE, LIQUID, FOOD)
 	, Cream_Nutella             ("nutella"                                                  , SIMPLE, LIQUID, FOOD)
-
+	
+	, Ketchup                   ("ketchup"                                                  , SIMPLE, LIQUID, FOOD)
+	
 	, Mayo                      ("mayo"                                                     , SIMPLE, LIQUID, FOOD)
 	, Dressing                  ("potion.dressing"                                          , SIMPLE, LIQUID, FOOD)
-
+	
 	, Soup_Mushroom             ("mushroomsoup"                                             , SIMPLE, LIQUID, FOOD)
-
+	
 	, Sauce_Chili               ("chillysauce"              , "potion.chillysauce"          , SIMPLE, LIQUID, FOOD)
 	, Sauce_Hot                 ("potion.hotsauce"                                          , SIMPLE, LIQUID, FOOD)
 	, Sauce_Diabolo             ("potion.diabolosauce"                                      , SIMPLE, LIQUID, FOOD)
 	, Sauce_Diablo              ("potion.diablosauce"                                       , SIMPLE, LIQUID, FOOD)
 	, Sauce_Snitches            ("potion.diablosauce.strong"                                , SIMPLE, LIQUID, FOOD)
-
+	, Sauce_BBQ                 ("bbqsauce"                                                 , SIMPLE, LIQUID, FOOD)
+	
 	, Slime_Pink                ("pinkslime"                                                , SIMPLE, LIQUID, FOOD, SLIME)
 	, Slime_Green               ("slime"                                                    , SIMPLE, LIQUID, FOOD, SLIME)
 	, BAWLS                     ("bawls"                                                    , SIMPLE, LIQUID, FOOD)
-
+	
 	, Tea                       ("tea"                      , "potion.tea"                  , SIMPLE, LIQUID, FOOD, THERMOS, TEA)
 	, Tea_Sweet                 ("sweettea"                 , "potion.sweettea"             , SIMPLE, LIQUID, FOOD, THERMOS, TEA)
 	, Tea_Ice                   ("icetea"                   , "potion.icetea"               , SIMPLE, LIQUID, FOOD, THERMOS, TEA)
-
+	
 	, Purple_Drink              ("purpledrink"              , "potion.purpledrink"          , SIMPLE, LIQUID, FOOD)
 	, Lemonade                  ("potion.lemonade"                                          , SIMPLE, LIQUID, FOOD)
 	, Grenade_Juice             ("potion.cavejohnsonsgrenadejuice"                          , SIMPLE, LIQUID, FOOD)
-
+	
 	, Vinegar_Grape             ("vinegar"                  , "potion.vinegar"              , SIMPLE, LIQUID, FOOD, ALCOHOLIC, VINEGAR)
 	, Vinegar_Apple             ("applevinegar"                                             , SIMPLE, LIQUID, FOOD, ALCOHOLIC, VINEGAR)
 	, Vinegar_Cane              ("canevinegar"                                              , SIMPLE, LIQUID, FOOD, ALCOHOLIC, VINEGAR)
 	, Vinegar_Rice              ("ricevinegar"                                              , SIMPLE, LIQUID, FOOD, ALCOHOLIC, VINEGAR)
-
+	
 	, Wine_Fruit                ("binnie.juice"                                             , SIMPLE, LIQUID, FOOD, ALCOHOLIC, WINE)
 	, Wine_Lemon                ("limoncello"               , "potion.limoncello"           , SIMPLE, LIQUID, FOOD, ALCOHOLIC, WINE)
 	, Wine_Agave                ("binnie.wineagave"                                         , SIMPLE, LIQUID, FOOD, ALCOHOLIC, WINE)
@@ -431,7 +434,10 @@ public enum FL {
 	, Glass                     ("glass"                    , "molten.glass"                , SIMPLE, LIQUID)
 	, Sluice                    ("sluicejuice"                                              , SIMPLE, LIQUID)
 	
-	, Myst_Ink                  ("myst.ink.black"                                           , SIMPLE, LIQUID, ENCHANTED_EFFECT)
+	, Indigo                    ("indigo"                                                   , SIMPLE, LIQUID, DYE)
+	
+	, InkSquid                  ("squidink"                                                 , SIMPLE, LIQUID, DYE)
+	, InkMyst                   ("myst.ink.black"                                           , SIMPLE, LIQUID, ENCHANTED_EFFECT)
 	
 	, Blaze                     ("blaze"                    , "molten.blaze"                , LIQUID, ENCHANTED_EFFECT) // 144 per Unit
 	, FieryBlood                ("fieryblood"                                               , LIQUID, ENCHANTED_EFFECT) // 144 per Unit
@@ -551,21 +557,24 @@ public enum FL {
 	, Potion_Invisibility_1D    ("potion.invisibility.lingering"                            , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	, Potion_Invisibility_1LD   ("potion.invisibility.long.lingering"                       , SIMPLE, LIQUID, POTION, ENCHANTED_EFFECT)
 	;
-
+	
 	public final String mName;
-
+	
 	private FL(String aName, Collection<String>... aFluidSets) {
 		mName = aName;
 		for (Collection<String> aFluidSet : aFluidSets) {aFluidSet.add(mName);}
 	}
 	private FL(String aName, String aOldName, Collection<String>... aFluidSets) {
 		mName = aName;
+		FluidsGT.HIDDEN.add(aOldName);
 		FluidsGT.NONSTANDARD.add(aOldName);
 		FluidsGT.FLUID_RENAMINGS.put(aOldName, mName);
 		for (Collection<String> aFluidSet : aFluidSets) {aFluidSet.add(mName); aFluidSet.add(aOldName);}
 	}
 	private FL(String aName, String aOldName1, String aOldName2, Collection<String>... aFluidSets) {
 		mName = aName;
+		FluidsGT.HIDDEN.add(aOldName1);
+		FluidsGT.HIDDEN.add(aOldName2);
 		FluidsGT.NONSTANDARD.add(aOldName1);
 		FluidsGT.NONSTANDARD.add(aOldName2);
 		FluidsGT.FLUID_RENAMINGS.put(aOldName1, mName);
@@ -734,8 +743,13 @@ public enum FL {
 	
 	public static boolean lighter(BlockFluidBase aFluid) {return aFluid != null && lighter(aFluid.getFluid());}
 	public static boolean lighter(IFluidTank aFluid)     {return aFluid != null && lighter(aFluid.getFluid());}
-	public static boolean lighter(FluidStack aFluid)     {return aFluid != null && aFluid.getFluid() != null && aFluid.getFluid().getDensity(aFluid)<0;}
+	public static boolean lighter(FluidStack aFluid)     {return aFluid != null && aFluid.getFluid() != null && aFluid.getFluid().getDensity(aFluid) < 0;}
 	public static boolean lighter(Fluid aFluid)          {return aFluid != null && aFluid.getDensity(make(aFluid, 1000)) < 0;}
+	
+	public static boolean heavier(BlockFluidBase aFluid) {return aFluid != null && heavier(aFluid.getFluid());}
+	public static boolean heavier(IFluidTank aFluid)     {return aFluid != null && heavier(aFluid.getFluid());}
+	public static boolean heavier(FluidStack aFluid)     {return aFluid != null && aFluid.getFluid() != null && aFluid.getFluid().getDensity(aFluid) > 0;}
+	public static boolean heavier(Fluid aFluid)          {return aFluid != null && aFluid.getDensity(make(aFluid, 1000)) > 0;}
 	
 	public static int dir(BlockFluidBase aFluid) {return lighter(aFluid) ? +1 : -1;}
 	public static int dir(IFluidTank aFluid)     {return lighter(aFluid) ? +1 : -1;}
@@ -791,24 +805,24 @@ public enum FL {
 	public static boolean fillAll (IFluidHandler aFluidHandler, byte[] aSides, FluidStack aFluid, boolean aDoFill) {return aFluidHandler != null && aFluid != null && fillAll_(aFluidHandler, aSides, aFluid, aDoFill);}
 	public static boolean fillAll_(IFluidHandler aFluidHandler, byte[] aSides, FluidStack aFluid, boolean aDoFill) {for (byte tSide : aSides) if (aFluidHandler.fill(FORGE_DIR[tSide], aFluid, F) == aFluid.amount && (!aDoFill || aFluidHandler.fill(FORGE_DIR[tSide], aFluid, T) > 0)) return T; return F;}
 	
-	public static long move (@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Integer.MAX_VALUE);}
-	public static long move_(@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Integer.MAX_VALUE);}
+	public static long move (@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Long.MAX_VALUE);}
+	public static long move_(@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Long.MAX_VALUE);}
 	public static long move (@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {return aFrom != null && aFrom.mTileEntity instanceof IFluidHandler && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMaxMoved) : 0;}
 	public static long move_(@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; FluidStack tDrained = ((IFluidHandler)aFrom.mTileEntity).drain(aFrom.getForgeSideOfTileEntity(), UT.Code.bindInt(aMaxMoved), F); if (tDrained == null || tDrained.amount <= 0) return 0; tDrained.amount = Code.bindInt(fill_(aTo, tDrained.copy(), T)); if (tDrained.amount <= 0) return 0; ((IFluidHandler)aFrom.mTileEntity).drain(aFrom.getForgeSideOfTileEntity(), tDrained, T); return tDrained.amount;}
 	public static long move (@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, FluidStack aMoved) {return aFrom != null && aFrom.mTileEntity instanceof IFluidHandler && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMoved) : 0;}
 	public static long move_(@SuppressWarnings("rawtypes") DelegatorTileEntity aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, FluidStack aMoved) {if (aMoved == null || aMoved.amount <= 0) return 0; FluidStack tDrained = ((IFluidHandler)aFrom.mTileEntity).drain(aFrom.getForgeSideOfTileEntity(), aMoved, F); if (tDrained == null || tDrained.amount <= 0) return 0; tDrained.amount = Code.bindInt(fill_(aTo, tDrained.copy(), T)); if (tDrained.amount <= 0) return 0; ((IFluidHandler)aFrom.mTileEntity).drain(aFrom.getForgeSideOfTileEntity(), tDrained, T); return tDrained.amount;}
-	public static long move (IFluidTank aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Integer.MAX_VALUE);}
-	public static long move_(IFluidTank aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Integer.MAX_VALUE);}
+	public static long move (IFluidTank aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Long.MAX_VALUE);}
+	public static long move_(IFluidTank aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Long.MAX_VALUE);}
 	public static long move (IFluidTank aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {return aFrom != null && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMaxMoved) : 0;}
 	public static long move_(IFluidTank aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; FluidStack tDrained = aFrom.drain(UT.Code.bindInt(aMaxMoved), F); if (tDrained == null || tDrained.amount <= 0) return 0; tDrained.amount = Code.bindInt(fill_(aTo, tDrained.copy(), T)); if (tDrained.amount <= 0) return 0; aFrom.drain(tDrained.amount, T); return tDrained.amount;}
-	public static long move (IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Integer.MAX_VALUE);}
-	public static long move_(IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Integer.MAX_VALUE);}
+	public static long move (IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Long.MAX_VALUE);}
+	public static long move_(IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Long.MAX_VALUE);}
 	public static long move (IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {return aFrom != null && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMaxMoved) : 0;}
-	public static long move_(IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; long rAmount = 0; for (IFluidTank tFrom : aFrom) if (tFrom != null) rAmount += move_(tFrom, aTo, aMaxMoved); return rAmount;}
-	public static long move (@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Integer.MAX_VALUE);}
-	public static long move_(@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Integer.MAX_VALUE);}
+	public static long move_(IFluidTank[] aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; long rAmount = 0; for (IFluidTank tFrom : aFrom) if (tFrom != null) rAmount += move_(tFrom, aTo, aMaxMoved-rAmount); return rAmount;}
+	public static long move (@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move (aFrom, aTo, Long.MAX_VALUE);}
+	public static long move_(@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo) {return move_(aFrom, aTo, Long.MAX_VALUE);}
 	public static long move (@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {return aFrom != null && aTo != null && aTo.mTileEntity instanceof IFluidHandler ? move_(aFrom, aTo, aMaxMoved) : 0;}
-	public static long move_(@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; long rAmount = 0; for (Object tFrom : aFrom) if (tFrom instanceof IFluidTank) rAmount += move_((IFluidTank)tFrom, aTo, aMaxMoved); return rAmount;}
+	public static long move_(@SuppressWarnings("rawtypes") Iterable aFrom, @SuppressWarnings("rawtypes") DelegatorTileEntity aTo, long aMaxMoved) {if (aMaxMoved <= 0) return 0; long rAmount = 0; for (Object tFrom : aFrom) if (tFrom instanceof IFluidTank) rAmount += move_((IFluidTank)tFrom, aTo, aMaxMoved-rAmount); return rAmount;}
 	
 	
 	public static String configName(FluidStack aFluid) {

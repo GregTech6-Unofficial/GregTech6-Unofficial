@@ -45,6 +45,7 @@ public class MD {
 	, IHL               = new ModData(ModIDs.IHL                , "IHL")
 	
 	, FMB               = new ModData(ModIDs.FMB                , "Forge Microblocks")
+	, TRANSLOCATOR      = new ModData(ModIDs.TRANSLOCATOR       , "Translocator")
 	, FUNK              = new ModData(ModIDs.FUNK               , "Funky Locomotion")
 	, BAUBLES           = new ModData(ModIDs.BAUBLES            , "Baubles")
 	
@@ -127,7 +128,9 @@ public class MD {
 	, EIO               = new ModData(ModIDs.EIO                , "Ender IO")
 	, RT                = new ModData(ModIDs.RT                 , "Random Things")
 	, AA                = new ModData(ModIDs.AA                 , "Actually Additions")
+	
 	, SD                = new ModData(ModIDs.SD                 , "Storage Drawers")
+	, BTRS              = new ModData(ModIDs.BTRS               , "Better Storage")
 	, JABBA             = new ModData(ModIDs.JABBA              , "JABBA")
 	
 	, MgC               = new ModData(ModIDs.MgC                , "Magneticraft")
@@ -157,6 +160,7 @@ public class MD {
 	, HaC               = new ModData(ModIDs.HaC                , "HarvestCraft")
 	, CookBook          = new ModData(ModIDs.CookBook           , "Cooking for Blockheads")
 	, APC               = new ModData(ModIDs.APC                , "AppleCore")
+	, HO                = new ModData(ModIDs.HO                 , "Hunger Overhaul")
 	, ENVM              = new ModData(ModIDs.ENVM               , "Enviromine")
 	, MaCr              = new ModData(ModIDs.MaCr               , "Magical Crops")
 	, MaCu              = new ModData(ModIDs.MaCu               , "Mariculture")
@@ -193,6 +197,11 @@ public class MD {
 	, ATG               = new ModData(ModIDs.ATG                , "Alternate Terrain Generation")
 	, RTG               = new ModData(ModIDs.RTG                , "Realistic Terrain Generation")
 	, RWG               = new ModData(ModIDs.RWG                , "Realistic World Generation")
+	
+	, A97               = new ModData(ModIDs.A97                , "Aroma1997 Core")
+	, A97_MINING        = new ModData(ModIDs.A97_MINING         , "Aroma1997's Mining Dimension")
+	
+	, CW2               = new ModData(ModIDs.CW2                , "Cave World 2")
 	
 	, GaSu              = new ModData(ModIDs.GaSu               , "Ganys Surface")
 	, GaNe              = new ModData(ModIDs.GaNe               , "Ganys Nether")

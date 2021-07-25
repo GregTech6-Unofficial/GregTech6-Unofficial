@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -80,11 +80,12 @@ public class CoverPump extends AbstractCoverAttachment {
 		super.addToolTips(aList, aStack, aF3_H);
 		aList.add(LH.Chat.CYAN + "Transfers " + mThroughput + " L/sec");
 		aList.add(LH.Chat.ORANGE + "Doesn't do Fluid Blocks! Use Drain for that instead!");
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_CONTROLLER_COVER));
 		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_SCREWDRIVER));
 	}
 	
 	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return aData.mVisuals[aSide]==0?sTextureOut:sTextureIn;}
-	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide == aTextureSide ? BlockTextureMulti.get(BACKGROUND_COVER, aData.mVisuals[aSide]==0?sTextureOut:sTextureIn) : aSide == OPPOSITES[aTextureSide] ? BlockTextureMulti.get(BACKGROUND_COVER, aData.mVisuals[aSide]!=0?sTextureOut:sTextureIn) : BACKGROUND_COVER;}
+	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide == aTextureSide ? BlockTextureMulti.get(BACKGROUND_COVER, aData.mVisuals[aSide]==0?sTextureOut:sTextureIn) : aSide == OPOS[aTextureSide] ? BlockTextureMulti.get(BACKGROUND_COVER, aData.mVisuals[aSide]!=0?sTextureOut:sTextureIn) : BACKGROUND_COVER;}
 	@Override public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {return BACKGROUND_COVER;}
 	@Override public boolean needsVisualsSaved(byte aSide, CoverData aData) {return T;}
 	@Override public boolean showsConnectorFront(byte aCoverSide, CoverData aData) {return F;}

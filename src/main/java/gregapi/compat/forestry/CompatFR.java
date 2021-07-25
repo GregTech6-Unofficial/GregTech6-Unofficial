@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -25,6 +25,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import forestry.api.farming.Farmables;
 import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmable;
+import forestry.api.storage.BackpackManager;
 import forestry.core.utils.vect.Vect;
 import forestry.farming.logic.CropBlock;
 import gregapi.block.ItemBlockBase;
@@ -32,6 +33,8 @@ import gregapi.block.tree.BlockBaseSapling;
 import gregapi.code.ItemStackContainer;
 import gregapi.code.ItemStackSet;
 import gregapi.compat.CompatBase;
+import gregapi.data.MD;
+import gregapi.util.ST;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -47,7 +50,16 @@ public class CompatFR extends CompatBase implements ICompatFR, IFarmable {
 	
 	@Override
 	public void addWindfall(ItemStack aStack) {
-		mWindfalls.add(aStack);
+		if (ST.valid(aStack)) mWindfalls.add(aStack);
+	}
+	
+	@Override
+	public void addToBackpacks(String aType, ItemStack aStack) {
+		if (MD.FR.mLoaded) try {
+			BackpackManager.definitions.get(aType).addValidItem(aStack);
+		} catch(Throwable e) {
+			e.printStackTrace(ERR);
+		}
 	}
 	
 	@Override

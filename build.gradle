@@ -191,6 +191,7 @@ dependencies {
 	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
 	compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+	compileOnly "inventorytweaks:InventoryTweaks:1.59-dev:deobf"
 	compileOnly "net.electricalage.eln:ElectricalAge-jrddunbr:1.16.3:dev"
 	compileOnly "net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev"
 	compileOnly "com.mod-buildcraft:buildcraft:7.1.23:dev"
@@ -207,6 +208,7 @@ dependencies {
 	compileOnly "cofh:CoFHCore:1.7.10R3.0.4:dev"
 	compileOnly "cofh:CoFHLib:1.7.10R3.0.3:dev"
 	compileOnly "applecore:AppleCore:1.7.10-3.1.1:deobf"
+	compileOnly "iguanaman:HungerOverhaul:1.7.10-1.0.0-basic:deobf"
 	compileOnly "li.cil.oc:OpenComputers:MC1.7.10-1.7.2.1204:dev"
 	// This ComputerCraft thing is *SUCH* a hack, but ComputerCraft is... not right...  This only works because of CodeChickenCore Magic being included up above...
 	compileOnly "dan200.computercraft:ComputerCraft:1.75"
@@ -225,11 +227,17 @@ dependencies {
 	compileOnly "com.builtbroken:VoltzEngine:1.7.10-1.11.0b466:deobf"
 	compileOnly "com.hbm:hbm:1.0.27:dev"
 	compileOnly "com.celestek.hexcraft:HEXCraft:1.7.10-0.13.1:dev"
-
+	compileOnly "team.chisel.ctmlib:CTMLib:MC1.7.10-1.4.1.5:deobf"
+	compileOnly "team.chisel:Chisel:2.9.5.12:deobf"
+	compileOnly "ganymedes01.etfuturum:Et_Futurum_Requiem:2.1.2:dev"
+	compileOnly "blusunrize:ImmersiveEngineering:0.7.7:deobf"
+	
+	
 	// List of potentially useful mods that may or may not be linked in here:
 	//compileOnly "appeng:appliedenergistics2:rv3-beta-6:dev"
 	//compileOnly "applecore:AppleCore:1.7.10-3.1.1:deobf"
 	//compileOnly "binnie:binnie-mods:1.7.10-2.0.22:dev"
+	//compileOnly "blusunrize:AquaTweaks-1.7.10:1.0:deobf"
 	//compileOnly "blusunrize:ImmersiveEngineering:0.7.7:deobf"
 	//compileOnly "climateControl:ClimateControl:0.6.61" // Hack
 	//compileOnly "climateControl:ClimateControl:0.8.2" // Hack
@@ -260,9 +268,11 @@ dependencies {
 	//compileOnly "com.creativemd:craftingmanager:0.7.6:dev"
 	//compileOnly "com.creativemd:creativecore:1.3.24:dev"
 	//compileOnly "com.enderio:EnderIO/1.7.10-2.3.0.430_beta:dev"
+	//compileOnly "com.github.glitchfiend.biomesoplenty:BiomesOPlenty:1.7.10-2.1.0.1465:deobf"
 	//compileOnly "com.gregoriust.gregtech:gregtech_1.7.10:6.09.00:dev"
 	//compileOnly "com.hbm:hbm:1.0.27:dev"
 	//compileOnly "com.mod-buildcraft:buildcraft:7.1.23:dev"
+	//compileOnly "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.0.0:dev"
 	//compileOnly "com.rwtema.funkylocomotion:funky-locomotion-1.7.10:beta-7:deobf"
 	//compileOnly "com.shedar.IC2NuclearControl:IC2NuclearControl:2.4.3a:dev"
 	//compileOnly "com.wayoftime.bloodmagic:BloodMagic:1.7.10-1.3.3-18:deobf"
@@ -270,10 +280,15 @@ dependencies {
 	//compileOnly "dan200.computercraft:ComputerCraft:1.75" // Hack
 	//compileOnly "delvr.streams:Streams:1.7.10-0.3.4:deobf"
 	//compileOnly "enviromine:EnviroMine:1.3.124:deobf"
+	//compileOnly "ganymedes01.etfuturum:Et_Futurum_Requiem:2.1.2:dev"
 	//compileOnly "extracells:ExtraCells:1.7.10-2.3.14b200:deobf"
 	//compileOnly "ic2:IC2Classic:1.2.1.8:dev"
+	//compileOnly "iguanaman:HungerOverhaul:1.7.10-1.0.0-basic:deobf"
 	//compileOnly "io.netty-opis:Netty-opis:4.0.23" // Needed for dev opis because it doesn't know how to specify dependencies properly
+	//compileOnly "inventorytweaks:InventoryTweaks:1.59-dev:deobf"
 	//compileOnly "java.moze_intel:ProjectE:1.7.10-PE1.10.1:dev"
+	//compileOnly "k4unl:HydCraft:1.7.10-2.1.253:deobf"
+	//compileOnly "k4unl:k4lib:1.7.10-0.1.55:deobf"
 	//compileOnly "li.cil.oc:OpenComputers:MC1.7.10-1.7.2.1204:dev"
 	//compileOnly "mcp.mobius.opis:Opis:1.2.5_1.7.10:dev"
 	//compileOnly "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev"
@@ -300,9 +315,12 @@ dependencies {
 	//compileOnly "powercrystals:MineFactoryReloaded:[1.7.10]2.8.2B1-201:dev"
 	//compileOnly "qmunity:QmunityLib:0.2.118:deobf"
 	//compileOnly "santa:hairy-spice:0.1:dev"
+	//compileOnly "train:Traincraft:5.0.2:dev"
 	//compileOnly "team.chisel.ctmlib:CTMLib:MC1.7.10-1.4.1.5:deobf"
 	//compileOnly "team.chisel:Chisel:2.9.5.12:deobf"
 	//compileOnly "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev"
+	//compileOnly "thermalexpansion:ThermalExpansion:1.7.10R4.0.3:dev"
+	//compileOnly "thermalfoundation:ThermalFoundation:1.7.10R1.2.0:dev"
 	//compileOnly "ttftcuts.atg:ATG:1.7.10-0.12.0:DEV"
 	//compileOnly "twilightforest:twilightforest:1.7.10-2.3.8dev:dev"
 	//compileOnly "vazkii.botania:Botania:r1.8-250:deobf"
@@ -384,7 +402,6 @@ task generateBuildInfo(type: Copy) {
 	def templateContext = [
 		version: project.buildInfo.tag,
 		mcversion: project.minecraft.version,
-		builddate: new Date().toString(),
 	]
 	inputs.properties templateContext
 	from 'src/template/java'
@@ -457,6 +474,7 @@ jar {
 			exclude 'META-INF', 'META-INF/**'
 		}
 	}
+	exclude 'gregtech/api/interfaces/tileentity/IGregTechTileEntity.class'
 }
 
 task sourceJar(type: Jar) {
@@ -556,6 +574,8 @@ if (!hasProperty("mavenURL")) {
 }
 
 if ( !project.buildInfo.tag.contains("-dirty") && (System.getenv().ONLY_RELEASES!="true" || project.buildInfo.isRelease) ) {
+	task testIfUploadable {}
+
 	uploadArchives {
 		repositories {
 			mavenDeployer {

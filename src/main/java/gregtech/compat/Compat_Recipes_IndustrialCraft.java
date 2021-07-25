@@ -81,18 +81,6 @@ public class Compat_Recipes_IndustrialCraft extends CompatMods {
 		if (ConfigsGT.RECIPES.get(ConfigCategories.Recipes.harderrecipes, "ic2_" + (tName = "mfeUnit"         ), T)) {CR.shaped(ST.mkic(tName, 1), CR.DEF | CR.DEL_OTHER_SHAPED_RECIPES, "BCB", "BXB", "BMB", 'M', IL.IC2_Machine    , 'X', aRegistry.getItem(10083), 'B', "gt:re-battery3", 'C', OD_CIRCUITS[3]);}
 		if (ConfigsGT.RECIPES.get(ConfigCategories.Recipes.harderrecipes, "ic2_" + (tName = "mfsUnit"         ), T)) {CR.shaped(ST.mkic(tName, 1), CR.DEF | CR.DEL_OTHER_SHAPED_RECIPES, "BCB", "BXB", "BMB", 'M', IL.IC2_Machine_Adv, 'X', aRegistry.getItem(10043), 'B', ST.mkic("mfeUnit", 1), 'C', OD_CIRCUITS[4]);}
 		
-		CR.delate(IL.IC2_Carbon_Mesh.get(1));
-		CR.delate(IL.IC2_Carbon_Fiber.get(1));
-		CR.delate(IL.IC2_Machine.get(1));
-		CR.delate(IL.IC2_EnergyCrystal.get(1));
-		CR.delate(IL.IC2_ITNT.get(1));
-		CR.delate(IL.IC2_Mixed_Metal_Ingot.get(1));
-		CR.delate(IL.IC2_Fertilizer.get(1));
-		CR.delate(IL.IC2_Spray_WeedEx.get(1));
-		CR.delate(IL.IC2_Food_Can_Empty.get(1));
-		CR.delate(IL.Cell_Empty.get(1));
-		CR.delate(IL.Cell_Universal_Fluid.get(1));
-		
 		CR.remove(ST.make(Items.lava_bucket , 1, 0), IL.Cell_Empty.get(1));
 		CR.remove(ST.make(Items.water_bucket, 1, 0), IL.Cell_Empty.get(1));
 		
@@ -118,7 +106,7 @@ public class Compat_Recipes_IndustrialCraft extends CompatMods {
 			UT.removeSimpleIC2MachineRecipe(ST.make(Blocks.ice       , 1, W), ic2.api.recipe.Recipes.compressor.getRecipes(), NI);
 			UT.removeSimpleIC2MachineRecipe(ST.make(Blocks.packed_ice, 1, W), ic2.api.recipe.Recipes.compressor.getRecipes(), NI);
 		} catch(Throwable e) {
-			if (D1) e.printStackTrace(ERR);
+			e.printStackTrace(ERR);
 		}
 		
 		RM.ic2_compressor(ST.make(Items.snowball, 4, 0), ST.make(Blocks.snow, 1, 0));
@@ -136,7 +124,7 @@ public class Compat_Recipes_IndustrialCraft extends CompatMods {
 		try {
 			UT.removeSimpleIC2MachineRecipe(NI, ic2.api.recipe.Recipes.compressor.getRecipes(), ST.make(MD.IC2, "item.itemPartDCP", 1, 0));
 		} catch(Throwable e) {
-			if (D1) e.printStackTrace(ERR);
+			e.printStackTrace(ERR);
 		}
 		
 		RM.ic2_compressor(OP.ingot          .mat(MT.Cu, 9), OP.plateDense.mat(MT.Cu, 1));
@@ -291,15 +279,14 @@ public class Compat_Recipes_IndustrialCraft extends CompatMods {
 			UT.Reflection.getField(tCrop = Crops.instance.getCropList()[13], "mDrop").set(tCrop, OP.plantGtBlossom.mat(MT.Fe, 1));
 			UT.Reflection.getField(tCrop = Crops.instance.getCropList()[14], "mDrop").set(tCrop, OP.plantGtBlossom.mat(MT.Au, 1));
 		} catch(Throwable e) {
-			if (D1) e.printStackTrace(ERR);
+			e.printStackTrace(ERR);
 		}
 		
 		CR.delate(ST.mkic("MOXFuel", 1));
 		CR.delate(ST.mkic("UranFuel", 1));
 		CR.delate(ST.mkic("RTGPellets", 1));
-		CR.delate(IL.IC2_Energium_Dust.get(1));
 		
-		CR.shaped(IL.IC2_Iridium_Ore.get(1), CR.DEF_NAC_NCC, "XXX", "XXX", "XXX", 'X', IL.IC2_Iridium_Shard);
+		CR.shaped(IL.IC2_Iridium_Ore.get(1), CR.DEF_NCC, "XXX", "XXX", "XXX", 'X', IL.IC2_Iridium_Shard);
 		
 		if (ConfigsGT.RECIPES.get(ConfigCategories.Recipes.harderrecipes, "ic2_" + (tName = "windMill"       ), T)) {CR.shaped(ST.mkic(tName, 1), CR.DEF | CR.DEL_OTHER_SHAPED_RECIPES, "PwP", "IMI", "PCP", 'M', IL.IC2_Generator  , 'C', OD_CIRCUITS[1], 'P', OP.plateCurved.dat(MT.Magnalium), 'I', OP.plateDouble.dat(ANY.Steel));}
 		if (ConfigsGT.RECIPES.get(ConfigCategories.Recipes.harderrecipes, "ic2_" + (tName = "waterMill"      ), T)) {CR.shaped(ST.mkic(tName, 1), CR.DEF | CR.DEL_OTHER_SHAPED_RECIPES, "P P", "wMh", "PCP", 'M', IL.IC2_Generator  , 'C', OD_CIRCUITS[1], 'P', OP.plateCurved.dat(MT.Al));}
@@ -437,10 +424,9 @@ public class Compat_Recipes_IndustrialCraft extends CompatMods {
 		CR.shaped(ST.mkic("tinCableItem"    , 3), CR.DEF, "xP", 'P', OP.plate.dat(MT.Sn));
 		
 		CR.delate(ST.mkic("crop", 1));
-		CR.delate(IL.IC2_Scaffold.get(1));
 		
-		CR.shaped(ST.mkic("crop", 1), CR.DEF, "SsS", 'S', OP.stick.dat(MT.WoodSealed));
-		CR.shaped(ST.mkic("crop", 1), CR.DEF, "SkS", 'S', OP.stick.dat(MT.WoodSealed));
+		CR.shaped(ST.mkic("crop", 1), CR.DEF, "SsS", 'S', OP.stick.dat(MT.WoodTreated));
+		CR.shaped(ST.mkic("crop", 1), CR.DEF, "SkS", 'S', OP.stick.dat(MT.WoodTreated));
 		CR.shaped(IL.IC2_Scaffold.get(4), CR.DEF, "WWW", " S ", "S S", 'W', OD.plankAnyWood, 'S', OP.stick.dat(ANY.Wood));
 		
 		RM.Autoclave        .addRecipe2(T,  0, 3000, OM.dust(MT.EnergiumRed, U*9), ST.tag(9), FL.Steam.make(96000), FL.DistW.make(450), IL.IC2_EnergyCrystal.get(1));
@@ -663,7 +649,7 @@ public class Compat_Recipes_IndustrialCraft extends CompatMods {
 		//                                                                                                                                                                                                                                                                                                                                                 TIER,SIZE,    ,AH,HA,CH,FD,DF,CO,WD
 		new GT_BaseCrop("Desert Nova"           , "Mithion"                 , IL.ARS_DesertNova .get(1, IL.DesertNova .get(1))  , null                                                                                                                                                                  , IL.ARS_DesertNova.get(4, IL.DesertNova.get(4))    , 6, 4,     0, 1, 4, 5, 1, 7, 4,10, new String[] {"Cactus"      , "Magic", "Fire", "Explosive"});
 		new GT_BaseCrop("Cerublossom"           , "Mithion"                 , IL.ARS_Cerublossom.get(1, IL.Cerublossom.get(1))  , null                                                                                                                                                                  , IL.ARS_Cerublossom.get(4, IL.Cerublossom.get(4))  , 6, 4,     0, 1, 4, 1, 1, 2, 4,10, new String[] {"Flower"      , "Magic", "Shiny"});
-		new GT_BaseCrop("Shimmerleaf"           , "Azanor"                  , OP.nugget.mat(MT.Hg, 1)                           , null                                                                                                                                                                  , IL.TC_Shimmerleaf.get(4)                          ,11, 4,     0, 1, 4, 5, 1, 4, 1, 8, new String[] {"Flower"      , "Magic", "Shiny", "Metal", "Mercury"});
+		new GT_BaseCrop("Shimmerleaf"           , "Azanor"                  , OP.chunkGt.mat(MT.Hg, 1)                          , null                                                                                                                                                                  , IL.TC_Shimmerleaf.get(4)                          ,11, 4,     0, 1, 4, 5, 1, 4, 1, 8, new String[] {"Flower"      , "Magic", "Shiny", "Metal", "Mercury"});
 		new GT_BaseCrop("Cinderpearl"           , "Azanor"                  , ST.make(Items.blaze_powder, 1, 0)                 , null                                                                                                                                                                  , IL.TC_Cinderpearl.get(4)                          , 8, 4,     0, 1, 4, 3, 1, 8, 2, 8, new String[] {"Flower"      , "Magic", "Fire", "Blaze", "Sulfur", "Ingredient"});
 	}
 }

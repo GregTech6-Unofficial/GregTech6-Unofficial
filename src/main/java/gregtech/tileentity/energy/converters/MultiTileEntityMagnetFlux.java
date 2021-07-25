@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -35,7 +35,7 @@ public class MultiTileEntityMagnetFlux extends TileEntityBase11Bipolar implement
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (!aShouldSideBeRendered[aSide]) return null;
-		int aIndex = aSide==mFacing?0:aSide==OPPOSITES[mFacing]?1:2;
+		int aIndex = aSide==mFacing?0:aSide==OPOS[mFacing]?1:2;
 		return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[aIndex], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[aIndex]));
 	}
 	

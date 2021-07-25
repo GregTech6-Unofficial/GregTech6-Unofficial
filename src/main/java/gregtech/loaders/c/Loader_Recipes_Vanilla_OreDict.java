@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -48,11 +48,14 @@ import net.minecraft.item.ItemStack;
 public class Loader_Recipes_Vanilla_OreDict extends OreDictListenerEvent_Names {
 	@Override
 	public void addAllListeners() {
-		addListener(OP.dust.dat(MT.Glass), OP.ingot.dat(MT.Glass), OP.gem.dat(MT.Glass), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.add_smelting(aEvent.mStack, ST.make(Blocks.glass, 1, 0));
+		addListener(OP.dust.dat(MT.Glass), OP.dust.dat(MT.Sand), OP.dust.dat(MT.RedSand), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			RM.add_smelting(aEvent.mStack, ST.make(Blocks.glass_pane, 1, 0), F, F, F);
 		}});
-		addListener(OP.dust.dat(MT.Stone), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.add_smelting(aEvent.mStack, ST.make(Blocks.stone, 1, 0));
+		addListener(OP.blockDust.dat(MT.Glass), OP.blockDust.dat(MT.Sand), OP.blockDust.dat(MT.RedSand), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			RM.add_smelting(aEvent.mStack, ST.make(Blocks.glass, 1, 0), F, F, F);
+		}});
+		addListener(OP.blockDust.dat(MT.Stone), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			RM.add_smelting(aEvent.mStack, ST.make(Blocks.stone, 1, 0), F, F, F);
 		}});
 		addListener(DYE_OREDICTS_LENS[DYE_INDEX_White], new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			RM.LaserEngraver    .addRecipe2(T, 16,  64, ST.make(Blocks.stone, 1, W), ST.amount(0, aEvent.mStack), ST.make(Blocks.stonebrick, 1, 3));
@@ -60,26 +63,22 @@ public class Loader_Recipes_Vanilla_OreDict extends OreDictListenerEvent_Names {
 			RM.LaserEngraver    .addRecipe2(T, 16, 128, IL.Module_Basalt_Generator    .get(0), ST.amount(0, aEvent.mStack), IL.NeLi_Basalt_Polished.get(1, IL.NePl_Basalt_Polished.get(1, ST.make(BlocksGT.Basalt, 1, BlockStones.BRICK))));
 			RM.LaserEngraver    .addRecipe2(T, 16, 128, IL.Module_Blackstone_Generator.get(0), ST.amount(0, aEvent.mStack), IL.NeLi_Blackstone_Bricks.get(1, IL.NePl_Blackstone_Bricks.get(1, ST.make(BlocksGT.Basalt, 1, BlockStones.BRICK))));
 		}});
-		addListener("blockSolidObsidian", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Hammer       .addRecipe1(T, 16,  64,                           aEvent.mStack, IL.RC_Crushed_Obsidian.get(1, OP.dust.mat(MT.Obsidian, 8)));
-			RM.Crusher      .addRecipe1(T, 16, 600, new long[] {10000, 2500}, aEvent.mStack, IL.RC_Crushed_Obsidian.get(1, OP.dust.mat(MT.Obsidian, 8)), OP.dust.mat(MT.Obsidian, 1));
-			RM.pulverizing(                                                   aEvent.mStack, IL.RC_Crushed_Obsidian.get(1, OP.dust.mat(MT.Obsidian, 8)), OP.dust.mat(MT.Obsidian, 1), 25, T);
+		addListener(OP.blockSolid.dat(MT.Obsidian), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			RM.Hammer       .addRecipe1(T, 16,   64,                           aEvent.mStack, IL.RC_Crushed_Obsidian.get(1, OP.dust.mat(MT.Obsidian, 8)));
+			RM.Crusher      .addRecipe1(T, 16,  600, new long[] {10000, 2500}, aEvent.mStack, IL.RC_Crushed_Obsidian.get(1, OP.dust.mat(MT.Obsidian, 8)), OP.dust.mat(MT.Obsidian, 1));
+			RM.pulverizing(                                                    aEvent.mStack, IL.RC_Crushed_Obsidian.get(1, OP.dust.mat(MT.Obsidian, 8)), OP.dust.mat(MT.Obsidian, 1), 25, T);
 		}});
 		addListener("stoneNetherBrick", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Hammer       .addRecipe1(T, 16,  16, aEvent.mStack, ST.make(Items.netherbrick, 3, 0));
-			RM.Crusher      .addRecipe1(T, 16,  16, new long[] {10000, 9000, 8000, 7000}, aEvent.mStack, ST.make(Items.netherbrick, 1, 0), ST.make(Items.netherbrick, 1, 0), ST.make(Items.netherbrick, 1, 0), ST.make(Items.netherbrick, 1, 0));
+			RM.Hammer       .addRecipe1(T, 16,   16, aEvent.mStack, ST.make(Items.netherbrick, 3, 0));
+			RM.Crusher      .addRecipe1(T, 16,   16, new long[] {10000, 9000, 8000, 7000}, aEvent.mStack, ST.make(Items.netherbrick, 1, 0), ST.make(Items.netherbrick, 1, 0), ST.make(Items.netherbrick, 1, 0), ST.make(Items.netherbrick, 1, 0));
 		}});
 		addListener("stoneNetherrack", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Hammer       .addRecipe1(T, 16,  16, aEvent.mStack, OP.dustImpure.mat(MT.Netherrack, 1));
-			RM.Crusher      .addRecipe1(T, 16,  16, new long[] {10000, 500}, aEvent.mStack, OP.dustImpure.mat(MT.Netherrack, 1), OM.dust(MT.S));
+			RM.Hammer       .addRecipe1(T, 16,   16, aEvent.mStack, OP.rockGt.mat(MT.Netherrack, 4));
+			RM.Crusher      .addRecipe1(T, 16,   16, aEvent.mStack, OP.rockGt.mat(MT.Netherrack, 4));
 		}});
 		addListener("stoneEndstone", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Hammer       .addRecipe1(T, 16,  16, aEvent.mStack, OP.dustImpure.mat(MT.Endstone, 1));
-			RM.Crusher      .addRecipe1(T, 16,  16, new long[] {10000, 500}, aEvent.mStack, OP.dustImpure.mat(MT.Endstone, 1), OM.dust(MT.EnderPearl));
-		}});
-		addListener("stoneRedrock", new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Hammer       .addRecipe1(T, 16,  16, aEvent.mStack, OP.dustImpure.mat(MT.Redrock, 1));
-			RM.Crusher      .addRecipe1(T, 16,  16, new long[] {10000, 1000}, aEvent.mStack, OP.dustImpure.mat(MT.Redrock, 1), OM.dust(MT.ClayRed));
+			RM.Hammer       .addRecipe1(T, 16,   16, aEvent.mStack, OP.rockGt.mat(MT.Endstone, 4));
+			RM.Crusher      .addRecipe1(T, 16,   16, aEvent.mStack, OP.rockGt.mat(MT.Endstone, 4));
 		}});
 		addListener(OD.itemTar, new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			RM.Laminator    .addRecipe2(T, 16,   16,              aEvent.mStack , ST.make(Blocks.piston, 1, W), ST.make(Blocks.sticky_piston, 1, 0));
@@ -176,8 +175,8 @@ public class Loader_Recipes_Vanilla_OreDict extends OreDictListenerEvent_Names {
 					tPlanks.stackSize = (tPlanks.stackSize * 3) / 2;
 					RM.sawing(16, 128, F, 5, ST.make(ST.item_(aEvent.mStack), 1, i), ST.copy(tPlanks), dust.mat(tWood, 1), OM.dust(MT.Bark, U2));
 					CR.remove(ST.make(ST.item_(aEvent.mStack), 1, i));
-					CR.shaped(ST.amount(NERFED_WOOD?tPlank.stackSize:(tPlank.stackSize * 5) / 4, tPlank), CR.DEF_NAC_NCC | CR.ONLY_IF_HAS_RESULT, "s", "L", 'L', ST.make(ST.item_(aEvent.mStack), 1, i));
-					CR.shapeless(ST.amount(tPlank.stackSize / (NERFED_WOOD?2:1), tPlank), CR.DEF_NAC_NCC | CR.ONLY_IF_HAS_RESULT, new Object[] {ST.make(ST.item_(aEvent.mStack), 1, i)});
+					CR.shaped(ST.amount(NERFED_WOOD?tPlank.stackSize:(tPlank.stackSize * 5) / 4, tPlank), CR.DEF_NCC | CR.ONLY_IF_HAS_RESULT, "s", "L", 'L', ST.make(ST.item_(aEvent.mStack), 1, i));
+					CR.shapeless(ST.amount(tPlank.stackSize / (NERFED_WOOD?2:1), tPlank), CR.DEF_NCC | CR.ONLY_IF_HAS_RESULT, new Object[] {ST.make(ST.item_(aEvent.mStack), 1, i)});
 				}
 			} else {
 				ItemStack tPlank = CR.get(ST.array(aEvent.mStack));
@@ -186,8 +185,8 @@ public class Loader_Recipes_Vanilla_OreDict extends OreDictListenerEvent_Names {
 					tPlanks.stackSize = (tPlanks.stackSize * 3) / 2;
 					RM.sawing(16, 128, F, 5, aEvent.mStack, ST.copy(tPlanks), dust.mat(tWood, 1), OM.dust(MT.Bark, U2));
 					CR.remove(aEvent.mStack);
-					CR.shaped(ST.amount(NERFED_WOOD?tPlank.stackSize:(tPlank.stackSize * 5) / 4, tPlank), CR.DEF_NAC_NCC | CR.ONLY_IF_HAS_RESULT, "s", "L", 'L', aEvent.mStack);
-					CR.shapeless(ST.amount(tPlank.stackSize / (NERFED_WOOD?2:1), tPlank), CR.DEF_NAC_NCC | CR.ONLY_IF_HAS_RESULT, new Object[] {aEvent.mStack});
+					CR.shaped(ST.amount(NERFED_WOOD?tPlank.stackSize:(tPlank.stackSize * 5) / 4, tPlank), CR.DEF_NCC | CR.ONLY_IF_HAS_RESULT, "s", "L", 'L', aEvent.mStack);
+					CR.shapeless(ST.amount(tPlank.stackSize / (NERFED_WOOD?2:1), tPlank), CR.DEF_NCC | CR.ONLY_IF_HAS_RESULT, new Object[] {aEvent.mStack});
 				}
 			}
 		}});

@@ -68,13 +68,14 @@ public class CoverVent extends AbstractCoverAttachment {
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		super.addToolTips(aList, aStack, aF3_H);
 		if (MD.GC.mLoaded) aList.add(LH.Chat.ORANGE + "Doesn't work on other Planets!");
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_CONTROLLER_COVER));
 	}
 	
 	@Override public boolean isOpaque(byte aSide, CoverData aData) {return T;}
 	@Override public boolean showsConnectorFront(byte aCoverSide, CoverData aData) {return F;}
 	
 	@Override public ITexture getCoverTextureSurface(byte aSide, CoverData aData) {return sTextureFront;}
-	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide == aTextureSide ? sTextureFront : aSide == OPPOSITES[aTextureSide] ? sTextureBack : sTextureSides;}
+	@Override public ITexture getCoverTextureAttachment(byte aSide, CoverData aData, byte aTextureSide) {return aSide == aTextureSide ? sTextureFront : aSide == OPOS[aTextureSide] ? sTextureBack : sTextureSides;}
 	@Override public ITexture getCoverTextureHolder(byte aSide, CoverData aData, byte aTextureSide) {return sTextureSides;}
 	
 	public static final ITexture

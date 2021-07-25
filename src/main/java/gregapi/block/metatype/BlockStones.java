@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -42,15 +42,19 @@ import gregapi.data.OP;
 import gregapi.data.RM;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictItemData;
+import gregapi.oredict.OreDictManager;
 import gregapi.oredict.OreDictMaterial;
 import gregapi.oredict.event.IOreDictListenerEvent;
+import gregapi.render.BlockTextureCopied;
 import gregapi.render.IIconContainer;
 import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
+import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,12 +68,14 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockStones extends BlockMetaType implements IOreDictListenerEvent, IBlockToolable, Runnable {
+public class BlockStones extends BlockMetaType implements IOreDictListenerEvent, IBlockToolable, IGrowable, Runnable {
 	public static final boolean[]
-	  MOSSY = {F,F,T,F,F,T,F,F,F,F,F,F,F,F,F,F}
-	, SEALABLE = {F,F,F,T,F,T,T,T,T,T,T,T,T,T,T,T}
+	  MOSSY     = {F,F,T,F,F,T,F,F,F,F,F,F,F,F,F,F}
+	, MOSSABLE  = {F,T,F,T,T,F,F,F,F,F,F,F,F,F,F,F}
+	, SEALABLE  = {F,F,F,T,F,T,T,T,T,T,T,T,T,T,T,T}
 	, SPAWNABLE = {T,T,T,F,F,F,F,F,F,F,F,F,F,F,F,F}
 	, PLANTABLE = {T,T,T,F,T,T,F,F,F,F,F,F,F,F,F,F}
+	, JUSTSTONE = {T,T,T,T,T,T,T,T,F,F,T,T,T,T,T,T}
 	;
 	
 	public static final byte
@@ -81,12 +87,16 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 	TILES = 10, STILE = 11;
 	
 	public static final byte[]
+	//NO_MAPPINGS     = {STONE, COBBL, MCOBL, BRICK, CRACK, MBRIK, CHISL, SMOTH, RNFBR, RSTBR, TILES, STILE, SBRIK, WINDA, WINDB, QBRIK}
 	  CHISEL_MAPPINGS = {SMOTH, COBBL, MCOBL, CRACK, COBBL, MCOBL, CHISL, CHISL, RNFBR, RSTBR, STILE, STILE, STILE, WINDB, WINDA, STILE}
+	, FILE_MAPPINGS   = {SMOTH, COBBL, MCOBL, SBRIK, CRACK, MBRIK, CHISL, SMOTH, RNFBR, RSTBR, STILE, STILE, STILE, WINDB, WINDA, STILE}
+	, HAMMER_MAPPINGS = {STONE, COBBL, MCOBL, CRACK, COBBL, CRACK, CRACK, COBBL, RNFBR, RSTBR, CRACK, CRACK, CRACK, CRACK, CRACK, CRACK} // Has to Map Stone to itself for prospecting Compatibility
+	, MOSS_MAPPINGS   = {STONE, MCOBL, MCOBL, MBRIK, MBRIK, MBRIK, CHISL, SMOTH, RNFBR, RSTBR, TILES, STILE, SBRIK, WINDA, WINDB, QBRIK}
 	;
 	
 	public final OreDictMaterial mMaterial;
 	@SuppressWarnings("rawtypes")
-	public final ItemStackSet[] mEqualBlocks = {new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(),};
+	public final ItemStackSet[] mEqualBlocks = {new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet(), new ItemStackSet()};
 	
 	public BlockStones(Class<? extends ItemBlock> aItemClass, Material aVanillaMaterial, SoundType aVanillaSoundType, String aName, String aDefaultLocalised, OreDictMaterial aMaterial, float aResistanceMultiplier, float aHardnessMultiplier, int aHarvestLevel, IIconContainer[] aIcons) {
 		super(aItemClass, aVanillaMaterial == null ? Material.rock : aVanillaMaterial, aVanillaSoundType == null ? soundTypeStone : aVanillaSoundType, aName, aDefaultLocalised, aMaterial, aResistanceMultiplier, aHardnessMultiplier, aHarvestLevel, 16, aIcons == null ? new IIconContainer[] {
@@ -132,8 +142,11 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 			LH.add(getUnlocalizedName()+".15.name", aDefaultLocalised+" Square Bricks");
 		}
 		
-		OM.data(ST.make(this, 1, RNFBR), new OreDictItemData(mMaterial, U, ANY.Iron, OP.stick.mAmount));
-		OM.data(ST.make(this, 1, RSTBR), new OreDictItemData(mMaterial, U, MT.Redstone, OP.dust.mAmount));
+		OP.blockSolid.disableItemGeneration(mMaterial);
+		OreDictManager.INSTANCE.setTarget(OP.blockSolid, aMaterial, ST.make(this, 1, SMOTH));
+		
+		OM.data(ST.make(this, 1, RNFBR), new OreDictItemData(mMaterial, U*9, ANY.Iron, OP.stick.mAmount));
+		OM.data(ST.make(this, 1, RSTBR), new OreDictItemData(mMaterial, U*9, MT.Redstone, OP.dust.mAmount));
 		
 		if (mMaterial != ANY.Stone) {
 			OM.reg_(OP.stone, mMaterial, ST.make(this, 1, STONE));
@@ -150,12 +163,62 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 			OM.reg_(OP.stone, mMaterial, ST.make(this, 1, WINDA));
 			OM.reg_(OP.stone, mMaterial, ST.make(this, 1, WINDB));
 			OM.reg_(OP.stone, mMaterial, ST.make(this, 1, QBRIK));
+			
+			OM.reg_(OP.stoneSmooth  , mMaterial, ST.make(this, 1, STONE));
+			OM.reg_(OP.stoneCobble  , mMaterial, ST.make(this, 1, COBBL));
+			OM.reg_(OP.stoneMossy   , mMaterial, ST.make(this, 1, MCOBL));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, BRICK));
+			OM.reg_(OP.stoneCracked , mMaterial, ST.make(this, 1, CRACK));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, MBRIK));
+			OM.reg_(OP.stoneChiseled, mMaterial, ST.make(this, 1, CHISL));
+			OM.reg_(OP.stonePolished, mMaterial, ST.make(this, 1, SMOTH));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, TILES));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, STILE));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, SBRIK));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, WINDA));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, WINDB));
+			OM.reg_(OP.stoneBricks  , mMaterial, ST.make(this, 1, QBRIK));
 		}
 		
-		OM.reg_(OP.cobblestone  , ST.make(this, 1, COBBL));
-		OM.reg_(OP.stone        , ST.make(this, 1, STONE));
+		OM.reg_(OP.stoneSmooth     , ST.make(this, 1, STONE));
+		OM.reg_(OP.stoneCobble     , ST.make(this, 1, COBBL));
+		OM.reg_(OP.stoneCobble     , ST.make(this, 1, MCOBL));
+		OM.reg_(OP.stoneMossy      , ST.make(this, 1, MCOBL));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, BRICK));
+		OM.reg_(OP.stoneCracked    , ST.make(this, 1, CRACK));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, CRACK));
+		OM.reg_(OP.stoneMossyBricks, ST.make(this, 1, MBRIK));
+		OM.reg_(OP.stoneMossy      , ST.make(this, 1, MBRIK));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, MBRIK));
+		OM.reg_(OP.stoneChiseled   , ST.make(this, 1, CHISL));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, CHISL));
+		OM.reg_(OP.stonePolished   , ST.make(this, 1, SMOTH));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, TILES));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, STILE));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, SBRIK));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, WINDA));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, WINDB));
+		OM.reg_(OP.stoneBricks     , ST.make(this, 1, QBRIK));
+		
+		OM.reg_(OP.cobblestone     , ST.make(this, 1, COBBL));
+		OM.reg_(OP.stone           , ST.make(this, 1, STONE));
 		
 		for (int i = 0; i < maxMeta(); i++) mEqualBlocks[i].add(ST.make(this, 1, i));
+		
+		aMaterial.mTextureSolid  = BlockTextureCopied.get(this, SIDE_TOP, STONE);
+		aMaterial.mTextureSmooth = BlockTextureCopied.get(this, SIDE_TOP, SMOTH);
+		
+		if (MD.RC.mLoaded) try {
+			EntityTunnelBore.addMineableBlock(this, COBBL);
+			EntityTunnelBore.addMineableBlock(this, STONE);
+			EntityTunnelBore.addMineableBlock(this, MCOBL);
+		} catch(Throwable e) {e.printStackTrace(ERR);}
+		
+		if (COMPAT_FR != null) {
+			COMPAT_FR.addToBackpacks("digger", ST.make(this, 1, COBBL));
+			COMPAT_FR.addToBackpacks("digger", ST.make(this, 1, STONE));
+			COMPAT_FR.addToBackpacks("digger", ST.make(this, 1, MCOBL));
+		}
 	}
 	
 	@Override
@@ -185,22 +248,22 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 			LH.add(getUnlocalizedName()+".14.name", aDefaultLocalised+" Windmill Tiles B Slab");
 			LH.add(getUnlocalizedName()+".15.name", aDefaultLocalised+" Square Bricks Slab");
 		}
-		OM.data(ST.make(this, 1, STONE), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, COBBL), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, MCOBL), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, BRICK), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, CRACK), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, MBRIK), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, CHISL), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, SMOTH), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, RNFBR), new OreDictItemData(mMaterial, U2, ANY.Iron, OP.stick.mAmount / 2));
-		OM.data(ST.make(this, 1, RSTBR), new OreDictItemData(mMaterial, U2, MT.Redstone, OP.dust.mAmount / 2));
-		OM.data(ST.make(this, 1, TILES), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, STILE), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, SBRIK), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, WINDA), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, WINDB), new OreDictItemData(mMaterial, U2));
-		OM.data(ST.make(this, 1, QBRIK), new OreDictItemData(mMaterial, U2));
+		OM.data(ST.make(this, 1, STONE), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, COBBL), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, MCOBL), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, BRICK), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, CRACK), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, MBRIK), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, CHISL), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, SMOTH), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, RNFBR), new OreDictItemData(mMaterial, 9*U2, ANY.Iron, OP.stick.mAmount / 2));
+		OM.data(ST.make(this, 1, RSTBR), new OreDictItemData(mMaterial, 9*U2, MT.Redstone, OP.dust.mAmount / 2));
+		OM.data(ST.make(this, 1, TILES), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, STILE), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, SBRIK), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, WINDA), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, WINDB), new OreDictItemData(mMaterial, 9*U2));
+		OM.data(ST.make(this, 1, QBRIK), new OreDictItemData(mMaterial, 9*U2));
 		
 		for (int i = 0; i < maxMeta(); i++) mEqualBlocks[i].add(ST.make(this, 1, i));
 	}
@@ -208,54 +271,61 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 	@Override
 	@SuppressWarnings("unchecked")
 	public void run() {
-		if ((!MD.NePl.mLoaded && !MD.NeLi.mLoaded) || (mMaterial != MT.Basalt && mMaterial != MT.Blackstone)) {
+		if ((!MD.NePl.mLoaded && !MD.NeLi.mLoaded) || (mMaterial != MT.STONES.Basalt && mMaterial != MT.STONES.Blackstone)) {
 			RM.pack(rockGt.mat(mMaterial, 4), ST.make(this, 1, COBBL));
 			CR.shaped(ST.make(this, 1, COBBL), CR.DEF, "XX", "XX", 'X', OP.rockGt.dat(mMaterial));
 		}
 		
-		CR.shaped(gearGtSmall.mat(     mMaterial, 1), CR.DEF_NAC, "X ", " f", 'X', OP.stone.dat(mMaterial));
+		RM.add_smelting(OP.blockDust.mat(mMaterial, 1), ST.make(this, 1, STONE), F, F, F);
+		
+		CR.shaped(gearGtSmall.mat(     mMaterial, 1), CR.DEF    , "X ", " f", 'X', OP.stone.dat(mMaterial));
 		CR.shaped(ST.make(Blocks.stone_stairs, 1, 0), CR.DEF_MIR, " X", "XX", 'X', OP.rockGt.dat(mMaterial)); // TODO Stairs
 		CR.shaped(ST.make(mSlabs[0]      , 1, COBBL), CR.DEF    , "  ", "XX", 'X', OP.rockGt.dat(mMaterial));
+		
+		for (int i = 0; i < maxMeta(); i++) if (JUSTSTONE[i]) {
+			RM.sawing(16, 16, F, 50, ST.make(mSlabs[0], 1, i), OP.plate.mat(mMaterial, 4), OP.dustSmall.mat(mMaterial, 2));
+		}
+		RM.sawing(16, 16, F, 50, ST.make(mSlabs[0], 1, RSTBR), OP.plate.mat(mMaterial, 4), OP.dustSmall.mat(mMaterial, 2), OP.dustSmall.mat(MT.Redstone, 2));
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[STONE]) {
 		if (FL.Mana_TE.exists())
 		RM.Bath         .addRecipe1(T,  0, 16                  , tStack.toStack(), FL.Mana_TE.make(1), NF, ST.make(this, 1, CHISL));
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, COBBL));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, COBBL));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, SMOTH));
-		CR.shaped(ST.make(this, 4, BRICK), CR.DEF_NAC, "XX", "XX", 'X', tStack.toStack());
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate       .get(0), OP.plate.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod         .get(0), OP.stick.mat(mMaterial, 2));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,   8, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Bolt        .get(0), OP.bolt.mat(mMaterial, 8));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, SMOTH), F, F, F);
+		CR.shaped(ST.make(this, 4, BRICK), CR.DEF, "XX", "XX", 'X', tStack.toStack());
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate       .get(0), OP.plate.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod         .get(0), OP.stick.mat(mMaterial, 18));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Bolt        .get(0), OP.bolt.mat(mMaterial, 64));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Ingot       .get(0), ST.make(this, 1, BRICK));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Block       .get(0), ST.make(this, 1, STONE));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_Extruder_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_Extruder_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_Extruder_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_Extruder_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 128, ST.amount(4, tStack.toStack()), IL.Shape_Extruder_Gear        .get(0), OP.gearGt.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 192, ST.amount(6, tStack.toStack()), IL.Shape_Extruder_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate       .get(0), OP.plate.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod         .get(0), OP.stick.mat(mMaterial, 2));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,   8, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Bolt        .get(0), OP.bolt.mat(mMaterial, 8));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Gear        .get(0), OP.gearGt.mat(mMaterial, 2));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate       .get(0), OP.plate.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod         .get(0), OP.stick.mat(mMaterial, 18));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Bolt        .get(0), OP.bolt.mat(mMaterial, 64));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Ingot       .get(0), ST.make(this, 1, BRICK));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Block       .get(0), ST.make(this, 1, STONE));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_SimpleEx_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_SimpleEx_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_SimpleEx_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_SimpleEx_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 128, ST.amount(4, tStack.toStack()), IL.Shape_SimpleEx_Gear        .get(0), OP.gearGt.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 192, ST.amount(6, tStack.toStack()), IL.Shape_SimpleEx_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Gear        .get(0), OP.gearGt.mat(mMaterial, 2));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[COBBL]) {
@@ -263,49 +333,50 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 		RM.Bath         .addRecipe1(T,  0, 16                  , tStack.toStack(), FL.Mana_TE.make(1), NF, ST.make(this, 1, MCOBL));
 		RM.Hammer       .addRecipe1(T, 16, 16,  8000           , tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.cobblestone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shaped(ST.make(mSlabs[0]      , 4, COBBL), CR.DEF    , "  ", "XX", 'X', tStack.toStack());
-		CR.shaped(ST.make(Blocks.stone_stairs, 4, 0), CR.DEF_MIR, " X", "XX", 'X', tStack.toStack()); // TODO Stairs
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate       .get(0), OP.plate.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod         .get(0), OP.stick.mat(mMaterial, 2));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,   8, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Bolt        .get(0), OP.bolt.mat(mMaterial, 8));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shaped(ST.make(mSlabs[0]          , 4, COBBL), CR.DEF    , "  " , "XX" , 'X', tStack.toStack());
+		CR.shaped(ST.make(Blocks.stone_stairs    , 4, 0), CR.DEF_MIR, " X" , "XX" , 'X', tStack.toStack()); // TODO Stairs
+		CR.shaped(ST.make(Blocks.cobblestone_wall, 6, 0), CR.DEF_MIR, "XXX", "XXX", 'X', tStack.toStack()); // TODO Walls
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate       .get(0), OP.plate.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod         .get(0), OP.stick.mat(mMaterial, 18));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Bolt        .get(0), OP.bolt.mat(mMaterial, 64));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Ingot       .get(0), ST.make(this, 1, BRICK));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Block       .get(0), ST.make(this, 1, STONE));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_Extruder_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_Extruder_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_Extruder_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_Extruder_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 128, ST.amount(4, tStack.toStack()), IL.Shape_Extruder_Gear        .get(0), OP.gearGt.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 192, ST.amount(6, tStack.toStack()), IL.Shape_Extruder_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate       .get(0), OP.plate.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod         .get(0), OP.stick.mat(mMaterial, 2));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,   8, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Bolt        .get(0), OP.bolt.mat(mMaterial, 8));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Gear        .get(0), OP.gearGt.mat(mMaterial, 2));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_Extruder_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate       .get(0), OP.plate.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, F, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Plate_Curved.get(0), OP.plateCurved.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod         .get(0), OP.stick.mat(mMaterial, 18));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Rod_Long    .get(0), OP.stickLong.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Bolt        .get(0), OP.bolt.mat(mMaterial, 64));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Ingot       .get(0), ST.make(this, 1, BRICK));
 		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Block       .get(0), ST.make(this, 1, STONE));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_SimpleEx_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  64, ST.amount(2, tStack.toStack()), IL.Shape_SimpleEx_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_SimpleEx_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  96, ST.amount(3, tStack.toStack()), IL.Shape_SimpleEx_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 128, ST.amount(4, tStack.toStack()), IL.Shape_SimpleEx_Gear        .get(0), OP.gearGt.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 1));
-		RM.Extruder.addRecipe2(T, F, F, F, T, 16, 192, ST.amount(6, tStack.toStack()), IL.Shape_SimpleEx_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Shovel      .get(0), OP.toolHeadRawShovel.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Sword       .get(0), OP.toolHeadRawSword.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Hoe         .get(0), OP.toolHeadRawHoe.mat(mMaterial, 4));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Pickaxe     .get(0), OP.toolHeadRawPickaxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Axe         .get(0), OP.toolHeadRawAxe.mat(mMaterial, 3));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Gear        .get(0), OP.gearGt.mat(mMaterial, 2));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Gear_Small  .get(0), OP.gearGtSmall.mat(mMaterial, 9));
+		RM.Extruder.addRecipe2(T, F, F, F, T, 16,  32, ST.amount(1, tStack.toStack()), IL.Shape_SimpleEx_Hammer      .get(0), OP.toolHeadHammer.mat(mMaterial, 1));
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[MCOBL]) {
 		RM.Hammer       .addRecipe1(T, 16, 16,  8000           , tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.mossy_cobblestone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[BRICK]) {
@@ -313,114 +384,114 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 		RM.Bath         .addRecipe1(T,  0, 16                  , tStack.toStack(), FL.Mana_TE.make(1), NF, ST.make(this, 1, MBRIK));
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stonebrick, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shaped(ST.make(this, 1, CRACK), CR.DEF_NAC, "h" , "X" , 'X', tStack.toStack());
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shaped(ST.make(this, 1, CRACK), CR.DEF    , "h" , "X" , 'X', tStack.toStack());
 		CR.shaped(ST.make(this, 1, RNFBR), CR.DEF_MIR, "Se", "X ", 'X', tStack.toStack(), 'S', OP.stick.dat(ANY.Iron));
-		CR.shaped(ST.make(this, 1, RSTBR), CR.DEF_NAC, "Dh", "X ", 'X', tStack.toStack(), 'D', OD.itemRedstone);
+		CR.shaped(ST.make(this, 1, RSTBR), CR.DEF    , "Dh", "X ", 'X', tStack.toStack(), 'D', OD.itemRedstone);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[CRACK]) {
 		RM.Hammer       .addRecipe1(T, 16, 16,  7000           , tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, COBBL));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stonebrick, 1, 1));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[MBRIK]) {
 		RM.Hammer       .addRecipe1(T, 16, 16,  7000           , tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, COBBL));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stonebrick, 1, 2));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[CHISL]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, COBBL));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, COBBL));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stonebrick, 1, 3));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[SMOTH]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, COBBL));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, COBBL));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shaped(ST.make(this, 1, CHISL), CR.DEF_NAC, "y" , "X" , 'X', tStack.toStack());
-		CR.shaped(ST.make(this, 4, BRICK), CR.DEF_NAC, "XX", "XX", 'X', tStack.toStack());
-		CR.shaped(ST.make(this, 2, TILES), CR.DEF_NAC, "X" , "X" , 'X', tStack.toStack());
-		CR.shaped(ST.make(this, 2, STILE), CR.DEF_NAC, "XX"      , 'X', tStack.toStack());
-		CR.shaped(ST.make(this, 2, SBRIK), CR.DEF_NAC, "X ", " X", 'X', tStack.toStack());
-		CR.shaped(ST.make(this, 2, WINDA), CR.DEF_NAC, " X", "X ", 'X', tStack.toStack());
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shaped(ST.make(this, 1, CHISL), CR.DEF, "y" , "X" , 'X', tStack.toStack());
+		CR.shaped(ST.make(this, 4, BRICK), CR.DEF, "XX", "XX", 'X', tStack.toStack());
+		CR.shaped(ST.make(this, 2, TILES), CR.DEF, "X" , "X" , 'X', tStack.toStack());
+		CR.shaped(ST.make(this, 2, STILE), CR.DEF, "XX"      , 'X', tStack.toStack());
+		CR.shaped(ST.make(this, 2, SBRIK), CR.DEF, "X ", " X", 'X', tStack.toStack());
+		CR.shaped(ST.make(this, 2, WINDA), CR.DEF, " X", "X ", 'X', tStack.toStack());
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[RNFBR]) {
 		RM.Hammer       .addRecipe1(T, 16, 16,  7000           , tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
 		RM.Crusher      .addRecipe1(T, 16, 64+mHarvestLevel* 64, tStack.toStack(), ST.make(this, 1, COBBL), OM.dust(MT.Fe, OP.stick.mAmount));
-		RM.Shredder     .addRecipe1(T, 16, 64+mHarvestLevel* 64, tStack.toStack(), OP.dust.mat(mMaterial, 1), OM.dust(MT.Fe, OP.stick.mAmount));
+		RM.Shredder     .addRecipe1(T, 16, 64+mHarvestLevel* 64, tStack.toStack(), OP.blockDust.mat(mMaterial, 1), OM.dust(MT.Fe, OP.stick.mAmount));
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[RSTBR]) {
 		RM.Hammer       .addRecipe1(T, 16, 16,  7000           , tStack.toStack(), OP.rockGt.mat(mMaterial, 4));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK), OM.dust(MT.Redstone));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1), OM.dust(MT.Redstone));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1), OM.dust(MT.Redstone));
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[TILES]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shapeless(ST.make(this, 1, QBRIK), CR.DEF_NAC, new Object[] {tStack.toStack()});
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shapeless(ST.make(this, 1, QBRIK), CR.DEF, new Object[] {tStack.toStack()});
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[STILE]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[SBRIK]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[WINDA]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shapeless(ST.make(this, 1, WINDB), CR.DEF_NAC, new Object[] {tStack.toStack()});
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shapeless(ST.make(this, 1, WINDB), CR.DEF, new Object[] {tStack.toStack()});
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[WINDB]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shapeless(ST.make(this, 1, WINDA), CR.DEF_NAC, new Object[] {tStack.toStack()});
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shapeless(ST.make(this, 1, WINDA), CR.DEF, new Object[] {tStack.toStack()});
 		}
 		
 		for (ItemStackContainer tStack : (ItemStackSet<ItemStackContainer>)mEqualBlocks[QBRIK]) {
 		RM.Hammer       .addRecipe1(T, 16, 16                  , tStack.toStack(), ST.make(this, 1, CRACK));
 		RM.Crusher      .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), ST.make(this, 1, CRACK));
-		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.dust.mat(mMaterial, 1));
+		RM.Shredder     .addRecipe1(T, 16, 16+mHarvestLevel* 16, tStack.toStack(), OP.blockDust.mat(mMaterial, 1));
 		RM.generify(tStack.toStack(), ST.make(Blocks.stone, 1, 0));
-		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE));
-		CR.shapeless(ST.make(this, 1, TILES), CR.DEF_NAC, new Object[] {tStack.toStack()});
+		RM.add_smelting(tStack.toStack(), ST.make(this, 1, STONE), F, F, F);
+		CR.shapeless(ST.make(this, 1, TILES), CR.DEF, new Object[] {tStack.toStack()});
 		}
 	}
 	
@@ -494,17 +565,15 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 		if (aTool.equals(TOOL_prospector)) return aMeta == STONE && ToolCompat.prospectStone(this, aMeta, aQuality, aChatReturn, aWorld, aSide, aX, aY, aZ) ? 10000 : 0;
 		if (aTool.equals(TOOL_chisel) && !aSneaking && CHISEL_MAPPINGS[aMeta & 15] != aMeta) {
 			aWorld.setBlockMetadataWithNotify(aX, aY, aZ, CHISEL_MAPPINGS[aMeta & 15], 3);
-			return mBlock == this ? 10000 : 5000;
+			return mOctantcount * 1250;
 		}
-		if (aTool.equals(TOOL_file) && !aSneaking) {
-			switch(aMeta) {
-			case STONE: aWorld.setBlockMetadataWithNotify(aX, aY, aZ, SMOTH, 3); return mBlock == this ? 10000 : 5000; // Stone to Smooth
-			case BRICK: aWorld.setBlockMetadataWithNotify(aX, aY, aZ, SBRIK, 3); return mBlock == this ? 10000 : 5000; // Bricks to Small Bricks
-			case TILES: aWorld.setBlockMetadataWithNotify(aX, aY, aZ, STILE, 3); return mBlock == this ? 10000 : 5000; // Tile to Small Tile
-			case SBRIK: aWorld.setBlockMetadataWithNotify(aX, aY, aZ, STILE, 3); return mBlock == this ? 10000 : 5000; // Small Bricks to Small Tile
-			case WINDA: aWorld.setBlockMetadataWithNotify(aX, aY, aZ, WINDB, 3); return mBlock == this ? 10000 : 5000;
-			case WINDB: aWorld.setBlockMetadataWithNotify(aX, aY, aZ, WINDA, 3); return mBlock == this ? 10000 : 5000;
-			}
+		if (aTool.equals(TOOL_file) && !aSneaking && FILE_MAPPINGS[aMeta & 15] != aMeta) {
+			aWorld.setBlockMetadataWithNotify(aX, aY, aZ, FILE_MAPPINGS[aMeta & 15], 3);
+			return mOctantcount * 1250;
+		}
+		if (aTool.equals(TOOL_hammer) && !aSneaking && HAMMER_MAPPINGS[aMeta & 15] != aMeta) {
+			aWorld.setBlockMetadataWithNotify(aX, aY, aZ, HAMMER_MAPPINGS[aMeta & 15], 3);
+			return mOctantcount * 125;
 		}
 		if (aTool.equals(TOOL_drill) && !aSneaking) {
 			if (mBlock == this && aPlayer instanceof EntityPlayer && aMeta == BRICK) {
@@ -513,8 +582,8 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 					ItemStack tStack = ((EntityPlayer)aPlayer).inventory.mainInventory[tIndex];
 					if (OM.is("stickAnyIronOrSteel", tStack)) {
 						if (aWorld.setBlockMetadataWithNotify(aX, aY, aZ, RNFBR, 3)) {
-							ST.use(aPlayer, tIndex, tStack);
-							return 10000;
+							ST.use(aPlayer, T, tStack);
+							return mOctantcount * 1250;
 						}
 						break;
 					}
@@ -553,9 +622,24 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 		return PLANTABLE[WD.meta(aWorld, aX, aY, aZ)] && aPlant.getPlantType(aWorld, aX+aSide.offsetX, aY+aSide.offsetY, aZ+aSide.offsetZ) == EnumPlantType.Cave;
 	}
 	
+	@Override public boolean func_149851_a(World aWorld, int aX, int aY, int aZ, boolean aIsRemote) {return MOSSY[WD.meta(aWorld, aX, aY, aZ)];}
+	@Override public boolean func_149852_a(World aWorld, Random aRandom, int aX, int aY, int aZ) {return MOSSY[WD.meta(aWorld, aX, aY, aZ)];}
+	
+	@Override
+	public void func_149853_b(World aWorld, Random aRandom, int aX, int aY, int aZ) {
+		for (byte[] tOffs : CUBE_3) {
+			Block tBlock = WD.block(aWorld, aX+tOffs[0], aY+tOffs[1], aZ+tOffs[2]);
+			if (tBlock == Blocks.cobblestone && WD.set(aWorld, aX+tOffs[0], aY+tOffs[1], aZ+tOffs[2], Blocks.mossy_cobblestone, 0, 3)) return;
+			byte tMeta = WD.meta(aWorld, aX+tOffs[0], aY+tOffs[1], aZ+tOffs[2]);
+			if (tBlock == Blocks.stonebrick && (tMeta == 0 || tMeta == 2) && WD.set(aWorld, aX+tOffs[0], aY+tOffs[1], aZ+tOffs[2], Blocks.stonebrick, 1, 3)) return;
+			if (tBlock instanceof BlockStones && MOSSABLE[tMeta] && WD.set(aWorld, aX+tOffs[0], aY+tOffs[1], aZ+tOffs[2], tBlock, MOSS_MAPPINGS[tMeta], 3)) return;
+		}
+	}
+	
 	static {
 		LH.add("gt.tooltip.stone.mushroom.yes", "Mushrooms can spread to this rough Stone");
 		LH.add("gt.tooltip.stone.mushroom.no", "Mushrooms cant spread to smooth Stones!");
+		LH.add("gt.tooltip.stone.moss.bonemeal", "Use Bonemeal or similar to spread the Moss");
 	}
 	
 	@Override
@@ -565,6 +649,9 @@ public class BlockStones extends BlockMetaType implements IOreDictListenerEvent,
 			aList.add(LH.Chat.GREEN + LH.get("gt.tooltip.stone.mushroom.yes"));
 		} else {
 			aList.add(LH.Chat.ORANGE + LH.get("gt.tooltip.stone.mushroom.no"));
+		}
+		if (MOSSY[aMeta]) {
+			aList.add(LH.Chat.DGREEN + LH.get("gt.tooltip.stone.moss.bonemeal"));
 		}
 	}
 	

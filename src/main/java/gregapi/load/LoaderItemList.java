@@ -35,7 +35,9 @@ import gregapi.data.OP;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictItemData;
 import gregapi.oredict.OreDictManager;
+import gregapi.render.BlockTextureCopied;
 import gregapi.render.IconContainerCopied;
+import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.worldgen.StoneLayer;
@@ -318,6 +320,9 @@ public class LoaderItemList implements Runnable {
 		ItemsGT.SHOW_RESISTANCE.add(ST.make(Blocks.brick_block                  , 1, W));
 		ItemsGT.SHOW_RESISTANCE.add(ST.make(Blocks.obsidian                     , 1, W));
 		ItemsGT.SHOW_RESISTANCE.add(ST.make(Blocks.bedrock                      , 1, W));
+		ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.EtFu, "tuff"                     , 1, W));
+		ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.EtFu, "deepslate"                , 1, W));
+		ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.EtFu, "cobbled_deepslate"        , 1, W));
 		ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.EtFu, "crying_obsidian"          , 1, W));
 		ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.NeLi, "CryingObsidian"           , 1, W));
 		ItemsGT.SHOW_RESISTANCE.add(ST.make(MD.NePl, "CryingObsidian"           , 1, W));
@@ -464,6 +469,8 @@ public class LoaderItemList implements Runnable {
 		BlocksGT.breakableGlass.add(ST.block(MD.CHSL, "stained_glass_forestry"      , null));
 		BlocksGT.breakableGlass.add(ST.block(MD.AETHER, "quicksoilGlass"            , null));
 		BlocksGT.breakableGlass.add(ST.block(MD.AETHER, "quicksoilGlassPane"        , null));
+		BlocksGT.breakableGlass.add(ST.block(MD.AE, "tile.BlockQuartzGlass"         , null));
+		BlocksGT.breakableGlass.add(ST.block(MD.AE, "tile.BlockQuartzLamp"          , null));
 		
 		
 		BlocksGT.instaharvest.add(ST.block(MD.NeLi, "EmptyLantern"                  , null));
@@ -508,6 +515,8 @@ public class LoaderItemList implements Runnable {
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.CHSL, "marble"                         , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.CHSL, "limestone"                      , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.EtFu, "stone"                          , null));
+		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.EtFu, "tuff"                           , null));
+		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.EtFu, "deepslate"                      , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.GaSu, "18Stones"                       , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.GaSu, "basalt"                         , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BOTA, "stone"                          , null));
@@ -518,6 +527,8 @@ public class LoaderItemList implements Runnable {
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.IC2, "copperOre"                       , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.IC2, "tinOre"                          , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.IC2, "uraniumOre"                      , null));
+		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.AE, "tile.oreQuartz"                   , null));
+		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.AE, "tile.oreQuartzCharged"            , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.TG, "oreTitanIron"                     , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BR, "YelloriteOre"                     , null));
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.BoP, "gemOre"                          , null));
@@ -596,6 +607,42 @@ public class LoaderItemList implements Runnable {
 		StoneLayer.REPLACEABLE_BLOCKS.add(ST.block(MD.HEX, "blockHexoriumOreWhite"           , null));
 		
 		
+		
+		MT.H2O.mTextureDust   = MT.Steam.mTextureDust   = MT.FreshWater.mTextureDust   = MT.DistWater.mTextureDust   = MT.Ice.mTextureDust   = MT.Snow.mTextureDust   = MT.Snow.mTextureSolid = BlockTextureCopied.get(Blocks.snow);
+		MT.H2O.mTextureMolten = MT.Steam.mTextureMolten = MT.FreshWater.mTextureMolten = MT.DistWater.mTextureMolten = MT.Ice.mTextureMolten = MT.Snow.mTextureMolten = BlockTextureCopied.get(Blocks.water);
+		MT.H2O.mTextureSolid  = MT.Steam.mTextureSolid  = MT.FreshWater.mTextureSolid  = MT.DistWater.mTextureSolid  = MT.Ice.mTextureSolid  = BlockTextureCopied.get(Blocks.packed_ice);
+		MT.Glowstone.mTextureSolid  = MT.Glowstone.mTextureGem = MT.Glowstone.mTextureMolten = BlockTextureCopied.get(Blocks.glowstone);
+		
+		MT.Lava.mTextureMolten        = MT.Obsidian.mTextureMolten  = BlockTextureCopied.get(Blocks.lava);
+		MT.Lava.mTextureSolid         = MT.Obsidian.mTextureSolid   = BlockTextureCopied.get(Blocks.obsidian);
+		MT.Coal.mTextureSolid         = MT.Coal.mTextureGem         = BlockTextureCopied.get(Blocks.coal_block);
+		MT.Charcoal.mTextureSolid     = MT.Charcoal.mTextureGem     = BlockTextureCopied.get(Blocks.coal_block);
+		MT.Lapis.mTextureSolid        = MT.Lapis.mTextureGem        = BlockTextureCopied.get(Blocks.lapis_block);
+		MT.Diamond.mTextureSolid      = MT.Diamond.mTextureGem      = BlockTextureCopied.get(Blocks.diamond_block);
+		MT.Emerald.mTextureSolid      = MT.Emerald.mTextureGem      = BlockTextureCopied.get(Blocks.emerald_block);
+		MT.Sand.mTextureSolid         = MT.Sand.mTextureDust        = BlockTextureCopied.get(Blocks.sand);
+		MT.RedSand.mTextureSolid      = MT.RedSand.mTextureDust     = BlockTextureCopied.get(Blocks.sand, 1);
+		MT.SoulSand.mTextureSolid     = MT.SoulSand.mTextureDust    = BlockTextureCopied.get(Blocks.soul_sand);
+		
+		MT.Stone.mTextureDust         = BlockTextureCopied.get(Blocks.gravel);
+		MT.Stone.mTextureSolid        = BlockTextureCopied.get(Blocks.stone);
+		MT.Stone.mTextureSmooth       = BlockTextureCopied.get(Blocks.double_stone_slab, SIDE_TOP, 0);
+		MT.Glass.mTextureSolid        = BlockTextureCopied.get(Blocks.glass);
+		MT.Ceramic.mTextureSolid      = BlockTextureCopied.get(Blocks.hardened_clay);
+		MT.Au.mTextureSolid           = BlockTextureCopied.get(Blocks.gold_block);
+		MT.Fe.mTextureSolid           = BlockTextureCopied.get(Blocks.iron_block);
+		MT.Redstone.mTextureSolid     = BlockTextureCopied.get(Blocks.redstone_block);
+		MT.Endstone.mTextureSolid     = BlockTextureCopied.get(Blocks.end_stone);
+		MT.Netherrack.mTextureSolid   = BlockTextureCopied.get(Blocks.netherrack);
+		MT.NetherBrick.mTextureSolid  = BlockTextureCopied.get(Blocks.nether_brick);
+		MT.NetherQuartz.mTextureSolid = BlockTextureCopied.get(Blocks.quartz_block);
+		MT.Bedrock.mTextureSolid      = BlockTextureCopied.get(Blocks.bedrock);
+		MT.Clay.mTextureSolid         = BlockTextureCopied.get(Blocks.clay);
+		MT.Brick.mTextureSolid        = BlockTextureCopied.get(Blocks.brick_block);
+		
+		
+		
+		
 		IL.Bottle_Empty                         .set(ST.make(Items.glass_bottle, 1, 0));
 		
 		IL.Dye_Bonemeal                         .set(ST.make(Items.dye, 1, 15));
@@ -605,7 +652,7 @@ public class LoaderItemList implements Runnable {
 		
 		IL.Bale_Wheat                           .set(ST.make(Blocks.hay_block, 1, 0), null, "baleWheat");
 		IL.Crop_Wheat                           .set(ST.make(Items.wheat, 1, 0), null, "cropWheat");
-		IL.Food_Bread                           .set(ST.make(Items.bread, 1, 0), null, "foodBread");
+		IL.Food_Bread                           .set(ST.make(Items.bread, 1, 0), null, "foodBread", CR.DELATE);
 		IL.Food_Carrot                          .set(ST.make(Items.carrot, 1, 0), null, "cropCarrot");
 		IL.Food_Potato                          .set(ST.make(Items.potato, 1, 0), null, "cropPotato");
 		IL.Food_Potato_Baked                    .set(ST.make(Items.baked_potato, 1, 0));
@@ -617,15 +664,16 @@ public class LoaderItemList implements Runnable {
 		IL.Torch                                .set(IL.TFC_Torch.get(1, ST.make(Blocks.torch, 1, 0)));
 		IL.Stick                                .set(IL.TFC_Stick.get(1, ST.make(Items.stick, 1, 0)));
 		
-		IL.Cell_Empty                           .set(ST.mkic("cell"                                         , 1   ), OP.cell.dat(MT.Empty));
+		IL.Cell_Empty                           .set(ST.mkic("cell"                                         , 1   ), OP.cell.dat(MT.Empty), CR.DELATE);
 		IL.Cell_Water                           .set(ST.mkic("waterCell"                                    , 1   ), OP.cell.dat(MT.H2O ), OD.container1000water);
 		IL.Cell_Lava                            .set(ST.mkic("lavaCell"                                     , 1   ), OP.cell.dat(MT.Lava), OD.container1000lava);
 		IL.Cell_Air                             .set(ST.mkic("airCell"                                      , 1   ), OP.cell.dat(MT.Air));
 		OP.cell.mContainerItem =                     ST.mkic("cell"                                         , 1   , OreDictManager.INSTANCE.getFirstOre("cellEmpty", 1));
 		
 		
-		IL.TE_Wrench                            .set(ST.make(MD.TE, "wrench"                                , 1, 0));
-		IL.TE_Wrench_Battle                     .set(ST.make(MD.TE, "tool.battleWrenchInvar"                , 1, 0));
+		
+		IL.TE_Wrench                            .set(ST.make(MD.TE, "wrench"                                , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.TE_Wrench.wild(1));
+		IL.TE_Wrench_Battle                     .set(ST.make(MD.TE, "tool.battleWrenchInvar"                , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.TE_Wrench_Battle.wild(1));
 		IL.TE_Cinnabar                          .set(ST.make(MD.TE_FOUNDATION, "material"                   , 1,  20));
 		IL.TE_Rod_Blizz                         .set(ST.make(MD.TE_FOUNDATION, "material"                   , 1,1024));
 		IL.TE_Rod_Blitz                         .set(ST.make(MD.TE_FOUNDATION, "material"                   , 1,1026));
@@ -639,10 +687,10 @@ public class LoaderItemList implements Runnable {
 		IL.RC_ShuntingWire                      .set(ST.make(MD.RC, "machine.delta"                         , 1, 0));
 		IL.RC_ShuntingWireFrame                 .set(ST.make(MD.RC, "frame"                                 , 1, 0));
 		IL.RC_Post_Metal                        .set(ST.make(MD.RC, "post"                                  , 1, 2));
-		IL.RC_Concrete                          .set(ST.make(MD.RC, "cube"                                  , 1, 1), new OreDictItemData(MT.Stone, 5*U8));
+		IL.RC_Concrete                          .set(ST.make(MD.RC, "cube"                                  , 1, 1), new OreDictItemData(MT.Stone, 5*U8), CR.DELATE);
 		IL.RC_Crushed_Obsidian                  .set(ST.make(MD.RC, "cube"                                  , 1, 4), new OreDictItemData(MT.Obsidian, U*8));
-		IL.RC_Stone_Abyssal                     .set(ST.make(MD.RC, "cube"                                  , 1, 6), OP.stone.dat(MT.Basalt));
-		IL.RC_Stone_Quarried                    .set(ST.make(MD.RC, "cube"                                  , 1, 7), OP.stone.dat(MT.Marble));
+		IL.RC_Stone_Abyssal                     .set(ST.make(MD.RC, "cube"                                  , 1, 6), OP.stone.dat(MT.STONES.Basalt));
+		IL.RC_Stone_Quarried                    .set(ST.make(MD.RC, "cube"                                  , 1, 7), OP.stone.dat(MT.STONES.Marble));
 		IL.RC_Creosote_Wood                     .set(ST.make(MD.RC, "cube"                                  , 1, 8), new OreDictItemData(ANY.Wood, U*8));
 		IL.RC_Rail_Standard                     .set(ST.make(MD.RC, "part.rail"                             , 1, 0));
 		IL.RC_Rail_Adv                          .set(ST.make(MD.RC, "part.rail"                             , 1, 1));
@@ -656,10 +704,12 @@ public class LoaderItemList implements Runnable {
 		IL.RC_Bed_Stone                         .set(ST.make(MD.RC, "part.railbed"                          , 1, 1), new OreDictItemData(MT.Stone, U*6));
 		IL.RC_Rebar                             .set(ST.make(MD.RC, "part.rebar"                            , 1, 0));
 		IL.RC_Firestone_Cut                     .set(ST.make(MD.RC, "firestone.cut"                         , 1, 0), new OreDictItemData(MT.Firestone, U));
-		IL.RC_Crowbar_Iron                      .set(ST.make(MD.RC, "tool.crowbar"                          , 1, 0), new OreDictItemData(ANY.Fe, U*3).setUseVanillaDamage());
-		IL.RC_Crowbar_Steel                     .set(ST.make(MD.RC, "tool.crowbar.reinforced"               , 1, 0), new OreDictItemData(ANY.Steel, U*3).setUseVanillaDamage());
-		IL.RC_Crowbar_Thaumium                  .set(ST.make(MD.RC, "tool.crowbar.magic"                    , 1, 0), new OreDictItemData(MT.Thaumium, U*3).setUseVanillaDamage());
-		IL.RC_Crowbar_Voidmetal                 .set(ST.make(MD.RC, "tool.crowbar.void"                     , 1, 0), new OreDictItemData(MT.VoidMetal, U*3).setUseVanillaDamage());
+		IL.RC_Firestone_Refined                 .set(ST.make(MD.RC, "firestone.refined"                     , 1, W), new OreDictItemData(MT.Firestone, U, MT.Redstone, U*36), OD.craftingFirestarter);
+		IL.RC_Firestone_Cracked                 .set(ST.make(MD.RC, "firestone.cracked"                     , 1, W), new OreDictItemData(MT.Firestone, U, MT.Redstone, U* 9), OD.craftingFirestarter);
+		IL.RC_Crowbar_Iron                      .set(ST.make(MD.RC, "tool.crowbar"                          , 1, 0), new OreDictItemData(ANY.Fe      , U*3).setUseVanillaDamage()); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.RC_Crowbar_Iron.wild(1));
+		IL.RC_Crowbar_Steel                     .set(ST.make(MD.RC, "tool.crowbar.reinforced"               , 1, 0), new OreDictItemData(ANY.Steel   , U*3).setUseVanillaDamage()); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.RC_Crowbar_Steel.wild(1));
+		IL.RC_Crowbar_Thaumium                  .set(ST.make(MD.RC, "tool.crowbar.magic"                    , 1, 0), new OreDictItemData(MT.Thaumium , U*3).setUseVanillaDamage()); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.RC_Crowbar_Thaumium.wild(1));
+		IL.RC_Crowbar_Voidmetal                 .set(ST.make(MD.RC, "tool.crowbar.void"                     , 1, 0), new OreDictItemData(MT.VoidMetal, U*3).setUseVanillaDamage()); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.RC_Crowbar_Voidmetal.wild(1));
 		IL.Tool_Sword_Steel                     .set(ST.make(MD.RC, "tool.steel.sword"                      , 1, 0), new OreDictItemData(ANY.Steel, OP.toolHeadSword  , ANY.Wood, U2).setUseVanillaDamage());
 		IL.Tool_Pickaxe_Steel                   .set(ST.make(MD.RC, "tool.steel.pickaxe"                    , 1, 0), new OreDictItemData(ANY.Steel, OP.toolHeadPickaxe, ANY.Wood, U ).setUseVanillaDamage());
 		IL.Tool_Shovel_Steel                    .set(ST.make(MD.RC, "tool.steel.shovel"                     , 1, 0), new OreDictItemData(ANY.Steel, OP.toolHeadShovel , ANY.Wood, U ).setUseVanillaDamage());
@@ -679,15 +729,18 @@ public class LoaderItemList implements Runnable {
 		
 		IL.IE_Creosote_Bottle                   .set(ST.make(MD.IE, "fluidContainers"                       , 1, 0), null, "bottleCreosote", OD.container1000creosote);
 		IL.IE_Creosote_Bucket                   .set(ST.make(MD.IE, "fluidContainers"                       , 1, 1), new OreDictItemData(ANY.Fe, U*3), "bucketCreosote", OD.container1000creosote);
-		IL.IE_Hammer                            .set(ST.make(MD.IE, "tool"                                  , 1, 0), new OreDictItemData(ANY.Fe, U*2, ANY.Wood, U));
+		IL.IE_Hammer                            .set(ST.make(MD.IE, "tool"                                  , 1, 0), new OreDictItemData(ANY.Fe, U*2, ANY.Wood, U)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.IE_Hammer.wild(1));
 		IL.IE_Slag                              .set(ST.make(MD.IE, "material"                              , 1,13), null, OD.itemSlag);
 		IL.IE_Blueprint_Projectiles_Common      .set(ST.make(MD.IE, "blueprint"                             , 1, 0), new OreDictItemData(MT.Paper, 3*U));
 		IL.IE_Blueprint_Projectiles_Specialized .set(ST.make(MD.IE, "blueprint"                             , 1, 1), new OreDictItemData(MT.Paper, 3*U));
 		IL.IE_Blueprint_Projectiles_Electrodes  .set(ST.make(MD.IE, "blueprint"                             , 1, 2), new OreDictItemData(MT.Paper, 3*U));
-		IL.IE_Treated_Planks                    .set(ST.make(MD.IE, "treatedWood"                           , 1, 0), new OreDictItemData(MT.WoodSealed, U));
-		IL.IE_Treated_Slab                      .set(ST.make(MD.IE, "woodenDecoration"                      , 1, 2), new OreDictItemData(MT.WoodSealed, U2));
-		IL.IE_Treated_Stairs                    .set(ST.make(MD.IE, "woodenStairs"                          , 1, 0), new OreDictItemData(MT.WoodSealed, 3*U4));
-		IL.IE_Crate                             .set(ST.make(MD.IE, "woodenDevice"                          , 1, 4), new OreDictItemData(MT.WoodSealed, 8*U), OD.craftingChest);
+		IL.IE_Treated_Planks                    .set(ST.make(MD.IE, "treatedWood"                           , 1, 0), new OreDictItemData(MT.WoodTreated, U));
+		IL.IE_Treated_Slab                      .set(ST.make(MD.IE, "woodenDecoration"                      , 1, 2), new OreDictItemData(MT.WoodTreated, U2));
+		IL.IE_Treated_Stairs                    .set(ST.make(MD.IE, "woodenStairs"                          , 1, 0), new OreDictItemData(MT.WoodTreated, 3*U4));
+		IL.IE_Crate                             .set(ST.make(MD.IE, "woodenDevice"                          , 1, 4), new OreDictItemData(MT.WoodTreated, 8*U), OD.craftingChest);
+		
+		
+		IL.A97_Hammer                           .set(ST.make(MD.A97, "wrench"                               , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.A97_Hammer.wild(1));
 		
 		
 		IL.FZ_Sludge                            .set(ST.make(MD.FZ, "sludge"                                , 1, 0), null, OD.itemSlag);
@@ -697,7 +750,7 @@ public class LoaderItemList implements Runnable {
 		IL.ABYSSAL_Lava                         .set(ST.make(MD.ABYSSAL, "solidlava"                        , 1, 0), new OreDictItemData(MT.Lava, 9*U));
 		
 		
-		IL.Myst_Ink_Vial                        .set(ST.make(MD.MYST, "vial"                                , 1, 0));
+		IL.Myst_Ink_Vial                        .set(ST.make(MD.MYST, "vial"                                , 1, 0), null, CR.DELATE);
 		IL.Myst_Desk_Item                       .set(ST.make(MD.MYST, "writingdesk"                         , 1, 0));
 		IL.Myst_Desk_Block                      .set(ST.make(MD.MYST, "WritingDesk"                         , 1, 0)); // 0L and 8R X POS, 1L and 9R Z NEG, 2L and 10R X NEG, 3L and 11R Z POS
 		IL.Myst_Bookstand                       .set(ST.make(MD.MYST, "BlockBookstand"                      , 1, 0)); // Requires Rotation Calls
@@ -724,7 +777,7 @@ public class LoaderItemList implements Runnable {
 		IL.BOTA_Mana_String                     .set(ST.make(MD.BOTA, "manaResource"                        , 1,16), null, OD.itemString);
 		
 		
-		IL.ALF_LivingCobble                     .set(ST.make(MD.ALF, "LivingCobble"                         , 1, 0), new OreDictItemData(MT.Livingrock, U), OP.cobblestone);
+		IL.ALF_LivingCobble                     .set(ST.make(MD.ALF, "LivingCobble"                         , 1, 0), new OreDictItemData(MT.STONES.Livingrock, U*9), OP.cobblestone);
 		IL.ALF_DreamWood                        .set(ST.make(MD.ALF, "DreamLog"                             , 1, 0), new OreDictItemData(MT.Dreamwood, U * 8, MT.Bark, U), OD.logWood);
 		IL.ALF_DreamSapling                     .set(ST.make(MD.ALF, "DreamSapling"                         , 1, 0), null, OP.treeSapling);
 		IL.ALF_DreamLeaves                      .set(ST.make(MD.ALF, "DreamLeaves"                          , 1, 0), null, OP.treeLeaves);
@@ -743,7 +796,7 @@ public class LoaderItemList implements Runnable {
 		IL.TC_Silverwood_Planks                 .set(ST.make(MD.TC, "blockWoodenDevice"                     , 1, 7), new OreDictItemData(MT.Silverwood, U), OP.plank.dat(MT.Silverwood));
 		IL.TC_Greatwood_Sapling                 .set(ST.make(MD.TC, "blockCustomPlant"                      , 1, 0), new OreDictItemData(MT.Greatwood , U2), OP.treeSapling);
 		IL.TC_Silverwood_Sapling                .set(ST.make(MD.TC, "blockCustomPlant"                      , 1, 1), new OreDictItemData(MT.Silverwood, U2), OP.treeSapling);
-		IL.TC_Shimmerleaf                       .set(ST.make(MD.TC, "blockCustomPlant"                      , 1, 2), new OreDictItemData(MT.Hg, U), "flowerShimmerleaf");
+		IL.TC_Shimmerleaf                       .set(ST.make(MD.TC, "blockCustomPlant"                      , 1, 2), new OreDictItemData(MT.Hg, U), "flowerShimmerleaf", OD.itemQuicksilver);
 		IL.TC_Cinderpearl                       .set(ST.make(MD.TC, "blockCustomPlant"                      , 1, 3), new OreDictItemData(MT.Blaze, U9), "flowerCinderpearl");
 		IL.TC_Vishroom                          .set(ST.make(MD.TC, "blockCustomPlant"                      , 1, 5));
 		IL.TC_Block_Amber                       .set(ST.make(MD.TC, "blockCosmeticOpaque"                   , 1, 0), new OreDictItemData(MT.Amber, 4*U));
@@ -756,7 +809,7 @@ public class LoaderItemList implements Runnable {
 		IL.TC_Block_Tallow                      .set(ST.make(MD.TC, "blockCosmeticSolid"                    , 1, 5), new OreDictItemData(MT.Tallow, 9*U));
 		IL.TC_Block_Flesh                       .set(ST.make(MD.TC, "blockTaint"                            , 1, 2), new OreDictItemData(MT.MeatRotten, 18*U, MT.Bone, U));
 		IL.TC_Block_Air                         .set(ST.make(MD.TC, "blockAiry"                             , 1, 0));
-		IL.TC_Phial                             .set(ST.make(MD.TC, "ItemEssence"                           , 1, 0), new OreDictItemData(ANY.Clay, U8, MT.Glass, 3*U8));
+		IL.TC_Phial                             .set(ST.make(MD.TC, "ItemEssence"                           , 1, 0), new OreDictItemData(ANY.Clay, U8, MT.Glass, U), CR.DELATE);
 		IL.TC_Knowledge_Fragment                .set(ST.make(MD.TC, "ItemResource"                          , 1, 9), new OreDictItemData(MT.Paper, U9), "paperResearchFragment");
 		IL.TC_Thaumonomicon                     .set(ST.make(MD.TC, "ItemThaumonomicon"                     , 1, 0), new OreDictItemData(MT.Paper, 9*U));
 		IL.TC_Crimson_Rites                     .set(ST.make(MD.TC, "ItemEldritchObject"                    , 1, 1), new OreDictItemData(MT.Paper, 9*U));
@@ -771,7 +824,7 @@ public class LoaderItemList implements Runnable {
 		IL.TF_Torchberries                      .set(ST.make(MD.TF, "item.torchberries"                     , 1, 0));
 		IL.TF_NagaScale                         .set(ST.make(MD.TF, "item.nagaScale"                        , 1, 0));
 		IL.TF_BorerEssence                      .set(ST.make(MD.TF, "item.borerEssence"                     , 1, 0));
-		IL.TF_Carminite                         .set(ST.make(MD.TF, "item.carminite"                        , 1, 0));
+		IL.TF_Carminite                         .set(ST.make(MD.TF, "item.carminite"                        , 1, 0), null, CR.DELATE);
 		IL.TF_Transformation_Powder             .set(ST.make(MD.TF, "item.transformPowder"                  , 1, 0));
 		IL.TF_Vial_FieryBlood                   .set(ST.make(MD.TF, "item.fieryBlood"                       , 1, 0));
 		IL.TF_Vial_FieryTears                   .set(ST.make(MD.TF, "item.fieryTears"                       , 1, 0));
@@ -790,14 +843,14 @@ public class LoaderItemList implements Runnable {
 		IL.TF_Dry_Bush                          .set(ST.make(MD.TF, "tile.TFPlant"                          , 1,11));
 		IL.TF_Roots                             .set(ST.make(MD.TF, "tile.TFRoots"                          , 1, 0), new OreDictItemData(MT.Wood, U*3));
 		IL.TF_Liveroots                         .set(ST.make(MD.TF, "tile.TFRoots"                          , 1, 1), new OreDictItemData(MT.LiveRoot, U*2, MT.Wood, U));
-		IL.TF_Deadrock_Weathered                .set(ST.make(MD.TF, "tile.TFDeadrock"                       , 1, 0), OP.stone.dat(MT.Deadrock));
-		IL.TF_Deadrock_Cracked                  .set(ST.make(MD.TF, "tile.TFDeadrock"                       , 1, 1), OP.stone.dat(MT.Deadrock));
-		IL.TF_Deadrock                          .set(ST.make(MD.TF, "tile.TFDeadrock"                       , 1, 2), OP.stone.dat(MT.Deadrock));
+		IL.TF_Deadrock_Weathered                .set(ST.make(MD.TF, "tile.TFDeadrock"                       , 1, 0), OP.stone.dat(MT.STONES.Deadrock));
+		IL.TF_Deadrock_Cracked                  .set(ST.make(MD.TF, "tile.TFDeadrock"                       , 1, 1), OP.stone.dat(MT.STONES.Deadrock));
+		IL.TF_Deadrock                          .set(ST.make(MD.TF, "tile.TFDeadrock"                       , 1, 2), OP.stone.dat(MT.STONES.Deadrock));
 		IL.TF_Trollsteinn                       .set(ST.make(MD.TF, "tile.TrollSteinn"                      , 1, 0), OP.stone.dat(MT.Stone));
 		IL.TF_Nagastone                         .set(ST.make(MD.TF, "tile.TFNagastone"                      , 1, 0), OP.stone.dat(MT.Stone));
 		IL.TF_Mazestone                         .set(ST.make(MD.TF, "tile.TFMazestone"                      , 1, 0), OP.stone.dat(MT.Stone));
 		IL.TF_Mazehedge                         .set(ST.make(MD.TF, "tile.TFHedge"                          , 1, 0));
-		IL.TF_Uncrafting                        .set(ST.make(MD.TF, "tile.TFUncraftingTable"                , 1, 0));
+		IL.TF_Uncrafting                        .set(ST.make(MD.TF, "tile.TFUncraftingTable"                , 1, 0), null, CR.DELATE);
 		IL.TF_Giant_Leaves                      .set(ST.make(MD.TF, "tile.GiantLeaves"                      , 1, 0));
 		IL.TF_Giant_Cobble                      .set(ST.make(MD.TF, "tile.GiantCobble"                      , 1, 0), new OreDictItemData(MT.Stone          , U *64));
 		IL.TF_Giant_Obsidian                    .set(ST.make(MD.TF, "tile.GiantObsidian"                    , 1, 0), new OreDictItemData(MT.Obsidian       , U*576));
@@ -833,15 +886,15 @@ public class LoaderItemList implements Runnable {
 		
 		IL.RH_Sand_Magnetite                    .set(ST.make(MD.RH, "globbypotato_rockhounding_beachSands"  , 1, 0), new OreDictItemData(MT.OREMATS.GraniticMineralSand, U));
 		IL.RH_Sand_Olivine                      .set(ST.make(MD.RH, "globbypotato_rockhounding_beachSands"  , 1, 1), new OreDictItemData(MT.Olivine, U));
-		IL.RH_Sand_Coral                        .set(ST.make(MD.RH, "globbypotato_rockhounding_beachSands"  , 1, 2), new OreDictItemData(MT.Sand, U));
+		IL.RH_Sand_Coral                        .set(ST.make(MD.RH, "globbypotato_rockhounding_beachSands"  , 1, 2), new OreDictItemData(MT.Sand, U*9));
 		IL.RH_Sand_Gypsum                       .set(ST.make(MD.RH, "globbypotato_rockhounding_beachSands"  , 1, 3), new OreDictItemData(MT.Gypsum, U));
 		
 		
-		IL.TROPIC_Sand_Coral                    .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 0), new OreDictItemData(MT.Sand, U));
-		IL.TROPIC_Sand_Foamy                    .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 1), new OreDictItemData(MT.Sand, U));
-		IL.TROPIC_Sand_Black                    .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 2), new OreDictItemData(MT.OREMATS.BasalticMineralSand, U));
+		IL.TROPIC_Sand_Coral                    .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 0), new OreDictItemData(MT.Sand, U*9));
+		IL.TROPIC_Sand_Foamy                    .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 1), new OreDictItemData(MT.Sand, U*9));
+		IL.TROPIC_Sand_Black                    .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 2), new OreDictItemData(MT.OREMATS.BasalticMineralSand, U*9));
 		IL.TROPIC_Sand_Mineral                  .set(ST.make(MD.TROPIC, "tile.mineralSand"                  , 1, 3), new OreDictItemData(MT.OREMATS.Cassiterite, U));
-		IL.TROPIC_Sand_Pure                     .set(ST.make(MD.TROPIC, "tile.purifiedSand"                 , 1, 0), new OreDictItemData(MT.Sand, U));
+		IL.TROPIC_Sand_Pure                     .set(ST.make(MD.TROPIC, "tile.purifiedSand"                 , 1, 0), new OreDictItemData(MT.Sand, U*9));
 		IL.TROPIC_Log_Palm                      .set(ST.make(MD.TROPIC, "tile.log"                          , 1, 0), new OreDictItemData(MT.WOODS.Palm    , U*8, MT.Bark, U), OD.logWood);
 		IL.TROPIC_Log_Mahogany                  .set(ST.make(MD.TROPIC, "tile.log"                          , 1, 1), new OreDictItemData(MT.WOODS.Mahogany, U*8, MT.Bark, U), OD.logWood);
 		IL.TROPIC_Bamboo                        .set(ST.make(MD.TROPIC, "bambooChute"                       , 1, 0), new OreDictItemData(MT.Bamboo, U), OD.bamboo);
@@ -881,10 +934,10 @@ public class LoaderItemList implements Runnable {
 		IL.CANDY_Plank_Light                    .set(ST.make(MD.CANDY, "B3"                                 , 1, 2), new OreDictItemData(MT.Marshmallow, U), OP.plank.dat(MT.Marshmallow));
 		
 		
-		IL.ERE_Umberstone                       .set(ST.make(MD.ERE, "umberstone"                           , 1, 0), OP.stone.dat(MT.Umber));
-		IL.ERE_Umbercobble                      .set(ST.make(MD.ERE, "umberstone"                           , 1, 1), OP.stone.dat(MT.Umber));
+		IL.ERE_Umberstone                       .set(ST.make(MD.ERE, "umberstone"                           , 1, 0), OP.stone.dat(MT.STONES.Umber));
+		IL.ERE_Umbercobble                      .set(ST.make(MD.ERE, "umberstone"                           , 1, 1), OP.stone.dat(MT.STONES.Umber));
 		IL.ERE_Mud_Brick                        .set(ST.make(MD.ERE, "materials"                            , 1,23));
-		IL.ERE_Spray_Repellant                  .set(ST.make(MD.ERE, "sprayCan"                             , 1, 0));
+		IL.ERE_Spray_Repellant                  .set(ST.make(MD.ERE, "sprayCan"                             , 1, 0), null, CR.DELATE);
 		IL.ERE_Herbicide                        .set(ST.make(MD.ERE, "planticide"                           , 1, 0));
 		IL.ERE_Compost                          .set(ST.make(MD.ERE, "compost"                              , 1, 0), null, OD.itemFertilizer);
 		IL.ERE_Bamboo                           .set(ST.make(MD.ERE, "materials"                            , 1, 3), new OreDictItemData(MT.Bamboo, U4), OD.bamboo);
@@ -910,8 +963,8 @@ public class LoaderItemList implements Runnable {
 		
 		IL.BTL_Swamp_Talisman                   .set(ST.make(MD.BTL, "swampTalisman"                        , 1, 0));
 		IL.BTL_Tainted_Potion                   .set(ST.make(MD.BTL, "taintedPotion"                        , 1, 0));
-		IL.BTL_Betweenstone                     .set(ST.make(MD.BTL, "betweenstone"                         , 1, 0), OP.stone.dat(MT.Betweenstone));
-		IL.BTL_Pitstone                         .set(ST.make(MD.BTL, "pitstone"                             , 1, 0), OP.stone.dat(MT.Pitstone));
+		IL.BTL_Betweenstone                     .set(ST.make(MD.BTL, "betweenstone"                         , 1, 0), OP.stone.dat(MT.STONES.Betweenstone));
+		IL.BTL_Pitstone                         .set(ST.make(MD.BTL, "pitstone"                             , 1, 0), OP.stone.dat(MT.STONES.Pitstone));
 		IL.BTL_Bedrock                          .set(ST.make(MD.BTL, "bedrock"                              , 1, 0), OP.stone.dat(MT.Bedrock));
 		IL.BTL_Chest                            .set(ST.make(MD.BTL, "weedwoodChest"                        , 1, 0), new OreDictItemData(MT.Weedwood, 8*U), OD.craftingChest);
 		IL.BTL_Weedwood_Leaves                  .set(ST.make(MD.BTL, "weedwoodLeaves"                       , 1, 0), null, OP.treeLeaves);
@@ -943,7 +996,7 @@ public class LoaderItemList implements Runnable {
 		IL.AETHER_Torch_Ambrosium               .set(ST.make(MD.AETHER, "ambrosiumTorch"                    , 1, 0), new OreDictItemData(MT.Ambrosium, U8, MT.Skyroot, U16), OD.blockTorch);
 		IL.AETHER_Apple                         .set(ST.make(MD.AETHER, "whiteApple"                        , 1, 0), null, "cropAppleWhite");
 		IL.AETHER_Tall_Grass                    .set(ST.make(MD.AETHER, "tallAetherGrass"                   , 1, 0), null, OD.itemGrassTall);
-		IL.AETHER_Sand                          .set(ST.make(MD.AETHER, "quicksoil"                         , 1, 0), new OreDictItemData(MT.Sand, U), OD.sand);
+		IL.AETHER_Sand                          .set(ST.make(MD.AETHER, "quicksoil"                         , 1, 0), new OreDictItemData(MT.Sand, U*9), OD.sand);
 		IL.AETHER_Glass                         .set(ST.make(MD.AETHER, "quicksoilGlass"                    , 1, 0), null, OD.blockGlassColorless);
 		IL.AETHER_Glass_Pane                    .set(ST.make(MD.AETHER, "quicksoilGlassPane"                , 1, 0), null, OD.paneGlassColorless);
 		IL.AETHER_Dirt                          .set(ST.make(MD.AETHER, "aetherDirt"                        , 1, 0));
@@ -968,13 +1021,13 @@ public class LoaderItemList implements Runnable {
 		if (IL.AETHER_Bucket_Poison.exists()) IL.AETHER_Bucket_Poison.item().setContainerItem(IL.AETHER_Bucket_Empty.getItem());
 		
 		
-		IL.GrC_Honey_Jar                        .set(ST.make(MD.GrC_Bees, "grc.honeyJar"                    , 1, 0), null, OD.container1000honey);
+		IL.GrC_Honey_Jar                        .set(ST.make(MD.GrC_Bees, "grc.honeyJar"                    , 1, 0), null, OD.container1000honey, CR.DELATE);
 		if (IL.GrC_Honey_Jar.exists()) IL.GrC_Honey_Jar.item().setContainerItem(Items.flower_pot);
 		
-		IL.GrC_Honey_Bucket                     .set(ST.make(MD.GrC_Bees, "grc.BucketFluidHoney"            , 1, 0), new OreDictItemData(ANY.Fe, U*3), OD.container1000honey);
-		IL.GrC_Honey_Bottle                     .set(ST.make(MD.GrC_Bees, "grc.BottleFluidHoney"            , 1, 0), null, OD.container250honey);
-		IL.GrC_Milk_Bucket                      .set(ST.make(MD.GrC_Milk, "grcmilk.BucketFluidMilk"         , 1, 0), new OreDictItemData(ANY.Fe, U*3), OD.container1000milk);
-		IL.GrC_Milk_Bottle                      .set(ST.make(MD.GrC_Milk, "grcmilk.BottleFluidMilk"         , 1, 0), null, OD.container250milk);
+		IL.GrC_Honey_Bucket                     .set(ST.make(MD.GrC_Bees, "grc.BucketFluidHoney"            , 1, 0), new OreDictItemData(ANY.Fe, U*3), OD.container1000honey, CR.DELATE);
+		IL.GrC_Honey_Bottle                     .set(ST.make(MD.GrC_Bees, "grc.BottleFluidHoney"            , 1, 0), null, OD.container250honey, CR.DELATE);
+		IL.GrC_Milk_Bucket                      .set(ST.make(MD.GrC_Milk, "grcmilk.BucketFluidMilk"         , 1, 0), new OreDictItemData(ANY.Fe, U*3), OD.container1000milk, CR.DELATE);
+		IL.GrC_Milk_Bottle                      .set(ST.make(MD.GrC_Milk, "grcmilk.BottleFluidMilk"         , 1, 0), null, OD.container250milk, CR.DELATE);
 		IL.GrC_Cheese_Cheddar                   .set(ST.make(MD.GrC_Milk, "grcmilk.Cheese"                  , 1, 0), null, "foodCheeseCheddar");
 		IL.GrC_Cheese_Gorgonzola                .set(ST.make(MD.GrC_Milk, "grcmilk.Cheese"                  , 1, 1), null, "foodCheeseGorgonzola");
 		IL.GrC_Cheese_Swiss                     .set(ST.make(MD.GrC_Milk, "grcmilk.Cheese"                  , 1, 2), null, "foodCheeseSwiss");
@@ -984,16 +1037,16 @@ public class LoaderItemList implements Runnable {
 		IL.GrC_Cheese_Monterey                  .set(ST.make(MD.GrC_Milk, "grcmilk.Cheese"                  , 1, 6), null, "foodCheeseMonterey");
 		IL.GrC_Cheese_Ricotta                   .set(ST.make(MD.GrC_Milk, "grcmilk.Cheese"                  , 1, 7), null, "foodCheeseRicotta");
 		IL.GrC_Starter_Culture                  .set(ST.make(MD.GrC_Milk, "grcmilk.StarterCulture"          , 1, 0));
-		IL.GrC_Applecore                        .set(ST.make(MD.GrC_Apples, "grc.appleSeeds"                , 1, 0), null, OD.itemPlantRemains);
+		IL.GrC_Applecore                        .set(ST.make(MD.GrC_Apples, "grc.appleSeeds"                , 1, 0), null, OD.itemPlantRemains, CR.DELATE);
 		IL.GrC_Bamboo                           .set(ST.make(MD.GrC_Bamboo, "grc.bamboo"                    , 1, 0), OP.stick.dat(MT.Bamboo), OD.bamboo);
 		IL.GrC_Bamboo_Charcoal                  .set(ST.make(MD.GrC_Bamboo, "grc.bambooCoal"                , 1, 0), new OreDictItemData(MT.Charcoal, U2));
 		IL.GrC_Paddy                            .set(ST.make(MD.GrC_Rice, "grc.paddyField"                  , 1, 0));
-		IL.GrC_Ice_Cream                        .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 0), null, "foodIcecream");
-		IL.GrC_Ice_Cream_Chocolate              .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 1), null, "foodChocolateicecream");
-		IL.GrC_Ice_Cream_Grape                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 2), null, "foodGrapeicecream");
-		IL.GrC_Ice_Cream_Apple                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 3), null, "foodAppleicecream");
-		IL.GrC_Ice_Cream_Honey                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 4), null, "foodHoneyicecream");
-		IL.GrC_Ice_Cream_Melon                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 5), null, "foodMelonicecream");
+		IL.GrC_Ice_Cream                        .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 0), null, CR.DELATE, "foodIcecream");
+		IL.GrC_Ice_Cream_Chocolate              .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 1), null, CR.DELATE, "foodChocolateicecream");
+		IL.GrC_Ice_Cream_Grape                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 2), null, CR.DELATE, "foodGrapeicecream");
+		IL.GrC_Ice_Cream_Apple                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 3), null, CR.DELATE, "foodAppleicecream");
+		IL.GrC_Ice_Cream_Honey                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 4), null, CR.DELATE, "foodHoneyicecream");
+		IL.GrC_Ice_Cream_Melon                  .set(ST.make(MD.GrC_Milk, "grcmilk.IceCream"                , 1, 5), null, CR.DELATE, "foodMelonicecream");
 		
 		
 		IL.GrC_Grape_Purple                     .set(ST.make(MD.GrC_Grapes, "grc.grapes"                    , 1, 0), null, "cropGrapePurple");
@@ -1023,15 +1076,15 @@ public class LoaderItemList implements Runnable {
 		IL.MaCu_Bait_Maggot                     .set(ST.make(MD.MaCu, "bait"                                , 1, 2));
 		IL.MaCu_Bait_Grasshopper                .set(ST.make(MD.MaCu, "bait"                                , 1, 3));
 		IL.MaCu_Bait_Bee                        .set(ST.make(MD.MaCu, "bait"                                , 1, 4));
-		IL.MaCu_Polished_Planks                 .set(ST.make(MD.MaCu, "woods"                               , 1, 1), OP.plank.dat(MT.WoodPolished));
-		IL.MaCu_Polished_Logs                   .set(ST.make(MD.MaCu, "woods"                               , 1, 2), new OreDictItemData(MT.WoodPolished, U*8, MT.Bark, U));
+		IL.MaCu_Polished_Planks                 .set(ST.make(MD.MaCu, "woods"                               , 1, 1), OP.plank.dat(MT.WoodPolished), CR.DELATE);
+		IL.MaCu_Polished_Logs                   .set(ST.make(MD.MaCu, "woods"                               , 1, 2), new OreDictItemData(MT.WoodPolished, U*8, MT.Bark, U), CR.DELATE);
 		
 		
 		IL.ENVM_Spoiled_Milk_Bucket             .set(ST.make(MD.ENVM, "spoiledMilk"                         , 1, 0), new OreDictItemData(ANY.Fe, U*3));
 		IL.ENVM_Rotten_Food                     .set(ST.make(MD.ENVM, "rottenFood"                          , 1, 0), null, "foodRotten");
-		IL.ENVM_Bottle_Water_Cold               .set(ST.make(MD.ENVM, "coldWaterBottle"                     , 1, 0));
-		IL.ENVM_Bottle_Water_Dirty              .set(ST.make(MD.ENVM, "badWaterBottle"                      , 1, 0));
-		IL.ENVM_Bottle_Water_Salty              .set(ST.make(MD.ENVM, "saltWaterBottle"                     , 1, 0));
+		IL.ENVM_Bottle_Water_Cold               .set(ST.make(MD.ENVM, "coldWaterBottle"                     , 1, 0), null, CR.DELATE);
+		IL.ENVM_Bottle_Water_Dirty              .set(ST.make(MD.ENVM, "badWaterBottle"                      , 1, 0), null, CR.DELATE);
+		IL.ENVM_Bottle_Water_Salty              .set(ST.make(MD.ENVM, "saltWaterBottle"                     , 1, 0), null, CR.DELATE);
 		
 		
 		IL.NePl_Torch                           .set(ST.make(MD.NePl, "SoulTorch"                           , 1, 0), null, OD.blockSoulTorch);
@@ -1039,21 +1092,25 @@ public class LoaderItemList implements Runnable {
 		IL.NePl_Ancient_Debris                  .set(ST.make(MD.NePl, "AncientDebris"                       , 1, 0));
 		IL.NePl_Obsidian                        .set(ST.make(MD.NePl, "CryingObsidian"                      , 1, 0), new OreDictItemData(MT.Obsidian, U*9), OD.cryingObsidian);
 		IL.NePl_Quartz_Bricks                   .set(ST.make(MD.NePl, "QuartzBricks"                        , 1, 0), new OreDictItemData(MT.NetherQuartz, U*4));
-		IL.NePl_Blackstone                      .set(ST.make(MD.NePl, "Blackstone"                          , 1, 0), OP.stone.dat(MT.Blackstone), OP.cobblestone);
-		IL.NePl_Blackstone_Polished             .set(ST.make(MD.NePl, "PolishedBlackstone"                  , 1, 0), OP.stone.dat(MT.Blackstone));
-		IL.NePl_Blackstone_Chiseled             .set(ST.make(MD.NePl, "ChiseledPolishedBlackstone"          , 1, 0), OP.stone.dat(MT.Blackstone));
-		IL.NePl_Blackstone_Bricks               .set(ST.make(MD.NePl, "PolishedBlackstoneBricks"            , 1, 0), OP.stone.dat(MT.Blackstone));
-		IL.NePl_Blackstone_Cracked              .set(ST.make(MD.NePl, "CrackedPolishedBlackstoneBricks"     , 1, 0), OP.stone.dat(MT.Blackstone));
-		IL.NePl_Basalt                          .set(ST.make(MD.NePl, "Basalt"                              , 1, 0), OP.stone.dat(MT.Basalt));
-		IL.NePl_Basalt_Polished                 .set(ST.make(MD.NePl, "PolishedBasalt"                      , 1, 0), OP.stone.dat(MT.Basalt));
+		IL.NePl_Blackstone                      .set(ST.make(MD.NePl, "Blackstone"                          , 1, 0), OP.stone.dat(MT.STONES.Blackstone), OP.stoneCobble, OP.cobblestone);
+		IL.NePl_Blackstone_Polished             .set(ST.make(MD.NePl, "PolishedBlackstone"                  , 1, 0), OP.stone.dat(MT.STONES.Blackstone), OP.stonePolished);
+		IL.NePl_Blackstone_Chiseled             .set(ST.make(MD.NePl, "ChiseledPolishedBlackstone"          , 1, 0), OP.stone.dat(MT.STONES.Blackstone), OP.stoneChiseled);
+		IL.NePl_Blackstone_Bricks               .set(ST.make(MD.NePl, "PolishedBlackstoneBricks"            , 1, 0), OP.stone.dat(MT.STONES.Blackstone), OP.stoneBricks);
+		IL.NePl_Blackstone_Cracked              .set(ST.make(MD.NePl, "CrackedPolishedBlackstoneBricks"     , 1, 0), OP.stone.dat(MT.STONES.Blackstone), OP.stoneBricks, OP.stoneCracked );
+		IL.NePl_Basalt                          .set(ST.make(MD.NePl, "Basalt"                              , 1, 0), OP.stone.dat(MT.STONES.Basalt));
+		IL.NePl_Basalt_Polished                 .set(ST.make(MD.NePl, "PolishedBasalt"                      , 1, 0), OP.stone.dat(MT.STONES.Basalt));
 		
 		
 		IL.NeLi_Fire_Soul                       .set(ST.make(MD.NeLi, "SoulFire"                            , 1, 0));
 		IL.NeLi_Fire_Shadow                     .set(ST.make(MD.NeLi, "ShadowFire"                          , 1, 0));
 		IL.NeLi_Fire_Fox                        .set(ST.make(MD.NeLi, "FoxFire"                             , 1, 0));
-		IL.NeLi_Torch_Soul                      .set(ST.make(MD.NeLi, "SoulTorch"                           , 1, 0), null, OD.blockSoulTorch);
-		IL.NeLi_Torch_Shadow                    .set(ST.make(MD.NeLi, "ShadowTorch"                         , 1, 0), null, OD.blockShadowTorch);
-		IL.NeLi_Torch_Fox                       .set(ST.make(MD.NeLi, "FoxfireTorch"                        , 1, 0), null, OD.blockFoxfireTorch);
+		IL.NeLi_Torch_Soul                      .set(ST.make(MD.NeLi, "SoulTorch"                           , 1, 0), null, CR.DELATE, OD.blockSoulTorch);
+		IL.NeLi_Torch_Shadow                    .set(ST.make(MD.NeLi, "ShadowTorch"                         , 1, 0), null, CR.DELATE, OD.blockShadowTorch);
+		IL.NeLi_Torch_Fox                       .set(ST.make(MD.NeLi, "FoxfireTorch"                        , 1, 0), null, CR.DELATE, OD.blockFoxfireTorch);
+		IL.NeLi_Bonetorch                       .set(ST.make(MD.NeLi, "BoneTorch"                           , 1, 0), null, CR.DELATE, OD.blockTorch);
+		IL.NeLi_Bonetorch_Soul                  .set(ST.make(MD.NeLi, "SoulBoneTorch"                       , 1, 0), null, CR.DELATE, OD.blockSoulTorch);
+		IL.NeLi_Bonetorch_Shadow                .set(ST.make(MD.NeLi, "ShadowBoneTorch"                     , 1, 0), null, CR.DELATE, OD.blockShadowTorch);
+		IL.NeLi_Bonetorch_Fox                   .set(ST.make(MD.NeLi, "FoxfireBoneTorch"                    , 1, 0), null, CR.DELATE, OD.blockFoxfireTorch);
 		IL.Crop_AbyssalOats                     .set(ST.make(MD.NeLi, "AbyssalOatItem"                      , 1, 0), new OreDictItemData(MT.OatAbyssal, U), "cropAbyssalOats");
 		IL.NeLi_Obsidian                        .set(ST.make(MD.NeLi, "CryingObsidian"                      , 1, 0), new OreDictItemData(MT.Obsidian, U*9), OD.cryingObsidian);
 		IL.NeLi_Quartz_Bricks                   .set(ST.make(MD.NeLi, "QuartzBricks"                        , 1, 0), new OreDictItemData(MT.NetherQuartz   , U*4));
@@ -1070,16 +1127,39 @@ public class LoaderItemList implements Runnable {
 		IL.NeLi_Crystal_Green                   .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 2), new OreDictItemData(MT.FluoriteGreen  , U*4));
 		IL.NeLi_Crystal_Yellow                  .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 3), new OreDictItemData(MT.FluoriteYellow , U*4));
 		IL.NeLi_Crystal_Magenta                 .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 4), new OreDictItemData(MT.FluoriteMagenta, U*4));
+		IL.NeLi_Budding_White                   .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 5), new OreDictItemData(MT.FluoriteWhite  , U*4));
+		IL.NeLi_Budding_Blue                    .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 6), new OreDictItemData(MT.FluoriteBlue   , U*4));
+		IL.NeLi_Budding_Green                   .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 7), new OreDictItemData(MT.FluoriteGreen  , U*4));
+		IL.NeLi_Budding_Yellow                  .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 8), new OreDictItemData(MT.FluoriteYellow , U*4));
+		IL.NeLi_Budding_Magenta                 .set(ST.make(MD.NeLi, "NetherCrystal"                       , 1, 9), new OreDictItemData(MT.FluoriteMagenta, U*4));
+		IL.NeLi_Lamp_White                      .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 0), new OreDictItemData(MT.FluoriteWhite  , U*4, ANY.Glowstone, U*4), CR.DELATE);
+		IL.NeLi_Lamp_Blue                       .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 1), new OreDictItemData(MT.FluoriteBlue   , U*4, ANY.Glowstone, U*4), CR.DELATE);
+		IL.NeLi_Lamp_Green                      .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 2), new OreDictItemData(MT.FluoriteGreen  , U*4, ANY.Glowstone, U*4), CR.DELATE);
+		IL.NeLi_Lamp_Yellow                     .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 3), new OreDictItemData(MT.FluoriteYellow , U*4, ANY.Glowstone, U*4), CR.DELATE);
+		IL.NeLi_Lamp_Magenta                    .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 4), new OreDictItemData(MT.FluoriteMagenta, U*4, ANY.Glowstone, U*4), CR.DELATE);
+		IL.NeLi_Redstone_Lamp_White             .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 5), new OreDictItemData(MT.FluoriteWhite  , U*4, ANY.Glowstone, U*4, MT.Redstone, U*4), CR.DELATE);
+		IL.NeLi_Redstone_Lamp_Blue              .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 6), new OreDictItemData(MT.FluoriteBlue   , U*4, ANY.Glowstone, U*4, MT.Redstone, U*4), CR.DELATE);
+		IL.NeLi_Redstone_Lamp_Green             .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 7), new OreDictItemData(MT.FluoriteGreen  , U*4, ANY.Glowstone, U*4, MT.Redstone, U*4), CR.DELATE);
+		IL.NeLi_Redstone_Lamp_Yellow            .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 8), new OreDictItemData(MT.FluoriteYellow , U*4, ANY.Glowstone, U*4, MT.Redstone, U*4), CR.DELATE);
+		IL.NeLi_Redstone_Lamp_Magenta           .set(ST.make(MD.NeLi, "CrystalLamp"                         , 1, 9), new OreDictItemData(MT.FluoriteMagenta, U*4, ANY.Glowstone, U*4, MT.Redstone, U*4), CR.DELATE);
+		IL.NeLi_Glass_White                     .set(ST.make(MD.NeLi, "TintedGlass"                         , 1, 0), new OreDictItemData(MT.FluoriteWhite  , U*4, MT.Glass, U*9), CR.DELATE);
+		IL.NeLi_Glass_Blue                      .set(ST.make(MD.NeLi, "TintedGlass"                         , 1, 1), new OreDictItemData(MT.FluoriteBlue   , U*4, MT.Glass, U*9), CR.DELATE);
+		IL.NeLi_Glass_Green                     .set(ST.make(MD.NeLi, "TintedGlass"                         , 1, 2), new OreDictItemData(MT.FluoriteGreen  , U*4, MT.Glass, U*9), CR.DELATE);
+		IL.NeLi_Glass_Yellow                    .set(ST.make(MD.NeLi, "TintedGlass"                         , 1, 3), new OreDictItemData(MT.FluoriteYellow , U*4, MT.Glass, U*9), CR.DELATE);
+		IL.NeLi_Glass_Magenta                   .set(ST.make(MD.NeLi, "TintedGlass"                         , 1, 4), new OreDictItemData(MT.FluoriteMagenta, U*4, MT.Glass, U*9), CR.DELATE);
 		IL.NeLi_Magmatic_Netherrack             .set(ST.make(MD.NeLi, "MagmaBlock"                          , 1, 1), new OreDictItemData(MT.Netherrack, U));
-		IL.NeLi_Magmatic_Blackstone             .set(ST.make(MD.NeLi, "MagmaBlock"                          , 1, 0), new OreDictItemData(MT.Blackstone, U));
-		IL.NeLi_Blackstone_Crying               .set(ST.make(MD.NeLi, "CryingBlackstone"                    , 1, 0), new OreDictItemData(MT.Blackstone, U));
-		IL.NeLi_Blackstone                      .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 0), OP.stone.dat(MT.Blackstone), OP.cobblestone);
-		IL.NeLi_Blackstone_Polished             .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 1), OP.stone.dat(MT.Blackstone));
-		IL.NeLi_Blackstone_Chiseled             .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 2), OP.stone.dat(MT.Blackstone));
-		IL.NeLi_Blackstone_Bricks               .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 3), OP.stone.dat(MT.Blackstone));
-		IL.NeLi_Blackstone_Cracked              .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 4), OP.stone.dat(MT.Blackstone));
-		IL.NeLi_Basalt                          .set(ST.make(MD.NeLi, "Basalt"                              , 1, 0), OP.stone.dat(MT.Basalt));
-		IL.NeLi_Basalt_Polished                 .set(ST.make(MD.NeLi, "Basalt"                              , 1, 1), OP.stone.dat(MT.Basalt));
+		IL.NeLi_Magmatic_Blackstone             .set(ST.make(MD.NeLi, "MagmaBlock"                          , 1, 0), new OreDictItemData(MT.STONES.Blackstone, U*9));
+		IL.NeLi_Blackstone_Crying               .set(ST.make(MD.NeLi, "CryingBlackstone"                    , 1, 0), new OreDictItemData(MT.STONES.Blackstone, U*9));
+		IL.NeLi_Blackstone                      .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 0), OP.stone.dat(MT.STONES.Blackstone), OP.stoneCobble, OP.cobblestone);
+		IL.NeLi_Blackstone_Polished             .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 1), OP.stone.dat(MT.STONES.Blackstone), OP.stonePolished);
+		IL.NeLi_Blackstone_Chiseled             .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 2), OP.stone.dat(MT.STONES.Blackstone), OP.stoneChiseled);
+		IL.NeLi_Blackstone_Bricks               .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 3), OP.stone.dat(MT.STONES.Blackstone), OP.stoneBricks);
+		IL.NeLi_Blackstone_Cracked              .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 4), OP.stone.dat(MT.STONES.Blackstone), OP.stoneBricks, OP.stoneCracked);
+		IL.NeLi_Blackstone_Tiles                .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 6), OP.stone.dat(MT.STONES.Blackstone));
+		IL.NeLi_Blackstone_Cross                .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 7), OP.stone.dat(MT.STONES.Blackstone));
+		IL.NeLi_Blackstone_Path                 .set(ST.make(MD.NeLi, "Blackstone"                          , 1, 8), OP.stone.dat(MT.STONES.Blackstone));
+		IL.NeLi_Basalt                          .set(ST.make(MD.NeLi, "Basalt"                              , 1, 0), OP.stone.dat(MT.STONES.Basalt));
+		IL.NeLi_Basalt_Polished                 .set(ST.make(MD.NeLi, "Basalt"                              , 1, 1), OP.stone.dat(MT.STONES.Basalt));
 		IL.NeLi_Stem_Crimson                    .set(ST.make(MD.NeLi, "Stem"                                , 1, 0), null, OD.logWood);
 		IL.NeLi_Stem_Warped                     .set(ST.make(MD.NeLi, "Stem"                                , 1, 2), null, OD.logWood);
 		IL.NeLi_Stem_FoxFire                    .set(ST.make(MD.NeLi, "Stem2"                               , 1, 0), null, OD.logWood);
@@ -1096,16 +1176,20 @@ public class LoaderItemList implements Runnable {
 		IL.NeLi_Beam2_Warped                    .set(ST.make(MD.NeLi, "FullWood"                            , 1, 3), null, OD.beamWood);
 		IL.NeLi_Beam2_FoxFire                   .set(ST.make(MD.NeLi, "FullWood"                            , 1, 5), null, OD.beamWood);
 	//  IL.NeLi_Beam2_                          .set(ST.make(MD.NeLi, "FullWood"                            , 1, 7), null, OD.beamWood);
-		IL.NeLi_SoulSoil                        .set(ST.make(MD.NeLi, "SoulSoil"                            , 1, 0), null, OD.soulsand);
+		IL.NeLi_SoulSoil                        .set(ST.make(MD.NeLi, "SoulSoil"                            , 1, W), null, OD.soulsand);
 		IL.NeLi_SoulFarm                        .set(ST.make(MD.NeLi, "SoulFarmland"                        , 1, 0), null, OD.soulsand);
+		IL.NeLi_Ash                             .set(ST.make(MD.NeLi, "Ash"                                 , 1, 0));
 		IL.NeLi_Gravel                          .set(ST.make(MD.NeLi, "Nether_Gravel"                       , 1, 0), null, OD.gravel);
 		IL.NeLi_Foxfire_Lily                    .set(ST.make(MD.NeLi, "FoxfireLily"                         , 1, 0), null, OD.flower);
-		IL.NeLi_Wither_Rose                     .set(ST.make(MD.NeLi, "WitherRose"                          , 1, 0), null, OD.flower);
+		IL.NeLi_Wither_Rose                     .set(ST.make(MD.NeLi, "WitherRose"                          , 1, 0), null, OD.flower, OD.flowerWither);
+		IL.NeLi_Bone_Rose                       .set(ST.make(MD.NeLi, "WitherRose"                          , 1, 1), null, OD.flower);
+		IL.NeLi_Soul_Rose                       .set(ST.make(MD.NeLi, "WitherRose"                          , 1, 2), null, OD.flower);
+		IL.NeLi_Gloom_Hibiscus                  .set(ST.make(MD.NeLi, "GloomHibiscus"                       , 1, 0), null, OD.flower);
 		IL.NeLi_Strider_Flank_Raw               .set(ST.make(MD.NeLi, "StriderFlankRaw"                     , 1, 0), new OreDictItemData(MT.MeatRaw   , U*2, MT.Bone, U9), "listAllmeatraw");
 		IL.NeLi_Strider_Flank_Cooked            .set(ST.make(MD.NeLi, "StriderFlankCooked"                  , 1, 0), new OreDictItemData(MT.MeatCooked, U*2, MT.Bone, U9), "listAllmeatcooked");
-		IL.NeLi_Bread                           .set(ST.make(MD.NeLi, "AbyssalBread"                        , 1, 0), null, "foodBread");
-		IL.NeLi_Cookie                          .set(ST.make(MD.NeLi, "CookieHellderberry"                  , 1, 0), null, "foodCookie");
-		IL.NeLi_Bottle_Hellderberryjuice        .set(ST.make(MD.NeLi, "JuiceHellderberry"                   , 1, 0), null, "foodHellderberryjuice");
+		IL.NeLi_Bread                           .set(ST.make(MD.NeLi, "AbyssalBread"                        , 1, 0), null, CR.DELATE, "foodBread");
+		IL.NeLi_Cookie                          .set(ST.make(MD.NeLi, "CookieHellderberry"                  , 1, 0), null, CR.DELATE, "foodCookie");
+		IL.NeLi_Bottle_Hellderberryjuice        .set(ST.make(MD.NeLi, "JuiceHellderberry"                   , 1, 0), null, CR.DELATE, "foodHellderberryjuice");
 		IL.NeLi_Bucket_Spectral_Dew             .set(ST.make(MD.NeLi, "SpectralBucket"                      , 1, 0), new OreDictItemData(ANY.Fe, U*3), OD.container1000water);
 		IL.NeLi_Bowl_DevilishMaize              .set(ST.make(MD.NeLi, "DevilishPopcornRaw"                  , 1, 0));
 		IL.NeLi_Bowl_DevilishPopcorn            .set(ST.make(MD.NeLi, "DevilishPopcorn"                     , 1, 0));
@@ -1118,8 +1202,16 @@ public class LoaderItemList implements Runnable {
 		IL.NeLi_Wart_Crimson                    .set(ST.make(MD.NeLi, "WartItem"                            , 1, 0));
 		IL.NeLi_Wart_Warped                     .set(ST.make(MD.NeLi, "WartItem"                            , 1, 1));
 		IL.NeLi_Wart_Soggy                      .set(ST.make(MD.NeLi, "WartItem"                            , 1, 2));
-		IL.NeLi_Foxfire_Powder                  .set(ST.make(MD.NeLi, "FoxfirePowder"                       , 1, 0));
+		IL.NeLi_Wart_Block_Crimson              .set(ST.make(MD.NeLi, "Wartblock"                           , 1, 0));
+		IL.NeLi_Wart_Block_Warped               .set(ST.make(MD.NeLi, "Wartblock"                           , 1, 1));
+		IL.NeLi_Wart_Block_Soggy                .set(ST.make(MD.NeLi, "Wartblock"                           , 1, 2));
+		IL.NeLi_Wart_Block_Nether               .set(ST.make(MD.NeLi, "Wartblock"                           , 1, 3));
+		IL.NeLi_Foxfire_Powder                  .set(ST.make(MD.NeLi, "FoxfirePowder"                       , 1, 0), null, CR.DELATE);
 		
+		
+		if (IL.NeLi_Gloomstone              .exists()) MT.Gloomstone.mTextureSolid  = MT.Gloomstone.mTextureGem = MT.Gloomstone.mTextureMolten = BlockTextureCopied.get(IL.NeLi_Gloomstone.block(), 0);
+		if (IL.NeLi_Blackstone              .exists()) MT.STONES.Blackstone.mTextureSolid  = BlockTextureCopied.get(IL.NeLi_Blackstone.block(), 0);
+		if (IL.NeLi_Blackstone_Polished     .exists()) MT.STONES.Blackstone.mTextureSmooth = BlockTextureCopied.get(IL.NeLi_Blackstone_Polished.block(), 1);
 		if (IL.NeLi_Bowl_DevilishMaize      .exists()) IL.NeLi_Bowl_DevilishMaize      .item().setContainerItem(Items.bowl);
 		if (IL.NeLi_Bowl_DevilishPopcorn    .exists()) IL.NeLi_Bowl_DevilishPopcorn    .item().setContainerItem(Items.bowl);
 		if (IL.NeLi_Bowl_CrimsonStew        .exists()) IL.NeLi_Bowl_CrimsonStew        .item().setContainerItem(Items.bowl);
@@ -1135,57 +1227,119 @@ public class LoaderItemList implements Runnable {
 		IL.EtFu_Beet_Seeds                      .set(ST.make(MD.EtFu, "beetroot_seeds"                      , 1, 0), null, "seedBeet");
 		IL.EtFu_Dragon_Breath                   .set(ST.make(MD.EtFu, "dragon_breath"                       , 1, 0));
 		IL.EtFu_Lingering_Potion                .set(ST.make(MD.EtFu, "lingering_potion"                    , 1, 0));
+		IL.EtFu_Wither_Rose                     .set(ST.make(MD.EtFu, "wither_rose"                         , 1, 0), null, OD.flower, OD.flowerWither);
+		IL.EtFu_Bark_Oak                        .set(ST.make(MD.EtFu, "bark"                                , 1, 0), new OreDictItemData(MT.WOODS.Oak    , U*8, MT.Bark, U), OD.logWood);
+		IL.EtFu_Bark_Spruce                     .set(ST.make(MD.EtFu, "bark"                                , 1, 1), new OreDictItemData(MT.WOODS.Spruce , U*8, MT.Bark, U), OD.logWood);
+		IL.EtFu_Bark_Birch                      .set(ST.make(MD.EtFu, "bark"                                , 1, 2), new OreDictItemData(MT.WOODS.Birch  , U*8, MT.Bark, U), OD.logWood);
+		IL.EtFu_Bark_Jungle                     .set(ST.make(MD.EtFu, "bark"                                , 1, 3), new OreDictItemData(MT.WOODS.Jungle , U*8, MT.Bark, U), OD.logWood);
+		IL.EtFu_Bark_Acacia                     .set(ST.make(MD.EtFu, "bark2"                               , 1, 0), new OreDictItemData(MT.WOODS.Acacia , U*8, MT.Bark, U), OD.logWood);
+		IL.EtFu_Bark_DarkOak                    .set(ST.make(MD.EtFu, "bark2"                               , 1, 1), new OreDictItemData(MT.WOODS.DarkOak, U*8, MT.Bark, U), OD.logWood);
+		IL.EtFu_Beam1_Oak                       .set(ST.make(MD.EtFu, "log_stripped"                        , 1, 0), new OreDictItemData(MT.WOODS.Oak    , U*8), OD.beamWood);
+		IL.EtFu_Beam1_Spruce                    .set(ST.make(MD.EtFu, "log_stripped"                        , 1, 1), new OreDictItemData(MT.WOODS.Spruce , U*8), OD.beamWood);
+		IL.EtFu_Beam1_Birch                     .set(ST.make(MD.EtFu, "log_stripped"                        , 1, 2), new OreDictItemData(MT.WOODS.Birch  , U*8), OD.beamWood);
+		IL.EtFu_Beam1_Jungle                    .set(ST.make(MD.EtFu, "log_stripped"                        , 1, 3), new OreDictItemData(MT.WOODS.Jungle , U*8), OD.beamWood);
+		IL.EtFu_Beam1_Acacia                    .set(ST.make(MD.EtFu, "log2_stripped"                       , 1, 0), new OreDictItemData(MT.WOODS.Acacia , U*8), OD.beamWood);
+		IL.EtFu_Beam1_DarkOak                   .set(ST.make(MD.EtFu, "log2_stripped"                       , 1, 1), new OreDictItemData(MT.WOODS.DarkOak, U*8), OD.beamWood);
+		IL.EtFu_Beam2_Oak                       .set(ST.make(MD.EtFu, "wood_stripped"                       , 1, 0), new OreDictItemData(MT.WOODS.Oak    , U*8), OD.beamWood);
+		IL.EtFu_Beam2_Spruce                    .set(ST.make(MD.EtFu, "wood_stripped"                       , 1, 1), new OreDictItemData(MT.WOODS.Spruce , U*8), OD.beamWood);
+		IL.EtFu_Beam2_Birch                     .set(ST.make(MD.EtFu, "wood_stripped"                       , 1, 2), new OreDictItemData(MT.WOODS.Birch  , U*8), OD.beamWood);
+		IL.EtFu_Beam2_Jungle                    .set(ST.make(MD.EtFu, "wood_stripped"                       , 1, 3), new OreDictItemData(MT.WOODS.Jungle , U*8), OD.beamWood);
+		IL.EtFu_Beam2_Acacia                    .set(ST.make(MD.EtFu, "wood2_stripped"                      , 1, 0), new OreDictItemData(MT.WOODS.Acacia , U*8), OD.beamWood);
+		IL.EtFu_Beam2_DarkOak                   .set(ST.make(MD.EtFu, "wood2_stripped"                      , 1, 1), new OreDictItemData(MT.WOODS.DarkOak, U*8), OD.beamWood);
+		IL.EtFu_Barrel                          .set(ST.make(MD.EtFu, "barrel"                              , 1, 0), new OreDictItemData(ANY.Wood, 7*U), OD.craftingChest);
+		IL.EtFu_Ancient_Debris                  .set(ST.make(MD.EtFu, "ancient_debris"                      , 1, 0));
 		IL.EtFu_Obsidian                        .set(ST.make(MD.EtFu, "crying_obsidian"                     , 1, 0), new OreDictItemData(MT.Obsidian, U*9, MT.Lapis, U), OD.cryingObsidian);
+		IL.EtFu_Quartz_Bricks                   .set(ST.make(MD.EtFu, "quartz_bricks"                       , 1, 0), new OreDictItemData(MT.NetherQuartz   , U*4));
+		IL.EtFu_Magmatic_Netherrack             .set(ST.make(MD.EtFu, "magma"                               , 1, 0), new OreDictItemData(MT.Netherrack, U));
+		IL.EtFu_Wart_Block_Nether               .set(ST.make(MD.EtFu, "nether_wart"                         , 1, 0));
 		IL.EtFu_Sandstone                       .set(ST.make(MD.EtFu, "red_sandstone"                       , 1, 0));
 		IL.EtFu_Path                            .set(ST.make(MD.EtFu, "grass_path"                          , 1, 0));
 		IL.EtFu_Dirt                            .set(ST.make(MD.EtFu, "coarse_dirt"                         , 1, 0));
 		IL.EtFu_Gravel                          .set(ST.make(MD.EtFu, "old_gravel"                          , 1, 0), null, OD.gravel);
-		IL.EtFu_Granite                         .set(ST.make(MD.EtFu, "stone"                               , 1, 1), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.EtFu_Granite_Smooth                  .set(ST.make(MD.EtFu, "stone"                               , 1, 2), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.EtFu_Diorite                         .set(ST.make(MD.EtFu, "stone"                               , 1, 3), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.EtFu_Diorite_Smooth                  .set(ST.make(MD.EtFu, "stone"                               , 1, 4), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.EtFu_Andesite                        .set(ST.make(MD.EtFu, "stone"                               , 1, 5), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.EtFu_Andesite_Smooth                 .set(ST.make(MD.EtFu, "stone"                               , 1, 6), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
+		IL.EtFu_Tuff                            .set(ST.make(MD.EtFu, "tuff"                                , 1, 0), new OreDictItemData(MT.Stone           , U*9), OP.stone.dat(MT.Stone           ));
+		IL.EtFu_Deepslate                       .set(ST.make(MD.EtFu, "deepslate"                           , 1, 0), new OreDictItemData(MT.STONES.Deepslate, U*9), OP.stone.dat(MT.STONES.Deepslate));
+		IL.EtFu_Deepslate_Cobble                .set(ST.make(MD.EtFu, "cobbled_deepslate"                   , 1, 0), new OreDictItemData(MT.STONES.Deepslate, U*9), OP.stone.dat(MT.STONES.Deepslate));
+		IL.EtFu_Deepslate_Smooth                .set(ST.make(MD.EtFu, "polished_deepslate"                  , 1, 0), new OreDictItemData(MT.STONES.Deepslate, U*9), OP.stone.dat(MT.STONES.Deepslate));
+		IL.EtFu_Granite                         .set(ST.make(MD.EtFu, "stone"                               , 1, 1), new OreDictItemData(MT.STONES.Granite  , U*9), OP.stone.dat(MT.STONES.Granite ), CR.DELATE);
+		IL.EtFu_Granite_Smooth                  .set(ST.make(MD.EtFu, "stone"                               , 1, 2), new OreDictItemData(MT.STONES.Granite  , U*9), OP.stone.dat(MT.STONES.Granite ), CR.DELATE);
+		IL.EtFu_Diorite                         .set(ST.make(MD.EtFu, "stone"                               , 1, 3), new OreDictItemData(MT.STONES.Diorite  , U*9), OP.stone.dat(MT.STONES.Diorite ), CR.DELATE);
+		IL.EtFu_Diorite_Smooth                  .set(ST.make(MD.EtFu, "stone"                               , 1, 4), new OreDictItemData(MT.STONES.Diorite  , U*9), OP.stone.dat(MT.STONES.Diorite ), CR.DELATE);
+		IL.EtFu_Andesite                        .set(ST.make(MD.EtFu, "stone"                               , 1, 5), new OreDictItemData(MT.STONES.Andesite , U*9), OP.stone.dat(MT.STONES.Andesite), CR.DELATE);
+		IL.EtFu_Andesite_Smooth                 .set(ST.make(MD.EtFu, "stone"                               , 1, 6), new OreDictItemData(MT.STONES.Andesite , U*9), OP.stone.dat(MT.STONES.Andesite), CR.DELATE);
+		IL.EtFu_Block_Copper                    .set(ST.make(MD.EtFu, "copper_block"                        , 1, 0));
+		IL.EtFu_Block_Copper_Exposed            .set(ST.make(MD.EtFu, "copper_block"                        , 1, 1), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Weathered          .set(ST.make(MD.EtFu, "copper_block"                        , 1, 2), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Oxidized           .set(ST.make(MD.EtFu, "copper_block"                        , 1, 3), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Waxed              .set(ST.make(MD.EtFu, "copper_block"                        , 1, 8), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Exposed_Waxed      .set(ST.make(MD.EtFu, "copper_block"                        , 1, 9), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Weathered_Waxed    .set(ST.make(MD.EtFu, "copper_block"                        , 1,10), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Oxidized_Waxed     .set(ST.make(MD.EtFu, "copper_block"                        , 1,11), new OreDictItemData(ANY.Cu, U*9));
+		IL.EtFu_Block_Copper_Cut                .set(ST.make(MD.EtFu, "copper_block"                        , 1, 4), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Exposed        .set(ST.make(MD.EtFu, "copper_block"                        , 1, 5), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Weathered      .set(ST.make(MD.EtFu, "copper_block"                        , 1, 6), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Oxidized       .set(ST.make(MD.EtFu, "copper_block"                        , 1, 7), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Waxed          .set(ST.make(MD.EtFu, "copper_block"                        , 1,12), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Exposed_Waxed  .set(ST.make(MD.EtFu, "copper_block"                        , 1,13), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Weathered_Waxed.set(ST.make(MD.EtFu, "copper_block"                        , 1,14), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Block_Copper_Cut_Oxidized_Waxed .set(ST.make(MD.EtFu, "copper_block"                        , 1,15), new OreDictItemData(ANY.Cu, U*4));
+		IL.EtFu_Slabs_Copper_Cut                .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 0), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Exposed        .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 1), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Weathered      .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 2), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Oxidized       .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 3), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Waxed          .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 4), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Exposed_Waxed  .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 5), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Weathered_Waxed.set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 6), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Slabs_Copper_Cut_Oxidized_Waxed .set(ST.make(MD.EtFu, "cut_copper_slab"                     , 1, 7), new OreDictItemData(ANY.Cu, U*2));
+		IL.EtFu_Stair_Copper_Cut                .set(ST.make(MD.EtFu, "cut_copper_stairs"                   , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Exposed        .set(ST.make(MD.EtFu, "exposed_cut_copper_stairs"           , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Weathered      .set(ST.make(MD.EtFu, "weathered_cut_copper_stairs"         , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Oxidized       .set(ST.make(MD.EtFu, "oxidized_cut_copper_stairs"          , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Waxed          .set(ST.make(MD.EtFu, "waxed_cut_copper_stairs"             , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Exposed_Waxed  .set(ST.make(MD.EtFu, "waxed_exposed_cut_copper_stairs"     , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Weathered_Waxed.set(ST.make(MD.EtFu, "waxed_weathered_cut_copper_stairs"   , 1, 0), new OreDictItemData(ANY.Cu, U*3));
+		IL.EtFu_Stair_Copper_Cut_Oxidized_Waxed .set(ST.make(MD.EtFu, "waxed_oxidized_cut_copper_stairs"    , 1, 0), new OreDictItemData(ANY.Cu, U*3));
 		
+		if (IL.EtFu_Block_Copper    .exists()) MT.Cu            .mTextureSolid = BlockTextureCopied.get(IL.EtFu_Block_Copper    .block(), 0);
+		if (IL.EtFu_Block_Copper_Cut.exists()) MT.AnnealedCopper.mTextureSolid = BlockTextureCopied.get(IL.EtFu_Block_Copper_Cut.block(), 4);
 		if (IL.EtFu_Lingering_Potion.exists()) IL.EtFu_Lingering_Potion.item().setContainerItem(Items.glass_bottle);
 		
 		
-		IL.GaSu_Granite                         .set(ST.make(MD.GaSu, "18Stones"                            , 1, 1), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.GaSu_Granite_Smooth                  .set(ST.make(MD.GaSu, "18Stones"                            , 1, 2), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.GaSu_Diorite                         .set(ST.make(MD.GaSu, "18Stones"                            , 1, 3), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.GaSu_Diorite_Smooth                  .set(ST.make(MD.GaSu, "18Stones"                            , 1, 4), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.GaSu_Andesite                        .set(ST.make(MD.GaSu, "18Stones"                            , 1, 5), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.GaSu_Andesite_Smooth                 .set(ST.make(MD.GaSu, "18Stones"                            , 1, 6), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.GaSu_Basalt                          .set(ST.make(MD.GaSu, "basalt"                              , 1, 0), new OreDictItemData(MT.Basalt  , U), OP.stone.dat(MT.Basalt  ));
-		IL.GaSu_Basalt_Smooth                   .set(ST.make(MD.GaSu, "basalt"                              , 1, 1), new OreDictItemData(MT.Basalt  , U), OP.stone.dat(MT.Basalt  ));
+		IL.GaSu_Granite                         .set(ST.make(MD.GaSu, "18Stones"                            , 1, 1), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ), CR.DELATE);
+		IL.GaSu_Granite_Smooth                  .set(ST.make(MD.GaSu, "18Stones"                            , 1, 2), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ), CR.DELATE);
+		IL.GaSu_Diorite                         .set(ST.make(MD.GaSu, "18Stones"                            , 1, 3), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ), CR.DELATE);
+		IL.GaSu_Diorite_Smooth                  .set(ST.make(MD.GaSu, "18Stones"                            , 1, 4), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ), CR.DELATE);
+		IL.GaSu_Andesite                        .set(ST.make(MD.GaSu, "18Stones"                            , 1, 5), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ), CR.DELATE);
+		IL.GaSu_Andesite_Smooth                 .set(ST.make(MD.GaSu, "18Stones"                            , 1, 6), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ), CR.DELATE);
+		IL.GaSu_Basalt                          .set(ST.make(MD.GaSu, "basalt"                              , 1, 0), new OreDictItemData(MT.STONES.Basalt    , U*9), OP.stone.dat(MT.STONES.Basalt    ));
+		IL.GaSu_Basalt_Smooth                   .set(ST.make(MD.GaSu, "basalt"                              , 1, 1), new OreDictItemData(MT.STONES.Basalt    , U*9), OP.stone.dat(MT.STONES.Basalt    ));
 		IL.GaSu_Beet_Seeds                      .set(ST.make(MD.GaSu, "beetrootSeeds"                       , 1, 0), null, "seedBeet");
 		
 		
-		IL.CHSL_Granite                         .set(ST.make(MD.CHSL, "granite"                             , 1, 0), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.CHSL_Diorite                         .set(ST.make(MD.CHSL, "diorite"                             , 1, 0), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.CHSL_Andesite                        .set(ST.make(MD.CHSL, "andesite"                            , 1, 0), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.CHSL_Granite_Smooth                  .set(ST.make(MD.CHSL, "granite"                             , 1, 1), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.CHSL_Diorite_Smooth                  .set(ST.make(MD.CHSL, "diorite"                             , 1, 1), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.CHSL_Andesite_Smooth                 .set(ST.make(MD.CHSL, "andesite"                            , 1, 1), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
+		IL.CHSL_Granite                         .set(ST.make(MD.CHSL, "granite"                             , 1, 0), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ), CR.DELATE);
+		IL.CHSL_Diorite                         .set(ST.make(MD.CHSL, "diorite"                             , 1, 0), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ), CR.DELATE);
+		IL.CHSL_Andesite                        .set(ST.make(MD.CHSL, "andesite"                            , 1, 0), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ), CR.DELATE);
+		IL.CHSL_Granite_Smooth                  .set(ST.make(MD.CHSL, "granite"                             , 1, 1), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ), CR.DELATE);
+		IL.CHSL_Diorite_Smooth                  .set(ST.make(MD.CHSL, "diorite"                             , 1, 1), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ), CR.DELATE);
+		IL.CHSL_Andesite_Smooth                 .set(ST.make(MD.CHSL, "andesite"                            , 1, 1), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ), CR.DELATE);
 		
 		
-		IL.BOTA_Andesite                        .set(ST.make(MD.BOTA, "stone"                               , 1, 0), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.BOTA_Basalt                          .set(ST.make(MD.BOTA, "stone"                               , 1, 1), new OreDictItemData(MT.Basalt  , U), OP.stone.dat(MT.Basalt  ));
-		IL.BOTA_Diorite                         .set(ST.make(MD.BOTA, "stone"                               , 1, 2), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.BOTA_Granite                         .set(ST.make(MD.BOTA, "stone"                               , 1, 3), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.BOTA_Andesite_Smooth                 .set(ST.make(MD.BOTA, "stone"                               , 1, 4), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.BOTA_Basalt_Smooth                   .set(ST.make(MD.BOTA, "stone"                               , 1, 5), new OreDictItemData(MT.Basalt  , U), OP.stone.dat(MT.Basalt  ));
-		IL.BOTA_Diorite_Smooth                  .set(ST.make(MD.BOTA, "stone"                               , 1, 6), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.BOTA_Granite_Smooth                  .set(ST.make(MD.BOTA, "stone"                               , 1, 7), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.BOTA_Andesite_Bricks                 .set(ST.make(MD.BOTA, "stone"                               , 1, 8), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.BOTA_Basalt_Bricks                   .set(ST.make(MD.BOTA, "stone"                               , 1, 9), new OreDictItemData(MT.Basalt  , U), OP.stone.dat(MT.Basalt  ));
-		IL.BOTA_Diorite_Bricks                  .set(ST.make(MD.BOTA, "stone"                               , 1,10), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.BOTA_Granite_Bricks                  .set(ST.make(MD.BOTA, "stone"                               , 1,11), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.BOTA_Andesite_Chiseled               .set(ST.make(MD.BOTA, "stone"                               , 1,12), new OreDictItemData(MT.Andesite, U), OP.stone.dat(MT.Andesite));
-		IL.BOTA_Basalt_Chiseled                 .set(ST.make(MD.BOTA, "stone"                               , 1,13), new OreDictItemData(MT.Basalt  , U), OP.stone.dat(MT.Basalt  ));
-		IL.BOTA_Diorite_Chiseled                .set(ST.make(MD.BOTA, "stone"                               , 1,14), new OreDictItemData(MT.Diorite , U), OP.stone.dat(MT.Diorite ));
-		IL.BOTA_Granite_Chiseled                .set(ST.make(MD.BOTA, "stone"                               , 1,15), new OreDictItemData(MT.Granite , U), OP.stone.dat(MT.Granite ));
-		IL.BOTA_Livingrock                      .set(ST.make(MD.BOTA, "livingrock"                          , 1, 0), new OreDictItemData(MT.Livingrock     , U), OP.stone.dat(MT.Livingrock     ));
+		IL.BOTA_Andesite                        .set(ST.make(MD.BOTA, "stone"                               , 1, 0), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ));
+		IL.BOTA_Basalt                          .set(ST.make(MD.BOTA, "stone"                               , 1, 1), new OreDictItemData(MT.STONES.Basalt    , U*9), OP.stone.dat(MT.STONES.Basalt    ));
+		IL.BOTA_Diorite                         .set(ST.make(MD.BOTA, "stone"                               , 1, 2), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ));
+		IL.BOTA_Granite                         .set(ST.make(MD.BOTA, "stone"                               , 1, 3), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ));
+		IL.BOTA_Andesite_Smooth                 .set(ST.make(MD.BOTA, "stone"                               , 1, 4), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ));
+		IL.BOTA_Basalt_Smooth                   .set(ST.make(MD.BOTA, "stone"                               , 1, 5), new OreDictItemData(MT.STONES.Basalt    , U*9), OP.stone.dat(MT.STONES.Basalt    ));
+		IL.BOTA_Diorite_Smooth                  .set(ST.make(MD.BOTA, "stone"                               , 1, 6), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ));
+		IL.BOTA_Granite_Smooth                  .set(ST.make(MD.BOTA, "stone"                               , 1, 7), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ));
+		IL.BOTA_Andesite_Bricks                 .set(ST.make(MD.BOTA, "stone"                               , 1, 8), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ));
+		IL.BOTA_Basalt_Bricks                   .set(ST.make(MD.BOTA, "stone"                               , 1, 9), new OreDictItemData(MT.STONES.Basalt    , U*9), OP.stone.dat(MT.STONES.Basalt    ));
+		IL.BOTA_Diorite_Bricks                  .set(ST.make(MD.BOTA, "stone"                               , 1,10), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ));
+		IL.BOTA_Granite_Bricks                  .set(ST.make(MD.BOTA, "stone"                               , 1,11), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ));
+		IL.BOTA_Andesite_Chiseled               .set(ST.make(MD.BOTA, "stone"                               , 1,12), new OreDictItemData(MT.STONES.Andesite  , U*9), OP.stone.dat(MT.STONES.Andesite  ));
+		IL.BOTA_Basalt_Chiseled                 .set(ST.make(MD.BOTA, "stone"                               , 1,13), new OreDictItemData(MT.STONES.Basalt    , U*9), OP.stone.dat(MT.STONES.Basalt    ));
+		IL.BOTA_Diorite_Chiseled                .set(ST.make(MD.BOTA, "stone"                               , 1,14), new OreDictItemData(MT.STONES.Diorite   , U*9), OP.stone.dat(MT.STONES.Diorite   ));
+		IL.BOTA_Granite_Chiseled                .set(ST.make(MD.BOTA, "stone"                               , 1,15), new OreDictItemData(MT.STONES.Granite   , U*9), OP.stone.dat(MT.STONES.Granite   ));
+		IL.BOTA_Livingrock                      .set(ST.make(MD.BOTA, "livingrock"                          , 1, 0), new OreDictItemData(MT.STONES.Livingrock, U*9), OP.stone.dat(MT.STONES.Livingrock));
 		IL.BOTA_Prismarine                      .set(ST.make(MD.BOTA, "prismarine"                          , 1, 0), new OreDictItemData(MT.PrismarineLight, U), OP.stone.dat(MT.PrismarineLight));
 		IL.BOTA_Prismarine_Bricks               .set(ST.make(MD.BOTA, "prismarine"                          , 1, 1), new OreDictItemData(MT.PrismarineLight, U), OP.stone.dat(MT.PrismarineLight));
 		IL.BOTA_Prismarine_Dark                 .set(ST.make(MD.BOTA, "prismarine"                          , 1, 2), new OreDictItemData(MT.PrismarineDark , U), OP.stone.dat(MT.PrismarineDark ));
@@ -1222,12 +1376,12 @@ public class LoaderItemList implements Runnable {
 		if (IL.EB_Dirt_Oxisol    .exists()) Textures.BlockIcons.DIRTS[11] = new IconContainerCopied(IL.EB_Dirt_Oxisol    .block(), 7, SIDE_BOTTOM);
 		
 		
-		IL.BoP_Limestone                        .set(ST.make(MD.BoP, "rocks"                                , 1, 0), OP.stone.dat(MT.Limestone));
-		IL.BoP_Limestone_Polished               .set(ST.make(MD.BoP, "rocks"                                , 1, 1), OP.stone.dat(MT.Limestone));
-		IL.BoP_Siltstone                        .set(ST.make(MD.BoP, "rocks"                                , 1, 2), OP.stone.dat(MT.Siltstone));
-		IL.BoP_Siltstone_Polished               .set(ST.make(MD.BoP, "rocks"                                , 1, 3), OP.stone.dat(MT.Siltstone));
-		IL.BoP_Shale                            .set(ST.make(MD.BoP, "rocks"                                , 1, 4), OP.stone.dat(MT.Shale));
-		IL.BoP_Shale_Polished                   .set(ST.make(MD.BoP, "rocks"                                , 1, 5), OP.stone.dat(MT.Shale));
+		IL.BoP_Limestone                        .set(ST.make(MD.BoP, "rocks"                                , 1, 0), OP.stone.dat(MT.STONES.Limestone));
+		IL.BoP_Limestone_Polished               .set(ST.make(MD.BoP, "rocks"                                , 1, 1), OP.stone.dat(MT.STONES.Limestone));
+		IL.BoP_Siltstone                        .set(ST.make(MD.BoP, "rocks"                                , 1, 2), OP.stone.dat(MT.STONES.Siltstone));
+		IL.BoP_Siltstone_Polished               .set(ST.make(MD.BoP, "rocks"                                , 1, 3), OP.stone.dat(MT.STONES.Siltstone));
+		IL.BoP_Shale                            .set(ST.make(MD.BoP, "rocks"                                , 1, 4), OP.stone.dat(MT.STONES.Shale));
+		IL.BoP_Shale_Polished                   .set(ST.make(MD.BoP, "rocks"                                , 1, 5), OP.stone.dat(MT.STONES.Shale));
 		IL.BoP_Quicksand                        .set(ST.make(MD.BoP, "mud"                                  , 1, 1));
 		IL.BoP_Mud                              .set(ST.make(MD.BoP, "mud"                                  , 1, 0));
 		IL.BoP_Mud_Ball                         .set(ST.make(MD.BoP, "mudball"                              , 1, 0), null, OD.itemMud);
@@ -1289,10 +1443,10 @@ public class LoaderItemList implements Runnable {
 		IL.BoP_Pear                             .set(ST.make(MD.BoP, "food"                                 , 1,12), null, "cropPear");
 		IL.BoP_Turnip_Seeds                     .set(ST.make(MD.BoP, "turnipSeeds"                          , 1, 0), null, "seedTurnip");
 		
-		IL.BoP_Jar_Empty                        .set(ST.make(MD.BoP, "jarEmpty"                             , 1, 0), new OreDictItemData(MT.Glass, 7*U3));
-		IL.BoP_Jar_Honey                        .set(ST.make(MD.BoP, "jarFilled"                            , 1, 0), new OreDictItemData(MT.Glass, 7*U3), "foodHoneydrop");
-		IL.BoP_Jar_Poison                       .set(ST.make(MD.BoP, "jarFilled"                            , 1, 1), new OreDictItemData(MT.Glass, 7*U3), OD.itemPoison);
-		IL.BoP_Jar_Pixie                        .set(ST.make(MD.BoP, "jarFilled"                            , 1, 2), new OreDictItemData(MT.Glass, 7*U3));
+		IL.BoP_Jar_Empty                        .set(ST.make(MD.BoP, "jarEmpty"                             , 1, 0), new OreDictItemData(MT.Glass, 21*U));
+		IL.BoP_Jar_Honey                        .set(ST.make(MD.BoP, "jarFilled"                            , 1, 0), new OreDictItemData(MT.Glass, 21*U), "foodHoneydrop");
+		IL.BoP_Jar_Poison                       .set(ST.make(MD.BoP, "jarFilled"                            , 1, 1), new OreDictItemData(MT.Glass, 21*U), OD.itemPoison);
+		IL.BoP_Jar_Pixie                        .set(ST.make(MD.BoP, "jarFilled"                            , 1, 2), new OreDictItemData(MT.Glass, 21*U));
 		
 		if (IL.BoP_Jar_Honey.item() != null && IL.BoP_Jar_Empty.item() != null) IL.BoP_Jar_Honey.item().setContainerItem(IL.BoP_Jar_Empty.item());
 		
@@ -1311,6 +1465,11 @@ public class LoaderItemList implements Runnable {
 		IL.RoC_Propolis_Slippery                .set(ST.make(MD.RoC, "rotarycraft_item_modinterface"        , 1, 1), null, OD.listAllpropolis);
 		IL.RoC_Ethanol_Extract                  .set(ST.make(MD.RoC, "rotarycraft_item_powders"             , 1,16), new OreDictItemData(MT.Ethanol, U));
 		IL.RoC_Ethanol_Crystal                  .set(ST.make(MD.RoC, "rotarycraft_item_ethanol"             , 1, 0), new OreDictItemData(MT.Ethanol, U));
+		
+		
+		IL.BTRS_Backpack                        .set(ST.make(MD.BTRS, "backpack"                            , 1, 0));
+		IL.BTRS_Enderpack                       .set(ST.make(MD.BTRS, "enderBackpack"                       , 1, 0));
+		IL.BTRS_Thaumpack                       .set(ST.make(MD.BTRS, "thaumcraftBackpack"                  , 1, 0));
 		
 		
 		IL.JABBA_Dolly                          .set(ST.make(MD.JABBA, "mover"                              , 1, 0));
@@ -1342,6 +1501,7 @@ public class LoaderItemList implements Runnable {
 		if (IL.TG_Ore_Cluster_2.block() != NB) IL.TG_Ore_Cluster_2.block().setHardness(1000).setResistance(6000000).setHarvestLevel(TOOL_pickaxe, 3);
 		
 		
+		IL.MFR_Hammer                           .set(ST.make(MD.MFR, "hammer"                               , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.MFR_Hammer.wild(1));
 		IL.MFR_Fertilizer                       .set(ST.make(MD.MFR, "fertilizer"                           , 1, 0), null, OD.itemFertilizer, DYE_OREDICTS_MIXABLE[DYE_INDEX_Brown]);
 		IL.MFR_Log_Rubber                       .set(ST.make(MD.MFR, "rubberwood.log"                       , 1, 0), null, OD.logRubber);
 		IL.MFR_Sapling_Rubber                   .set(ST.make(MD.MFR, "rubberwood.sapling"                   , 1, 0), null, OP.treeSapling);
@@ -1366,14 +1526,19 @@ public class LoaderItemList implements Runnable {
 		IL.ICBM_Concrete                        .set(ST.make(MD.ICBM, "icbmCConcrete"                       , 1, 0));
 		
 		
-		IL.BC_Wrench                            .set(ST.make(MD.BC, "wrenchItem"                            , 1, 0));
+		IL.BC_Wrench                            .set(ST.make(MD.BC, "wrenchItem"                            , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.BC_Wrench.wild(1));
 		
 		
-		IL.AE_Wrench_Certus                     .set(ST.make(MD.AE, "item.ToolCertusQuartzWrench"           , 1, 0));
-		IL.AE_Wrench_Quartz                     .set(ST.make(MD.AE, "item.ToolNetherQuartzWrench"           , 1, 0));
+		IL.AE_Wrench_Certus                     .set(ST.make(MD.AE, "item.ToolCertusQuartzWrench"           , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.AE_Wrench_Certus.wild(1));
+		IL.AE_Wrench_Quartz                     .set(ST.make(MD.AE, "item.ToolNetherQuartzWrench"           , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.AE_Wrench_Quartz.wild(1));
+		IL.AE_Cutter_Certus                     .set(ST.make(MD.AE, "item.ToolCertusQuartzCuttingKnife"     , 1, 0)); ItemsGT.CONTAINER_DURABILITY.add(IL.AE_Cutter_Certus.wild(1));
+		IL.AE_Cutter_Quartz                     .set(ST.make(MD.AE, "item.ToolNetherQuartzCuttingKnife"     , 1, 0)); ItemsGT.CONTAINER_DURABILITY.add(IL.AE_Cutter_Quartz.wild(1));
 		
 		
-		IL.FR_Wrench                            .set(ST.make(MD.FR, "wrench"                                , 1, 0));
+		IL.EIO_Wrench                           .set(ST.make(MD.EIO, "itemYetaWrench"                       , 1, 0), null, CR.DELATE); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.EIO_Wrench.wild(1));
+		
+		
+		IL.FR_Wrench                            .set(ST.make(MD.FR, "wrench"                                , 1, 0)); ItemsGT.SPECIAL_CASE_TOOLS.add(IL.FR_Wrench.wild(1));
 		IL.FR_Planks_Fireproof                  .set(ST.make(MD.FR, "planksFireproof"                       , 1, 0));
 		IL.FR_Planks                            .set(ST.make(MD.FR, "planks"                                , 1, 0));
 		IL.FR_Slabs_Fireproof                   .set(ST.make(MD.FR, "slabsFireproof"                        , 1, 0));
@@ -1653,7 +1818,7 @@ public class LoaderItemList implements Runnable {
 		IL.FR_Chipset_Bronze                    .set(ST.make(MD.FR, "chipsets"                              , 1, 1), new OreDictItemData(MT.Bronze  , U* 3, MT.Redstone, U * 6));
 		IL.FR_Chipset_Iron                      .set(ST.make(MD.FR, "chipsets"                              , 1, 2), new OreDictItemData(ANY.Fe     , U* 3, MT.Redstone, U * 6));
 		IL.FR_Chipset_Gold                      .set(ST.make(MD.FR, "chipsets"                              , 1, 3), new OreDictItemData(MT.Au      , U* 3, MT.Redstone, U * 6));
-		IL.FR_ElectronTube_Copper               .set(ST.make(MD.FR, "thermionicTubes"                       , 1, 0), new OreDictItemData(MT.Cu      , 5*U4, MT.Redstone, U2, MT.Glass, U8));
+		IL.FR_ElectronTube_Copper               .set(ST.make(MD.FR, "thermionicTubes"                       , 1, 0), new OreDictItemData(ANY.Cu     , 5*U4, MT.Redstone, U2, MT.Glass, U8));
 		IL.FR_ElectronTube_Tin                  .set(ST.make(MD.FR, "thermionicTubes"                       , 1, 1), new OreDictItemData(MT.Sn      , 5*U4, MT.Redstone, U2, MT.Glass, U8));
 		IL.FR_ElectronTube_Bronze               .set(ST.make(MD.FR, "thermionicTubes"                       , 1, 2), new OreDictItemData(MT.Bronze  , 5*U4, MT.Redstone, U2, MT.Glass, U8));
 		IL.FR_ElectronTube_Iron                 .set(ST.make(MD.FR, "thermionicTubes"                       , 1, 3), new OreDictItemData(ANY.Fe     , 5*U4, MT.Redstone, U2, MT.Glass, U8));
@@ -1674,6 +1839,8 @@ public class LoaderItemList implements Runnable {
 		IL.BINNIE_Dye_Black                     .set(ST.make(MD.BINNIE_BEE, "misc"                          , 1,24), null, DYE_OREDICTS_MIXABLE[DYE_INDEX_Black]);
 		IL.BINNIE_Dye_Brown                     .set(ST.make(MD.BINNIE_BEE, "misc"                          , 1,25), null, DYE_OREDICTS_MIXABLE[DYE_INDEX_Brown]);
 		
+		IL.Ancient_Debris.set((IL.EtFu_Ancient_Debris.exists() ? IL.EtFu_Ancient_Debris : IL.NePl_Ancient_Debris).get(1));
+		
 		ST.item(MD.BINNIE, "containerGlass", Items.potionitem).setContainerItem(Items.glass_bottle);
 		
 		if (MD.IC2C.mLoaded) {
@@ -1691,31 +1858,31 @@ public class LoaderItemList implements Runnable {
 		IL.Cell_CFoam                           .set(NI);
 		} else {
 		IL.IC2_Iridium_Shard                    .set(ST.mkic("iridiumShard"                                 , 1   ), new OreDictItemData(MT.Ir, U9));
-		IL.IC2_Energium_Dust                    .set(ST.mkic("energiumDust"                                 , 1   ));
+		IL.IC2_Energium_Dust                    .set(ST.mkic("energiumDust"                                 , 1   ), null, CR.DELATE);
 		IL.IC2_Fuel_Rod_Empty                   .set(ST.mkic("fuelRod"                                      , 1   ), new OreDictItemData(MD.GT.mLoaded?MT.Zr:ANY.Fe, U));
 		IL.IC2_Biochaff                         .set(ST.mkic("biochaff"                                     , 1   ));
 		IL.IC2_ShaftIron                        .set(ST.mkic("ironshaft"                                    , 1   ), new OreDictItemData(ANY.Fe, U*9));
 		IL.IC2_ShaftSteel                       .set(ST.mkic("steelshaft"                                   , 1   ), new OreDictItemData(ANY.Steel, U*9));
-		IL.IC2_ForgeHammer                      .set(ST.mkic("ForgeHammer"                                  , 1   ));
+		IL.IC2_ForgeHammer                      .set(ST.mkic("ForgeHammer"                                  , 1   )); ItemsGT.CONTAINER_DURABILITY.add(IL.IC2_ForgeHammer.wild(1));
 		IL.IC2_Debug                            .set(ST.mkic("debug"                                        , 1   )); ItemsGT.DEBUG_ITEMS.add(IL.IC2_Debug.wild(1)); ItemsGT.ILLEGAL_DROPS.add(IL.IC2_Debug.wild(1));
 		IL.IC2_AdvBattery                       .set(ST.mkic("advBattery"                                   , 1   ));
-		IL.Cell_Universal_Fluid                 .set(ST.mkic("FluidCell"                                    , 1   ), new OreDictItemData(MT.Sn, U*2, OM.stack(MT.Glass, 3*U8)));
+		IL.Cell_Universal_Fluid                 .set(ST.mkic("FluidCell"                                    , 1   ), new OreDictItemData(MT.Sn, U*2, OM.stack(MT.Glass, U)), CR.DELATE);
 		IL.Cell_UUM                             .set(ST.mkic("uuMatterCell"                                 , 1   ), OP.cell.dat(MT.UUMatter));
 		IL.Cell_CFoam                           .set(ST.mkic("CFCell"                                       , 1   ), OP.cell.dat(MT.ConstructionFoam));
 		}
 		
-		IL.IC2_ITNT                             .set(ST.mkic("industrialTnt"                                , 1   ));
+		IL.IC2_ITNT                             .set(ST.mkic("industrialTnt"                                , 1   ), null, CR.DELATE);
 		IL.IC2_Iridium_Ore                      .set(ST.mkic("iridiumOre"                                   , 1   ), new OreDictItemData(MT.Ir, U));
-		IL.IC2_Scaffold                         .set(ST.mkic("scaffold"                                     , 1   ), new OreDictItemData(ANY.Wood, 9*U8));
+		IL.IC2_Scaffold                         .set(ST.mkic("scaffold"                                     , 1   ), new OreDictItemData(ANY.Wood, 9*U8), CR.DELATE);
 		IL.IC2_Scaffold_Iron                    .set(ST.mkic("ironScaffold"                                 , 1   ), new OreDictItemData(ANY.Fe, 15*U32));
 		IL.IC2_Foam                             .set(ST.mkic("constructionFoam"                             , 1   ));
 		IL.IC2_Foam_Reinforced                  .set(ST.mkic("constructionreinforcedFoam"                   , 1   ));
 		IL.IC2_Wall                             .set(ST.mkic("constructionFoamWall"                         , 1   ));
 		IL.IC2_Wall_Reinforced                  .set(ST.mkic("reinforcedStone"                              , 1   ));
 		IL.IC2_Glass_Reinforced                 .set(ST.mkic("reinforcedGlass"                              , 1   ));
-		IL.IC2_Spray_WeedEx                     .set(ST.mkic("weedEx"                                       , 1   ), new OreDictItemData(MT.Sn, U, MT.Redstone, U));
-		IL.IC2_Mixed_Metal_Ingot                .set(ST.mkic("mixedMetalIngot"                              , 1   ));
-		IL.IC2_Fertilizer                       .set(ST.mkic("fertilizer"                                   , 1   ), null, OD.itemFertilizer);
+		IL.IC2_Spray_WeedEx                     .set(ST.mkic("weedEx"                                       , 1   ), new OreDictItemData(MT.Sn, U, MT.Redstone, U), CR.DELATE);
+		IL.IC2_Mixed_Metal_Ingot                .set(ST.mkic("mixedMetalIngot"                              , 1   ), null, CR.DELATE);
+		IL.IC2_Fertilizer                       .set(ST.mkic("fertilizer"                                   , 1   ), null, OD.itemFertilizer, CR.DELATE);
 		IL.IC2_Resin                            .set(ST.mkic("resin"                                        , 1   ), null, OD.itemResin);
 		IL.IC2_Log_Rubber                       .set(ST.mkic("rubberWood"                                   , 1   ), new OreDictItemData(MT.WoodRubber, U*8, MT.Bark, U), OD.logRubber);
 		IL.IC2_Leaves_Rubber                    .set(ST.mkic("rubberLeaves"                                 , 1   ));
@@ -1725,7 +1892,7 @@ public class LoaderItemList implements Runnable {
 		IL.IC2_Grin_Powder                      .set(ST.mkic("grinPowder"                                   , 1   ));
 		IL.IC2_Scrap                            .set(ST.mkic("scrap"                                        , 1   ));
 		IL.IC2_Scrapbox                         .set(ST.mkic("scrapBox"                                     , 1   ));
-		IL.IC2_Food_Can_Empty                   .set(ST.mkic("tinCan"                                       , 1   ), new OreDictItemData(MT.Sn, U2));
+		IL.IC2_Food_Can_Empty                   .set(ST.mkic("tinCan"                                       , 1   ), new OreDictItemData(MT.Sn, U2), CR.DELATE);
 		IL.IC2_Food_Can_Filled                  .set(ST.mkic("filledTinCan"                                 , 1, 0));
 		IL.IC2_Food_Can_Spoiled                 .set(ST.mkic("filledTinCan"                                 , 1, 1));
 		IL.IC2_Food_Can_Poisonous               .set(ST.mkic("filledTinCan"                                 , 1, 2));
@@ -1734,18 +1901,18 @@ public class LoaderItemList implements Runnable {
 		IL.IC2_Coal_Ball                        .set(ST.mkic("coalBall"                                     , 1   ), new OreDictItemData(MT.Coal, U*8));
 		IL.IC2_Compressed_Coal_Ball             .set(ST.mkic("compressedCoalBall"                           , 1   ), new OreDictItemData(MT.Coal, U*8));
 		IL.IC2_Compressed_Coal_Chunk            .set(ST.mkic("coalChunk"                                    , 1   ), new OreDictItemData(MT.Coal, U*64, MT.Obsidian, U*9));
-		IL.IC2_Carbon_Fiber                     .set(ST.mkic("carbonFiber"                                  , 1   ));
-		IL.IC2_Carbon_Mesh                      .set(ST.mkic("carbonMesh"                                   , 1   ));
-		IL.IC2_Carbon_Plate                     .set(ST.mkic("carbonPlate"                                  , 1   ));
+		IL.IC2_Carbon_Fiber                     .set(ST.mkic("carbonFiber"                                  , 1   ), null, CR.DELATE);
+		IL.IC2_Carbon_Mesh                      .set(ST.mkic("carbonMesh"                                   , 1   ), null, CR.DELATE);
+		IL.IC2_Carbon_Plate                     .set(ST.mkic("carbonPlate"                                  , 1   ), null, CR.DELATE);
 		IL.IC2_Advanced_Alloy                   .set(ST.mkic("advancedAlloy"                                , 1   ));
 		IL.IC2_Iridium_Alloy                    .set(ST.mkic("iridiumPlate"                                 , 1   ), new OreDictItemData(MT.Ir, U*4, ANY.Diamond, U*1));
-		IL.IC2_Machine                          .set(ST.mkic("machine"                                      , 1   ), new OreDictItemData(ANY.Fe, U*8));
+		IL.IC2_Machine                          .set(ST.mkic("machine"                                      , 1   ), new OreDictItemData(ANY.Fe, U*8), CR.DELATE);
 		IL.IC2_Machine_Adv                      .set(ST.mkic("advancedMachine"                              , 1   ), new OreDictItemData(ANY.Fe, U*8));
 		IL.IC2_Generator                        .set(ST.mkic("generator"                                    , 1   ), new OreDictItemData(ANY.Fe, U*8));
 		
 		IL.IC2_SuBattery                        .set(ST.mkic("suBattery"                                    , 1   ));
 		IL.IC2_ReBattery                        .set(ST.mkic("reBattery"                                    , 1   ));
-		IL.IC2_EnergyCrystal                    .set(ST.mkic("energyCrystal"                                , 1   ), new OreDictItemData(MT.EnergiumRed, U*9));
+		IL.IC2_EnergyCrystal                    .set(ST.mkic("energyCrystal"                                , 1   ), new OreDictItemData(MT.EnergiumRed, U*9), CR.DELATE);
 		IL.IC2_LapotronCrystal                  .set(ST.mkic("lapotronCrystal"                              , 1   ), new OreDictItemData(MT.EnergiumRed, U*9));
 		
 		IL.Tool_Sword_Bronze                    .set(ST.mkic("bronzeSword"                                  , 1, 0), new OreDictItemData(MT.Bronze, OP.toolHeadSword  , ANY.Wood, U2).setUseVanillaDamage());
@@ -1753,7 +1920,7 @@ public class LoaderItemList implements Runnable {
 		IL.Tool_Shovel_Bronze                   .set(ST.mkic("bronzeShovel"                                 , 1, 0), new OreDictItemData(MT.Bronze, OP.toolHeadShovel , ANY.Wood, U ).setUseVanillaDamage());
 		IL.Tool_Axe_Bronze                      .set(ST.mkic("bronzeAxe"                                    , 1, 0), new OreDictItemData(MT.Bronze, OP.toolHeadAxe    , ANY.Wood, U ).setUseVanillaDamage());
 		IL.Tool_Hoe_Bronze                      .set(ST.mkic("bronzeHoe"                                    , 1, 0), new OreDictItemData(MT.Bronze, OP.toolHeadHoe    , ANY.Wood, U ).setUseVanillaDamage());
-		IL.IC2_WireCutter                       .set(ST.mkic("cutter"                                       , 1   ));
+		IL.IC2_WireCutter                       .set(ST.mkic("cutter"                                       , 1   )); ItemsGT.CONTAINER_DURABILITY.add(IL.IC2_WireCutter.wild(1));
 		
 		IL.Credit_Iron                          .set(ST.mkic("coin"                                         , 1   ));
 		

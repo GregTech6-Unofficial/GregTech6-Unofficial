@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -22,6 +22,7 @@ package gregtech.tileentity.inventories;
 import static gregapi.data.CS.*;
 
 import gregapi.data.CS.SFX;
+import gregapi.data.IL;
 import gregapi.data.TD;
 import gregapi.old.Textures;
 import gregapi.render.BlockTextureDefault;
@@ -61,13 +62,15 @@ public class MultiTileEntityLocker extends TileEntityBase09FacingSingle implemen
 			for (int i = 0; i < 4; i++) {
 				ItemStack tStack = slot(i);
 				if (tStack == null || tStack.getItem().isValidArmor(tStack, 3-i, aPlayer)) {
-					slot(i, aPlayer.inventory.armorInventory[i]);
-					aPlayer.inventory.armorInventory[i] = tStack;
-					temp = T;
+					if (!IL.BTRS_Backpack.equal(aPlayer.inventory.armorInventory[i], T, T) && !IL.BTRS_Thaumpack.equal(aPlayer.inventory.armorInventory[i], T, T)) {
+						slot(i, aPlayer.inventory.armorInventory[i]);
+						aPlayer.inventory.armorInventory[i] = tStack;
+						temp = T;
+					}
 				}
 			}
 			if (temp) {
-				if (aPlayer.openContainer != null) aPlayer.openContainer.detectAndSendChanges();
+				ST.update(aPlayer);
 				updateInventory();
 				UT.Sounds.send(SFX.MC_CLICK, aPlayer);
 			}
@@ -88,7 +91,7 @@ public class MultiTileEntityLocker extends TileEntityBase09FacingSingle implemen
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (!aShouldSideBeRendered[aSide]) return null;
-		int aIndex = aSide<2?aSide:aSide==mFacing?2:aSide==OPPOSITES[mFacing]?3:4;
+		int aIndex = aSide<2?aSide:aSide==mFacing?2:aSide==OPOS[mFacing]?3:4;
 		return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[aIndex], mRGBa, mMaterial.contains(TD.Properties.GLOWING)), BlockTextureDefault.get(sOverlays[aIndex]));
 	}
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -120,6 +120,8 @@ public class LH {
 	, COVER_TOOLTIP = "gt.lang.cover.tooltip"
 	, TOOL_TO_SET_FACING_PRE = "gt.lang.use.x.to.toggle.facing.pre"
 	, TOOL_TO_SET_FACING_POST = "gt.lang.use.x.to.toggle.facing.post"
+	, TOOL_TO_SET_FACING2_PRE = "gt.lang.use.x.to.toggle.facing2.pre"
+	, TOOL_TO_SET_FACING2_POST = "gt.lang.use.x.to.toggle.facing2.post"
 	, TOOL_TO_SET_CONNECTIONS_PRE = "gt.lang.use.x.to.toggle.connection.pre"
 	, TOOL_TO_SET_CONNECTIONS_POST = "gt.lang.use.x.to.toggle.connection.post"
 	, TOOL_TO_SET_DIRECTION_MONKEY_WRENCH = "gt.lang.use.monkey.wrench.to.toggle.direction"
@@ -129,6 +131,7 @@ public class LH {
 	, TOOL_TO_TOGGLE_OUTPUTS_MONKEY_WRENCH = "gt.lang.use.monkey.wrench.to.toggle.outputs"
 	, TOOL_TO_TOGGLE_AUTO_INPUTS_MONKEY_WRENCH = "gt.lang.use.monkey.wrench.to.toggle.auto.inputs"
 	, TOOL_TO_TOGGLE_AUTO_OUTPUTS_MONKEY_WRENCH = "gt.lang.use.monkey.wrench.to.toggle.auto.outputs"
+	, TOOL_TO_TOGGLE_CONTROLLER_COVER = "gt.lang.use.controlcover.to.toggle"
 	, TOOL_TO_TOGGLE_SCREWDRIVER = "gt.lang.use.screwdriver.to.toggle"
 	, TOOL_TO_TOGGLE_MONKEY_WRENCH = "gt.lang.use.monkey.wrench.to.toggle"
 	, TOOL_TO_TOGGLE_CUTTER = "gt.lang.use.cutter.to.toggle"
@@ -355,6 +358,16 @@ public class LH {
 	}
 	
 	static {
+		add("loot.mineshaftCorridor"                    , "Mineshaft");
+		add("loot.pyramidDesertyChest"                  , "Desert Pyramid");
+		add("loot.pyramidJungleChest"                   , "Jungle Temple");
+		add("loot.pyramidJungleDispenser"               , "Dispenser");
+		add("loot.strongholdCorridor"                   , "Corridor");
+		add("loot.strongholdLibrary"                    , "Library");
+		add("loot.strongholdCrossing"                   , "Storage");
+		add("loot.villageBlacksmith"                    , "Blacksmith");
+		add("loot.bonusChest"                           , "Bonus Chest");
+		add("loot.dungeonChest"                         , "Dungeon");
 		add(EFFICIENCY                                  , "Efficiency");
 		add(RECIPE                                      , "Recipe");
 		add(RECIPES                                     , "Recipes");
@@ -365,8 +378,8 @@ public class LH {
 		add(RECIPES_MORTAR_USAGE                        , "Rightclick with the Item you want to turn into Dust");
 		add(RECIPES_JUICER_USAGE                        , "Rightclick with the Item you want to get Juice from");
 		add(RECIPES_SIFTER_USAGE                        , "Place Input on Top and rightclick it");
-		add(RECIPES_MIXINGBOWL_USAGE                    , "Place Input on Top and rightclick it");
-		add(RECIPES_BATHINGPOT_USAGE                    , "Place Input on Top and rightclick it");
+		add(RECIPES_MIXINGBOWL_USAGE                    , "Place Input in Center, Fill with Fluid on the Rim, then rightclick it");
+		add(RECIPES_BATHINGPOT_USAGE                    , "Place Input in Center, Fill with Fluid on the Rim, then rightclick it");
 		add(RECIPES_GRINDSTONE_USAGE                    , "Click multiple times with the Object you want to sharpen");
 		add(RECIPES_GRINDSTONE_INIT                     , "Add Sandstone Block in order to be able to use this");
 		add(RECIPES_DUSTFUNNEL                          , "Turns all differently sized Dusts into the specified Size");
@@ -433,6 +446,7 @@ public class LH {
 		add(COVER_TOOLTIP                               , "This Item can be used as Cover");
 		add(TOOL_TO_REMOVE_SHOVEL                       , "Use Shovel to empty this");
 		add(TOOL_TO_CHANGE_DESIGN_CHISEL                , "Use Chisel to change Design");
+		add(TOOL_TO_TOGGLE_CONTROLLER_COVER             , "Use Cover Controller Cover to toggle ON/OFF");
 		add(TOOL_TO_TOGGLE_SCREWDRIVER                  , "Use Screwdriver to toggle Modes");
 		add(TOOL_TO_TOGGLE_MONKEY_WRENCH                , "Use Monkey Wrench to toggle Modes");
 		add(TOOL_TO_TOGGLE_CUTTER                       , "Use Cutter to toggle Modes");
@@ -456,6 +470,8 @@ public class LH {
 		add(TOOL_TO_SET_DIRECTION_MONKEY_WRENCH         , "Use Monkey Wrench to set Direction");
 		add(TOOL_TO_SET_FACING_PRE                      , "Use ");
 		add(TOOL_TO_SET_FACING_POST                     , " to set Facing");
+		add(TOOL_TO_SET_FACING2_PRE                     , "Use ");
+		add(TOOL_TO_SET_FACING2_POST                    , " to set secondary Facing");
 		add(TOOL_TO_SET_CONNECTIONS_PRE                 , "Use ");
 		add(TOOL_TO_SET_CONNECTIONS_POST                , " to set Connections");
 		add(TOOL_TO_HARVEST                             , "Tool to Harvest");
@@ -478,8 +494,8 @@ public class LH {
 		add(HAZARD_EXPLOSION_STEAM                      , "Explodes when Steam Pressure is too high!");
 		add(HAZARD_MELTDOWN                             , "Melts down when stored Heat is too much!");
 		add(HAZARD_CONTACT                              , "Causes Damage when touched while active!");
-		add(HAZARD_LEAKING_GAS                          , "Leaks when used with Gasses!");
-		add(TOOLTIP_GASPROOF                            , "Can handle Gasses");
+		add(HAZARD_LEAKING_GAS                          , "Leaks when used with Gases!");
+		add(TOOLTIP_GASPROOF                            , "Can handle Gases");
 		add(TOOLTIP_ACIDPROOF                           , "Can handle Acids");
 		add(TOOLTIP_LIQUIDPROOF                         , "Can handle Liquids");
 		add(TOOLTIP_PLASMAPROOF                         , "Can handle Plasma");
@@ -530,7 +546,7 @@ public class LH {
 		add(TOOLTIP_TWILIGHT_MAZE_HEDGE_BREAKING        , "Can break Twilight Forest Maze Hedges");
 		add(TOOLTIP_TWILIGHT_MAZE_STONE_BREAKING        , "Can break Twilight Forest Mazestone");
 		add(PROSPECTING_LAVA                            , "There is Lava behind this Rock");
-		add(PROSPECTING_LIQUID                          , "There is a Liquid behind this Rock");
+		add(PROSPECTING_LIQUID                          , "There is a Fluid behind this Rock");
 		add(PROSPECTING_AIR                             , "There is an Air Pocket behind this Rock");
 		add(PROSPECTING_CHANGE                          , "Material is changing behind this Rock");
 		add(PROSPECTING_TRACES                          , "Found traces of ");
@@ -539,7 +555,7 @@ public class LH {
 		add(ADVCRAFTING_INSERT_BLUEPRINT                , "Insert a Blueprint here");
 		add(ADVCRAFTING_PUT_TO_STORAGE                  , "Move Crafting Grid content to Storage Slots");
 		add(ADVCRAFTING_AUTOMATION_ACCESS               , "Allow Automation to extract from the Crafting Grid");
-		add(ADVCRAFTING_NEUTRAL_SLOT                    , "This Slot does ABSOLUTELY NOTHING to its content");
+		add(ADVCRAFTING_NEUTRAL_SLOT                    , "This Slot does ABSOLUTELY NOTHING! park Items here!");
 		add(ADVCRAFTING_DROP_SLOT                       , "Automation can extract Items you drop into this Slot");
 		add(TIME_TICK                                   , "Tick");
 		add(TIME_SEC                                    , "Second");
@@ -559,30 +575,57 @@ public class LH {
 	
 	public static class Chat {
 		public static final String
-		  BLACK = EnumChatFormatting.BLACK.toString()
-		, DBLUE = EnumChatFormatting.DARK_BLUE.toString()
-		, DGREEN = EnumChatFormatting.DARK_GREEN.toString()
-		, DCYAN = EnumChatFormatting.DARK_AQUA.toString()
-		, DRED = EnumChatFormatting.DARK_RED.toString()
-		, PURPLE = EnumChatFormatting.DARK_PURPLE.toString()
-		, ORANGE = EnumChatFormatting.GOLD.toString()
-		, GOLD = EnumChatFormatting.GOLD.toString()
-		, GRAY = EnumChatFormatting.GRAY.toString()
-		, DGRAY = EnumChatFormatting.DARK_GRAY.toString()
-		, BLUE = EnumChatFormatting.BLUE.toString()
-		, GREEN = EnumChatFormatting.GREEN.toString()
-		, CYAN = EnumChatFormatting.AQUA.toString()
-		, RED = EnumChatFormatting.RED.toString()
-		, PINK = EnumChatFormatting.LIGHT_PURPLE.toString()
-		, YELLOW = EnumChatFormatting.YELLOW.toString()
-		, WHITE = EnumChatFormatting.WHITE.toString()
-		, OBFUSCATED = EnumChatFormatting.OBFUSCATED.toString()
-		, BOLD = EnumChatFormatting.BOLD.toString()
-		, STRIKETHROUGH = EnumChatFormatting.STRIKETHROUGH.toString()
-		, UNDERLINE = EnumChatFormatting.UNDERLINE.toString()
-		, ITALIC = EnumChatFormatting.ITALIC.toString()
-		, RESET = EnumChatFormatting.RESET.toString()
-		, RESET_TOOLTIP = RESET + GRAY
+		   BLACK          = EnumChatFormatting.BLACK.toString()
+		,  DBLUE          = EnumChatFormatting.DARK_BLUE.toString()
+		,  DGREEN         = EnumChatFormatting.DARK_GREEN.toString()
+		,  DCYAN          = EnumChatFormatting.DARK_AQUA.toString()
+		,  DRED           = EnumChatFormatting.DARK_RED.toString()
+		,  PURPLE         = EnumChatFormatting.DARK_PURPLE.toString()
+		,  ORANGE         = EnumChatFormatting.GOLD.toString()
+		,  GOLD           = EnumChatFormatting.GOLD.toString()
+		,  GRAY           = EnumChatFormatting.GRAY.toString()
+		,  DGRAY          = EnumChatFormatting.DARK_GRAY.toString()
+		,  BLUE           = EnumChatFormatting.BLUE.toString()
+		,  GREEN          = EnumChatFormatting.GREEN.toString()
+		,  CYAN           = EnumChatFormatting.AQUA.toString()
+		,  RED            = EnumChatFormatting.RED.toString()
+		,  PINK           = EnumChatFormatting.LIGHT_PURPLE.toString()
+		,  YELLOW         = EnumChatFormatting.YELLOW.toString()
+		,  WHITE          = EnumChatFormatting.WHITE.toString()
+		,  OBFUSCATED     = EnumChatFormatting.OBFUSCATED.toString()
+		,  BOLD           = EnumChatFormatting.BOLD.toString()
+		,  STRIKETHROUGH  = EnumChatFormatting.STRIKETHROUGH.toString()
+		,  UNDERLINE      = EnumChatFormatting.UNDERLINE.toString()
+		,  ITALIC         = EnumChatFormatting.ITALIC.toString()
+		,  RESET          = EnumChatFormatting.RESET.toString()
+		,  RESET_TOOLTIP  = RESET + GRAY
+		;
+		
+		public static final String
+		  _BLACK          = " " + BLACK
+		, _DBLUE          = " " + DBLUE
+		, _DGREEN         = " " + DGREEN
+		, _DCYAN          = " " + DCYAN
+		, _DRED           = " " + DRED
+		, _PURPLE         = " " + PURPLE
+		, _ORANGE         = " " + ORANGE
+		, _GOLD           = " " + GOLD
+		, _GRAY           = " " + GRAY
+		, _DGRAY          = " " + DGRAY
+		, _BLUE           = " " + BLUE
+		, _GREEN          = " " + GREEN
+		, _CYAN           = " " + CYAN
+		, _RED            = " " + RED
+		, _PINK           = " " + PINK
+		, _YELLOW         = " " + YELLOW
+		, _WHITE          = " " + WHITE
+		, _OBFUSCATED     = " " + OBFUSCATED
+		, _BOLD           = " " + BOLD
+		, _STRIKETHROUGH  = " " + STRIKETHROUGH
+		, _UNDERLINE      = " " + UNDERLINE
+		, _ITALIC         = " " + ITALIC
+		, _RESET          = " " + RESET
+		, _RESET_TOOLTIP  = " " + RESET_TOOLTIP
 		;
 		
 		public static String

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -49,8 +49,8 @@ import net.minecraft.world.World;
 public class BlockMetaType extends BlockBaseMeta {
 	public final float mHardnessMultiplier, mResistanceMultiplier;
 	public final int mHarvestLevel;
-	public final byte mSide;
-	public final boolean mIsWall, mIsSlab, mIsStair;
+	public final byte mSide, mOctantcount;
+	public final boolean mIsWall, mIsSlab, mIsStair, mIsPrimary;
 	public final BlockMetaType mBlock;
 	public final BlockMetaType[] mSlabs;
 	
@@ -64,7 +64,9 @@ public class BlockMetaType extends BlockBaseMeta {
 		mIsWall = F;
 		mIsSlab = F;
 		mIsStair = F;
+		mIsPrimary = T;
 		mBlock = this;
+		mOctantcount = 8;
 		mSide = SIDE_UNKNOWN;
 		mHarvestLevel = aHarvestLevel;
 		mHardnessMultiplier = aHardnessMultiplier;
@@ -84,10 +86,15 @@ public class BlockMetaType extends BlockBaseMeta {
 		ST.hide(mSlabs[SIDE_WEST]);
 		ST.hide(mSlabs[SIDE_EAST]);
 		for (byte i = 0; i < 16; i++) {
-			RM.sawing(16, 16, F, 5, ST.make(this, 1, i), ST.make(mSlabs[0], 2, i));
-			CR.shaped(ST.make(mSlabs[0], 2, i), CR.DEF_NAC, "sX", 'X', ST.make(this, 1, i));
-			CR.shaped(ST.make(this, 1, i), CR.DEF_NAC, "X", "X", 'X', ST.make(mSlabs[0], 1, i));
+			CR.shaped(ST.make(this, 1, i), CR.DEF, "X", "X", 'X', ST.make(mSlabs[0], 1, i));
+			// Avoid duplicating Recipes that are added by the Wood Dictionary anyways.
+			if (!(this instanceof BlockBasePlanks)) {
+				RM.sawing(16, 16, F, 5, ST.make(this, 1, i), ST.make(mSlabs[0], 2, i));
+				CR.shaped(ST.make(mSlabs[0], 2, i), CR.DEF, "sX", 'X', ST.make(this, 1, i));
+			}
 		}
+		
+		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("builder", ST.make(this, 1, W));
 	}
 	
 	protected BlockMetaType makeSlab(Class<? extends ItemBlock> aItemClass, Material aVanillaMaterial, SoundType aVanillaSoundType, String aName, String aDefaultLocalised, OreDictMaterial aMaterial, float aResistanceMultiplier, float aHardnessMultiplier, int aHarvestLevel, int aCount, IIconContainer[] aIcons, byte aSlabType, BlockMetaType aBlock) {
@@ -103,7 +110,9 @@ public class BlockMetaType extends BlockBaseMeta {
 		mIsWall = F;
 		mIsSlab = T;
 		mIsStair = F;
+		mIsPrimary = (aSlabType == 0);
 		mBlock = aBlock;
+		mOctantcount = 4;
 		mSide = aSlabType;
 		mHarvestLevel = aHarvestLevel;
 		mHardnessMultiplier = aHardnessMultiplier;
@@ -117,6 +126,8 @@ public class BlockMetaType extends BlockBaseMeta {
 		mSide == SIDE_Y_NEG ? 0.5F : 1.0F,
 		mSide == SIDE_Z_NEG ? 0.5F : 1.0F
 		);
+		
+		if (COMPAT_FR != null) COMPAT_FR.addToBackpacks("builder", ST.make(this, 1, W));
 	}
 	
 	public void onBlockCreation(Class<? extends ItemBlock> aItemClass, Material aVanillaMaterial, SoundType aSoundType, String aName, String aDefaultLocalised, OreDictMaterial aMaterial, float aResistanceMultiplier, float aHardnessMultiplier, int aHarvestLevel, int aCount, IIconContainer[] aIcons) {
@@ -129,7 +140,7 @@ public class BlockMetaType extends BlockBaseMeta {
 	
 	@Override
 	public boolean onBlockActivated(World aWorld, int aX, int aY, int aZ, EntityPlayer aPlayer, int aSide, float aHitX, float aHitY, float aHitZ) {
-		if (mBlock == this || aSide != OPPOSITES[mSide] || (mBlock.getCollisionBoundingBoxFromPool(aWorld, aX, aY, aZ) != null && !aWorld.checkNoEntityCollision(mBlock.getCollisionBoundingBoxFromPool(aWorld, aX, aY, aZ)))) return F;
+		if (mBlock == this || aSide != OPOS[mSide] || (mBlock.getCollisionBoundingBoxFromPool(aWorld, aX, aY, aZ) != null && !aWorld.checkNoEntityCollision(mBlock.getCollisionBoundingBoxFromPool(aWorld, aX, aY, aZ)))) return F;
 		ItemStack aStack = aPlayer.getCurrentEquippedItem();
 		byte aMetaData = WD.meta(aWorld, aX, aY, aZ);
 		if (ST.equal(aStack, mBlock.mSlabs[0], aMetaData)) {
@@ -144,7 +155,7 @@ public class BlockMetaType extends BlockBaseMeta {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess aWorld, int aX, int aY, int aZ, int aSide) {
-		if (aSide == OPPOSITES[mSide]) return T;
+		if (aSide == OPOS[mSide]) return T;
 		if (aSide != mSide && SIDES_VALID[mSide]) {
 			Block aBlock = aWorld.getBlock(aX, aY, aZ);
 			if (aBlock instanceof BlockMetaType && ((BlockMetaType)aBlock).mSide == mSide) return aBlock.getRenderBlockPass() != 0;
@@ -164,7 +175,7 @@ public class BlockMetaType extends BlockBaseMeta {
 	@Override public boolean doesPistonPush(byte aMeta) {return T;}
 	@Override public int getLightOpacity() {return mBlock == this ? LIGHT_OPACITY_MAX : LIGHT_OPACITY_WATER;}
 	@Override public int getItemStackLimit(ItemStack aStack) {return UT.Code.bindStack(OP.stone.mDefaultStackSize * (mBlock.mBlock == mBlock ? 1 : 2));}
-	@Override public Item getItemDropped(int par1, Random par2Random, int par3) {return Item.getItemFromBlock(mBlock == this ? mBlock : mBlock.mSlabs[0]);}
-	@Override public void getSubBlocks(Item aItem, CreativeTabs aTab, @SuppressWarnings("rawtypes") List aList) {if (mBlock == this || mBlock.mSlabs[0] == this) super.getSubBlocks(aItem, aTab, aList);}
-	@Override public Item getItem(World aWorld, int aX, int aY, int aZ) {return Item.getItemFromBlock(mBlock == this ? mBlock : mBlock.mSlabs[0]);}
+	@Override public Item getItemDropped(int par1, Random par2Random, int par3) {return Item.getItemFromBlock(mIsSlab ? mBlock.mSlabs[0] : mBlock);}
+	@Override public void getSubBlocks(Item aItem, CreativeTabs aTab, @SuppressWarnings("rawtypes") List aList) {if (mIsPrimary) super.getSubBlocks(aItem, aTab, aList);}
+	@Override public Item getItem(World aWorld, int aX, int aY, int aZ) {return Item.getItemFromBlock(mIsSlab ? mBlock.mSlabs[0] : mBlock);}
 }

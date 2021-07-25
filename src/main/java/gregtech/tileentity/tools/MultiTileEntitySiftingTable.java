@@ -35,7 +35,6 @@ import gregapi.data.IL;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
 import gregapi.data.MT;
-import gregapi.data.OP;
 import gregapi.data.RM;
 import gregapi.data.TD;
 import gregapi.network.INetworkHandler;
@@ -70,7 +69,7 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 	public byte mState = 0, oState = 0, mClickCount = 0;
 	public RecipeMap mRecipes = RM.Sifting;
 	public Recipe mLastRecipe = null;
-
+	
 	@Override
 	public void readFromNBT2(NBTTagCompound aNBT) {
 		super.readFromNBT2(aNBT);
@@ -78,14 +77,14 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 		if (aNBT.hasKey(NBT_PROGRESS)) mClickCount = aNBT.getByte(NBT_PROGRESS);
 		if (aNBT.hasKey(NBT_RECIPEMAP)) mRecipes = RecipeMap.RECIPE_MAPS.get(aNBT.getString(NBT_RECIPEMAP));
 	}
-
+	
 	@Override
 	public void writeToNBT2(NBTTagCompound aNBT) {
 		super.writeToNBT2(aNBT);
 		aNBT.setByte(NBT_STATE, mState);
 		aNBT.setByte(NBT_PROGRESS, mClickCount);
 	}
-
+	
 	@Override
 	public void addToolTips(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		aList.add(Chat.CYAN     + LH.get(LH.RECIPES) + ": " + Chat.WHITE + LH.get(mRecipes.mNameInternal));
@@ -102,27 +101,22 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 			ItemStack tStack = slot(0);
 			if (ST.valid(tStack)) {
 				mState |= B[0];
-				if (ST.equal(tStack, Blocks.gravel      , W)) {mDisplayedInput = -1;} else
 				if (ST.equal(tStack, Blocks.dirt        , 0)) {mDisplayedInput = -2;} else
 				if (ST.equal(tStack, Blocks.dirt        , 1)) {mDisplayedInput = -3;} else
 				if (ST.equal(tStack, Blocks.dirt        , 2)) {mDisplayedInput = -4;} else
-				if (ST.equal(tStack, Blocks.sand        , 0)) {mDisplayedInput = -5;} else
-				if (ST.equal(tStack, Blocks.sand        , 1)) {mDisplayedInput = -6;} else
 				if (ST.equal(tStack, Blocks.grass       , W)) {mDisplayedInput = -7;} else
 				if (ST.equal(tStack, BlocksGT.Grass     , W)) {mDisplayedInput = -7;} else
 				if (ST.equal(tStack, Blocks.mycelium    , W)) {mDisplayedInput = -8;} else
-				if (ST.equal(tStack, Blocks.soul_sand   , W)) {mDisplayedInput = -9;} else
-				if (ST.equal(tStack, BlocksGT.Diggables , W)) {mDisplayedInput =-10;} else
-				if (ST.equal(tStack, BlocksGT.Sands     , W)) {mDisplayedInput =-11;} else
+				if (ST.equal(tStack, BlocksGT.Diggables , 0)) {mDisplayedInput =-10;} else
 				if (IL.AETHER_Sand                  .equal(tStack, T, T)) {mDisplayedInput = -5;} else
 				if (IL.RH_Sand_Magnetite            .equal(tStack, F, T)) {mDisplayedInput =-11;} else
 				if (IL.RH_Sand_Magnetite            .equal(tStack, T, T)) {mDisplayedInput =- 5;} else
 				if (IL.TROPIC_Sand_Black            .equal(tStack, F, T)) {mDisplayedInput =-11;} else
 				if (IL.TROPIC_Sand_Black            .equal(tStack, T, T)) {mDisplayedInput = -5;} else
 				if (IL.PFAA_Sands                   .equal(tStack, T, T)) {mDisplayedInput =-11;} else
-				if (IL.NePl_SoulSoil                .equal(tStack, F, T)) {mDisplayedInput = -9;} else
-				if (IL.NeLi_SoulSoil                .equal(tStack, F, T)) {mDisplayedInput = -9;} else
-				if (IL.NeLi_Gravel                  .equal(tStack, F, T)) {mDisplayedInput =-11;} else
+				if (IL.NePl_SoulSoil                .equal(tStack, T, T)) {mDisplayedInput = -9;} else
+				if (IL.NeLi_SoulSoil                .equal(tStack, T, T)) {mDisplayedInput = -9;} else
+				if (IL.NeLi_Gravel                  .equal(tStack, T, T)) {mDisplayedInput =-11;} else
 				if (IL.EtFu_Gravel                  .equal(tStack, F, T)) {mDisplayedInput = -1;} else
 				if (IL.EtFu_Dirt                    .equal(tStack, F, T)) {mDisplayedInput = -3;} else
 				if (IL.BoP_Mud                      .equal(tStack, F, T)) {mDisplayedInput =-10;} else
@@ -170,27 +164,22 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 			mState &= ~B[1];
 			for (int i = 1; i < 13; i++) if (ST.valid(tStack = slot(i))) {
 				mState |= B[1];
-				if (ST.equal(tStack, Blocks.gravel      , W)) {mDisplayedOutput = -1;} else
 				if (ST.equal(tStack, Blocks.dirt        , 0)) {mDisplayedOutput = -2;} else
 				if (ST.equal(tStack, Blocks.dirt        , 1)) {mDisplayedOutput = -3;} else
 				if (ST.equal(tStack, Blocks.dirt        , 2)) {mDisplayedOutput = -4;} else
-				if (ST.equal(tStack, Blocks.sand        , 0)) {mDisplayedOutput = -5;} else
-				if (ST.equal(tStack, Blocks.sand        , 1)) {mDisplayedOutput = -6;} else
 				if (ST.equal(tStack, Blocks.grass       , W)) {mDisplayedOutput = -7;} else
 				if (ST.equal(tStack, BlocksGT.Grass     , W)) {mDisplayedOutput = -7;} else
 				if (ST.equal(tStack, Blocks.mycelium    , W)) {mDisplayedOutput = -8;} else
-				if (ST.equal(tStack, Blocks.soul_sand   , W)) {mDisplayedOutput = -9;} else
-				if (ST.equal(tStack, BlocksGT.Diggables , W)) {mDisplayedOutput =-10;} else
-				if (ST.equal(tStack, BlocksGT.Sands     , W)) {mDisplayedOutput =-11;} else
+				if (ST.equal(tStack, BlocksGT.Diggables , 0)) {mDisplayedOutput =-10;} else
 				if (IL.AETHER_Sand                  .equal(tStack, T, T)) {mDisplayedOutput = -5;} else
 				if (IL.RH_Sand_Magnetite            .equal(tStack, F, T)) {mDisplayedOutput =-11;} else
 				if (IL.RH_Sand_Magnetite            .equal(tStack, T, T)) {mDisplayedOutput = -5;} else
 				if (IL.TROPIC_Sand_Black            .equal(tStack, F, T)) {mDisplayedOutput =-11;} else
 				if (IL.TROPIC_Sand_Black            .equal(tStack, T, T)) {mDisplayedOutput = -5;} else
 				if (IL.PFAA_Sands                   .equal(tStack, T, T)) {mDisplayedOutput =-11;} else
-				if (IL.NePl_SoulSoil                .equal(tStack, F, T)) {mDisplayedOutput = -9;} else
-				if (IL.NeLi_SoulSoil                .equal(tStack, F, T)) {mDisplayedOutput = -9;} else
-				if (IL.NeLi_Gravel                  .equal(tStack, F, T)) {mDisplayedOutput =-11;} else
+				if (IL.NePl_SoulSoil                .equal(tStack, T, T)) {mDisplayedOutput = -9;} else
+				if (IL.NeLi_SoulSoil                .equal(tStack, T, T)) {mDisplayedOutput = -9;} else
+				if (IL.NeLi_Gravel                  .equal(tStack, T, T)) {mDisplayedOutput =-11;} else
 				if (IL.EtFu_Gravel                  .equal(tStack, F, T)) {mDisplayedOutput = -1;} else
 				if (IL.EtFu_Dirt                    .equal(tStack, F, T)) {mDisplayedOutput = -3;} else
 				if (IL.BoP_Mud                      .equal(tStack, F, T)) {mDisplayedOutput =-10;} else
@@ -258,8 +247,10 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 									if (aStack.stackSize <= 0) slotKill(0);
 									ItemStack[] tOutputs = tRecipe.getOutputs();
 									for (int i = 0, j = Math.min(tOutputs.length, 12); i < j; i++) addStackToSlot(i+1, tOutputs[i]);
-									tEntry.getKey().addExhaustion((tRecipe.mEUt * tRecipe.mDuration) / 5000.0F);
+									tEntry.getKey().addExhaustion(tRecipe.getAbsoluteTotalPower() / 5000.0F);
 									tEntry.getKey().swingItem();
+									updateInventory();
+									updateAdjacentInventories();
 								}
 							}
 						}
@@ -346,13 +337,12 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 		mTextureBorder = BlockTextureMulti.get(BlockTextureDefault.get(sTextureBorder, mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayBorder));
 		mTexturePlate  = BlockTextureMulti.get(BlockTextureDefault.get(sTexturePlate , mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayPlate));
 		
-		mTextureInput  = BlockTextureDefault.get(MT.NULL, OP.blockDust, CA_GRAY_64, F);
-		mTextureOutput = BlockTextureDefault.get(MT.NULL, OP.blockDust, CA_GRAY_64, F);
+		mTextureInput  = MT.NULL.getTextureDust();
+		mTextureOutput = MT.NULL.getTextureDust();
 		
 		if (mDisplayedInput != 0) {
 			if (UT.Code.exists(mDisplayedInput, OreDictMaterial.MATERIAL_ARRAY)) {
-				OreDictMaterial tMaterial = OreDictMaterial.MATERIAL_ARRAY[mDisplayedInput];
-				mTextureInput = BlockTextureDefault.get(tMaterial, OP.blockDust.mIconIndexBlock, tMaterial.contains(TD.Properties.GLOWING));
+				mTextureInput = OreDictMaterial.MATERIAL_ARRAY[mDisplayedInput].getTextureDust();
 			} else if (mDisplayedInput < 0) {
 				switch(mDisplayedInput) {
 				case  -1: mTextureInput  = BlockTextureCopied.get(Blocks.gravel         , SIDE_ANY, 0); break;
@@ -371,8 +361,7 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 		}
 		if (mDisplayedOutput != 0) {
 			if (UT.Code.exists(mDisplayedOutput, OreDictMaterial.MATERIAL_ARRAY)) {
-				OreDictMaterial tMaterial = OreDictMaterial.MATERIAL_ARRAY[mDisplayedOutput];
-				mTextureOutput = BlockTextureDefault.get(tMaterial, OP.blockDust.mIconIndexBlock, tMaterial.contains(TD.Properties.GLOWING));
+				mTextureOutput = OreDictMaterial.MATERIAL_ARRAY[mDisplayedOutput].getTextureDust();
 			} else if (mDisplayedOutput < 0) {
 				switch(mDisplayedOutput) {
 				case  -1: mTextureOutput = BlockTextureCopied.get(Blocks.gravel         , SIDE_ANY, 0); break;
@@ -455,7 +444,7 @@ public class MultiTileEntitySiftingTable extends TileEntityBase07Paintable imple
 		return ACCESSIBLE_SLOTS;
 	}
 
-	@Override public boolean canInsertItem2 (int aSlot, ItemStack aStack, byte aSide) {return aSlot == 0 && mRecipes != null && mRecipes.containsInput(aStack, this, NI) && !OP.crushedPurifiedTiny.contains(aStack);}
+	@Override public boolean canInsertItem2 (int aSlot, ItemStack aStack, byte aSide) {return aSlot == 0 && mRecipes != null && mRecipes.containsInput(aStack, this, NI);}
 	@Override public boolean canExtractItem2(int aSlot, ItemStack aStack, byte aSide) {return aSlot != 0;}
 
 	@Override public String getTileEntityName() {return "gt.multitileentity.sifter.table";}

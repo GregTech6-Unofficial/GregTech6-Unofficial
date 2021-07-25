@@ -41,7 +41,7 @@ import net.minecraftforge.fluids.Fluid;
  * @author Gregorius Techneticies
  */
 public class BlockOcean extends BlockWaterlike {
-	public static boolean PLACEMENT_ALLOWED = F, SPREAD_TO_AIR = T;
+	public static boolean PLACEMENT_ALLOWED = F, SPREAD_TO_AIR = T, UPDATE_TICK = T;
 	
 	public BlockOcean(String aName, Fluid aFluid) {
 		super(aName, aFluid);
@@ -51,9 +51,9 @@ public class BlockOcean extends BlockWaterlike {
 	@Override
 	public void onBlockAdded(World aWorld, int aX, int aY, int aZ) {
 		if (PLACEMENT_ALLOWED) {
-			aWorld.scheduleBlockUpdate(aX, aY, aZ, this, 10+RNGSUS.nextInt(90));
+			if (UPDATE_TICK) aWorld.scheduleBlockUpdate(aX, aY, aZ, this, 10+RNGSUS.nextInt(90));
 		} else {
-			aWorld.setBlockToAir(aX, aY, aZ);
+			aWorld.setBlock(aX, aY, aZ, NB, 0, 2);
 		}
 	}
 	
@@ -65,7 +65,7 @@ public class BlockOcean extends BlockWaterlike {
 	
 	@Override
 	public void updateTick(World aWorld, int aX, int aY, int aZ, Random aRandom) {
-		PLACEMENT_ALLOWED = T;
+		PLACEMENT_ALLOWED = UPDATE_TICK = T;
 		
 		if (aWorld.doChunksNearChunkExist(aX, aY, aZ, 33)) {
 			aWorld.func_147451_t(aX, aY, aZ);
@@ -94,34 +94,43 @@ public class BlockOcean extends BlockWaterlike {
 		
 		BiomeGenBase tBiome = aWorld.getBiomeGenForCoords(aX, aZ);
 		
+		boolean tHasNoOceanAround = T, tHasOceanBiome = BIOMES_OCEAN_BEACH.contains(tBiome.biomeName);
 		byte tOceanCounter = 0;
 		ArrayListNoNulls<ChunkCoordinates> tList = new ArrayListNoNulls<>();
 		for (byte tSide : ALL_SIDES_HORIZONTAL) {
 			tBlock = WD.block(aWorld, aX, aY, aZ, tSide);
 			if (tBlock == this) {
-				if (WD.meta(aWorld, aX, aY, aZ, tSide) == 0) tOceanCounter++;
-			} else if (WD.anywater(tBlock)) {
-				if (!(tBlock instanceof BlockWaterlike && tBlock != BlocksGT.River) || BIOMES_OCEAN_BEACH.contains(tBiome.biomeName)) tList.add(new ChunkCoordinates(aX+OFFSETS_X[tSide], aY+OFFSETS_Y[tSide], aZ+OFFSETS_Z[tSide]));
-				if (WD.meta(aWorld, aX, aY, aZ, tSide) == 0) tOceanCounter++;
+				tHasNoOceanAround = F;
+				if (tHasOceanBiome || WD.meta(aWorld, aX, aY, aZ, tSide) == 0) tOceanCounter++;
+			} else if (tBlock == BlocksGT.River) {
+				tList.add(new ChunkCoordinates(aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide]));
+				tOceanCounter++;
+			} else if (WD.water(tBlock)) {
+				tList.add(new ChunkCoordinates(aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide]));
+				if (tHasOceanBiome || WD.meta(aWorld, aX, aY, aZ, tSide) == 0) tOceanCounter++;
+			} else if (tHasOceanBiome && tBlock instanceof BlockWaterlike) {
+				tList.add(new ChunkCoordinates(aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide]));
+				tOceanCounter++;
 			}
 		}
 		
 		tBlock = WD.block(aWorld, aX, aY-1, aZ);
 		if (tBlock == this) {
+			tHasNoOceanAround = F;
 			if (WD.meta(aWorld, aX, aY-1, aZ) == 0) tOceanCounter++;
 		} else if (WD.anywater(tBlock)) {
-			aWorld.setBlock(aX, aY-1, aZ, this, 0, 2);
-			if (WD.meta(aWorld, aX, aY-1, aZ) == 0) tOceanCounter++;
+			tHasNoOceanAround = F;
+			if (aWorld.setBlock(aX, aY-1, aZ, this, 0, 2)) tOceanCounter++;
 		}
 		
-		if (WD.meta(aWorld, aX, aY, aZ) == 0) {
-			if (tOceanCounter <= 0 && !(aWorld.getBlock(aX, aY+1, aZ) instanceof BlockOcean)) {
-				aWorld.setBlockToAir(aX, aY, aZ);
-				PLACEMENT_ALLOWED = F;
-				return;
-			}
-		} else {
-			if (tOceanCounter >= 2 || (SPREAD_TO_AIR && (BIOMES_OCEAN_BEACH.contains(tBiome.biomeName) || (aWorld.getBlock(aX, aY+1, aZ) instanceof BlockOcean && WD.meta(aWorld, aX, aY+1, aZ) == 0)))) {
+		if (tHasNoOceanAround && WD.block(aWorld, aX, aY+1, aZ) != this) {
+			aWorld.setBlock(aX, aY, aZ, NB, 0, 2);
+			PLACEMENT_ALLOWED = F;
+			return;
+		}
+		
+		if (WD.meta(aWorld, aX, aY, aZ) != 0) {
+			if (tOceanCounter >= 2 || (SPREAD_TO_AIR && tHasOceanBiome) || (aWorld.getBlock(aX, aY+1, aZ) == this && WD.meta(aWorld, aX, aY+1, aZ) == 0)) {
 				aWorld.setBlock(aX, aY, aZ, this, 0, 2);
 			}
 		}
@@ -129,7 +138,7 @@ public class BlockOcean extends BlockWaterlike {
 		if (BIOMES_RIVER_LAKE.contains(tBiome.biomeName)) {
 			tOceanCounter = 0;
 			for (int i = -1; i < 2; i++) for (int j = -1; j < 2; j++) if (i != 0 && j != 0) {
-				if (aWorld.getBlock(aX+i, aY, aZ+j) instanceof BlockOcean && WD.meta(aWorld, aX+i, aY, aZ+j) == 0) {
+				if (aWorld.getBlock(aX+i, aY, aZ+j) == this && WD.meta(aWorld, aX+i, aY, aZ+j) == 0) {
 					tOceanCounter++;
 				}
 			}
@@ -144,7 +153,7 @@ public class BlockOcean extends BlockWaterlike {
 			if (aWorld.setBlock(tCoords.posX, tCoords.posY, tCoords.posZ, this, 0, 2)) for (int i = -1; i < 2; i++) for (int j = -1; j < 2; j++) {
 				if (aWorld.blockExists(tCoords.posX+i, tCoords.posY, tCoords.posZ+j)) {
 					tBlock = aWorld.getBlock(tCoords.posX+i, tCoords.posY, tCoords.posZ+j);
-					if (tBlock instanceof BlockOcean) aWorld.scheduleBlockUpdate(tCoords.posX+i, tCoords.posY, tCoords.posZ+j, this, tickRate);
+					if (tBlock == this) aWorld.scheduleBlockUpdate(tCoords.posX+i, tCoords.posY, tCoords.posZ+j, this, tickRate);
 				}
 			}
 		}
@@ -154,7 +163,7 @@ public class BlockOcean extends BlockWaterlike {
 		return;
 	}
 	
-	@Override public int getLightOpacity(IBlockAccess aWorld, int aX, int aY, int aZ) {if (aWorld.getBlock(aX, aY-3, aZ) != this) return LIGHT_OPACITY_NONE; Block tBlock = aWorld.getBlock(aX, aY+1, aZ); return !tBlock.getMaterial().isLiquid() && tBlock.getLightOpacity(aWorld, aX, aY+1, aZ) <= 0 && !WD.visOpq(tBlock) ? 16 : LIGHT_OPACITY_NONE;}
+	@Override public int getLightOpacity(IBlockAccess aWorld, int aX, int aY, int aZ) {return aWorld.getBlockMetadata(aX, aY, aZ) == 0 && WD.air(aWorld.getBlock(aX, aY+1, aZ)) && WD.air(aWorld.getBlock(aX, aY+2, aZ)) && aWorld.getBlock(aX, aY-1, aZ).getLightOpacity(aWorld, aX, aY-1, aZ) < LIGHT_OPACITY_MAX ? 16 : LIGHT_OPACITY_NONE;}
 	@Override public IIcon getIcon(int aSide, int aMeta) {return Blocks.water.getIcon(aSide, aMeta);}
 	@Override @SideOnly(Side.CLIENT) public int getRenderColor(int aMeta) {return 0x00c0c0c0;}
 	@Override @SideOnly(Side.CLIENT) public int colorMultiplier(IBlockAccess aWorld, int aX, int aY, int aZ) {return 0x00c0c0c0;}

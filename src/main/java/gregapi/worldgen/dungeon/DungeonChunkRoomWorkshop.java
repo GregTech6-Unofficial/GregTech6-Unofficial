@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -45,7 +45,9 @@ public class DungeonChunkRoomWorkshop extends DungeonChunkRoomEmpty {
 	
 	@Override
 	public boolean generate(DungeonData aData) {
-		super.generate(aData);
+		if (aData.mTags.contains(WorldgenDungeonGT.TAG_WORKSHOP) || !super.generate(aData)) return F;
+		aData.mTags.add(WorldgenDungeonGT.TAG_WORKSHOP);
+		
 		aData.set             ( 5, 1,  1, SIDE_UNKNOWN, 32055, new FluidTankGT(FL.Propane.make(8000)).writeToNBT(UT.NBT.make(NBT_COLOR, DYE_INT_Red, NBT_PAINTED, T), NBT_TANK), T, T);
 		
 		aData.set             ( 3, 1,  1, SIDE_UNKNOWN,    11, UT.NBT.make(NBT_COLOR, DYES_INT[aData.mColor], NBT_PAINTED, T, NBT_FACING, SIDE_Z_POS, "gt.dungeonloot", ChestGenHooks.MINESHAFT_CORRIDOR      ), T, T);
@@ -53,7 +55,7 @@ public class DungeonChunkRoomWorkshop extends DungeonChunkRoomEmpty {
 		aData.set             ( 2, 1,  1, SIDE_UNKNOWN,    11, UT.NBT.make(NBT_COLOR, DYES_INT[aData.mColor], NBT_PAINTED, T, NBT_FACING, SIDE_Z_POS, "gt.dungeonloot", ChestGenHooks.STRONGHOLD_CROSSING     ), T, T);
 		
 		aData.set             ( 1, 1,  1, Blocks.crafting_table, 0, 2);
-		aData.set             ( 1, 2,  1, SIDE_UNKNOWN, 32735, UT.NBT.make(), T, T);
+		aData.set             ( 1, 2,  1, SIDE_UNKNOWN, 32735, T, T);
 		
 		aData.set             ( 1, 1,  2, SIDE_UNKNOWN,    11, UT.NBT.make(NBT_COLOR, DYES_INT[aData.mColor], NBT_PAINTED, T, NBT_FACING, SIDE_X_POS, "gt.dungeonloot", ChestGenHooks.DUNGEON_CHEST           ), T, T);
 		

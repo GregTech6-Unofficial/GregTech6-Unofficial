@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.List;
 
 import gregapi.code.TagData;
+import gregapi.data.CS.GarbageGT;
 import gregapi.data.FL;
 import gregapi.data.FM;
 import gregapi.data.LH;
@@ -118,10 +119,10 @@ public class MultiTileEntityMotorLiquid extends TileEntityBase09FacingSingle imp
 						if (tRecipe.isRecipeInputEqual(T, F, mTanks[0].AS_ARRAY, ZL_IS)) {
 							mActivity.mActive = T;
 							mLastRecipe = tRecipe;
-							mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+							mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 							if (tRecipe.mFluidOutputs.length > 0) mTanks[1].fill(tRecipe.mFluidOutputs[0]);
 							while (mEnergy < mRate * 2 && (tRecipe.mFluidOutputs.length <= 0 || mTanks[1].canFillAll(tRecipe.mFluidOutputs[0])) && tRecipe.isRecipeInputEqual(T, F, mTanks[0].AS_ARRAY, ZL_IS)) {
-								mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
+								mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
 								if (tRecipe.mFluidOutputs.length > 0) mTanks[1].fill(tRecipe.mFluidOutputs[0]);
 								if (mTanks[0].isEmpty()) break;
 							}
@@ -138,8 +139,8 @@ public class MultiTileEntityMotorLiquid extends TileEntityBase09FacingSingle imp
 			if (mEnergy < 0) mEnergy = 0;
 			
 			if (mTanks[1].has()) {
-				FL.move(mTanks[1], getAdjacentTank(OPPOSITES[mFacing]));
-				if (FL.gas(mTanks[1]) && !WD.hasCollide(worldObj, getOffset(OPPOSITES[mFacing], 1))) {
+				FL.move(mTanks[1], getAdjacentTank(OPOS[mFacing]));
+				if (FL.gas(mTanks[1]) && !WD.hasCollide(worldObj, getOffset(OPOS[mFacing], 1))) {
 					mTanks[1].setEmpty();
 				}
 			}
@@ -152,6 +153,11 @@ public class MultiTileEntityMotorLiquid extends TileEntityBase09FacingSingle imp
 		if (rReturn > 0) return rReturn;
 		
 		if (isClientSide()) return 0;
+		
+		if (aTool.equals(TOOL_plunger)) {
+			if (mTanks[1].has()) return GarbageGT.trash(mTanks[1]);
+			return GarbageGT.trash(mTanks[0]);
+		}
 		
 		if (aTool.equals(TOOL_magnifyingglass)) {
 			if (aChatReturn != null) {
@@ -208,9 +214,9 @@ public class MultiTileEntityMotorLiquid extends TileEntityBase09FacingSingle imp
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (!aShouldSideBeRendered[aSide]) return null;
-		if (aSide == mFacing)              return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[0], mRGBa), BlockTextureDefault.get((mActivity.mState > 0?sOverlaysActive:sOverlays)[0]));
-		if (aSide == OPPOSITES[mFacing])   return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[1], mRGBa), BlockTextureDefault.get((mActivity.mState > 0?sOverlaysActive:sOverlays)[1]));
-										   return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[2], mRGBa), BlockTextureDefault.get((mActivity.mState > 0?sOverlaysActive:sOverlays)[2]));
+		if (aSide == mFacing)              return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[0], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[0]));
+		if (aSide == OPOS[mFacing])   return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[1], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[1]));
+										   return BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[2], mRGBa), BlockTextureDefault.get((mActivity.mState>0?sOverlaysActive:sOverlays)[2]));
 	}
 	
 	@Override public ItemStack[] getDefaultInventory(NBTTagCompound aNBT) {return ZL_IS;}

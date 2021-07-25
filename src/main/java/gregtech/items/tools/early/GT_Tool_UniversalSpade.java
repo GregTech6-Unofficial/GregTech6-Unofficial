@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -88,24 +88,14 @@ public class GT_Tool_UniversalSpade extends ToolStats {
 		return 1.0F;
 	}
 	
-	@Override
-	public boolean canBlock() {
-		return T;
-	}
-	
-	@Override
-	public boolean isCrowbar() {
-		return T;
-	}
-	
-	@Override
-	public boolean isWeapon() {
-		return T;
-	}
+	@Override public boolean canCollect()                                                   {return T;}
+	@Override public boolean canBlock()                                                     {return T;}
+	@Override public boolean isCrowbar()                                                    {return T;}
+	@Override public boolean isWeapon()                                                     {return T;}
 	
 	@Override
 	public boolean isMinableBlock(Block aBlock, byte aMetaData) {
-		if (aBlock instanceof BlockRailBase) return T;
+		if (aBlock instanceof BlockRailBase || BlocksGT.openableCrowbar.contains(aBlock)) return T;
 		String tTool = aBlock.getHarvestTool(aMetaData);
 		return (tTool != null && (tTool.equalsIgnoreCase(TOOL_shovel) || tTool.equalsIgnoreCase(TOOL_axe) || tTool.equalsIgnoreCase(TOOL_saw) || tTool.equalsIgnoreCase(TOOL_sword) || tTool.equalsIgnoreCase(TOOL_crowbar))) || aBlock.getMaterial() == Material.sand || aBlock.getMaterial() == Material.grass || aBlock.getMaterial() == Material.ground || aBlock.getMaterial() == Material.snow || aBlock.getMaterial() == Material.craftedSnow || aBlock.getMaterial() == Material.clay  || aBlock.getMaterial() == Material.leaves || aBlock.getMaterial() == Material.vine || aBlock.getMaterial() == Material.wood || aBlock.getMaterial() == Material.cactus || aBlock.getMaterial() == Material.circuits || aBlock.getMaterial() == Material.gourd || aBlock.getMaterial() == Material.web || aBlock.getMaterial() == Material.cloth || aBlock.getMaterial() == Material.carpet || aBlock.getMaterial() == Material.plants || aBlock.getMaterial() == Material.cake || aBlock.getMaterial() == Material.tnt || aBlock.getMaterial() == Material.fire || aBlock.getMaterial() == Material.sponge;
 	}

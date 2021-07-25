@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -46,11 +46,19 @@ public class Behavior_Key extends AbstractBehaviorDefault {
 		
 		DelegatorTileEntity<TileEntity> aTileEntity = WD.te(aWorld, aX, aY, aZ, aSide, T);
 		if (aTileEntity.mTileEntity instanceof ITileEntityKeyInteractable) {
-			NBTTagCompound tNBT = aStack.getTagCompound();
-			if (tNBT == null) tNBT = UT.NBT.make();
-			if (!tNBT.hasKey(NBT_KEY)) tNBT.setLong(NBT_KEY, System.nanoTime());
-			UT.NBT.set(aStack, tNBT);
-			return ((ITileEntityKeyInteractable)aTileEntity.mTileEntity).useKey(aPlayer, aSide, hitX, hitY, hitZ, tNBT.getLong(NBT_KEY));
+			NBTTagCompound tNBT = UT.NBT.getNBT(aStack);
+			long tKeyID = tNBT.getLong(NBT_KEY);
+			if (tKeyID != 0) return ((ITileEntityKeyInteractable)aTileEntity.mTileEntity).useKey(aPlayer, aSide, hitX, hitY, hitZ, tKeyID);
+			tKeyID = ((ITileEntityKeyInteractable)aTileEntity.mTileEntity).getKeyID();
+			if (tKeyID == 0) {
+				tKeyID = 1+Math.max(RNGSUS.nextInt(1000000), System.nanoTime());
+				UT.NBT.set(aStack, UT.NBT.setNumber(tNBT, NBT_KEY, tKeyID));
+				return ((ITileEntityKeyInteractable)aTileEntity.mTileEntity).useKey(aPlayer, aSide, hitX, hitY, hitZ, tKeyID);
+			}
+			if (((ITileEntityKeyInteractable)aTileEntity.mTileEntity).canCloneKey(aPlayer, aSide, hitX, hitY, hitZ)) {
+				UT.NBT.set(aStack, UT.NBT.setNumber(tNBT, NBT_KEY, tKeyID));
+				return T;
+			}
 		}
 		return F;
 	}
@@ -61,7 +69,7 @@ public class Behavior_Key extends AbstractBehaviorDefault {
 	public List<String> getAdditionalToolTips(MultiItem aItem, List<String> aList, ItemStack aStack) {
 		aList.add(LH.get("gt.behaviour.key"));
 		NBTTagCompound tNBT = aStack.getTagCompound();
-		if (tNBT != null && tNBT.hasKey(NBT_KEY)) aList.add("Key ID: " + tNBT.getLong(NBT_KEY)); else aList.add("*BLANK*");
+		if (tNBT != null && tNBT.hasKey(NBT_KEY)) aList.add("Key ID: " + UT.Code.makeString(tNBT.getLong(NBT_KEY))); else aList.add("*BLANK*");
 		return aList;
 	}
 }

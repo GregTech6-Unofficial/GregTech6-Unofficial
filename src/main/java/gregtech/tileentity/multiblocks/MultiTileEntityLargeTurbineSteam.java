@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -23,6 +23,7 @@ import static gregapi.data.CS.*;
 
 import java.util.List;
 
+import gregapi.data.CS.GarbageGT;
 import gregapi.data.FL;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
@@ -30,6 +31,8 @@ import gregapi.fluid.FluidTankGT;
 import gregapi.tileentity.multiblocks.ITileEntityMultiBlockController;
 import gregapi.tileentity.multiblocks.MultiTileEntityMultiBlockPart;
 import gregapi.util.UT;
+import net.minecraft.entity.Entity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -39,7 +42,7 @@ import net.minecraftforge.fluids.IFluidTank;
  * @author Gregorius Techneticies
  */
 public class MultiTileEntityLargeTurbineSteam extends MultiTileEntityLargeTurbine {
-	public FluidTankGT[] mTanks = new FluidTankGT[] {new FluidTankGT(Integer.MAX_VALUE), new FluidTankGT(Integer.MAX_VALUE)};
+	public FluidTankGT[] mTanks = new FluidTankGT[] {new FluidTankGT(), new FluidTankGT()};
 	public long mSteamCounter = 0, mEnergyProducedNextTick = 0; 
 	public static final int STEAM_PER_WATER = 170;
 	
@@ -97,7 +100,7 @@ public class MultiTileEntityLargeTurbineSteam extends MultiTileEntityLargeTurbin
 	}
 	
 	static {
-		LH.add("gt.tooltip.multiblock.steamturbine.1", "3x3x4 of the Block you crafted this one with");
+		LH.add("gt.tooltip.multiblock.steamturbine.1", "3x3x4 of the Walls you crafted this with");
 		LH.add("gt.tooltip.multiblock.steamturbine.2", "Main centered on the 3x3 facing outwards");
 		LH.add("gt.tooltip.multiblock.steamturbine.3", "Input only possible at frontal 3x3");
 		LH.add("gt.tooltip.multiblock.steamturbine.4", "Distilled Water can be pumped out at Bottom Layer");
@@ -117,6 +120,21 @@ public class MultiTileEntityLargeTurbineSteam extends MultiTileEntityLargeTurbin
 	public void addToolTipsEnergy(List<String> aList, ItemStack aStack, boolean aF3_H) {
 		super.addToolTipsEnergy(aList, aStack, aF3_H);
 		aList.add(Chat.ORANGE   + LH.get(LH.EMITS_USED_STEAM) + " ("+LH.get(LH.FACE_SIDES)+", 95%)");
+	}
+	
+	@Override
+	public long onToolClick2(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, byte aSide, float aHitX, float aHitY, float aHitZ) {
+		long rReturn = super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
+		if (rReturn > 0) return rReturn;
+		
+		if (isClientSide()) return 0;
+		
+		if (aTool.equals(TOOL_plunger)) {
+			if (mTanks[0].has()) return GarbageGT.trash(mTanks[0]);
+			return GarbageGT.trash(mTanks[1]);
+		}
+		
+		return 0;
 	}
 	
 	@Override

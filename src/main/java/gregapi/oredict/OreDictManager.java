@@ -36,6 +36,7 @@ import gregapi.code.HashSetNoNulls;
 import gregapi.code.ItemStackContainer;
 import gregapi.code.ItemStackMap;
 import gregapi.code.ItemStackSet;
+import gregapi.code.ModData;
 import gregapi.config.Config;
 import gregapi.data.ANY;
 import gregapi.data.FL;
@@ -50,6 +51,7 @@ import gregapi.oredict.event.IOreDictListenerEvent.OreDictRegistrationContainer;
 import gregapi.oredict.event.IOreDictListenerRecyclable;
 import gregapi.oredict.event.IOreDictListenerRecyclable.OreDictRecyclingContainer;
 import gregapi.recipes.Recipe;
+import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
@@ -105,7 +107,7 @@ public final class OreDictManager {
 	, "snowLayer", "ice", "cloud"
 	, "antiBlock", "transdimBlock"
 	, "carpet", "pendant"
-	, "tyrian", "redstoneCrystal", "arcaneAsh", "camoPaste", "burntQuartz", "KangarooPaw", "redstoneRoot", "pigment", "diamondShard", "eternalLifeEssence", "honeyDrop", "grubBee", "salmonRaw", "stringFluxed", "aquaRegia", "sludge", "lexicaBotania", "resourceTaint", "chainLink", "sulfuricAcid", "scribingTools", "bacon", "redalloyBundled", "bluestoneInsulated", "infusedteslatiteInsulated", "bluestoneBundled", "redalloyInsulated", "infusedteslatiteBundled", "universalCable", "laserReceptor", "laserEmitter", "laserFocus", "laserMirror", "mobEgg"
+	, "tyrian", "arcaneAsh", "camoPaste", "burntQuartz", "KangarooPaw", "redstoneRoot", "pigment", "diamondShard", "eternalLifeEssence", "honeyDrop", "grubBee", "salmonRaw", "stringFluxed", "aquaRegia", "sludge", "lexicaBotania", "resourceTaint", "chainLink", "sulfuricAcid", "scribingTools", "bacon", "redalloyBundled", "bluestoneInsulated", "infusedteslatiteInsulated", "bluestoneBundled", "redalloyInsulated", "infusedteslatiteBundled", "universalCable", "laserReceptor", "laserEmitter", "laserFocus", "laserMirror", "mobEgg"
 //  , "torchRedstoneActive"
 	, "awesomeiteHammer", "awesomeCore"
 	, "bPlaceholder", "bVial", "bRedString", "bEnderAirBottle", "bFlask", "brDeviceCyaniteProcessor", "prbackpack"
@@ -115,7 +117,7 @@ public final class OreDictManager {
 	, "hempBrick", "hempBlock", "savehempBrick", "savehempBlock", "saveplatedHempBrick", "saveplatedHempBlock", "platedHempBrick", "platedHempBlock", "platedHemp", "savehemp", "saveplatedHemp"
 	);
 	/** Lists all Names which should not be processed due to technical Issues. */
-	private final Set<String> mIgnoredNames = new HashSetNoNulls<>(F, "oreBentonite", "oreFullersEarth", "oreKaolinite", "dustRefinedObsidian", "dustRefinedGlowstone", "oreNetherQuartz", "oreBasalticMineralSand", "oreLifeCrystal", "cropMaplesyrup", "oreTritanium", "oreDuranium", "plateLapis", "shardEntropy", "shardAir", "shardWater", "shardEarth", "shardFire", "shardOrder", "greggy_greg_do_please_kindly_stuff_a_sock_in_it", "halfSheetCylinderMetal", "halfSheetMetal", "quarterSheetMetal", "sheetCurvedFourMetal", "sheetCurvedOneMetal", "sheetCurvedThreeMetal", "sheetCurvedTwoMetal", "sheetCylinderMetal", "sheetMediumConeMetal", "sheetMetal", "sheetMicroConeMetal", "sheetMicroFinMetal", "sheetSmallConeMetal", "sheetSmallCylinderMetal", "sheetSmallFinMetal", "shirtSheetMetal", "rivetSheetMetal", "triangleSheetMetal");
+	private final Set<String> mIgnoredNames = new HashSetNoNulls<>(F, "oreCompass", "oreBentonite", "oreFullersEarth", "oreKaolinite", "dustRefinedObsidian", "dustRefinedGlowstone", "oreNetherQuartz", "oreNetherite", "oreBasalticMineralSand", "oreLifeCrystal", "cropMaplesyrup", "oreTritanium", "oreDuranium", "plateLapis", "shardEntropy", "shardAir", "shardWater", "shardEarth", "shardFire", "shardOrder", "greggy_greg_do_please_kindly_stuff_a_sock_in_it", "halfSheetCylinderMetal", "halfSheetMetal", "quarterSheetMetal", "sheetCurvedFourMetal", "sheetCurvedOneMetal", "sheetCurvedThreeMetal", "sheetCurvedTwoMetal", "sheetCylinderMetal", "sheetMediumConeMetal", "sheetMetal", "sheetMicroConeMetal", "sheetMicroFinMetal", "sheetSmallConeMetal", "sheetSmallCylinderMetal", "sheetSmallFinMetal", "shirtSheetMetal", "rivetSheetMetal", "triangleSheetMetal");
 	/** Lists all Names which have already been registered. Used for the OreDict Listeners, so that certain Recipes (such as Crafting) don't get registered twice.*/
 	private final Set<String> mAlreadyRegisteredNames = new HashSetNoNulls<>();
 	/** Used to check if Recipe Outputs accidentally contain uncopied OreDict Items. */
@@ -285,7 +287,8 @@ public final class OreDictManager {
 		if (GAPI.mStartedInit) {
 			List<OreDictEventContainer> tBufferedRegistrations = mBufferedRegistrations;
 			mBufferedRegistrations = null;
-			UT.LoadingBar.start("OreDict", tBufferedRegistrations.size());
+			// Yep, I used a Sampler to see why the hell this part lags so much, figures Mariculture eats most of the CPU in that.
+			UT.LoadingBar.start(MD.MaCu.mLoaded ? "(Lags because Mariculture) OreDict" : "OreDict", tBufferedRegistrations.size());
 			for (OreDictEventContainer tContainer : tBufferedRegistrations) {
 				UT.LoadingBar.step(tContainer.mEvent.Name);
 				onOreRegistration2(tContainer.mModID, tContainer.mRegName, tContainer.mEvent);
@@ -309,20 +312,18 @@ public final class OreDictManager {
 		String aModID = tContainer==null||mIsRunningInIterationMode?"UNKNOWN":tContainer.getModId();
 		
 		// I am very sure the OreDict actually checks for these cases, so I do not think this will ever trigger.
-		if (aEvent.Ore == null) {ERR.println("ERROR: A NULL STACK from the Mod " + aModID + " has been registered to the OreDict as: " + aEvent.Name); return;}
+		if (aEvent.Ore == null) {ERR.println("ERROR: A NULL STACK from the Mod '" + aModID + "' has been registered to the OreDict as: " + aEvent.Name); return;}
 		// I am very sure the OreDict actually checks for these cases, so I do not think this will ever trigger.
-		if (aEvent.Ore.getItem() == null) {ERR.println("ERROR: A NULL ITEM from the Mod " + aModID + " has been registered to the OreDict as: " + aEvent.Name); return;}
+		if (aEvent.Ore.getItem() == null) {ERR.println("ERROR: A NULL ITEM from the Mod '" + aModID + "' has been registered to the OreDict as: " + aEvent.Name); return;}
 		
 		String aRegName = ST.regName(aEvent.Ore);
 		
 		// Yeah this definitely can happen, and I want to see it if any Mod fucks that one up, so I can potentially fix that..
-		if (UT.Code.stringInvalid(aRegName)) {ERR.println("ERROR: " + aEvent.Ore.getItem().getClass() + " from the Mod " + aModID + " has been registered to the OreDict before being registered as an Item/Block as: " + aEvent.Name); return;}
-		
-		// Fixing Thaumcraft checking for the wrong OreDict when chopping Wood with Golems. Oh and it doesn't check Wildcard either, so I'm gonna need to split that too.
-		// Also there is a huge Issue within Thaumcraft itself that makes the whole OreDict check impossible, I fixed that in CompatTC.
-		if (aEvent.Name.startsWith("log") && ST.block(aEvent.Ore) != NB) if (ST.meta_(aEvent.Ore) == W) for (int i = 0; i < 16; i++) registerOreSafe("woodLog", ST.copyMeta(i, aEvent.Ore)); else registerOreSafe("woodLog", aEvent.Ore);
+		if (UT.Code.stringInvalid(aRegName)) {ERR.println("ERROR: " + aEvent.Ore.getItem().getClass() + " from the Mod '" + aModID + "' has been registered to the OreDict before being registered as an Item/Block with: " + aEvent.Name); return;}
 		
 		if (GT != null) {
+			// Preventing Blizz, Blitz and Basalz Stuff from being registered wrongly to GT6.
+			if (MD.TE_FOUNDATION.owns(aRegName, "material") && UT.Code.inside(1024, 1029, ST.meta_(aEvent.Ore)) && MD.TE_FOUNDATION.mID.equalsIgnoreCase(aModID)) return;
 			// In order to fix a ThaumCraft Bug I have to ignore this registration under all circumstances. I registered it under the proper Name manually.
 			// Note: This has been fixed on TC Side, so it can be removed in later MC versions.
 			if (MD.TC  .owns(aRegName) &&  aEvent.Name.toLowerCase().endsWith("uicksilver")) return;
@@ -351,27 +352,32 @@ public final class OreDictManager {
 			}
 		}
 		
+		// Fixing Thaumcraft checking for the wrong OreDict when chopping Wood with Golems. Oh and it doesn't check Wildcard either, so I'm gonna need to split that too.
+		// Also there is a huge Issue within Thaumcraft itself that makes the whole OreDict check impossible, I fixed that in CompatTC.
+		if (aEvent.Name.startsWith("log") && ST.block(aEvent.Ore) != NB) if (ST.meta_(aEvent.Ore) == W) for (int i = 0; i < 16; i++) registerOreSafe("woodLog", ST.copyMeta(i, aEvent.Ore)); else registerOreSafe("woodLog", aEvent.Ore);
+		
 		//ORD.println(aModID + " → " + aRegName + " → " + aEvent.Name);
 		
 		aEvent.Ore.stackSize = 1;
 		
 		mAllRegisteredOres.add(aEvent.Ore);
 		
-		if (!ST.isGT(aEvent.Ore)) triggerVisibility(aEvent.Name);
-		
-		if (!(mIgnoredNames.contains(aEvent.Name) || aEvent.Name.contains(" ") || aEvent.Name.contains("|") || aEvent.Name.contains("*") || aEvent.Name.contains(":") || aEvent.Name.contains(".") || aEvent.Name.contains("$"))) {
-			if (mBufferedRegistrations == null) {
-				onOreRegistration2(aModID, aRegName, aEvent);
-			} else {
-				mBufferedRegistrations.add(new OreDictEventContainer(aModID, aRegName, aEvent));
-			}
+		if (!ST.isGT(aEvent.Ore)) {
+			// Another Mod registered something, maybe that makes a Material visible!
+			triggerVisibility(aEvent.Name);
 		}
-		
-		aEvent.Ore.stackSize = 1;
 		
 		if (aEvent.Name.contains(" ")) {
 			registerOreSafe(aEvent.Name.replaceAll(" ", ""), aEvent.Ore);
 		} else {
+			if (!(mIgnoredNames.contains(aEvent.Name) || aEvent.Name.contains("|") || aEvent.Name.contains("*") || aEvent.Name.contains(":") || aEvent.Name.contains(".") || aEvent.Name.contains("$"))) {
+				if (mBufferedRegistrations == null) {
+					onOreRegistration2(aModID, aRegName, aEvent);
+				} else {
+					mBufferedRegistrations.add(new OreDictEventContainer(aModID, aRegName, aEvent));
+				}
+			}
+			
 			Collection<String> tReRegistrations = mReRegistrationMappings.get(aEvent.Name);
 			if (tReRegistrations != null) for (String tName : tReRegistrations) registerOreSafe(tName, aEvent.Ore);
 		}
@@ -485,13 +491,17 @@ public final class OreDictManager {
 		return setTarget_(aPrefix, aMaterial, aStack, F, F, F);
 	}
 	
+	public boolean setTarget(OreDictPrefix aPrefix, OreDictMaterial aMaterial, ModData aMod, Object aName, long aMeta) {
+		ItemStack aStack = ST.make(aMod, aName.toString(), 1, aMeta);
+		if (aMod.mLoaded && aStack == null) DEB.println("Item does not exist for Unification Target despite being loaded: " + aMod.mID + ":" + aName);
+		return setTarget(aPrefix, aMaterial, aStack, T, F, T);
+	}
 	public boolean setTarget(OreDictPrefix aPrefix, OreDictMaterial aMaterial, ItemStack aStack) {
 		return setTarget(aPrefix, aMaterial, aStack, T, F, T);
 	}
 	public boolean setTarget_(OreDictPrefix aPrefix, OreDictMaterial aMaterial, ItemStack aStack) {
 		return setTarget_(aPrefix, aMaterial, aStack, T, F, T);
 	}
-
 	public boolean setTarget(OreDictPrefix aPrefix, OreDictMaterial aMaterial, ItemStack aStack, boolean aOverwrite, boolean aAlreadyRegistered) {
 		return setTarget(aPrefix, aMaterial, aStack, aOverwrite, aAlreadyRegistered, T);
 	}
@@ -731,6 +741,7 @@ public final class OreDictManager {
 		return registerOre_(aName, aStack);
 	}
 	public boolean registerOre_(Object aName, ItemStack aStack) {
+		if (CR.DELATE == aName) {if (MD.GT.mLoaded) CR.delate(aStack); return MD.GT.mLoaded;}
 		if (Abstract_Mod.sStartedPostInit > 0) throw new IllegalStateException("Late OreDict Registration using GT OreDict Utility. Only @Init and @PreInit are allowed for this when you use this Function instead of the Forge one.");
 		String tName = aName.toString();
 		if (UT.Code.stringInvalid(tName)) return F;

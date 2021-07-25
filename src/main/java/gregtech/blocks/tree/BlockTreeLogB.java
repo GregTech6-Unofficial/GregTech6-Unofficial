@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -86,9 +86,9 @@ public class BlockTreeLogB extends BlockBaseLogFlammable implements IBlockToolab
 		OM.reg(ST.make(this, 1,15), OD.logWood);
 	}
 	
-	@Override public int getLeavesRangeSide(byte aMeta) {return ((BlockBaseLeaves)BlocksGT.Leaves).getLeavesRangeSide((byte)((aMeta & 3)|4));}
-	@Override public int getLeavesRangeYPos(byte aMeta) {return ((BlockBaseLeaves)BlocksGT.Leaves).getLeavesRangeYNeg((byte)((aMeta & 3)|4));} // Yes it has to be the Negative Range of the Leaves here
-	@Override public int getLeavesRangeYNeg(byte aMeta) {return ((BlockBaseLeaves)BlocksGT.Leaves).getLeavesRangeYPos((byte)((aMeta & 3)|4));} // Yes it has to be the Positive Range of the Leaves here
+	@Override public int getLeavesRangeSide(byte aMeta) {return ((BlockBaseLeaves)BlocksGT.Leaves_AB).getLeavesRangeSide((byte)((aMeta & 3)|4));}
+	@Override public int getLeavesRangeYPos(byte aMeta) {return ((BlockBaseLeaves)BlocksGT.Leaves_AB).getLeavesRangeYNeg((byte)((aMeta & 3)|4));} // Yes it has to be the Negative Range of the Leaves here
+	@Override public int getLeavesRangeYNeg(byte aMeta) {return ((BlockBaseLeaves)BlocksGT.Leaves_AB).getLeavesRangeYPos((byte)((aMeta & 3)|4));} // Yes it has to be the Positive Range of the Leaves here
 	
 	@Override
 	public long onToolClick(String aTool, long aRemainingDurability, long aQuality, Entity aPlayer, List<String> aChatReturn, IInventory aPlayerInventory, boolean aSneaking, ItemStack aStack, World aWorld, byte aSide, int aX, int aY, int aZ, float aHitX, float aHitY, float aHitZ) {
@@ -96,7 +96,7 @@ public class BlockTreeLogB extends BlockBaseLogFlammable implements IBlockToolab
 			if (aWorld.isRemote) return 0;
 			byte aMeta = WD.meta(aWorld, aX, aY, aZ);
 			aWorld.setBlock(aX, aY, aZ, BlocksGT.BeamB, aMeta, 3);
-			UT.Inventories.addStackToPlayerInventoryOrDrop(aPlayer instanceof EntityPlayer ? (EntityPlayer)aPlayer : null, (aMeta & 3) == 1 ? IL.HaC_Cinnamon.get(1, IL.Food_Cinnamon.get(1, OM.dust(MT.Cinnamon))) : OM.dust(MT.Bark), aWorld, aX+OFFSETS_X[aSide], aY+OFFSETS_Y[aSide], aZ+OFFSETS_Z[aSide]);
+			UT.Inventories.addStackToPlayerInventoryOrDrop(aPlayer instanceof EntityPlayer ? (EntityPlayer)aPlayer : null, (aMeta & 3) == 1 ? IL.HaC_Cinnamon.get(1, IL.Food_Cinnamon.get(1, OM.dust(MT.Cinnamon))) : OM.dust(MT.Bark), aWorld, aX+OFFX[aSide], aY+OFFY[aSide], aZ+OFFZ[aSide]);
 			return aTool.equals(TOOL_axe) ? 500 : 1000;
 		}
 		if (SIDES_HORIZONTAL[aSide] && aTool.equals(TOOL_drill) && WD.meta(aWorld, aX, aY, aZ) == 3) {

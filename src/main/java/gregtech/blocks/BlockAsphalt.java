@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -28,6 +28,7 @@ import gregapi.block.metatype.ItemBlockMetaType;
 import gregapi.data.MT;
 import gregapi.old.Textures;
 import gregapi.oredict.OreDictMaterial;
+import gregapi.render.BlockTextureCopied;
 import gregapi.render.IIconContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,6 +40,7 @@ public class BlockAsphalt extends BlockColored implements IBlockOnWalkOver {
 	public BlockAsphalt(String aUnlocalised) {
 		super(ItemBlockMetaType.class, Material.rock, soundTypeStone, aUnlocalised, "Asphalt", MT.Asphalt, 1.0F, 1.0F, 1, Textures.BlockIcons.ASPHALTS);
 		setCreativeTab(CreativeTabs.tabTransport);
+		MT.Asphalt.mTextureSolid = BlockTextureCopied.get(this, SIDE_TOP, DYE_INDEX_Black);
 	}
 	
 	@Override
@@ -53,7 +55,7 @@ public class BlockAsphalt extends BlockColored implements IBlockOnWalkOver {
 	
 	@Override
 	public void onWalkOver(EntityLivingBase aEntity, World aWorld, int aX, int aY, int aZ) {
-		if ((aEntity.motionX != 0 || aEntity.motionZ != 0) && !aEntity.isInWater() && !aEntity.isWet() && !aEntity.isSneaking()) {
+		if ((aEntity.motionX != 0 || aEntity.motionZ != 0) && !aEntity.isInWater() && !aEntity.isSneaking()) {
 			double tSpeed = (mSide == SIDE_BOTTOM && aWorld.getBlock(aX, aY-1, aZ).slipperiness >= 0.8 ? 1.05 : 1.3);
 			aEntity.motionX *= tSpeed; aEntity.motionZ *= tSpeed;
 		}

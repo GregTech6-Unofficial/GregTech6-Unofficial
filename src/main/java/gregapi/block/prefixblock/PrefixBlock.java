@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -33,6 +33,7 @@ import gregapi.block.ToolCompat;
 import gregapi.block.behaviors.Drops;
 import gregapi.code.ModData;
 import gregapi.data.LH;
+import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.data.TD;
@@ -54,6 +55,7 @@ import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
+import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.ITileEntityProvider;
@@ -215,10 +217,21 @@ public class PrefixBlock extends Block implements Runnable, ITileEntityProvider,
 		
 		mPrefix.mRegisteredItems.add(this); // this optimizes some processes by decreasing the size of the Set.
 		
-		if (COMPAT_IC2 != null && mPrefix.contains(TD.Prefix.ORE) && mBaseHardness >= 0) for (byte i = 0; i < 16; i++) COMPAT_IC2.valuable(this, i, 3);
+		if (mPrefix.contains(TD.Prefix.ORE)) {
+			if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("miner", ST.make(this, 1, W));
+			if (COMPAT_IC2 != null && mBaseHardness >= 0) {
+				for (byte i = 0; i < 16; i++) COMPAT_IC2.valuable(this, i, 3);
+			}
+		} else if (mPrefix.containsAny(TD.Prefix.DUST_BASED, TD.Prefix.INGOT_BASED, TD.Prefix.GEM_BASED)) {
+			if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("miner", ST.make(this, 1, W));
+		} else {
+			if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("builder", ST.make(this, 1, W));
+		}
+		
+		if (MD.RC.mLoaded) try {EntityTunnelBore.addMineableBlock(this);} catch(Throwable e) {e.printStackTrace(ERR);}
 		
 		if (mOpaque) VISUALLY_OPAQUE_BLOCKS.add(this);
-		mDrops = aDrops==null?new Drops(this, this):aDrops;
+		mDrops = aDrops==null?new Drops(this, this, this, this, F, F, 0, 0):aDrops;
 		
 		if (CODE_CLIENT) MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(this), RendererBlockTextured.INSTANCE);
 		
@@ -229,12 +242,13 @@ public class PrefixBlock extends Block implements Runnable, ITileEntityProvider,
 	/** This ensures, that all Materials are registered at the time this Item registers to the OreDictionary. */
 	@Override
 	public void run() {
+		for (short i = 0; i < mMaterialList.length; i++) if (mPrefix.isGeneratingItem(mMaterialList[i])) {
+			LH.add("oredict." + mPrefix.dat(mMaterialList[i]).toString() + ".name", getLocalName(mPrefix, mMaterialList[i]));
+		}
 		if (mRegisterToOreDict) {
 			boolean tUnificationAllowed = (mPrefix.contains(TD.Prefix.UNIFICATABLE) && !mPrefix.contains(TD.Prefix.UNIFICATABLE_RECIPES));
-			for (short i = 0; i < mMaterialList.length; i++) if (mMaterialList[i] != null && mPrefix.isGeneratingItem(mMaterialList[i])) {
-				ItemStack tStack = ST.make(this, 1, i);
-				ST.update_(tStack);
-				LH.add("oredict." + mPrefix.dat(mMaterialList[i]).toString() + ".name", getLocalName(mPrefix, mMaterialList[i]));
+			for (short i = 0; i < mMaterialList.length; i++) if (mPrefix.isGeneratingItem(mMaterialList[i])) {
+				ItemStack tStack = ST.update_(ST.make(this, 1, i));
 				if (tUnificationAllowed) OreDictManager.INSTANCE.addTarget_(mPrefix, mMaterialList[i], tStack); else OreDictManager.INSTANCE.registerOre_(mPrefix, mMaterialList[i], tStack);
 			}
 		}
@@ -517,9 +531,9 @@ public class PrefixBlock extends Block implements Runnable, ITileEntityProvider,
 			if ((mCanBurn || mCanExplode) && aMaterial.contains(TD.Atomic.ALKALI_METAL)) {
 				boolean tExplode = F;
 				for (byte tSide : ALL_SIDES_VALID) {
-					Block tBlock = aWorld.getBlock(aX+OFFSETS_X[tSide], aY+OFFSETS_Y[tSide], aZ+OFFSETS_Z[tSide]);
+					Block tBlock = aWorld.getBlock(aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide]);
 					if (tBlock == Blocks.water || tBlock == Blocks.flowing_water) {
-						aWorld.setBlockToAir(aX+OFFSETS_X[tSide], aY+OFFSETS_Y[tSide], aZ+OFFSETS_Z[tSide]);
+						aWorld.setBlockToAir(aX+OFFX[tSide], aY+OFFY[tSide], aZ+OFFZ[tSide]);
 						tExplode = T;
 					}
 				}
@@ -550,8 +564,9 @@ public class PrefixBlock extends Block implements Runnable, ITileEntityProvider,
 		for (ItemStack tStack : tList) if (RNGSUS.nextFloat() <= aChance) dropBlockAsItem(aWorld, aX, aY, aZ, tStack);
 	}
 	
-	@Override public int getRenderBlockPass() {return ITexture.Util.MC_ALPHA_BLENDING?1:0;}
 	@Override public final ArrayList<ItemStack> getDrops(World aWorld, int aX, int aY, int aZ, int aUnusableMetaData, int aFortune) {return mDrops.getDrops(this, aWorld, aX, aY, aZ, aFortune, F);}
+	@Override public int getExpDrop(IBlockAccess aWorld, int aMeta, int aFortune) {return mDrops.getExp(this);}
+	@Override public int getRenderBlockPass() {return ITexture.Util.MC_ALPHA_BLENDING?1:0;}
 	@Override public void getSubBlocks(Item aItem, CreativeTabs aCreativeTab, @SuppressWarnings("rawtypes") List aList) {aItem.getSubItems(aItem, aCreativeTab, aList);}
 	/** Where I come from, we set the TileEntities ourselves instead of letting a Handler do it. */
 	@Override public final TileEntity createNewTileEntity(World aWorld, int aMeta) {return null;}
@@ -565,7 +580,7 @@ public class PrefixBlock extends Block implements Runnable, ITileEntityProvider,
 	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool(World aWorld, int aX, int aY, int aZ) {return AxisAlignedBB.getBoundingBox(aX + mMinX, aY + mMinY, aZ + mMinZ, aX + mMaxX, aY + mMaxY, aZ + mMaxZ);}
 	@Override public AxisAlignedBB getSelectedBoundingBoxFromPool(World aWorld, int aX, int aY, int aZ) {return AxisAlignedBB.getBoundingBox(aX + mMinX, aY + mMinY, aZ + mMinZ, aX + mMaxX, aY + mMaxY, aZ + mMaxZ);}
 	@Override public void setBlockBoundsBasedOnState(IBlockAccess aWorld, int aX, int aY, int aZ) {setBlockBounds(mMinX, mMinY, mMinZ, mMaxX, mMaxY, mMaxZ);}
-	@Override public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {return mBaseHardness < 0 ? -1 : mBaseHardness * (1+getHarvestLevel(aWorld.getBlockMetadata(aX, aY, aZ)));}
+	@Override public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {return mBaseHardness < 0 ? -1 : mBaseHardness == 0 ? 0 : Math.max(1, mBaseHardness * (1+getHarvestLevel(aWorld.getBlockMetadata(aX, aY, aZ))));}
 	@Override public int getRenderType() {return RendererBlockTextured.INSTANCE==null?super.getRenderType():RendererBlockTextured.INSTANCE.mRenderID;}
 	@Override public int getHarvestLevel(int aMaterialToolQuality) {return (int)UT.Code.bind_(mHarvestLevelMinimum, mHarvestLevelMaximum, mHarvestLevelOffset + aMaterialToolQuality);}
 	@Override public int tickRate(World aWorld) {return 2;}

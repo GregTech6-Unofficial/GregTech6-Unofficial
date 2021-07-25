@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -42,8 +42,8 @@ public class Compat_Recipes_BiomesOPlenty extends CompatMods {
 	public Compat_Recipes_BiomesOPlenty(ModData aMod, Abstract_Mod aGTMod) {super(aMod, aGTMod);}
 	
 	@Override public void onPostLoad(FMLPostInitializationEvent aInitEvent) {OUT.println("GT_Mod: Doing BoP Recipes.");
-		RM.add_smelting(IL.Mud_Ball.get(1), IL.BoP_Mud_Brick.get(1));
-		RM.add_smelting(IL.BoP_Mud_Ball.get(1), IL.BoP_Mud_Brick.get(1));
+		RM.add_smelting(IL.Mud_Ball    .get(1), IL.BoP_Mud_Brick.get(1), F, F, T);
+		RM.add_smelting(IL.BoP_Mud_Ball.get(1), IL.BoP_Mud_Brick.get(1), F, F, T);
 		
 		RM.generify(IL.Mud_Ball.get(1), IL.BoP_Mud_Ball.get(1));
 		RM.generify(IL.BoP_Mud_Ball.get(1), IL.Mud_Ball.get(1));
@@ -62,6 +62,7 @@ public class Compat_Recipes_BiomesOPlenty extends CompatMods {
 		RM.biomass(ST.make(MD.BoP, "coral1", 16, W));
 		RM.biomass(ST.make(MD.BoP, "coral2", 16, W));
 		RM.biomass(ST.make(MD.BoP, "lilyBop", 8, W));
+		RM.biomass(IL.BoP_Pinecone.get(16));
 		
 		CR.remove(IL.BoP_Bone_Small.get(1));
 		CR.remove(IL.BoP_Bone_Medium.get(1));
@@ -69,9 +70,9 @@ public class Compat_Recipes_BiomesOPlenty extends CompatMods {
 		CR.shaped(IL.Dye_Bonemeal.get(1), DEF, "h", "X", 'X', IL.BoP_Bone_Small);
 		CR.shaped(IL.Dye_Bonemeal.get(1), DEF, "h", "X", 'X', IL.BoP_Bone_Medium);
 		CR.shaped(IL.Dye_Bonemeal.get(1), DEF, "h", "X", 'X', IL.BoP_Bone_Large);
-		CR.shapeless(OP.dust.mat(MT.White, 1), DEF_NAC, new Object[] {IL.BoP_Bone_Small});
-		CR.shapeless(OP.dust.mat(MT.White, 2), DEF_NAC, new Object[] {IL.BoP_Bone_Medium});
-		CR.shapeless(OP.dust.mat(MT.White, 4), DEF_NAC, new Object[] {IL.BoP_Bone_Large});
+		CR.shapeless(OP.dust.mat(MT.White, 1), DEF, new Object[] {IL.BoP_Bone_Small});
+		CR.shapeless(OP.dust.mat(MT.White, 2), DEF, new Object[] {IL.BoP_Bone_Medium});
+		CR.shapeless(OP.dust.mat(MT.White, 4), DEF, new Object[] {IL.BoP_Bone_Large});
 		RM.Mortar       .addRecipe1(T, 16, 16, IL.BoP_Bone_Small.get(1), IL.Dye_Bonemeal.get(2));
 		RM.Mortar       .addRecipe1(T, 16, 32, IL.BoP_Bone_Medium.get(1), IL.Dye_Bonemeal.get(4));
 		RM.Mortar       .addRecipe1(T, 16, 64, IL.BoP_Bone_Large.get(1), IL.Dye_Bonemeal.get(8));

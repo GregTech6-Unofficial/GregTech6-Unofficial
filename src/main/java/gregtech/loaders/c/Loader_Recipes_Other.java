@@ -49,8 +49,6 @@ public class Loader_Recipes_Other implements Runnable {
 	@Override public void run() {
 		dust.addListener(new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {if (aEvent.mMaterial.mReRegistrations.contains(ANY.Wax) && !ST.isGT_(aEvent.mStack)) CR.remove(aEvent.mStack);}});
 		
-		RM.Compressor.addRecipe1(T, 16, 16, OM.dust(MT.SoulSand, U), ST.make(Blocks.soul_sand, 1, 0));
-		
 		for (OreDictMaterial tWax : ANY.Wax.mToThis) {
 		RM.Compressor.addRecipe1(T, 16, 16, OM.dust(tWax, U ), plate.mat(tWax, 1));
 		RM.Compressor.addRecipe1(T, 16, 16, OM.dust(tWax, U4), foil .mat(tWax, 1));
@@ -93,14 +91,10 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(MT.KNO3, U72), OM.dust(MT.NaNO3, U72), OM.dust(MT.Niter, 2*U72));
 		
 		for (OreDictMaterial tSapphire : ANY.Sapphire.mToThis) {
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U ), OM.dust(MT.Redstone   , 5*U ), OM.dust(MT.EnergiumRed , 9*U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U9), OM.dust(MT.Redstone   , 5*U9), OM.dust(MT.EnergiumRed ,   U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U ), OM.dust(MT.Nikolite   , 5*U ), OM.dust(MT.EnergiumCyan, 9*U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U9), OM.dust(MT.Nikolite   , 5*U9), OM.dust(MT.EnergiumCyan,   U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U ), OM.dust(MT.Teslatite  , 5*U ), OM.dust(MT.EnergiumCyan, 9*U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U9), OM.dust(MT.Teslatite  , 5*U9), OM.dust(MT.EnergiumCyan,   U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U ), OM.dust(MT.Electrotine, 5*U ), OM.dust(MT.EnergiumCyan, 9*U));
-		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U9), OM.dust(MT.Electrotine, 5*U9), OM.dust(MT.EnergiumCyan,   U));
+		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U ), OM.dust(MT.Redstone, 5*U ), OM.dust(MT.EnergiumRed , 9*U));
+		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U9), OM.dust(MT.Redstone, 5*U9), OM.dust(MT.EnergiumRed ,   U));
+		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U ), OM.dust(MT.Nikolite, 5*U ), OM.dust(MT.EnergiumCyan, 9*U));
+		RM.Mixer.addRecipe2(T, 16,  144, OM.dust(tSapphire, 4*U9), OM.dust(MT.Nikolite, 5*U9), OM.dust(MT.EnergiumCyan,   U));
 		}
 		
 		new OreDictListenerEvent_Names() {@Override public void addAllListeners() {
@@ -140,14 +134,15 @@ public class Loader_Recipes_Other implements Runnable {
 		}});
 		
 		
-		addListener(dust.dat(MT.HydratedCoal), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.Coal));}});
-		addListener(rockGt.dat(MT.Netherrack), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, rockGt.mat(MT.NetherBrick, 1));}});
+		addListener(dust.dat(MT.HydratedCoal), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, OM.dust(MT.Coal), F, F, F);}});
+		addListener(rockGt.dat(MT.Netherrack), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {RM.add_smelting(aEvent.mStack, rockGt.mat(MT.NetherBrick, 1), F, F, T);}});
 		
 		
 		addListener(new Object[] {OD.itemRubber, "gemHexorium", "ingotIron", "oreCoal", "oreIron", "oreHematite", "oreMagnetite", "oreBogIron", "oreBrownLimonite", "oreYellowLimonite", "oreSiderite", "oreTaconite", "oreGold", "oreRedstone", "oreLapis", "oreDiamond", "oreEmerald", "oreBauxite", "oreAluminium", "oreRutile", "oreTitanium", "oreTungsten", "oreSulfur", "oreSaltpeter", "oreNiter", "oreNitre"}, new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			RM.rem_smelting(aEvent.mStack);
 		}});
 		addListener(OD.itemResin, new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
+			RM.biomass(ST.amount(6, aEvent.mStack), 32);
 			RM.rem_smelting(aEvent.mStack);
 			RM.ic2_extractor(aEvent.mStack, OM.ingot(MT.Rubber, 7*U9));
 			RM.Juicer           .addRecipe1(T, 16,   64, aEvent.mStack, NF, FL.Latex.make(L/2), NI);
@@ -168,16 +163,22 @@ public class Loader_Recipes_Other implements Runnable {
 			RM.Loom             .addRecipe2(T, 16,   16, ST.tag(10), ST.amount(7, aEvent.mStack), IL.Rope_Grass.get(1));
 		}});
 		addListener(dustTiny.dat(ANY.Wood), dustTiny.dat(MT.Bark), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Mixer            .addRecipe1(T, 16,   32, aEvent.mStack, MT.Glyceryl.fluid( U9, T), NF, OM.dust(MT.Dynamite,2*U9));
+			RM.Mixer            .addRecipe1(T, 16,   32,              aEvent.mStack , MT.Glyceryl.fluid(U9,T), NF, OM.dust(MT.Dynamite,2*U9));
+			RM.Bath             .addRecipe1(T,  0,   16, ST.amount(9, aEvent.mStack), FL.Water     .make(125), NF, ST.make(Items.paper, 1, 0));
+			RM.Bath             .addRecipe1(T,  0,   16, ST.amount(9, aEvent.mStack), FL.SpDew     .make(125), NF, ST.make(Items.paper, 1, 0));
+			RM.Bath             .addRecipe1(T,  0,   16, ST.amount(9, aEvent.mStack), FL.DistW     .make(100), NF, ST.make(Items.paper, 1, 0));
 		}});
 		addListener(dustSmall.dat(ANY.Wood), dustSmall.dat(MT.Bark), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Mixer            .addRecipe1(T, 16,   32, aEvent.mStack, MT.Glyceryl.fluid( U4, T), NF, OM.dust(MT.Dynamite,  U2));
+			RM.Mixer            .addRecipe1(T, 16,   32,              aEvent.mStack , MT.Glyceryl.fluid(U4,T), NF, OM.dust(MT.Dynamite,  U2));
+			RM.Bath             .addRecipe1(T,  0,   16, ST.amount(4, aEvent.mStack), FL.Water     .make(125), NF, ST.make(Items.paper, 1, 0));
+			RM.Bath             .addRecipe1(T,  0,   16, ST.amount(4, aEvent.mStack), FL.SpDew     .make(125), NF, ST.make(Items.paper, 1, 0));
+			RM.Bath             .addRecipe1(T,  0,   16, ST.amount(4, aEvent.mStack), FL.DistW     .make(100), NF, ST.make(Items.paper, 1, 0));
 		}});
 		addListener(dust.dat(ANY.Wood), dust.dat(MT.Bark), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
-			RM.Mixer            .addRecipe1(T, 16,   32, aEvent.mStack, MT.Glyceryl.fluid( U , T), NF, OM.dust(MT.Dynamite,2*U ));
-			RM.Bath             .addRecipe1(T,  0,   16, aEvent.mStack, FL.Water.make(125), NF, ST.make(Items.paper, 1, 0));
-			RM.Bath             .addRecipe1(T,  0,   16, aEvent.mStack, FL.SpDew.make(125), NF, ST.make(Items.paper, 1, 0));
-			RM.Bath             .addRecipe1(T,  0,   16, aEvent.mStack, FL.DistW.make(100), NF, ST.make(Items.paper, 1, 0));
+			RM.Mixer            .addRecipe1(T, 16,   32,              aEvent.mStack , MT.Glyceryl.fluid(U ,T), NF, OM.dust(MT.Dynamite,2*U ));
+			RM.Bath             .addRecipe1(T,  0,   16,              aEvent.mStack , FL.Water     .make(125), NF, ST.make(Items.paper, 1, 0));
+			RM.Bath             .addRecipe1(T,  0,   16,              aEvent.mStack , FL.SpDew     .make(125), NF, ST.make(Items.paper, 1, 0));
+			RM.Bath             .addRecipe1(T,  0,   16,              aEvent.mStack , FL.DistW     .make(100), NF, ST.make(Items.paper, 1, 0));
 		}});
 		addListener(stick.dat(ANY.WoodNormal), new IOreDictListenerEvent() {@Override public void onOreRegistration(OreDictRegistrationContainer aEvent) {
 			RM.Loom         .addRecipe2(T, 16,   16, ST.make(Blocks.wool  , 1, W), ST.amount(8, aEvent.mStack), ST.make(Items.painting, 1, 0));
@@ -213,109 +214,57 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Mixer        .addRecipe1(T, 16,   16, OM.dust(MT.ConstructionFoam), FL.mul(tWater, 1,10, T), FL.CFoam.make(100), ZL_IS);
 		
 		for (OreDictMaterial tClay : ANY.Clay.mToThis) {
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Stone, MT.Concrete, MT.Gravel, MT.Talc, MT.Rhyolite, MT.Gneiss, MT.Shale, MT.Dolomite, MT.Chert, MT.Asbestos}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.CFoam.make(1000), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.CFoam.make(4000), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Stone, MT.Concrete, MT.Talc, MT.STONES.Rhyolite, MT.STONES.Gneiss, MT.STONES.Shale, MT.Dolomite, MT.STONES.Chert, MT.Asbestos}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.CFoam.make(1000), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.CFoam.make(4000), ZL_IS);
 		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.CFoam.make(1000), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.CFoam.make(4000), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Diorite, MT.STONES.Marble, MT.Chalk, MT.CaCO3, MT.STONES.Livingrock, MT.STONES.Holystone}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_White], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_White], 40), ZL_IS);
 		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Diorite, MT.Marble, MT.Chalk, MT.CaCO3, MT.Livingrock, MT.Holystone}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_White], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_White], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Basalt, MT.STONES.Gabbro}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Black], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Black], 40), ZL_IS);
 		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_White], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_White], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Migmatite, MT.STONES.Eclogite, MT.STONES.SpaceRock}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Gray], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Gray], 40), ZL_IS);
 		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Basalt, MT.Gabbro}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Black], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Black], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Andesite, MT.STONES.Dacite, MT.STONES.Deadrock, MT.STONES.Greywacke, MT.STONES.MoonRock, MT.STONES.MoonTurf}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightGray], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightGray], 40), ZL_IS);
 		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Black], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Black], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Blueschist}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightBlue], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightBlue], 40), ZL_IS);
 		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Migmatite, MT.Eclogite, MT.SpaceRock}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Gray], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Gray], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Greenschist, MT.STONES.Betweenstone}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Lime], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Lime], 40), ZL_IS);
 		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Gray], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Gray], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Pitstone}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Green], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Green], 40), ZL_IS);
 		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Andesite, MT.Dacite, MT.Deadrock, MT.Greywacke, MT.MoonRock, MT.MoonTurf}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightGray], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightGray], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Redrock, MT.STONES.MarsRock, MT.STONES.MarsSand}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Red], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Red], 40), ZL_IS);
 		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightGray], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightGray], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Komatiite}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Yellow], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Yellow], 40), ZL_IS);
 		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Blueschist}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightBlue], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightBlue], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Limestone}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Orange], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Orange], 40), ZL_IS);
 		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightBlue], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_LightBlue], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Quartzite, MT.STONES.Siltstone}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Pink], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Pink], 40), ZL_IS);
 		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Greenschist, MT.Betweenstone}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Lime], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Lime], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Lime], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Lime], 40), ZL_IS);
-		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Pitstone}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Green], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Green], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Green], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Green], 40), ZL_IS);
-		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Redrock, MT.MarsRock, MT.MarsSand}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Red], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Red], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Red], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Red], 40), ZL_IS);
-		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Komatiite}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Yellow], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Yellow], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Yellow], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Yellow], 40), ZL_IS);
-		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Limestone}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Orange], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Orange], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Orange], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Orange], 40), ZL_IS);
-		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Quartzite, MT.Siltstone}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Pink], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Pink], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Pink], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Pink], 40), ZL_IS);
-		}
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Umber, MT.Kimberlite}) {
-		for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat       , U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Brown], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat       , U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Brown], 40), ZL_IS);
-		}
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), ST.make(Blocks.sand,  2, W), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Brown], 10), ZL_IS);
-		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), ST.make(Blocks.sand,  8, W), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Brown], 40), ZL_IS);
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Umber, MT.STONES.Kimberlite}) for (OreDictMaterial tMat : ANY.SiO2.mToThis) {
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U* 6), OM.dust(tMat, U * 2), OM.dust(tClay, U4)), FL.mul(tWater, 1), FL.mul(DYED_C_FOAMS[DYE_INDEX_Brown], 10), ZL_IS);
+		RM.Mixer.addRecipeX(T,F,F,F,T, 16,  256, ST.array(OM.dust(tRock, U*24), OM.dust(tMat, U * 8), OM.dust(tClay, U )), FL.mul(tWater, 4), FL.mul(DYED_C_FOAMS[DYE_INDEX_Brown], 40), ZL_IS);
 		}
 		}
 		
@@ -339,31 +288,31 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Drying           .addRecipe1(T, 16,   16, ST.tag(0)           , FL.Concrete.make(L), FL.DistW.make(8), ST.make(BlocksGT.Concrete          , 1, DYE_INDEX_LightGray));
 		
 		// Asphalt
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Stone, MT.Concrete, MT.Gravel, MT.Talc, MT.Rhyolite, MT.Gneiss, MT.Shale, MT.Dolomite, MT.Chert})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Stone, MT.Concrete, MT.Talc, MT.STONES.Rhyolite, MT.STONES.Gneiss, MT.STONES.Shale, MT.Dolomite, MT.STONES.Chert})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Gray));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Diorite, MT.Marble, MT.Chalk, MT.CaCO3, MT.Livingrock, MT.Holystone})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Diorite, MT.STONES.Marble, MT.Chalk, MT.CaCO3, MT.STONES.Livingrock, MT.STONES.Holystone})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_White));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Basalt, MT.Gabbro})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Basalt, MT.STONES.Gabbro})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Black));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Migmatite, MT.Eclogite, MT.SpaceRock})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Migmatite, MT.STONES.Eclogite, MT.STONES.SpaceRock})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Gray));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Andesite, MT.Dacite, MT.Deadrock, MT.Greywacke, MT.MoonRock, MT.MoonTurf})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Andesite, MT.STONES.Dacite, MT.STONES.Deadrock, MT.STONES.Greywacke, MT.STONES.MoonRock, MT.STONES.MoonTurf})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_LightGray));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Blueschist})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Blueschist})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_LightBlue));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Greenschist, MT.Betweenstone})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Greenschist, MT.STONES.Betweenstone})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Lime));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Pitstone})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Pitstone})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Lime));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Redrock, MT.MarsRock, MT.MarsSand})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Redrock, MT.STONES.MarsRock, MT.STONES.MarsSand})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Red));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Komatiite})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Komatiite})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Yellow));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Limestone})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Limestone})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Orange));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Quartzite, MT.Siltstone})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Quartzite, MT.STONES.Siltstone})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Pink));
-		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.Umber, MT.Kimberlite})
+		for (OreDictMaterial tRock : new OreDictMaterial[] {MT.STONES.Umber, MT.STONES.Kimberlite})
 		RM.Mixer            .addRecipe1(T, 16,   16, OM.dust(tRock), MT.Asphalt.liquid(U, T), NF, ST.make(BlocksGT.Asphalt, 1, DYE_INDEX_Brown));
 		
 		ItemStack x, y;
@@ -385,29 +334,44 @@ public class Loader_Recipes_Other implements Runnable {
 		CR.remove(x, x, x, dust.mat(MT.Zn, 1));
 		CR.remove(x, y = dust.mat(MT.Ni, 1));
 		CR.remove(x = dust.mat(MT.Fe, 1), x, y);
-		CR.remove(dust.mat(MT.Au, 1), dust.mat(MT.Ag, 1));
+		CR.remove(dust.mat(MT.Cu         , 1), dust.mat(MT.Sn        , 1));
+		CR.remove(dust.mat(MT.Cu         , 1), dust.mat(MT.Zn        , 1));
+		CR.remove(dust.mat(MT.Fe         , 1), dust.mat(MT.Mn        , 1));
+		CR.remove(dust.mat(MT.Fe         , 1), dust.mat(MT.Bronze    , 1));
+		CR.remove(dust.mat(MT.Au         , 1), dust.mat(MT.Bronze    , 1));
+		CR.remove(dust.mat(MT.Au         , 1), dust.mat(MT.Ag        , 1));
+		CR.remove(dust.mat(MT.Au         , 1), dust.mat(MT.Fe        , 1));
+		CR.remove(dust.mat(MT.Infuscolium, 1), dust.mat(MT.DeepIron  , 1));
+		CR.remove(dust.mat(MT.ShadowIron , 1), dust.mat(MT.Lemurite  , 1));
+		CR.remove(dust.mat(MT.Alduorite  , 1), dust.mat(MT.Ceruclase , 1));
+		CR.remove(dust.mat(MT.Mithril    , 1), dust.mat(MT.Rubracium , 1));
+		CR.remove(dust.mat(MT.Pt         , 1), dust.mat(MT.Orichalcum, 1));
+		CR.remove(dust.mat(MT.Eximite    , 1), dust.mat(MT.Meutoite  , 1));
+		CR.remove(dust.mat(MT.Adamantine , 1), dust.mat(MT.Atl       , 1));
+		CR.remove(dust.mat(MT.Prometheum , 1), dust.mat(MT.Kalendrite, 1));
 		CR.remove(x = dust.mat(MT.Clay, 1), x, dust.mat(MT.PotassiumFeldspar, 1), dust.mat(MT.SiO2, 1));
-		CR.remove(dust.mat(MT.Redstone, 1), dust.mat(MT.Teslatite, 1));
+		CR.remove(dust.mat(MT.Redstone, 1), dust.mat(MT.Nikolite, 1));
 		
 		//----------------------------------------------------------------------------
 		
-		CR.shaped(stick         .mat(MT.PetrifiedWood   ,  1), CR.DEF_NAC, "X" , "X" , 'X', rockGt.dat(MT.PetrifiedWood));
-		CR.shaped(plate         .mat(MT.PetrifiedWood   ,  1), CR.DEF_NAC, "XX", "XX", 'X', rockGt.dat(MT.PetrifiedWood));
-		CR.shaped(plateTiny     .mat(MT.Paper           ,  9), CR.DEF_NAC, "b ", " X", 'X', plate.dat(MT.Paper));
-		CR.shaped(plateTiny     .mat(MT.Paper           ,  9), CR.DEF_NAC, "q ", " X", 'X', plate.dat(MT.Paper));
+		CR.shaped(stick         .mat(MT.PetrifiedWood   ,  9), CR.DEF, "X" , "X" , 'X', rockGt.dat(MT.PetrifiedWood));
+		CR.shaped(plate         .mat(MT.PetrifiedWood   ,  9), CR.DEF, "XX", "XX", 'X', rockGt.dat(MT.PetrifiedWood));
+		CR.shaped(ST.make(Blocks.stone_slab          , 9,  2), CR.DEF, "XX"      , 'X', rockGt.dat(MT.PetrifiedWood));
+		CR.shaped(plateTiny     .mat(MT.Paper           ,  9), CR.DEF, "b ", " X", 'X', plate.dat(MT.Paper));
+		CR.shaped(plateTiny     .mat(MT.Paper           ,  9), CR.DEF, "q ", " X", 'X', plate.dat(MT.Paper));
 		for (OreDictMaterial tWax : ANY.Wax.mToThis) {
-		CR.shaped(ring          .mat(tWax               ,  1), CR.DEF_NAC, "k", "X", 'X', plate.dat(tWax));
-		CR.shaped(casingSmall   .mat(tWax               ,  1), CR.DEF_NAC, "X", "k", 'X', plate.dat(tWax));
+		CR.shaped(ring          .mat(tWax               ,  1), CR.DEF, "k", "X", 'X', plate.dat(tWax));
+		CR.shaped(casingSmall   .mat(tWax               ,  1), CR.DEF, "X", "k", 'X', plate.dat(tWax));
 		}
-		CR.shaped(ring          .mat(MT.Rubber          ,  1), CR.DEF_NAC, "k", "X", 'X', plate.dat(MT.Rubber));
-		CR.shaped(casingSmall   .mat(MT.Rubber          ,  1), CR.DEF_NAC, "X", "k", 'X', plate.dat(MT.Rubber));
-		CR.shaped(gearGt        .mat(MT.Stone           ,  1), CR.DEF_NAC, "SPS", "PfP", "SPS", 'P', stoneSmooth, 'S', OD.buttonStone);
-		CR.shaped(gearGt        .mat(MT.Stone           ,  1), CR.DEF_NAC, "SPS", "PfP", "SPS", 'P', stoneSmooth, 'S', rockGt.dat(MT.Stone));
-		CR.shaped(gearGt        .mat(MT.Stone           ,  1), CR.DEF_NAC, "SPS", "PfP", "SPS", 'P', stoneSmooth, 'S', stick.dat(MT.Stone));
-		CR.shaped(gearGtSmall   .mat(MT.Stone           ,  1), CR.DEF_NAC, "P ", " f", 'P', stoneSmooth);
+		CR.shaped(ring          .mat(MT.Rubber          ,  1), CR.DEF, "k", "X", 'X', plate.dat(MT.Rubber));
+		CR.shaped(casingSmall   .mat(MT.Rubber          ,  1), CR.DEF, "X", "k", 'X', plate.dat(MT.Rubber));
+		CR.shaped(gearGt        .mat(MT.Stone           ,  1), CR.DEF, "SPS", "PfP", "SPS", 'P', stoneSmooth, 'S', OD.buttonStone);
+		CR.shaped(gearGt        .mat(MT.Stone           ,  1), CR.DEF, "SPS", "PfP", "SPS", 'P', stoneSmooth, 'S', rockGt.dat(MT.Stone));
+		CR.shaped(gearGt        .mat(MT.Stone           ,  1), CR.DEF, "SPS", "PfP", "SPS", 'P', stoneSmooth, 'S', stick.dat(MT.Stone));
+		CR.shaped(gearGtSmall   .mat(MT.Stone           ,  1), CR.DEF, "P ", " f", 'P', stoneSmooth);
 		
 		for (OreDictMaterial tMat : OreDictMaterial.MATERIAL_MAP.values()) if (!tMat.containsAny(TD.Properties.INVALID_MATERIAL, TD.Compounds.COATED, TD.Properties.WOOD) && tMat.mTargetRegistration == tMat)
-		CR.shaped(gearGtSmall.mat(tMat, 1), CR.ONLY_IF_HAS_RESULT | CR.DEF_NAC_NCC, "P ", tMat.contains(TD.Properties.STONE)?" f":" h", 'P', plate.dat(tMat));
+		CR.shaped(gearGtSmall.mat(tMat, 1), CR.ONLY_IF_HAS_RESULT | CR.DEF_NCC, "P ", tMat.contains(TD.Properties.STONE)?" f":" h", 'P', plate.dat(tMat));
 		
 		
 		RM.Slicer           .addRecipe2(T, 16,   16, ST.make(Items.paper, 1, W), IL.Shape_Slicer_Grid.get(0), plateTiny.mat(MT.Paper, 9));
@@ -490,16 +454,13 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Kaolinite, U2), OM.dust(tMat, U4), OM.dust(MT.PotassiumFeldspar, U4)), OM.dust(MT.Porcelain     ));
 		}
 		for (OreDictMaterial tGlowstone : ANY.Glowstone.mToThis) {
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Stone          ), OM.dust(MT.Netherrack    ), OM.dust(MT.Redstone    ), OM.dust(tGlowstone   )), OM.dust(MT.ArcaneCompound, U2));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Stone      , U4), OM.dust(MT.Netherrack, U4), OM.dust(MT.Redstone, U4), OM.dust(tGlowstone,U4)), OM.dust(MT.ArcaneCompound, U8));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Stone      , U9), OM.dust(MT.Netherrack, U9), OM.dust(MT.Redstone, U9), OM.dust(tGlowstone,U9)), OM.dust(MT.ArcaneCompound, U18));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Gravel         ), OM.dust(MT.Netherrack    ), OM.dust(MT.Redstone    ), OM.dust(tGlowstone   )), OM.dust(MT.ArcaneCompound, U2));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Gravel     , U4), OM.dust(MT.Netherrack, U4), OM.dust(MT.Redstone, U4), OM.dust(tGlowstone,U4)), OM.dust(MT.ArcaneCompound, U8));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Gravel     , U9), OM.dust(MT.Netherrack, U9), OM.dust(MT.Redstone, U9), OM.dust(tGlowstone,U9)), OM.dust(MT.ArcaneCompound, U18));
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Stone        ), OM.dust(MT.Netherrack    ), OM.dust(MT.Redstone    ), OM.dust(tGlowstone   )), OM.dust(MT.ArcaneCompound, U2));
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Stone    , U4), OM.dust(MT.Netherrack, U4), OM.dust(MT.Redstone, U4), OM.dust(tGlowstone,U4)), OM.dust(MT.ArcaneCompound, U8));
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Stone    , U9), OM.dust(MT.Netherrack, U9), OM.dust(MT.Redstone, U9), OM.dust(tGlowstone,U9)), OM.dust(MT.ArcaneCompound, U18));
 		}
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Ag             ), OM.dust(MT.I    )), OM.dust(MT.AgI, 2*U  ));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Ag         , U4), OM.dust(MT.I, U4)), OM.dust(MT.AgI, 2* U4));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Ag         , U9), OM.dust(MT.I, U9)), OM.dust(MT.AgI, 2* U9));
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Ag           ), OM.dust(MT.I    )), OM.dust(MT.AgI, 2*U  ));
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Ag       , U4), OM.dust(MT.I, U4)), OM.dust(MT.AgI, 2* U4));
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Ag       , U9), OM.dust(MT.I, U9)), OM.dust(MT.AgI, 2* U9));
 		for (OreDictMaterial tMat : ANY.Quartz.mToThis) {ItemStack tDust = dust.mat(tMat, 1), tGem = gem.mat(tMat, 1);
 		if (ST.valid(tDust)) {
 		RM.Mixer            .addRecipe2(T, 16,   16, OM.dust(MT.C           ,U*2), tDust, OM.dust(MT.BlackQuartz));
@@ -526,12 +487,12 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Charcoal,  U9), OM.dust(tNiter,  U9), OM.dust(MT.S    ,   U9)), OM.dust(MT.Gunpowder, 2*U9));
 		for (OreDictMaterial tMat : ANY.SiO2.mToThis)
 		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Redstone     ), OM.dust(tNiter     ), OM.dust(MT.Blitz,   U9), OM.dust(tMat                )), OM.dust(MT.Aerotheum, 2*U));
-		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Redstone     ), OM.dust(tNiter     ), OM.dust(MT.Blitz,   U9), ST.make(Blocks.sand   , 1, W)), OM.dust(MT.Aerotheum, 2*U));
 		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Redstone     ), OM.dust(tNiter     ), OM.dust(MT.Blizz,   U9), ST.make(Items.snowball, 1, W)), OM.dust(MT.Cryotheum, 2*U));
 		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Redstone     ), OM.dust(tNiter     ), OM.dust(MT.Blizz,   U9), OM.dust(MT.Snow       ,   U4)), OM.dust(MT.Cryotheum, 2*U));
 		RM.Mixer            .addRecipeX(T, 16,   64, ST.array(OM.dust(MT.Redstone,4*U ), OM.dust(tNiter,4*U ), OM.dust(MT.Blizz, 4*U9), ST.make(Blocks.snow   , 1, W)), OM.dust(MT.Cryotheum, 8*U));
 		RM.Mixer            .addRecipeX(T, 16,   64, ST.array(OM.dust(MT.Redstone,4*U ), OM.dust(tNiter,4*U ), OM.dust(MT.Blizz, 4*U9), OM.dust(MT.Snow             )), OM.dust(MT.Cryotheum, 8*U));
 		}
+		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Redstone), OM.dust(MT.Coal), OM.dust(MT.S)), FL.Blaze.make(L), NF, OM.dust(MT.Pyrotheum, 2*U));
 		RM.Mixer            .addRecipeX(T, 16,   16, ST.array(OM.dust(MT.Redstone), OM.dust(MT.Blaze, U9), OM.dust(MT.Coal), OM.dust(MT.S)), OM.dust(MT.Pyrotheum, 2*U));
 		if (FL.Pyrotheum.exists() && FL.Cryotheum.exists() && FL.Petrotheum.exists() && FL.Aerotheum.exists() && FL.Mana_TE.exists())
 		RM.Mixer            .addRecipe0(T, 16,   16, FL.array(FL.Pyrotheum.make(1), FL.Cryotheum.make(1), FL.Petrotheum.make(1), FL.Aerotheum.make(1)), FL.array(FL.Mana_TE.make(4)), ZL_IS);
@@ -554,10 +515,10 @@ public class Loader_Recipes_Other implements Runnable {
 		
 		// Glass
 		for (int i = 0; i < 16; i++) {
-		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.Na2SO4     ), FL.array(FL.make("glass",  4000), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  1, T)), ZL_FS, ST.make(BlocksGT.Glass, 4, i));
-		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.Na2SO4,  U4), FL.array(FL.make("glass",  1000), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  4, T)), ZL_FS, ST.make(BlocksGT.Glass, 1, i));
-		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.K2SO4      ), FL.array(FL.make("glass",  4000), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  1, T)), ZL_FS, ST.make(BlocksGT.Glass, 4, i));
-		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.K2SO4 ,  U4), FL.array(FL.make("glass",  1000), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  4, T)), ZL_FS, ST.make(BlocksGT.Glass, 1, i));
+		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.Na2SO4     ), FL.array(MT.Glass.liquid(U*9*4, T), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  1, T)), ZL_FS, ST.make(BlocksGT.Glass, 4, i));
+		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.Na2SO4,  U4), FL.array(MT.Glass.liquid(U*9  , T), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  4, T)), ZL_FS, ST.make(BlocksGT.Glass, 1, i));
+		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.K2SO4      ), FL.array(MT.Glass.liquid(U*9*4, T), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  1, T)), ZL_FS, ST.make(BlocksGT.Glass, 4, i));
+		RM.Mixer            .addRecipe1(T, 16, 16, OM.dust(MT.K2SO4 ,  U4), FL.array(MT.Glass.liquid(U*9  , T), FL.mul(DYE_FLUIDS_CHEMICAL[i], 1,  4, T)), ZL_FS, ST.make(BlocksGT.Glass, 1, i));
 		
 		for (OreDictMaterial tMat : ANY.Glowstone.mToThis) {
 		RM.Injector         .addRecipe2(T, 16, 32, dust     .mat(tMat, 1), ST.make(BlocksGT.Glass, 1, i), ST.make(BlocksGT.GlowGlass, 1, i));
@@ -595,13 +556,19 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Lightning    .addRecipe2(T, 16, 2048, ST.tag(1), gem.mat(MT.CertusQuartz, 1), gem.mat(MT.ChargedCertusQuartz, 1));
 		
 		for (byte i = 0; i < 16; i++) {
-		RM.Press        .addRecipeX(T, 16,   16, ST.array(ST.tag(1), OM.dust(MT.Dynamite, U*1), plantGtFiber.mat(MT.DATA.Dye_Materials[15-i], 1)), IL.Dynamite.get(1));
-		RM.Press        .addRecipeX(T, 16,   64, ST.array(ST.tag(2), OM.dust(MT.Dynamite, U*2), plantGtFiber.mat(MT.DATA.Dye_Materials[15-i], 1)), IL.Dynamite_Strong.get(1));
+		for (OreDictMaterial tMat : ANY.SiO2.mToThis)
+		RM.Press        .addRecipeX(T, 16,   64, ST.array(OM.dust(tMat, U*2), OM.dust(MT.Gunpowder, U*2), plantGtFiber.mat(MT.DATA.Dye_Materials[15-i], 1)), IL.Boomstick      .get(1));
+		RM.Press        .addRecipeX(T, 16,   16, ST.array(ST         .tag(1), OM.dust(MT.Dynamite , U*1), plantGtFiber.mat(MT.DATA.Dye_Materials[15-i], 1)), IL.Dynamite       .get(1));
+		RM.Press        .addRecipeX(T, 16,   64, ST.array(ST         .tag(2), OM.dust(MT.Dynamite , U*2), plantGtFiber.mat(MT.DATA.Dye_Materials[15-i], 1)), IL.Dynamite_Strong.get(1));
 		}
-		RM.Press        .addRecipeX(T, 16,   16, ST.array(ST.tag(1), OM.dust(MT.Dynamite, U*1), plantGtFiber.mat(MT.Cu, 1)), IL.Dynamite.get(1));
-		RM.Press        .addRecipeX(T, 16,   64, ST.array(ST.tag(2), OM.dust(MT.Dynamite, U*2), plantGtFiber.mat(MT.Cu, 1)), IL.Dynamite_Strong.get(1));
-		RM.Press        .addRecipeX(T, 16,   16, ST.array(ST.tag(1), OM.dust(MT.Dynamite, U*1), ST.make(Items.string, 1, W)), IL.Dynamite.get(1));
-		RM.Press        .addRecipeX(T, 16,   64, ST.array(ST.tag(2), OM.dust(MT.Dynamite, U*2), ST.make(Items.string, 1, W)), IL.Dynamite_Strong.get(1));
+		for (OreDictMaterial tMat : ANY.SiO2.mToThis)
+		RM.Press        .addRecipeX(T, 16,   64, ST.array(OM.dust(tMat, U*2), OM.dust(MT.Gunpowder, U*2), plantGtFiber.mat(MT.Cu , 1)), IL.Boomstick      .get(1));
+		RM.Press        .addRecipeX(T, 16,   16, ST.array(ST         .tag(1), OM.dust(MT.Dynamite , U*1), plantGtFiber.mat(MT.Cu , 1)), IL.Dynamite       .get(1));
+		RM.Press        .addRecipeX(T, 16,   64, ST.array(ST         .tag(2), OM.dust(MT.Dynamite , U*2), plantGtFiber.mat(MT.Cu , 1)), IL.Dynamite_Strong.get(1));
+		for (OreDictMaterial tMat : ANY.SiO2.mToThis)
+		RM.Press        .addRecipeX(T, 16,   64, ST.array(OM.dust(tMat, U*2), OM.dust(MT.Gunpowder, U*2), ST.make(Items.string, 1, W)), IL.Boomstick      .get(1));
+		RM.Press        .addRecipeX(T, 16,   16, ST.array(ST         .tag(1), OM.dust(MT.Dynamite , U*1), ST.make(Items.string, 1, W)), IL.Dynamite       .get(1));
+		RM.Press        .addRecipeX(T, 16,   64, ST.array(ST         .tag(2), OM.dust(MT.Dynamite , U*2), ST.make(Items.string, 1, W)), IL.Dynamite_Strong.get(1));
 		
 		
 		
@@ -624,7 +591,7 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Drying       .addRecipe0(T, 16,   20, FL.mul(DYE_FLUIDS_FLOWER[i], 1, 6, T), FL.DistW.make(10), dustTiny.mat(MT.DATA.Dye_Materials[i], 1));
 		}
 		
-		RM.Centrifuge   .addRecipe0(T, 64,   16, MT.FishOil.liquid( U2, T), MT.Hg.liquid(U144, F), ZL_IS);
+		RM.Centrifuge   .addRecipe0(T, 64,   16, MT.FishOil.liquid( U2, T), MT.Hg.liquid(1, T), ZL_IS);
 		
 		RM.Coagulator   .addRecipe0(T,  0,  256, FL.Latex.make(L/9), NF, nugget.mat(MT.Rubber, 1));
 		
@@ -633,12 +600,10 @@ public class Loader_Recipes_Other implements Runnable {
 			RM.CrystallisationCrucible.addRecipe1(T, 16,  72000, OM.dust(MT.Ge             ,  U9), FL.array(       tFluid    , MT.Ge            .liquid(35*U9, T)), NF, bouleGt.mat(MT.Ge              , 1));
 			RM.CrystallisationCrucible.addRecipe1(T, 16,  72000, OM.dust(MT.RedstoneAlloy  ,  U9), FL.array(       tFluid    , MT.RedstoneAlloy .liquid(35*U9, T)), NF, bouleGt.mat(MT.RedstoneAlloy   , 1));
 			RM.CrystallisationCrucible.addRecipe1(T, 16,  72000, OM.dust(MT.NikolineAlloy  ,  U9), FL.array(       tFluid    , MT.NikolineAlloy .liquid(35*U9, T)), NF, bouleGt.mat(MT.NikolineAlloy   , 1));
-			RM.CrystallisationCrucible.addRecipe1(T, 16,  72000, OM.dust(MT.TeslatineAlloy ,  U9), FL.array(       tFluid    , MT.TeslatineAlloy.liquid(35*U9, T)), NF, bouleGt.mat(MT.TeslatineAlloy  , 1));
 			RM.CrystallisationCrucible.addRecipe1(T, 16, 648000, OM.dust(MT.Si                  ), FL.array(FL.mul(tFluid, 9), MT.Si            .liquid(35*U , T)), NF, bouleGt.mat(MT.Si              , 9));
 			RM.CrystallisationCrucible.addRecipe1(T, 16, 648000, OM.dust(MT.Ge                  ), FL.array(FL.mul(tFluid, 9), MT.Ge            .liquid(35*U , T)), NF, bouleGt.mat(MT.Ge              , 9));
 			RM.CrystallisationCrucible.addRecipe1(T, 16, 648000, OM.dust(MT.RedstoneAlloy       ), FL.array(FL.mul(tFluid, 9), MT.RedstoneAlloy .liquid(35*U , T)), NF, bouleGt.mat(MT.RedstoneAlloy   , 9));
 			RM.CrystallisationCrucible.addRecipe1(T, 16, 648000, OM.dust(MT.NikolineAlloy       ), FL.array(FL.mul(tFluid, 9), MT.NikolineAlloy .liquid(35*U , T)), NF, bouleGt.mat(MT.NikolineAlloy   , 9));
-			RM.CrystallisationCrucible.addRecipe1(T, 16, 648000, OM.dust(MT.TeslatineAlloy      ), FL.array(FL.mul(tFluid, 9), MT.TeslatineAlloy.liquid(35*U , T)), NF, bouleGt.mat(MT.TeslatineAlloy  , 9));
 			
 			RM.CrystallisationCrucible.addRecipe1(T,256,  18000, OM.dust(MT.Al2O3          ,  U9), FL.array(       tFluid    , MT.Al2O3         .liquid(29*U9, T)), NF, bouleGt.mat(MT.Sapphire        , 1));
 			RM.CrystallisationCrucible.addRecipe1(T,256, 156000, OM.dust(MT.Al2O3               ), FL.array(FL.mul(tFluid, 9), MT.Al2O3         .liquid(29*U , T)), NF, bouleGt.mat(MT.Sapphire        , 9));
@@ -657,7 +622,7 @@ public class Loader_Recipes_Other implements Runnable {
 			RM.CrystallisationCrucible.addRecipe1(T,256,  52000, OM.dust(MT.Cr             ,2*U ), FL.array(FL.mul(tFluid, 3), MT.Al2O3         .liquid(10*U , T)), NF, bouleGt.mat(MT.Ruby            , 3));
 		}
 		
-		for (ItemStack tTNT : ST.array(ST.make(Blocks.tnt, 8, W), IL.IC2_ITNT.get(4), IL.Dynamite.get(2), IL.Dynamite_Strong.get(1))) if (ST.valid(tTNT)) {
+		for (ItemStack tTNT : ST.array(ST.make(Blocks.tnt, 8, W), IL.IC2_ITNT.get(4), IL.Boomstick.get(12), IL.Dynamite.get(2), IL.Dynamite_Strong.get(1))) if (ST.valid(tTNT)) {
 			for (OreDictMaterial tMat : ANY.Diamond.mToThis) {OreDictMaterial tOutput = MT.DiamondIndustrial;
 				RM.ImplosionCompressor.addRecipeX(T,  0,  256, ST.array(dust.mat(tMat, 1),           tTNT , ST.tag(0)), plateGem    .mat(tOutput, 1));
 				RM.ImplosionCompressor.addRecipeX(T,  0,  256, ST.array(dust.mat(tMat, 1),           tTNT , ST.tag(1)), gem         .mat(tOutput, 1));
@@ -719,29 +684,44 @@ public class Loader_Recipes_Other implements Runnable {
 		RM.Loom    .addRecipe2(T, 16,   16, ST.tag(10), plantGtFiber.mat(MT.Cu, 4), IL.Rope.get(1));
 		RM.Loom    .addRecipe2(T, 16,   16, ST.tag(10), ST.make(Items.string, 4, W), IL.Rope_Silk.get(1));
 		
+		RM.CokeOven.addRecipe1(T,  0,  3600, gem                   .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U2, F), gem       .mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, nugget                .mat(MT.Coal    , 9), NF, MT.Creosote.liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, chunkGt               .mat(MT.Coal    , 4), NF, MT.Creosote.liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, ingot                 .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
-		RM.CokeOven.addRecipe1(T,  0,  3600, gem                   .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U2, F), gem       .mat(MT.CoalCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0,  7200, oreRaw                .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U , F), ingot     .mat(MT.CoalCoke, 2));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushed               .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedTiny           .mat(MT.Coal    , 9), NF, MT.Creosote.liquid(   U2, F), ingot     .mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedPurified       .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedPurifiedTiny   .mat(MT.Coal    , 9), NF, MT.Creosote.liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedCentrifuged    .mat(MT.Coal    , 1), NF, MT.Creosote.liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedCentrifugedTiny.mat(MT.Coal    , 9), NF, MT.Creosote.liquid(   U2, F), chunkGt   .mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1), chunkGt.mat(MT.CoalCoke, 1));
-		RM.CokeOven.addRecipe1(T,  0, 32400, blockGem              .mat(MT.Coal    , 1), NF, MT.Creosote.liquid( 9*U2, F), blockGem  .mat(MT.CoalCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0, 32400, blockRaw              .mat(MT.Coal    , 1), NF, MT.Creosote.liquid( 9*U , F), blockIngot.mat(MT.CoalCoke, 2));
 		RM.CokeOven.addRecipe1(T,  0, 32400, blockIngot            .mat(MT.Coal    , 1), NF, MT.Creosote.liquid( 9*U2, F), blockIngot.mat(MT.CoalCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0, 32400, blockGem              .mat(MT.Coal    , 1), NF, MT.Creosote.liquid( 9*U2, F), blockGem  .mat(MT.CoalCoke, 1));
 		
+		RM.CokeOven.addRecipe1(T,  0,  3600, gem                   .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U4, F), gem       .mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, nugget                .mat(MT.Lignite , 9), NF, MT.Creosote.liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, chunkGt               .mat(MT.Lignite , 4), NF, MT.Creosote.liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, ingot                 .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
-		RM.CokeOven.addRecipe1(T,  0,  3600, gem                   .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U4, F), gem       .mat(MT.LigniteCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0,  7200, oreRaw                .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U2, F), ingot     .mat(MT.LigniteCoke, 2));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushed               .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedTiny           .mat(MT.Lignite , 9), NF, MT.Creosote.liquid( 3*U4, F), ingot     .mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedPurified       .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedPurifiedTiny   .mat(MT.Lignite , 9), NF, MT.Creosote.liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedCentrifuged    .mat(MT.Lignite , 1), NF, MT.Creosote.liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1));
 		RM.CokeOven.addRecipe1(T,  0,  3600, crushedCentrifugedTiny.mat(MT.Lignite , 9), NF, MT.Creosote.liquid( 3*U4, F), chunkGt   .mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1), chunkGt.mat(MT.LigniteCoke, 1));
-		RM.CokeOven.addRecipe1(T,  0, 32400, blockGem              .mat(MT.Lignite , 1), NF, MT.Creosote.liquid(27*U4, F), blockGem  .mat(MT.LigniteCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0, 32400, blockRaw              .mat(MT.Lignite , 1), NF, MT.Creosote.liquid(27*U2, F), blockIngot.mat(MT.LigniteCoke, 2));
 		RM.CokeOven.addRecipe1(T,  0, 32400, blockIngot            .mat(MT.Lignite , 1), NF, MT.Creosote.liquid(27*U4, F), blockIngot.mat(MT.LigniteCoke, 1));
+		RM.CokeOven.addRecipe1(T,  0, 32400, blockGem              .mat(MT.Lignite , 1), NF, MT.Creosote.liquid(27*U4, F), blockGem  .mat(MT.LigniteCoke, 1));
 		
 		RM.CokeOven.addRecipe1(T,  0,  3600, dust                  .mat(MT.Oilshale, 1), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
+		RM.CokeOven.addRecipe1(T,  0,  7200, oreRaw                .mat(MT.Oilshale, 1), NF, MT.Oil     .liquid(  U20, F), dustTiny  .mat(MT.Asphalt, 2));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushed               .mat(MT.Oilshale, 1), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedTiny           .mat(MT.Oilshale, 9), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedPurified       .mat(MT.Oilshale, 1), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedPurifiedTiny   .mat(MT.Oilshale, 9), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedCentrifuged    .mat(MT.Oilshale, 1), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
+		RM.CokeOven.addRecipe1(T,  0,  3600, crushedCentrifugedTiny.mat(MT.Oilshale, 9), NF, MT.Oil     .liquid(  U40, F), dustTiny  .mat(MT.Asphalt, 1));
 		RM.CokeOven.addRecipe1(T,  0, 32400, blockDust             .mat(MT.Oilshale, 1), NF, MT.Oil     .liquid(9*U40, F), dust      .mat(MT.Asphalt, 1));
 		
 		

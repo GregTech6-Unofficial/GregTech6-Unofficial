@@ -24,8 +24,12 @@ import static gregapi.data.CS.*;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.cricketcraft.chisel.api.carving.CarvingUtils;
+
 import appeng.api.AEApi;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import ganymedes01.etfuturum.recipes.BlastFurnaceRecipes;
+import ganymedes01.etfuturum.recipes.SmokerRecipes;
 import gregapi.code.ArrayListNoNulls;
 import gregapi.code.IItemContainer;
 import gregapi.config.ConfigCategories;
@@ -41,11 +45,13 @@ import gregapi.util.CR;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.UT;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
+import team.chisel.carving.Carving;
 
 /**
  * @author Gregorius Techneticies
@@ -78,7 +84,7 @@ public class RM {
 	, Hammer                    = new RecipeMapHammer               (null, "gt.recipe.hammer"                       , "Hammer"                          , null, 6, 3, RES_PATH_GUI+"machines/Hammer"                    ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, F, T, T, F, T, T)
 	, Chisel                    = new RecipeMapChisel               (null, "gt.recipe.chisel"                       , "Chisel"                          , null, 0, 1, RES_PATH_GUI+"machines/Chisel"                    ,/*IN-OUT-MIN-ITEM=*/ 1, 1, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, F, T, T, F, T, T)
 	, Shredder                  = new RecipeMapShredder             (null, "gt.recipe.shredder"                     , "Shredder"                        , null, 0, 1, RES_PATH_GUI+"machines/Shredder"                  ,/*IN-OUT-MIN-ITEM=*/ 1, 6, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
-	, Crusher                   = new RecipeMap                     (null, "gt.recipe.crusher"                      , "Crusher"                         , null, 0, 1, RES_PATH_GUI+"machines/Crusher"                   ,/*IN-OUT-MIN-ITEM=*/ 1, 6, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
+	, Crusher                   = new RecipeMap                     (null, "gt.recipe.crusher"                      , "Crusher"                         , null, 0, 1, RES_PATH_GUI+"machines/Crusher"                   ,/*IN-OUT-MIN-ITEM=*/ 1,12, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
 	, Lathe                     = new RecipeMap                     (null, "gt.recipe.lathe"                        , "Lathe"                           , null, 0, 1, RES_PATH_GUI+"machines/Lathe"                     ,/*IN-OUT-MIN-ITEM=*/ 1, 2, 1,/*IN-OUT-MIN-FLUID=*/ 0, 0, 0,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
 	, Cutter                    = new RecipeMap                     (null, "gt.recipe.cutter"                       , "Cutter"                          , null, 0, 1, RES_PATH_GUI+"machines/Cutter"                    ,/*IN-OUT-MIN-ITEM=*/ 1, 3, 1,/*IN-OUT-MIN-FLUID=*/ 1, 0, 1,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
 	, Debarker                  = new RecipeMap                     (null, "gt.recipe.debarker"                     , "Debarker"                        , null, 0, 1, RES_PATH_GUI+"machines/Debarker"                  ,/*IN-OUT-MIN-ITEM=*/ 1, 2, 1,/*IN-OUT-MIN-FLUID=*/ 1, 0, 1,/*MIN*/ 0,/*AMP=*/ 1, ""                    ,    1, ""      , T, T, T, T, F, T, T)
@@ -191,8 +197,8 @@ public class RM {
 	}
 	public static boolean boxunbox(ItemStack aEmpty, ItemStack aFull, ItemStack aContent) {
 		if (ST.invalid(aEmpty) || ST.invalid(aFull) || ST.invalid(aContent)) return F;
-		Boxinator  .addRecipe2(T, 16, 16, aContent, aEmpty, aFull);
 		Unboxinator.addRecipe1(T, 16, 16, aFull, aContent, aEmpty);
+		Boxinator  .addRecipe2(T, 16, 16, aContent, aEmpty, aFull);
 		return T;
 	}
 	
@@ -380,43 +386,105 @@ public class RM {
 	public static boolean add_smelting(ItemStack aInput, ItemStack aOutput, boolean aRemoveOthers) {
 		return add_smelting(aInput, aOutput, 0, aRemoveOthers);
 	}
+	public static boolean add_smelting(ItemStack aInput, ItemStack aOutput, boolean aRemoveOthers, boolean aSmoker, boolean aBlast) {
+		return add_smelting(aInput, aOutput, 0, aRemoveOthers, aSmoker, aBlast);
+	}
 	public static boolean add_smelting(ItemStack aInput, ItemStack aOutput, float aEXP) {
 		return add_smelting(aInput, aOutput, aEXP, T);
 	}
 	public static boolean add_smelting(ItemStack aInput, ItemStack aOutput, float aEXP, boolean aRemoveOthers) {
+		return add_smelting(aInput, aOutput, aEXP, aRemoveOthers, F, F);
+	}
+	public static boolean add_smelting(ItemStack aInput, ItemStack aOutput, float aEXP, boolean aRemoveOthers, boolean aSmoker, boolean aBlast) {
 		if (ST.invalid(aInput) || ST.invalid(aOutput)) return F;
 		if (aRemoveOthers) rem_smelting(aInput);
 		aOutput = OM.get_(aOutput);
 		if (ST.container(aInput, F) != null || ST.equal_(aInput, aOutput, F) || !ConfigsGT.RECIPES.get(ConfigCategories.Machines.smelting, aInput, T)) return F;
 		FurnaceRecipes.smelting().func_151394_a(aInput, ST.copy_(aOutput), aEXP);
+		if (MD.EtFu.mLoaded) try {
+			if (aSmoker) SmokerRecipes      .smelting().addRecipe(aInput, ST.copy_(aOutput), aEXP);
+			if (aBlast ) BlastFurnaceRecipes.smelting().addRecipe(aInput, ST.copy_(aOutput), aEXP);
+		} catch(Throwable e) {e.printStackTrace(ERR);}
 		return T;
 	}
+	@SuppressWarnings("unchecked")
 	public static boolean rem_smelting(ItemStack aInput) {
 		if (ST.invalid(aInput)) return F;
 		ItemStack tPyrotheum = OP.dust.mat(MT.Pyrotheum, 1);
 		if (ST.valid(tPyrotheum)) CR.remove(aInput, tPyrotheum);
-		@SuppressWarnings("unchecked")
+		boolean rReturn = F;
 		Iterator<Entry<ItemStack, ItemStack>> tIterator = FurnaceRecipes.smelting().getSmeltingList().entrySet().iterator();
-		boolean temp = F;
 		while (tIterator.hasNext()) if (ST.equal(aInput, tIterator.next().getKey(), T)) {
 			tIterator.remove();
-			temp = T;
+			rReturn = T;
 		}
-		return temp;
+		if (MD.EtFu.mLoaded) try {
+			tIterator = SmokerRecipes.smelting().getSmeltingList().entrySet().iterator();
+			while (tIterator.hasNext()) if (ST.equal(aInput, tIterator.next().getKey(), T)) {
+				tIterator.remove();
+				rReturn = T;
+			}
+			tIterator = BlastFurnaceRecipes.smelting().getSmeltingList().entrySet().iterator();
+			while (tIterator.hasNext()) if (ST.equal(aInput, tIterator.next().getKey(), T)) {
+				tIterator.remove();
+				rReturn = T;
+			}
+		} catch(Throwable e) {e.printStackTrace(ERR);}
+		return rReturn;
 	}
+	@SuppressWarnings("unchecked")
 	public static boolean rem_smelting(ItemStack aInput, ItemStack aOutput) {
 		if (ST.invalid(aInput) || ST.invalid(aOutput)) return F;
-		@SuppressWarnings("unchecked")
+		boolean rReturn = F;
 		Iterator<Entry<ItemStack, ItemStack>> tIterator = FurnaceRecipes.smelting().getSmeltingList().entrySet().iterator();
-		boolean temp = F;
 		while (tIterator.hasNext()) {
 			Entry<ItemStack, ItemStack> tEntry = tIterator.next();
 			if (ST.equal(aInput, tEntry.getKey(), T) && ST.equal(aOutput, tEntry.getValue(), T)) {
 				tIterator.remove();
-				temp = T;
+				rReturn = T;
 			}
 		}
-		return temp;
+		if (MD.EtFu.mLoaded) try {
+			tIterator = SmokerRecipes.smelting().getSmeltingList().entrySet().iterator();
+			while (tIterator.hasNext()) {
+				Entry<ItemStack, ItemStack> tEntry = tIterator.next();
+				if (ST.equal(aInput, tEntry.getKey(), T) && ST.equal(aOutput, tEntry.getValue(), T)) {
+					tIterator.remove();
+					rReturn = T;
+				}
+			}
+			tIterator = BlastFurnaceRecipes.smelting().getSmeltingList().entrySet().iterator();
+			while (tIterator.hasNext()) {
+				Entry<ItemStack, ItemStack> tEntry = tIterator.next();
+				if (ST.equal(aInput, tEntry.getKey(), T) && ST.equal(aOutput, tEntry.getValue(), T)) {
+					tIterator.remove();
+					rReturn = T;
+				}
+			}
+		} catch(Throwable e) {e.printStackTrace(ERR);}
+		return rReturn;
+	}
+	
+	public static boolean chisel(String aName, ItemStack... aStacks) {
+		if (!MD.CHSL.mLoaded || UT.Code.stringInvalid(aName) || aStacks == null || aStacks.length < 1 || ST.invalid(aStacks[0])) return F;
+		try {
+			boolean temp = T;
+			for (int i = 0; i < aStacks.length; i++) if (ST.valid(aStacks[i])) {
+				Block tBlock = ST.block_(aStacks[i]);
+				if (tBlock == NB) continue;
+				short tMeta = ST.meta_(aStacks[i]);
+				if (tMeta == W) {
+					if (temp) {Carving.chisel.addGroup(CarvingUtils.getDefaultGroupFor(aName)); temp = F;}
+					for (int j = 0; j < 16; j++)
+					Carving.chisel.getGroup(aName).addVariation(CarvingUtils.getDefaultVariationFor(tBlock, j, i*16+j));
+				} else if (UT.Code.inside(0, 15, tMeta)) {
+					if (temp) {Carving.chisel.addGroup(CarvingUtils.getDefaultGroupFor(aName)); temp = F;}
+					Carving.chisel.getGroup(aName).addVariation(CarvingUtils.getDefaultVariationFor(tBlock, tMeta, i*16));
+				}
+			}
+			return T;
+		} catch(Throwable e) {e.printStackTrace(ERR);}
+		return F;
 	}
 	
 	public static boolean ae_grinder(int aTurns, ItemStack aInput, ItemStack aOutput) {if (MD.AE.mLoaded && ST.valid(aInput) && ST.valid(aOutput)) try {AEApi.instance().registries().grinder().addRecipe(ST.copy_(aInput), ST.copy_(aOutput), Math.max(1, aTurns)); return T;} catch(Throwable e) {e.printStackTrace(ERR);} return F;}

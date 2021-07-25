@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -91,6 +91,16 @@ public class MultiTileEntitySafeKeyLocked extends MultiTileEntitySafe implements
 	}
 	
 	@Override
+	public boolean canCloneKey(EntityPlayer aPlayer, byte aSide, float hitX, float hitY, float hitZ) {
+		return mOpened && mID != 0;
+	}
+	
+	@Override
+	public long getKeyID() {
+		return mID;
+	}
+	
+	@Override
 	public IPacket getClientDataPacket(boolean aSendAll) {
 		return aSendAll ? getClientDataPacketByteArray(aSendAll, (byte)UT.Code.getR(mRGBa), (byte)UT.Code.getG(mRGBa), (byte)UT.Code.getB(mRGBa), getDirectionData(), getVisualData()) : getClientDataPacketByte(aSendAll, getVisualData());
 	}
@@ -109,7 +119,7 @@ public class MultiTileEntitySafeKeyLocked extends MultiTileEntitySafe implements
 	@Override
 	public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {
 		if (!aShouldSideBeRendered[aSide]) return null;
-		int aIndex = aSide==mFacing?0:aSide==OPPOSITES[mFacing]?1:2;
+		int aIndex = aSide==mFacing?0:aSide==OPOS[mFacing]?1:2;
 		return BlockTextureMulti.get(BlockTextureDefault.get((mOpened?sColoredsOpen:sColoreds)[aIndex], mRGBa, mMaterial.contains(TD.Properties.GLOWING)), BlockTextureDefault.get((mOpened?sOverlaysOpen:sOverlays)[aIndex]));
 	}
 	

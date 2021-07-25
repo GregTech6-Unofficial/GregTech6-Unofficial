@@ -28,7 +28,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregapi.code.ModData;
 import gregapi.data.ANY;
-import gregapi.data.CS.BlocksGT;
 import gregapi.data.LH;
 import gregapi.data.MT;
 import gregapi.data.OP;
@@ -109,9 +108,8 @@ public class PrefixItem extends Item implements Runnable, IItemUpdatable, IPrefi
 	@Override
 	public void run() {
 		boolean tUnificationAllowed = (mPrefix.contains(TD.Prefix.UNIFICATABLE) && !mPrefix.contains(TD.Prefix.UNIFICATABLE_RECIPES));
-		for (short i = 0; i < mMaterialList.length; i++) if (mMaterialList[i] != null && mPrefix.isGeneratingItem(mMaterialList[i])) {
-			ItemStack tStack = ST.make(this, 1, i);
-			ST.update_(tStack);
+		for (short i = 0; i < mMaterialList.length; i++) if (mPrefix.isGeneratingItem(mMaterialList[i])) {
+			ItemStack tStack = ST.update_(ST.make(this, 1, i));
 			LH.add("oredict." + mPrefix.dat(mMaterialList[i]).toString() + ".name", getLocalName(mPrefix, mMaterialList[i]));
 			if (tUnificationAllowed) OreDictManager.INSTANCE.addTarget_(mPrefix, mMaterialList[i], tStack); else OreDictManager.INSTANCE.registerOre_(mPrefix, mMaterialList[i], tStack);
 		}
@@ -120,7 +118,7 @@ public class PrefixItem extends Item implements Runnable, IItemUpdatable, IPrefi
 	@Override
 	@SuppressWarnings("unchecked")
 	public void getSubItems(Item var1, CreativeTabs aCreativeTab, @SuppressWarnings("rawtypes") List aList) {
-		if ((SHOW_HIDDEN_PREFIXES || !mPrefix.contains(TD.Creative.HIDDEN)) && (SHOW_ORE_BLOCK_PREFIXES || this == BlocksGT.ore || !mPrefix.contains(TD.Prefix.ORE))) for (int i = 0; i < mMaterialList.length; i++) if (mPrefix.isGeneratingItem(mMaterialList[i])) if (SHOW_HIDDEN_MATERIALS || !mMaterialList[i].mHidden) {
+		if ((SHOW_HIDDEN_PREFIXES || !mPrefix.contains(TD.Creative.HIDDEN))) for (int i = 0; i < mMaterialList.length; i++) if (mPrefix.isGeneratingItem(mMaterialList[i])) if (SHOW_HIDDEN_MATERIALS || !mMaterialList[i].mHidden) {
 			ItemStack tStack = OM.get_(ST.make(this, 1, i));
 			if (tStack.getItem() == this) {
 				updateItemStack(tStack);
@@ -201,7 +199,6 @@ public class PrefixItem extends Item implements Runnable, IItemUpdatable, IPrefi
 	@Override public String toString() {return mNameInternal;}
 	@Override public final String getUnlocalizedName() {return mNameInternal;}
 	@Override public final Item setUnlocalizedName(String aName) {return this;}
-	@Override public void addInformation(ItemStack aStack, EntityPlayer aPlayer, @SuppressWarnings("rawtypes") List aList, boolean aF3_H) {/**/}
 	@Override public final boolean hasContainerItem(ItemStack aStack) {return getContainerItem(aStack) != null;}
 	@Override public boolean doesContainerItemLeaveCraftingGrid(ItemStack aStack) {return F;}
 	@Override public void onCreated(ItemStack aStack, World aWorld, EntityPlayer aPlayer) {updateItemStack(aStack);}
@@ -214,6 +211,7 @@ public class PrefixItem extends Item implements Runnable, IItemUpdatable, IPrefi
 	@Override public OreDictPrefix getPrefix(int aMetaData) {return mPrefix;}
 	@Override @SuppressWarnings("deprecation") public boolean hasEffect(ItemStack aStack) {return F;}
 	@Override public boolean hasEffect(ItemStack aStack, int aRenderPass) {return F;}
+	@Override public void addInformation(ItemStack aStack, EntityPlayer aPlayer, @SuppressWarnings("rawtypes") List aList, boolean aF3_H) {while (aList.remove(null));}
 	
 	/*
 	@Override @Optional.Method(modid = ModIDs.TC) public void setAspects(ItemStack aStack, AspectList aAspectList) {}

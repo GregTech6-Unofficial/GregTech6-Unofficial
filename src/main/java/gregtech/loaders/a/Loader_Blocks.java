@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -97,13 +97,15 @@ public class Loader_Blocks implements Runnable {
 		
 		
 		BlocksGT.Spikes_Sharp                                                   = new BlockSpikeSharp           ("gt.block.spikes.sharp");
+		BlocksGT.Spikes_Steel                                                   = new BlockSpikeSteel           ("gt.block.spikes.steel");
 		BlocksGT.Spikes_Super                                                   = new BlockSpikeSuper           ("gt.block.spikes.super");
 		BlocksGT.Spikes_Metal                                                   = new BlockSpikeMetal           ("gt.block.spikes.metal");
 		BlocksGT.Spikes_Fancy                                                   = new BlockSpikeFancy           ("gt.block.spikes.fancy");
-		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Sharp, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.METALLUM, 4));
-		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Super, 1, W), F, TC.stack(TC.VINCULUM, 8), TC.stack(TC.METALLUM, 4));
-		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Metal, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.VENENUM, 4));
-		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Fancy, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.LUCRUM, 4));
+		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Sharp, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.METALLUM, 4), TC.stack(TC.TELUM, 4));
+		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Steel, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.METALLUM, 4), TC.stack(TC.TELUM, 4));
+		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Super, 1, W), F, TC.stack(TC.VINCULUM, 8), TC.stack(TC.METALLUM, 4), TC.stack(TC.FABRICO, 4));
+		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Metal, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.METALLUM, 4), TC.stack(TC.VENENUM, 4));
+		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.Spikes_Fancy, 1, W), F, TC.stack(TC.VINCULUM, 4), TC.stack(TC.METALLUM, 4), TC.stack(TC.LUCRUM, 4));
 		
 		
 		BlocksGT.Bars_Wood                                                      = new BlockBarsWood             ("gt.block.bars.wood");
@@ -142,11 +144,11 @@ public class Loader_Blocks implements Runnable {
 		tNBTList.appendTag(new NBTTagString(ST.regName(BlocksGT.Ocean)));
 		FMLInterModComms.sendMessage(MD.IC2C.mID, "watergen", UT.NBT.make("blocks", tNBTList));
 		
-		BlocksGT.OilExtraHeavy                                                  = new BlockBaseFluid            ("gt.block.fluid.oil.extraheavy"    , FL.Oil_ExtraHeavy.fluid(), 1000, MaterialOil.instance).addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1).setWeb();
-		BlocksGT.OilHeavy                                                       = new BlockBaseFluid            ("gt.block.fluid.oil.heavy"         , FL.Oil_Heavy     .fluid(), 1000, MaterialOil.instance).addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1).setWeb();
-		BlocksGT.OilMedium                                                      = new BlockBaseFluid            ("gt.block.fluid.oil.medium"        , FL.Oil_Medium    .fluid(), 1000, MaterialOil.instance).addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1);
-		BlocksGT.OilLight                                                       = new BlockBaseFluid            ("gt.block.fluid.oil.light"         , FL.Oil_Light     .fluid(), 1000, MaterialOil.instance).addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1);
-		BlocksGT.GasNatural                                                     = new BlockBaseFluid            ("gt.block.fluid.gas.natural"       , FL.Gas_Natural   .fluid(), 1000, MaterialGas.instance).addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0);
+		BlocksGT.OilExtraHeavy                                                  = new BlockBaseFluid            ("gt.block.fluid.oil.extraheavy"    , FL.Oil_ExtraHeavy.fluid(), 1000, MaterialOil.instance).setLighterThanWater().addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1).setWeb();
+		BlocksGT.OilHeavy                                                       = new BlockBaseFluid            ("gt.block.fluid.oil.heavy"         , FL.Oil_Heavy     .fluid(), 1000, MaterialOil.instance).setLighterThanWater().addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1).setWeb();
+		BlocksGT.OilMedium                                                      = new BlockBaseFluid            ("gt.block.fluid.oil.medium"        , FL.Oil_Medium    .fluid(), 1000, MaterialOil.instance).setLighterThanWater().addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1);
+		BlocksGT.OilLight                                                       = new BlockBaseFluid            ("gt.block.fluid.oil.light"         , FL.Oil_Light     .fluid(), 1000, MaterialOil.instance).setLighterThanWater().addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0).addEffect(Potion.blindness.id, 60, 1);
+		BlocksGT.GasNatural                                                     = new BlockBaseFluid            ("gt.block.fluid.gas.natural"       , FL.Gas_Natural   .fluid(), 1000, MaterialGas.instance).setLighterThanWater().addEffect(Potion.poison.id, 300, 0).addEffect(Potion.confusion.id, 120, 0);
 		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.OilExtraHeavy , 1, W), F, TC.stack(TC.AQUA, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.POTENTIA, 3));
 		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.OilHeavy      , 1, W), F, TC.stack(TC.AQUA, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.POTENTIA, 2));
 		if (COMPAT_TC != null) COMPAT_TC.registerThaumcraftAspectsToItem(ST.make(BlocksGT.OilMedium     , 1, W), F, TC.stack(TC.AQUA, 1), TC.stack(TC.IGNIS, 1), TC.stack(TC.POTENTIA, 1));

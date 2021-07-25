@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -23,7 +23,6 @@ import static gregapi.data.CS.*;
 
 import java.net.URL;
 import java.util.EnumSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -32,8 +31,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
 import gregapi.GT_API;
 import gregapi.api.Abstract_Mod;
@@ -63,13 +60,19 @@ import gregapi.util.UT;
 import gregapi.util.WD;
 import gregtech.blocks.fluids.BlockWaterlike;
 import gregtech.entities.Override_Drops;
+import gregtech.entities.ai.EntityAIBetterAttackOnCollide;
 import gregtech.entities.projectiles.EntityArrow_Material;
 import gregtech.tileentity.misc.MultiTileEntityCertificate;
 import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -79,7 +82,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -90,6 +92,7 @@ import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
+import net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate;
 import net.minecraftforge.fluids.Fluid;
 
 public abstract class GT_Proxy extends Abstract_Proxy {
@@ -98,7 +101,7 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 	
 	public String mMessage = Strings.EMPTY;
 	
-	public boolean mDisableVanillaOres = T, mVersionOutdated = F;
+	public boolean mDisableVanillaOres = T, mDisableVanillaLakes = T, mVersionOutdated = F;
 	public int mSkeletonsShootGTArrows = 16, mFlintChance = 30;
 	
 	public GT_Proxy() {
@@ -166,7 +169,7 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 			while (tScanner.hasNextLine()) rList.add(aLowercase ? tScanner.nextLine().toLowerCase() : tScanner.nextLine());
 			tScanner.close();
 			for (String tLine : rList) if (tLine.contains("a href")) {
-				OUT.println("GT_DL_Thread: Your Internet Connection has Issues, you should probably go check that your ISP or Network don't do stupid Stuff.");
+				ERR.println("GT_DL_Thread: Your Internet Connection has Issues, you should probably go check that your ISP or Network don't do stupid Stuff.");
 				return new ArrayListNoNulls<>();
 			}
 			return rList;
@@ -199,25 +202,26 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 				String tClassName = UT.Reflection.getLowercaseClass(aEvent.world.provider.terrainType);
 				if ("WorldProviderSurfaceRTG".equalsIgnoreCase(tClassName) || "WorldTypeRTG".equalsIgnoreCase(tClassName)) return;
 			}
-			if (GENERATE_STREETS && (UT.Code.inside(-48, 47, aEvent.chunkX) || UT.Code.inside(-48, 47, aEvent.chunkZ))) aEvent.setResult(Result.DENY);
-			if (GENERATE_BIOMES  && (UT.Code.inside(-96, 95, aEvent.chunkX) && UT.Code.inside(-96, 95, aEvent.chunkZ))) aEvent.setResult(Result.DENY);
+			if (GENERATE_STREETS && (UT.Code.inside(-48, 47, aEvent.chunkX) || UT.Code.inside(-48, 47, aEvent.chunkZ))) {aEvent.setResult(Result.DENY); return;}
+			if (GENERATE_BIOMES  && (UT.Code.inside(-96, 95, aEvent.chunkX) && UT.Code.inside(-96, 95, aEvent.chunkZ))) {aEvent.setResult(Result.DENY); return;}
 		}
 	}
 	@SubscribeEvent
 	public void onTerrainGenEvent(PopulateChunkEvent.Populate aEvent) {
 		if (aEvent.world.provider.dimensionId == 0) {
+			if (mDisableVanillaLakes && (aEvent.type == Populate.EventType.LAKE || aEvent.type == Populate.EventType.LAVA)) {aEvent.setResult(Result.DENY); return;}
 			if (MD.RTG.mLoaded) {
 				String tClassName = UT.Reflection.getLowercaseClass(aEvent.world.provider.terrainType);
 				if ("WorldProviderSurfaceRTG".equalsIgnoreCase(tClassName) || "WorldTypeRTG".equalsIgnoreCase(tClassName)) return;
 			}
-			if (GENERATE_STREETS && (UT.Code.inside(-48, 47, aEvent.chunkX) || UT.Code.inside(-48, 47, aEvent.chunkZ))) aEvent.setResult(Result.DENY);
-			if (GENERATE_BIOMES  && (UT.Code.inside(-96, 95, aEvent.chunkX) && UT.Code.inside(-96, 95, aEvent.chunkZ))) aEvent.setResult(Result.DENY);
+			if (GENERATE_STREETS && (UT.Code.inside(-48, 47, aEvent.chunkX) || UT.Code.inside(-48, 47, aEvent.chunkZ))) {aEvent.setResult(Result.DENY); return;}
+			if (GENERATE_BIOMES  && (UT.Code.inside(-96, 95, aEvent.chunkX) && UT.Code.inside(-96, 95, aEvent.chunkZ))) {aEvent.setResult(Result.DENY); return;}
 		}
 	}
 	@SubscribeEvent
 	public void onGetVillageBlockIDEvent(BiomeEvent.GetVillageBlockID aEvent) {
 		if (aEvent.original == Blocks.cobblestone) {
-			aEvent.replacement = aEvent.biome == null ? BlocksGT.Andesite : BlocksGT.stones[(aEvent.biome.biomeID+6) % BlocksGT.stones.length];
+			aEvent.replacement = (aEvent.biome == null ? BlocksGT.Andesite : BlocksGT.stones[(aEvent.biome.biomeID+6) % BlocksGT.stones.length]);
 			aEvent.setResult(Result.DENY);
 		}
 	}
@@ -275,7 +279,7 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 							}
 						}
 						if (!WD.infiniteWater(aEvent.world, tTarget.blockX, tTarget.blockY, tTarget.blockZ)) aEvent.world.setBlockToAir(tTarget.blockX, tTarget.blockY, tTarget.blockZ);
-						if (aEvent.entityPlayer.openContainer != null) aEvent.entityPlayer.openContainer.detectAndSendChanges();
+						ST.update(aEvent.entityPlayer);
 						return;
 					}
 					if (tBlock == BlocksGT.River || WD.waterstream(tBlock)) {
@@ -303,7 +307,10 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 				}
 				if (aStack.getItem() == Items.bucket) {
 					MovingObjectPosition tTarget = WD.getMOP(aEvent.world, aEvent.entityPlayer, T);
-					if (tTarget != null && tTarget.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && aEvent.world.getBlock(tTarget.blockX, tTarget.blockY, tTarget.blockZ) instanceof BlockWaterlike) aEvent.setCanceled(T);
+					if (tTarget != null && tTarget.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+						Block tBlock = aEvent.world.getBlock(tTarget.blockX, tTarget.blockY, tTarget.blockZ);
+						if (tBlock instanceof BlockWaterlike && tBlock != BlocksGT.River) aEvent.setCanceled(T);
+					}
 					return;
 				}
 			}
@@ -347,28 +354,29 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 					if (!aEvent.world.isRemote && aEvent.entityPlayer.isSneaking() && ST.block(aStack) == NB) {
 						OreDictItemData tData = OM.anyassociation_(aStack);
 						if (tData != null) {
-							if (tData.mPrefix == OP.rockGt) {
+							if (tData.mPrefix == OP.rockGt || tData.mPrefix == OP.oreRaw) {
 								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32074, ST.save(NBT_VALUE, ST.amount(1, aStack))).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
-									ST.use(aEvent.entityPlayer, aStack);
-									aEvent.setCanceled(T);
+									ST.use(aEvent.entityPlayer, aStack); aEvent.setCanceled(T);
 								}
 							}
 							if (tData.mPrefix == OP.ingot) if (!MD.BOTA.mLoaded || tData.mMaterial.mMaterial.mOriginalMod != MD.BOTA || Blocks.beacon != aEvent.world.getBlock(aEvent.x, aEvent.y, aEvent.z)) {
-								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32084, ST.save(NBT_VALUE, ST.copy(aStack))).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
-									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize);
-									aEvent.setCanceled(T);
+								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32084, ST.save(NBT_VALUE, aStack)).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
+									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize); aEvent.setCanceled(T);
 								}
 							}
 							if (tData.mPrefix == OP.plate) {
-								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32085, ST.save(NBT_VALUE, ST.copy(aStack))).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
-									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize);
-									aEvent.setCanceled(T);
+								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32085, ST.save(NBT_VALUE, aStack)).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
+									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize); aEvent.setCanceled(T);
 								}
 							}
 							if (tData.mPrefix == OP.plateGem) {
-								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32086, ST.save(NBT_VALUE, ST.copy(aStack))).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
-									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize);
-									aEvent.setCanceled(T);
+								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32086, ST.save(NBT_VALUE, aStack)).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
+									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize); aEvent.setCanceled(T);
+								}
+							}
+							if (tData.mPrefix == OP.scrapGt) {
+								if (MultiTileEntityRegistry.getRegistry("gt.multitileentity").getItem(32103, ST.save(NBT_VALUE, aStack)).tryPlaceItemIntoWorld(aEvent.entityPlayer, aEvent.world, aEvent.x, aEvent.y, aEvent.z, (byte)aEvent.face, 0.5F, 0.5F, 0.5F)) {
+									ST.use(aEvent.entityPlayer, aStack, aStack.stackSize); aEvent.setCanceled(T);
 								}
 							}
 						}
@@ -392,75 +400,65 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 	
 	@SubscribeEvent
 	public void onEntitySpawningEvent(EntityJoinWorldEvent aEvent) {
-		if (aEvent.entity != null && !aEvent.entity.worldObj.isRemote) {
-			if (mSkeletonsShootGTArrows > 0 && aEvent.entity.getClass() == EntityArrow.class && RNGSUS.nextInt(mSkeletonsShootGTArrows) == 0) {
-				if (((EntityArrow)aEvent.entity).shootingEntity instanceof EntitySkeleton) {
-					OreDictMaterial tMaterial = MT.Craponite; // Just default to Anti-Bear989Sr Arrows
-					switch(RNGSUS.nextInt(10)) {
-					case 0: tMaterial = MT.Steel; break; // Sharpness 2
-					case 1: tMaterial = MT.AnnealedCopper; break; // Dissolving 5
-					case 2: tMaterial = MT.AstralSilver; break; // Disjunction 5 and Werebane 5
-					case 3: tMaterial = MT.BismuthBronze; break; // Bane of Arthropods 4
-					case 4: tMaterial = MT.Pt; break; // Smite 5
-					case 5: tMaterial = MT.Netherite; break; // Fire Aspect 3
-					case 6: tMaterial = MT.Thaumium; break; // Fortune/Looting 2
-					case 7: tMaterial = MT.Rubber; break; // Knockback 2
-					case 8: tMaterial = MT.DamascusSteel; break; // Sharpness 5
-					case 9: tMaterial = MT.Craponite; break; // Werebane 10
+		if (aEvent.entity == null) return;
+		
+		if (aEvent.entity instanceof EntityLiving) {
+			// AI Tasks for Entities
+			EntityAITasks tTasks = ((EntityLiving)aEvent.entity).tasks;
+			if (tTasks != null) {
+				if (aEvent.entity instanceof EntityOcelot) {
+					if (ItemsGT.CANS != null) tTasks.addTask(3, new EntityAITempt((EntityCreature)aEvent.entity, 0.6D, ItemsGT.CANS, T));
+				}
+				if (aEvent.entity instanceof EntityZombie) {
+					for (int i = 0; i < tTasks.taskEntries.size(); i++) {
+						EntityAITasks.EntityAITaskEntry tEntry = (EntityAITasks.EntityAITaskEntry)tTasks.taskEntries.get(i);
+						if (tEntry.action.getClass() == EntityAIAttackOnCollide.class) {
+							tEntry.action = new EntityAIBetterAttackOnCollide((EntityAIAttackOnCollide)tEntry.action);
+						}
 					}
-					ItemStack tArrow = OP.arrowGtWood.mat(tMaterial, 1);
-					if (ST.valid(tArrow)) {
-						aEvent.entity.worldObj.spawnEntityInWorld(new EntityArrow_Material((EntityArrow)aEvent.entity, tArrow));
-						aEvent.entity.setDead();
+				}
+			}
+			
+			// Check if this Entity was already spawned, and not just unloaded and reloaded.
+			if (!aEvent.entity.worldObj.isRemote && !aEvent.entity.getEntityData().hasKey("gt.spawned")) {
+				if (aEvent.entity instanceof EntityZombie && !((EntityZombie)aEvent.entity).isChild() && ST.invalid(((EntityZombie)aEvent.entity).getEquipmentInSlot(0))) {
+					if (ZOMBIES_HOLD_TNT && RNGSUS.nextInt(250) == 0) {
+						((EntityZombie)aEvent.entity).setCurrentItemOrArmor(0, ST.make(Blocks.tnt, 1+RNGSUS.nextInt(2), 0));
+					} else if (ZOMBIES_HOLD_PICKAXES && RNGSUS.nextInt(100) == 0) {
+						((EntityZombie)aEvent.entity).setCurrentItemOrArmor(0, ST.make(Items.iron_pickaxe, 1, Items.iron_pickaxe.getMaxDamage() < 5 ? 0 : 1+RNGSUS.nextInt(Items.iron_pickaxe.getMaxDamage()-2)));
 					}
+				}
+				// Mark Entity as has been spawned
+				aEvent.entity.getEntityData().setBoolean("gt.spawned", T);
+			}
+			return;
+		}
+		
+		if (aEvent.entity.worldObj.isRemote) return;
+		
+		if (mSkeletonsShootGTArrows > 0 && aEvent.entity.getClass() == EntityArrow.class && RNGSUS.nextInt(mSkeletonsShootGTArrows) == 0) {
+			if (((EntityArrow)aEvent.entity).shootingEntity instanceof EntitySkeleton) {
+				OreDictMaterial tMaterial = MT.Craponite; // Just default to Anti-Bear989Sr Arrows
+				switch(RNGSUS.nextInt(10)) {
+				case 0: tMaterial = MT.Steel; break; // Sharpness 2
+				case 1: tMaterial = MT.AnnealedCopper; break; // Dissolving 5
+				case 2: tMaterial = MT.AstralSilver; break; // Disjunction 5 and Werebane 5
+				case 3: tMaterial = MT.BismuthBronze; break; // Bane of Arthropods 4
+				case 4: tMaterial = MT.Pt; break; // Smite 5
+				case 5: tMaterial = MT.Netherite; break; // Fire Aspect 3
+				case 6: tMaterial = MT.Efrine; break; // Fortune/Looting 2
+				case 7: tMaterial = MT.Rubber; break; // Knockback 2
+				case 8: tMaterial = MT.DamascusSteel; break; // Sharpness 5
+				case 9: tMaterial = MT.Craponite; break; // Werebane 10
+				}
+				ItemStack tArrow = OP.arrowGtWood.mat(tMaterial, 1);
+				if (ST.valid(tArrow)) {
+					aEvent.entity.worldObj.spawnEntityInWorld(new EntityArrow_Material((EntityArrow)aEvent.entity, tArrow));
+					aEvent.entity.setDead();
 				}
 			}
 		}
 	}
-	
-// Not gonna do that one due to exploitiness.
-//  @SubscribeEvent
-//  public void onItemExpireEvent(ItemExpireEvent aEvent) {
-//      ItemStack aStack = aEvent.entityItem.getEntityItem();
-//      if (aStack != null) {
-//          if (aStack.stackSize <= 0) {aEvent.entityItem.setDead(); return;}
-//          
-//          if (!aEvent.entityItem.worldObj.isRemote && aEvent.entityItem.onGround) {
-//              if (aStack.getItem() == Items.stick) {
-//                  MultiTileEntityRegistry tRegistry = MultiTileEntityRegistry.getRegistry("gt.multitileentity");
-//                  for (byte tSide : ALL_SIDES_MIDDLE_DOWN) {
-//                      if (aEvent.entityItem.worldObj.canPlaceEntityOnSide(tRegistry.mBlock, MathHelper.floor_double(aEvent.entityItem.posX)+OFFSETS_X[tSide], MathHelper.floor_double(aEvent.entityItem.posY)+OFFSETS_Y[tSide], MathHelper.floor_double(aEvent.entityItem.posZ)+OFFSETS_Z[tSide], F, SIDE_TOP, aEvent.entityItem, aStack)) {
-//                          if (tRegistry.mBlock.placeBlock(aEvent.entityItem.worldObj, MathHelper.floor_double(aEvent.entityItem.posX)+OFFSETS_X[tSide], MathHelper.floor_double(aEvent.entityItem.posY)+OFFSETS_Y[tSide], MathHelper.floor_double(aEvent.entityItem.posZ)+OFFSETS_Z[tSide], SIDE_UNKNOWN, (short)32756, null, T, F)) {
-//                              aStack.stackSize--;
-//                              if (aStack.stackSize <= 0) {aEvent.entityItem.setDead(); return;}
-//                          }
-//                      }
-//                  }
-//                  aEvent.entityItem.setEntityItemStack(aStack);
-//                  aEvent.extraLife = 200;
-//                  aEvent.setCanceled(T);
-//                  return;
-//              }
-//              OreDictItemData tData = OM.data(aStack);
-//              if (tData != null && tData.mPrefix == OP.rockGt) {
-//                  MultiTileEntityRegistry tRegistry = MultiTileEntityRegistry.getRegistry("gt.multitileentity");
-//                  for (byte tSide : ALL_SIDES_MIDDLE_DOWN) {
-//                      if (aEvent.entityItem.worldObj.canPlaceEntityOnSide(tRegistry.mBlock, MathHelper.floor_double(aEvent.entityItem.posX)+OFFSETS_X[tSide], MathHelper.floor_double(aEvent.entityItem.posY)+OFFSETS_Y[tSide], MathHelper.floor_double(aEvent.entityItem.posZ)+OFFSETS_Z[tSide], F, SIDE_TOP, aEvent.entityItem, aStack)) {
-//                          if (tRegistry.mBlock.placeBlock(aEvent.entityItem.worldObj, MathHelper.floor_double(aEvent.entityItem.posX)+OFFSETS_X[tSide], MathHelper.floor_double(aEvent.entityItem.posY)+OFFSETS_Y[tSide], MathHelper.floor_double(aEvent.entityItem.posZ)+OFFSETS_Z[tSide], SIDE_UNKNOWN, (short)32757, ST.save(null, NBT_VALUE, aStack), T, F)) {
-//                              aStack.stackSize = 0;
-//                              aEvent.entityItem.setDead();
-//                              return;
-//                          }
-//                      }
-//                  }
-//                  aEvent.entityItem.setEntityItemStack(aStack);
-//                  aEvent.extraLife = 200;
-//                  aEvent.setCanceled(T);
-//                  return;
-//              }
-//          }
-//      }
-//  }
 	
 	@SubscribeEvent
 	public void onEntityLivingDropsEventEvent(LivingDropsEvent aEvent) {
@@ -472,31 +470,6 @@ public abstract class GT_Proxy extends Abstract_Proxy {
 	public void onEntityLivingFallEvent(LivingFallEvent aEvent) {
 		if (!aEvent.entity.worldObj.isRemote && aEvent.entity instanceof EntityPlayer) {
 			if (ST.equal(((EntityPlayer)aEvent.entity).getCurrentEquippedItem(), ToolsGT.sMetaTool, ToolsGT.SCISSORS) || ST.equal(((EntityPlayer)aEvent.entity).getCurrentEquippedItem(), ToolsGT.sMetaTool, ToolsGT.POCKET_SCISSORS)) aEvent.distance *= 2;
-		}
-	}
-	
-	public ArrayListNoNulls<EntityOcelot> mOcelots = new ArrayListNoNulls<>();
-	
-	@SubscribeEvent
-	public void onEntityConstructingEvent(EntityConstructing aEvent) {
-		if (Abstract_Mod.sFinalized < Abstract_Mod.sModCountUsingGTAPI) return;
-		if (aEvent.entity instanceof EntityOcelot) mOcelots.add(((EntityOcelot)aEvent.entity));
-	}
-	
-	@SubscribeEvent
-	public void onServerTickEvent(ServerTickEvent aEvent) {
-		if (aEvent.side.isServer() && aEvent.phase == Phase.START && SERVER_TIME > 20) {
-			try {
-				Iterator<EntityOcelot> tIterator = mOcelots.iterator();
-				while (tIterator.hasNext()) {
-					EntityOcelot tOcelot = tIterator.next();
-					if (tOcelot != null && tOcelot.tasks != null) tOcelot.tasks.addTask(3, new EntityAITempt(tOcelot, 0.6D, ItemsGT.CANS, T));
-					tIterator.remove();
-				}
-				mOcelots.clear();
-			} catch(Throwable e) {
-				e.printStackTrace(ERR);
-			}
 		}
 	}
 	

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -28,23 +28,18 @@ import gregapi.block.multitileentity.IMultiTileEntity.IMTE_GetCollisionBoundingB
 import gregapi.block.multitileentity.IMultiTileEntity.IMTE_OnEntityCollidedWithBlock;
 import gregapi.code.TagData;
 import gregapi.data.FM;
+import gregapi.data.IL;
 import gregapi.data.LH;
 import gregapi.data.LH.Chat;
 import gregapi.data.TD;
-import gregapi.old.Textures;
 import gregapi.recipes.Recipe;
 import gregapi.recipes.Recipe.RecipeMap;
-import gregapi.render.BlockTextureDefault;
-import gregapi.render.BlockTextureMulti;
-import gregapi.render.IIconContainer;
-import gregapi.render.ITexture;
 import gregapi.tileentity.base.TileEntityBase09FacingSingle;
 import gregapi.tileentity.energy.ITileEntityEnergy;
 import gregapi.tileentity.machines.ITileEntityRunningActively;
 import gregapi.util.ST;
 import gregapi.util.UT;
 import gregapi.util.WD;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -55,7 +50,7 @@ import net.minecraft.util.AxisAlignedBB;
 /**
  * @author Gregorius Techneticies
  */
-public class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle implements ITileEntityEnergy, ITileEntityRunningActively, IMTE_GetCollisionBoundingBoxFromPool, IMTE_OnEntityCollidedWithBlock {
+public abstract class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle implements ITileEntityEnergy, ITileEntityRunningActively, IMTE_GetCollisionBoundingBoxFromPool, IMTE_OnEntityCollidedWithBlock {
 	private static int FLAME_RANGE = 3;
 	
 	protected short mEfficiency = 10000;
@@ -113,24 +108,67 @@ public class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle 
 					}
 				}
 				if (mEnergy < mRate * 2) {
-					WD.fire(worldObj, getOffset(mFacing, 1), T);
+					WD.burn(worldObj, getOffset(mFacing, 1), T, T);
 					if (addStackToSlot(1, mOutput1)) mOutput1 = null;
-					if (mOutput1 == null && !WD.hasCollide(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing)) && !getBlockAtSide(mFacing).getMaterial().isLiquid() && WD.oxygen(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
-						Recipe tRecipe = mRecipes.findRecipe(this, mLastRecipe, T, Long.MAX_VALUE, null, ZL_FS, slot(0));
-						if (tRecipe != null && tRecipe.isRecipeInputEqual(T, F, ZL_FS, slot(0))) {
-							mLastRecipe = tRecipe;
-							ItemStack[] tOutputs = tRecipe.getOutputs();
-							if (tOutputs.length > 0) mOutput1 = ST.copy(tOutputs[0]);
-							mEnergy += UT.Code.units(Math.abs(tRecipe.mEUt * tRecipe.mDuration), 10000, mEfficiency, F);
-							removeAllDroppableNullStacks();
+					if (mOutput1 == null && slotHas(0) && !WD.hasCollide(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing)) && !getBlockAtSide(mFacing).getMaterial().isLiquid() && WD.oxygen(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
+						if (IL.RC_Firestone_Refined.equal(slot(0), T, T)) {
+							ItemStack tStack = ST.container(slot(0), F);
+							if (ST.invalid(tStack)) {
+								// Just dump the empty Firestone to the Output. This should not happen, unless you insert an empty Firestone.
+								if (addStackToSlot(1, slot(0))) slotKill(0);
+							} else if (ST.invalid(ST.container(tStack, F))) {
+								// 80% of whatever Heat Energy you get from Lava. This is over 10 times the normal Firestone Furnace burn Value.
+								mEnergy += 800 * EU_PER_LAVA;
+								// Prevent using up the Firestone entirely.
+								slotKill(0);
+								mOutput1 = tStack;
+							} else {
+								// 80% of whatever Heat Energy you get from Lava. This is over 10 times the normal Firestone Furnace burn Value.
+								mEnergy += 800 * EU_PER_LAVA;
+								// Continue using the Firestone.
+								slot(0, tStack);
+							}
+						} else if (IL.RC_Firestone_Cracked.equal(slot(0), T, T)) {
+							ItemStack tStack = ST.container(slot(0), F);
+							if (ST.invalid(tStack)) {
+								// Just dump the empty Firestone to the Output. This should not happen, unless you insert an empty Firestone.
+								if (addStackToSlot(1, slot(0))) slotKill(0);
+							} else if (ST.invalid(ST.container(tStack, F))) {
+								// Less Power for the broken Firestone, so 60%.
+								mEnergy += 600 * EU_PER_LAVA;
+								// Prevent using up the Firestone entirely.
+								slotKill(0);
+								mOutput1 = tStack;
+							} else {
+								// Less Power for the broken Firestone, so 60%.
+								mEnergy += 600 * EU_PER_LAVA;
+								// Continue using the Firestone.
+								slot(0, tStack);
+								// Cracked Firestones cause Fire to be released way more often.
+								WD.fire(worldObj, xCoord-FLAME_RANGE+rng(2*FLAME_RANGE+1), yCoord-1+rng(2+FLAME_RANGE), zCoord-FLAME_RANGE+rng(2*FLAME_RANGE+1), T);
+							}
+						} else {
+							Recipe tRecipe = mRecipes.findRecipe(this, mLastRecipe, T, Long.MAX_VALUE, null, ZL_FS, slot(0));
+							if (tRecipe != null && tRecipe.isRecipeInputEqual(T, F, ZL_FS, slot(0))) {
+								mLastRecipe = tRecipe;
+								ItemStack[] tOutputs = tRecipe.getOutputs();
+								if (tOutputs.length > 0) mOutput1 = ST.copy(tOutputs[0]);
+								mEnergy += UT.Code.units(tRecipe.getAbsoluteTotalPower(), 10000, mEfficiency, F);
+								removeAllDroppableNullStacks();
+							}
 						}
 					}
+				}
+			} else {
+				// Something burning in front of it? Lets ignite!
+				if (rng(200) == 0 && WD.burning(worldObj, getOffsetX(mFacing), getOffsetY(mFacing), getOffsetZ(mFacing))) {
+					mBurning = T;
 				}
 			}
 			if (mEnergy <     0) mEnergy = 0;
 			if (mEnergy < mRate) mBurning = F;
 		} else {
-			if (mBurning && rng(4) == 0) spawnBurningParticles(xCoord+0.5+OFFSETS_X[mFacing]*0.55+(SIDES_AXIS_X[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F), yCoord+RNGSUS.nextFloat()*0.375F, zCoord+0.5+OFFSETS_Z[mFacing]*0.55+(SIDES_AXIS_Z[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F));
+			if (mBurning && rng(4) == 0) spawnBurningParticles(xCoord+0.5+OFFX[mFacing]*0.55+(SIDES_AXIS_X[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F), yCoord+RNGSUS.nextFloat()*0.375F, zCoord+0.5+OFFZ[mFacing]*0.55+(SIDES_AXIS_Z[mFacing]?0:RNGSUS.nextFloat()*0.6F-0.3F));
 		}
 	}
 	
@@ -213,9 +251,7 @@ public class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle 
 	
 	@Override public byte getVisualData() {return (byte)(mBurning?1:0);}
 	@Override public byte getDefaultSide() {return SIDE_FRONT;}
-	@Override public boolean[] getValidSides() {return SIDES_HORIZONTAL;}
-	
-	@Override public ITexture getTexture2(Block aBlock, int aRenderPass, byte aSide, boolean[] aShouldSideBeRendered) {return aShouldSideBeRendered[aSide] ? BlockTextureMulti.get(BlockTextureDefault.get(sColoreds[FACING_ROTATIONS[mFacing][aSide]], mRGBa), BlockTextureDefault.get((mBurning?sOverlaysActive:sOverlays)[FACING_ROTATIONS[mFacing][aSide]])): null;}
+	@Override public boolean[] getValidSides() {return mBurning ? SIDES_THIS[mFacing] : SIDES_HORIZONTAL;}
 	
 	@Override public void onEntityCollidedWithBlock(Entity aEntity) {if (mBurning) UT.Entities.applyHeatDamage(aEntity, Math.min(10.0F, mRate / 10.0F));}
 	@Override public AxisAlignedBB getCollisionBoundingBoxFromPool() {return box(0, 0, 0, 1, 0.875, 1);}
@@ -223,7 +259,7 @@ public class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle 
 	// Inventory Stuff
 	private static final int[] ACCESSABLE_SLOTS = new int[] {0, 1};
 	@Override public int[] getAccessibleSlotsFromSide2(byte aSide) {return aSide == mFacing ? ZL_INTEGER : ACCESSABLE_SLOTS;}
-	@Override public boolean canInsertItem2 (int aSlot, ItemStack aStack, byte aSide) {return aStack != null && aSlot == 0 && aSide != mFacing && mRecipes.containsInput(aStack, this, NI);}
+	@Override public boolean canInsertItem2 (int aSlot, ItemStack aStack, byte aSide) {return aStack != null && aSlot == 0 && aSide != mFacing && (mRecipes.containsInput(aStack, this, NI) || IL.RC_Firestone_Refined.equal(aStack, T, T) || IL.RC_Firestone_Cracked.equal(aStack, T, T));}
 	@Override public boolean canExtractItem2(int aSlot, ItemStack aStack, byte aSide) {return aStack != null && aSlot == 1 && aSide != mFacing;}
 	@Override public boolean canDrop(int aInventorySlot) {return T;}
 	@Override public ItemStack[] getDefaultInventory(NBTTagCompound aNBT) {return new ItemStack[2];}
@@ -240,34 +276,10 @@ public class MultiTileEntityGeneratorSolid extends TileEntityBase09FacingSingle 
 	@Override public boolean getStateRunningPossible() {return mBurning;}
 	@Override public boolean getStateRunningActively() {return mBurning;}
 	
+	@Override public float getBlockHardness() {return mBurning ? super.getBlockHardness() * 16 : super.getBlockHardness();}
+	
 	protected void spawnBurningParticles(double aX, double aY, double aZ) {
 		worldObj.spawnParticle("smoke", aX, aY, aZ, 0, 0, 0);
 		worldObj.spawnParticle("flame", aX, aY, aZ, 0, 0, 0);
 	}
-	
-	// Icons
-	public static IIconContainer[] sColoreds = new IIconContainer[] {
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/colored/bottom"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/colored/top"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/colored/left"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/colored/front"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/colored/right"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/colored/back")
-	}, sOverlays = new IIconContainer[] {
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay/bottom"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay/top"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay/left"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay/front"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay/right"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay/back")
-	}, sOverlaysActive = new IIconContainer[] {
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay_active/bottom"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay_active/top"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay_active/left"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay_active/front"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay_active/right"),
-		new Textures.BlockIcons.CustomIcon("machines/generators/burning_solid/overlay_active/back")
-	};
-	
-	@Override public String getTileEntityName() {return "gt.multitileentity.generator.burning_solid";}
 }

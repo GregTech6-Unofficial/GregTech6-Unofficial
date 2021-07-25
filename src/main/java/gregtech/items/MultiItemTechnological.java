@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -88,7 +88,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Cover_Filter_Item                     .set(addItem(tLastID =  1023, "Item Filter"                           , "Filters for an Item"                             , new CoverFilterItem()                                      , TC.stack(TC.MACHINA, 1), TC.stack(TC.ORDO, 1), TC.stack(TC.ITER, 1)));
 		IL.Cover_Filter_Fluid                    .set(addItem(tLastID =  1024, "Fluid Filter"                          , "Filters for a Fluid"                             , new CoverFilterFluid()                                     , TC.stack(TC.MACHINA, 1), TC.stack(TC.ORDO, 1), TC.stack(TC.AQUA, 1)));
 		IL.Cover_Controller                      .set(addItem(tLastID =  1025, "Cover Controller"                      , "Turns Redstone into ON/OFF State for Covers"     , new CoverControllerCovers()                                , TC.stack(TC.MACHINA, 1), TC.stack(TC.PERMUTATIO, 2)));
-		IL.Cover_Shutter                         .set(addItem(tLastID =  1026, "Shutter Cover"                         , "Connects and Disconnects Pipes"                  , new CoverShutter()                                         , TC.stack(TC.MACHINA, 2), TC.stack(TC.PERMUTATIO, 1)));
+		IL.Cover_Shutter                         .set(addItem(tLastID =  1026, "Shutter Cover"                         , "Connects and Disconnects Pipes and Wires"        , new CoverShutter()                                         , TC.stack(TC.MACHINA, 2), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Cover_Button_Selector                 .set(addItem(tLastID =  1027, "Button Panel Selector"                 , "Selector Cover that is controlled by Buttons"    , new CoverSelectorButtonPanel()                             , TC.stack(TC.MACHINA, 1), TC.stack(TC.PERMUTATIO, 1)));
 		IL.Cover_Warning                         .set(addItem(tLastID =  1028, "Warning Cover"                         , "Warns about certain Types of Danger"             , new CoverTextureMulti(T, T, "machines/covers/warning/", 20), TC.stack(TC.MACHINA, 1), TC.stack(TC.SENSUS, 1), TC.stack(TC.VINCULUM, 1)));
 		IL.Cover_Redstone_Conductor_IN           .set(addItem(tLastID =  1029, "Redstone Conductor Cover (Accept)"     , "Redstone will transfer to emitting Conductors"   , new CoverRedstoneConductorIN()                             , TC.stack(TC.MACHINA, 2), TC.stack(TC.SENSUS, 1)));
@@ -165,7 +165,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		CR.shaped(IL.Cover_Controller               .get(1), CR.DEF_REV, "BW" , "CQ"        , 'Q', IL.Cover_Blank, 'C', OD_CIRCUITS[2], 'W', MT.DATA.CABLES_01[1], 'B', Items.comparator);
 		CR.shaped(IL.Cover_Shutter                  .get(1), CR.DEF_REV, "TwT", "PQP", "TdT", 'Q', IL.Cover_Blank, 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
 		CR.shaped(IL.Cover_Button_Selector          .get(1), CR.DEF_REV, "BXB", "BQB", "BCB", 'Q', IL.Cover_Blank, 'C', OD_CIRCUITS[1], 'B', OD.button, 'X', IL.Circuit_Selector.wild(1));
-		CR.shaped(IL.Cover_Warning                  .get(1), CR.DEF_REV, "GB" , "YQ"        , 'Q', IL.Cover_Blank, 'C', OD.craftingWorkBench, 'G', OD.itemGlue);
+		CR.shaped(IL.Cover_Warning                  .get(1), CR.DEF_REV, "GB" , "YQ"        , 'Q', IL.Cover_Blank, 'Y', DYE_OREDICTS[DYE_INDEX_Yellow], 'G', OD.itemGlue);
 		CR.shaped(IL.Cover_Redstone_Conductor_IN    .get(1), CR.DEF_REV,  "R" ,  "Q"        , 'Q', IL.Cover_Blank, 'R', OP.wireGt01.dat(MT.RedAlloy));
 		CR.shaped(IL.Cover_Redstone_Conductor_OUT   .get(1), CR.DEF_REV,  "Q" ,  "R"        , 'Q', IL.Cover_Blank, 'R', OP.wireGt01.dat(MT.RedAlloy));
 		CR.shaped(IL.Cover_Retriever_Item           .get(1), CR.DEF_REV, "RPR", "CQC"       , 'Q', IL.Cover_Filter_Item, 'P', IL.PISTONS[1], 'C', OD_CIRCUITS[3], 'R', OP.plateCurved.dat(MT.Electrum));
@@ -212,7 +212,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Shape_Extruder_Gear_Small       .set(addItem(tLastID = 10026, "Extruder Shape (Small Gear)"              , "Extruder Shape for making small Gears"               , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_Extruder_Rod              .set(addItem(tLastID = 10027, "Extruder Shape (Rod)"                     , "Extruder Shape for making Rods"                      , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_Extruder_CCC              .set(addItem(tLastID = 10028, "Extruder Shape (Capsule-Cell-Container)"  , "Extruder Shape for making Capsule-Cell-Containers"   , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
-		IL.Shape_Extruder_Foil             .set(addItem(tLastID = 10029, "Extruder Shape (Foil)"                    , "Extruder Shape for making Foils"                     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
+		IL.Shape_Extruder_Foil             .set(addItem(tLastID = 10029, "Extruder Shape (Foil)"                    , "Extruder Shape for making Foils from Non-Metals"     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_Extruder_Plate_Tiny       .set(addItem(tLastID = 10030, "Extruder Shape (Tiny Plate)"              , "Extruder Shape for making Tiny Plates"               , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 
 		CR.shaped(IL.Shape_Extruder_Ingot           .get(1), CR.DEF_REV, "x  ", " P ", "   ", 'P', IL.Shape_Extruder_Empty);
@@ -318,7 +318,7 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.Shape_SimpleEx_Gear_Small       .set(addItem(tLastID = 10226, "Low Heat Extruder Shape (Small Gear)"             , "Extruder Shape for making small Gears"               , TC.stack(TC.FABRICO, 1), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_SimpleEx_Rod              .set(addItem(tLastID = 10227, "Low Heat Extruder Shape (Rod)"                    , "Extruder Shape for making Rods"                      , TC.stack(TC.FABRICO, 1), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_SimpleEx_CCC              .set(addItem(tLastID = 10228, "Low Heat Extruder Shape (Capsule-Cell-Container)" , "Extruder Shape for making Capsule-Cell-Containers"   , TC.stack(TC.FABRICO, 1), TC.stack(TC.METALLUM, 2)));
-		IL.Shape_SimpleEx_Foil             .set(addItem(tLastID = 10229, "Low Heat Extruder Shape (Foil)"                   , "Extruder Shape for making Foils"                     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
+		IL.Shape_SimpleEx_Foil             .set(addItem(tLastID = 10229, "Low Heat Extruder Shape (Foil)"                   , "Extruder Shape for making Foils from Non-Metals"     , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 		IL.Shape_SimpleEx_Plate_Tiny       .set(addItem(tLastID = 10230, "Low Heat Extruder Shape (Tiny Plate)"             , "Extruder Shape for making Tiny Plates"               , TC.stack(TC.FABRICO, 2), TC.stack(TC.METALLUM, 2)));
 
 		CR.shaped(IL.Shape_SimpleEx_Ingot           .get(1), CR.DEF_REV, "x  ", " P ", "   ", 'P', IL.Shape_SimpleEx_Empty);
@@ -535,8 +535,8 @@ public class MultiItemTechnological extends MultiItemRandom {
 		
 		
 		
-		IL.Battery_Lead_Acid_Cell_Empty    .set(addItem(tLastID = 20000, "Lead Acid Cell (Empty)"           , "Battery Part (doesn't require Canning Machine!)" , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.METALLUM, 2), TC.stack(TC.VACUOS , 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U)));
-		IL.Battery_Lead_Acid_Cell_Filled   .set(addItem(tLastID = 20001, "Lead Acid Cell (Filled)"          , "Battery Part"                                    , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.ELECTRUM, 2), TC.stack(TC.VENENUM, 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U, MT.H2SO4, 2*U), new FluidContainerData(MT.H2SO4.liquid(2*U, T), ST.make(this, 1, 20001), ST.make(this, 1, 20000), F)));
+		IL.Battery_Lead_Acid_Cell_Empty    .set(addItem(tLastID = 20000, "Lead-Acid Cell (Empty)"           , "Battery Part (doesn't require Canning Machine!)" , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.METALLUM, 2), TC.stack(TC.VACUOS , 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U)));
+		IL.Battery_Lead_Acid_Cell_Filled   .set(addItem(tLastID = 20001, "Lead-Acid Cell (Filled)"          , "Battery Part"                                    , ItemsGT.NEI_DONT_SHOW_FLUIDS, TC.stack(TC.ELECTRUM, 2), TC.stack(TC.VENENUM, 2), new OreDictItemData(MT.Pb, U, MT.BatteryAlloy, U, MT.H2SO4, 2*U), new FluidContainerData(MT.H2SO4.liquid(2*U, T), ST.make(this, 1, 20001), ST.make(this, 1, 20000), F)));
 		ItemsGT.addNEIRedirects(IL.Battery_Lead_Acid_Cell_Empty.get(1), IL.Battery_Lead_Acid_Cell_Filled.get(1));
 		CR.shaped(IL.Battery_Lead_Acid_Cell_Empty.get(1), CR.DEF_NCC, " Fh", "FPF", "xF ", 'P', OP.plateCurved.dat(MT.BatteryAlloy), 'F', OP.foil.dat(MT.Pb));
 
@@ -906,34 +906,39 @@ public class MultiItemTechnological extends MultiItemRandom {
 		IL.USB_Stick_2                     .set(addItem(tLastID = 32002, "USB 2.0 Stick"                    , "Stores Data"                                     , OD_USB_STICKS[2], Behavior_DataStorage.INSTANCE, TC.stack(TC.COGNITIO, 4), TC.stack(TC.ELECTRUM, 2), TC.stack(TC.MOTUS, 1)));
 		IL.USB_Stick_3                     .set(addItem(tLastID = 32003, "USB 3.0 Stick"                    , "Stores Data"                                     , OD_USB_STICKS[3], Behavior_DataStorage.INSTANCE, TC.stack(TC.COGNITIO, 5), TC.stack(TC.ELECTRUM, 3), TC.stack(TC.MOTUS, 2)));
 		IL.USB_Stick_4                     .set(addItem(tLastID = 32004, "USB 4.0 Stick"                    , "Stores Data"                                     , OD_USB_STICKS[4], Behavior_DataStorage.INSTANCE, TC.stack(TC.COGNITIO, 6), TC.stack(TC.ELECTRUM, 4), TC.stack(TC.MOTUS, 3)));
-
-		CR.shaped(IL.USB_Stick_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al                ), 'T', OP.screw.dat(MT.Al              ));
-		CR.shaped(IL.USB_Stick_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel    ), 'T', OP.screw.dat(MT.StainlessSteel  ));
-		CR.shaped(IL.USB_Stick_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr                ), 'T', OP.screw.dat(MT.Cr              ));
-		CR.shaped(IL.USB_Stick_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti                ), 'T', OP.screw.dat(MT.Ti              ));
-
-
+		
+		CR.shaped(IL.USB_Stick_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al            ), 'T', OP.screw.dat(MT.Al            ));
+		CR.shaped(IL.USB_Stick_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
+		CR.shaped(IL.USB_Stick_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr            ), 'T', OP.screw.dat(MT.Cr            ));
+		CR.shaped(IL.USB_Stick_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', OD_CIRCUITS[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti            ), 'T', OP.screw.dat(MT.Ti            ));
+		
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_1.get(1)), (byte)54);
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_2.get(1)), (byte)54);
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_3.get(1)), (byte)54);
+		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_Stick_4.get(1)), (byte)54);
+		
+		
 		IL.USB_Cable_1                     .set(addItem(tLastID = 32011, "USB 1.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[1], TC.stack(TC.COGNITIO, 2), TC.stack(TC.ELECTRUM, 1)));
 		IL.USB_Cable_2                     .set(addItem(tLastID = 32012, "USB 2.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[2], TC.stack(TC.COGNITIO, 3), TC.stack(TC.ELECTRUM, 2), TC.stack(TC.ITER, 1)));
 		IL.USB_Cable_3                     .set(addItem(tLastID = 32013, "USB 3.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[3], TC.stack(TC.COGNITIO, 4), TC.stack(TC.ELECTRUM, 3), TC.stack(TC.ITER, 2)));
 		IL.USB_Cable_4                     .set(addItem(tLastID = 32014, "USB 4.0 Cable"                    , "Replaces USB Sticks when connected to USB Ports" , OD_USB_CABLES[4], TC.stack(TC.COGNITIO, 5), TC.stack(TC.ELECTRUM, 4), TC.stack(TC.ITER, 3)));
-
-		CR.shaped(IL.USB_Cable_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al              ), 'T', OP.screw.dat(MT.Al              ));
-		CR.shaped(IL.USB_Cable_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel  ), 'T', OP.screw.dat(MT.StainlessSteel  ));
-		CR.shaped(IL.USB_Cable_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr              ), 'T', OP.screw.dat(MT.Cr              ));
-		CR.shaped(IL.USB_Cable_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti              ), 'T', OP.screw.dat(MT.Ti              ));
-
-
+		
+		CR.shaped(IL.USB_Cable_1.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[3], 'W', MT.DATA.WIRES_01[3], 'P', OP.plate.dat(MT.Al            ), 'T', OP.screw.dat(MT.Al            ));
+		CR.shaped(IL.USB_Cable_2.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[4], 'W', MT.DATA.WIRES_01[4], 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
+		CR.shaped(IL.USB_Cable_3.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[5], 'W', MT.DATA.WIRES_01[5], 'P', OP.plate.dat(MT.Cr            ), 'T', OP.screw.dat(MT.Cr            ));
+		CR.shaped(IL.USB_Cable_4.get(1), CR.DEF_REV, "xWd", "PCP", "TCT", 'C', MT.DATA.CABLES_01[6], 'W', MT.DATA.WIRES_01[6], 'P', OP.plate.dat(MT.Ti            ), 'T', OP.screw.dat(MT.Ti            ));
+		
+		
 		IL.USB_HDD_1                       .set(addItem(tLastID = 32021, "USB 1.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[1], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 3), TC.stack(TC.ELECTRUM, 2), TC.stack(TC.MOTUS, 1)));
 		IL.USB_HDD_2                       .set(addItem(tLastID = 32022, "USB 2.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[2], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 4), TC.stack(TC.ELECTRUM, 3), TC.stack(TC.MOTUS, 2)));
 		IL.USB_HDD_3                       .set(addItem(tLastID = 32023, "USB 3.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[3], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 5), TC.stack(TC.ELECTRUM, 4), TC.stack(TC.MOTUS, 3)));
 		IL.USB_HDD_4                       .set(addItem(tLastID = 32024, "USB 4.0 HDD"                      , "Stores up to 16 Files at once"                   , OD_USB_DRIVES[4], Behavior_DataStorage16.INSTANCE, TC.stack(TC.COGNITIO, 6), TC.stack(TC.ELECTRUM, 5), TC.stack(TC.MOTUS, 4)));
-
-		CR.shaped(IL.USB_HDD_1.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[3], 'W', IL.USB_Cable_1, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Al             ), 'T', OP.screw.dat(MT.Al              )); // TODO: Replace record with a CD (made of aluminium foils and plastic plates in a Press)
-		CR.shaped(IL.USB_HDD_2.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[4], 'W', IL.USB_Cable_2, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.StainlessSteel ), 'T', OP.screw.dat(MT.StainlessSteel  ));
-		CR.shaped(IL.USB_HDD_3.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[5], 'W', IL.USB_Cable_3, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Cr             ), 'T', OP.screw.dat(MT.Cr              ));
-		CR.shaped(IL.USB_HDD_4.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[6], 'W', IL.USB_Cable_4, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Ti             ), 'T', OP.screw.dat(MT.Ti              ));
-
+		
+		CR.shaped(IL.USB_HDD_1.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[3], 'W', IL.USB_Cable_1, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Al            ), 'T', OP.screw.dat(MT.Al            )); // TODO: Replace record with a CD (made of aluminium foils and plastic plates in a Press)
+		CR.shaped(IL.USB_HDD_2.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[4], 'W', IL.USB_Cable_2, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.StainlessSteel), 'T', OP.screw.dat(MT.StainlessSteel));
+		CR.shaped(IL.USB_HDD_3.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[5], 'W', IL.USB_Cable_3, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Cr            ), 'T', OP.screw.dat(MT.Cr            ));
+		CR.shaped(IL.USB_HDD_4.get(1), CR.DEF_REV, "PLT", "dRW", "TCP", 'C', OD_CIRCUITS[6], 'W', IL.USB_Cable_4, 'L', IL.Comp_Laser_Gas_He, 'R', OD.record, 'P', OP.plate.dat(MT.Ti            ), 'T', OP.screw.dat(MT.Ti            ));
+		
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_1.get(1)), (byte)54);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_2.get(1)), (byte)54);
 		BooksGT.BOOK_REGISTER.put(new ItemStackContainer(IL.USB_HDD_3.get(1)), (byte)54);

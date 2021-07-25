@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2020 GregTech-6 Team
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -112,7 +112,7 @@ public class Override_Drops {
 			, IL.Food_Can_Meat_5.get(1+RNGSUS.nextInt(2))
 			, IL.Food_Can_Fish_4.get(1+RNGSUS.nextInt(2))
 			, IL.Food_Can_Chum_4.get(1+RNGSUS.nextInt(2))
-			, IL.Dynamite.get(1+RNGSUS.nextInt(2))
+			, IL.Dynamite.get(1+RNGSUS.nextInt(6))
 			)));
 			}
 			
@@ -330,7 +330,7 @@ public class Override_Drops {
 			if (RNGSUS.nextInt( 2) == 0) aDrops.add(ST.entity(aDead, ST.make(Items.flint, 1, 0)));
 			if (RNGSUS.nextInt( 3) == 0) aDrops.add(ST.entity(aDead, IL.Stick.get(1)));
 			if (RNGSUS.nextInt( 5) == 0) aDrops.add(ST.entity(aDead, IL.Tool_Matches.get(1+RNGSUS.nextInt(4))));
-			if (RNGSUS.nextInt(10) == 0) aDrops.add(ST.entity(aDead, IL.Dynamite.get(1+RNGSUS.nextInt(4))));
+			if (RNGSUS.nextInt(10) == 0) aDrops.add(ST.entity(aDead, IL.Dynamite.get(1+RNGSUS.nextInt(8))));
 			
 			if (tRandomNumber == 0) {
 			aDrops.add(ST.entity(aDead, UT.Code.select(ST.make(Items.name_tag, 1, 0)
@@ -370,7 +370,7 @@ public class Override_Drops {
 			tReplaceIron = T;
 			
 			if (aPlayerKill) {
-			if (RNGSUS.nextInt( 2) == 0) aDrops.add(ST.entity(aDead, RNGSUS.nextBoolean()?OP.rockGt.mat(aSpace?MT.SpaceRock:MT.Stone, 1):aSpace?OP.rockGt.mat(MT.MeteoricIron, 1):ST.make(Items.flint, 1, 0)));
+			if (RNGSUS.nextInt( 2) == 0) aDrops.add(ST.entity(aDead, RNGSUS.nextBoolean()?OP.rockGt.mat(aSpace?MT.STONES.SpaceRock:MT.Stone, 1):aSpace?OP.rockGt.mat(MT.MeteoricIron, 1):ST.make(Items.flint, 1, 0)));
 			if (RNGSUS.nextInt( 5) == 0) aDrops.add(ST.entity(aDead, aSpace?OP.stick.mat(MT.Plastic, 1):IL.Stick.get(1)));
 			if (RNGSUS.nextInt(10) == 0) aDrops.add(ST.entity(aDead, aSpace?OP.scrapGt.mat(MT.Plastic, 1):IL.Mud_Ball.get(1)));
 			if (RNGSUS.nextInt(20) == 0) aDrops.add(ST.entity(aDead, aSpace?OP.nugget.mat(MT.MeteoricIron, 1):IL.Tool_Matches.get(1)));
@@ -472,7 +472,7 @@ public class Override_Drops {
 			int tAmount = 24+RNGSUS.nextInt(8);
 			if (aLooting > 0) tAmount += RNGSUS.nextInt(aLooting*8+1);
 			while (tAmount-->0) aDrops.add(ST.entity(aDead, aBurn?IL.Food_Mutton_Cooked.get(1):IL.Food_Mutton_Raw.get(1)));
-		} else if (aClass.equalsIgnoreCase("EntityWarg") || aClass.equalsIgnoreCase("MoCEntityWWolf") || aClass.equalsIgnoreCase("EntityTFMistWolf") || aClass.equalsIgnoreCase("EntityTFWinterWolf")) {
+		} else if (aClass.equalsIgnoreCase("EntityWarg") || aClass.equalsIgnoreCase("EntityHellhound") || aClass.equalsIgnoreCase("MoCEntityWWolf") || aClass.equalsIgnoreCase("EntityTFMistWolf") || aClass.equalsIgnoreCase("EntityTFWinterWolf")) {
 			tReplaceIron = T;
 			int tAmount = 1+RNGSUS.nextInt(4);
 			if (aLooting > 0) tAmount += RNGSUS.nextInt(aLooting + 1);
@@ -513,7 +513,11 @@ public class Override_Drops {
 		}
 		
 		for (EntityItem tEntity : aDrops) {ItemStack tStack = tEntity.getEntityItem(); if (ST.valid(tStack)) {
-			// Replace Iron and Steel with Lead
+			// Replace some of the Arrows with Headless Arrows.
+			if (ST.item_(tStack) == Items.arrow && RNGSUS.nextInt(aLooting * 2 + 4) < 3) {
+				ST.set(tStack, OP.arrowGtWood.mat(MT.Empty, 1), F, F);
+			}
+			// Replace Iron and Steel with Lead.
 			if (tReplaceIron) {
 				if (OM.is("plateAnyIronOrSteel", tStack)) {
 					ST.set(tStack, OP.plate.mat(MT.Pb, 1), F, F);
@@ -531,13 +535,13 @@ public class Override_Drops {
 			// Give Meat more variety! :D
 			if (!OD.listAllmeatsubstitute.is(tStack)) {
 				if (RNGSUS.nextInt(3) == 0 && (OM.is("listAllmeatraw", tStack) || OM.is("listAllmeatcooked", tStack))) tIntestinesAmount++;
-				if (tStack.getItem() == Items.porkchop) {
+				if (ST.item_(tStack) == Items.porkchop) {
 					switch(tRandomNumber%3) {
 					case 0: ST.set(tStack, (aBurn?IL.Food_Ham_Cooked:IL.Food_Ham_Raw).get(1), F, F); break;
 					case 1: ST.set(tStack, (aBurn?IL.Food_Bacon_Cooked:IL.Food_Bacon_Raw).get(UT.Code.bindStack(tStack.stackSize * (3+RNGSUS.nextInt(3)))), T, F); break;
 					}
 				} else
-				if (tStack.getItem() == Items.cooked_porkchop) {
+				if (ST.item_(tStack) == Items.cooked_porkchop) {
 					switch(tRandomNumber%3) {
 					case 0: ST.set(tStack, IL.Food_Ham_Cooked.get(1), F, F); break;
 					case 1: ST.set(tStack, IL.Food_Bacon_Cooked.get(UT.Code.bindStack(tStack.stackSize * (3+RNGSUS.nextInt(3)))), T, F); break;

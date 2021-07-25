@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -81,9 +81,9 @@ public class Behavior_Bucket_Container extends AbstractBehaviorDefault {
 			return aStack;
 		}
 		
-		tPosition.blockX+=OFFSETS_X[tPosition.sideHit];
-		tPosition.blockY+=OFFSETS_Y[tPosition.sideHit];
-		tPosition.blockZ+=OFFSETS_Z[tPosition.sideHit];
+		tPosition.blockX+=OFFX[tPosition.sideHit];
+		tPosition.blockY+=OFFY[tPosition.sideHit];
+		tPosition.blockZ+=OFFZ[tPosition.sideHit];
 		tBlock = aWorld.getBlock(tPosition.blockX, tPosition.blockY, tPosition.blockZ);
 		
 		if (tBlock instanceof IFluidBlock) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2019 Gregorius Techneticies
+ * Copyright (c) 2021 GregTech-6 Team
  *
  * This file is part of GregTech.
  *
@@ -43,20 +43,22 @@ import net.minecraftforge.fluids.IFluidHandler;
  * @author Gregorius Techneticies
  */
 public class CoverPressureValve extends AbstractCoverAttachment {
-	@Override public boolean interceptCoverPlacement(byte aCoverSide, CoverData aData, Entity aPlayer) {return !(aData.mTileEntity instanceof MultiTileEntityPipeFluid) || ((MultiTileEntityPipeFluid)aData.mTileEntity).mTanks.length != 1;}
+	@Override public boolean interceptCoverPlacement(byte aCoverSide, CoverData aData, Entity aPlayer) {return !(aData.mTileEntity instanceof MultiTileEntityPipeFluid) || ((MultiTileEntityPipeFluid)aData.mTileEntity).mTanks.length != 1 || aData.mTileEntity.getAdjacentTileEntity(aCoverSide).mTileEntity instanceof MultiTileEntityPipeFluid;}
+	@Override public boolean interceptConnect(byte aCoverSide, CoverData aData) {return aData.mTileEntity.getAdjacentTileEntity(aCoverSide).mTileEntity instanceof MultiTileEntityPipeFluid;}
 	
 	@Override
 	@SuppressWarnings("unchecked")
 	public void onTickPost(byte aSide, CoverData aData, long aTimer, boolean aIsServerSide, boolean aReceivedBlockUpdate, boolean aReceivedInventoryUpdate) {
 		if (aIsServerSide && !aData.mStopped && aTimer > 2 && aData.mTileEntity instanceof MultiTileEntityPipeFluid) {
 			FluidTankGT tTank = ((MultiTileEntityPipeFluid)aData.mTileEntity).mTanks[0];
+			((MultiTileEntityPipeFluid)aData.mTileEntity).disconnect(aSide, T);
 			if (tTank.isFull()) {
 				DelegatorTileEntity<IFluidHandler> tDelegator = aData.mTileEntity.getAdjacentTank(aSide);
 				if (tDelegator.mTileEntity != null) {
 					FL.move(tTank, tDelegator);
 				} else if (FL.gas(tTank) && !tDelegator.hasCollisionBox()) {
 					UT.Sounds.send(aData.mTileEntity.getWorld(), SFX.MC_FIZZ, 1.0F, 1.0F, aData.mTileEntity.getCoords());
-					try {for (Entity tEntity : (ArrayList<Entity>)aData.mTileEntity.getWorld().getEntitiesWithinAABB(Entity.class, aData.box(-2, -2, -2, +3, +3, +3))) UT.Entities.applyTemperatureDamage(tEntity, FL.temperature(tTank.getFluid()), 2.0F);} catch(Throwable e) {if (D1) e.printStackTrace(ERR);}
+					try {for (Entity tEntity : (ArrayList<Entity>)aData.mTileEntity.getWorld().getEntitiesWithinAABB(Entity.class, aData.box(-2, -2, -2, +3, +3, +3))) UT.Entities.applyTemperatureDamage(tEntity, FL.temperature(tTank.getFluid()), 2.0F);} catch(Throwable e) {e.printStackTrace(ERR);}
 					GarbageGT.trash(tTank);
 				}
 			}
@@ -68,7 +70,8 @@ public class CoverPressureValve extends AbstractCoverAttachment {
 		super.addToolTips(aList, aStack, aF3_H);
 		aList.add(LH.Chat.CYAN + "Releases Fluids when Pipe is full.");
 		aList.add(LH.Chat.ORANGE + "Liquids require Tank in front!");
-		aList.add(LH.Chat.ORANGE + "Gasses require Air or Tank in front!");
+		aList.add(LH.Chat.ORANGE + "Gases require Air or Tank in front!");
+		aList.add(LH.Chat.DGRAY + LH.get(LH.TOOL_TO_TOGGLE_CONTROLLER_COVER));
 	}
 	
 	@Override public float[] getCoverBounds (byte aCoverSide, CoverData aData) {return BOXES_VALVES[aCoverSide];}

@@ -21,23 +21,33 @@ package gregtech.blocks.stone;
 
 import static gregapi.data.CS.*;
 
+import java.util.ArrayList;
+
 import gregapi.block.BlockBaseMeta;
+import gregapi.code.ArrayListNoNulls;
 import gregapi.data.LH;
+import gregapi.data.MD;
 import gregapi.data.MT;
 import gregapi.data.OP;
 import gregapi.old.Textures;
+import gregapi.oredict.OreDictMaterial;
 import gregapi.util.OM;
 import gregapi.util.ST;
 import gregapi.util.WD;
 import gregapi.worldgen.StoneLayer;
+import mods.railcraft.common.carts.EntityTunnelBore;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+/** Dense Ores that typically generate in large Layers. */
 public class BlockRockOres extends BlockBaseMeta {
 	public static byte[] HARVEST_LEVELS = {0, 0, 1, 1, 2, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0};
-	public static int[] BURN_LEVELS = {100, 100, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	public static int[] BURN_LEVELS = {30, 30, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	public static float[] HARDNESS_LEVELS = {0.5F, 0.5F, 1.0F, 1.0F, 2.0F, 0.5F, 0.5F, 1.0F, 1.0F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F, 0.5F};
+	public static OreDictMaterial[] ORE_MATERIALS = {MT.Coal, MT.Lignite, MT.NaCl, MT.KCl, MT.OREMATS.Bauxite, MT.Oilshale, MT.Gypsum, MT.MilkyQuartz, MT.NetherQuartz, MT.NULL, MT.NULL, MT.NULL, MT.NULL, MT.NULL, MT.NULL, MT.NULL};
 	
 	public BlockRockOres(String aUnlocalised) {
 		super(null, aUnlocalised, Material.rock, soundTypeStone, 9, Textures.BlockIcons.ROCK_ORES);
@@ -51,15 +61,7 @@ public class BlockRockOres extends BlockBaseMeta {
 		LH.add(getUnlocalizedName()+ ".7.name", "Milky Quartz");
 		LH.add(getUnlocalizedName()+ ".8.name", "Nether Quartz");
 		
-		OM.reg(ST.make(this, 1, 0), OP.oreDense.dat(MT.Coal));
-		OM.reg(ST.make(this, 1, 1), OP.oreDense.dat(MT.Lignite));
-		OM.reg(ST.make(this, 1, 2), OP.oreDense.dat(MT.NaCl));
-		OM.reg(ST.make(this, 1, 3), OP.oreDense.dat(MT.KCl));
-		OM.reg(ST.make(this, 1, 4), OP.oreDense.dat(MT.OREMATS.Bauxite));
-		OM.reg(ST.make(this, 1, 5), OP.oreDense.dat(MT.Oilshale));
-		OM.reg(ST.make(this, 1, 6), OP.oreDense.dat(MT.Gypsum));
-		OM.reg(ST.make(this, 1, 7), OP.oreDense.dat(MT.MilkyQuartz));
-		OM.reg(ST.make(this, 1, 8), OP.oreDense.dat(MT.NetherQuartz));
+		for (int i = 0; i < maxMeta(); i++) OM.reg(ST.make(this, 1, i), OP.oreDense.dat(ORE_MATERIALS[i]));
 		
 		if (COMPAT_IC2 != null) {
 		COMPAT_IC2.valuable(this,  0, 1);
@@ -89,17 +91,31 @@ public class BlockRockOres extends BlockBaseMeta {
 		StoneLayer.LAYERS.add(new StoneLayer(this, 6, MT.Gypsum));
 		StoneLayer.LAYERS.add(new StoneLayer(this, 7, MT.MilkyQuartz));
 	//  StoneLayer.LAYERS.add(new StoneLayer(this, 8, MT.NetherQuartz)); Nope, that is not for the Overworld.
+		
+		if (MD.RC.mLoaded) try {EntityTunnelBore.addMineableBlock(this);} catch(Throwable e) {e.printStackTrace(ERR);}
+		if (COMPAT_FR  != null) COMPAT_FR.addToBackpacks("miner", ST.make(this, 1, W));
+	}
+	
+	@Override
+	public ArrayList<ItemStack> getDrops(World aWorld, int aX, int aY, int aZ, int aMeta, int aFortune) {
+		return new ArrayListNoNulls<>(F, OP.oreRaw.mat(ORE_MATERIALS[aMeta], aFortune>0?2+RNGSUS.nextInt(aFortune*2+2):2));
+	}
+	
+	@Override
+	public int getExpDrop(IBlockAccess aWorld, int aMeta, int aFortune) {
+		return RNGSUS.nextInt(8) == 0 ? 1 : 0;
 	}
 	
 	@Override public boolean useGravity(byte aMeta) {return F;}
 	@Override public boolean doesWalkSpeed(byte aMeta) {return F;}
 	@Override public boolean doesPistonPush(byte aMeta) {return T;}
+	@Override public boolean canSilkHarvest(byte aMeta) {return T;}
 	@Override public boolean canCreatureSpawn(byte aMeta) {return T;}
 	@Override public boolean isSealable(byte aMeta, byte aSide) {return F;}
 	@Override public String getHarvestTool(int aMeta) {return TOOL_pickaxe;}
 	@Override public int getHarvestLevel(int aMeta) {return HARVEST_LEVELS[aMeta];}
 	@Override public int getFlammability(byte aMeta) {return BURN_LEVELS[aMeta];}
-	@Override public int getFireSpreadSpeed(byte aMeta) {return BURN_LEVELS[aMeta];}
+	@Override public int getFireSpreadSpeed(byte aMeta) {return 0;}
 	@Override public float getBlockHardness(World aWorld, int aX, int aY, int aZ) {return Blocks.stone.getBlockHardness(aWorld, aX, aY, aZ) * HARDNESS_LEVELS[WD.meta(aWorld, aX, aY, aZ)];}
 	@Override public float getExplosionResistance(byte aMeta) {return Blocks.stone.getExplosionResistance(null);}
 }

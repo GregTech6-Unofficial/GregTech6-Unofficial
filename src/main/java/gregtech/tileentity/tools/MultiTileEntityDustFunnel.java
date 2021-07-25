@@ -94,9 +94,11 @@ public class MultiTileEntityDustFunnel extends TileEntityBase07Paintable impleme
 	@Override
 	public void onTick2(long aTimer, boolean aIsServerSide) {
 		if (aIsServerSide) {
-			boolean temp = F;
+			boolean temp = (mInventoryChanged || aTimer % 100 == 0);
 			
 			slotNull(0);
+			
+			if (temp && !slotHas(0)) ST.move(getAdjacentInventory(SIDE_TOP), delegator(SIDE_TOP));
 			
 			if (slotHas(0) && (mContent == null || mContent.mAmount < DUST_TYPES[mMode].mAmount)) {
 				OreDictItemData tData = OM.anydata(slot(0));
@@ -120,10 +122,7 @@ public class MultiTileEntityDustFunnel extends TileEntityBase07Paintable impleme
 				}
 			}
 			
-			if (temp || mInventoryChanged || aTimer % 100 == 0) {
-				if ( slotHas(1)) ST.move(delegator(SIDE_BOTTOM), getAdjacentInventory(SIDE_BOTTOM));
-				if (!slotHas(0)) ST.move(getAdjacentInventory(SIDE_TOP), delegator(SIDE_TOP));
-			}
+			if (temp && slotHas(1)) ST.move(delegator(SIDE_BOTTOM), getAdjacentInventory(SIDE_BOTTOM));
 		}
 	}
 	
@@ -143,7 +142,12 @@ public class MultiTileEntityDustFunnel extends TileEntityBase07Paintable impleme
 			return 10000;
 		}
 		if (aTool.equals(TOOL_magnifyingglass)) {
-			if (aChatReturn != null) aChatReturn.add("Outputs in the Size of " + DUST_TYPES[mMode].mNameLocal);
+			if (aChatReturn != null) {
+				aChatReturn.add("Outputs in the Size of " + DUST_TYPES[mMode].mNameLocal);
+				if (mContent != null && mContent.mAmount > 0) {
+					aChatReturn.add("Contains a Fraction of " + mContent.mMaterial.mNameLocal);
+				}
+			}
 			return 1;
 		}
 		return super.onToolClick2(aTool, aRemainingDurability, aQuality, aPlayer, aChatReturn, aPlayerInventory, aSneaking, aStack, aSide, aHitX, aHitY, aHitZ);
@@ -222,8 +226,7 @@ public class MultiTileEntityDustFunnel extends TileEntityBase07Paintable impleme
 				mTextureInput     = BlockTextureMulti.get(BlockTextureDefault.get(sTextureTop     , mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayTop)     , BlockTextureDefault.get(sTextureHole, mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayHole));
 			} else {
 				if (UT.Code.exists(mDust, OreDictMaterial.MATERIAL_ARRAY)) {
-					OreDictMaterial tMaterial = OreDictMaterial.MATERIAL_ARRAY[mDust];
-					mTextureInput = BlockTextureMulti.get(BlockTextureDefault.get(tMaterial, OP.blockDust), BlockTextureDefault.get(sTextureHole, mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayHole));
+					mTextureInput = BlockTextureMulti.get(OreDictMaterial.MATERIAL_ARRAY[mDust].getTextureDust(), BlockTextureDefault.get(sTextureHole, mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayHole));
 				} else {
 					mTextureInput = BlockTextureMulti.get(BlockTextureDefault.get(MT.NULL, OP.blockDust, CA_GRAY_64, F), BlockTextureDefault.get(sTextureHole, mRGBa, F, tGlow, F, F), BlockTextureDefault.get(sOverlayHole));
 				}
