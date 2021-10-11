@@ -78,7 +78,7 @@ Also thanks to GregoriousT!
 
 ## Support Us
 
-If you do like the new content we added to GregTech, consider supporting us at https://www.patreon.com/TeamMoeg (INTERNATIONAL) or https://afdian.net/@teammoeg (CN). Remember: your support is only toward to the new content we added, excluding the stuff Greg created. I would like to put a Patreon link to Greg's site, but he closed it earlier this year. So just join https://forum.mechaenetia.com/ to get in touch with this awesome guy who created GT6 and give him a warm appreciation. 
+If you do like the new content we added to GregTech, consider supporting us at https://www.patreon.com/TeamMoegProjects (INTERNATIONAL) or https://afdian.net/@teammoeg (CN). Remember: your support is only toward to the new content we added, excluding the stuff Greg created. I would like to put a Patreon link to Greg's site, but he closed it earlier this year. So just join https://forum.mechaenetia.com/ to get in touch with this awesome guy who created GT6 and give him a warm appreciation. 
 
 ## Contribution
 
