@@ -89,7 +89,7 @@ public class TE_Behavior_Energy_Buffer_Converter extends TE_Behavior {
 			}
 
 			if (tEmittedPackets > 0) {
-				mStorage.mEnergy = Math.max(0, mStorage.mEnergy - UT.Code.units(tEmittedPackets * tOutput, mEnergyOUT.mRec * mMultiplier, mEnergyIN.mRec, T));
+				mStorage.mEnergy = Math.max(0, mStorage.mEnergy - UT.Code.units(tEmittedPackets * tOutput * mFactor, mEnergyOUT.mRec * mMultiplier, mEnergyIN.mRec, T));
 				mEmitsEnergy = T;
 			}
 
